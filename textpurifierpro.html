@@ -1,0 +1,310 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800;900&display=swap');
+
+/* 블로그 기본 레이아웃 완벽 숨김 */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; 
+    width: 100% !important; min-height: 100vh !important;
+    -webkit-tap-highlight-color: transparent; overflow-x: hidden;
+}
+
+img { max-width: 100% !important; height: auto !important; }
+.content-outer, .content-wrapper, .main-outer, .main-inner, .post-body, .post-outer {
+    padding: 0 !important; margin: 0 !important; border: none !important;
+    width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;
+}
+
+#app-container {
+    --bg-main: #0f172a;      
+    --bg-card: #1e293b;      
+    --bg-hover: #334155;
+    --accent: #14b8a6;       
+    --accent-glow: rgba(20, 184, 166, 0.4);
+    --warning: #f43f5e;
+    --text-white: #f8fafc;
+    --text-muted: #94a3b8; 
+    --border: #334155;
+
+    background-color: var(--bg-main); 
+    color: var(--text-white);
+    font-family: 'Pretendard', sans-serif; 
+    min-height: 100vh;
+    padding: 20px 16px 80px 16px; 
+    box-sizing: border-box; 
+    line-height: 1.6;
+}
+
+.max-width-wrapper { max-width: 650px; margin: 0 auto; position: relative; }
+
+#app-container h1 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 5px; color: var(--text-white); }
+#app-container .subtitle { font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 25px; }
+
+.info-box { background-color: rgba(20, 184, 166, 0.1); border: 1px solid var(--accent); border-radius: 10px; padding: 15px; margin-bottom: 25px; }
+.info-box h3 { color: var(--accent); font-size: 15px; margin: 0 0 10px 0; font-weight: 700; }
+.info-box ul { margin: 0; padding-left: 20px; color: var(--text-white); font-size: 13px; }
+.info-box ul li { margin-bottom: 5px; }
+
+#app-container .section-title { font-size: 15px; font-weight: 700; margin: 25px 0 8px 0; color: var(--accent); display: flex; align-items: center; }
+.title-warning { color: var(--warning) !important; }
+
+#app-container textarea {
+    width: 100%; height: 120px; background-color: var(--bg-main); color: var(--text-white);
+    border: 1px solid var(--border); border-radius: 10px; padding: 15px; font-size: 14px; line-height: 1.6;
+    box-sizing: border-box; resize: none; font-family: inherit; transition: all 0.3s ease;
+}
+#app-container textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+#app-container .dict-textarea { height: 100px; font-family: monospace; font-size: 13px; border-color: var(--border); }
+
+#app-container .options-box { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin: 10px 0; }
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 500px) { .options-grid { grid-template-columns: 1fr; } }
+
+#app-container .option-item { display: flex; align-items: flex-start; }
+#app-container .option-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 10px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+#app-container .option-item label { font-size: 14px; color: var(--text-white); cursor: pointer; line-height: 1.4; }
+#app-container .highlight-option { color: var(--accent) !important; font-weight: bold; margin-bottom: 15px; display: block; border-bottom: 1px dashed var(--border); padding-bottom: 15px; }
+
+#app-container .btn-run { background-color: var(--accent); color: #ffffff; border: none; border-radius: 10px; padding: 16px; font-size: 17px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px var(--accent-glow); }
+#app-container .btn-copy { background-color: var(--bg-hover); color: var(--text-white); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; margin-top: 12px; }
+
+#app-container .disclaimer { background-color: transparent; border: 1px solid var(--border); border-radius: 8px; padding: 15px; font-size: 12px; color: var(--text-muted); margin-top: 30px; line-height: 1.5; }
+#app-container .disclaimer strong { color: #f87171; }
+</style>
+
+<div id="app-container">
+    <div class="max-width-wrapper">
+        
+        <h1>OCR 텍스트 정화기 PRO (MAX)</h1><div><br /></div>
+        <div class="subtitle">문서 교정부터 개인정보 보호까지, 가장 안전한 오프라인 텍스트 도구</div>
+
+        <div class="info-box">
+            <h3>💡 [필독] 활용 꿀팁 및 특징</h3>
+            <ul>
+                <li><strong>절대 보안:</strong> 입력하신 모든 내용은 서버로 전송되지 않고 스마트폰 기기 내부에서만 처리됩니다. 기밀문서도 안심하고 변환하세요.</li>
+                <li><strong>보안 블라인드:</strong> 외부로 공유할 문서의 전화번호, 주민등록번호, 카드 번호를 클릭 한 번에 별표(*)로 안전하게 가려줍니다.</li>
+                <li><strong>단어 치환:</strong> 하단 4번 칸에 본인이 자주 틀리는 오타를 '원래단어&gt;바꿀단어' 형식으로 계속 추가할 수 있습니다. (예: 문안하다 대신 핵심 글자인 '문안하&gt;무난하' 로 입력하세요)</li>
+            </ul>
+        </div>
+
+        <div class="section-title">📌 1. 원본 텍스트 입력</div>
+        <textarea id="inputText" placeholder="여기에 지저분한 텍스트를 붙여넣으세요..."></textarea>
+
+        <div class="section-title">⚙️ 2. 정밀 정화 (기본 옵션)</div>
+        <div class="options-box">
+            <div class="option-item">
+                <input checked="" id="optAll" type="checkbox" />
+                <label class="highlight-option">✨ 원클릭 종합 정화 (추천: 아래 필수 항목 자동 적용)</label>
+            </div>
+            <div class="options-grid">
+                <div class="option-item"><input id="optNewline" type="checkbox" /><label>PDF 줄바꿈 복원 (끊긴 문장 연결)</label></div>
+                <div class="option-item"><input id="optSpace" type="checkbox" /><label>다중 띄어쓰기 압축 (불필요한 공백 제거)</label></div>
+                <div class="option-item"><input id="optEmptyLines" type="checkbox" /><label>빈 줄(공백 줄) 모두 삭제</label></div>
+                <div class="option-item"><input id="optTrimLines" type="checkbox" /><label>각 줄 앞뒤 여백 깔끔하게 다듬기</label></div>
+                <div class="option-item"><input id="optSpecial" type="checkbox" /><label>특수문자 및 한자 일괄 삭제</label></div>
+                <div class="option-item"><input id="optEmail" type="checkbox" /><label>이메일 인용 기호(&gt;) 삭제</label></div>
+                <div class="option-item"><input id="optHtml" type="checkbox" /><label>HTML 웹 태그 통째로 지우기</label></div>
+                <div class="option-item"><input id="optBrackets" type="checkbox" /><label>괄호 ( ) [ ] 안의 내용 통째로 지우기</label></div>
+            </div>
+        </div>
+
+        <div class="section-title title-warning">🛡️ 3. 개인정보 자동 블라인드 (보안 옵션)</div>
+        <div class="options-box">
+            <div class="options-grid">
+                <div class="option-item"><input checked="" id="optMaskPhone" type="checkbox" /><label>휴대전화 번호 마스킹 (010-****-5678)</label></div>
+                <div class="option-item"><input checked="" id="optMaskRRN" type="checkbox" /><label>주민등록번호 마스킹 (900101-*******)</label></div>
+                <div class="option-item"><input id="optMaskCard" type="checkbox" /><label>신용카드 번호 마스킹 (1234-****-****-5678)</label></div>
+            </div>
+        </div>
+
+        <div class="section-title">🔄 4. 사용자 지정 맞춤법 치환</div>
+        <textarea class="dict-textarea" id="customDict">어의없>어이없
+안됌>안됨
+문안하>무난하
+오랫만>오랜만
+금새>금세
+몇일>며칠
+왠만하>웬만하
+구지>굳이
+희안하>희한하
+설레임>설렘
+바램>바람
+댓가>대가
+역활>역할
+백분률>백분율
+틈틈히>틈틈이
+일찍히>일찍이
+깨끗히>깨끗이
+곰곰히>곰곰이
+엇그제>엊그제
+단언컨데>단언컨대
+바꼈>바뀌었
+서슴치>서슴지
+삼가해>삼가
+찌게>찌개
+육계장>육개장
+됬>됐
+할께>할게
+갈께>갈게
+널부러>널브러
+헬쓱하>핼쑥하
+야밤도주>야반도주
+승락>승낙
+하마트면>하마터면
+윗어른>웃어른</textarea>
+
+        <button class="btn-run" onclick="runPurifier()">텍스트 완벽 정화 및 보안 처리</button>
+
+        <div class="section-title">✅ 5. 정화 완료 결과물</div>
+        <textarea id="outputText" placeholder="깔끔하게 정리된 텍스트가 이곳에 나타납니다." readonly=""></textarea>
+        <button class="btn-copy" onclick="copyResult()">최종 결과물 복사하기 (Clipboard)</button>
+
+        <div class="disclaimer">
+            <strong>[서비스 이용 약관 및 법적 책임 고지]</strong><br />
+            1. 본 서비스는 오프라인 기반으로 작동하며 입력된 텍스트를 외부로 유출하지 않는 안전한 편의 도구입니다.<br />
+            2. 시스템은 기계적으로 변환 및 마스킹을 수행하므로 데이터의 무결성을 100% 보장하지 않습니다. 특히 중요한 개인정보 및 보안 문서의 경우 반드시 사용자의 육안 검수가 필요합니다.
+        </div>
+
+    </div><br /><br />
+</div>
+
+<script>
+    document.getElementById('optAll').addEventListener('change', function() {
+        const isChecked = this.checked;
+        document.getElementById('optNewline').checked = isChecked;
+        document.getElementById('optSpace').checked = isChecked;
+        document.getElementById('optTrimLines').checked = isChecked;
+        document.getElementById('optSpecial').checked = isChecked;
+    });
+
+    function runPurifier() {
+        const inputText = document.getElementById('inputText').value;
+        if (!inputText.trim()) {
+            alert("처리할 텍스트를 먼저 입력해 주십시오.");
+            return;
+        }
+
+        sessionStorage.setItem('ocrInputData', inputText);
+        sessionStorage.setItem('ocrCustomDict', document.getElementById('customDict').value);
+        
+        const options = {
+            optNewline: document.getElementById('optNewline').checked,
+            optSpace: document.getElementById('optSpace').checked,
+            optEmptyLines: document.getElementById('optEmptyLines').checked,
+            optTrimLines: document.getElementById('optTrimLines').checked,
+            optSpecial: document.getElementById('optSpecial').checked,
+            optEmail: document.getElementById('optEmail').checked,
+            optHtml: document.getElementById('optHtml').checked,
+            optBrackets: document.getElementById('optBrackets').checked,
+            optMaskPhone: document.getElementById('optMaskPhone').checked,
+            optMaskRRN: document.getElementById('optMaskRRN').checked,
+            optMaskCard: document.getElementById('optMaskCard').checked
+        };
+        sessionStorage.setItem('ocrOptions', JSON.stringify(options));
+
+        window.location.href = window.location.pathname + "?action=purify&t=" + new Date().getTime();
+    }
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('action') === 'purify') {
+            let text = sessionStorage.getItem('ocrInputData');
+            const customDictText = sessionStorage.getItem('ocrCustomDict');
+            const options = JSON.parse(sessionStorage.getItem('ocrOptions'));
+
+            if (text && options) {
+                document.getElementById('inputText').value = text;
+                if(customDictText) document.getElementById('customDict').value = customDictText;
+
+                // [1] 텍스트 정화 옵션 적용 먼저 실행 (마스킹보다 먼저 실행하여 별표 지워짐 방지)
+                if (options.optHtml) { text = text.replace(/<[^>]*>?/gm, ''); }
+                if (options.optEmail) { text = text.replace(/^[>〉》]\s*/gm, ''); }
+                if (options.optBrackets) { text = text.replace(/\([^)]*\)|\[[^\]]*\]/g, ''); }
+                if (options.optNewline) { text = text.replace(/([^\n])\n([^\n])/g, '$1 $2'); }
+                if (options.optSpecial) { 
+                    text = text.replace(/[\u4e00-\u9fa5]/g, ''); 
+                    text = text.replace(/[^\w\s가-힣ㄱ-ㅎㅏ-ㅣ.,!?()""''\-]/g, ''); 
+                }
+                if (options.optSpace) { text = text.replace(/[ \t]{2,}/g, ' '); }
+                if (options.optTrimLines) { text = text.split('\n').map(line => line.trim()).join('\n'); }
+                if (options.optEmptyLines) { text = text.replace(/^\s*[\r\n]/gm, ''); }
+
+                // [2] 사용자 지정 단어 치환 적용
+                if (customDictText) {
+                    const lines = customDictText.split('\n');
+                    lines.forEach(line => {
+                        const parts = line.split('>');
+                        if (parts.length === 2 && parts[0].trim() !== '') {
+                            const target = parts[0].trim();
+                            const replacement = parts[1].trim();
+                            const regex = new RegExp(target, "g");
+                            text = text.replace(regex, replacement);
+                        }
+                    });
+                }
+
+                // [3] 마스킹 (보안 처리) 가장 마지막에 실행 (이전에 지워질 위험 완벽 차단)
+                if (options.optMaskRRN) { 
+                    text = text.replace(/(\d{6})[- ]?([1-4]\d{6})/g, '$1-*******'); 
+                }
+                if (options.optMaskPhone) { 
+                    text = text.replace(/(010|011|016|017|018|019)[- ]?(\d{3,4})[- ]?(\d{4})/g, '$1-****-$3'); 
+                }
+                if (options.optMaskCard) { 
+                    text = text.replace(/(\d{4})[- ]?(\d{4})[- ]?(\d{4})[- ]?(\d{4})/g, '$1-****-****-$4'); 
+                }
+
+                // 결과 출력
+                document.getElementById('outputText').value = text.trim();
+                
+                // UI 체크박스 복구
+                document.getElementById('optNewline').checked = options.optNewline;
+                document.getElementById('optSpace').checked = options.optSpace;
+                document.getElementById('optEmptyLines').checked = options.optEmptyLines;
+                document.getElementById('optTrimLines').checked = options.optTrimLines;
+                document.getElementById('optSpecial').checked = options.optSpecial;
+                document.getElementById('optEmail').checked = options.optEmail;
+                document.getElementById('optHtml').checked = options.optHtml;
+                document.getElementById('optBrackets').checked = options.optBrackets;
+                document.getElementById('optMaskPhone').checked = options.optMaskPhone;
+                document.getElementById('optMaskRRN').checked = options.optMaskRRN;
+                document.getElementById('optMaskCard').checked = options.optMaskCard;
+                
+                if(options.optNewline && options.optSpace && options.optTrimLines && options.optSpecial) {
+                    document.getElementById('optAll').checked = true;
+                } else {
+                    document.getElementById('optAll').checked = false;
+                }
+            }
+        }
+    };
+
+    function copyResult() {
+        const outputText = document.getElementById('outputText');
+        if (!outputText.value.trim()) {
+            alert("복사할 텍스트가 존재하지 않습니다.");
+            return;
+        }
+        outputText.select();
+        document.execCommand("copy");
+        alert("성공적으로 복사되었습니다.");
+    }
+</script>
