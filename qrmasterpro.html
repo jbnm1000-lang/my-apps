@@ -1,4 +1,4 @@
-<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (URL 데이터 전달 방식)-->
+<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (수정 및 안정화 완료)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
@@ -88,11 +88,11 @@
 
         <label style="display: block; margin-bottom: 12px; text-align: center;">QR 스타일 컬러 선택</label>
         <div class="color-picker">
-            <div class="color-btn active" onclick="setColor('#000000', this)" style="background: rgb(0, 0, 0); color: black;"></div>
-            <div class="color-btn" onclick="setColor('#4f46e5', this)" style="background: rgb(79, 70, 229); color: #4f46e5;"></div>
-            <div class="color-btn" onclick="setColor('#db2777', this)" style="background: rgb(219, 39, 119); color: #db2777;"></div>
-            <div class="color-btn" onclick="setColor('#ea580c', this)" style="background: rgb(234, 88, 12); color: #ea580c;"></div>
-            <div class="color-btn" onclick="setColor('#16a34a', this)" style="background: rgb(22, 163, 74); color: #16a34a;"></div>
+            <div class="color-btn active" data-color="#000000" onclick="setColor('#000000', this)" style="background: #000000;"></div>
+            <div class="color-btn" data-color="#4f46e5" onclick="setColor('#4f46e5', this)" style="background: #4f46e5;"></div>
+            <div class="color-btn" data-color="#db2777" onclick="setColor('#db2777', this)" style="background: #db2777;"></div>
+            <div class="color-btn" data-color="#ea580c" onclick="setColor('#ea580c', this)" style="background: #ea580c;"></div>
+            <div class="color-btn" data-color="#16a34a" onclick="setColor('#16a34a', this)" style="background: #16a34a;"></div>
         </div>
 
         <button class="action-btn" onclick="triggerAction('generate')">🚀 마스터 QR 코드 생성하기</button>
@@ -223,7 +223,8 @@
 
             var btns = document.querySelectorAll('.color-btn');
             for (var i = 0; i < btns.length; i++) {
-                if(btns[i].style.backgroundColor === currentColor || btns[i].style.background === currentColor || btns[i].style.color === currentColor) {
+                btns[i].classList.remove('active');
+                if(btns[i].getAttribute('data-color') === currentColor) {
                     btns[i].classList.add('active');
                 }
             }
@@ -238,9 +239,11 @@
             }
 
             if(finalString !== "") {
+                // 한글 입력 시 충돌을 방지하기 위한 안전 변환 처리
+                var safeString = unescape(encodeURIComponent(finalString));
                 document.getElementById('qrcode').innerHTML = ""; 
                 new QRCode(document.getElementById("qrcode"), {
-                    text: finalString, 
+                    text: safeString, 
                     width: 220, 
                     height: 220,
                     colorDark : currentColor, 
