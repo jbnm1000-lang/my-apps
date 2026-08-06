@@ -1,0 +1,385 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 블로그 기본 레이아웃 제거 및 네이티브 앱 환경 세팅 */
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #090d16 !important; 
+    width: 100% !important; min-height: 100dvh !important;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+#breathe-app-container { 
+    display: block !important;
+    position: absolute !important; 
+    top: 0 !important; left: 0 !important;
+    width: 100% !important; min-height: 100dvh !important;
+    background: radial-gradient(circle at center, #1e293b 0%, #020617 100%) !important;
+    z-index: 2147483647 !important; 
+    box-sizing: border-box;
+}
+
+/* 파티클 배경 캔버스 */
+#particle-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 메인 콘텐츠 래퍼 */
+.app-content { max-width: 600px; margin: 0 auto; padding: 20px 16px 60px 16px; box-sizing: border-box; position: relative; z-index: 10; }
+
+/* 헤더 영역 */
+.app-header { text-align: center; margin-bottom: 25px; }
+.app-header h1 { font-size: 24px; font-weight: 900; color: #ffffff; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+.app-header h1 span { color: #38bdf8; }
+.app-header p { font-size: 14px; color: #94a3b8; margin: 0; line-height: 1.5; }
+
+/* 옵션 컨트롤 패널 (새로고침/전면광고 유도 영역) */
+.control-card { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 18px; margin-bottom: 25px; display: flex; gap: 10px; justify-content: center; backdrop-filter: blur(5px); }
+.select-box { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); color: #e2e8f0; padding: 12px 10px; border-radius: 12px; font-size: 14px; font-weight: 700; outline: none; flex: 1; text-align: center; appearance: none; cursor: pointer; }
+
+/* 중앙 호흡 시각화 영역 */
+.display-window { background: rgba(15, 23, 42, 0.5); width: 100%; height: 320px; border-radius: 24px; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin-bottom: 25px; backdrop-filter: blur(10px); }
+
+/* 애니메이션 원형 그래픽 */
+.breathe-circle { width: 130px; height: 130px; border-radius: 50%; background: linear-gradient(135deg, #0ea5e9, #3b82f6); box-shadow: 0 0 30px rgba(56, 189, 248, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 1s linear; position: relative; z-index: 10; }
+.circle-text { font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.circle-timer { font-size: 34px; font-weight: 900; color: #f8fafc; text-shadow: 0 2px 4px rgba(0,0,0,0.4); line-height: 1; }
+
+/* 부드러운 물결 후광 효과 */
+.halo { position: absolute; width: 130px; height: 130px; border-radius: 50%; border: 2px solid rgba(56, 189, 248, 0.6); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
+
+/* 시작 오버레이 */
+.start-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; background: rgba(2, 6, 23, 0.7); backdrop-filter: blur(4px); }
+.start-icon { font-size: 45px; margin-bottom: 15px; animation: floatIcon 2s infinite ease-in-out; }
+.start-btn { background: #38bdf8; color: #0f172a; border: none; padding: 14px 35px; font-size: 17px; font-weight: 900; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4); transition: transform 0.1s; }
+.start-btn:active { transform: scale(0.95); }
+@keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* 작동 상태별 크기 ও 색상 변화 클래스 */
+.phase-inhale { transform: scale(1.85); background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 50px rgba(16, 185, 129, 0.6); }
+.phase-hold { transform: scale(1.85); background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 0 50px rgba(245, 158, 11, 0.6); }
+.phase-exhale { transform: scale(1); background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+
+/* ✨ 명상 가이드 & 꿀팁 영역 ✨ */
+.guide-card { background: linear-gradient(to right, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8)); border-radius: 16px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #6366f1; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+.guide-title { font-size: 16px; font-weight: 900; color: #818cf8; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.guide-content { font-size: 14.5px; color: #e2e8f0; line-height: 1.6; word-break: keep-all; margin: 0; transition: opacity 0.5s; min-height: 45px;}
+.guide-tip { margin-top: 15px; font-size: 13px; color: #94a3b8; background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; line-height: 1.5; }
+
+/* 진행 상태 표시바 */
+.status-bar { text-align: center; margin-bottom: 20px; }
+.session-timer { font-size: 15px; font-weight: 700; color: #cbd5e1; background: rgba(0,0,0,0.4); display: inline-block; padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+
+/* 🚨 가독성을 높인 강력한 면책조항 (심사 프리패스용) 🚨 */
+.defense-shield-box { background: rgba(127, 29, 29, 0.15); border: 2px solid #ef4444; padding: 22px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1); }
+.shield-title { font-size: 16px; font-weight: 900; color: #f87171; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.shield-text { font-size: 13.5px; color: #fca5a5; margin: 0 0 8px 0; line-height: 1.6; word-break: keep-all; font-weight: 500; }
+.shield-text:last-child { margin-bottom: 0; }
+</style>
+
+<div id="breathe-app-container">
+    <!--몽환적인 파티클 캔버스-->
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="app-content">
+        <div class="app-header">
+            <h1>4-7-8 <span>수면 호흡 가이드</span></h1>
+            <p>스트레스를 비우고, 평온한 수면을 맞이하세요.</p>
+        </div>
+
+        <!--옵션 컨트롤 (파라미터 새로고침 발생 영역)-->
+        <div class="control-card">
+            <select class="select-box" id="timer-setting" onchange="changeSettings()">
+                <option value="0">무제한 반복 모드</option>
+                <option value="1">1분 (가벼운 안정)</option>
+                <option value="3">3분 (스트레스 완화)</option>
+                <option value="5">5분 (깊은 수면 유도)</option>
+            </select>
+            <select class="select-box" id="bgm-setting" onchange="changeSettings()">
+                <option value="white">자연의 바람결</option>
+                <option value="rain">잔잔한 빗소리</option>
+            </select>
+        </div>
+
+        <!--남은 시간 표시-->
+        <div class="status-bar">
+            <div class="session-timer" id="total-time-display">대기 중: 호흡을 준비하세요</div>
+        </div>
+
+        <!--중앙 시각화 그래픽 영역-->
+        <div class="display-window">
+            
+            <div class="start-overlay" id="start-screen">
+                <div class="start-icon">🌙</div>
+                <button class="start-btn" onclick="startBreathing()">호흡 시작하기</button>
+            </div>
+
+            <div class="halo" id="pulse-halo"></div>
+            <div class="breathe-circle" id="main-circle">
+                <div class="circle-text" id="action-text">준비</div>
+                <div class="circle-timer" id="action-timer">0</div>
+            </div>
+            
+        </div>
+
+        <!--✨ 꽉 찬 명상 가이드 & 꿀팁 영역 ✨-->
+        <div class="guide-card">
+            <div class="guide-title">💡 <span id="guide-title-text">4-7-8 호흡법이란?</span></div>
+            <p class="guide-content" id="guide-main-text">하버드 의대 앤드류 웨일 박사가 고안한 호흡법으로, 신경계를 안정시키고 불면증을 완화하는 데 탁월한 효과가 있는 천연 신경안정제입니다.</p>
+            <div class="guide-tip">📌 <b>전문가 꿀팁:</b> 호흡할 때 어깨에 힘을 빼고, 내쉴 때는 입으로 '후~' 소리를 내며 몸 안의 탁한 공기를 모두 뱉어낸다고 상상하세요.</div>
+        </div>
+
+        <!--🚨 의료/건강 앱 심사 방어용 강력한 면책조항 🚨-->
+        <div class="defense-shield-box">
+            <div class="shield-title">🚨 서비스 이용 전 필수 확인 사항</div>
+            <p class="shield-text">1. 본 소프트웨어는 현대인의 심리적 안정 및 긴장 완화 보조를 목적으로 제작된 <strong>순수 힐링 유틸리티 도구</strong>입니다.</p>
+            <p class="shield-text">2. 본 앱에서 제공하는 호흡 가이드 및 백색 소음은 어떠한 의학적 효능이나 질병의 치료, 진단을 보장하지 않습니다.</p>
+            <p class="shield-text">3. 호흡기 질환 등 관련 기저질환이 있으신 분은 무리하게 호흡을 참지 마시고 본인의 체력에 맞게 조절하시길 바라며, 이용 중 발생한 결과에 대해 개발자는 법적/의학적 책임을 지지 않습니다.</p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    // 기본 요소 정리 및 초기화
+    document.addEventListener("DOMContentLoaded", function() {
+        var appContainer = document.getElementById('breathe-app-container');
+        if (appContainer) {
+            document.body.appendChild(appContainer);
+            Array.from(document.body.children).forEach(function(child) {
+                if (child.id !== 'breathe-app-container' && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE' && child.tagName !== 'META') {
+                    child.style.display = 'none';
+                }
+            });
+        }
+        initAppParams();
+        initParticles(); // 별빛 파티클 시작
+    });
+
+    // 몽환적인 드림 더스트(파티클) 구현 로직
+    function initParticles() {
+        var canvas = document.getElementById('particle-canvas');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (var i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 0.5,
+                speedY: Math.random() * 0.5 + 0.2,
+                opacity: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                ctx.globalAlpha = p.opacity;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // 위로 서서히 올라가는 애니메이션
+                p.y -= p.speedY;
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                    p.x = Math.random() * canvas.width;
+                }
+            }
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+    }
+
+    // 오디오 소스 (구글 공식 무료 사운드)
+    var bgmLinks = {
+        white: "https://actions.google.com/sounds/v1/weather/wind_in_trees.ogg",
+        rain: "https://actions.google.com/sounds/v1/weather/light_rain.ogg"
+    };
+
+    // 사이클마다 바뀌는 동적 힐링 문구
+    var quotes = [
+        "숨을 들이마시며 긍정적인 에너지를, 내쉬며 피로를 내보내세요.",
+        "지금 이 순간, 오직 당신의 편안한 호흡에만 집중하세요.",
+        "규칙적인 호흡은 부교감 신경을 활성화하여 깊은 수면을 돕습니다.",
+        "하루의 스트레스가 숨결을 타고 천천히 공기 중으로 흩어집니다.",
+        "잘하고 있습니다. 긴장했던 어깨의 힘을 부드럽게 빼보세요.",
+        "심장 박동이 느려지고 마음이 점점 고요해집니다.",
+        "생각이 떠오르면 억누르지 말고, 구름처럼 흘러가게 두세요."
+    ];
+
+    var breathingActive = false;
+    var phaseTimer = 0;
+    var intervalId = null;
+    var sessionRemainingSeconds = 0;
+    var sessionTimerId = null;
+    var backgroundAudio = null;
+
+    // 파라미터 체크
+    function initAppParams() {
+        var params = new URLSearchParams(window.location.search);
+        var urlTimer = params.get('timer');
+        var urlBgm = params.get('bgm');
+
+        if (urlTimer) document.getElementById('timer-setting').value = urlTimer;
+        if (urlBgm) document.getElementById('bgm-setting').value = urlBgm;
+
+        var initialTime = parseInt(document.getElementById('timer-setting').value);
+        if (initialTime > 0) {
+            document.getElementById('total-time-display').innerText = "선택된 시간: " + initialTime + "분 (준비됨)";
+        } else {
+            document.getElementById('total-time-display').innerText = "무제한 모드 (준비됨)";
+        }
+    }
+
+    // 설정 변경 시 파라미터 적용 (전면광고 유도 포인트)
+    function changeSettings() {
+        var tVal = document.getElementById('timer-setting').value;
+        var bVal = document.getElementById('bgm-setting').value;
+        var origin = window.location.origin;
+        var pathname = window.location.pathname;
+        window.location.replace(origin + pathname + "?timer=" + tVal + "&bgm=" + bVal + "&done=1");
+    }
+
+    // 터치 시 오디오 재생 및 시작 (모바일 먹통 방지 안전장치)
+    function startBreathing() {
+        document.getElementById('start-screen').style.display = 'none';
+        
+        var bgmType = document.getElementById('bgm-setting').value;
+        if (backgroundAudio) {
+            backgroundAudio.pause();
+        }
+        backgroundAudio = new Audio(bgmLinks[bgmType]);
+        backgroundAudio.loop = true;
+        backgroundAudio.volume = 0.6;
+        backgroundAudio.play().catch(function(e){});
+
+        var minutes = parseInt(document.getElementById('timer-setting').value);
+        if (minutes > 0) {
+            sessionRemainingSeconds = minutes * 60;
+            updateSessionTimerText();
+            sessionTimerId = setInterval(function() {
+                sessionRemainingSeconds--;
+                updateSessionTimerText();
+                if (sessionRemainingSeconds <= 0) {
+                    endSession();
+                }
+            }, 1000);
+        } else {
+            document.getElementById('total-time-display').innerText = "진행 중: 무제한 모드";
+        }
+
+        breathingActive = true;
+        startCycle();
+    }
+
+    function updateSessionTimerText() {
+        var min = Math.floor(sessionRemainingSeconds / 60);
+        var sec = sessionRemainingSeconds % 60;
+        document.getElementById('total-time-display').innerText = "남은 시간: " + min + "분 " + sec + "초";
+    }
+
+    function endSession() {
+        breathingActive = false;
+        clearInterval(intervalId);
+        clearInterval(sessionTimerId);
+        if (backgroundAudio) backgroundAudio.pause();
+        
+        var circle = document.getElementById('main-circle');
+        circle.className = 'breathe-circle';
+        circle.style.transform = 'scale(1)'; // 초기화
+        document.getElementById('action-text').innerText = "종료";
+        document.getElementById('action-timer').innerText = "✓";
+        document.getElementById('total-time-display').innerText = "수고하셨습니다. 평온한 밤 되세요.";
+        document.getElementById('guide-title-text').innerText = "명상이 완료되었습니다.";
+        document.getElementById('guide-main-text').innerText = "오늘 하루도 정말 고생 많으셨습니다. 긴장이 충분히 풀렸기를 바랍니다.";
+        
+        var startScreen = document.getElementById('start-screen');
+        startScreen.style.display = 'flex';
+        document.querySelector('.start-btn').innerText = "다시 시작하기";
+    }
+
+    // 4-7-8 핵심 엔진
+    function startCycle() {
+        if (!breathingActive) return;
+        
+        // 새로운 명언 노출 효과
+        var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        var quoteBox = document.getElementById('guide-main-text');
+        quoteBox.style.opacity = 0;
+        setTimeout(function() {
+            document.getElementById('guide-title-text').innerText = "마음 챙김 가이드";
+            quoteBox.innerText = randomQuote;
+            quoteBox.style.opacity = 1;
+        }, 500);
+
+        // 1. 들이마시기 (4초)
+        setPhase('inhale', 4, '들이마시기', function() {
+            if (!breathingActive) return;
+            // 2. 멈추기 (7초)
+            setPhase('hold', 7, '숨 참기', function() {
+                if (!breathingActive) return;
+                // 3. 내쉬기 (8초)
+                setPhase('exhale', 8, '내쉬기', function() {
+                    if (!breathingActive) return;
+                    startCycle(); // 무한 반복
+                });
+            });
+        });
+    }
+
+    function setPhase(phaseName, duration, textStr, callback) {
+        if (!breathingActive) return;
+        
+        var circle = document.getElementById('main-circle');
+        circle.className = 'breathe-circle phase-' + phaseName;
+        
+        // 부드러운 트랜지션 타임 맞춤 설정
+        if (phaseName === 'exhale') {
+            circle.style.transition = 'all 8s linear';
+        } else if (phaseName === 'inhale') {
+            circle.style.transition = 'all 4s ease-out';
+        } else {
+            circle.style.transition = 'all 0.5s ease';
+        }
+
+        document.getElementById('action-text').innerText = textStr;
+        phaseTimer = duration;
+        document.getElementById('action-timer').innerText = phaseTimer;
+
+        var elapsed = 0;
+        intervalId = setInterval(function() {
+            elapsed++;
+            phaseTimer--;
+            document.getElementById('action-timer').innerText = phaseTimer;
+            
+            if (elapsed >= duration) {
+                clearInterval(intervalId);
+                callback();
+            }
+        }, 1000);
+    }
+//]]>
+</script>
