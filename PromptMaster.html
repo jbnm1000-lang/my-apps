@@ -1,0 +1,364 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Poppins:wght@500;700&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 기본 테마 완벽 숨김 (돋보기, 뒤로가기, 프로필, 사이드바 모두 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+
+/* 2. 하얀색 공백 및 뒷배경 나무 이미지 완벽 제거 (MBTI 앱 전용 다크 테마 배경) */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .date-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #0f172a !important; /* MBTI 테마색으로 화면 전체 도배 */
+    background-image: none !important; /* 기존 나무 배경 이미지 무효화 */
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+}
+
+    /* [프리미엄 UI/UX 세팅] - 다크 테크 글래스모피즘 스타일 고도화 */
+    :root {
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        --glass-bg: rgba(30, 41, 59, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --accent-primary: #10b981; /* 에메랄드 그린 */
+        --accent-secondary: #6366f1; /* 인디고 블루 */
+        --accent-glow: #f59e0b; /* 앰버 골드 */
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+    }
+
+    /* 최적화 앱 래퍼 레이아웃 */
+    .app-wrapper {
+        background: var(--bg-gradient);
+        color: var(--text-main);
+        font-family: 'Noto Sans KR', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* 입체감 있는 반투명 프리미엄 컨테이너 */
+    .premium-box {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 25px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+        margin-bottom: 60px;
+    }
+
+    h2.main-title {
+        font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+        text-align: center;
+        background: linear-gradient(90deg, #f59e0b, #10b981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.75em;
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9em;
+        margin-bottom: 25px;
+        font-weight: 300;
+    }
+
+    /* 안전성 가이드라인 안내 세그먼트 */
+    .security-banner {
+        background: rgba(245, 158, 11, 0.1);
+        border-left: 4px solid var(--accent-glow);
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-size: 0.82em;
+        color: #fbbf24;
+        line-height: 1.5;
+    }
+
+    /* 폼 입력 필드 시각 최적화 */
+    .form-group { margin-bottom: 20px; position: relative; }
+    label { display: block; font-size: 0.88em; font-weight: 500; margin-bottom: 8px; color: #cbd5e1; padding-left: 4px; }
+    
+    select, input[type="text"], textarea {
+        width: 100%; padding: 14px 16px; background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+        color: var(--text-main); font-size: 0.95em; box-sizing: border-box;
+        outline: none; transition: all 0.3s ease; font-family: inherit;
+    }
+    
+    select:focus, input[type="text"]:focus, textarea:focus {
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+        background: rgba(15, 23, 42, 0.8);
+    }
+    
+    textarea { resize: none; height: 80px; }
+
+    /* 고급 상용 그래디언트 버튼 프로필 */
+    .btn-generate {
+        width: 100%; background: linear-gradient(90deg, var(--accent-secondary), #4f46e5);
+        color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: 700; cursor: pointer;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); transition: all 0.3s ease; margin-top: 10px;
+    }
+    .btn-generate:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4); }
+
+    .btn-copy {
+        width: 100%; background: linear-gradient(90deg, var(--accent-primary), #059669);
+        color: white; padding: 15px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: 700; cursor: pointer;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.3s ease; margin-top: 15px;
+    }
+
+    .btn-reset {
+        width: 100%; background: rgba(255, 255, 255, 0.08); color: #e2e8f0; padding: 12px; border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px; font-size: 0.95em; font-weight: 500; cursor: pointer; margin-top: 12px; transition: all 0.3s ease;
+    }
+
+    /* 결과 출력 콘솔 아키텍처 */
+    #resultContainer { display: none; animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    .output-box {
+        background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px;
+        padding: 20px; font-size: 0.95em; line-height: 1.7; color: #e2e8f0; white-space: pre-wrap; word-break: break-all; margin-top: 15px;
+    }
+
+    /* 스마트폰 전용 통합 하단 모바일 토스트(Toast) 시스템 */
+    #toast {
+        visibility: hidden; min-width: 280px; background-color: #10b981; color: #fff; text-align: center;
+        border-radius: 50px; padding: 14px 24px; position: fixed; z-index: 1000; left: 50%; bottom: 40px;
+        transform: translateX(-50%); font-size: 0.93em; font-weight: 600; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #toast.show { visibility: visible; animation: fadein 0.4s, fadeout 0.4s 2.6s; }
+
+    /* 화면 하단 우측 플로팅 액션 버튼 (FAB) */
+    .fab-button {
+        position: fixed; bottom: 75px; right: 20px; width: 48px; height: 48px; background: var(--accent-secondary);
+        border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        cursor: pointer; z-index: 99; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;
+    }
+    
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 40px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 40px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+</style>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">SMART AI PROMPT MASTER</h2><div><br /></div>
+        <div class="subtitle">Advanced High-End Prompt Engineering Framework</div>
+        
+        <div class="security-banner">
+            🛡️ <b>안전성 및 유저 가이드라인 선언</b><br />
+            본 시스템은 AI 거대 언어 모델의 가독성과 연산 정확도를 향상시키기 위한 논리 프롬프트 빌더 자산을 송출합니다. 도출된 질문 구조물을 타 플랫폼에 적용할 시, 주요 팩트 관계의 검증 의무는 최종 유저에게 귀속됩니다.
+        </div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>1. 대분류 시스템 도메인 선택 (Category)</label>
+                <select id="category" onchange="syncSubCategories()">
+                    <option value="c1">💰 블로그 &amp; 구글 SEO 마케팅 (Search Optimization)</option>
+                    <option value="c2">🎬 유튜브 &amp; 숏폼 비디오 크리에이티브 (Video Script)</option>
+                    <option value="c3">💳 실생활 경제 솔루션 &amp; 배달 혜택 (Life &amp; Economy)</option>
+                    <option value="c4">🎮 모바일 게임 분석 &amp; 커뮤니티 빌딩 (Gaming Strategy)</option>
+                    <option value="c5">💻 소프트웨어 엔지니어링 &amp; 자동화 (IT Development)</option>
+                    <option value="c6">🍼 영유아 발달 케어 &amp; 올바른 양육 솔루션 (Parenting Guide)</option>
+                    <option value="c7">📈 엔터프라이즈 기획 &amp; 비즈니스 전략 (Corporate Management)</option>
+                    <option value="c8">🎓 학업 과제 구조 설계 &amp; 논문 초안 (Academic Writing)</option>
+                    <option value="c9">🏃 피트니스 루틴 및 임상 영양 설계 (Health &amp; Nutrition)</option>
+                    <option value="c10">🎨 문학 창작 &amp; 이미지 최적화 지시어 (Creative Art &amp; Prompt)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>2. 세부 소주제 도메인 최적화 (MAX 100개 데이터 세트)</label>
+                <select id="subCategory"></select>
+            </div>
+
+            <div class="form-group">
+                <label>3. 다이내믹 핵심 주제/키워드 입력 (필수 사항)</label>
+                <input id="customKeyword" placeholder="예시: 생성형 AI 자동화, 올바른 이유식 식단, 리니지 장비 세팅 등" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label>4. 구체적인 특수 상황 및 제약조건 추가 (선택 요구사항)</label>
+                <textarea id="customContext" placeholder="예시: 5개 단락으로 요약해서, 초보자용 가이드 라인 형태로, 핵심 통계치를 인용하여 서술 등 명확한 제약을 자유롭게 기재해 주세요."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>5. 지향 언어 텍스트 어조 (Tone of Voice)</label>
+                <select id="tone">
+                    <option value="t1">Professional - 매우 전문적이고 명확한 신뢰감을 주는 논리 어조</option>
+                    <option value="t2">Friendly - 유치하지 않고 정중하며 아주 부드럽고 상냥한 친근 어조</option>
+                    <option value="t3">Analytical - 감정을 철저히 배제하고 객관적인 데이터 데이터 중심의 분석 어조</option>
+                    <option value="t4">Creative - 고정관념을 파괴하는 창의적이고 독창적인 영감 어조</option>
+                    <option value="t5">Witty - 청중의 지루함을 환기하는 유머러스하고 유연한 위트 어조</option>
+                    <option value="t6">Concise - 부연설명을 완전히 삭제하고 군더더기 없이 요약된 간결 어조</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>6. 타겟 엔드 유저 타겟팅 (Target Audience)</label>
+                <select id="audience">
+                    <option value="a1">지식이 전혀 없는 일반 대중 및 잠재적 엔드 유저</option>
+                    <option value="a2">업계 고도화 용어와 컨텍스트를 즉시 해독하는 실무 최고 전문가 그룹</option>
+                    <option value="a3">기초적인 장벽을 넘어서고자 하는 완전 초보자 및 입문 단계 유저</option>
+                    <option value="a4">어려운 단어 소화 능력이 제한적인 초등학생 수준의 아동층</option>
+                    <option value="a5">신생아부터 영유아를 정성껏 양육하고 있는 전 연령대 부모님</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>7. 최종 출력물 템플릿 아키텍처 포맷 (Output Structure)</label>
+                <select id="format">
+                    <option value="f1">인간의 가독성에 가장 최적화된 논리적 일반 문장(줄글) 아키텍처</option>
+                    <option value="f2">상호 비교 및 연산 관계가 한눈에 직관적으로 매핑되는 다차원 구조 표(Table) 포맷</option>
+                    <option value="f3">가장 핵심이 되는 가치 위주로 깔끔하게 정돈된 넘버링 리스트 / 불릿 포인트</option>
+                    <option value="f4">실전에서 예외 없이 순서대로 작동하도록 유도하는 시퀀셜 단계별 이행 가이드</option>
+                    <option value="f5">복사하여 즉각 컴파일이 가능한 완전한 소스 코딩 및 로직 스크립트 형태</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>8. 엔진 연산 인스트럭션 실행 언어 (Execution Language)</label>
+                <select id="language">
+                    <option value="l1">국문 최적화 엔진 구동 (한국어 연산)</option>
+                    <option value="l2">영문 최적화 최고 지능 모드 구동 (영어 지시문 추출)</option>
+                </select>
+            </div>
+
+            <button class="btn-generate" onclick="executeEngineBuild()">고도화 엔진 프롬프트 조립하기</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--accent-primary); font-family: Poppins; font-size: 1.25em; margin-top: 0px; text-align: center;">💎 ADVANCED FRAMEWORK DEPLOYED</h3>
+            <div class="output-box" id="promptConsole"></div>
+            <p style="color: #fbbf24; font-size: 0.8em; font-weight: bold; margin-top: 15px; text-align: center;">[!] 하단의 클립보드 복사 버튼 클릭 후 대상 AI 대화창에 바로 입력해 주세요.</p>
+            
+            <button class="btn-copy" id="copyConsoleBtn" onclick="processClipboardCopy()">📋 지능형 프롬프트 전체 복사하기</button>
+            <button class="btn-reset" onclick="rebootSystem()">← 새로운 조건으로 다시 조립하기</button>
+        </div>
+    </div>
+</div>
+
+<div class="fab-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    <svg style="fill: white; height: 22px; width: 22px;" viewbox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>
+</div>
+
+<div id="toast">복사가 완료되었습니다. AI 창에 붙여넣기 하세요!</div>
+
+<script>
+    // [MAX DATABASE] - 누락 없는 대주제 10개 및 세부 소분류 100종 데이터 세트
+    const engineData = {
+        c1: { role: "15년 경력의 구글 SEO 알고리즘 마케팅 수석 수석위원", subs: { s1: "구글 검색엔진 크롤링 봇 최적화 상위 1페이지 인덱싱 보장 원고 아키텍처 빌딩", s2: "이탈률 감소 및 독자 체류시간 극대화를 위한 강력한 도입부 후크 설계", s3: "구글 서치 엔진 친화적 시맨틱 마크업 헤더 구조화(H2, H3, H4) 정밀 설계", s4: "클릭률을 대폭 상승시키는 심리학 기반 정보성 타이틀 헤드라인 10종 추출", s5: "롱테일 핵심 다중 키워드 및 블루오션 니치 키워드 전략 수립", s6: "애드센스 연동형 정보전달 본문 설계 및 내부 하이퍼링크 가치 점수 최대화 원고", s7: "서치 콘솔 색인 생성 누락 현상을 완벽 차단하는 논리 전개 리라이팅 프로토콜", s8: "특정 도메인의 가치 점수를 끌어올리기 위한 분야별 한 달 주기 30개 포스팅 로드맵 기획", s9: "제휴 마케팅 유저의 최종 구매 전환율 극대화를 유도하는 서비스 상세 리뷰 양식", s10: "동일 경쟁사 웹사이트 원고 데이터의 약점을 완벽하게 상쇄하는 차별화된 심층 콘텐츠 원고" } },
+        c2: { role: "누적 조회수 1.5억 뷰를 보유한 지능형 유튜브 메인 총괄 디렉터", subs: { s1: "초반 3초 구간 이탈을 원천 봉쇄하는 모바일 최적화 숏폼 바이럴 스크립트 작성", s2: "평균 시청 지속 시간 최대치를 도출하는 기승전결 10분 롱폼 다큐멘터리 스크립트 빌딩", s3: "유튜브 알고리즘 추천 점수를 가속화하는 시선 집중형 썸네일 그래픽 콘셉트 및 디렉션 제안", s4: "AI 자연어 처리 메타데이터가 선호하는 동영상 상세 설명란 텍스트 및 전략적 태그 세트 설계", s5: "오프닝 단락에서 구독과 알림 설정을 자연스럽게 유도하는 스토리텔링 인트로 스크립트", s6: "아웃트로 구간 시청자 이탈을 방지하고 다음 추천 비디오 클릭을 강제하는 연쇄형 엔딩 멘트", s7: "정보 전달 채널을 위한 고품격 나레이션 전용 논리적 비디오 원고 작성", s8: "글로벌 트렌드 밈 요소를 문맥에 녹여내는 위트 넘치는 대본 컴포지션", s9: "채널 충성도를 확보하기 위한 유기적 연결형 5부작 시리즈 콘텐츠 전체 구성안 기획", s10: "시청자 커뮤니티 댓글 반응을 폭발시켜 알고리즘 활성화를 유도하는 라이브 전용 대본" } },
+        c3: { role: "대한민국 자산 관리 컨설팅 및 실생활 경제 가계 지출 최적화 최고 전문가", subs: { s1: "국내 3대 배달 어플리케이션(배민, 요기요, 쿠팡이츠) 숨은 할인 혜택 매핑 및 통합 가이드", s2: "소득 유형별 정부 보조금 및 누락된 미환급 정부지원금 정밀 매칭 조건 분석", s3: "가계 고정 지출 비용의 30%를 영구히 감축하는 식비 절약 냉장고 관리 프로세스 설계", s4: "통신비 과다 청구 해소, 불필요 구독 모델 정리 등 고정 금융 비용 다이어트 솔루션", s5: "친환경 보일러 등 가전 정비 보조금 자격 요건 정밀 요약 및 신청 가이드", s6: "사회초년생을 위한 월 소득 대비 최적의 저축 포트폴리오 다중 통장 분할 쪼개기 매뉴얼", s7: "해외 조기 예약 알고리즘을 역이용한 항공권/숙박 비용 반값 감축 실전 가이드", s8: "휴면 신용카드 포인트 및 마일리지 가치를 200% 역산하여 현금화하는 테크닉 프로세스", s9: "중고 플랫폼 사기 예방 거래 전용 체크리스트 및 가치 인지 제값 판매 노하우", s10: "연말정산 소득공제 최대 공제액 수령을 위한 맞춤형 소비 지출 최적화 전략 리포트" } },
+        c4: { role: "대형 모바일 게임 수석 길드 총괄 마스터 및 데이터 분석가", subs: { s1: "리니지M 등 고도화 모바일 게임 직업별 무과금 극효율 성장 및 사냥터 동선 매뉴얼", s2: "신작 서브컬처 모바일 게임 캐릭터 데이터 전수 검증을 통한 최신 신뢰 등급 티어표 산출", s3: "대규모 연합 시스템 운영을 위한 체계적인 행동 수칙 및 정비 공지문 아키텍처", s4: "신규 진입 유저의 재화 소모 낭비를 0%로 제한하는 초반 성장 재화 분배 솔루션", s5: "효율적 자동 사냥 시스템 구동을 위한 최적의 스킬 슬롯 배치 가이드 및 물약 세팅 프로토콜", s6: "개발사 공식 패치 노트 텍스트 정밀 역분석을 통한 인게임 경제 메타 변화 예측 리포트", s7: "소과금 유저의 가성비 한계 효용을 극대화하는 상점 패키지 효율 비교 평가표 작성", s8: "상위 레이드 공략을 위한 직업군별 완벽 시너지 조합 및 위기 대처 타임라인 전략 수립", s9: "인게임 거래소 시세 변동 추이 데이터 기반의 고수익 아이템 장사 베이스라인 구축 매뉴얼", s10: "게임 커뮤니티 유저 지지율 확보를 위한 고품격 게임 스토리 세계관 해석 포스팅 기획" } },
+        c5: { role: "엔터프라이즈 아키텍트 출신의 최고 기술 전무이사(CTO)", subs: { s1: "파이썬 다중 스택 추적 코딩 디버깅 및 런타임 오류 원인 역추적 솔루션 코드", s2: "OpenClaw AI 연동 웹 크롤링 기반 구글 블로그 데이터 무인 자동 포스팅 자동화 아키텍처", s3: "플러터플로우 컴포넌트 비동기 데이터 통신 로직 및 상태 관리 이슈 해결", s4: "복잡한 레거시 소스코드를 클린코드 규격으로 재구성하는 고효율 코딩 리팩토링 모델", s5: "비기술직 경영진도 한눈에 아키텍처를 이해할 수 있는 상세한 주석 및 다이어그램 기술서", s6: "타겟 웹 어플리케이션 보안 취약점 사전 차단용 웹 스크래핑 엔진 제작 프로토콜", s7: "엑셀 대용량 원시 데이터의 정제 및 적재 업무를 자동화하는 파이썬 스크립트 작성", s8: "API 연동 간 토큰 갱신 오류 및 헤더 인증 불일치 문제를 해결하는 통신 규격 코드", s9: "앱인벤터 등 로우코드 프레임워크와 외부 데이터베이스 간 동기화 솔루션", s10: "컴퓨터 과학 비전공 입문자를 주니어 엔지니어로 견인하는 100일 완성 독학 로드맵 설계" } },
+        c6: { role: "아동 심리학 학위 보유 20년 경력 영유아 발달 상태 정밀 진단 교수", subs: { s1: "신생아기 수면 위생 환경 확립을 위한 과학적 통계 기반 영유아 수면 교육 시간표 가이드", s2: "특정 거부 반응을 보이는 유아기 편식 증상 해소를 위한 영양학적 접근 레시피", s3: "유아기 자존감 및 정서적 안정성을 고도화하는 부모의 긍정 언어 상황별 훈육 멘트", s4: "초보 양육 부모 전용 돌발성 고열 발생 시 시간별 대처 및 해열제 교차 복용 정밀 매뉴얼", s5: "영유아 미디어 중독 증상을 원천 차단하는 대체 자극 놀이 중심 디지털 노출 차단 솔루션", s6: "가정 내 공간을 활용한 영유아 발달 균형 촉진 실내 놀이 프로그램 시나리오", s7: "심리적 정체를 예방하는 자연스러운 기저귀 떼기 배변 훈련 성공 가이드", s8: "다자녀 가정 내 형제자매 갈등 발생 시 부모의 편향 없는 공평한 중재 및 대화법 알고리즘", s9: "안전 검증이 완료된 발달 자극형 주말 나들이 동선 및 체크리스트 설계", s10: "부모의 마인드케어를 위한 정서적 밸런스 회복 솔루션" } },
+        c7: { role: "글로벌 대기업 경영 전략기획실 수석 파트너 이사", subs: { s1: "임원진 의사결정 속도를 단축시키는 논리 비즈니스 기획서 프레임워크", s2: "이해관계자 간 이해 상충 문제를 정중하고 명확하게 통제하는 다국적 기업 협조 이메일 초안", s3: "1시간 분량 난상 토론 회의록에서 핵심 중심 통찰력을 도출하는 요약 양식", s4: "외부 컴플레인 리스크를 최소화하고 기업 브랜드 신뢰를 방어하는 위기 관리 사과문 매뉴얼", s5: "글로벌 신규 시장 진입 전략 수립을 위한 마켓 포지셔닝 분석서", s6: "실적 분석 결과 가독성을 극대화하는 임원진 보고용 데이터 인사이트 브리핑 시트", s7: "인재 유치용 핵심 성과 지표와 직무 역량이 논리적으로 매핑된 완성도 높은 경력 기술서", s8: "신규 입사자 이탈을 방지하고 생산성을 즉각 발휘하게 하는 온보딩 가이드라인 시스템", s9: "팀원 역량 강화를 유도하는 건설적이고 객관적인 피드백 면담 시나리오", s10: "투자 유치 성공률을 획기적으로 향상시키는 스토리텔링 기반 프레젠테이션 스피치 대본" } },
+        c8: { role: "명문 대학교 학업 설계 위원회 수석 위원 및 논문 전문 교정 위원", subs: { s1: "학부 과정 A+ 취득을 보장하는 리포트 서론 논제 설정 및 구조적 목차 설계안", s2: "교수 위원진의 예리한 질의를 사전에 방어하는 대학교 조별 발표 PPT 전용 스크립트 대본", s3: "방대한 전공 서적 및 학술 논문 텍스트 데이터의 핵심 가치 요약 및 시험 예상 문항 설계", s4: "심사위원단의 감동을 유도하는 장학금 지원 제출용 연구 계획 및 사유서 작성", s5: "학위 청구 논문을 위한 연구 가설 수립 및 선행 연구 분석 방법론 기술서", s6: "복잡한 영문 학술 아티클 문맥을 훼손 없이 국문으로 완벽 해독하는 번역", s7: "석학 과정 매칭용 연구 목적 진술서 및 영문 자기소개서 아키텍처 설계", s8: "어학 자격 시험 단기 고득점 획득을 위한 시간 관리 매트릭스 학습 로드맵", s9: "벼락치기 학업 성취도를 상승시키는 응용 집중력 제어 타임 테이블", s10: "학과 교수님께 성적 정정을 요청하는 정중함의 극치를 담은 정량 이메일 서식" } },
+        c9: { role: "전담 피지컬 트레이닝 총괄 코치 및 생화학 메커니즘 임상 영양사", subs: { s1: "체지방 감량을 가속하는 4주 주기 맞춤형 매크로 식단표", s2: "웨이트 트레이닝 입문자를 위한 점진적 과부하 원칙 적용 부위별 근력 강화 루틴 매뉴얼", s3: "사무직 직장인의 만성 근골격계 질환을 예방하는 5분 교정 스트레칭 루틴", s4: "근비대 효율을 극대화하는 보충제 섭취 가이드", s5: "관절 질환 유저를 위한 안전 보장형 고효율 유산소 운동 프로토콜", s6: "수면 장애를 청산하는 야간 수면 위생 환경 조성 솔루션", s7: "스트레스성 야식 및 폭식 단절 마인드 셋업 솔루션", s8: "혈당 스파이크 현상을 사전에 억제하는 과학적인 대사 질환 예방 식사 순서 법칙 가이드", s9: "층간 소음 리스크를 0%로 제어하는 홈 트레이닝 맨몸 운동 프로그램 루틴", s10: "운동 정체기 돌파를 위한 신경계 회복 및 전략 가이드 리포트" } },
+        c10: { role: "문학상 수상 경력의 소설가이자 미드저니 공식 프롬프트 수석 엔지니어", subs: { s1: "미드저니 등에서 실사 해상도를 도출하는 8K 렌더링 프롬프트", s2: "웹소설 플랫폼 상위권 안착을 위한 독창적 차원 이동 세계관 및 입체적 인물 관계 시놉시스", s3: "글쓰기 두려움을 격파하고 창작을 즉각 유도하는 장르별 문학 글감 소스 10종", s4: "연극 무대용 관객 흡입력이 완벽한 창작 아동 연극 시나리오 대본", s5: "오글거림 배제형 세련된 시적 텍스트 카피라이팅 문구", s6: "평범한 일상 속 에피소드를 트렌디한 시트콤 및 웹툰 시나리오 형태로 극적 각색하는 노하우", s7: "브랜드 아이덴티티 가치를 대변하는 세련된 영문/국문 네이밍 슬로건 조합 자산 도출 프로토콜", s8: "로고 및 엠블럼 생성용 디자인 기하학 시스템 이미지 지시어 설계", s9: "유저의 텍스트 선택지에 따라 멀티 엔딩 시나리오로 분기하는 텍스트 아키텍처 스크립트", s10: "특정 사운드 스케이프의 청각적 무드를 시각화하는 문학적 수사법 중심 묘사문 표현" } }
+    };
+
+    const tones = { t1: "전문적이고 신뢰감 있는 논리 어조로", t2: "친절하고 부드러우며 상냥한 친근 어조로", t3: "감정을 배제하고 객관적인 사실과 데이터 위주로", t4: "틀에 얽매이지 않는 창의적이고 독창적인 영감 어조로", t5: "지루하지 않게 유머러스하고 위트 넘치는 어조로", t6: "불필요한 수식어를 배제하고 핵심만 짚은 간결한 어조로" };
+    const auds = { a1: "지식이 없는 일반 대중", a2: "업계 고도화 용어와 문맥을 이해하는 전문가 그룹", a3: "기초를 배우는 초보자 및 입문 단계 유저", a4: "어려운 단어 소화 능력이 제한적인 연령대 아동층", a5: "신생아부터 영유아를 양육하며 고민이 많은 부모님" };
+    const fmts = { f1: "자연스럽게 읽히는 논리적 문장 형태", f2: "데이터를 한눈에 비교하고 파악하기 쉬운 표(Table) 형식", f3: "가장 중요한 핵심 가치만 요약 정리한 기호 형태", f4: "순서대로 따라 하기만 하면 되는 단계별 이행 가이드 형태", f5: "복사해서 바로 붙여넣어 구동할 수 있는 소스 코드 스크립트 형태" };
+    const langs = { l1: "한국어", l2: "영어(English) - 최고 수준의 정교한 연산을 위해 완전한 영어로 작성" };
+
+    function syncSubCategories() {
+        const catSelect = document.getElementById("category").value;
+        const subSelect = document.getElementById("subCategory");
+        subSelect.innerHTML = ""; 
+        const subs = engineData[catSelect].subs;
+        for (let key in subs) {
+            let option = document.createElement("option");
+            option.value = key; option.text = subs[key]; subSelect.add(option);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { syncSubCategories(); processUrlParameters(); });
+
+    // [하단 토스트 제어 통합 엔진 시스템]
+    function activateToastAlert(message, isCritical = false) {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        if (isCritical) {
+            toast.style.backgroundColor = "#e11d48"; // 경고 전용 딥 레드 컬러
+            toast.style.boxShadow = "0 10px 25px rgba(225, 29, 72, 0.4)";
+        } else {
+            toast.style.backgroundColor = "#10b981"; // 성공용 에메랄드 그린
+            toast.style.boxShadow = "0 10px 25px rgba(16, 185, 129, 0.4)";
+        }
+        toast.className = "show";
+        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+    }
+
+    function executeEngineBuild() {
+        const c = document.getElementById("category").value;
+        const s = document.getElementById("subCategory").value;
+        const kw = encodeURIComponent(document.getElementById("customKeyword").value.trim());
+        const ctx = encodeURIComponent(document.getElementById("customContext").value.trim());
+        const t = document.getElementById("tone").value;
+        const a = document.getElementById("audience").value;
+        const f = document.getElementById("format").value;
+        const l = document.getElementById("language").value;
+
+        // 필수 항목 비어있을 때 촌스러운 브라우저 창 대신 세련된 토스트로 호출
+        if(!kw) {
+            activateToastAlert("필수 항목(3번 키워드)을 입력해 주세요!", true);
+            document.getElementById("customKeyword").focus();
+            return;
+        }
+
+        const query = `?launch=true&c=${c}&s=${s}&kw=${kw}&ctx=${ctx}&t=${t}&a=${a}&f=${f}&l=${l}`;
+        window.location.href = window.location.pathname + query;
+    }
+
+    function processUrlParameters() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("launch") === "true") {
+            document.getElementById("formContainer").style.display = "none";
+            document.getElementById("resultContainer").style.display = "block";
+
+            const c = params.get("c"), s = params.get("s"), kw = decodeURIComponent(params.get("kw") || ""), ctx = decodeURIComponent(params.get("ctx") || "");
+            const t = params.get("t"), a = params.get("a"), f = params.get("f"), l = params.get("l");
+
+            let promptText = `[역할 부여]\n당신은 "${engineData[c].role}"입니다. 제공된 역할의 지식에 동화되어 권위자의 관점에서 문제를 해결해 주십시오.\n\n`;
+            promptText += `[맥락 및 핵심 주제]\n- 핵심 타겟 대상: ${auds[a]}\n- 분석 대상: ${engineData[c].subs[s]}\n- 유저 지정 핵심 키워드: ${kw}\n\n`;
+            if(ctx) promptText += `[특수 조건]\n유저가 지시한 제약조건을 최우선으로 적용하십시오:\n"${ctx}"\n\n`;
+            promptText += `[구조 요구사항]\n1. 정보 전달의 분위기는 반드시 "${tones[t]}" 엄격히 통제하여 기술해 주십시오.\n2. 실증적 가이드와 구체적인 예시를 수반하십시오.\n3. 결과 데이터의 포맷은 반드시 "${fmts[f]}"(으)로 구현해야만 합니다.\n\n[출력 언어]\n최종 출력 데이터의 언어는 무조건 "${langs[l]}"로 선언합니다.`;
+
+            document.getElementById("promptConsole").innerText = promptText;
+            window.scrollTo({top: document.querySelector('.premium-box').offsetTop - 10, behavior: 'smooth'});
+        }
+    }
+
+    function processClipboardCopy() {
+        const consoleText = document.getElementById("promptConsole").innerText;
+        const el = document.createElement("textarea"); el.value = consoleText;
+        document.body.appendChild(el); el.select(); document.execCommand("copy"); document.body.removeChild(el);
+
+        activateToastAlert("복사가 완료되었습니다. AI 창에 붙여넣기 하세요!", false);
+    }
+
+    function rebootSystem() { window.location.href = window.location.pathname; }
+</script>
