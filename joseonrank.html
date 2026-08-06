@@ -1,0 +1,292 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;900&display=swap');
+
+html, body {
+    padding: 0 !important; margin: 0 !important; border: none !important;
+    background-color: #0c0c0c !important; 
+    width: 100% !important; min-height: 100dvh !important;
+    font-family: 'Noto Serif KR', serif !important;
+    color: #e5e5e5;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+#navbar-iframe, .Navbar, #header, #sidebar, .sidebar, .footer, #footer, .post-title, .comments {
+    display: none !important;
+}
+
+#dynasty-app-container {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 100% !important; min-height: 100dvh !important;
+    background: radial-gradient(circle at center, #24201e 0%, #0a0a0a 100%) !important;
+    z-index: 2147483647 !important;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#bg-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+}
+
+.app-wrapper {
+    position: relative; z-index: 10; max-width: 600px; margin: 0 auto;
+    padding: 30px 20px 60px 20px; display: flex; flex-direction: column;
+    align-items: center; gap: 20px;
+}
+
+/* 랭크 표시 디자인 */
+.rank-display {
+    background: rgba(30, 28, 26, 0.8); border: 1px solid #d4af37; padding: 25px 30px;
+    border-radius: 12px; text-align: center; width: 100%; max-width: 300px;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.05);
+}
+.rank-modern { font-size: 14px; color: #ff9f43; font-weight: 600; margin-bottom: 8px; }
+.rank-level { font-size: 15px; font-weight: 400; color: #b89f5f; margin-bottom: 5px; }
+.rank-title { font-size: 32px; font-weight: 900; color: #ffffff; margin: 0; }
+.rank-display img { max-width: 100%; height: auto; }
+
+/* 클릭 버튼 */
+.study-circle {
+    width: 170px; height: 170px; border-radius: 50%;
+    background: linear-gradient(145deg, #1f1b18, #2a2522); border: 2px solid #5a4b35;
+    display: flex; align-items: center; justify-content: center; font-size: 45px;
+    cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin: 10px 0;
+}
+.study-circle:active { transform: scale(0.92); }
+.click-hint { font-size: 13px; color: #737373; margin-top: -10px; }
+
+/* 프로그레스 바 */
+.progress-container { width: 100%; max-width: 320px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.progress-bg { width: 100%; height: 12px; background: #111; border-radius: 6px; border: 1px solid #333; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #8a6c32, #d4af37); width: 0%; transition: width 0.3s ease; }
+.progress-text { font-size: 14px; color: #a09e9c; }
+
+/* 승진 버튼 */
+.btn-promote {
+    background: linear-gradient(135deg, #800020, #4a0012); color: #ffffff;
+    border: 1px solid #d4af37; padding: 18px 40px; font-size: 18px; font-weight: 900;
+    border-radius: 8px; cursor: pointer; display: none; width: 100%; max-width: 320px;
+    box-shadow: 0 10px 20px rgba(128,0,32,0.4); font-family: 'Noto Serif KR', serif;
+}
+
+/* 스토리 수집 카드 */
+.story-card {
+    background: rgba(20, 18, 16, 0.9); border: 1px solid #d4af37;
+    border-radius: 10px; padding: 20px; width: 100%; max-width: 320px; line-height: 1.6;
+}
+.story-card h3 { color: #d4af37; font-size: 16px; margin: 0 0 10px 0; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 8px; text-align: center; }
+.story-card p { font-size: 14.5px; color: #e5e5e5; margin: 0; word-break: keep-all; }
+.secret-badge { display: block; width: max-content; background: #800020; color: white; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin: 0 auto 10px auto; }
+
+/* 꿀팁 및 안내 영역 */
+.extra-section { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
+.extra-card { background: rgba(20, 18, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 20px; }
+.guide-card { border-left: 4px solid #d4af37; }
+.warning-card { border-left: 4px solid #800020; }
+.extra-card h3 { margin: 0 0 10px 0; font-size: 15px; display: flex; align-items: center; font-weight: 900; }
+.guide-title { color: #d4af37; }
+.warning-title { color: #ff6b6b; }
+.extra-card p { font-size: 13.5px; color: #b5b5b5; margin: 0 0 8px 0; line-height: 1.5; word-break: keep-all; }
+.extra-card p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="dynasty-app-container">
+    <canvas id="bg-canvas"></canvas>
+    <div class="app-wrapper">
+
+        <div class="rank-display">
+            <h1 style="text-align: left;"><span style="color: #04ff00;">조선시대 신분 상승기</span></h1><div><span style="color: #04ff00;"><br /></span></div>
+            <div class="rank-modern" id="ui-rank-modern">현대 직급: 취업 준비생</div>
+            <div class="rank-level" id="ui-rank-level">제 1 단계</div>
+            <div class="rank-title" id="ui-rank-title">평민</div>
+        </div>
+
+        <div class="study-circle" onclick="addExp(5)">📖</div>
+        <div class="click-hint" id="txt-hint">화면을 터치하여 실적을 올리십시오</div>
+
+        <div class="progress-container" id="progress-area">
+            <div class="progress-bg"><div class="progress-fill" id="ui-exp-fill"></div></div>
+            <div class="progress-text">승진 심사 진행도 : <span id="ui-exp-text">0 / 100</span></div>
+        </div>
+
+        <!--멘트를 수정한 버튼-->
+        <button class="btn-promote" id="btn-promote" onclick="executePromotion()">📜 승진하기</button>
+
+        <div class="story-card">
+            <span class="secret-badge">🔓 기밀 해제</span>
+            <h3 id="ui-desc-title">수집된 역사 기록</h3>
+            <p id="ui-desc-text">관직에 오르면 교과서에 없는 흥미로운 조선시대 야사가 공개됩니다.</p>
+        </div>
+
+        <div class="extra-section">
+            <div class="extra-card guide-card">
+                <h3 class="guide-title">💡 앱 이용 가이드 및 꿀팁</h3>
+                <p>✔️ 가만히 두어도 1초마다 학문 성취도가 자동으로 오르는 방치형 시스템입니다.</p>
+                <p>✔️ 서책(📖)을 열심히 터치하면 더욱 빠르게 승진 심사를 받을 수 있습니다.</p>
+                <p>✔️ 승급할 때마다 총 19가지의 놀라운 조선시대 비밀 이야기가 순서대로 해금됩니다.</p>
+            </div>
+
+            <div class="extra-card warning-card">
+                <h3 class="warning-title">🚨 필수 안내</h3>
+                <p>본 앱은 직장 생활의 피로를 유쾌하게 풀어드리기 위한 가상 엔터테인먼트 도구입니다.</p>
+                <p>관직이 오르더라도 실제 현금이나 재화가 지급되지 않으며, 사행성 요소가 일절 없음을 명확히 안내해 드립니다.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+    var appContainer = document.getElementById('dynasty-app-container');
+    if (appContainer) {
+        document.body.appendChild(appContainer);
+        var children = document.body.children;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].id !== 'dynasty-app-container' && children[i].tagName !== 'SCRIPT' && children[i].tagName !== 'STYLE') {
+                children[i].style.display = 'none';
+            }
+        }
+    }
+    initApp();
+    initCanvasEffects();
+});
+
+var dynastyData = [
+    { title: "평민", modern: "취업 준비생", secret: "출사를 위해 서당에서 사서삼경을 익히는 중입니다. 다음 관직에 오르면 조선의 은밀한 이야기가 열립니다.", req: 100 },
+    { title: "종9품 참봉", modern: "9급 공무원 시보", secret: "[조선의 기괴한 장수 비결] 역대 최고령 왕인 영조의 장수 비결은 평생토록 즐겨 먹은 잣죽과 고추장, 그리고 철저한 소식이었습니다.", req: 300 },
+    { title: "정9품 통사랑", modern: "9급 공무원", secret: "[조선의 배달 음식] 조선시대에도 야식 배달이 있었습니다. '효종갱'이라는 해장국은 밤새 끓여 새벽에 한양 양반집으로 배달되었습니다.", req: 600 },
+    { title: "종8품 봉사", modern: "8급 공무원", secret: "[세종대왕의 파격 복지] 세종은 관노비가 출산하면 100일의 휴가를 주었고, 남편에게도 30일의 산후휴가를 주었습니다.", req: 1000 },
+    { title: "정8품 통사랑", modern: "대리 진급 예정자", secret: "[암행어사의 상징] 마패는 사실 신분증이 아니라, 역참에서 말을 몇 마리 빌릴 수 있는지 나타내는 '교통카드'였습니다.", req: 1500 },
+    { title: "종7품 직장", modern: "7급 주사보", secret: "[조선의 소방관] 한양 도성에 큰 불이 나는 것을 막기 위해 세조 때 '멸화군'이라는 24시간 대기 전문 소방 부대가 있었습니다.", req: 2100 },
+    { title: "정7품 무공랑", modern: "실무 에이스 대리", secret: "[조선의 얼음 창고] 냉장고가 없던 시절, 한겨울 한강의 얼음을 잘라 동빙고와 서빙고에 보관하여 여름내 시원하게 썼습니다.", req: 2800 },
+    { title: "종6품 주부", modern: "만년 과장", secret: "[조선의 안경] 정조는 지독한 시력 저하에 시달려 업무를 볼 때 돋보기안경을 매우 즐겨 썼습니다.", req: 3600 },
+    { title: "정6품 승의랑", modern: "차장", secret: "[궁녀의 진짜 월급] 궁녀는 평생 궁에 갇혀 사는 대신, 현대 가치로 연봉 수천만 원에 달하는 고소득 전문직이었습니다.", req: 4500 },
+    { title: "종5품 판관", modern: "부장 진급 대기자", secret: "[코끼리 귀양 사건] 태종 때 일본이 선물한 코끼리가 밥을 너무 많이 먹고 사람을 밟아 죽이자 외딴섬으로 귀양을 보냈습니다.", req: 5500 },
+    { title: "정5품 통덕랑", modern: "신임 부장", secret: "[왕의 화장실] 왕의 대변은 '매화'라 불렸고, 매화틀에 볼일을 보면 어의가 그 색과 맛을 보며 건강을 체크했습니다.", req: 6600 },
+    { title: "종4품 군수", modern: "지방 지사장", secret: "[조선의 애완동물] 성종은 사슴, 고양이, 원숭이 등 온갖 동물을 궁궐에서 직접 키운 지독한 동물 매니아였습니다.", req: 7800 },
+    { title: "정4품 조산대부", modern: "본사 핵심 부장", secret: "[다둥이 출산 지원금] 조선시대에 세쌍둥이를 출산하면 국가에서 축하의 의미로 쌀과 콩을 대량으로 무상 지급했습니다.", req: 9100 },
+    { title: "종3품 부사", modern: "상무보", secret: "[조선의 부동산 난] 한양으로 인구가 몰리면서 땅값이 폭등해, 양반들도 전세 사기를 당하거나 셋방살이를 하는 일이 흔했습니다.", req: 10500 },
+    { title: "정3품 당상관", modern: "상무이사 (임원)", secret: "[조선판 CSI] 살인 사건이 나면 '신주무원록'이라는 법의학 책을 바탕으로 시체의 상태를 과학적으로 수사했습니다.", req: 12000 },
+    { title: "종2품 관찰사", modern: "전무이사", secret: "[과거 시험 커닝] 과거 시험장에서는 콧구멍이나 붓대 속에 커닝 페이퍼를 숨겨 들어가는 등 온갖 부정행위가 만연했습니다.", req: 15000 },
+    { title: "정2품 판서", modern: "부사장", secret: "[왕의 극한 식단] 조선의 왕은 건강 유지를 위해 하루 5번 수라상을 받았으며, 반찬 투정도 마음대로 할 수 없었습니다.", req: 20000 },
+    { title: "종1품 좌찬성", modern: "대표이사", secret: "[성균관 유생의 파업] 성균관 유생들은 국가 정책에 불만이 있으면 단체로 식당 출입을 거부하는 '권당' 동맹 휴학을 벌였습니다.", req: 30000 },
+    { title: "정1품 영의정", modern: "그룹 회장", secret: "최고의 자리에 오르셨습니다! 이제 당신의 모든 결정이 역사가 됩니다. 험난한 관직 생활을 이겨내신 노고에 박수를 보냅니다.", req: "MAX" }
+];
+
+var userRankIndex = 0;
+var userExp = 0;
+
+function loadData() {
+    try {
+        var r = localStorage.getItem("dynApp_rank");
+        var e = localStorage.getItem("dynApp_exp");
+        if (r !== null) userRankIndex = parseInt(r);
+        if (e !== null) userExp = parseInt(e);
+    } catch(err) {}
+}
+
+function saveData() {
+    try {
+        localStorage.setItem("dynApp_rank", userRankIndex);
+        localStorage.setItem("dynApp_exp", userExp);
+    } catch(err) {}
+}
+
+function updateUI() {
+    var data = dynastyData[userRankIndex];
+    document.getElementById("ui-rank-title").innerText = data.title;
+    document.getElementById("ui-rank-modern").innerText = "현대 직급: " + data.modern;
+    document.getElementById("ui-rank-level").innerText = "제 " + (userRankIndex + 1) + " 단계";
+    document.getElementById("ui-desc-text").innerText = data.secret;
+
+    if (data.req === "MAX") {
+        document.getElementById("ui-exp-fill").style.width = "100%";
+        document.getElementById("ui-exp-text").innerText = "최고 관직 도달";
+        document.getElementById("btn-promote").style.display = "none";
+        document.getElementById("progress-area").style.display = "flex";
+        document.getElementById("txt-hint").innerText = "모든 역사 수집이 완료되었습니다.";
+    } else {
+        if (userExp >= data.req) {
+            userExp = data.req;
+            document.getElementById("btn-promote").style.display = "block";
+            document.getElementById("progress-area").style.display = "none";
+            document.getElementById("txt-hint").innerText = "새로운 역사를 수집할 준비가 되었습니다.";
+        } else {
+            document.getElementById("btn-promote").style.display = "none";
+            document.getElementById("progress-area").style.display = "flex";
+            document.getElementById("txt-hint").innerText = "화면을 터치하여 실적을 올리십시오";
+        }
+        document.getElementById("ui-exp-fill").style.width = ((userExp / data.req) * 100) + "%";
+        document.getElementById("ui-exp-text").innerText = userExp + " / " + data.req;
+    }
+}
+
+function addExp(amount) {
+    if (dynastyData[userRankIndex].req === "MAX") return;
+    if (userExp < dynastyData[userRankIndex].req) {
+        userExp += amount;
+        saveData();
+        updateUI();
+    }
+}
+
+function executePromotion() {
+    var baseUrl = window.location.href.split('?')[0];
+    // 목표 단계를 강제로 주소에 새겨넣어서 저장소가 꼬여도 무조건 넘어가도록 수정했습니다.
+    window.location.href = baseUrl + "?m=1&action=promote&r=" + (userRankIndex + 1) + "&t=" + new Date().getTime();
+}
+
+function initApp() {
+    loadData();
+    var qs = window.location.search;
+    
+    // 앱인벤터가 action=promote 글씨를 100% 포착할 수 있도록 주소 지우는 코드를 삭제했습니다.
+    if (qs.indexOf('action=promote') !== -1) {
+        var match = qs.match(/r=(\d+)/);
+        if (match) {
+            var targetRank = parseInt(match[1]);
+            // 무조건 다음 단계로 고정하여 넘기기
+            if (targetRank <= dynastyData.length - 1 && targetRank > userRankIndex) {
+                userRankIndex = targetRank;
+                userExp = 0;
+                saveData();
+            }
+        }
+    }
+    updateUI();
+    setInterval(function() { addExp(1); }, 1000);
+}
+
+function initCanvasEffects() {
+    var cvs = document.getElementById("bg-canvas");
+    if (!cvs) return;
+    var ctx = cvs.getContext("2d");
+    var pts = [];
+    window.addEventListener("resize", function() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; });
+    cvs.width = window.innerWidth; cvs.height = window.innerHeight;
+
+    for (var i = 0; i < 30; i++) {
+        pts.push({ x: Math.random() * cvs.width, y: Math.random() * cvs.height, s: Math.random() * 2 + 0.5, sy: Math.random() * 0.3 + 0.1, o: Math.random() * 0.5 + 0.1 });
+    }
+    
+    function anim() {
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+        for (var i = 0; i < pts.length; i++) {
+            pts[i].y += pts[i].sy;
+            if (pts[i].y > cvs.height) { pts[i].y = 0; pts[i].x = Math.random() * cvs.width; }
+            ctx.fillStyle = "rgba(212, 175, 55, " + pts[i].o + ")";
+            ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, pts[i].s, 0, Math.PI*2); ctx.fill();
+        }
+        requestAnimationFrame(anim);
+    }
+    anim();
+}
+//]]>
+</script>
