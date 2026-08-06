@@ -1,4 +1,4 @@
-<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (저장 기능 완벽 개선)-->
+<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (한글 충돌 및 저장 기능 완벽 해결)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
@@ -255,14 +255,14 @@
             } else if (pTab === 'wifi') {
                 finalString = "WIFI:T:WPA;S:" + pSsid + ";P:" + pPw + ";;";
             } else if (pTab === 'vcard') {
-                finalString = "BEGIN:VCARD\nVERSION:3.0\nN:" + pVname + "\nTEL:" + pVphone + "\nEND:VCARD";
+                // 한글 처리를 위한 안전 변환 처리
+                finalString = unescape(encodeURIComponent("BEGIN:VCARD\nVERSION:3.0\nN:" + pVname + "\nTEL:" + pVphone + "\nEND:VCARD"));
             }
 
             if(finalString !== "") {
-                var safeString = unescape(encodeURIComponent(finalString));
                 document.getElementById('qrcode').innerHTML = ""; 
                 new QRCode(document.getElementById("qrcode"), {
-                    text: safeString, 
+                    text: finalString, 
                     width: 220, 
                     height: 220,
                     colorDark : currentColor, 
