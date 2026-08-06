@@ -1,0 +1,312 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Poppins:wght@500;700;900&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 기본 테마 요소 및 돋보기/화살표 도구모음 완벽하게 숨기기 */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .search-toggle, .share-toggle, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"][aria-label="Search"], [role="button"][aria-label="Share"] { 
+    display: none !important; 
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+} 
+
+/* 2. 하얀색 공백 및 뒷배경 제거 (화면 전체 도배) */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .date-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #090d16 !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* 3. 프리미엄 사이버네틱 UI 디자인 시스템 */
+#gacha-simulator-wrapper {
+    --bg-main: #090d16;
+    --bg-card: #111827;
+    --bg-input: #1f2937;
+    --neon-cyan: #06b6d4;
+    --neon-gold: #f59e0b;
+    --neon-rose: #f43f5e;
+    --neon-green: #10b981;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.sim-container { max-width: 600px; margin: 0 auto; }
+
+/* 헤더 섹션 */
+.sim-header { text-align: center; margin-bottom: 24px; }
+.sim-header h1 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 6px 0; color: #fff; }
+.sim-header h1 span { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(6, 182, 212, 0.3); }
+.sim-header p { color: var(--text-muted); font-size: 13px; margin: 0; word-break: keep-all; }
+
+/* 알림 및 대시보드 배너 */
+.info-banner { background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); border: 1px solid #4c1d95; border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.info-banner-title { font-size: 14px; font-weight: 700; color: var(--neon-gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.info-banner-desc { font-size: 12px; color: #c084fc; margin: 0; line-height: 1.5; word-break: keep-all; }
+
+/* 메인 입력 카드 */
+.sim-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); margin-bottom: 20px; }
+.input-label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--neon-cyan); }
+.input-sub-desc { font-size: 11px; color: var(--text-muted); margin-top: -6px; margin-bottom: 10px; line-height: 1.4; word-break: keep-all; }
+.input-field-box { position: relative; margin-bottom: 20px; }
+.input-field { width: 100%; padding: 14px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 12px; color: #fff; font-size: 15px; font-weight: 500; outline: none; box-sizing: border-box; transition: all 0.3s; }
+.input-field:focus { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(6, 182, 212, 0.2); }
+.input-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--text-muted); }
+
+/* 실행 버튼 */
+.start-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3); transition: all 0.2s; }
+.start-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+/* 방치형 시뮬레이션 라이브 보드 구역 */
+#live-simulation-view { display: none; background-color: #0c101f; border: 2px solid var(--neon-gold); border-radius: 20px; padding: 24px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.15); margin-bottom: 20px; text-align: center; }
+.live-status-badge { display: inline-block; padding: 4px 12px; background-color: rgba(245, 158, 11, 0.15); border: 1px solid var(--neon-gold); border-radius: 30px; font-size: 11px; font-weight: 700; color: var(--neon-gold); margin-bottom: 16px; letter-spacing: 1px; animation: blink 1.2s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.live-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.live-item { background-color: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 14px 8px; }
+.live-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; display: block; }
+.live-val { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+.live-val.highlight-rose { color: var(--neon-rose); text-shadow: 0 0 8px rgba(244, 63, 94, 0.2); }
+.live-val.highlight-cyan { color: var(--neon-cyan); }
+
+/* 방치형 실시간 영수증 로그 출력창 */
+.live-receipt-box { background-color: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 12px; height: 110px; overflow-y: hidden; padding: 12px; font-size: 11px; font-family: monospace; text-align: left; color: #86efac; line-height: 1.6; margin-bottom: 16px; box-sizing: border-box; }
+
+/* 최종 성공 리포트 구역 */
+#final-result-view { display: none; background: linear-gradient(145deg, #111827, #030712); border: 2px solid var(--neon-rose); border-radius: 20px; padding: 26px; box-sizing: border-box; margin-bottom: 20px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.result-icon { font-size: 44px; margin-bottom: 12px; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+.result-title { font-size: 22px; font-weight: 900; color: var(--neon-rose); margin-bottom: 16px; }
+
+.final-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.final-stat-box { background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px 8px; }
+.final-stat-title { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+.final-stat-value { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #fff; }
+.final-stat-value.danger { color: #f43f5e; text-shadow: 0 0 10px rgba(244, 63, 94, 0.3); }
+
+.verdict-box { background-color: rgba(244, 63, 94, 0.08); border: 1px dashed rgba(244, 63, 94, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+.verdict-text { font-size: 13px; font-weight: 600; color: #fda4af; margin: 0; line-height: 1.6; word-break: keep-all; }
+
+.reset-btn { width: 100%; padding: 14px; background-color: transparent; border: 1px solid var(--text-muted); color: var(--text-main); border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.reset-btn:hover { background-color: rgba(255,255,255,0.05); }
+
+/* 강력한 공익적 법적 규제 및 사행성 방지 안내 가이드 */
+.regulatory-notice { background-color: #111827; border: 1px solid #dc2626; border-radius: 16px; padding: 20px; box-shadow: 0 5px 15px rgba(220, 38, 38, 0.05); margin-top: 24px; }
+.notice-header { color: #ef4444; font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid rgba(220, 38, 38, 0.2); padding-bottom: 8px; }
+.notice-body { font-size: 12px; color: #f87171; margin: 0; line-height: 1.7; text-align: justify; word-break: keep-all; }
+.notice-list { list-style-type: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #fca5a5; }
+.notice-list li { margin-bottom: 8px; line-height: 1.6; word-break: keep-all; }
+</style>
+
+<div id="gacha-simulator-wrapper">
+    <div class="sim-container">
+        
+        <div class="sim-header">
+            <h1>🎰 <span>Gacha</span> 파산 시뮬레이터</h1>
+            <p>모바일 게임의 희박한 인게임 가챠 확률을 초고속으로 검증하는 시뮬레이터</p>
+        </div>
+
+        <div class="info-banner">
+            <div class="info-banner-title">💡 인게임 확률 제어 시뮬레이션 활용 수칙</div>
+            <p class="info-banner-desc">
+                본 프로그램은 유저가 입력한 실제 독립 시행 확률을 기반으로 초당 최대 1,000회의 연산을 가상으로 수행합니다. 결제 버튼을 누르기 전, 가상 시뮬레이션을 통해 자본금 소모 기대치를 미리 시각화해 볼 수 있습니다.
+            </p>
+        </div>
+
+        <div id="input-control-view">
+            <div class="sim-card">
+                <div class="input-label">1. 목표 아이템의 등장 확률 설정</div>
+                <div class="input-sub-desc">공개 의무 법령에 따라 게임사 공지사항에 기재된 해당 아이템의 정확한 소수점 확률을 입력하십시오.</div>
+                <div class="input-field-box">
+                    <input class="input-field" id="gacha-probability" max="100" placeholder="예: 0.003 또는 0.1" type="number" />
+                    <span class="input-unit">%</span>
+                </div>
+
+                <div class="input-label">2. 1회 가챠 소모 비용 입력</div>
+                <div class="input-sub-desc">유료 재화 단가를 원화(KRW) 가치로 환산하여 입력하십시오. 패키지나 연차 할인은 평균값으로 산출하여 기재하면 더 정확합니다.</div>
+                <div class="input-field-box">
+                    <input class="input-field" id="gacha-cost" placeholder="예: 3300" type="number" />
+                    <span class="input-unit">원</span>
+                </div>
+
+                <button class="start-btn" onclick="triggerGachaRefresher()">방치형 가챠 시뮬레이션 시작</button>
+            </div>
+        </div>
+
+        <div id="live-simulation-view">
+            <div class="live-status-badge">ENGINE RUNNING : 가상 컴퓨터 루프 가동 중</div>
+            
+            <div class="live-grid">
+                <div class="live-item">
+                    <span class="live-label">현재 누적 가챠 횟수</span>
+                    <div class="live-val highlight-cyan" id="live-count">0회</div>
+                </div>
+                <div class="live-item">
+                    <span class="live-label">가상 현실 누적 탕진 금액</span>
+                    <div class="live-val highlight-rose" id="live-money">0원</div>
+                </div>
+            </div>
+
+            <div class="live-receipt-box" id="live-terminal-log">
+                [SYSTEM] 엔진 대기 완료. 확률 데이터 로드를 준비 중입니다...
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 11px; margin: 0px; word-break: keep-all;">
+                ※ 초고속 독립 확률 연산이 진행 중입니다. 아이템 획득 조건이 충족될 때까지 가상 자산 소모 로직이 멈추지 않고 연속 실행됩니다.
+            </p>
+        </div>
+
+        <div id="final-result-view">
+            <div class="result-icon">💸</div>
+            <div class="result-title">가상 현실 파산 리포트</div>
+            
+            <div class="final-card-grid">
+                <div class="final-stat-box">
+                    <span class="final-stat-title">아이템 획득까지 걸린 횟수</span>
+                    <div class="final-stat-value" id="final-count">0회</div>
+                </div>
+                <div class="final-stat-box">
+                    <span class="final-stat-title">최종 현실 탕진 비용</span>
+                    <div class="final-stat-value danger" id="final-money">0원</div>
+                </div>
+            </div>
+
+            <div class="verdict-box">
+                <p class="verdict-text" id="final-verdict-message"></p>
+            </div>
+
+            <button class="reset-btn" onclick="clearSimulationState()">다른 조건으로 확률 검증하기</button>
+        </div>
+
+        <div class="regulatory-notice">
+            <div class="notice-header">🛑 과도한 사행성 유도 게임 이용 주의 고지</div>
+            <p class="notice-body">
+                본 시뮬레이터의 결과는 매 회차마다 수학적 독립 시행 확률로 계산된 통계적 결과입니다. 가챠 게임 구조는 단 한 번에 성공할 수도 있으나, 무한에 가까운 독립 시행 과정에서 평균 회계 지출의 한계를 초과할 수 있는 재정적 위험성을 내포하고 있습니다.
+            </p>
+            <ul class="notice-list">
+                <li>🚨 과도한 확률형 아이템 결제 행위는 개인의 자산 건전성을 침해하며 가계 파탄 및 일상생활 붕괴의 원인이 됩니다.</li>
+                <li>🚨 인게임 뽑기 확률은 누적 수치가 아닙니다. 이전 가챠에 실패했더라도 다음 가챠의 성공 확률은 완전히 동일한 제로 베이스에서 시작하므로 독립 시행의 함정에 주의하십시오.</li>
+                <li>🚨 청소년의 무분별한 유료 결제는 법적인 보호를 받기 어려우므로 반드시 보호자의 엄격한 통제하에 진행되어야 합니다.</li>
+                <li>🚨 게임 중독 및 과몰입으로 인해 일상생활에 심각한 어려움을 겪고 계신다면, 주저하지 말고 예방 통합 무료 상담센터(☎ 국번없이 1336)를 통해 전문적인 도움을 받으시길 바랍니다.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    window.onload = function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var hasLaunch = urlParams.get('execute_loop');
+        var inputProb = urlParams.get('param_prob');
+        var inputCost = urlParams.get('param_cost');
+
+        if (hasLaunch === 'true' && inputProb && inputCost) {
+            document.getElementById('input-control-view').style.display = 'none';
+            document.getElementById('live-simulation-view').style.display = 'block';
+            
+            executeGachaLoopEngine(parseFloat(inputProb), parseInt(inputCost));
+        }
+    };
+
+    function triggerGachaRefresher() {
+        var probStr = document.getElementById('gacha-probability').value.trim();
+        var costStr = document.getElementById('gacha-cost').value.trim();
+
+        if (!probStr || !costStr) {
+            alert('확률(%)과 1회 비용(원) 데이터를 모두 누락 없이 기입해 주십시오.');
+            return;
+        }
+
+        var prob = parseFloat(probStr);
+        var cost = parseInt(costStr);
+
+        if (prob <= 0 || prob > 100) { alert('확률은 0보다 크고 100% 이하의 올바른 양수값이어야 합니다.'); return; }
+        if (cost < 0) { alert('가챠 비용은 음수일 수 없습니다.'); return; }
+
+        var randomToken = Math.floor(Math.random() * 99999) + 1;
+        var currentUrl = window.location.origin + window.location.pathname;
+        
+        window.location.href = currentUrl + "?execute_loop=true&param_prob=" + prob + "&param_cost=" + cost + "&token_id=" + randomToken;
+    }
+
+    function executeGachaLoopEngine(probPercentage, singleCost) {
+        var rawTargetProbability = probPercentage / 100;
+        
+        var totalDrawCount = 0;
+        var liveTerminalLogElement = document.getElementById('live-terminal-log');
+        var liveCountText = document.getElementById('live-count');
+        var liveMoneyText = document.getElementById('live-money');
+
+        var receiptBuffer = [];
+
+        var engineTimer = setInterval(function() {
+            for (var loopUnit = 0; loopUnit < 50; loopUnit++) {
+                totalDrawCount++;
+                var pseudoRandomValue = Math.random();
+
+                if (totalDrawCount % 13 === 0 || totalDrawCount < 10) {
+                    var currentExpense = totalDrawCount * singleCost;
+                    receiptBuffer.unshift("[TRY " + totalDrawCount + "] 소모 자산: " + currentExpense.toLocaleString() + "원 ➔ 획득 실패 (꽝)");
+                    if (receiptBuffer.length > 5) receiptBuffer.pop();
+                    liveTerminalLogElement.innerHTML = receiptBuffer.join("<br/>");
+                }
+
+                if (pseudoRandomValue <= rawTargetProbability) {
+                    clearInterval(engineTimer);
+                    displayFinalDestructionReport(totalDrawCount, singleCost, probPercentage);
+                    return;
+                }
+            }
+
+            liveCountText.innerHTML = totalDrawCount.toLocaleString() + "회";
+            liveMoneyText.innerHTML = (totalDrawCount * singleCost).toLocaleString() + "원";
+
+        }, 40); 
+    }
+
+    function displayFinalDestructionReport(finalCount, singleCost, originalProb) {
+        var finalTotalExpense = finalCount * singleCost;
+
+        document.getElementById('live-simulation-view').style.display = 'none';
+        document.getElementById('final-result-view').style.display = 'block';
+
+        document.getElementById('final-count').innerHTML = finalCount.toLocaleString() + "회";
+        document.getElementById('final-money').innerHTML = finalTotalExpense.toLocaleString() + "원";
+
+        var verdictMessage = "";
+        if (finalTotalExpense >= 50000000) {
+            verdictMessage = "마침내 아이템 획득에 성공하셨습니다. 하지만 현실이었다면 아파트 전세 보증금이나 고급 외제차 한 대 값인 [" + finalTotalExpense.toLocaleString() + "원]을 탕진하여 심각한 경제적 타격을 입었을 것입니다. 이성을 유지할 수 있었을지 고민해 보시기 바랍니다.";
+        } else if (finalTotalExpense >= 10000000) {
+            verdictMessage = "목표 아이템을 쟁취했습니다. 그러나 누적 탕진액이 직장인 평균 연봉의 상당 부분인 [" + finalTotalExpense.toLocaleString() + "원]에 도달했습니다. 디지털 데이터 조각에 인생의 귀중한 가치를 매몰시키는 행위가 얼마나 무모한지 객관적으로 돌아보아야 합니다.";
+        } else if (finalTotalExpense >= 3000000) {
+            verdictMessage = "아이템을 손에 넣었습니다. 다만 이 결과의 이면에는 직장인 한 달 치 월급이 공중 분해된 [" + finalTotalExpense.toLocaleString() + "원]의 영수증이 존재합니다. 가상 현실이기에 안도할 수 있지만 현실에서 클릭을 지속했다면 큰 가계 경제 위기를 초래했을 것입니다.";
+        } else {
+            verdictMessage = "아이템 획득에 성공했습니다. 이번 모의 계산에서는 누적 [" + finalTotalExpense.toLocaleString() + "원]이 소모되어 통계적 기대치에 비해 비교적 양호한 확률을 보여주었습니다. 하지만 명심하십시오. 다음 가챠에서도 이러한 상위 1%의 행운이 당신에게 다시 찾아올 확률은 매우 낮습니다.";
+        }
+
+        document.getElementById('final-verdict-message').innerHTML = verdictMessage;
+    }
+
+    function clearSimulationState() {
+        window.location.href = window.location.origin + window.location.pathname;
+    }
+//]]>
+</script>
