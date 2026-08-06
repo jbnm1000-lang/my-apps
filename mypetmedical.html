@@ -1,0 +1,402 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@600;700;900&display=swap');
+
+/* 블로그 레이아웃 강제 숨김 및 내비게이션 차단 */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; background-image: none !important; 
+    width: 100% !important; min-height: 100vh !important;
+}
+
+#pet-app {
+    --bg-main: #0f172a; --bg-card: #1e293b; --bg-input: #0b1120;
+    --accent-main: #6366f1; --accent-glow: #818cf8; --accent-red: #f43f5e;
+    --accent-green: #10b981; --accent-yellow: #f59e0b;
+    --text-white: #f8fafc; --text-muted: #94a3b8; --border: #334155;
+
+    background-color: var(--bg-main); color: var(--text-white);
+    font-family: 'Noto Sans KR', sans-serif; min-height: 100vh;
+    padding: 24px 16px 80px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+/* 헤더 타이틀 */
+.app-header { text-align: center; margin-bottom: 24px; padding-top: 10px; }
+.app-header h1 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent-glow); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; line-height: 1.5; }
+
+/* 입력 폼 */
+.section-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px; margin-top: 30px; border-left: 5px solid var(--accent-main); padding-left: 10px; }
+.card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+.group { margin-bottom: 22px; }
+.group label { display: block; font-size: 14px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px; }
+
+.select-box, .input-box { width: 100%; padding: 16px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-size: 15px; font-weight: 500; outline: none; box-sizing: border-box; }
+.select-box { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 20px; }
+.input-box::placeholder { color: #475569; font-weight: 400; }
+
+.row-inputs { display: flex; gap: 12px; margin-bottom: 22px; }
+.row-inputs .group { flex: 1; margin-bottom: 0; }
+
+.shield-box { background-color: rgba(0,0,0,0.3); border-radius: 12px; padding: 18px; margin-bottom: 20px; border: 1px solid var(--border); }
+.shield-item { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+.shield-item input { width: 22px; height: 22px; accent-color: var(--accent-main); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.shield-label { font-size: 13px; color: #94a3b8; line-height: 1.6; word-break: keep-all; font-weight: 400; text-align: left; }
+
+/* 메인 버튼 */
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%); color: #fff; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3); margin-top: 5px; }
+.btn:active { transform: scale(0.98); }
+.btn-save { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25); margin-top: 15px; display: none; }
+
+/* 결과 대시보드 */
+.report-card { background-color: #0f172a; border-radius: 16px; padding: 24px; margin-top: 28px; border: 1px solid var(--border); border-top: 5px solid var(--accent-glow); display: none; }
+.report-header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.report-header h2 { font-size: 20px; margin: 0; color: #fff; font-weight: 900; }
+.report-header p { font-size: 14px; color: var(--accent-glow); margin: 5px 0 0 0; font-weight: 700; }
+
+.dash-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.dash-row:last-child { border-bottom: none; }
+.dash-title { font-size: 14px; color: #cbd5e1; font-weight: 500; }
+.dash-value { font-size: 15px; font-weight: 800; color: #fff; text-align: right; word-break: keep-all; }
+
+/* 킥 포인트 디자인 */
+.alert-box { background-color: rgba(244, 63, 94, 0.1); border-radius: 12px; padding: 16px; margin: 15px 0; border: 1px solid rgba(244, 63, 94, 0.3); }
+.alert-title { color: #fb7185; font-size: 14px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.alert-text { color: #fecdd3; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
+
+.cost-box { background-color: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 16px; border: 1px solid rgba(245, 158, 11, 0.3); }
+.cost-title { color: #fbbf24; font-size: 14px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.cost-text { color: #fde68a; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
+
+/* 데이터 산출 근거 패널 */
+.ref-panel { background-color: #1e293b; border-radius: 10px; padding: 16px; margin-top: 20px; text-align: center; border: 1px solid #334155; }
+.ref-panel b { color: var(--accent-glow); font-size: 14px; display: block; margin-bottom: 6px; }
+.ref-panel span { font-size: 12px; color: #94a3b8; line-height: 1.6; display: block; }
+
+.legal-footer { background-color: #1e293b; border-top: 1px solid #334155; padding: 24px; margin-top: 45px; border-radius: 16px; }
+.legal-title { color: #94a3b8; font-size: 13px; font-weight: 800; margin-bottom: 12px; text-align: center; }
+.legal-text { font-size: 12px; color: #64748b; line-height: 1.7; text-align: justify; word-break: keep-all; margin: 0; }
+</style>
+
+<script type="text/javascript">
+  if (window.location.pathname === '/' || window.location.pathname.indexOf('/search') > -1) {
+      window.location.href = "https://www.google.com";
+  }
+</script>
+
+<div id="pet-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1>프리미엄 <span>반려동물 메디컬 리포트</span></h1>
+            <p>한국 수의학계 통계 및 개체 정보를 바탕으로, 우리 아이의 정확한 생체 연령과 필수 건강 지표를 분석합니다.</p>
+        </div>
+
+        <div class="section-title">1. 개체 기본 정보 및 품종 선택</div>
+        <div class="card">
+            
+            <div class="group">
+                <label>반려동물 품종 (유전적 취약 질환 매칭용)</label>
+                <select class="select-box" id="pet-breed">
+                    <option value="">-- 정확한 품종을 선택해 주십시오 --</option>
+                    <optgroup label="🐶 국내 주요 소형견 (10kg 미만)">
+                        <option value="dog|small|4|슬개골 탈구, 심장 질환(이첨판 폐쇄부전증), 뇌수막염">말티즈 / 말티푸</option>
+                        <option value="dog|small|4|기관허탈(거위소리), 슬개골 탈구, 알로페시아 탈모">포메라니안 / 폼피츠</option>
+                        <option value="dog|small|4|백내장, 슬개골 탈구, 쿠싱증후군(호르몬 이상)">푸들 (토이/미니어처)</option>
+                        <option value="dog|small|4|기관허탈, 고관절 이형성증, 심각한 치주 질환">요크셔테리어</option>
+                        <option value="dog|small|4|추간판 탈출증(허리 디스크), 녹내장, 비만">닥스훈트</option>
+                        <option value="dog|small|4|슬개골 탈구, 피부 알레르기, 안구 질환">시츄 / 페키니즈</option>
+                        <option value="dog|small|4|슬개골 탈구, 피부 알레르기, 유루증(눈물관 막힘)">비숑 프리제</option>
+                        <option value="dog|small|4|수두증, 심장 질환, 기관허탈">치와와</option>
+                        <option value="dog|small|4|슬개골 탈구, 피부 질환, 치과 질환">기타 소형견 (믹스견 포함)</option>
+                    </optgroup>
+                    <optgroup label="🐶 국내 주요 중/대형견 (10kg 이상)">
+                        <option value="dog|medium|5|추간판 탈출증, 고관절 이형성증, 비만">웰시코기 / 비글</option>
+                        <option value="dog|medium|5|아토피성 피부염, 슬개골 탈구, 백내장">시바견 / 프렌치 불독</option>
+                        <option value="dog|medium|5|피부염, 외이염, 십자인대 파열">진돗개 / 코카 스파니엘 / 중형 믹스견</option>
+                        <option value="dog|large|6.5|고관절 이형성증, 위확장 및 염전(위꼬임), 림프종">리트리버 (골든/래브라도)</option>
+                        <option value="dog|large|6.5|관절염, 확장성 심근근육병증, 위확장">허스키 / 사모예드 / 대형 믹스견</option>
+                        <option value="dog|large|6.5|고관절 이형성증, 퇴행성 관절염, 종양">기타 대형견</option>
+                    </optgroup>
+                    <optgroup label="🐱 국내 주요 반려묘">
+                        <option value="cat|cat|0|특발성 방광염(하부요로기 질환), 만성 신부전, 구내염">코리안 숏헤어 / 일반 믹스묘</option>
+                        <option value="cat|cat|0|다낭성 신장질환(PKD), 호흡기 질환, 비대성 심근증">페르시안 / 브리티시 숏헤어</option>
+                        <option value="cat|cat|0|비대성 심근증(HCM), 척추관절 병변, 천식">샴 / 러시안 블루 / 아비시니안</option>
+                        <option value="cat|cat|0|골관절염, 연골 이형성증, 비대성 심근증">스코티시 폴드 / 먼치킨</option>
+                        <option value="cat|cat|0|비대성 심근증(HCM), 고관절 이형성증, 다낭성 신장질환">메인쿤 / 랙돌 / 대형묘</option>
+                        <option value="cat|cat|0|특발성 방광염, 치아 흡수성 병변, 신부전">기타 묘종 전체</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="row-inputs">
+                <div class="group">
+                    <label>나이 (살)</label>
+                    <input class="input-box" id="age-yy" max="30" placeholder="예: 5" type="number" />
+                </div>
+                <div class="group">
+                    <label>개월 (모르면 비워두세요)</label>
+                    <input class="input-box" id="age-mm" max="11" placeholder="선택 입력" type="number" />
+                </div>
+            </div>
+
+            <div class="group" style="margin-bottom: 0px;">
+                <label>현재 체중 (kg)</label>
+                <input class="input-box" id="pet-weight" placeholder="예: 4.5" type="number" />
+            </div>
+        </div>
+
+        <div class="section-title">2. 맞춤 대사량(DER) 산출용 생활 패턴</div>
+        <div class="card">
+            <div class="group" style="margin-bottom: 0px;">
+                <label>정확한 현재 생활 환경 선택</label>
+                <select class="select-box" id="pet-activity">
+                    <option value="">-- 현재 상태를 선택해 주십시오 --</option>
+                    <option value="3.0">성장기 퍼피/키튼 (생후 4개월 미만)</option>
+                    <option value="2.0">성장기 퍼피/키튼 (생후 4개월 ~ 1년 미만)</option>
+                    <option value="1.8">중성화 수술 전 성견/성묘 (일반 활동량)</option>
+                    <option value="1.6">중성화 수술 완료 성견/성묘 (활동량 많음 / 산책 잦음)</option>
+                    <option value="1.2">중성화 수술 완료 성견/성묘 (일반적인 실내 생활)</option>
+                    <option value="2.5">활동량이 매우 많은 견종 (매일 강도 높은 운동)</option>
+                    <option value="1.0">비만 경향 (다이어트 및 체중 감량이 필요한 상태)</option>
+                    <option value="1.4">노령견/노령묘 (활동량이 현저히 줄어든 시니어)</option>
+                    <option value="3.0">임신 후반기 또는 수유기 모견/모묘</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="shield-box">
+            <label class="shield-item">
+                <input id="check-policy" type="checkbox" />
+                <span class="shield-label">본 리포트는 수의학적 통계에 기반한 참고 자료이며, 전문 수의사의 임상 진단을 대신할 수 없음에 동의합니다.</span>
+            </label>
+        </div>
+
+        <button class="btn" onclick="runPetCalc()">맞춤형 메디컬 리포트 생성 (무료)</button>
+        <button class="btn btn-save" id="app-save-btn" onclick="sendToApp()">💾 리포트 기기에 안전하게 보관하기</button>
+
+        <div class="report-card" id="report-area">
+            <div class="report-header">
+                <h2>📊 맞춤형 메디컬 리포트</h2>
+                <p id="res-breed-name">품종 정보 대기중</p>
+            </div>
+
+            <div class="dash-row">
+                <span class="dash-title">사람 나이 환산 (생체 연령)</span>
+                <span class="dash-value" id="res-human-age" style="color: #818cf8; font-size: 16px;">-</span>
+            </div>
+            <div class="dash-row">
+                <span class="dash-title">현재 생애주기 단계</span>
+                <span class="dash-value" id="res-stage">-</span>
+            </div>
+            <div class="dash-row">
+                <span class="dash-title">하루 권장 급여량 (DER)</span>
+                <span class="dash-value" id="res-calories" style="color: #10b981;">-</span>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-title">🚨 해당 품종 주요 취약 질환</div>
+                <p class="alert-text" id="res-disease">품종 선택 시 결과가 출력됩니다.</p>
+            </div>
+
+            <div class="cost-box">
+                <div class="cost-title">💡 올해 맞춤 검진 항목 및 예상 병원비</div>
+                <p class="cost-text" id="res-cost">분석 결과가 출력됩니다.</p>
+            </div>
+            
+            <div class="ref-panel">
+                <b>📊 수의학 데이터 산출 근거</b>
+                <span>
+                • 연령 환산: 미국동물병원협회(AAHA) 생애주기 지침<br />
+                • 권장 칼로리: 세계소동물수의사회(WSAVA) RER 공식<br />
+                • 진료비: 국내 동물병원 평균 수가 기준 적용
+                </span>
+            </div>
+        </div>
+
+        <div class="legal-footer">
+            <div class="legal-title">[법적 면책 고지]</div>
+            <p class="legal-text">
+                본 서비스에서 제공하는 연령 환산, 유전 질환 정보 및 예상 병원비는 국내외 수의학계 통계 자료를 바탕으로 산출된 일반적인 지표입니다. 개별 동물의 유전적 소인 및 생활 환경에 따라 실제 건강 상태는 다를 수 있습니다. 따라서 본 리포트의 내용은 의학적 평가로 사용될 수 없으며, 질병의 예방 및 치료를 위해서는 반드시 전문 수의사와 직접 상담하셔야 합니다. 사용자의 임의적 해석으로 발생한 문제에 대하여 서비스 제공자는 책임지지 않습니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var appDataString = "";
+
+    function getUrlParams() {
+        var params = {};
+        var search = window.location.search.substring(1);
+        if (search) {
+            var pairs = search.split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                params[pair[0]] = decodeURIComponent(pair[1] || '');
+            }
+        }
+        return params;
+    }
+
+    function runPetCalc() {
+        var breedSelect = document.getElementById('pet-breed');
+        var ageYy = document.getElementById('age-yy').value;
+        var ageMm = document.getElementById('age-mm').value;
+        var weight = document.getElementById('pet-weight').value;
+        var activity = document.getElementById('pet-activity').value;
+        var policyChk = document.getElementById('check-policy').checked;
+
+        if (!policyChk) { alert("면책 고지 사항에 동의하셔야 리포트를 확인할 수 있습니다."); return; }
+        if (!breedSelect.value) { alert("품종을 정확히 선택해 주십시오."); return; }
+        if (ageYy === "") { alert("나이(살)를 입력해 주십시오."); return; }
+        if (!weight || parseFloat(weight) <= 0) { alert("체중을 올바르게 입력해 주십시오."); return; }
+        if (!activity) { alert("생활 환경(패턴)을 정확히 선택해 주십시오."); return; }
+
+        var randomNum = Math.floor(Math.random() * 99999) + 1;
+        var currentUrl = window.location.href.split('?')[0].split('#')[0];
+
+        var newUrl = currentUrl + "?m=1&report_gen=" + randomNum + 
+                     "&b=" + encodeURIComponent(breedSelect.value) + 
+                     "&y=" + encodeURIComponent(ageYy) + 
+                     "&m=" + encodeURIComponent(ageMm) + 
+                     "&w=" + encodeURIComponent(weight) + 
+                     "&a=" + encodeURIComponent(activity);
+
+        window.location.href = newUrl;
+    }
+
+    window.onload = function() {
+        var params = getUrlParams();
+        
+        if (!params['report_gen'] || !params['b']) return;
+
+        var bVal = params['b'];
+        var yVal = params['y'];
+        var mVal = params['m'];
+        var wVal = params['w'];
+        var aVal = params['a'];
+
+        var breedSelect = document.getElementById('pet-breed');
+        breedSelect.value = bVal;
+        document.getElementById('age-yy').value = yVal;
+        document.getElementById('age-mm').value = mVal;
+        document.getElementById('pet-weight').value = wVal;
+        document.getElementById('pet-activity').value = aVal;
+        document.getElementById('check-policy').checked = true;
+
+        var numYy = parseInt(yVal);
+        var numMm = mVal === "" ? 0 : parseInt(mVal);
+        var numWeight = parseFloat(wVal);
+        var actFactor = parseFloat(aVal);
+        var totalMonths = (numYy * 12) + numMm;
+
+        var bData = bVal.split('|');
+        var animalType = bData[0]; 
+        var sizeType = bData[1];
+        var multiplier = parseFloat(bData[2]);
+        var diseases = bData[3];
+        var breedName = breedSelect.options[breedSelect.selectedIndex].text;
+
+        var humanAge = 0;
+        if (animalType === 'cat') {
+            if (totalMonths <= 6) humanAge = Math.round(totalMonths * 1.6);
+            else if (totalMonths <= 12) humanAge = 10 + Math.round((totalMonths - 6) * 0.83);
+            else if (totalMonths <= 24) humanAge = 15 + Math.round((totalMonths - 12) * 0.75);
+            else humanAge = 24 + Math.round((totalMonths - 24) / 12 * 4);
+        } else {
+            if (totalMonths <= 12) humanAge = Math.round(totalMonths * 1.25);
+            else if (totalMonths <= 24) humanAge = 15 + Math.round((totalMonths - 12) * 0.75);
+            else humanAge = 24 + Math.round(((totalMonths - 24) / 12) * multiplier);
+        }
+
+        var stageText = "";
+        var baseCostText = "";
+        
+        if (humanAge <= 15) {
+            stageText = "성장기 (기초 면역 형성기)";
+            baseCostText = "• [연령 필수]: 기초 예방접종 및 중성화 (평균 40~60만 원 내외)";
+        } else if (humanAge <= 40) {
+            stageText = "청년기 (건강 유지 및 관리기)";
+            baseCostText = "• [연령 필수]: 연 1회 기본 혈액검사(CBC), 흉부 엑스레이 (평균 15~25만 원 내외)";
+        } else if (humanAge <= 60) {
+            stageText = "장년기 (만성 질환 예방기)";
+            baseCostText = "• [연령 필수]: 시니어 정밀 검진(혈청 화학 10종 이상, 복부 초음파 필수) (평균 35~50만 원 내외)";
+        } else {
+            stageText = "노령기 (집중 의료 케어기)";
+            baseCostText = "• [연령 필수]: 6개월 주기 노령 정밀 모니터링 및 노화 방지 케어 (회당 평균 30~60만 원 내외)";
+        }
+
+        var extraCostText = "";
+        if (diseases.indexOf("관절") !== -1 || diseases.indexOf("슬개골") !== -1) {
+            extraCostText += "<br>• [품종 특화]: 슬개골 및 관절 정밀 방사선 검사 (약 5~10만 원 추가)";
+        }
+        if (diseases.indexOf("심장") !== -1 || diseases.indexOf("심근") !== -1) {
+            extraCostText += "<br>• [품종 특화]: 심장 초음파 및 심전도 검사 (약 15~25만 원 추가)";
+        }
+        if (diseases.indexOf("신장") !== -1 || diseases.indexOf("방광") !== -1) {
+            extraCostText += "<br>• [품종 특화]: 신장 조기진단(SDMA) 및 요로계 초음파 (약 10~15만 원 추가)";
+        }
+        if (diseases.indexOf("피부") !== -1 || diseases.indexOf("알레르기") !== -1) {
+            extraCostText += "<br>• [품종 특화]: 알레르기 혈청 검사 및 피모 진단 (약 10~20만 원 추가)";
+        }
+        if (diseases.indexOf("안구") !== -1 || diseases.indexOf("백내장") !== -1 || diseases.indexOf("녹내장") !== -1) {
+            extraCostText += "<br>• [품종 특화]: 안압 및 안저 정밀 검사 (약 5~10만 원 추가)";
+        }
+
+        var finalCostText = baseCostText + (extraCostText !== "" ? extraCostText : "<br>• [품종 특화]: 현재 뚜렷한 유전적 고위험군 검사가 요구되지 않으나 기본 검진 유지 권장");
+
+        var rer = 70 * Math.pow(numWeight, 0.75);
+        var der = Math.round(rer * actFactor);
+
+        var humanAgeDisplay = "사람 나이 환산 약 " + humanAge + "세";
+        var caloriesDisplay = der.toLocaleString() + " kcal / 일";
+        
+        document.getElementById('res-breed-name').innerHTML = "[ " + breedName + " ] 분석 결과";
+        document.getElementById('res-human-age').innerHTML = humanAgeDisplay;
+        document.getElementById('res-stage').innerHTML = stageText;
+        document.getElementById('res-calories').innerHTML = caloriesDisplay;
+        
+        document.getElementById('res-disease').innerHTML = "⚠️ <b>" + diseases + "</b><br><span style='font-size:12px; margin-top:5px; display:block; color:#fb7185;'>해당 견종/묘종에서 수의학적으로 자주 보고되는 주요 질환입니다. 건강 검진 시 해당 부위를 중점적으로 확인하십시오.</span>";
+        document.getElementById('res-cost').innerHTML = finalCostText;
+
+        document.getElementById('report-area').style.display = 'block';
+
+        appDataString = "SAVE|" + breedName.split(' ')[0] + " (생체 " + humanAge + "세)";
+        document.getElementById('app-save-btn').style.display = 'block';
+
+        setTimeout(function() {
+            document.getElementById('report-area').scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    };
+
+    function sendToApp() {
+        if(appDataString !== "" && window.AppInventor) {
+            window.AppInventor.setWebViewString(appDataString);
+        } else {
+            alert("확인된 리포트가 없거나 앱 환경이 아닙니다.");
+        }
+    }
+//]]>
+</script>
