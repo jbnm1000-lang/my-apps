@@ -1,0 +1,516 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 블로그 레이아웃 강제 숨김 */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; 
+    width: 100% !important; min-height: 100vh !important;
+    -webkit-tap-highlight-color: transparent; overflow-x: hidden;
+}
+
+#health-app {
+    --bg-main: #0f172a; --bg-card: #1e293b; --bg-tab: #334155;
+    --accent: #14b8a6; --accent-hover: #0d9488; --text-white: #f8fafc; 
+    --text-muted: #94a3b8; --border: #475569; --warning: #f59e0b; --danger: #ef4444;
+
+    background-color: var(--bg-main); color: var(--text-white);
+    font-family: 'Noto Sans KR', sans-serif; min-height: 100vh;
+    padding: 20px 16px 80px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+/* 헤더 */
+.app-header { text-align: center; margin-bottom: 20px; padding-top: 15px; }
+.app-header h1 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; line-height: 1.5; text-align: center; }
+
+/* 꿀팁 및 차별점 패널 */
+.tip-panel { background-color: rgba(20, 184, 166, 0.08); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px; margin-bottom: 25px; }
+.tip-title { color: #5eead4; font-size: 14px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.tip-text { font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0; word-break: keep-all; text-align: left; }
+
+/* 선택된 영양제 표시 트레이 */
+.selected-tray { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 20px; min-height: 80px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.2); }
+.empty-text { color: #64748b; font-size: 14px; font-weight: 500; }
+.sel-chip { background-color: var(--accent); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px; animation: popIn 0.2s ease-out; box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3); }
+.sel-chip .remove { font-size: 16px; font-weight: 900; cursor: pointer; }
+@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* 카테고리 탭 */
+.tab-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 12px; margin-bottom: 15px; scrollbar-width: none; }
+.tab-scroll::-webkit-scrollbar { display: none; }
+.tab-btn { flex-shrink: 0; background-color: var(--bg-tab); border: 1px solid var(--border); color: var(--text-muted); padding: 10px 18px; border-radius: 25px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.tab-btn.active { background-color: var(--accent); color: #0f172a; border-color: var(--accent); font-weight: 900; }
+
+/* 영양제 그리드 */
+.ing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 10px; background-color: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; align-content: start; min-height: 220px; }
+.ing-item { background-color: var(--bg-tab); border: 1px solid var(--border); border-radius: 12px; padding: 12px 5px; text-align: center; cursor: pointer; transition: 0.1s; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ing-item:active { transform: scale(0.95); }
+.ing-item.selected { border-color: var(--accent); background-color: rgba(20, 184, 166, 0.15); box-shadow: 0 0 10px rgba(20, 184, 166, 0.2); }
+.ing-icon { font-size: 24px; line-height: 1; }
+.ing-name { font-size: 12px; color: var(--text-white); font-weight: 700; word-break: keep-all; }
+
+/* 메인 분석 버튼 */
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: #fff; border: none; border-radius: 16px; font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4); margin-bottom: 15px; letter-spacing: -0.5px; }
+.btn:active { transform: scale(0.97); }
+
+/* 결과 영역 */
+.result-box { display: none; margin-bottom: 30px; animation: slideUp 0.3s ease-out; }
+@keyframes slideUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+/* 시너지 카드 */
+.synergy-card { background-color: var(--bg-card); border-radius: 16px; padding: 20px; border: 1px solid var(--border); margin-bottom: 15px; }
+.synergy-card.good { border-left: 5px solid var(--accent); background-color: rgba(20, 184, 166, 0.05); }
+.synergy-card.bad { border-left: 5px solid var(--danger); background-color: rgba(239, 68, 68, 0.05); }
+.synergy-card.neutral { border-left: 5px solid #3b82f6; background-color: rgba(59, 130, 246, 0.05); }
+.syn-title { font-size: 15px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.syn-title.good { color: var(--accent); }
+.syn-title.bad { color: #fca5a5; }
+.syn-title.neutral { color: #93c5fd; }
+.syn-desc { color: #cbd5e1; font-size: 14px; line-height: 1.6; margin: 0; word-break: keep-all; }
+
+/* 24시간 타임테이블 */
+.timetable { background-color: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 25px; margin-top: 25px;}
+.time-header { background-color: var(--bg-tab); padding: 15px 20px; font-size: 16px; font-weight: 900; color: #fff; text-align: center; border-bottom: 1px solid var(--border); display: flex; justify-content: center; align-items: center; gap: 8px; }
+.time-slot { padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 15px; align-items: flex-start; }
+.time-slot:last-child { border-bottom: none; }
+.time-icon { font-size: 20px; padding-top: 2px; }
+.time-content { flex: 1; }
+.time-period { font-size: 14px; font-weight: 800; color: var(--warning); margin-bottom: 4px; }
+.time-items { font-size: 14px; color: #fff; font-weight: 500; margin-bottom: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+.time-item-tag { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 8px; font-size: 13px; }
+.time-reason { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin: 0; word-break: keep-all; }
+
+/* 버튼 그룹 */
+.btn-group { display: flex; gap: 10px; margin-top: 20px; }
+.btn-half { flex: 1; padding: 16px 10px; border: none; border-radius: 12px; font-size: 14.5px; font-weight: 800; cursor: pointer; transition: 0.1s; color: #fff; word-break: keep-all; }
+.btn-half:active { transform: scale(0.96); }
+.btn-reroll { background: #334155; border: 1px solid #475569; }
+.btn-reset { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
+
+/* 구글 심사 방어용 법적 방패막 */
+.shield-panel { background-color: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 16px; padding: 20px; margin-top: 35px; }
+.shield-title { color: var(--warning); font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.shield-text { font-size: 13px; color: #cbd5e1; line-height: 1.7; text-align: left; word-break: keep-all; margin: 0; }
+.shield-text b { color: #fbbf24; }
+
+/* 프리미엄 토스트 알림창 */
+.custom-toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: rgba(30, 41, 59, 0.95); color: #fff; padding: 14px 24px; border-radius: 30px; border: 1px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 10000; font-weight: 700; font-size: 14px; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); text-align: center; white-space: nowrap; }
+.custom-toast.show { bottom: 30px; }
+
+/* 신비로운 에메랄드 파티클 효과 */
+.particle { position: fixed; bottom: -10px; border-radius: 50%; z-index: 9999; opacity: 0.8; pointer-events: none; animation: floatUp linear forwards; box-shadow: 0 0 8px rgba(20, 184, 166, 0.6); }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+</style>
+
+<div id="health-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1>스마트 영양제 <span>마스터 PRO</span></h1>
+            <p>매일 먹는 영양제, 제대로 흡수되고 있을까요?</p>
+        </div>
+
+        <div class="tip-panel" id="tip-panel">
+            <div class="tip-title">💡 앱 활용 꿀팁 및 핵심 차별점</div>
+            <p class="tip-text">
+                단순히 같이 먹어도 되는지만 알려주는 일반 앱들과 다릅니다. 이 앱의 핵심 <b>'강점'</b>은 선택하신 영양소들의 생체 이용률을 극대화할 수 있도록 <b>[기상 직후부터 취침 전까지의 24시간 완벽한 복용 루틴]</b>을 자동으로 설계해 드린다는 점입니다. 최대 6개를 선택해 보세요!
+            </p>
+        </div>
+
+        <div class="selected-tray" id="selected-tray">
+            <div class="empty-text">아래에서 복용 중인 영양제를 터치해 주십시오.</div>
+        </div>
+
+        <div class="tab-scroll" id="tab-container"></div>
+        <div class="ing-grid" id="ing-grid"></div>
+
+        <button class="btn" id="btn-search" onclick="executeAnalysis()">🧬 스마트 AI 영양 조합 분석 시작</button>
+        
+        <div class="result-box" id="result-box">
+            <div id="synergy-container"></div>
+
+            <div class="timetable">
+                <div class="time-header">🕒 생체 리듬 맞춤형 24시간 루틴</div>
+                <div id="timetable-container"></div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn-half btn-reroll" onclick="executeAnalysis()">🔄 이 조합으로 다시 분석</button>
+                <button class="btn-half btn-reset" onclick="resetItems()">🗑️ 영양제 새로 고르기</button>
+            </div>
+        </div>
+
+        <div class="shield-panel">
+            <div class="shield-title">🚨 안전 및 면책 주의사항</div>
+            <p class="shield-text">
+                • 본 애플리케이션에서 제공하는 영양소 섭취 및 조합 정보는 일반적으로 알려진 빅데이터를 기반으로 한 단순 참고용 도구(Tool)이며, 어떠한 형태의 의학적 효능이나 보증을 의미하지 않습니다.<br /><br />
+                • 본 앱은 사용자의 생활 습관(루틴) 관리를 돕기 위한 목적으로 제작되었으며, 체질에 따라 영양소 흡수율은 다를 수 있습니다.<br /><br />
+                • 평소 개인의 건강 상태나 복용 중인 다른 식품이 있다면 본인의 판단하에 일일 권장 섭취량을 초과하지 않도록 주의하여 활용해 주십시오.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="custom-toast" id="custom-toast">메시지</div>
+
+<script type="text/javascript">
+//<![CDATA[
+// 데이터 MAX 확장 (24종) 및 특성 부여
+var ingredientDB = [
+    { cat: "필수/기초", items: [
+        { id: 'vitC', name: '비타민C', icon: '🍋', timeGroup: '아침/점심 식후', reason: '강한 산성으로 위장 장애를 유발할 수 있어 반드시 식후 복용 권장', tags: ['항산화', '면역력', '피로회복'] },
+        { id: 'vitD', name: '비타민D', icon: '☀️', timeGroup: '아침/점심 식후', reason: '지용성 비타민이므로 식사에 포함된 지방과 함께 섭취 시 생체 이용률 극대화', tags: ['뼈건강', '면역력'] },
+        { id: 'vitB', name: '비타민B군', icon: '⚡', timeGroup: '아침 공복/식후', reason: '체내 에너지 대사를 돕기 때문에 늦은 저녁 복용 시 수면 방해 유발 가능', tags: ['피로회복', '에너지'] },
+        { id: 'calcium', name: '칼슘', icon: '🥛', timeGroup: '저녁 식후', reason: '천연 신경 안정제 역할을 하여 저녁에 복용 시 근육 이완과 숙면에 도움', tags: ['뼈건강', '신경안정'] },
+        { id: 'magnesium', name: '마그네슘', icon: '🥜', timeGroup: '저녁 식후/취침 전', reason: '수면 유도 호르몬인 멜라토닌 합성을 도와 수면의 질을 향상시킴', tags: ['근육이완', '수면개선'] },
+        { id: 'iron', name: '철분', icon: '🩸', timeGroup: '기상 직후 공복', reason: '음식물 속 탄닌, 피틴산 등과 결합하면 흡수율이 크게 하락하므로 완전 공복 섭취 필수', tags: ['혈액생성', '빈혈예방'] },
+        { id: 'zinc', name: '아연', icon: '🦪', timeGroup: '아침/점심 식후', reason: '완전 공복 섭취 시 극심한 메스꺼움을 유발할 수 있는 미네랄', tags: ['면역력', '세포분열'] }
+    ]},
+    { cat: "항산화/혈행", items: [
+        { id: 'omega3', name: '오메가3', icon: '🐟', timeGroup: '점심/저녁 식후', reason: '지용성 성분으로, 담즙산이 가장 많이 분비되는 식후에 섭취해야 흡수율이 높음', tags: ['혈행개선', '두뇌건강'] },
+        { id: 'coq10', name: '코엔자임Q10', icon: '🫀', timeGroup: '아침/점심 식후', reason: '지용성 항산화제로 식후 섭취가 유리하며, 에너지 대사에 관여하여 오전에 좋음', tags: ['항산화', '혈압관리'] },
+        { id: 'glutathione', name: '글루타치온', icon: '✨', timeGroup: '기상 직후 공복', reason: '강력한 항산화제로, 위산의 영향을 덜 받는 공복 상태에서 흡수율이 유리함', tags: ['항산화', '피부건강'] },
+        { id: 'polycosanol', name: '폴리코사놀', icon: '🩸', timeGroup: '저녁 식후', reason: '콜레스테롤 합성이 주로 밤에 일어나므로 저녁 식후 복용이 가장 효과적', tags: ['혈행개선', '콜레스테롤'] },
+        { id: 'vitE', name: '비타민E', icon: '🥑', timeGroup: '점심/저녁 식후', reason: '지용성 비타민으로 체내 지질 산화를 방지하며 식후 흡수율이 높음', tags: ['항산화', '세포보호'] }
+    ]},
+    { cat: "장/눈/면역", items: [
+        { id: 'probiotics', name: '유산균', icon: '🦠', timeGroup: '기상 직후 공복', reason: '위산이 가장 적은 공복에 물을 한 컵 마신 후 복용해야 장까지의 생존율이 보장됨', tags: ['장건강', '면역력'] },
+        { id: 'lutein', name: '루테인', icon: '👁️', timeGroup: '아침/점심 식후', reason: '지용성 색소 성분으로 식사 직후 분비되는 소화효소와 섞여야 흡수됨', tags: ['눈건강', '항산화'] },
+        { id: 'propolis', name: '프로폴리스', icon: '🍯', timeGroup: '아침/점심 식후', reason: '특유의 향과 성분이 위장 부담을 줄 수 있어 식사 중간이나 식후 권장', tags: ['항균', '면역력'] },
+        { id: 'astaxanthin', name: '아스타잔틴', icon: '🦐', timeGroup: '점심/저녁 식후', reason: '강력한 지용성 항산화제로 오메가3 등 지방 성분과 함께 섭취 시 시너지', tags: ['눈건강', '항산화'] }
+    ]},
+    { cat: "간/활력/기타", items: [
+        { id: 'milkthistle', name: '밀크씨슬', icon: '🌱', timeGroup: '저녁 식후', reason: '간 세포의 재생과 해독 작용이 활발해지는 수면 시간을 돕기 위해 저녁 복용', tags: ['간건강', '피로회복'] },
+        { id: 'arginine', name: '아르기닌', icon: '🔥', timeGroup: '기상 직후 공복', reason: '타 아미노산과의 흡수 경쟁에서 밀리기 쉬워 반드시 공복에 단독 섭취', tags: ['활력증진', '혈관확장'] },
+        { id: 'maca', name: '마카', icon: '🥔', timeGroup: '아침/점심 식후', reason: '에너지를 급격히 올려주기 때문에 늦은 저녁 복용 시 수면을 방해함', tags: ['스태미나', '피로회복'] },
+        { id: 'collagen', name: '콜라겐', icon: '💧', timeGroup: '취침 전 공복', reason: '피부 세포의 재생이 활발한 수면 시간(밤 10시~새벽 2시)에 맞춰 복용', tags: ['피부건강', '관절건강'] },
+        { id: 'biotin', name: '비오틴', icon: '💇', timeGroup: '아침/점심 식후', reason: '수용성 비타민으로 대사를 촉진하며, 식사 후 다른 영양소와 함께 섭취 시 유리', tags: ['모발건강', '에너지'] },
+        { id: 'redginseng', name: '홍삼', icon: '🫚', timeGroup: '아침 공복/식전', reason: '진세노사이드 성분은 공복 상태에서 체내 흡수율이 가장 극대화됨', tags: ['면역력', '피로회복'] }
+    ]}
+];
+
+// 심화 상호작용 규칙 
+var interactions = [
+    { type: 'good', pair: ['vitC','collagen'], desc: '비타민C는 체내에서 콜라겐이 합성되는 과정에 필수적인 조효소로 작용하여 생체 이용률을 극대화하는 최고의 시너지 조합입니다.' },
+    { type: 'good', pair: ['iron','vitC'], desc: '비타민C는 철분이 체내에 잘 흡수되는 형태로 변환시켜 철분 흡수율을 최대 30% 이상 높여줍니다.' },
+    { type: 'good', pair: ['calcium','vitD','magnesium'], desc: '칼슘 혼자서는 뼈로 흡수되지 않습니다. 비타민D가 문을 열어주고 마그네슘이 칼슘의 혈관 내 석회화를 방지하는 완벽한 뼈건강 트리오입니다.' },
+    { type: 'good', pair: ['calcium','vitD'], desc: '비타민D는 장점막에서 칼슘의 흡수 단백질을 활성화하여 뼈로 이동시키는 필수적인 짝꿍입니다.' },
+    { type: 'good', pair: ['omega3','lutein'], desc: '오메가3의 불포화 지방산이 지용성인 루테인의 망막 모세혈관 도달 및 흡수율을 대폭 끌어올립니다.' },
+    { type: 'good', pair: ['omega3','vitE'], desc: '비타민E의 강력한 항산화 작용이 체내에서 오메가3가 산화(부패)되는 것을 막아주는 이상적인 방어 조합입니다.' },
+    { type: 'good', pair: ['coq10','omega3'], desc: '코엔자임Q10은 지용성 환경에서 흡수율이 급증하므로, 오메가3의 기름 성분과 만나면 혈행 개선 시너지가 폭발합니다.' },
+    { type: 'good', pair: ['arginine','maca'], desc: '아르기닌의 산화질소 혈관 확장 기능과 마카의 스태미나 성분이 만나 극강의 피로 회복 및 활력을 돕습니다.' },
+    { type: 'good', pair: ['milkthistle','vitB'], desc: '밀크씨슬이 간을 보호하는 동안, 비타민B군이 간의 에너지 대사를 돌려 피로를 회복하게 돕는 훌륭한 조합입니다.' },
+    { type: 'bad', pair: ['iron','calcium'], desc: '칼슘과 철분은 장내에서 흡수 통로가 같아 서로의 흡수를 막습니다. 최소 2시간 간격을 두세요.' },
+    { type: 'bad', pair: ['zinc','iron'], desc: '아연과 철분 역시 흡수 통로가 같아 동시 복용 시 생체 이용률이 크게 떨어집니다. 철분은 아침 공복, 아연은 식후로 분리하십시오.' },
+    { type: 'bad', pair: ['probiotics','vitC'], desc: '비타민C의 강한 산성 물질이 장으로 내려가는 유산균의 생존을 위협할 수 있습니다. 유산균은 기상 직후, 비타민C는 식후에 따로 드세요.' },
+    { type: 'bad', pair: ['magnesium','iron'], desc: '마그네슘은 위산을 중화시키는 성질이 있어 산성 환경에서 잘 흡수되는 철분의 흡수율을 크게 떨어뜨립니다.' },
+    { type: 'bad', pair: ['calcium','zinc'], desc: '고용량의 칼슘(500mg 이상)은 아연의 체내 흡수율을 절반 가까이 억제합니다. 시간차 복용이 필수입니다.' }
+];
+
+var selectedItems = [];
+
+function showToast(msg) {
+    var toast = document.getElementById('custom-toast');
+    toast.innerText = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2500);
+}
+
+function getUrlParams() {
+    var params = {};
+    var search = window.location.search.substring(1);
+    if (search) {
+        var pairs = search.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1] || '');
+        }
+    }
+    return params;
+}
+
+function initApp() {
+    var params = getUrlParams();
+    if (params['ings']) {
+        selectedItems = params['ings'].split(',');
+    }
+
+    renderTabs();
+    if (selectedItems.length > 0) {
+        updateSelectedTray();
+    } else {
+        renderIngredients(ingredientDB[0].cat);
+    }
+    
+    if (params['action'] === 'pill') {
+        document.getElementById('result-box').style.display = 'block';
+        document.getElementById('btn-search').style.display = 'none';
+        document.getElementById('tip-panel').style.display = 'none';
+        generateAnalysis();
+        setTimeout(function() {
+            document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+    }
+}
+
+function renderTabs() {
+    var tabContainer = document.getElementById('tab-container');
+    tabContainer.innerHTML = '';
+    ingredientDB.forEach(function(catData, index) {
+        var btn = document.createElement('div');
+        btn.className = 'tab-btn' + (index === 0 && selectedItems.length === 0 ? ' active' : '');
+        btn.innerText = catData.cat;
+        btn.onclick = function() {
+            document.querySelectorAll('.tab-btn').forEach(function(e) { e.classList.remove('active'); });
+            btn.classList.add('active');
+            renderIngredients(catData.cat);
+        };
+        tabContainer.appendChild(btn);
+    });
+
+    if(selectedItems.length > 0) {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        renderIngredients(ingredientDB[0].cat);
+    }
+}
+
+function renderIngredients(categoryName) {
+    var grid = document.getElementById('ing-grid');
+    grid.innerHTML = '';
+    
+    var categoryData = ingredientDB.find(function(db) { return db.cat === categoryName; });
+    if (!categoryData) return;
+
+    categoryData.items.forEach(function(item) {
+        var isSelected = selectedItems.includes(item.id);
+        var el = document.createElement('div');
+        el.className = 'ing-item' + (isSelected ? ' selected' : '');
+        el.innerHTML = '<span class="ing-icon">' + item.icon + '</span><span class="ing-name">' + item.name + '</span>';
+        
+        el.onclick = function() {
+            if (isSelected) {
+                selectedItems = selectedItems.filter(function(i) { return i !== item.id; });
+            } else {
+                if (selectedItems.length >= 6) {
+                    showToast("🚨 정밀 분석을 위해 최대 6개까지만 선택해 주세요.");
+                    return;
+                }
+                selectedItems.push(item.id);
+            }
+            renderIngredients(categoryName);
+            updateSelectedTray();
+        };
+        grid.appendChild(el);
+    });
+}
+
+function updateSelectedTray() {
+    var tray = document.getElementById('selected-tray');
+    if (selectedItems.length === 0) {
+        tray.innerHTML = '<div class="empty-text">아래에서 복용 중인 영양제를 터치해 주십시오.</div>';
+        return;
+    }
+    tray.innerHTML = '';
+    
+    var allItems = ingredientDB.reduce((acc, curr) => acc.concat(curr.items), []);
+
+    selectedItems.forEach(function(id) {
+        var itemData = allItems.find(function(d) { return d.id === id; });
+        var chip = document.createElement('div');
+        chip.className = 'sel-chip';
+        chip.innerHTML = itemData.name + ' <span class="remove">×</span>';
+        chip.onclick = function() {
+            selectedItems = selectedItems.filter(function(i) { return i !== id; });
+            var activeTabElement = document.querySelector('.tab-btn.active');
+            var activeTab = activeTabElement ? activeTabElement.innerText : ingredientDB[0].cat;
+            renderIngredients(activeTab);
+            updateSelectedTray();
+        };
+        tray.appendChild(chip);
+    });
+}
+
+function executeAnalysis() {
+    if(selectedItems.length < 1) {
+        showToast("⚠️ 최소 1개 이상의 영양제를 선택해 주십시오.");
+        return;
+    }
+    var ingsParam = encodeURIComponent(selectedItems.join(","));
+    var baseUrl = window.location.href.split('?')[0];
+    window.location.href = baseUrl + "?m=1&action=pill&ings=" + ingsParam + "&t=" + new Date().getTime();
+}
+
+function resetItems() {
+    var baseUrl = window.location.href.split('?')[0];
+    window.location.href = baseUrl + "?m=1";
+}
+
+function createParticles() {
+    var colors = ['#14b8a6', '#0d9488', '#5eead4', '#ffffff'];
+    for (var i = 0; i < 40; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+        p.style.animationDelay = (Math.random() * 0.5) + 's';
+        var size = (Math.random() * 7 + 3) + 'px';
+        p.style.width = size;
+        p.style.height = size;
+        document.body.appendChild(p);
+        
+        setTimeout(function(particle) {
+            if (particle && particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 4000, p);
+    }
+}
+
+function generateAnalysis() {
+    var synContainer = document.getElementById('synergy-container');
+    synContainer.innerHTML = '';
+    
+    var foundSynergies = [];
+    var noSynergy = true;
+    var allItems = ingredientDB.reduce((acc, curr) => acc.concat(curr.items), []);
+    var selectedDataObjects = selectedItems.map(id => allItems.find(d => d.id === id));
+
+    for (var i = 0; i < selectedItems.length; i++) {
+        for (var j = i + 1; j < selectedItems.length; j++) {
+            var itemA = selectedItems[i];
+            var itemB = selectedItems[j];
+            
+            var trioMatch = interactions.find(inter => inter.pair.length === 3 && inter.pair.includes(itemA) && inter.pair.includes(itemB));
+            if(trioMatch) {
+                var missing = trioMatch.pair.find(x => x !== itemA && x !== itemB);
+                if(selectedItems.includes(missing)) {
+                    if(!foundSynergies.includes(trioMatch)) foundSynergies.push(trioMatch);
+                    noSynergy = false;
+                }
+            }
+            
+            var match = interactions.find(inter => inter.pair.length === 2 && inter.pair.includes(itemA) && inter.pair.includes(itemB));
+            if (match && !foundSynergies.includes(match)) {
+                foundSynergies.push(match);
+                noSynergy = false;
+            }
+        }
+    }
+
+    if (noSynergy && selectedItems.length > 1) {
+        var allTags = selectedDataObjects.reduce((acc, curr) => acc.concat(curr.tags), []);
+        var tagCounts = {};
+        allTags.forEach(tag => { tagCounts[tag] = (tagCounts[tag] || 0) + 1; });
+        var sortedTags = Object.keys(tagCounts).sort((a,b) => tagCounts[b] - tagCounts[a]);
+        var mainThemes = sortedTags.slice(0, 2).map(t => "[" + t + "]").join(" 및 ");
+
+        synContainer.innerHTML = `
+            <div class="synergy-card neutral">
+                <div class="syn-title neutral">🧬 인공지능 성분 종합 분석</div>
+                <p class="syn-desc">분석 결과, <b>${mainThemes}</b> 관리에 특화된 훌륭하고 전문적인 루틴입니다. 성분 간 흡수를 방해하는 뚜렷한 충돌이 발견되지 않은 매우 안전한 구성으로, 하단의 생체 리듬 시간표를 엄수하시면 최상의 생체 이용률을 기대할 수 있습니다.</p>
+            </div>
+        `;
+    } else if (selectedItems.length === 1) {
+        synContainer.innerHTML = `
+            <div class="synergy-card neutral">
+                <div class="syn-title neutral">💡 단일 영양소 집중 가이드</div>
+                <p class="syn-desc">해당 영양소의 단독 흡수율을 극대화하는 가이드라인을 하단 시간표에서 확인하세요. 여러 개를 함께 선택하셔야 심도 깊은 상호작용 분석이 가능합니다.</p>
+            </div>
+        `;
+    }
+
+    foundSynergies.forEach(function(syn) {
+        var isGood = syn.type === 'good';
+        var icon = isGood ? '🔥 흡수율 극대화 시너지' : '⚠️ 주의 요망 (길항 작용 발생)';
+        var html = `
+            <div class="synergy-card ${syn.type}">
+                <div class="syn-title ${syn.type}">${icon}</div>
+                <p class="syn-desc">${syn.desc}</p>
+            </div>
+        `;
+        synContainer.innerHTML += html;
+    });
+
+    var timeGroups = {
+        '기상 직후 공복/식전': [],
+        '아침/점심 식후 (활동 시간)': [],
+        '점심/저녁 식후': [],
+        '저녁 식후/취침 전 (휴식 시간)': [],
+        '취침 전 공복': []
+    };
+
+    selectedDataObjects.forEach(function(data) {
+        if(data.timeGroup.includes('기상')) timeGroups['기상 직후 공복/식전'].push(data);
+        else if (data.timeGroup.includes('아침/점심')) timeGroups['아침/점심 식후 (활동 시간)'].push(data);
+        else if (data.timeGroup.includes('점심/저녁')) timeGroups['점심/저녁 식후'].push(data);
+        else if (data.timeGroup.includes('취침 전 공복')) timeGroups['취침 전 공복'].push(data);
+        else timeGroups['저녁 식후/취침 전 (휴식 시간)'].push(data);
+    });
+
+    var tableHtml = '';
+    var timeIcons = {
+        '기상 직후 공복/식전': '🌅',
+        '아침/점심 식후 (활동 시간)': '☀️',
+        '점심/저녁 식후': '🌤️',
+        '저녁 식후/취침 전 (휴식 시간)': '🌙',
+        '취침 전 공복': '🛌'
+    };
+
+    for (var key in timeGroups) {
+        if (timeGroups[key].length > 0) {
+            var tagsHtml = timeGroups[key].map(function(d) {
+                return `<span class="time-item-tag">${d.icon} ${d.name}</span>`;
+            }).join('');
+            
+            var reasonsHtml = timeGroups[key].map(function(d) {
+                return `• <b>${d.name}</b>: ${d.reason}`;
+            }).join('<br><br>');
+
+            tableHtml += `
+                <div class="time-slot">
+                    <div class="time-icon">${timeIcons[key]}</div>
+                    <div class="time-content">
+                        <div class="time-period">${key}</div>
+                        <div class="time-items">${tagsHtml}</div>
+                        <p class="time-reason" style="margin-top: 8px;">${reasonsHtml}</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    document.getElementById('timetable-container').innerHTML = tableHtml;
+    
+    createParticles();
+}
+
+document.addEventListener("DOMContentLoaded", initApp);
+//]]>
+</script>
