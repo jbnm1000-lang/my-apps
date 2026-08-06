@@ -1,0 +1,254 @@
+<style>
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+    
+/* 1. 구글 블로그 기본 테마 숨기기 (인기글, 피드 포함 완벽 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label { display: none !important; }
+    }
+
+    /* 포춘쿠키 앱을 최상단으로 끌어올려 화면 100% 차지 */
+    #ultimate-cookie-app {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 9999999 !important;
+        background: radial-gradient(circle at center, #0f172a 0%, #020617 100%) !important;
+        overflow-y: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #f8fafc;
+        font-family: 'Pretendard', -apple-system, sans-serif;
+    }
+
+    /* 2. 내부 레이아웃 및 디자인 */
+    .app-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 사행성 방지 및 주의사항 안내 (필수) */
+    .legal-notice {
+        background-color: rgba(30, 41, 59, 0.8);
+        border-left: 4px solid #ef4444;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #cbd5e1;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .legal-notice strong { color: #f87171; }
+
+    .header-area { text-align: center; margin-bottom: 20px; }
+    .header-area h1 { 
+        font-size: 32px; 
+        color: #fbbf24; 
+        margin: 0; 
+        font-weight: 800; 
+        letter-spacing: -1px; 
+        text-shadow: 0 4px 15px rgba(217, 119, 6, 0.3); 
+    }
+    .header-area p { font-size: 15px; color: #94a3b8; margin-top: 8px; }
+
+    /* 3. 쿠키 애니메이션 */
+    .cookie-stage {
+        width: 220px; height: 220px; position: relative; margin: 30px 0 10px 0;
+        cursor: pointer; display: flex; justify-content: center; align-items: center;
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+    }
+    .cookie-left, .cookie-right {
+        width: 110px; height: 180px; background: linear-gradient(135deg, #fde047 0%, #d97706 100%);
+        border: 2px solid #b45309; position: absolute; transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: inset -10px 0 20px rgba(0,0,0,0.3);
+    }
+    .cookie-left { border-radius: 110px 0 0 110px; left: 0; transform-origin: bottom right; }
+    .cookie-right { border-radius: 0 110px 110px 0; right: 0; transform-origin: bottom left; }
+
+    .cookie-stage.cracked .cookie-left { transform: rotate(-25deg) translateX(-45px) translateY(20px); opacity: 0.2; }
+    .cookie-stage.cracked .cookie-right { transform: rotate(25deg) translateX(45px) translateY(20px); opacity: 0.2; }
+
+    .fortune-paper {
+        position: absolute; width: 240px; background: #fff;
+        color: #0f172a; font-weight: 800; display: flex; flex-direction: column; justify-content: center; align-items: center;
+        font-size: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(251, 191, 36, 0.5);
+        transform: scale(0) translateY(0); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 10; text-align: center; border-radius: 8px; border-top: 6px solid #fbbf24;
+        opacity: 0; line-height: 1.5;
+    }
+    .cookie-stage.cracked .fortune-paper { transform: scale(1) translateY(-10px); opacity: 1; }
+
+    /* 사용자 안내 멘트 */
+    .interaction-guide {
+        font-size: 15px; color: #fbbf24; font-weight: 700; margin-bottom: 20px;
+        background: rgba(217, 119, 6, 0.2); padding: 10px 20px; border-radius: 30px;
+        animation: pulse 2s infinite; border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+    @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+    /* 4. 상세 결과 영역 (내용 대폭 강화) */
+    .result-area { display: none; width: 100%; animation: slideUp 1s forwards; margin-top: 20px; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .detail-section {
+        background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(251, 191, 36, 0.2);
+        border-radius: 16px; padding: 25px; margin-bottom: 20px;
+    }
+    .detail-section h3 {
+        color: #fbbf24; font-size: 18px; margin-top: 0; margin-bottom: 15px;
+        display: flex; align-items: center;
+    }
+    .detail-section h3::before {
+        content: ''; display: inline-block; width: 5px; height: 18px; background: #fbbf24; margin-right: 10px; border-radius: 2px;
+    }
+    .detail-section p {
+        color: #e2e8f0; font-size: 15px; line-height: 1.8; margin: 0; word-break: keep-all; text-align: left;
+    }
+
+    .lucky-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-bottom: 30px; }
+    .lucky-box { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.05); padding: 18px; border-radius: 12px; text-align: center; }
+    .lucky-label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; display: block; }
+    .lucky-value { font-size: 16px; color: #38bdf8; font-weight: 800; }
+
+    .action-btn {
+        width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        color: #fff; padding: 20px; border: none; border-radius: 12px; font-size: 18px; font-weight: 800;
+        cursor: pointer; box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4); letter-spacing: 1px;
+    }
+</style>
+
+<div id="ultimate-cookie-app">
+    <div class="app-container">
+        
+        <h1 style="text-align: left;"><span style="color: #ff00fe;">천상의 지혜</span></h1><div><span style="color: #ff00fe;"><br /></span></div><div class="header-area"><div><br /></div><div><strong>[사용자 안내 및 주의사항]</strong><br />본 시스템이 제공하는 포춘쿠키 조언은 개인적인 고찰과 긍정적인 일상 흐름을 돕기 위한 인문학적 가이드 도구입니다. 어떠한 사행성 유도나 금전적 베팅 요소도 포함하지 않으며 과학적 효력을 증명하지 않습니다. 가벼운 마음으로 하루의 활력을 얻는 데 참고해 주십시오.</div><div><br /></div><div><br /></div>
+            <p>당신의 운명을 환하게 밝혀줄 11만 가지 조언</p>
+        </div>
+
+        <div class="interaction-guide" id="guideText">
+            👆 쿠키를 터치하거나 스마트폰을 흔들어주세요
+        </div>
+
+        <div class="cookie-stage" id="cookieStage" onclick="crackCookie()">
+            <div class="cookie-left"></div>
+            <div class="cookie-right"></div>
+            <div class="fortune-paper">
+                <span style="color: #64748b; font-size: 13px; margin-bottom: 8px;">오늘의 메시지</span>
+                <span id="shortQuote" style="font-size: 18px;">행운이 깃들기를...</span>
+            </div>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            
+            <div class="detail-section">
+                <h3>거시적 상황 해설</h3>
+                <p id="txtDetail">해설을 불러오는 중입니다...</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>오늘의 실천 가이드</h3>
+                <p id="txtAction">가이드를 불러오는 중입니다...</p>
+            </div>
+
+            <div class="lucky-grid">
+                <div class="lucky-box"><span class="lucky-label">🎨 행운의 색상</span><span class="lucky-value" id="valColor">-</span></div>
+                <div class="lucky-box"><span class="lucky-label">🍱 추천 에너지식</span><span class="lucky-value" id="valFood">-</span></div>
+                <div class="lucky-box"><span class="lucky-label">📍 행운의 방위</span><span class="lucky-value" id="valDir">-</span></div>
+                <div class="lucky-box"><span class="lucky-label">🔢 에너지 주파수</span><span class="lucky-value" id="valNum">-</span></div>
+            </div>
+            
+            <button class="action-btn" onclick="refreshCookie()">새로운 지혜 구하기 (새로고침)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 5. 방대하고 상세해진 데이터베이스
+    const wisdomData = [
+        {
+            quote: "가장 어두운 밤도 결국 끝날 것이며, 태양은 다시 떠오를 것이다.",
+            detail: "현재 마주하고 있는 답답한 상황이나 정체기는 결코 영원하지 않습니다. 밤이 가장 깊을 때 새벽이 찾아오듯, 지금 당신이 느끼는 인내의 시간은 곧 밝은 결과로 전환될 매우 긍정적인 신호입니다. 에너지가 응축되고 있는 시기입니다.",
+            action: "오늘은 무리한 결정을 내리거나 억지로 상황을 바꾸려 하기보다는 현상을 유지하는 것이 좋습니다. 따뜻한 차 한 잔과 함께 스스로의 마음을 다독이며 다가올 기회를 차분히 준비해 보세요."
+        },
+        {
+            quote: "기회는 기다리는 자가 아니라, 문을 두드리는 자에게 열린다.",
+            detail: "주변의 환경적 요인들이 당신의 능동적인 행동을 기다리고 있는 형국입니다. 막연히 좋은 일이 생기기를 바라기보다는, 평소에 생각만 하고 미루어 두었던 작은 아이디어를 현실로 끄집어낼 때 우주의 에너지가 가장 강하게 반응합니다.",
+            action: "거창한 계획이 아니어도 좋습니다. 평소 연락하고 싶었던 지인에게 안부를 묻거나, 새로운 업무의 기획서 첫 줄을 적어보는 등 아주 작은 '두드림'을 오늘 당장 실천에 옮기십시오."
+        },
+        {
+            quote: "인생은 속도가 아니라 방향이다.",
+            detail: "타인과의 비교나 사회적인 조급함 때문에 본인만의 페이스를 잃어버리기 쉬운 시점입니다. 빨리 성과를 내야 한다는 압박감은 오히려 시야를 좁게 만듭니다. 지금은 얼마나 멀리 왔는지가 아니라, 제대로 된 길 위에 서 있는지를 점검해야 할 때입니다.",
+            action: "오늘 하루는 스마트폰과 소셜 미디어 사용을 잠시 줄이고, 조용한 공간에서 본인이 진정으로 원하는 최종 목표가 무엇인지 다시 한번 차분하게 종이에 적어보는 시간을 가져보십시오."
+        },
+        {
+            quote: "실패는 성공으로 가는 길목에 놓인 정류장일 뿐이다.",
+            detail: "최근 겪었던 작은 실수나 계획의 틀어짐은 결코 당신의 능력이 부족해서가 아닙니다. 이는 더 큰 성공을 거두기 위해 반드시 거쳐야 하는 경험의 축적 과정입니다. 현재의 시행착오를 통해 가장 귀중한 데이터를 얻고 있는 중입니다.",
+            action: "자책하는 마음을 거두고, 어제의 실수에서 배운 점을 정확히 한 문장으로 정리해 보세요. 그 한 문장이 앞으로의 삶에서 가장 강력한 무기가 되어줄 것입니다."
+        },
+        {
+            quote: "모든 꽃이 한꺼번에 피지는 않는다. 당신만의 계절이 오고 있다.",
+            detail: "각자의 삶에는 고유한 타이밍과 만개의 시기가 존재합니다. 주변 사람들이 먼저 성과를 내고 앞서가는 것처럼 보일 수 있지만, 당신의 뿌리는 지금 보이지 않는 곳에서 누구보다 깊고 단단하게 내리고 있는 중입니다.",
+            action: "타인의 성과에 흔들리지 말고, 오늘 하루 나에게 주어진 소소한 일과에 집중하세요. 스스로에게 칭찬 한마디를 건네며 본인만의 자존감을 단단하게 채워나가는 것이 핵심입니다."
+        }
+        // 이 부분에 명언과 상세 해설 세트를 수십 개 더 추가하시면 앱이 더욱 풍성해집니다.
+    ];
+
+    const colors = ["미드나잇 블루", "샴페인 골드", "로즈 쿼츠", "에메랄드 그린", "차콜 그레이", "크림 화이트", "버건디 와인", "라벤더 퍼플", "포레스트 그린", "코랄 핑크"];
+    const foods = ["따뜻한 아메리카노", "신선한 연어 샐러드", "매콤한 떡볶이", "달콤한 초콜릿 큐브", "단백한 닭가슴살", "바삭한 돈가스", "시원한 냉면", "고소한 견과류", "상큼한 요거트", "따뜻한 전복죽"];
+    const dirs = ["동쪽 (햇살의 기운)", "서쪽 (안정의 기운)", "남쪽 (열정의 기운)", "북쪽 (지혜의 기운)", "북동쪽 (귀인의 방향)", "남서쪽 (재물의 방향)", "중앙 (나의 내면)", "남동쪽 (변화의 방향)"];
+
+    let isCracked = false;
+
+    // 쿠키 쪼개기 실행 함수
+    function crackCookie() {
+        if(isCracked) return;
+        isCracked = true;
+        
+        // 안내 멘트 숨기고 애니메이션 시작
+        document.getElementById('guideText').style.display = 'none';
+        document.getElementById('cookieStage').classList.add('cracked');
+        
+        // 0.8초 후 결과 화면 부드럽게 등장
+        setTimeout(() => {
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 800);
+    }
+
+    // 새로고침(전면광고 유도) 함수
+    function refreshCookie() {
+        const randomSeed = Math.floor(Math.random() * 999999);
+        window.location.href = window.location.pathname + "?cookie=" + randomSeed;
+    }
+
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // 결과 데이터 무작위 세팅 (매번 새롭게)
+        const w = wisdomData[Math.floor(Math.random() * wisdomData.length)];
+        const c = colors[Math.floor(Math.random() * colors.length)];
+        const f = foods[Math.floor(Math.random() * foods.length)];
+        const d = dirs[Math.floor(Math.random() * dirs.length)];
+        const n = Math.floor(Math.random() * 900) + 100;
+
+        document.getElementById('shortQuote').innerText = w.quote;
+        document.getElementById('txtDetail').innerText = w.detail;
+        document.getElementById('txtAction').innerText = w.action;
+        document.getElementById('valColor').innerText = c;
+        document.getElementById('valFood').innerText = f;
+        document.getElementById('valDir').innerText = d;
+        document.getElementById('valNum').innerText = n + " Hz";
+
+        // URL 뒤에 ?cookie= 파라미터가 달려있으면 (= 버튼이나 흔들기로 다시 들어왔을 때)
+        if (params.get('cookie')) {
+            // 즉시 쿠키를 쪼개진 상태로 보여주어 버그 방지
+            document.getElementById('cookieStage').style.transition = 'none';
+            crackCookie();
+        }
+    };
+</script>
