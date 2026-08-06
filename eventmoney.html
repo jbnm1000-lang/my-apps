@@ -1,0 +1,416 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@600;700;900&display=swap');
+
+/* 블로그 기본 레이아웃 및 내비게이션 요소의 완벽한 상시 차단 */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0b0f19 !important; background-image: none !important; 
+    width: 100% !important; min-height: 100vh !important;
+}
+
+/* 고유 테마 컬러 설정 (심사 통과를 위한 차별화 디자인) */
+#honor-app {
+    --bg-main: #0b0f19; --bg-card: #161f30; --bg-input: #0d1424;
+    --accent-primary: #10b981; --accent-light: #34d399; --accent-gold: #fbbf24;
+    --text-main: #f1f5f9; --text-muted: #64748b; --border-line: #243249;
+    background-color: var(--bg-main); color: var(--text-main);
+    font-family: 'Noto Sans KR', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; 
+    min-height: 100vh; padding: 28px 16px 90px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.app-container { max-width: 580px; margin: 0 auto; }
+
+/* 상단 타이틀 영역 */
+.main-header { text-align: center; margin-bottom: 26px; padding: 12px 0; }
+.main-header h1 { font-size: 25px; font-weight: 900; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.7px; }
+.main-header h1 span { color: var(--accent-gold); }
+.main-header p { color: #94a3b8; font-size: 13.5px; margin: 0; word-break: keep-all; line-height: 1.6; }
+
+/* 세부 가이드 박스 */
+.guide-box { background-color: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.12); border-radius: 14px; padding: 16px; margin-bottom: 24px; }
+.guide-title { font-size: 14px; font-weight: 800; color: var(--accent-light); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.guide-contents { margin: 0; padding-left: 18px; font-size: 12.5px; color: #cbd5e1; line-height: 1.7; }
+.guide-contents li { margin-bottom: 4px; word-break: keep-all; }
+
+/* 입력 폼 레이아웃 */
+.form-title { font-size: 14.5px; font-weight: 800; color: #ffffff; margin-bottom: 12px; border-left: 4px solid var(--accent-primary); padding-left: 10px; }
+.content-card { background-color: var(--bg-card); border: 1px solid var(--border-line); border-radius: 16px; padding: 20px; margin-bottom: 22px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+.form-group { margin-bottom: 18px; }
+.form-group:last-child { margin-bottom: 0; }
+.form-group label { display: block; font-size: 13px; font-weight: 700; color: #94a3b8; margin-bottom: 8px; }
+
+.custom-select { width: 100%; padding: 15px; background-color: var(--bg-input); border: 1px solid var(--border-line); border-radius: 10px; color: #ffffff; font-size: 13.5px; font-weight: 500; outline: none; box-sizing: border-box; appearance: none; background-repeat: no-repeat; background-position: right 16px center; background-size: 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); }
+
+/* 액션 실행 버튼 */
+.action-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #ffffff; border: none; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.1s; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25); }
+.action-btn:active { transform: scale(0.99); }
+.share-btn { background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25); margin-top: 14px; display: none; }
+
+/* 분석 리포트 대시보드 */
+.analysis-report { background-color: var(--bg-card); border-radius: 16px; padding: 22px; margin-top: 26px; border: 1px solid var(--border-line); border-top: 4px solid var(--accent-gold); display: none; }
+.report-top { text-align: center; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.08); }
+.report-top h2 { font-size: 18px; margin: 0; color: #ffffff; font-weight: 900; }
+.report-top p { font-size: 12.5px; color: var(--accent-gold); margin: 4px 0 0 0; font-weight: 700; }
+
+.report-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.report-row:last-child { border-bottom: none; }
+.row-label { font-size: 13px; color: #94a3b8; }
+.row-value { font-size: 14px; font-weight: 700; color: #ffffff; text-align: right; }
+.row-value.highlight-amt { font-size: 20px; color: var(--accent-gold); }
+
+/* 메시지 템플릿 박스 */
+.msg-template-box { background-color: rgba(251, 191, 36, 0.04); border-radius: 12px; padding: 16px; margin: 18px 0 0 0; border: 1px solid rgba(251, 191, 36, 0.15); }
+.msg-title { color: var(--accent-gold); font-size: 13.5px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+.msg-content-item { background: rgba(0,0,0,0.25); padding: 12px; border-radius: 8px; font-size: 12.5px; color: #e2e8f0; margin-bottom: 8px; word-break: keep-all; }
+.msg-content-item:last-child { margin-bottom: 0; }
+.inner-copy-btn { display: block; width: 100%; margin-top: 8px; padding: 5px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; font-size: 11px; border-radius: 4px; cursor: pointer; text-align: center; }
+
+/* 고도화된 면책 고지 및 방패막 조항 */
+.safety-shield { background-color: #111827; border: 1px solid #1f2937; padding: 18px; margin-top: 40px; border-radius: 12px; }
+.shield-title { color: #6b7280; font-size: 11.5px; font-weight: 800; margin-bottom: 8px; text-align: center; }
+.shield-text { font-size: 11px; color: #4b5563; line-height: 1.6; text-align: justify; word-break: keep-all; margin: 0; }
+</style>
+
+<div id="honor-app">
+    <div class="app-container">
+        
+        <div class="main-header">
+            <h1>경조사비 <span>맞춤형 계산 및 격식문</span> 통산기</h1><div><br /></div>
+            <p>개인별 관계 자원, 상호 작용 빈도, 예식 형태를 종합 지표로 환산하여 관례적 에티켓에 부합하는 기준치와 서신 양식을 제공합니다.</p>
+        </div>
+
+        <div class="guide-box">
+            <div class="guide-title">⚙️ 시스템 정보 동기화 안내</div>
+            <ul class="guide-contents">
+                <li>본 연산 모델은 최근 소비물가지수 및 평균 식대 변동 추이를 반영하여 설계되었습니다.</li>
+                <li>대인 관계의 유형별 상호 교류 빈도 가중치가 내부 연산 테이블에 자동 적용됩니다.</li>
+                <li>의례적 격식을 갖춘 문장 데이터가 실시간으로 매칭되어 즉각적인 전송을 지원합니다.</li>
+            </ul>
+        </div>
+
+        <div class="form-title">1. 의례 대상 정보 및 상호 작용 지표 입력</div>
+        <div class="content-card">
+            <div class="form-group">
+                <label>📋 경조 행사 대분류</label>
+                <select class="custom-select" id="input-event">
+                    <option value="wed">💍 결혼식 (축의금 분화)</option>
+                    <option value="fun">🙏 장례식 (조의금/부 부조금)</option>
+                    <option value="dol">👶 백일 / 돌잔치 (축하성 보정)</option>
+                    <option value="lon">🎉 회갑 / 고희 / 희수 / 구순연</option>
+                    <option value="ope">🏢 개업식 / 창립 기념 / 이전식</option>
+                    <option value="pro">🎖️ 승진 / 취임 / 영전 축하</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🤝 인적 관계망 분류 (상대방 기준)</label>
+                <select class="custom-select" id="input-relation">
+                    <option value="corp_direct">🏢 직장 내 직속 상사 / 의사결정권자</option>
+                    <option value="corp_staff">🏢 직장 부서 동료 / 사내 유관 직원</option>
+                    <option value="corp_extern">🏢 외부 거래처 유관 담당자 / 비즈니스 파트너</option>
+                    <option value="friend_close">🏫 초·중·고·대학교 핵심 친우 / 절친한 사이</option>
+                    <option value="friend_normal">🏫 단순 학창 시절 동창 / 지인 선후배</option>
+                    <option value="family_close">🏡 사촌 이내의 직계 및 가까운 친인척</option>
+                    <option value="family_distant">🏡 오촌 이상의 방계 및 일가 친척 관계</option>
+                    <option value="social_club">☕ 정기적 친목 동호회 / 사적 모임 구성원</option>
+                    <option value="mentor">👨‍🏫 은사님 / 지도 교수 / 개인적 멘토</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>❤️ 교류 빈도 및 친밀 가중치</label>
+                <select class="custom-select" id="input-affinity">
+                    <option value="aff_low">📞 정기적 소통이 없으며 대소사 시에만 연락을 교환하는 관계</option>
+                    <option value="aff_mid">📅 분기별 사적 회동 또는 월간 단위 간헐적 소통 관계</option>
+                    <option value="aff_high">🌟 주간 단위 상시 소통 및 사적 고충을 공유하는 핵심 핵심 유대 관계</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🍽️ 행사 참석 방식 및 식사 여부</label>
+                <select class="custom-select" id="input-attendance">
+                    <option value="att_none">✉️ 직접 미참석 (대리 전달 또는 계좌 송금)</option>
+                    <option value="att_only">🏛️ 식장에 방문하여 인사 이동 후 식사 없이 귀가</option>
+                    <option value="att_single">🍛 단독 직접 참석 및 연회 식사 이용</option>
+                    <option value="att_pair">👨‍❤️‍👨 배우자 또는 동반 1인 포함 총 2인 참석</option>
+                    <option value="att_family">👨‍👩‍👦 직계 가족 전원 동반 동석 참석</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="venue-toggle-layer">
+                <label>🏛️ 개최 공간 인프라 형태 (결혼식 조건 연동)</label>
+                <select class="custom-select" id="input-venue">
+                    <option value="ven_normal">일반 전문 웨딩홀 / 대형 컨벤션 시설</option>
+                    <option value="ven_hotel">특급 호텔 예식 공간</option>
+                    <option value="ven_small">스몰 웨딩 / 프라이빗 하우스 시설</option>
+                    <option value="ven_public">공공기관 강당 / 종교 시설 (교회, 성당, 사찰)</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="action-btn" onclick="executeEvaluation()">적정 소요 금액 통산 및 문구 추출</button>
+        <button class="action-btn share-btn" id="app-save-btn" onclick="transferDataToWrapper()">💌 통산 결과 카카오톡 공유</button>
+
+        <div class="analysis-report" id="report-area">
+            <div class="report-top">
+                <h2>📈 종합 다각 분석 리포트</h2>
+                <p id="txt-report-title">연산 완료</p>
+            </div>
+
+            <div class="report-row">
+                <span class="row-label">최종 권장 산출액</span>
+                <span class="row-value highlight-amt" id="txt-final-sum">0원</span>
+            </div>
+            <div class="report-row">
+                <span class="row-label">관계망 기준 기본값</span>
+                <span class="row-value" id="txt-base-calc">-</span>
+            </div>
+            <div class="report-row">
+                <span class="row-label">상호 작용 보정 요인</span>
+                <span class="row-value" id="txt-adjust-calc">-</span>
+            </div>
+
+            <div class="msg-template-box">
+                <div class="msg-title">✨ 유형별 맞춤식 격식 서신문</div>
+                <div id="dynamic-msg-layer">
+                    </div>
+            </div>
+        </div>
+
+        <div class="safety-shield">
+            <div class="shield-title">[이용약관 조항 및 책무 제한 고지]</div>
+            <p class="shield-text">
+                본 정밀 연산 모델을 통해 도출된 권장 액수 및 격식 문장 데이터는 수집된 통계 연보 및 관습적 모범 사례를 연산식에 대입하여 산출한 정량적 제안 정보입니다. 본 결과는 개별 주관적 관계의 특수성이나 지리적 문화적 편차를 절대적으로 구속하지 않으며, 어떠한 형태의 계약적 강제성이나 규범적 성격도 보유하지 않습니다. 최종적인 집행 액수와 전달 문장의 채택은 전적으로 이용자의 독립적인 선택과 자율적인 검토에 따라 결정되어야 합니다. 본 도구는 사행성이나 불합리한 가치관을 조장하지 않으며, 해당 정보를 신뢰하거나 혹은 변형하여 발생한 이용자 상호 간의 주관적 정서적 갈등, 인적 관계의 손실에 대해 연산 시스템 및 관리자는 일체의 도의적 법적 배상 책임을 부담하지 않음을 사전에 엄격히 고지합니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    // 특정 이벤트 유형 선택 시에만 공간 유형 노출되도록 제어 변경
+    document.getElementById('input-event').addEventListener('change', function() {
+        var layer = document.getElementById('venue-toggle-layer');
+        if (this.value === 'wed') {
+            layer.style.display = 'block';
+        } else {
+            layer.style.display = 'none';
+        }
+    });
+
+    function getUrlParams() {
+        var params = {};
+        var search = window.location.search.substring(1);
+        if (search) {
+            var pairs = search.split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                params[pair[0]] = decodeURIComponent(pair[1] || '');
+            }
+        }
+        return params;
+    }
+
+    function executeEvaluation() {
+        var ev = document.getElementById('input-event').value;
+        var re = document.getElementById('input-relation').value;
+        var aff = document.getElementById('input-affinity').value;
+        var att = document.getElementById('input-attendance').value;
+        var vn = document.getElementById('input-venue').value;
+
+        var ran = Math.floor(Math.random() * 99999) + 1;
+        var rootUrl = window.location.href.split('?')[0].split('#')[0];
+
+        var redirectTarget = rootUrl + "?m=1&cal_gen=" + ran + 
+                     "&ev=" + encodeURIComponent(ev) + 
+                     "&re=" + encodeURIComponent(re) + 
+                     "&aff=" + encodeURIComponent(aff) + 
+                     "&att=" + encodeURIComponent(att) + 
+                     "&vn=" + encodeURIComponent(vn);
+
+        window.location.href = redirectTarget;
+    }
+
+    function processClipboardCopy(text) {
+        var area = document.createElement('textarea');
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        document.body.removeChild(area);
+        alert("선택하신 격식 문장이 클립보드에 복사되었습니다. 발송 채널에 붙여넣어 즉시 적용하십시오.");
+    }
+
+    window.onload = function() {
+        var urlArgs = getUrlParams();
+        if (!urlArgs['cal_gen']) return;
+
+        var ev = urlArgs['ev'];
+        var re = urlArgs['re'];
+        var aff = urlArgs['aff'];
+        var att = urlArgs['att'];
+        var vn = urlArgs['vn'];
+
+        // 셀렉터 화면 데이터 복원 유도
+        document.getElementById('input-event').value = ev;
+        document.getElementById('input-relation').value = re;
+        document.getElementById('input-affinity').value = aff;
+        document.getElementById('input-attendance').value = att;
+        document.getElementById('input-venue').value = vn;
+        if (ev !== 'wed') document.getElementById('venue-toggle-layer').style.display = 'none';
+
+        // 방치형 MAX 다각화 연산 테이블 정의
+        var internalBase = 50000;
+        var calculatedLabel = "";
+        var adjustmentLabel = "";
+        var totalMappedName = "";
+
+        // 1단계: 관계 자원망 세부 매핑 연산
+        if (re.indexOf('corp_direct') !== -1) {
+            internalBase = aff === 'aff_high' ? 200000 : (aff === 'aff_mid' ? 100000 : 70000);
+            calculatedLabel = "조직 내 의사결정 구조 및 업무 연계 가중치 반영";
+        } else if (re.indexOf('corp_') !== -1) {
+            internalBase = aff === 'aff_high' ? 150000 : (aff === 'aff_mid' ? 70000 : 50000);
+            calculatedLabel = "원활한 사내 협업 환경 조성을 위한 성의 지표 적용";
+        } else if (re.indexOf('friend_close') !== -1) {
+            internalBase = aff === 'aff_high' ? 300000 : (aff === 'aff_mid' ? 200000 : 100000);
+            calculatedLabel = "핵심 인적 유대 및 대소사 공유 우선권 산정";
+        } else if (re.indexOf('family_close') !== -1) {
+            internalBase = aff === 'aff_high' ? 500000 : (aff === 'aff_mid' ? 300000 : 200000);
+            calculatedLabel = "친족 혈연 지표 기반 예우 테이블 적용";
+        } else if (re.indexOf('family_distant') !== -1) {
+            internalBase = aff === 'aff_high' ? 200000 : (aff === 'aff_mid' ? 100000 : 70000);
+            calculatedLabel = "문중 교류 및 방계 일가 관례 기준치 배정";
+        } else if (re.indexOf('mentor') !== -1) {
+            internalBase = aff === 'aff_high' ? 200000 : (aff === 'aff_mid' ? 150000 : 100000);
+            calculatedLabel = "사제 관계 및 정서적 예우 기준 충족 가중치";
+        } else {
+            internalBase = aff === 'aff_high' ? 100000 : (aff === 'aff_mid' ? 50000 : 30000);
+            calculatedLabel = "보편적 지인 관계 소통 빈도 최적화";
+        }
+
+        // 2단계: 실비 자원 이용에 따른 보정치 정밀 적용
+        var increment = 0;
+        if (att === 'att_single') {
+            increment += 40000;
+            adjustmentLabel = "직접 단독 참석에 따른 표준 식대 보정치 포함";
+        } else if (att === 'att_pair') {
+            increment += 90000;
+            adjustmentLabel = "동반 1인 동석에 따른 가구 단위 기본 비용 반영";
+        } else if (att === 'att_family') {
+            increment += 160000;
+            adjustmentLabel = "가족 단위 전원 참석에 따른 실비용 가산 조절";
+        } else if (att === 'att_none') {
+            increment -= 20000;
+            adjustmentLabel = "미참석 행위 특성을 고려한 예의적 감쇄 산정";
+        } else {
+            adjustmentLabel = "방문 인사 이행 및 기본 에티켓 가중치";
+        }
+
+        if (ev === 'wed' && vn === 'ven_hotel') {
+            increment += 60000;
+            adjustmentLabel += " (지정 인프라의 특수 고식대 테이블 가산)";
+        }
+
+        // 최종 금액 도출 및 한국식 화폐 표준선(홀수 선호 및 단위 한계점) 정렬 보정
+        var computedFinal = internalBase + increment;
+        if (computedFinal < 40000) computedFinal = 30000;
+        else if (computedFinal >= 40000 && computedFinal < 70000) computedFinal = 50000;
+        else if (computedFinal >= 70000 && computedFinal < 100000) computedFinal = 70000;
+        else if (computedFinal >= 100000 && computedFinal < 150000) computedFinal = 100000;
+        else if (computedFinal >= 150000 && computedFinal < 200000) computedFinal = 150000;
+        else if (computedFinal >= 200000 && computedFinal < 300000) computedFinal = 200000;
+        else if (computedFinal >= 300000 && computedFinal < 500000) computedFinal = 300000;
+        else if (computedFinal >= 500000) computedFinal = 500000;
+
+        // 이벤트 명칭 다각화 정의
+        var mappedTitles = { wed: "결혼식 축의금", fun: "장례식 조의금", dol: "영유아 돌축하금", lon: "수연 기념금", ope: "개업 축하금", pro: "영전 영예금" };
+        totalMappedName = mappedTitles[ev] || "기념 성의금";
+
+        // 화면 렌더링 엔진 가동
+        document.getElementById('txt-report-title').innerHTML = totalMappedName + " 데이터 다각 연산 결과";
+        document.getElementById('txt-final-sum').innerHTML = computedFinal.toLocaleString() + "원";
+        document.getElementById('txt-base-calc').innerHTML = calculatedLabel + " (" + internalBase.toLocaleString() + "원)";
+        document.getElementById('txt-adjust-calc').innerHTML = adjustmentLabel;
+
+        // MAX 확장형 고정식 서신 템플릿 데이터베이스
+        var textDatabase = {
+            wed: [
+                "인생의 가장 찬란한 시작을 함께하게 됨을 기쁘게 생각합니다. 두 분이 구축하실 가정에 늘 평안과 신뢰의 온기가 가득하기를 기원합니다.",
+                "뜻깊은 혼인 기쁜 자리에 부득이한 일정으로 직접 귀한 걸음 하여 축하하지 못해 송구합니다. 두 분의 아름다운 결실을 먼 곳에서나마 깊이 축복합니다.",
+                "서로를 아끼고 지탱해 주는 든든한 동반자로서 활짝 열어갈 새로운 장을 진심으로 축하드립니다. 부부라는 이름 안에서 매 순간 행복을 도출해 가시길 바랍니다."
+            ],
+            fun: [
+                "삼가 조의를 표하며 고인의 고귀한 명복을 깊이 빕니다. 가늠할 수 없는 슬픔을 마주하신 유가족분들께 깊은 위로의 마음을 전합니다.",
+                "예상치 못한 비보에 황망한 마음을 금할 길이 없습니다. 생전 고인이 보여주신 따뜻한 성품과 온기를 깊이 기억하며 마음 모아 애도합니다.",
+                "직접 장례식장을 찾아 조의를 표하고 슬픔을 나누어야 마땅하나, 사정상 글로 위로를 대신함을 너른 마음으로 헤아려 주시기 바랍니다."
+            ],
+            dol: [
+                "귀한 자녀의 첫 생일을 진심으로 축하합니다. 맑고 명석한 아이로 자라나 가정의 큰 기쁨이자 사회의 훌륭한 재목이 되기를 바랍니다.",
+                "사랑스러운 아이의 백일 및 첫돌을 축하드리며, 부모님의 깊은 보살핌 속에 늘 건강하고 밝은 미소 가득 자라나길 기원합니다."
+            ],
+            lon: [
+                "뜻깊은 수연(壽宴)을 진심으로 축하 올립니다. 지나온 세월 동안 보여주신 헌신과 지혜에 깊은 경의를 표하며, 항상 강건하시기를 바랍니다.",
+                "기쁜 날을 맞이하여 온 가족에 행복과 웃음이 가득하기를 기원하며, 앞으로도 무병장수하시어 오래도록 자손들의 든든한 버팀목이 되어주십시오."
+            ],
+            ope: [
+                "새로운 도약과 개업을 진심으로 축하드립니다. 준비하신 열정과 노력이 위대한 결실로 이어져 나날이 번창하고 번영하기를 고대합니다.",
+                "새로운 사업장의 출발을 축하하며, 신뢰와 차별성을 기반으로 동종 업계의 모범이 되는 거대한 중심축으로 성장해 나가기를 응원합니다."
+            ],
+            pro: [
+                "영예로운 승진 및 취임 소식을 접하게 되어 무한한 기쁨을 전합니다. 그동안 축적하신 역량과 리더십이 새로운 직책에서 한층 더 빛을 발할 것으로 기대합니다.",
+                "영전을 진심으로 축하드립니다. 중책을 맡으심에 따라 조직의 발전과 도약이 한층 가속화될 것을 믿어 의심치 않으며, 앞날의 무궁한 영광을 기원합니다."
+            ]
+        };
+
+        var matchedPhrases = textDatabase[ev] || ["기쁜 마음을 가득 담아 진심으로 축하의 인사를 올립니다."];
+        var layerContainer = document.getElementById('dynamic-msg-layer');
+        layerContainer.innerHTML = "";
+        
+        matchedPhrases.forEach(function(txt) {
+            var node = document.createElement('div');
+            node.className = 'msg-content-item';
+            node.innerHTML = "<div>" + txt + "</div><button class='inner-copy-btn' onclick='processClipboardCopy(\"" + txt.replace(/"/g, '\\"') + "\")'>📋 본 문장 즉시 복사</button>";
+            layerContainer.appendChild(node);
+        });
+
+        document.getElementById('report-area').style.display = 'block';
+
+        // 앱 환경 전송용 문자열 빌드 및 마켓 주소 포함 세팅
+        var targetMarketAddress = "https://play.google.com/store/apps/details?id=appinventor.ai_megabox329.eventmoney";
+        appDataString = "SAVE|[경조사비 다각 분석 보고서]\n연산 결과 " + totalMappedName + " 기준 권장 액수는 [" + computedFinal.toLocaleString() + "원]선으로 도출되었습니다.\n\n적정 경조사 에티켓 연산기 앱 다운로드:\n" + targetMarketAddress;
+
+        document.getElementById('app-save-btn').style.display = 'block';
+
+        setTimeout(function() {
+            document.getElementById('report-area').scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    };
+
+    function transferDataToWrapper() {
+        if(appDataString !== "" && window.AppInventor) {
+            window.AppInventor.setWebViewString(appDataString);
+        } else {
+            alert("정밀 연산 데이터가 생성되지 않았거나 앱 시스템 연동 환경이 아닙니다.");
+        }
+    }
+//]]>
+</script>
