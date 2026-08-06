@@ -1,0 +1,514 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Poppins:wght@500;700&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 기본 테마 완벽 숨김 (돋보기, 뒤로가기, 사이드바 등 모두 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar, .onesignal-slidedown-dialog, #onesignal-slidedown-dialog, .push-notification-dialog { display: none !important; }
+
+/* 2. 하얀색 공백 및 뒷배경 나무 이미지 완벽 제거 (앱 화면 꽉 채우기) */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .date-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #0f172a !important; /* MBTI 테마색으로 화면 전체 도배 */
+    background-image: none !important; /* 기존 블로그 배경 이미지 무효화 */
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* 3. 프리미엄 다크 테마 및 UI 변수 */
+#mbti-engine-wrapper {
+    --bg-main: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.85);
+    --primary: #6366f1;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --text-h: #f8fafc;
+    --text-p: #cbd5e1;
+    background: var(--bg-main);
+    color: var(--text-h);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 30px 15px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.mbti-container {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+}
+
+.mbti-title {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 5px 0;
+}
+
+.mbti-subtitle {
+    text-align: center;
+    color: var(--text-p);
+    font-size: 0.9em;
+    margin-bottom: 30px;
+}
+
+.input-group { margin-bottom: 25px; }
+.input-group label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-p);
+    margin-bottom: 8px;
+}
+.input-group select {
+    width: 100%;
+    padding: 15px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    color: var(--text-h);
+    font-size: 0.95em;
+    outline: none;
+    transition: 0.3s;
+    appearance: none;
+}
+.input-group select optgroup { background: #1e1b4b; color: #f59e0b; font-weight: 700; }
+.input-group select option { background: #0f172a; color: #f8fafc; font-weight: 400; }
+.input-group select:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(99, 102, 241, 0.3); }
+
+.action-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), #4338ca);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.action-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(99, 102, 241, 0.4); }
+
+.reset-btn {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: var(--text-p);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.reset-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+.disclaimer-box {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    font-size: 0.8em;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#mbti-result-area { display: none; animation: fadeIn 0.6s ease; }
+
+.result-card {
+    background: rgba(15, 23, 42, 0.6);
+    border-left: 4px solid var(--secondary);
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 20px;
+}
+.result-card h4 { margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1em; }
+.result-card p { margin: 0; color: var(--text-h); font-size: 0.95em; line-height: 1.7; }
+
+.result-card.warning { border-left-color: #ef4444; }
+.result-card.warning h4 { color: #ef4444; }
+.result-card.magic { border-left-color: var(--accent); }
+.result-card.magic h4 { color: var(--accent); }
+
+.mbti-toast {
+    visibility: hidden;
+    min-width: 280px;
+    background-color: #ef4444;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 15px 25px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    font-size: 0.95em;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+.mbti-toast.show { visibility: visible; animation: popUp 0.4s; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popUp { 0% { bottom: 0; opacity: 0; } 100% { bottom: 40px; opacity: 1; } }
+</style>
+
+<div id="mbti-engine-wrapper">
+    <div class="mbti-container">
+        <h2 class="mbti-title">MBTI SYNERGY MASTER</h2>
+        <div class="mbti-subtitle">상황별 완벽한 대인관계 대처법 및 심리 분석 엔진</div>
+
+        <div id="mbti-input-area">
+            <div class="input-group">
+                <label>1. 나의 성향 (My MBTI)</label>
+                <select id="userMbti">
+                    <option disabled="" selected="" value="">나의 MBTI를 선택하세요</option>
+                    <option value="INTJ">INTJ (용의주도한 전략가)</option>
+                    <option value="INTP">INTP (논리적인 사색가)</option>
+                    <option value="ENTJ">ENTJ (대담한 통솔자)</option>
+                    <option value="ENTP">ENTP (뜨거운 논쟁을 즐기는 변론가)</option>
+                    <option value="INFJ">INFJ (선의의 옹호자)</option>
+                    <option value="INFP">INFP (열정적인 중재자)</option>
+                    <option value="ENFJ">ENFJ (정의로운 사회운동가)</option>
+                    <option value="ENFP">ENFP (재기발랄한 활동가)</option>
+                    <option value="ISTJ">ISTJ (청렴결백한 논리주의자)</option>
+                    <option value="ISFJ">ISFJ (용감한 수호자)</option>
+                    <option value="ESTJ">ESTJ (엄격한 관리자)</option>
+                    <option value="ESFJ">ESFJ (사교적인 외교관)</option>
+                    <option value="ISTP">ISTP (만능 재주꾼)</option>
+                    <option value="ISFP">ISFP (호기심 많은 예술가)</option>
+                    <option value="ESTP">ESTP (모험을 즐기는 사업가)</option>
+                    <option value="ESFP">ESFP (자유로운 영혼의 연예인)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>2. 상대방의 성향 (Target's MBTI)</label>
+                <select id="targetMbti">
+                    <option disabled="" selected="" value="">상대방의 MBTI를 선택하세요</option>
+                    <option value="INTJ">INTJ (용의주도한 전략가)</option>
+                    <option value="INTP">INTP (논리적인 사색가)</option>
+                    <option value="ENTJ">ENTJ (대담한 통솔자)</option>
+                    <option value="ENTP">ENTP (뜨거운 논쟁을 즐기는 변론가)</option>
+                    <option value="INFJ">INFJ (선의의 옹호자)</option>
+                    <option value="INFP">INFP (열정적인 중재자)</option>
+                    <option value="ENFJ">ENFJ (정의로운 사회운동가)</option>
+                    <option value="ENFP">ENFP (재기발랄한 활동가)</option>
+                    <option value="ISTJ">ISTJ (청렴결백한 논리주의자)</option>
+                    <option value="ISFJ">ISFJ (용감한 수호자)</option>
+                    <option value="ESTJ">ESTJ (엄격한 관리자)</option>
+                    <option value="ESFJ">ESFJ (사교적인 외교관)</option>
+                    <option value="ISTP">ISTP (만능 재주꾼)</option>
+                    <option value="ISFP">ISFP (호기심 많은 예술가)</option>
+                    <option value="ESTP">ESTP (모험을 즐기는 사업가)</option>
+                    <option value="ESFP">ESFP (자유로운 영혼의 연예인)</option>
+                    <option value="UNKNOWN">모름 (가장 보편적인 대처법 적용)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>3. 현재 직면한 세부 상황 (Situation)</label>
+                <select id="situation">
+                    <option disabled="" selected="" value="">해결해야 할 상황을 선택하세요 (총 26개 상황)</option>
+                    <optgroup label="💼 비즈니스 및 직장 생활">
+                        <option value="s1">의견 충돌 및 갈등을 부드럽게 해결해야 할 때</option>
+                        <option value="s2">상대방에게 거절당하기 쉬운 어려운 부탁을 할 때</option>
+                        <option value="s3">감정 상하지 않게 객관적인 피드백과 조언을 건넬 때</option>
+                        <option value="s4">실수가 용납되지 않는 중요한 업무를 함께 협업할 때</option>
+                        <option value="s5">촉박한 기한 내에 무리한 업무를 요청해야 할 때</option>
+                        <option value="s6">상대방의 무리한 요구나 제안을 단호하게 거절해야 할 때</option>
+                        <option value="s7">연봉 협상이나 업무 분담에 대해 이의를 제기할 때</option>
+                    </optgroup>
+                    <optgroup label="❤️ 연애 및 로맨스">
+                        <option value="s8">호감 있는 상대에게 부담스럽지 않게 마음을 고백할 때</option>
+                        <option value="s9">연인과 크게 다투고 난 뒤 먼저 화해를 시도할 때</option>
+                        <option value="s10">서로의 사생활이나 개인적인 공간(시간)을 요구할 때</option>
+                        <option value="s11">기념일을 잊어버리거나 큰 실수를 해서 마음을 풀어줘야 할 때</option>
+                        <option value="s12">미래(결혼, 진로 등)에 대한 진지하고 무거운 대화를 나눌 때</option>
+                    </optgroup>
+                    <optgroup label="🤝 친구 및 가족 관계">
+                        <option value="s13">우울하거나 큰 상처를 받은 상대방의 마음을 위로할 때</option>
+                        <option value="s14">가족이나 지인과 금전적인 문제(돈 빌리기 등)를 논의할 때</option>
+                        <option value="s15">원치 않는 조언이나 오지랖을 기분 나쁘지 않게 차단할 때</option>
+                        <option value="s16">여럿이 함께하는 여행이나 모임의 계획을 주도해야 할 때</option>
+                        <option value="s17">어쩔 수 없이 약속을 취소하거나 일정을 변경해야 할 때</option>
+                        <option value="s18">상대방의 서운한 행동에 대해 감정 상하지 않게 불만을 말할 때</option>
+                        <option value="s19">친한 친구의 지속적인 나쁜 습관을 고치도록 충고할 때</option>
+                    </optgroup>
+                    <optgroup label="💬 일상 및 특수 상황">
+                        <option value="s20">처음 만난 사람과 어색한 침묵을 깨고 친밀감을 형성할 때</option>
+                        <option value="s21">상대방의 텐션이 너무 높거나 낮아서 내 기를 맞추기 힘들 때</option>
+                        <option value="s22">서로의 가치관이나 신념이 다름을 쿨하게 인정하고 넘어가야 할 때</option>
+                        <option value="s23">상대방이 나를 오해하고 있는 상황에서 논리적으로 해명할 때</option>
+                        <option value="s24">도저히 말이 안 통하는 억지스러운 주장에 침착하게 대응할 때</option>
+                        <option value="s25">자신감이 떨어진 상대방에게 강력한 동기부여를 줄 때</option>
+                        <option value="s26">나의 명백한 잘못에 대해 변명 없이 진심으로 사과할 때</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <button class="action-btn" onclick="executeAnalysis()">분석 엔진 가동</button>
+            
+            <div class="disclaimer-box">
+                ⚠️ <b>안내 및 주의사항</b><br />
+                본 솔루션은 마이어스-브릭스 유형 지표(MBTI)의 공식적인 심리 검사가 아니며, 원활한 대인 관계 형성을 돕기 위한 참고용 콘텐츠입니다. 전문적인 의학적, 심리적 상담을 대신할 수 없습니다.
+            </div>
+        </div>
+
+        <div id="mbti-result-area">
+            <h3 style="color: var(--secondary); margin-top: 0px; text-align: center;">📊 정밀 관계 분석 리포트</h3>
+            
+            <div class="result-card">
+                <h4>💡 관계 및 상황 요약</h4>
+                <p id="res-summary"></p>
+            </div>
+            
+            <div class="result-card">
+                <h4>✅ 단계별 최적 대처법 (Action Plan)</h4>
+                <p id="res-action"></p>
+            </div>
+            
+            <div class="result-card warning">
+                <h4>🚫 절대 피해야 할 금기 행동 (Trigger Point)</h4>
+                <p id="res-warning"></p>
+            </div>
+
+            <div class="result-card magic">
+                <h4>✨ 상황을 반전시키는 마법의 멘트</h4>
+                <p id="res-magic"></p>
+            </div>
+
+            <button class="action-btn" onclick="copyResult()">📋 분석 결과 전체 복사하기</button>
+            <button class="reset-btn" onclick="resetEngine()">← 새로운 조건으로 다시 분석하기</button>
+        </div>
+    </div>
+</div>
+
+<div class="mbti-toast" id="global-toast"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+const mbtiData = {
+    INTJ: { 
+        trait: "사물과 현상의 본질을 꿰뚫어 보는 통찰력을 지니고 있으며, 감정적인 호소보다는 객관적인 데이터와 논리적 효율성을 최우선으로 생각하는 성향입니다.", 
+        action: "불필요한 서론을 생략하고 핵심과 결론을 먼저 제시하는 것이 좋습니다. 대화를 나눌 때는 수치화된 데이터나 명확한 인과관계를 바탕으로 논리를 전개할 때 상대방의 깊은 신뢰를 얻을 수 있습니다.", 
+        avoid: "충분한 근거나 계획 없이 감정적으로만 접근하거나, 개인적인 사담으로 대화의 목적을 흐리고 시간을 낭비하게 만드는 행동.", 
+        magic: "이 상황을 가장 효율적으로 풀어나갈 수 있는 객관적인 대안을 정리해 보았습니다. 당신의 예리한 시각으로 함께 검토해 주시겠습니까?" 
+    },
+    INTP: { 
+        trait: "복잡한 문제의 원리를 분석하는 것을 즐기며, 지적 호기심이 매우 강하고 논리적인 일관성을 중요하게 생각하는 성향입니다.", 
+        action: "새로운 아이디어를 받아들일 수 있도록 충분히 생각할 시간과 혼자만의 공간을 존중해 주세요. 결론을 재촉하기보다는 다양한 가능성을 함께 열어두고 대화하는 것이 좋습니다.", 
+        avoid: "어떤 결론에 대해 즉각적인 대답을 강요하거나, 논리적 근거 없이 감정적인 압박으로 상황을 모면하려는 행동.", 
+        magic: "이 문제의 근본적인 원인에 대해 깊이 생각해 보았는데, 당신의 분석적인 시각에서는 어떻게 보이는지 의견을 듣고 싶습니다." 
+    },
+    ENTJ: { 
+        trait: "거시적인 안목으로 전체적인 방향을 설정하고, 목표를 달성하기 위해 강력한 추진력과 통솔력을 발휘하는 성향입니다.", 
+        action: "우리가 도달해야 할 최종 목표를 명확히 하고, 현재의 계획이 어떻게 성공적인 결과로 이어지는지 단계별로 설명해 주세요. 자신감 있고 당당한 태도가 도움이 됩니다.", 
+        avoid: "분명한 이유 없이 우유부단하게 결정을 미루거나, 비효율적인 변명을 길게 늘어놓으며 문제 해결을 회피하는 것.", 
+        magic: "우리의 목표를 가장 확실하게 달성하기 위해 이 방향으로 진행하는 것이 최선이라고 생각합니다. 함께 추진해 보시지요." 
+    },
+    ENTP: { 
+        trait: "틀에 얽매이지 않는 자유로운 사고를 바탕으로 끊임없이 새로운 가능성을 탐구하며, 지적인 토론을 즐기는 성향입니다.", 
+        action: "이미 정해진 방식만 고집하기보다는, 흥미롭고 창의적인 아이디어를 자유롭게 나눌 수 있는 분위기를 만들어 주세요. 상대방의 독창적인 생각에 열린 마음으로 호응하는 것이 중요합니다.", 
+        avoid: "딱딱한 규율이나 '원래부터 그래왔다'는 식의 낡은 관습을 강요하여 상대방의 자율성과 흥미를 꺾어버리는 행동.", 
+        magic: "정말 흥미롭고 기발한 시각이네요! 만약 우리가 이 아이디어를 전혀 다른 방식으로 한 번 더 발전시켜 보면 어떨까요?" 
+    },
+    INFJ: { 
+        trait: "보이지 않는 이면의 의미를 파악하는 직관력이 뛰어나며, 타인의 감정에 깊이 공감하면서도 자신만의 확고한 가치관을 지닌 성향입니다.", 
+        action: "가벼운 농담보다는 진정성 있는 태도로 다가가며, 상대방이 중요하게 여기는 개인적인 신념과 가치를 깊이 존중해 주세요. 천천히 신뢰를 쌓아가는 과정이 필요합니다.", 
+        avoid: "표면적이고 가벼운 태도로 상황을 넘기려 하거나, 진심이 담기지 않은 빈말과 거짓말로 깊은 신뢰를 단번에 무너뜨리는 것.", 
+        magic: "당신이 이 일에 얼마나 깊은 진심과 의미를 담고 있는지 충분히 이해하고 있습니다. 제가 어떤 부분에서 힘이 되어드릴 수 있을까요?" 
+    },
+    INFP: { 
+        trait: "내면의 평화와 진정성을 무엇보다 소중하게 생각하며, 타인에 대한 따뜻한 이해심과 풍부한 상상력을 지닌 이상주의적인 성향입니다.", 
+        action: "상대방이 느끼는 감정을 옳고 그름으로 나누지 말고 있는 그대로 부드럽게 수용해 주세요. 현실적인 조언보다는 정서적인 지지와 공감이 먼저 선행되어야 합니다.", 
+        avoid: "상대방의 소중한 신념이나 감정을 차갑게 비판하거나, 지나치게 차가운 현실의 잣대로만 상황을 평가하여 상처를 주는 행동.", 
+        magic: "당신이 지금 느끼고 있는 그 복잡한 감정들, 저라도 충분히 그렇게 느꼈을 것 같습니다. 당신의 마음을 온전히 응원합니다." 
+    },
+    ENFJ: { 
+        trait: "주변 사람들의 긍정적인 성장을 돕는 것을 기쁨으로 여기며, 타고난 공감 능력으로 조화롭고 따뜻한 관계를 이끌어가는 성향입니다.", 
+        action: "상대방이 공동체를 위해 애쓰는 헌신과 배려를 당연하게 여기지 말고, 진심 어린 칭찬과 감사를 적극적으로 표현해 주세요. 긍정적인 피드백이 큰 힘이 됩니다.", 
+        avoid: "나만의 이익을 우선시하는 이기적인 태도를 보이거나, 그룹 전체의 따뜻한 조화와 분위기를 차갑게 깨뜨리는 행동.", 
+        magic: "당신이 항상 우리를 위해 보이지 않는 곳에서 마음 써준 덕분에 모든 일이 정말 잘 풀렸습니다. 진심으로 감사드려요." 
+    },
+    ENFP: { 
+        trait: "특유의 밝은 에너지로 주변을 환하게 만들며, 새로운 사람들과 교류하고 창의적인 아이디어를 실현하는 것에 큰 열정을 느끼는 성향입니다.", 
+        action: "상대방의 톡톡 튀는 아이디어와 긍정적인 에너지에 적극적으로 맞장구쳐 주세요. 활기찬 리액션과 함께 열린 마음으로 대화에 참여하는 것이 좋습니다.", 
+        avoid: "세세하고 숨 막히는 규칙으로 상대방의 자유로운 행동반경을 통제하거나, 지나치게 엄숙한 분위기로 에너지를 억누르는 것.", 
+        magic: "그 아이디어 진짜 최고인데요! 생각만 해도 너무 기대가 됩니다. 우리 당장 함께 구체화해 볼까요?" 
+    },
+    ISTJ: { 
+        trait: "책임감이 매우 강하고 과거의 검증된 경험을 신뢰하며, 정해진 원칙과 사실관계를 철저하게 준수하려는 진중한 성향입니다.", 
+        action: "애매한 추측보다는 정확하고 구체적인 사실관계를 전달해 주세요. 무엇보다 시간 약속이나 정해진 규칙을 철저하게 지켜 신뢰를 주는 것이 가장 중요합니다.", 
+        avoid: "뚜렷한 계획이나 사전 논의 없이 갑자기 일정을 변경하거나, 자신의 역할을 다하지 않는 무책임한 태도를 보이는 행동.", 
+        magic: "말씀해 주신 기존의 원칙과 매뉴얼을 꼼꼼하게 확인했으며, 차질이 생기지 않도록 정확하게 준비해 두었습니다." 
+    },
+    ISFJ: { 
+        trait: "따뜻한 애정으로 주변 사람들을 성실하게 돌보며, 눈에 띄지 않게 세부적인 사항들을 세심하게 챙겨주는 헌신적인 성향입니다.", 
+        action: "상대방이 베풀어주는 조용한 배려와 호의를 당연하게 넘기지 말고, 다정한 말 한마디로 고마움을 꼭 짚어서 표현해 주세요. 안정감을 주는 것이 좋습니다.", 
+        avoid: "상대방의 헌신을 당연한 권리처럼 받아들이거나, 고마움을 전혀 표현하지 않아 상대방이 마음속으로 서운함을 쌓게 만드는 것.", 
+        magic: "항상 제가 미처 챙기지 못하는 부분까지 세심하게 신경 써주셔서 정말 큰 감동을 받았습니다. 늘 고맙습니다." 
+    },
+    ESTJ: { 
+        trait: "현실적이고 체계적인 사고방식을 가지고 있으며, 뚜렷한 기준을 바탕으로 신속하고 정확하게 결과를 도출해 내는 성향입니다.", 
+        action: "모호하게 돌려서 말하기보다는, 구체적인 진행 상황과 명확한 결과물을 직접적으로 제시해 주세요. 체계적인 계획과 효율적인 일 처리를 보여주는 것이 좋습니다.", 
+        avoid: "질문에 대해 애매모호하게 대답하거나, 문제가 발생했을 때 책임 소재를 불분명하게 만들어 상황을 회피하려는 태도.", 
+        magic: "요청하신 업무는 정확히 내일 오전 10시까지 모든 검토를 마치고 깔끔하게 정리하여 보고해 드리겠습니다." 
+    },
+    ESFJ: { 
+        trait: "사람들과의 조화로운 상호작용을 가장 중요하게 생각하며, 타고난 친절함으로 주변의 감정과 필요를 기민하게 파악하는 성향입니다.", 
+        action: "항상 친근하고 다정한 미소로 대화에 임하며, 상대방의 소소한 일상이나 관심사를 기억해 두었다가 먼저 물어봐 주는 등 따뜻한 관심을 보여주세요.", 
+        avoid: "대화 중 차가운 말투로 논리적 우위만 내세우거나, 특정 사람을 무리에서 소외시켜 화합을 깨뜨리는 차가운 행동.", 
+        magic: "오늘 당신이 따뜻하게 챙겨준 덕분에 이곳 분위기가 정말 화기애애하고 좋았습니다. 당신이 없었다면 어쩔 뻔했어요!" 
+    },
+    ISTP: { 
+        trait: "뛰어난 관찰력으로 상황을 객관적으로 분석하며, 복잡한 문제도 가장 실용적이고 효율적인 방식으로 해결해 내는 독립적인 성향입니다.", 
+        action: "불필요한 간섭이나 감정적인 개입을 최소화하고, 상대방이 가진 실용적인 문제 해결 능력을 온전히 신뢰하고 맡겨주세요. 깔끔한 소통이 핵심입니다.", 
+        avoid: "과도한 감정적 공감을 지속적으로 요구하거나, 상대방이 소중하게 생각하는 사적인 영역과 혼자만의 시간을 무리하게 침범하는 것.", 
+        magic: "지금 상황에서 이 문제를 가장 빠르고 실용적으로 풀 수 있는 사람은 당신뿐입니다. 당신의 확실한 해결책을 부탁드려도 될까요?" 
+    },
+    ISFP: { 
+        trait: "온화하고 겸손한 태도로 삶의 매 순간을 있는 그대로 즐길 줄 알며, 자신만의 섬세한 감수성과 예술적 감각을 지닌 성향입니다.", 
+        action: "상대방이 압박감을 느끼지 않도록 부드럽고 편안한 분위기를 먼저 조성해 주세요. 결정을 서두르지 않고, 상대방의 속도에 맞춰 자연스럽게 다가가는 것이 좋습니다.", 
+        avoid: "공격적이고 강압적인 태도로 의견을 밀어붙이거나, 원치 않는 상황 속으로 상대방을 구석으로 몰아넣어 숨 막히게 하는 행동.", 
+        magic: "결코 서두르실 필요 없습니다. 당신이 가장 마음 편안할 때 언제든지 편하게 이야기해 주세요. 저는 여기서 기다리겠습니다." 
+    },
+    ESTP: { 
+        trait: "탁월한 순발력으로 현재의 상황을 빠르게 파악하며, 복잡한 이론보다는 직접적인 경험과 즉각적인 행동을 통해 문제를 해결하는 성향입니다.", 
+        action: "지루하고 긴 설명이나 복잡한 이론은 피하고, 즉각적으로 행동으로 옮길 수 있는 방안이나 현실적인 이득을 바로 제시해 주세요.", 
+        avoid: "실행 없이 지루한 탁상공론만 계속해서 길게 늘어놓거나, 지나치게 꽉 막힌 규율로 상대방의 활기찬 행동반경을 통제하려는 것.", 
+        magic: "복잡하게 앉아서 고민만 할 것 없이, 지금 바로 몸으로 부딪혀서 시원하게 이 상황을 해결해 봅시다!" 
+    },
+    ESFP: { 
+        trait: "타고난 유쾌함과 낙천적인 성격으로 주변 사람들에게 즐거움을 선사하며, 현실의 아름다움과 사람들과의 어울림을 진심으로 사랑하는 성향입니다.", 
+        action: "늘 밝고 유쾌한 에너지로 반응해 주며, 다가올 걱정거리보다는 지금 현재 함께 나누고 있는 즐거운 대화와 긍정적인 면에 집중해 주세요.", 
+        avoid: "지나치게 진지하고 비관적인 주제로 무거운 분위기를 조성하여, 상대방이 가진 본연의 밝은 에너지를 순식간에 빼앗아 버리는 것.", 
+        magic: "당신과 함께 시간을 보내면 어떤 힘든 상황에서도 금세 기분이 좋아지고 활력이 넘쳐요. 늘 유쾌한 에너지 고맙습니다!" 
+    },
+    UNKNOWN: { 
+        trait: "아직 상대방의 구체적인 행동 패턴이나 선호하는 소통 방식을 명확하게 파악하기 어려운 초기 단계의 상황입니다.", 
+        action: "특정 성향을 넘겨짚기보다는 정중하고 예의 바른 태도를 유지하세요. 상대방의 말에 귀 기울이는 경청의 자세를 통해 천천히 실마리를 찾아가는 것이 좋습니다.", 
+        avoid: "단편적인 모습만 보고 섣불리 상대방의 성향을 규정지어 말하거나, 친밀도가 쌓이기 전에 무리하게 선을 넘는 개인적인 질문을 던지는 것.", 
+        magic: "제가 어떤 방식으로 의견을 맞추어 드리는 것이 현재 상황에서 가장 편안하고 도움이 되실지 먼저 여쭤보아도 될까요?" 
+    }
+};
+
+const sitData = {
+    s1: "의견 충돌 및 갈등을 부드럽게 해결해야 할 때",
+    s2: "상대방에게 거절당하기 쉬운 어려운 부탁을 할 때",
+    s3: "감정 상하지 않게 객관적인 피드백과 조언을 건넬 때",
+    s4: "실수가 용납되지 않는 중요한 업무를 함께 협업할 때",
+    s5: "촉박한 기한 내에 무리한 업무를 요청해야 할 때",
+    s6: "상대방의 무리한 요구나 제안을 단호하게 거절해야 할 때",
+    s7: "연봉 협상이나 업무 분담에 대해 이의를 제기할 때",
+    s8: "호감 있는 상대에게 부담스럽지 않게 마음을 고백할 때",
+    s9: "연인과 크게 다투고 난 뒤 먼저 화해를 시도할 때",
+    s10: "서로의 사생활이나 개인적인 공간(시간)을 요구할 때",
+    s11: "기념일을 잊어버리거나 큰 실수를 해서 마음을 풀어줘야 할 때",
+    s12: "미래(결혼, 진로 등)에 대한 진지하고 무거운 대화를 나눌 때",
+    s13: "우울하거나 큰 상처를 받은 상대방의 마음을 위로할 때",
+    s14: "가족이나 지인과 금전적인 문제(돈 빌리기 등)를 논의할 때",
+    s15: "원치 않는 조언이나 오지랖을 기분 나쁘지 않게 차단할 때",
+    s16: "여럿이 함께하는 여행이나 모임의 계획을 주도해야 할 때",
+    s17: "어쩔 수 없이 약속을 취소하거나 일정을 변경해야 할 때",
+    s18: "상대방의 서운한 행동에 대해 감정 상하지 않게 불만을 말할 때",
+    s19: "친한 친구의 지속적인 나쁜 습관을 고치도록 충고할 때",
+    s20: "처음 만난 사람과 어색한 침묵을 깨고 친밀감을 형성할 때",
+    s21: "상대방의 텐션이 너무 높거나 낮아서 내 기를 맞추기 힘들 때",
+    s22: "서로의 가치관이나 신념이 다름을 쿨하게 인정하고 넘어가야 할 때",
+    s23: "상대방이 나를 오해하고 있는 상황에서 논리적으로 해명할 때",
+    s24: "도저히 말이 안 통하는 억지스러운 주장에 침착하게 대응할 때",
+    s25: "자신감이 떨어진 상대방에게 강력한 동기부여를 줄 때",
+    s26: "나의 명백한 잘못에 대해 변명 없이 진심으로 사과할 때"
+};
+
+function showToast(msg, isWarning = false) {
+    const t = document.getElementById("global-toast");
+    t.innerText = msg;
+    t.style.backgroundColor = isWarning ? "#ef4444" : "#10b981";
+    t.className = "mbti-toast show";
+    setTimeout(() => { t.className = t.className.replace("show", ""); }, 3000);
+}
+
+function executeAnalysis() {
+    const um = document.getElementById("userMbti").value;
+    const tm = document.getElementById("targetMbti").value;
+    const sit = document.getElementById("situation").value;
+
+    if(!um || !tm || !sit) {
+        showToast("모든 항목(1, 2, 3번)을 반드시 선택해 주세요!", true);
+        return;
+    }
+    
+    // 수익화 극대화 핵심: URL 파라미터 기반 새로고침
+    const q = `?launch=1&um=${um}&tm=${tm}&sit=${sit}`;
+    window.location.href = window.location.pathname + q;
+}
+
+function runEngineFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if(params.get("launch") === "1") {
+        document.getElementById("mbti-input-area").style.display = "none";
+        document.getElementById("mbti-result-area").style.display = "block";
+
+        const um = params.get("um");
+        const tm = params.get("tm");
+        const sit = params.get("sit");
+
+        const uData = mbtiData[um];
+        const tData = mbtiData[tm];
+        const sData = sitData[sit];
+
+        // 글자 깨짐 방지: 직접 HTML 태그 활용
+        document.getElementById("res-summary").innerHTML = `당신은 <b>[${um}]</b> 성향으로 ${uData.trait} 반면, 상대방은 <b>[${tm}]</b> 성향으로 ${tData.trait} 현재 직면한 [${sData}]`;
+        
+        document.getElementById("res-action").innerHTML = `1. 먼저 당신의 본래 성향인 '${um}의 방식'을 잠시 내려놓고, 철저히 상대방의 주파수에 맞추십시오.<br><br>2. 상대방을 대할 때는 ${tData.action}<br><br>3. 당신의 의도를 전달할 때는 상황의 특성에 맞게 논리 구조를 짜서 접근해야 합니다.`;
+        
+        document.getElementById("res-warning").innerHTML = `상대방(${tm})의 방어기제를 폭발시키고 관계를 돌이킬 수 없게 만드는 치명적인 행동입니다:<br><br><b>🚨 ${tData.avoid}</b><br><br>이 상황에서는 절대로 위와 같은 행동 패턴을 보여서는 안 됩니다.`;
+        
+        document.getElementById("res-magic").innerHTML = `<b>" ${tData.magic} "</b><br><br><span style="font-size:0.85em; color:#94a3b8;">(이 멘트를 자연스럽게 대화의 도입부나 마무리에 사용하여 상대의 경계를 해제하십시오.)</span>`;
+
+        window.scrollTo({top: document.querySelector('.mbti-container').offsetTop - 20, behavior: 'smooth'});
+    }
+}
+
+function copyResult() {
+    const text = `💡 관계 요약:\n${document.getElementById("res-summary").innerText}\n\n✅ 대처법:\n${document.getElementById("res-action").innerText}\n\n🚫 금기 행동:\n${document.getElementById("res-warning").innerText}\n\n✨ 마법의 멘트:\n${document.getElementById("res-magic").innerText}`;
+    
+    const el = document.createElement("textarea");
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    showToast("분석 결과가 복사되었습니다. 카카오톡이나 메모장에 공유해 보세요!", false);
+}
+
+function resetEngine() { window.location.href = window.location.pathname; }
+
+document.addEventListener("DOMContentLoaded", runEngineFromUrl);
+//]]>
+</script>
