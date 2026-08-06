@@ -1,4 +1,4 @@
-<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (수정 및 안정화 완료)-->
+<!--구글 블로거 백색 화면 완벽 무력화 마스터 버전 (저장 기능 완벽 개선)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
@@ -189,13 +189,33 @@
     }
 
     function downloadImage() {
-        var canvas = document.querySelector("#qrcode canvas");
-        if (canvas) {
-            var image = canvas.toDataURL("image/png");
-            var link = document.createElement('a');
-            link.download = 'Premium_QR_Master.png';
-            link.href = image;
-            link.click();
+        var pTab = getParam("tab") || 'text';
+        var pColor = getParam("color") || '#000000';
+        var pText = getParam("text") || "";
+        var pSsid = getParam("ssid") || "";
+        var pPw = getParam("pw") || "";
+        var pVname = getParam("vname") || "";
+        var pVphone = getParam("vphone") || "";
+        
+        var finalString = "";
+        if (pTab === 'text') {
+            finalString = pText;
+        } else if (pTab === 'wifi') {
+            finalString = "WIFI:T:WPA;S:" + pSsid + ";P:" + pPw + ";;";
+        } else if (pTab === 'vcard') {
+            finalString = "BEGIN:VCARD\nVERSION:3.0\nN:" + pVname + "\nTEL:" + pVphone + "\nEND:VCARD";
+        }
+
+        if (finalString !== "") {
+            var cleanColor = pColor.replace('#', '');
+            // 앱 외부의 안전한 환경으로 주소 전달
+            var downloadUrl = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&color=" + cleanColor + "&data=" + encodeURIComponent(finalString);
+            
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString(downloadUrl);
+            } else {
+                alert("정상적인 서비스 이용을 위해 앱 내부 환경을 확인해 주세요.");
+            }
         } else {
             alert("QR코드를 먼저 생성해 주세요.");
         }
@@ -239,7 +259,6 @@
             }
 
             if(finalString !== "") {
-                // 한글 입력 시 충돌을 방지하기 위한 안전 변환 처리
                 var safeString = unescape(encodeURIComponent(finalString));
                 document.getElementById('qrcode').innerHTML = ""; 
                 new QRCode(document.getElementById("qrcode"), {
