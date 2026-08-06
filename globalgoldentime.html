@@ -1,0 +1,312 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@600;700;900&display=swap');
+
+/* 블로그 레이아웃 강제 숨김 및 내비게이션 차단 (최종 업그레이드 버전) */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; background-image: none !important; 
+    width: 100% !important; min-height: 100vh !important;
+}
+
+#time-app {
+    --bg-main: #0f172a; --bg-card: #1e293b; --bg-input: #0b1120;
+    --accent-main: #3b82f6; --accent-glow: #60a5fa; --accent-red: #ef4444; --accent-green: #10b981;
+    --text-white: #f8fafc; --text-muted: #94a3b8; --border: #334155;
+    background-color: var(--bg-main); color: var(--text-white);
+    /* 이모티콘이 깨지지 않도록 전용 폰트 우선 적용 */
+    font-family: 'Noto Sans KR', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; 
+    min-height: 100vh;
+    padding: 24px 16px 80px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+/* 헤더 영역 */
+.app-header { text-align: center; margin-bottom: 24px; padding-top: 10px; }
+.app-header h1 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent-glow); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; line-height: 1.5; }
+
+/* 가이드 및 설명 영역 */
+.info-box { background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.info-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.info-list { margin: 0; padding-left: 20px; font-size: 13px; color: #cbd5e1; line-height: 1.7; }
+.info-list li { margin-bottom: 6px; word-break: keep-all; }
+
+/* 입력 폼 */
+.section-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 12px; border-left: 5px solid var(--accent-main); padding-left: 10px; }
+.card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+.group { margin-bottom: 22px; }
+.group:last-child { margin-bottom: 0; }
+.group label { display: block; font-size: 14px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px; }
+
+.select-box, .input-box { width: 100%; padding: 16px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-size: 15px; font-weight: 500; outline: none; box-sizing: border-box; }
+.select-box { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 20px; }
+
+/* 로직 설명 팁 박스 */
+.tip-box { background-color: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 16px; margin-bottom: 20px; border: 1px solid rgba(59, 130, 246, 0.3); }
+.tip-box p { margin: 0; font-size: 12px; color: #93c5fd; line-height: 1.6; word-break: keep-all; }
+
+/* 버튼 */
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); margin-top: 5px; }
+.btn:active { transform: scale(0.98); }
+.btn-save { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25); margin-top: 15px; display: none; }
+
+/* 결과 대시보드 */
+.report-card { background-color: #0f172a; border-radius: 16px; padding: 24px; margin-top: 28px; border: 1px solid var(--border); border-top: 5px solid var(--accent-glow); display: none; }
+.report-header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.report-header h2 { font-size: 20px; margin: 0; color: #fff; font-weight: 900; }
+.report-header p { font-size: 14px; color: var(--accent-glow); margin: 5px 0 0 0; font-weight: 700; }
+
+.dash-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.dash-row:last-child { border-bottom: none; }
+.dash-title { font-size: 14px; color: #cbd5e1; font-weight: 500; }
+.dash-value { font-size: 16px; font-weight: 800; color: #fff; text-align: right; }
+
+.status-badge { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; margin-left: 8px; vertical-align: middle; }
+.status-good { background-color: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.status-bad { background-color: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+.golden-box { background-color: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 18px; margin: 20px 0 0 0; border: 1px solid rgba(59, 130, 246, 0.3); }
+.golden-title { color: #60a5fa; font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.golden-list { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.golden-list li { font-size: 13px; color: #bfdbfe; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; }
+
+/* 법적 고지 / 방패막 */
+.legal-footer { background-color: #1e293b; border-top: 1px solid #334155; padding: 24px; margin-top: 45px; border-radius: 16px; }
+.legal-title { color: #94a3b8; font-size: 13px; font-weight: 800; margin-bottom: 12px; text-align: center; }
+.legal-text { font-size: 12px; color: #64748b; line-height: 1.7; text-align: justify; word-break: keep-all; margin: 0; }
+</style>
+
+<div id="time-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1>글로벌 <span>통화 골든타임</span> 분석기</h1><div><br /></div>
+            <p>상대방 국가와 시간을 선택하면 시차와 수면 시간을 정밀하게 분석하여 최고의 연락 시간을 추천해 드립니다.</p>
+        </div>
+
+        <div class="info-box">
+            <div class="info-title">💡 이렇게 활용해 보세요!</div>
+            <ul class="info-list">
+                <li><b>글로벌 비즈니스:</b> 해외 바이어나 파트너에게 결례를 범하지 않고 원활하게 업무 연락을 취할 수 있습니다.</li>
+                <li><b>가족 및 친지 안부:</b> 해외에 거주하는 가족(모든 연령대의 자녀, 그리고 부모님까지)과 안부 전화를 나눌 때 상대방의 단잠을 깨우지 않도록 배려할 수 있습니다.</li>
+                <li><b>장거리 연애:</b> 서로의 생활 패턴을 존중하며 가장 편안하게 대화할 수 있는 교집합 시간대를 쉽게 찾을 수 있습니다.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">1. 통화 상대방 정보 및 시간 설정</div>
+        <div class="card">
+            <div class="group">
+                <label>📞 상대방이 있는 국가 (도시)</label>
+                <select class="select-box" id="target-tz">
+                    <option value="">-- 국가 및 지역을 선택해 주십시오 --</option>
+                    <optgroup label="북미 / 남미">
+                        <option value="America/New_York">🇺🇸 미국 (뉴욕, 워싱턴, 동부)</option>
+                        <option value="America/Chicago">🇺🇸 미국 (시카고, 중부)</option>
+                        <option value="America/Los_Angeles">🇺🇸 미국 (LA, 샌프란시스코, 서부)</option>
+                        <option value="America/Toronto">🇨🇦 캐나다 (토론토)</option>
+                        <option value="America/Vancouver">🇨🇦 캐나다 (밴쿠버)</option>
+                        <option value="America/Sao_Paulo">🇧🇷 브라질 (상파울루)</option>
+                    </optgroup>
+                    <optgroup label="아시아 / 오세아니아">
+                        <option value="Asia/Tokyo">🇯🇵 일본 (도쿄)</option>
+                        <option value="Asia/Shanghai">🇨🇳 중국 (베이징, 상하이)</option>
+                        <option value="Asia/Ho_Chi_Minh">🇻🇳 베트남 (하노이, 호치민)</option>
+                        <option value="Asia/Manila">🇵🇭 필리핀 (마닐라)</option>
+                        <option value="Asia/Bangkok">🇹🇭 태국 (방콕)</option>
+                        <option value="Australia/Sydney">🇦🇺 호주 (시드니, 멜버른)</option>
+                        <option value="Australia/Perth">🇦🇺 호주 (퍼스)</option>
+                        <option value="Pacific/Auckland">🇳🇿 뉴질랜드 (오클랜드)</option>
+                    </optgroup>
+                    <optgroup label="유럽 / 중동">
+                        <option value="Europe/London">🇬🇧 영국 (런던)</option>
+                        <option value="Europe/Paris">🇫🇷 프랑스 / 🇩🇪 독일 / 🇪🇸 스페인</option>
+                        <option value="Europe/Rome">🇮🇹 이탈리아 (로마)</option>
+                        <option value="Europe/Moscow">🇷🇺 러시아 (모스크바)</option>
+                        <option value="Asia/Dubai">🇦🇪 아랍에미리트 (두바이)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="group">
+                <label>⏰ 내가 통화하고 싶은 시간 (한국 기준)</label>
+                <input class="input-box" id="my-time" type="time" value="20:00" />
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <p><b>⚙️ 정밀도 안내:</b> 본 분석기는 국제 표준 시간대(IANA Time Zone Database) 로직을 적용하여 구동됩니다. 해당 국가의 <b>서머타임(일광절약시간제, DST) 적용 여부를 자동으로 감지</b>하여 오차 없이 정확한 시간을 산출합니다.</p>
+        </div>
+
+        <button class="btn" onclick="runTimeCalc()">최적의 통화 시간 분석 (무료)</button>
+        <button class="btn btn-save" id="app-save-btn" onclick="sendToApp()">💌 통화 시간 카톡으로 제안하기</button>
+
+        <div class="report-card" id="report-area">
+            <div class="report-header">
+                <h2>🌍 시차 및 매너콜 분석 결과</h2>
+                <p id="res-country-name">국가 정보 대기중</p>
+            </div>
+
+            <div class="dash-row">
+                <span class="dash-title">한국 시간 (나)</span>
+                <span class="dash-value" id="res-my-time">-</span>
+            </div>
+            <div class="dash-row">
+                <span class="dash-title">현지 시간 (상대방)</span>
+                <div style="text-align: right;">
+                    <span class="dash-value" id="res-target-time">-</span>
+                    <br /><span id="res-status-badge"></span>
+                </div>
+            </div>
+
+            <div class="golden-box">
+                <div class="golden-title">✨ 양쪽 모두 활동 중인 골든 타임 (추천)</div>
+                <ul class="golden-list" id="res-golden-list">
+                    <li>추천 시간을 계산 중입니다...</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="legal-footer">
+            <div class="legal-title">[서비스 이용에 대한 면책 고지]</div>
+            <p class="legal-text">
+                본 앱에서 제공하는 현지 시간 및 골든타임 정보는 국제 표준시를 기준으로 연산된 결과입니다. 시스템은 각 국가의 서머타임 변동을 최대한 자동으로 반영하지만, 특정 국가의 갑작스러운 정책 변경이나 지역별 특수한 시차 규정에 따라 일시적인 오차가 발생할 수 있습니다. 제공되는 결과는 상호 원활한 소통을 위한 참고용으로 활용하시기 바라며, 중요도가 높은 비즈니스 연락이나 국제 업무 진행 전에는 반드시 해당 현지 시간을 별도로 확인하시기 바랍니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var appDataString = "";
+
+    function getUrlParams() {
+        var params = {};
+        var search = window.location.search.substring(1);
+        if (search) {
+            var pairs = search.split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                params[pair[0]] = decodeURIComponent(pair[1] || '');
+            }
+        }
+        return params;
+    }
+
+    function runTimeCalc() {
+        var tzSelect = document.getElementById('target-tz');
+        var myTime = document.getElementById('my-time').value;
+
+        if (!tzSelect.value) { alert("상대방이 있는 국가를 선택해 주십시오."); return; }
+        if (!myTime) { alert("통화하고 싶은 시간을 설정해 주십시오."); return; }
+
+        var randomNum = Math.floor(Math.random() * 99999) + 1;
+        var currentUrl = window.location.href.split('?')[0].split('#')[0];
+
+        var newUrl = currentUrl + "?m=1&report_gen=" + randomNum + 
+                     "&tz=" + encodeURIComponent(tzSelect.value) + 
+                     "&nm=" + encodeURIComponent(tzSelect.options[tzSelect.selectedIndex].text) +
+                     "&time=" + encodeURIComponent(myTime);
+
+        window.location.href = newUrl;
+    }
+
+    window.onload = function() {
+        var params = getUrlParams();
+        if (!params['report_gen'] || !params['tz']) return;
+
+        var tzVal = params['tz'];
+        var tzName = params['nm'];
+        var timeVal = params['time'];
+
+        document.getElementById('target-tz').value = tzVal;
+        document.getElementById('my-time').value = timeVal;
+
+        var timeParts = timeVal.split(':');
+        var baseDate = new Date();
+        baseDate.setHours(parseInt(timeParts[0]), parseInt(timeParts[1]), 0, 0);
+
+        var kstFormatter = new Intl.DateTimeFormat('ko-KR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'Asia/Seoul' });
+        var kstDisplay = kstFormatter.format(baseDate);
+
+        var targetFormatter = new Intl.DateTimeFormat('ko-KR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: tzVal });
+        var targetHourFormatter = new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false, timeZone: tzVal });
+        
+        var targetDisplay = targetFormatter.format(baseDate);
+        var targetHour24 = parseInt(targetHourFormatter.format(baseDate));
+
+        var statusBadge = "";
+        var isAwake = (targetHour24 >= 8 && targetHour24 < 22);
+        if (isAwake) {
+            statusBadge = "<span class='status-badge status-good'>통화하기 좋은 시간 🟢</span>";
+        } else {
+            statusBadge = "<span class='status-badge status-bad'>수면/휴식 시간 🔴</span>";
+        }
+
+        var goldenListHtml = "";
+        var tempDate = new Date();
+        tempDate.setMinutes(0, 0, 0);
+        
+        for (var h = 8; h <= 22; h++) {
+            tempDate.setHours(h);
+            var tHour = parseInt(targetHourFormatter.format(tempDate));
+            if (tHour >= 8 && tHour < 22) {
+                var kTimeStr = new Intl.DateTimeFormat('ko-KR', { hour: 'numeric', hour12: true, timeZone: 'Asia/Seoul' }).format(tempDate);
+                var tTimeStr = targetFormatter.format(tempDate);
+                goldenListHtml += "<li>한국 " + kTimeStr + " ↔ 현지 " + tTimeStr + "</li>";
+            }
+        }
+
+        if (goldenListHtml === "") {
+            goldenListHtml = "<li>서로 깨어있는 이상적인 겹침 시간이 부족합니다. 주말을 활용해 보세요.</li>";
+        }
+
+        document.getElementById('res-country-name').innerHTML = tzName;
+        document.getElementById('res-my-time').innerHTML = kstDisplay;
+        document.getElementById('res-target-time').innerHTML = targetDisplay;
+        document.getElementById('res-status-badge').innerHTML = statusBadge;
+        document.getElementById('res-golden-list').innerHTML = goldenListHtml;
+
+        document.getElementById('report-area').style.display = 'block';
+
+        var countryShort = tzName.split(' ')[1];
+        
+        // 카카오톡 공유 시 구글 플레이 스토어 주소가 함께 첨부됩니다.
+        var playStoreLink = "https://play.google.com/store/apps/details?id=appinventor.ai_megabox329.globalgoldentime";
+        appDataString = "SAVE|한국 " + kstDisplay + "에 통화 어때? (" + countryShort + " 시간: " + targetDisplay + ")\n\n" + playStoreLink;
+        
+        document.getElementById('app-save-btn').style.display = 'block';
+
+        setTimeout(function() {
+            document.getElementById('report-area').scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    };
+
+    function sendToApp() {
+        if(appDataString !== "" && window.AppInventor) {
+            window.AppInventor.setWebViewString(appDataString);
+        } else {
+            alert("확인된 리포트가 없거나 앱 환경이 아닙니다.");
+        }
+    }
+//]]>
+</script>
