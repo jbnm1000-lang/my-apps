@@ -1,0 +1,555 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 구글 블로그 요소 완벽 차단 */
+.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0b1120 !important; 
+    width: 100% !important; min-height: 100vh !important;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    overflow-x: hidden;
+}
+
+.app-wrapper { max-width: 650px; margin: 0 auto; padding: 25px 20px 100px 20px; box-sizing: border-box; position: relative; z-index: 10; }
+
+/* 파티클 애니메이션 */
+.particle { position: fixed; bottom: -10px; border-radius: 50%; pointer-events: none; opacity: 0; z-index: 1; animation: floatUp linear infinite; }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.3; }
+    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* 상단 타이틀 영역 */
+.top-header { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; text-align: center; position: relative; z-index: 10; }
+.top-header h1 { font-size: 24px; font-weight: 900; color: #ffffff; margin: 0 0 12px 0; letter-spacing: -0.5px; }
+.top-header h1 span { color: #facc15; }
+.top-header p { font-size: 14.5px; color: #94a3b8; margin: 0; line-height: 1.6; word-break: keep-all; }
+
+/* 법적 책임 고지 */
+.warning-box { background-color: rgba(225, 29, 72, 0.08); border-left: 4px solid #e11d48; padding: 20px; border-radius: 12px; margin-bottom: 30px; position: relative; z-index: 10; }
+.warning-title { font-size: 15px; font-weight: 800; color: #fb7185; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.warning-text { font-size: 13px; color: #fda4af; margin: 0 0 8px 0; line-height: 1.6; word-break: keep-all; }
+.highlight-warn { color: #fff1f2; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+
+/* 전면 광고 유도 버튼 */
+.btn-ad-trigger { width: 100%; padding: 22px; background: linear-gradient(135deg, #facc15 0%, #eab308 100%); color: #422006; font-size: 17px; font-weight: 900; border: none; border-radius: 16px; box-shadow: 0 8px 25px rgba(234, 179, 8, 0.25); cursor: pointer; margin-bottom: 30px; transition: transform 0.2s; letter-spacing: -0.5px; position: relative; z-index: 10; }
+.btn-ad-trigger:active { transform: scale(0.97); }
+
+/* 식재료 추가 폼 */
+.add-form { background: #1e293b; padding: 30px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 40px rgba(0,0,0,0.4); margin-bottom: 35px; position: relative; z-index: 10; }
+.form-title { font-size: 17px; font-weight: 800; color: #ffffff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px; }
+.form-input, .form-select { width: 100%; padding: 16px; background-color: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #ffffff; font-size: 15px; font-family: 'Noto Sans KR', sans-serif; box-sizing: border-box; outline: none; }
+.form-input:focus, .form-select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+.form-select option, .form-select optgroup { background-color: #1e293b; color: #ffffff; }
+
+/* 필수 동의 체크박스 */
+.agreement-section { background-color: #0f172a; padding: 15px; border-radius: 12px; border: 1px dashed #475569; margin-bottom: 20px; }
+.checkbox-label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.checkbox-label input { width: 20px; height: 20px; accent-color: #3b82f6; margin-top: 2px; }
+.checkbox-label span { font-size: 13px; color: #94a3b8; line-height: 1.5; word-break: keep-all; }
+.checkbox-label span strong { color: #fca5a5; }
+
+/* 꿀팁 안내 박스 */
+.help-text-box { background: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; padding: 15px; border-radius: 8px; margin-top: 15px; display: none; }
+.help-text-title { color: #38bdf8; font-size: 14px; font-weight: 800; margin-bottom: 5px; }
+.help-text-desc { color: #bae6fd; font-size: 13.5px; line-height: 1.6; word-break: keep-all; margin: 0; }
+
+/* 버튼 속성 강화 (type="button" 필수) */
+.btn-add { width: 100%; padding: 18px; background: #3b82f6; color: #ffffff; font-size: 16px; font-weight: 800; border: none; border-radius: 14px; cursor: pointer; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
+
+/* 가로 스크롤 탭 메뉴 */
+.category-tabs { display: flex; overflow-x: auto; gap: 10px; margin-bottom: 20px; padding-bottom: 10px; position: relative; z-index: 10; scrollbar-width: none; }
+.category-tabs::-webkit-scrollbar { display: none; }
+.tab-btn { flex-shrink: 0; padding: 12px 20px; background: #1e293b; border: 1px solid #334155; border-radius: 25px; color: #94a3b8; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+.tab-btn.active { background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+
+.fridge-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px; position: relative; z-index: 10; }
+.fridge-list-header h3 { font-size: 18px; font-weight: 900; color: #ffffff; margin: 0; }
+.item-count { background: #334155; color: #f8fafc; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 800; }
+
+#fridge-container { position: relative; z-index: 10; }
+
+/* 식재료 아이템 레이아웃 */
+.food-item { background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 16px; margin-bottom: 15px; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.food-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 15px; }
+.food-left-group { display: flex; align-items: center; gap: 15px; flex: 1; }
+.food-icon { font-size: 28px; background: #0b1120; width: 50px; height: 50px; border-radius: 14px; display: flex; justify-content: center; align-items: center; border: 1px solid #334155; }
+.food-info h4 { margin: 0 0 4px 0; font-size: 17px; font-weight: 800; color: #ffffff; }
+.food-details { font-size: 13px; color: #94a3b8; margin: 0; }
+.food-right-group { display: flex; align-items: center; gap: 10px; }
+.d-day-badge { padding: 10px 12px; border-radius: 10px; font-weight: 900; font-size: 15px; text-align: center; min-width: 65px; letter-spacing: 0.5px; }
+.food-tip-container { background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 16px; position: relative; }
+.food-tip-container::before { content: '💡 수명 연장 보관 꿀팁'; display: block; font-size: 13px; font-weight: 800; color: #10b981; margin-bottom: 8px; }
+.food-tip { font-size: 13.5px; color: #d1fae5; margin: 0; line-height: 1.7; word-break: keep-all; }
+.tip-danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+.tip-danger::before { content: '🚨 강력 폐기 권고 (안전 주의)'; color: #ef4444; }
+.tip-danger .food-tip { color: #fca5a5; font-weight: 700; }
+
+.status-safe { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+.status-warn { background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(253, 224, 71, 0.3); }
+.status-danger { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(252, 165, 165, 0.3); }
+.btn-delete { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; width: 40px; height: 40px; border-radius: 10px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; border: none; }
+.btn-delete:hover { background: #ef4444; color: white; border-color: #ef4444; }
+.empty-state { text-align: center; padding: 50px 20px; color: #64748b; font-size: 15px; background: #0f172a; border-radius: 16px; border: 2px dashed #334155; line-height: 1.6; }
+
+/* 커스텀 팝업 */
+.custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(5px); }
+.custom-modal-box { background: #1e293b; width: 85%; max-width: 400px; padding: 30px 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.custom-modal-box h4 { margin: 0 0 15px 0; font-size: 18px; color: #ffffff; font-weight: 800; }
+.custom-modal-box p { margin: 0 0 25px 0; font-size: 14px; color: #cbd5e1; line-height: 1.6; word-break: keep-all; white-space: pre-wrap; }
+.custom-modal-btn { background: #3b82f6; color: white; border: none; padding: 14px 30px; font-size: 15px; font-weight: 800; border-radius: 10px; cursor: pointer; width: 100%; }
+</style>
+
+<div class="app-wrapper">
+    <div class="top-header">
+        <h1>버리는 식재료 <span>제로(ZERO)</span>&nbsp;스마트 관리기</h1>
+        <p>물가 비싼 요즘, 1인 가구의 소중한 식비를 완벽하게 지켜드립니다.<br />스마트하게 기록하고 알뜰하게 소비해 보세요.</p>
+    </div>
+
+    <div class="warning-box">
+        <div class="warning-title">🚨 올바른 식재료 관리를 위한 필수 법적 안내</div>
+        <p class="warning-text">1. 본 앱에서 제공하는 보관 기한은 식약처 기준을 참고한 <span class="highlight-warn">단순 권장 데이터</span>입니다. 냉장고 온도나 구입 당시의 신선도에 따라 실제 부패 속도는 크게 다를 수 있습니다.</p>
+        <p class="warning-text">2. 앱에 기록된 기한이 남아 있더라도, 조리 전에는 <span class="highlight-warn">반드시 사용자가 직접 냄새와 상태를 꼼꼼히 점검</span>해야 합니다.</p>
+        <p class="warning-text">3. 식재료 섭취 후 발생하는 모든 건강상, 법적 문제에 대해 <span class="highlight-warn">본 앱과 개발자는 어떠한 책임도 지지 않습니다.</span></p>
+    </div>
+
+    <button class="btn-ad-trigger" onclick="reloadForCheck()" type="button">🔍 오늘 유통기한이 끝나는 위험한 식재료 확인하기</button>
+
+    <div class="add-form">
+        <div class="form-title">새로운 식재료 스마트 보관하기</div>
+        <div class="input-group">
+            <label>🛒 어떤 식재료를 구매하셨나요?</label>
+            <select class="form-select" id="food-preset" onchange="applyPreset()">
+                <!--JS에서 자동 생성-->
+            </select>
+        </div>
+        <div class="input-group">
+            <label>📝 식재료 이름 (직접 입력 가능)</label>
+            <input class="form-input" id="food-name" placeholder="예: 어제 먹다 남은 김치찌개" type="text" />
+        </div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <label>⏰ 언제까지 먹어야 하나요?</label>
+            <input class="form-input" id="food-date" type="date" />
+            <div class="help-text-box" id="help-text-box">
+                <div class="help-text-title">전문가의 보관 꿀팁</div>
+                <p class="help-text-desc" id="food-tip-text"></p>
+            </div>
+        </div>
+        <div class="agreement-section">
+            <label class="checkbox-label">
+                <input id="liability-agree" type="checkbox" />
+                <span><strong>(필수 동의)</strong> 본 앱의 데이터는 단순 참고용이며, 섭취 후 발생하는 모든 문제에 대해 앱 제공자에게 법적 책임이 없음에 동의합니다.</span>
+            </label>
+        </div>
+        <!--타입(type)을 명시하여 폼 전송 에러 원천 차단-->
+        <button class="btn-add" onclick="addFoodItem()" type="button">+ 나의 냉장고에 안전하게 기록하기</button>
+    </div>
+
+    <div class="category-tabs" id="category-tabs">
+        <button class="tab-btn active" onclick="filterCategory('전체', this)" type="button">🎁 전체</button>
+        <button class="tab-btn" onclick="filterCategory('채소/과일', this)" type="button">🥬 채소/과일</button>
+        <button class="tab-btn" onclick="filterCategory('육류/해산물', this)" type="button">🥩 육류/해산물</button>
+        <button class="tab-btn" onclick="filterCategory('유제품/가공', this)" type="button">🥛 유제품/가공</button>
+        <button class="tab-btn" onclick="filterCategory('기타', this)" type="button">🛒 기타</button>
+    </div>
+
+    <div class="fridge-list-header">
+        <h3 id="current-category-title">나의 냉장고 (전체)</h3>
+        <span class="item-count" id="total-count">총 0개</span>
+    </div>
+
+    <div id="fridge-container">
+        <!--리스트 생성 영역-->
+    </div>
+</div>
+
+<!--커스텀 팝업-->
+<div class="custom-modal-overlay" id="custom-modal">
+    <div class="custom-modal-box">
+        <h4 id="modal-title">알림</h4>
+        <p id="modal-desc">내용</p>
+        <button class="custom-modal-btn" onclick="closeModal()" type="button">확인 및 점검하기</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var premiumFoodDB = {
+        "채소/과일": [
+            { name: "대파", days: 7, tip: "대파는 수분에 매우 취약합니다. 뿌리와 시든 잎을 다듬은 후 씻지 않고 큼직하게 썰어 밀폐용기에 키친타월을 깔고 냉장 보관하세요." },
+            { name: "양파", days: 30, tip: "껍질을 벗기지 않은 상태로 양파망에 하나씩 매듭을 지어 통풍이 잘되는 서늘한 그늘에 매달아 두시는 것이 완벽한 보관법입니다." },
+            { name: "마늘", days: 10, tip: "통마늘은 신문지에 싸서 서늘한 곳에, 다진 마늘은 실리콘 얼음틀에 넣어 냉동실에 얼려두시면 매번 똑 끊어 쓰기 편합니다." },
+            { name: "양배추", days: 14, tip: "단단한 심지 부분을 둥글게 도려낸 후, 빈자리에 물에 적신 키친타월을 채워 넣고 랩으로 싸서 냉장 보관하세요." },
+            { name: "상추 및 깻잎", days: 5, tip: "씻지 않은 상태로 키친타월에 감싸 지퍼백에 넣은 뒤, 줄기 부분이 아래를 향하도록 냉장고 문 쪽 랙에 세워서 보관하세요." },
+            { name: "무", days: 14, tip: "위에 달린 잎(무청)을 즉시 잘라내야 바람이 들지 않습니다. 흙이 묻은 채로 신문지에 말아 서늘한 곳에 두세요." },
+            { name: "당근", days: 14, tip: "씻지 말고 랩이나 키친타월로 개별 포장하여 산소를 차단한 후 세워서 보관해 주세요." },
+            { name: "감자", days: 30, tip: "냉장 보관은 피하고, 검은 비닐봉지에 담아 서늘한 실온에 두세요. 사과를 한 개 같이 넣으면 싹이 트는 것을 막아줍니다." },
+            { name: "고구마", days: 30, tip: "추위에 매우 약해 냉장고에 넣으면 썩습니다. 신문지 위에서 습기를 말린 뒤 구멍 뚫린 상자에 넣어 실내에 보관하세요." },
+            { name: "버섯류 (팽이, 새송이)", days: 7, tip: "물이 닿으면 금방 무릅니다. 요리 직전에 먼지만 털어내시고, 습기가 차지 않게 키친타월로 감싸 지퍼백에 보관하세요." },
+            { name: "사과", days: 21, tip: "사과에서 나오는 에틸렌 가스가 다른 과일을 썩게 만듭니다. 반드시 비닐이나 랩으로 꼼꼼하게 개별 포장해 주세요." },
+            { name: "바나나", days: 5, tip: "꼭지 부분을 랩으로 감싸두면 숙성이 느려집니다. 바닥에 닿지 않도록 옷걸이 등에 매달아 실온에 보관하세요." }
+        ],
+        "육류/해산물": [
+            { name: "돼지고기 / 소고기", days: 4, tip: "표면에 식용유를 얇게 바른 뒤 랩으로 여러 번 밀착해서 감싸주세요. 며칠 내로 안 드실 거라면 무조건 소분하여 냉동해야 합니다." },
+            { name: "닭고기", days: 2, tip: "닭은 다른 고기보다 수분이 많아 빨리 상합니다. 핏물을 씻고 물기를 닦은 후, 즉시 조리하거나 바로 냉동 보관해야 안전합니다." },
+            { name: "생선류", days: 2, tip: "내장과 핏물을 깨끗이 씻고, 굵은소금을 살짝 뿌려 랩으로 단단하게 싼 뒤 지퍼백에 밀봉하여 냉동 보관하는 것이 좋습니다." }
+        ],
+        "유제품/가공": [
+            { name: "우유", days: 7, tip: "냉장고 문 쪽 랙은 온도 변화가 심해 빨리 상합니다. 반드시 냉장고 안쪽 가장 깊숙하고 시원한 칸에 보관하세요." },
+            { name: "계란", days: 30, tip: "둥근 쪽에 숨구멍이 있으니 뾰족한 부분이 아래를 향하도록 세워주세요. 천연 보호막이 파괴되니 물로 절대 씻지 마세요." },
+            { name: "두부", days: 7, tip: "밀폐용기에 두부가 푹 잠길 만큼 물을 붓고 소금을 한 꼬집 풀어 보관하세요. 이 물을 매일 갈아주시면 훨씬 오래갑니다." },
+            { name: "치즈", days: 30, tip: "개봉 후 공기와 닿으면 곰팡이가 생깁니다. 랩으로 틈이 없도록 꼼꼼하게 감싸 지퍼백에 넣어 최대한 공기를 빼주세요." },
+            { name: "가공육 (스팸, 소시지)", days: 3, tip: "통조림 캔을 딴 후 남은 것을 캔에 그대로 두면 금속이 산화되어 건강에 치명적입니다. 반드시 유리나 플라스틱 밀폐용기에 옮기세요." }
+        ]
+    };
+
+    var fridgeItems = [];
+    var currentCategory = "전체";
+    var selectedCategoryBuffer = "기타"; 
+
+    function createParticles() {
+        var colors = ['#facc15', '#00f0ff', '#ffffff']; 
+        for (var i = 0; i < 25; i++) {
+            var particle = document.createElement('div');
+            particle.className = 'particle';
+            var size = Math.random() * 4 + 2; 
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
+            particle.style.animationDelay = (Math.random() * 15) + 's';
+            document.body.appendChild(particle);
+        }
+    }
+
+    function showCustomModal(title, desc) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('custom-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('custom-modal').style.display = 'none';
+    }
+
+    function getQueryParam(name) {
+        var url = window.location.search.substring(1);
+        var vars = url.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === name) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    window.onload = function() {
+        createParticles();
+
+        if (getQueryParam('check') === '1') {
+            window.history.replaceState({}, document.title, window.location.pathname);
+            showCustomModal("식재료 점검 완료", "냉장고 점검 결과가 화면에 정리되었습니다.\n\nD-Day가 임박했거나 붉은색으로 표시된 위험 식재료를 오늘 최우선으로 요리하여 식비를 아껴보세요!");
+        }
+        
+        var selectEl = document.getElementById('food-preset');
+        var optionsHtml = '<option value="">직접 입력하기 (선택 시 맞춤 카테고리 자동 지정)</option>';
+        for (var category in premiumFoodDB) {
+            if (premiumFoodDB.hasOwnProperty(category)) {
+                optionsHtml += '<optgroup label="' + category + '">';
+                var foods = premiumFoodDB[category];
+                for (var i = 0; i < foods.length; i++) {
+                    optionsHtml += '<option value="' + foods[i].name + '">' + foods[i].name + ' (평균 ' + foods[i].days + '일 보관)</option>';
+                }
+                optionsHtml += '</optgroup>';
+            }
+        }
+        selectEl.innerHTML = optionsHtml;
+
+        loadItems();
+        renderList();
+    };
+
+    function applyPreset() {
+        var selectedName = document.getElementById('food-preset').value;
+        var nameInput = document.getElementById('food-name');
+        var dateInput = document.getElementById('food-date');
+        var tipBox = document.getElementById('help-text-box');
+        var tipText = document.getElementById('food-tip-text');
+
+        if (!selectedName) {
+            nameInput.value = "";
+            dateInput.value = "";
+            selectedCategoryBuffer = "기타";
+            tipBox.style.display = "none";
+            return;
+        }
+
+        var foundFood = null;
+        for (var catName in premiumFoodDB) {
+            if (premiumFoodDB.hasOwnProperty(catName)) {
+                var foods = premiumFoodDB[catName];
+                for (var j = 0; j < foods.length; j++) {
+                    if (foods[j].name === selectedName) {
+                        foundFood = foods[j];
+                        selectedCategoryBuffer = catName;
+                        break;
+                    }
+                }
+            }
+            if (foundFood) break;
+        }
+
+        if (foundFood) {
+            nameInput.value = foundFood.name;
+            var today = new Date();
+            today.setDate(today.getDate() + foundFood.days);
+            
+            var dd = today.getDate();
+            if (dd < 10) { dd = '0' + dd; }
+            var mm = today.getMonth() + 1;
+            if (mm < 10) { mm = '0' + mm; }
+            var yyyy = today.getFullYear();
+            
+            dateInput.value = yyyy + '-' + mm + '-' + dd;
+            
+            tipText.innerText = foundFood.tip;
+            tipBox.style.display = "block";
+        }
+    }
+
+    function reloadForCheck() {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseUrl + "?check=1";
+    }
+
+    // 강력한 3중 백업 저장 시스템 (Blogger & App Inventor 웹뷰 완벽 호환)
+    function saveItems() {
+        var dataStr = JSON.stringify(fridgeItems);
+        try { localStorage.setItem('premiumFridgeData3', dataStr); } catch(e) {}
+        try { document.cookie = "premiumFridgeData3=" + encodeURIComponent(dataStr) + "; path=/; max-age=31536000;"; } catch(e) {}
+        try { window.name = "FRIDGE_" + dataStr; } catch(e) {}
+    }
+
+    function loadItems() {
+        var stored = null;
+        try { stored = localStorage.getItem('premiumFridgeData3'); } catch(e) {}
+        
+        if (!stored) {
+            try {
+                var cookies = document.cookie.split(';');
+                for(var i=0; i<cookies.length; i++) {
+                    var c = cookies[i].replace(/^\s+/, '');
+                    if (c.indexOf("premiumFridgeData3=") === 0) {
+                        stored = decodeURIComponent(c.substring(19));
+                        break;
+                    }
+                }
+            } catch(e) {}
+        }
+        
+        if (!stored) {
+            try {
+                if (window.name && window.name.indexOf("FRIDGE_") === 0) {
+                    stored = window.name.substring(7);
+                }
+            } catch(e) {}
+        }
+
+        if (stored) {
+            try {
+                var parsed = JSON.parse(stored);
+                if (parsed && typeof parsed.length !== 'undefined') {
+                    fridgeItems = parsed;
+                } else {
+                    fridgeItems = [];
+                }
+                for (var j = 0; j < fridgeItems.length; j++) {
+                    if (!fridgeItems[j].category) {
+                        fridgeItems[j].category = "기타";
+                    }
+                }
+            } catch(e) {
+                fridgeItems = [];
+            }
+        }
+    }
+
+    // 전체 try-catch 적용으로 에러 발생 시 앱 마비 방지
+    function addFoodItem() {
+        try {
+            var name = document.getElementById('food-name').value;
+            if(name) name = name.replace(/^\s+|\s+$/g, '');
+            var expiryDate = document.getElementById('food-date').value;
+            var tipBox = document.getElementById('help-text-box');
+            var tip = document.getElementById('food-tip-text').innerText;
+            var isAgreed = document.getElementById('liability-agree').checked;
+
+            if (!isAgreed) {
+                showCustomModal("동의 필요", "안전한 앱 사용을 위해 하단의 [필수 면책 동의] 체크박스에 먼저 체크해 주시기 바랍니다.");
+                return;
+            }
+
+            if (!name || !expiryDate) {
+                showCustomModal("입력 오류", "어떤 식재료인지 이름과 기한(날짜)을 모두 정확히 입력해 주세요.");
+                return;
+            }
+
+            var today = new Date();
+            var dd = today.getDate();
+            if (dd < 10) { dd = '0' + dd; }
+            var mm = today.getMonth() + 1;
+            if (mm < 10) { mm = '0' + mm; }
+            var yyyy = today.getFullYear();
+
+            var newItem = {
+                id: new Date().getTime(),
+                name: name,
+                date: expiryDate,
+                category: selectedCategoryBuffer,
+                tip: tipBox.style.display !== "none" ? tip : "표시된 날짜 이전이라도, 드시기 전 냄새와 상태를 직접 꼭 점검해 주세요.",
+                addedAt: yyyy + '-' + mm + '-' + dd
+            };
+
+            // 배열 손상 시 자동 복구
+            if (!fridgeItems || typeof fridgeItems.push === 'undefined') {
+                fridgeItems = [];
+            }
+
+            fridgeItems.push(newItem);
+            saveItems();
+            renderList();
+            
+            document.getElementById('food-name').value = "";
+            document.getElementById('food-date').value = "";
+            document.getElementById('food-preset').value = "";
+            document.getElementById('liability-agree').checked = false; 
+            selectedCategoryBuffer = "기타";
+            tipBox.style.display = "none";
+            
+            showCustomModal("기록 완료", "나의 냉장고에 안전하게 기록되었습니다.\n이 식재료를 잊지 않고 소비하시면 식비를 크게 절약하실 수 있습니다.");
+        } catch (error) {
+            // 버튼이 먹통이 되지 않고 에러 원인을 즉시 화면에 띄워줍니다.
+            alert("시스템 보호 알림: " + error.message + "\n앱을 완전히 종료 후 다시 실행해 주시면 정상 복구됩니다.");
+        }
+    }
+
+    function deleteItem(id) {
+        if(confirm("이 식재료를 정리하셨나요? 리스트에서 완전히 삭제합니다.")) {
+            var newItems = [];
+            for (var i = 0; i < fridgeItems.length; i++) {
+                if (fridgeItems[i].id !== id) {
+                    newItems.push(fridgeItems[i]);
+                }
+            }
+            fridgeItems = newItems;
+            saveItems();
+            renderList();
+        }
+    }
+
+    function calculateDday(targetDate) {
+        var today = new Date();
+        today.setHours(0,0,0,0);
+        var target = new Date(targetDate);
+        target.setHours(0,0,0,0);
+        return Math.ceil((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    function filterCategory(categoryName, btnElement) {
+        currentCategory = categoryName;
+        var tabs = document.querySelectorAll('.tab-btn');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
+        }
+        btnElement.classList.add('active');
+        document.getElementById('current-category-title').innerText = '나의 냉장고 (' + categoryName + ')';
+        renderList();
+    }
+
+    function getCategoryEmoji(cat) {
+        if(cat === "채소/과일") return "🥬";
+        if(cat === "육류/해산물") return "🥩";
+        if(cat === "유제품/가공") return "🥛";
+        return "🛒";
+    }
+
+    function renderList() {
+        var container = document.getElementById('fridge-container');
+        var countLabel = document.getElementById('total-count');
+        
+        fridgeItems.sort(function(a, b) {
+            return new Date(a.date) - new Date(b.date);
+        });
+
+        var filteredItems = [];
+        if (currentCategory === "전체") {
+            filteredItems = fridgeItems;
+        } else {
+            for (var k = 0; k < fridgeItems.length; k++) {
+                if (fridgeItems[k].category === currentCategory) {
+                    filteredItems.push(fridgeItems[k]);
+                }
+            }
+        }
+
+        countLabel.innerText = "총 " + filteredItems.length + "개 보관 중";
+
+        if (filteredItems.length === 0) {
+            container.innerHTML = "<div class='empty-state'>현재 해당 카테고리가 비어있습니다.<br>새로운 식재료를 기록해 보세요!</div>";
+            return;
+        }
+
+        var html = "";
+        for (var m = 0; m < filteredItems.length; m++) {
+            var item = filteredItems[m];
+            var dDay = calculateDday(item.date);
+            var badgeClass = "status-safe";
+            var badgeText = "D-" + dDay;
+            var tipHtml = '<div class="food-tip-container"><p class="food-tip">' + item.tip + '</p></div>';
+
+            if (dDay < 0) {
+                badgeClass = "status-danger";
+                badgeText = "기한초과";
+                tipHtml = '<div class="food-tip-container tip-danger"><p class="food-tip">설정된 보관 기한이 지났습니다. 눈에 보이지 않는 세균 번식 및 식중독의 위험이 매우 높으므로, 아깝더라도 안전을 위해 즉시 폐기하시는 것을 강력히 권장합니다.</p></div>';
+            } else if (dDay === 0) {
+                badgeClass = "status-danger";
+                badgeText = "D-Day";
+            } else if (dDay <= 3) {
+                badgeClass = "status-warn";
+            }
+
+            var iconEmoji = getCategoryEmoji(item.category);
+
+            html += '<div class="food-item">' +
+                        '<div class="food-item-header">' +
+                            '<div class="food-left-group">' +
+                                '<div class="food-icon">' + iconEmoji + '</div>' +
+                                '<div class="food-info">' +
+                                    '<h4>' + item.name + '</h4>' +
+                                    '<p class="food-details">기한: ' + item.date + ' 까지</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="food-right-group">' +
+                                '<div class="d-day-badge ' + badgeClass + '">' + badgeText + '</div>' +
+                                '<button type="button" class="btn-delete" onclick="deleteItem(' + item.id + ')">✖</button>' +
+                            '</div>' +
+                        '</div>' +
+                        tipHtml +
+                    '</div>';
+        }
+
+        container.innerHTML = html;
+    }
+//]]>
+</script>
