@@ -1,0 +1,414 @@
+<style>
+  .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+  
+    /* 블로그 충돌 방지용 독립 CSS */
+    .calc-wrapper {
+        box-sizing: border-box;
+        background-color: #121212;
+        color: #f5f5f7;
+        padding: 15px;
+        line-height: 1.6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        border-radius: 20px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .calc-container {
+        background-color: #1e1e1e;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid #333;
+    }
+
+    .calc-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .calc-header h1 {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(90deg, #00C6FF, #0072FF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .calc-header p {
+        font-size: 14px;
+        color: #a1a1a6;
+    }
+
+    .calc-notice {
+        background-color: #2c2c2e;
+        border-left: 4px solid #ff9f0a;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .calc-notice h3 {
+        font-size: 14px;
+        color: #ff9f0a;
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+
+    .calc-notice p {
+        font-size: 13px;
+        color: #d1d1d6;
+        margin: 0;
+    }
+
+    .calc-group {
+        margin-bottom: 20px;
+    }
+
+    .calc-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #e5e5ea;
+    }
+
+    .calc-group select, .calc-group input {
+        width: 100%;
+        padding: 15px;
+        background-color: #2c2c2e;
+        border: 1px solid #3a3a3c;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .calc-group select:focus, .calc-group input:focus {
+        outline: none;
+        border-color: #0072FF;
+        box-shadow: 0 0 0 2px rgba(0, 114, 255, 0.3);
+    }
+
+    .calc-btn-submit {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(135deg, #0072FF 0%, #00C6FF 100%);
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+        margin-top: 10px;
+        transition: transform 0.2s;
+    }
+
+    .calc-btn-submit:active {
+        transform: scale(0.98);
+    }
+
+    .calc-btn-copy {
+        width: 100%;
+        padding: 15px;
+        background-color: #FEE500;
+        color: #000000;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .calc-result {
+        margin-top: 30px;
+        background-color: #2c2c2e;
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid #0072FF;
+        display: none;
+    }
+
+    .calc-result-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #00C6FF;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .calc-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #3a3a3c;
+        font-size: 15px;
+    }
+
+    .calc-item:last-child {
+        border-bottom: none;
+    }
+
+    .c-red { color: #ff375f; font-weight: bold; }
+    .c-blue { color: #32ade6; font-weight: bold; }
+
+    /* 풍부한 가이드 섹션 (앱 분량 확보용) */
+    .calc-guide {
+        margin-top: 40px;
+        padding-top: 25px;
+        border-top: 1px solid #3a3a3c;
+    }
+
+    .calc-guide h2 {
+        font-size: 18px;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .calc-card {
+        background-color: #2c2c2e;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .calc-card h4 {
+        font-size: 15px;
+        color: #00C6FF;
+        margin-bottom: 8px;
+        margin-top: 0;
+    }
+
+    .calc-card p {
+        font-size: 13px;
+        color: #a1a1a6;
+        margin: 0;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="calc-wrapper">
+    <div class="calc-container">
+        <div class="calc-header">
+            <h1>모임 정산 &amp; 복불복&nbsp;<span face="pplxSerif, pplxSerif, ui-serif, Georgia, Cambria, AppleMyungjo, Batang, &quot;Hiragino Mincho ProN&quot;, &quot;Yu Mincho&quot;, &quot;Songti SC&quot;, SimSun, &quot;Songti TC&quot;, PMingLiU, &quot;Songti TC&quot;, MingLiU_HKSCS, &quot;Songti TC&quot;, PMingLiU, serif" style="background-color: color(srgb 0.980392 0.972549 0.960784); color: #27251e; font-size: 16px;">Easy Roulette</span></h1>
+            <p>복잡하고 머리아픈 모임 비용, 이제 1초만에 끝내세요!</p>
+        </div>
+
+        <div class="calc-notice">
+            <h3>💡 잠깐! 건전한 이용을 위한 안내</h3>
+            <p>이 서비스는 친구들이나 직장 동료들과 밥값을 나눌 때 웃으면서 재미있게 쓰시라고 만든 '정산 도구'입니다. 모임 분위기를 띄우는 용도로만 사용해 주시고, 진짜 도박이나 사행성 목적으로는 절대! 사용하시면 안 됩니다. 약속!</p>
+        </div>
+
+        <div class="calc-group">
+            <label>오늘은 어떻게 나눠 낼까요? (8가지 맞춤 모드)</label>
+            <select id="calcMode">
+                <option value="basic">1. 평화주의자: 깔끔한 1/N 정산 (잔돈은 주최자가)</option>
+                <option value="one">2. 강심장 전용: 심장이 쫄깃한 '1명 독박 룰렛'</option>
+                <option value="random">3. 묻고 더블로 가: 랜덤 비율 쪼개기 (운세 테스트)</option>
+                <option value="penalty">4. 시간은 금: 지각자 1만원 먼저 내기 (나머지 N빵)</option>
+                <option value="boss">5. 지갑 전사: 멋진 선배님/팀장님 50% 쿨결제</option>
+                <option value="lucky">6. 로또 급 행운: 딱 1명만 전액 면제 (나머지 뿜빠이)</option>
+                <option value="couple">7. 알콩달콩: 커플 모임 더블데이트 (6:4 비율)</option>
+                <option value="ladder">8. 아수라장: 완전 랜덤 사다리 (금액 내맘대로 분배)</option>
+            </select>
+        </div>
+
+        <div class="calc-group">
+            <label>오늘 긁은 총 결제 금액 (원)</label>
+            <input id="calcAmount" placeholder="예: 삼겹살 회식 85000" type="number" />
+        </div>
+
+        <div class="calc-group">
+            <label>오늘 모인 인원 (명)</label>
+            <input id="calcPeople" max="50" placeholder="예: 우리팀 5" type="number" />
+        </div>
+
+        <button class="calc-btn-submit" onclick="runCalcReload()">결과 확인하기 (두구두구 🎲)</button>
+
+        <div class="calc-result" id="calcResultBox"></div>
+
+        <div class="calc-guide">
+            <h2>앱 100% 활용하는 상황별 추천 꿀팁</h2>
+            
+            <div class="calc-card">
+                <h4>[모드 1] 평화주의자를 위한 깔끔한 1/N</h4>
+                <p>가장 기본적이고 탈 없는 방법이죠. 10원 단위로 딱 안 떨어져서 이체하기 귀찮을 때 있잖아요? 이 모드는 100원 단위로 딱 맞춰주고, 남는 귀여운 잔돈은 모임을 주최한 총무님이나 방장님이 쿨하게 부담하도록 계산해 줍니다. 10원짜리 이체하는 번거로움은 이제 안녕!</p>
+            </div>
+
+            <div class="calc-card">
+                <h4>[모드 2 &amp; 6] 아드레날린 폭발! 몰아주기와 한 명 면제</h4>
+                <p>2차 맥주 내기나 아이스크림 쏘기 할 때 강력 추천합니다. 진짜 영수증 금액 전부를 한 명이 독박 쓰는 '모드 2'와, 모두가 돈을 낼 때 운 좋은 딱 한 명만 돈을 1원도 안 내는 '모드 6'이 있습니다. 술자리 텐션 올리는 데는 이만한 게 없죠. 결과가 나오면 캡처 필수!</p>
+            </div>
+
+            <div class="calc-card">
+                <h4>[모드 4] 약속 시간 어긴 친구 응징하기</h4>
+                <p>맨날 "나 지금 출발했어(이제 씻음)" 하는 친구가 모임에 꼭 한 명씩 있죠? 지각한 사람이나 게임 벌칙자에게 패널티 요금(기본 1만 원)을 얹어주고, 남은 금액을 나머지 친구들이 평등하게 나누어 내는 아주 합리적이고 정의로운 방식입니다.</p>
+            </div>
+
+            <div class="calc-card">
+                <h4>[모드 5] 멋진 선배님, 팀장님 캐리 찬스</h4>
+                <p>법카가 없는 날, 직장 회식이나 동아리 신입생 환영회에서 엄청 유용합니다. 모임에서 가장 높은 직급이나 선배님이 "내가 반 낼게!" 라고 멋지게 외치셨을 때 쓰세요. 선배님이 딱 50%를 내고, 나머지 50%를 후배들이 사이좋게 나누어 낼 수 있도록 1초 만에 정리해 드립니다.</p>
+            </div>
+            
+            <div class="calc-card">
+                <h4>💬 단톡방 박제! 카카오톡 공유 기능</h4>
+                <p>열심히 계산했는데 단톡방에 일일이 타이핑해서 올리기 너무 귀찮으셨죠? 결과 화면이 나오면 맨 아래에 있는 노란색 '카카오톡으로 결과 복사하기' 버튼을 눌러보세요. 이름표와 금액이 예쁜 텍스트로 복사되니까 채팅방에 그대로 붙여넣기만 하시면 됩니다. 오늘부터 당신이 모임의 공식 총무!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getCalcParam(p) {
+        return new URLSearchParams(window.location.search).get(p);
+    }
+
+    function runCalcReload() {
+        var m = document.getElementById('calcMode').value;
+        var a = document.getElementById('calcAmount').value;
+        var p = document.getElementById('calcPeople').value;
+        
+        if(!a || !p || a < 100 || p < 2) {
+            alert("금액과 인원수를 정확히 적어주세요!");
+            return;
+        }
+
+        // 전체 페이지 강제 새로고침 (광고 노출 극대화 로직)
+        window.location.href = window.location.origin + window.location.pathname + 
+            "?mode=" + m + "&amount=" + a + "&people=" + p + "&done=1";
+    }
+
+    function copyResult(text) {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        alert("복사 완료! 단톡방에 바로 붙여넣기 하세요!");
+    }
+
+    window.onload = function() {
+        var mode = getCalcParam('mode');
+        var amount = parseInt(getCalcParam('amount'));
+        var people = parseInt(getCalcParam('people'));
+        var done = getCalcParam('done');
+
+        if (done === '1' && amount > 0 && people > 1) {
+            document.getElementById('calcMode').value = mode;
+            document.getElementById('calcAmount').value = amount;
+            document.getElementById('calcPeople').value = people;
+
+            var resBox = document.getElementById('calcResultBox');
+            resBox.style.display = 'block';
+
+            var html = "<div class='calc-result-title'>🧾 오늘의 정산 결과</div>";
+            var copyText = "[오늘의 정산 영수증]\n- 총 금액: " + amount.toLocaleString() + "원\n- 총 인원: " + people + "명\n\n";
+
+            if (mode === 'basic') {
+                var per = Math.floor(amount / people / 100) * 100;
+                var remainder = amount - (per * (people - 1));
+                html += "<div class='calc-item'><span>기본 멤버 (" + (people-1) + "명)</span><span class='c-blue'>" + per.toLocaleString() + "원</span></div>";
+                html += "<div class='calc-item'><span>주최자/총무 (잔돈포함)</span><span class='c-red'>" + remainder.toLocaleString() + "원</span></div>";
+                copyText += "일반 멤버: " + per.toLocaleString() + "원\n주최자: " + remainder.toLocaleString() + "원";
+            } 
+            else if (mode === 'one') {
+                var target = Math.floor(Math.random() * people) + 1;
+                for(var i=1; i<=people; i++){
+                    if(i === target) {
+                        html += "<div class='calc-item'><span class='c-red'>멤버 " + i + " (독박 당첨!)</span><span class='c-red'>" + amount.toLocaleString() + "원</span></div>";
+                        copyText += "멤버 " + i + ": " + amount.toLocaleString() + "원 (당첨!)\n";
+                    } else {
+                        html += "<div class='calc-item'><span>멤버 " + i + "</span><span class='c-blue'>0원 (공짜!)</span></div>";
+                        copyText += "멤버 " + i + ": 0원 (생존)\n";
+                    }
+                }
+            }
+            else if (mode === 'random' || mode === 'ladder') {
+                var current = 0;
+                var splits = [];
+                for(var i=0; i<people; i++) {
+                    var weight = Math.random() + 0.5;
+                    splits.push(weight);
+                    current += weight;
+                }
+                var totalAssigned = 0;
+                for(var i=0; i<people-1; i++){
+                    var val = Math.floor((splits[i] / current) * amount / 100) * 100;
+                    totalAssigned += val;
+                    html += "<div class='calc-item'><span>멤버 " + (i+1) + "</span><span>" + val.toLocaleString() + "원</span></div>";
+                    copyText += "멤버 " + (i+1) + ": " + val.toLocaleString() + "원\n";
+                }
+                var lastVal = amount - totalAssigned;
+                html += "<div class='calc-item'><span>멤버 " + people + "</span><span>" + lastVal.toLocaleString() + "원</span></div>";
+                copyText += "멤버 " + people + ": " + lastVal.toLocaleString() + "원\n";
+            }
+            else if (mode === 'penalty') {
+                var penaltyFee = 10000;
+                var remain = amount - penaltyFee;
+                var per = Math.floor(remain / people / 100) * 100;
+                var lastPer = remain - (per * (people-1));
+                
+                html += "<div class='calc-item'><span class='c-red'>지각자 (1만원 추가)</span><span class='c-red'>" + (per + penaltyFee).toLocaleString() + "원</span></div>";
+                copyText += "지각자: " + (per + penaltyFee).toLocaleString() + "원\n";
+                for(var i=1; i<people-1; i++){
+                    html += "<div class='calc-item'><span>일반 멤버 " + i + "</span><span class='c-blue'>" + per.toLocaleString() + "원</span></div>";
+                    copyText += "일반 멤버 " + i + ": " + per.toLocaleString() + "원\n";
+                }
+                html += "<div class='calc-item'><span>일반 멤버 " + (people-1) + "</span><span class='c-blue'>" + lastPer.toLocaleString() + "원</span></div>";
+                copyText += "일반 멤버 " + (people-1) + ": " + lastPer.toLocaleString() + "원\n";
+            }
+            else if (mode === 'boss') {
+                var bossFee = Math.floor(amount * 0.5 / 100) * 100;
+                var remain = amount - bossFee;
+                var per = Math.floor(remain / (people - 1) / 100) * 100;
+                var lastPer = remain - (per * (people - 2));
+
+                html += "<div class='calc-item'><span class='c-red'>선배님/팀장님 (50%)</span><span class='c-red'>" + bossFee.toLocaleString() + "원</span></div>";
+                copyText += "선배님/팀장님: " + bossFee.toLocaleString() + "원\n";
+                for(var i=1; i<people-1; i++){
+                    html += "<div class='calc-item'><span>후배 멤버 " + i + "</span><span class='c-blue'>" + per.toLocaleString() + "원</span></div>";
+                    copyText += "후배 멤버 " + i + ": " + per.toLocaleString() + "원\n";
+                }
+                if (people > 2) {
+                    html += "<div class='calc-item'><span>후배 멤버 " + (people-1) + "</span><span class='c-blue'>" + lastPer.toLocaleString() + "원</span></div>";
+                    copyText += "후배 멤버 " + (people-1) + ": " + lastPer.toLocaleString() + "원\n";
+                }
+            }
+            else if (mode === 'lucky') {
+                var luckyTarget = Math.floor(Math.random() * people) + 1;
+                var per = Math.floor(amount / (people - 1) / 100) * 100;
+                var lastPer = amount - (per * (people - 2));
+                
+                var regularCount = 1;
+                for(var i=1; i<=people; i++){
+                    if(i === luckyTarget) {
+                        html += "<div class='calc-item'><span class='c-blue'>멤버 " + i + " (럭키! 공짜)</span><span class='c-blue'>0원</span></div>";
+                        copyText += "멤버 " + i + ": 0원 (당첨!)\n";
+                    } else {
+                        var pay = (regularCount === people - 1) ? lastPer : per;
+                        html += "<div class='calc-item'><span>멤버 " + i + "</span><span>" + pay.toLocaleString() + "원</span></div>";
+                        copyText += "멤버 " + i + ": " + pay.toLocaleString() + "원\n";
+                        regularCount++;
+                    }
+                }
+            }
+            else if (mode === 'couple') {
+                var p1 = Math.floor(amount * 0.6 / 100) * 100;
+                var p2 = amount - p1;
+                html += "<div class='calc-item'><span>60% 부담 커플</span><span>" + p1.toLocaleString() + "원</span></div>";
+                html += "<div class='calc-item'><span>40% 부담 커플</span><span class='c-blue'>" + p2.toLocaleString() + "원</span></div>";
+                copyText += "60% 부담: " + p1.toLocaleString() + "원\n40% 부담: " + p2.toLocaleString() + "원\n";
+            }
+
+            html += "<button class='calc-btn-copy' onclick='copyResult(`" + copyText + "`)'>💬 단톡방으로 결과 텍스트 복사하기</button>";
+            resBox.innerHTML = html;
+            resBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+</script>
