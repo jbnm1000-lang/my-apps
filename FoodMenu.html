@@ -1,0 +1,152 @@
+<style>
+  /* 블로그 불필요한 기본 테마 요소 완벽하게 숨기기 */
+  header, .header, #header, .header-widget, .header-inner, 
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+  
+  body, .main-inner, .post-body { 
+      padding-top: 0px !important; 
+      margin-top: 0px !important; 
+  }
+</style>
+
+<div style="background-color: #fcfcfc; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.08) 0px 10px 20px; font-family: &quot;Noto Sans KR&quot;, &quot;Malgun Gothic&quot;, sans-serif; margin: 0px auto; max-width: 500px; padding: 25px 20px; text-align: center;">
+    
+    <!--재미를 유도하는 상단 헤더-->
+    <div style="margin-bottom: 25px;">
+        <span style="background-color: #ff4757; border-radius: 20px; color: white; display: inline-block; font-size: 12px; font-weight: bold; margin-bottom: 10px; padding: 5px 12px;">결정장애 종결 🚨</span>
+        <h2 style="color: #2f3542; font-size: 24px; line-height: 1.4; margin: 0px 0px 10px;">오늘 뭐 먹을지 고민하다가<br />식사시간 다 지나갑니다!</h2>
+        <br />
+        <p style="color: #747d8c; font-size: 15px; line-height: 1.6; margin: 0px;">지금 가장 끌리는 카테고리를 선택해 보세요.<br />수백 가지 메뉴 중 최고의 한 끼를 찾아드립니다!</p>
+    </div>
+
+    <!--초기 카테고리 선택 화면 (세분화된 버튼들)-->
+    <div id="default-view">
+        <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+            <button onclick="spinRoulette('all')" style="background-color: #ff4757; border-color: currentcolor; border-image: initial; border-radius: 12px; border-style: none; border-width: medium; border: none; box-shadow: rgba(255, 71, 87, 0.4) 0px 4px 10px; color: white; cursor: pointer; font-size: 18px; font-weight: 900; grid-column: span 2; padding: 18px; transition: background-color 0.2s;">
+                🎲 전부 다! 무작위 룰렛
+            </button>
+            <button onclick="spinRoulette('rice')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🍚 든든한 밥류
+            </button>
+            <button onclick="spinRoulette('noodle')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🍜 면/분식류
+            </button>
+            <button onclick="spinRoulette('meat')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🥩 고기/구이류
+            </button>
+            <button onclick="spinRoulette('soup')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🍲 뜨끈한 국물
+            </button>
+            <button onclick="spinRoulette('night')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🌙 야식/술안주
+            </button>
+            <button onclick="spinRoulette('light')" style="background-color: #f1f2f6; border-radius: 10px; border: 1px solid rgb(223, 228, 234); color: #2f3542; cursor: pointer; font-size: 15px; font-weight: bold; padding: 15px;">
+                🥗 가벼운 다이어트
+            </button>
+        </div>
+    </div>
+
+    <!--결과 화면 (새로고침 후 나타남)-->
+    <div id="result-view" style="display: none; margin-top: 20px;">
+        <h3 style="color: #57606f; font-size: 16px; margin-bottom: 10px;">축하합니다! 오늘의 맞춤 메뉴는</h3>
+        <div id="menu-result" style="background: linear-gradient(135deg, rgb(241, 242, 246) 0%, rgb(223, 228, 234) 100%); border-radius: 12px; border: 2px dashed rgb(206, 214, 224); color: #2f3542; font-size: 38px; font-weight: 900; margin: 0px 0px 20px; padding: 30px 10px;"></div>
+        
+        <button onclick="resetRoulette()" style="background-color: #57606f; border-color: currentcolor; border-image: initial; border-radius: 12px; border-style: none; border-width: medium; border: none; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px; color: white; cursor: pointer; font-size: 16px; font-weight: bold; margin-bottom: 30px; padding: 16px; width: 100%;">
+            🤔 다시 추천받을래요 (처음으로)
+        </button>
+
+        <!--10가지 맞춤 꿀팁 링크 (수익화 연결)-->
+        <div style="background-color: white; border-radius: 12px; border: 1px solid rgb(241, 242, 246); box-shadow: rgba(0, 0, 0, 0.03) 0px 4px 10px; padding: 20px;">
+            <h4 style="color: #2f3542; font-size: 18px; margin-bottom: 20px; margin-top: 0px; text-align: left;">✨ 상황별 맞춤 메뉴 &amp; 할인 꿀팁</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_286.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">☔ 비 오는 날 생각나는 파전과 국물 요리</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_862.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🥗 다이어트 중 죄책감 덜어주는 외식 메뉴</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_245.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🛵 배달 앱 통신사 할인받고 싸게 먹는 법</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_417.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🔥 스트레스 확 풀리는 화끈한 매운맛 추천</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_460.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">💸 지갑 얇은 날, 든든한 가성비 갑 메뉴</a>
+                <a href="https://soonddo.blogspot.com/2026/05/20-0.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🎧 눈치 안 보고 즐기는 프로 혼밥러 메뉴</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_04.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🤢 전날 과음 주의! 속 뻥 뚫리는 숙취 해소템</a>
+                <a href="https://soonddo.blogspot.com/2026/06/best.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🌙 늦은 밤 참을 수 없는 야식의 유혹 BEST</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_739.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">🍷 특별한 날, 분위기 내기 좋은 레스토랑 팁</a>
+                <a href="https://soonddo.blogspot.com/2026/06/blog-post_151.html" style="background-color: #f8f9fa; border-radius: 8px; border: 1px solid rgb(241, 242, 246); color: #2f3542; display: block; font-weight: bold; padding: 14px 15px; text-align: left; text-decoration: none; transition: background 0.2s;">😋 더위/추위에 잃어버린 입맛 돋우는 별미</a>
+            </div>
+        </div>
+    </div>
+
+    <!--강조된 안전 및 면책 주의사항-->
+    <div style="background-color: #fff3cd; border-color: rgb(255, 230, 156) rgb(255, 230, 156) rgb(255, 230, 156) rgb(255, 193, 7); border-image: initial; border-left: 5px solid #ffc107; border-radius: 8px; border-style: solid; border-width: 1px 1px 1px 5px; border: 1px solid rgb(255, 230, 156); box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 5px; color: #57606f; font-size: 13px; line-height: 1.6; margin-top: 35px; padding: 18px; text-align: left;">
+        <strong style="color: #d35400; display: block; font-size: 14px; margin-bottom: 8px;">🚨 안전 및 이용 주의사항</strong>
+        본 서비스는 사용자의 식사 메뉴 결정을 돕기 위해 무작위로 메뉴를 제안해 드리는 재미 목적의 엔터테인먼트 도구입니다.<br /><br />
+        <strong>1. 알레르기 주의:</strong> 제공된 결과에 본인이 알레르기 반응을 일으키는 식재료(예: 땅콩, 갑각류, 복숭아 등)가 포함될 수 있으므로 실제 섭취 전 반드시 확인하시기 바랍니다.<br />
+        <strong>2. 건강 상태 고려:</strong> 특정 질환으로 인해 식단 조절이 필요하신 분들은 본인의 건강 상태를 우선적으로 고려하여 메뉴를 선택해 주십시오.<br />
+        <strong>3. 책임 한계:</strong> 앱에서 추천한 메뉴 섭취로 인해 발생하는 모든 문제에 대해 개발자는 법적 책임을 지지 않음을 알려드립니다.
+    </div>
+</div>
+
+<script>
+    // 카테고리별로 방대하게 구성된 메뉴 데이터 (총 150여 개)
+    const categoryData = {
+        rice: ["제육볶음", "국밥", "비빔밥", "볶음밥", "오므라이스", "카레", "덮밥", "텐동", "규동", "가츠동", "백반", "돌솥비빔밥", "김치볶음밥", "오징어덮밥", "제육덮밥", "간장계란밥", "쌈밥", "초밥", "롤", "김밥"],
+        noodle: ["짜장면", "짬뽕", "우동", "소바", "라멘", "파스타", "쌀국수", "팟타이", "쫄면", "라면", "칼국수", "수제비", "냉면", "막국수", "잔치국수", "비빔국수", "볶음면", "떡볶이", "마라샹궈", "로제떡볶이"],
+        meat: ["삼겹살", "소고기구이", "돼지갈비", "닭갈비", "보쌈", "족발", "스테이크", "양꼬치", "돈까스", "탕수육", "치킨", "찜닭", "닭도리탕", "오리주물럭", "함박스테이크", "폭립", "깐풍기", "동파육"],
+        soup: ["김치찌개", "된장찌개", "순두부찌개", "부대찌개", "청국장", "동태탕", "알탕", "감자탕", "뼈해장국", "설렁탕", "곰탕", "갈비탕", "육개장", "마라탕", "샤브샤브", "훠궈", "밀푀유나베", "어묵탕", "조개탕"],
+        night: ["곱창", "막창", "대창", "닭발", "오돌뼈", "아구찜", "해물찜", "피자", "치킨", "햄버거", "타코", "쭈꾸미볶음", "낙지볶음", "물회", "육회", "연어", "골뱅이무침", "닭똥집", "감자튀김", "먹태"],
+        light: ["연어샐러드", "닭가슴살 샐러드", "샌드위치", "월남쌈", "편백찜", "서브웨이", "포케", "키토김밥", "두부김치", "회덮밥", "생선구이", "그릭요거트", "단백질쉐이크", "닭가슴살 소시지", "곤약면", "브리또"]
+    };
+
+    // URL에서 결과값을 읽어오는 함수 (한글 깨짐 방지 적용)
+    function getParameterByName(name) {
+        let url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // 페이지가 열릴 때 실행되는 로직
+    window.onload = function() {
+        let resultMenu = getParameterByName('result');
+        // 주소창에 결과 메뉴가 있으면 해당 메뉴를 화면에 크게 표시
+        if (resultMenu !== null && resultMenu !== '') {
+            document.getElementById('default-view').style.display = 'none';
+            document.getElementById('result-view').style.display = 'block';
+            document.getElementById('menu-result').innerText = resultMenu;
+            
+            // 결과 화면으로 부드럽게 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    // 사용자가 카테고리 버튼을 눌렀을 때 실행되는 함수
+    function spinRoulette(categoryKey) {
+        let targetList = [];
+        
+        // '전부 다 무작위'를 선택한 경우 모든 배열을 하나로 합침
+        if (categoryKey === 'all') {
+            for (let key in categoryData) {
+                targetList = targetList.concat(categoryData[key]);
+            }
+        } else {
+            // 특정 카테고리를 선택한 경우 해당 배열만 가져옴
+            targetList = categoryData[categoryKey];
+        }
+
+        // 선택된 리스트 안에서 랜덤으로 하나를 뽑음
+        let randomIdx = Math.floor(Math.random() * targetList.length);
+        let selectedMenu = targetList[randomIdx];
+        
+        let currentUrl = window.location.origin + window.location.pathname;
+        
+        // 뽑힌 메뉴 이름을 URL에 파라미터로 붙여서 새로고침 (전면광고 유도)
+        window.location.href = currentUrl + "?result=" + encodeURIComponent(selectedMenu);
+    }
+
+    // 다시 뽑기 버튼 클릭 시 실행 (초기화)
+    function resetRoulette() {
+        let currentUrl = window.location.origin + window.location.pathname;
+        window.location.href = currentUrl;
+    }
+</script>
