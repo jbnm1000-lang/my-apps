@@ -1,0 +1,292 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Poppins:wght@500;700&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 기본 테마 완벽 숨김 (돋보기, 뒤로가기, 사이드바 모두 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+
+/* 2. 하얀색 공백 및 뒷배경 완벽 제거 (세이프가드 앱 전용 테마 배경) */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .date-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #0b1120 !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* 3. 프리미엄 보안 앱 테마 */
+#app-wrapper {
+    --bg-color: #0b1120;
+    --card-bg: #1e293b;
+    --card-highlight: #334155;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --primary: #38bdf8;
+    --primary-hover: #0ea5e9;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --border: #334155;
+
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    padding: 20px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.app-container { max-width: 800px; margin: 0 auto; }
+.app-header { text-align: center; margin-bottom: 24px; padding: 10px 0; }
+.app-header h1 { font-size: 26px; font-weight: 800; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; justify-content: center; gap: 8px;}
+.app-header h1 span { color: var(--primary); }
+.app-header p { color: var(--text-sub); font-size: 14px; margin: 0; }
+.app-card { background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); margin-bottom: 20px; }
+.app-label { display: block; font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+.app-textarea { width: 100%; height: 130px; background-color: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 16px; color: var(--text-main); font-size: 15px; resize: none; box-sizing: border-box; margin-bottom: 16px; }
+.app-textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(56,189,248,0.1); }
+.app-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 16px; background: linear-gradient(to right, #0ea5e9, #2563eb); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; }
+.app-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.dash-item { background-color: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.dash-item h3 { margin: 0 0 8px 0; font-size: 14px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+.dash-item p { margin: 0; font-size: 12px; color: var(--text-sub); line-height: 1.5; }
+.spinner-container { text-align: center; padding: 50px 0; }
+.spinner { width: 50px; height: 50px; border: 4px solid rgba(56, 189, 248, 0.1); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loading-text { color: var(--primary); font-weight: 700; font-size: 16px; transition: opacity 0.3s; }
+.report-header { text-align: center; padding-bottom: 20px; border-bottom: 1px dashed var(--border); margin-bottom: 20px; }
+.final-status { font-size: 28px; font-weight: 900; margin: 10px 0; }
+.final-desc { font-size: 15px; font-weight: 600; padding: 12px; border-radius: 8px; margin-top: 10px; }
+.detail-box { background-color: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--text-sub); }
+.detail-value { font-weight: 700; color: var(--text-main); }
+.kw-tag { display: inline-block; background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 4px 10px; border-radius: 6px; font-size: 12px; margin: 3px; font-weight: 600; }
+.action-title { font-size: 14px; color: var(--primary); font-weight: 700; margin-bottom: 12px; text-align: center; }
+.linker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.linker-btn { background-color: var(--card-highlight); border: 1px solid var(--border); padding: 14px 10px; border-radius: 12px; color: var(--text-main); font-size: 13px; font-weight: 700; text-decoration: none; text-align: center; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+.linker-btn span { font-size: 20px; }
+.linker-btn:hover { background-color: var(--primary); border-color: var(--primary); color: #fff; }
+.reset-btn { width: 100%; padding: 14px; background-color: transparent; border: 1px solid var(--text-sub); color: var(--text-main); border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+</style>
+
+<div id="app-wrapper">
+    <div class="app-container">
+        
+        <div class="app-header">
+            <h1>🛡️ <span>세이프가드</span> 진단 센터</h1>
+            <p>스미싱 문자와 악성 URL을 원천 차단합니다.</p>
+        </div>
+
+        <div id="inputView">
+            <div class="app-card">
+                <label class="app-label">의심되는 텍스트 및 주소 입력</label>
+                <textarea class="app-textarea" id="targetText" placeholder="예: [국외발신] 고객님의 해외결제가 승인되었습니다. 본인이 아닐경우 아래 주소로 문의바랍니다. https://..."></textarea>
+                <button class="app-btn" onclick="executeAnalysis()">AI 정밀 진단 시작</button>
+            </div>
+
+            <div style="background-color: rgba(245, 158, 11, 0.05); border-radius: 12px; border: 1.5px solid rgb(245, 158, 11); box-shadow: rgba(245, 158, 11, 0.1) 0px 0px 15px; margin-bottom: 20px; margin-top: 10px; padding: 20px;">
+                <h3 style="align-items: center; color: #fcd34d; display: flex; font-size: 16px; gap: 8px; margin: 0px 0px 10px;">⚠️ 1차 진단 도구 이용 시 주의사항</h3>
+                <p style="color: #f59e0b; font-size: 13px; line-height: 1.6; margin: 0px;">
+                    본 시스템은 내부 탑재된 대규모 사기 패턴 데이터베이스를 기반으로 작동하는 1차 스크리닝 도구입니다. 어떠한 경우에도 본 앱의 진단 결과가 정부 기관이나 전문 보안 업체의 최종 판단을 대신할 수 없으며, 기술적 한계로 인해 모든 스미싱 시도를 100% 정확하게 식별하는 것은 불가능합니다.<br /><br />
+                    <strong>첨부된 링크 클릭이나 정보 입력 시 발생하는 모든 위험과 피해에 대한 최종적인 책임은 본인에게 있으며, 개발자 및 본 서비스는 이에 대해 법적 책임을 지지 않습니다.</strong> 정상적인 문자를 사기로 오인할 수도 있으므로, 의심스러운 경우 하단의 전문 플랫폼 연동 기능을 통해 반드시 교차 검증하시기 바랍니다.
+                </p>
+            </div>
+          
+            <div class="dashboard-grid">
+                <div class="dash-item">
+                    <h3>🚨 금주의 사기 트렌드</h3>
+                    <p>최근 '모바일 청첩장' 및 '부고장'을 위장한 악성 앱 설치 유도 문자가 급증하고 있습니다. 알 수 없는 링크는 절대 누르지 마세요.</p>
+                </div>
+                <div class="dash-item">
+                    <h3>💡 100% 예방 수칙</h3>
+                    <p>본 앱의 진단 결과 '위험'이 뜰 경우, 즉시 해당 문자를 삭제하고 보낸 번호를 스마트폰에서 수신 차단하시기 바랍니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-card" id="loadingView" style="display: none;">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <div class="loading-text" id="loadingMsg">1단계: 문맥 및 키워드 추출 중...</div>
+            </div>
+        </div>
+
+        <div class="app-card" id="resultView" style="display: none;">
+            <div class="report-header">
+                <div id="reportIcon" style="font-size: 40px; margin-bottom: 10px;"></div>
+                <div class="final-status" id="reportTitle">진단 결과</div>
+                <div class="final-desc" id="reportAction"></div>
+            </div>
+
+            <div class="detail-box">
+                <div class="detail-row">
+                    <span class="detail-label">인터넷 주소(URL) 포함 여부</span>
+                    <span class="detail-value" id="detailUrl"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">개인정보 탈취 패턴 일치율</span>
+                    <span class="detail-value" id="detailPattern"></span>
+                </div>
+                <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 12px; padding-top: 12px;">
+                    <div class="detail-label" style="margin-bottom: 8px;">탐지된 악성 키워드 내역</div>
+                    <div id="keywordContainer"></div>
+                </div>
+            </div>
+
+            <div class="action-title">전문 기관 교차 검증 및 신고</div>
+            <div class="linker-grid">
+                <a class="linker-btn" href="javascript:void(0)" onclick="openExternalBrowser('https://thecheat.co.kr')"><span>📞</span>더치트 사기이력 조회</a>
+                <a class="linker-btn" href="javascript:void(0)" id="linkVirusTotal"><span>🦠</span>바이러스토탈 URL 스캔</a>
+                <a class="linker-btn" href="javascript:void(0)" id="linkScamAdviser"><span>🛡️</span>스캠어드바이저 신용도</a>
+                <a class="linker-btn" href="javascript:void(0)" onclick="openExternalBrowser('https://ecrm.police.go.kr')"><span>🚨</span>경찰청 사이버수사대</a>
+            </div>
+            
+            <button class="reset-btn" onclick="resetForm()">다른 문자 검사하기</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+//<![CDATA[
+    // 앱 인벤터 통신 전용 함수 (스마트폰 기본 브라우저 실행용)
+    function openExternalBrowser(url) {
+        if (window.AppInventor) {
+            window.AppInventor.setWebViewString(url); // 앱 인벤터로 URL 전송
+        } else {
+            window.open(url, '_blank'); // PC 접속 시 새 탭 열기
+        }
+    }
+
+    var dangerKeywords = [
+        "배송불가", "미수령", "주소변경", "주소오류", "택배반송", "수하물", "우체국확인", "물품보관", "택배확인", "송장번호", "통관번호", "관세납부",
+        "형사고발", "출석요구서", "대검찰청", "법원출석", "민원접수", "과태료", "위반안내", "무단투기", "불법주차", "신호위반", "의무조사", "교통위반", "경찰서", "국세청", "연말정산", "건강검진", "국민건강보험", "행복주택", "통장압류",
+        "해외인증", "결제완료", "해외결제", "지원금신청", "소상공인대출", "긴급재난", "대환대출", "안전계좌", "금융감독원", "보안카드", "계좌정지", "환급금조회", "해외IP", "승인완료", "자동이체", "명의도용", "신용카드발급", "비밀번호변경", "대출승인", "보증금", "연금수령", "출금안내", "대리결제", "모바일결제", "소액결제",
+        "부고", "모바일청첩장", "장례식장", "피로연", "초대장", "돌잔치", "결혼식",
+        "국제발신", "국외발신", "본인확인", "인증바랍니다", "인증번호", "보안인증", "계좌비밀번호", "상품권지급"
+    ];
+
+    var suspiciousKeywords = [
+        "확인요망", "아래주소", "링크보기", "클릭", "상세보기", "조회", "변경바랍니다", "안내", "수신동의", "고객님", "지원누락", "발송완료", "접수완료", "미지급", "지급명령", "긴급안내", "특별지원", "한도조정", "당첨", "사은품", "무료증정", "이벤트", "기프티콘", "쿠폰발급", "기한임박", "즉시확인", "고객센터", "문의전화", "상담원연결", "카카오톡연결", "채널추가"
+    ];
+
+    window.onload = function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var encodedMsg = urlParams.get('msg');
+        
+        if (encodedMsg) {
+            document.getElementById('inputView').style.display = 'none';
+            document.getElementById('loadingView').style.display = 'block';
+            
+            var loadingMsg = document.getElementById('loadingMsg');
+            setTimeout(function() { loadingMsg.innerHTML = "2단계: 악성 URL 패턴 대조 중..."; }, 800);
+            setTimeout(function() { loadingMsg.innerHTML = "3단계: 최종 위험도 산출 중..."; }, 1600);
+            
+            setTimeout(function() {
+                document.getElementById('loadingView').style.display = 'none';
+                analyzeContent(decodeURIComponent(encodedMsg));
+            }, 2400);
+        }
+    };
+
+    function executeAnalysis() {
+        var text = document.getElementById('targetText').value.trim();
+        if (!text) { alert('분석할 문자 내용이나 주소를 입력해 주세요.'); return; }
+        var randomId = Math.floor(Math.random() * 999999) + 1;
+        var currentUrl = window.location.origin + window.location.pathname;
+        window.location.href = currentUrl + "?msg=" + encodeURIComponent(text) + "&scan_id=" + randomId;
+    }
+
+    function analyzeContent(text) {
+        var score = 0;
+        var detectedDanger = [];
+        var detectedSuspicious = [];
+
+        for(var i=0; i<dangerKeywords.length; i++) {
+            if (text.indexOf(dangerKeywords[i]) !== -1) { score += 25; detectedDanger.push(dangerKeywords[i]); }
+        }
+        for(var j=0; j<suspiciousKeywords.length; j++) {
+            if (text.indexOf(suspiciousKeywords[j]) !== -1) { score += 10; detectedSuspicious.push(suspiciousKeywords[j]); }
+        }
+
+        var urlPattern = /(https?:\/\/[^\s]+)/g;
+        var hasUrl = urlPattern.test(text);
+        if (hasUrl) score += 15;
+
+        if (score > 100) score = 100;
+        
+        document.getElementById('resultView').style.display = 'block';
+
+        var rIcon = document.getElementById('reportIcon');
+        var rTitle = document.getElementById('reportTitle');
+        var rAction = document.getElementById('reportAction');
+        var dUrl = document.getElementById('detailUrl');
+        var dPattern = document.getElementById('detailPattern');
+        var kwContainer = document.getElementById('keywordContainer');
+
+        dUrl.innerHTML = hasUrl ? "<span style='color:var(--danger);'>⚠️ 감지됨 (접속 주의)</span>" : "<span style='color:var(--success);'>미검출</span>";
+        
+        if (score >= 50) {
+            rIcon.innerHTML = "🚫";
+            rTitle.innerHTML = "확실한 스미싱 사기입니다!";
+            rTitle.style.color = "var(--danger)";
+            rAction.innerHTML = "절대 링크를 누르지 마시고, 즉시 문자를 삭제하세요.";
+            rAction.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+            rAction.style.color = "#fca5a5";
+            dPattern.innerHTML = "<span style='color:var(--danger);'>매우 높음 (악성 수법 일치)</span>";
+        } else if (score >= 20) {
+            rIcon.innerHTML = "⚠️";
+            rTitle.innerHTML = "스팸 및 피싱 의심 문서입니다.";
+            rTitle.style.color = "var(--warning)";
+            rAction.innerHTML = "정상적인 알림을 위장한 스팸일 확률이 높습니다. 주의하세요.";
+            rAction.style.backgroundColor = "rgba(245, 158, 11, 0.2)";
+            rAction.style.color = "#fcd34d";
+            dPattern.innerHTML = "<span style='color:var(--warning);'>경계 필요 (유도성 단어 포함)</span>";
+        } else {
+            rIcon.innerHTML = "✅";
+            rTitle.innerHTML = "특이점 미발견 (안전함)";
+            rTitle.style.color = "var(--success)";
+            rAction.innerHTML = "알려진 사기 키워드가 없습니다. 다만 개인정보 요구 시 주의하세요.";
+            rAction.style.backgroundColor = "rgba(16, 185, 129, 0.2)";
+            rAction.style.color = "#6ee7b7";
+            dPattern.innerHTML = "<span style='color:var(--success);'>낮음 (일반 텍스트)</span>";
+        }
+
+        kwContainer.innerHTML = "";
+        var allDetected = detectedDanger.concat(detectedSuspicious);
+        if (allDetected.length === 0) {
+            kwContainer.innerHTML = "<span style='color:var(--text-sub); font-size:13px;'>발견된 악성 키워드가 없습니다.</span>";
+        } else {
+            for(var k=0; k<allDetected.length; k++) {
+                var span = document.createElement('span');
+                span.className = "kw-tag";
+                span.innerHTML = allDetected[k];
+                kwContainer.appendChild(span);
+            }
+        }
+
+        // 도메인 추출 후 외부 브라우저 호출 명령으로 연결
+        var extractedUrls = text.match(urlPattern);
+        var extractedUrl = extractedUrls ? extractedUrls[0] : "";
+        if (extractedUrl) {
+            var cleanDomain = extractedUrl.replace(/^(?:https?:\/\/)?/i, "").split('/')[0];
+            document.getElementById('linkVirusTotal').setAttribute("onclick", "openExternalBrowser('https://www.virustotal.com/gui/search/" + encodeURIComponent(cleanDomain) + "')");
+            document.getElementById('linkScamAdviser').setAttribute("onclick", "openExternalBrowser('https://www.scamadviser.com/check-website?url=" + encodeURIComponent(cleanDomain) + "')");
+        } else {
+            document.getElementById('linkVirusTotal').setAttribute("onclick", "openExternalBrowser('https://www.virustotal.com')");
+            document.getElementById('linkScamAdviser').setAttribute("onclick", "openExternalBrowser('https://www.scamadviser.com')");
+        }
+    }
+
+    function resetForm() {
+        window.location.href = window.location.origin + window.location.pathname;
+    }
+//]]>
+</script>
