@@ -1,0 +1,265 @@
+<!--구글 블로거 전용: 글로벌 안전자산 레이더 (디자인 리뉴얼 / 파티클 추가 / 에러 티커 수정)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #030811 !important; /* 미드나잇 네이비 배경 */
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    /* 구글 블로그 기본 껍데기 완벽 숨김 처리 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    /* 은은한 배경 파티클 애니메이션 */
+    .particles-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; animation: float 12s infinite ease-in-out alternate; }
+    .orb1 { width: 250px; height: 250px; background: #00897B; top: -50px; left: -50px; animation-duration: 15s; }
+    .orb2 { width: 300px; height: 300px; background: #003366; bottom: -100px; right: -50px; animation-duration: 18s; }
+    .orb3 { width: 200px; height: 200px; background: #00E676; top: 40%; left: 30%; opacity: 0.15; animation-duration: 20s; }
+    
+    @keyframes float {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(30px, 40px) scale(1.1); }
+    }
+
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 0 0 100px 0; }
+
+    /* 프리미엄 헤더 */
+    .header-box { padding: 30px 20px 20px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .header-title { font-size: 25px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 5px; }
+    .header-title span { color: #00E676; text-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
+    .header-date { font-size: 14px; color: #78909C; font-weight: 500; letter-spacing: 1px; }
+
+    /* 상단 티커 */
+    .ticker-wrap { width: 100%; height: 46px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+    /* 위젯 공통 컨테이너 */
+    .widget-container { padding: 25px 20px; display: flex; flex-direction: column; gap: 35px; }
+    .section-title { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+    .section-title span { color: #00E676; }
+    
+    .widget-box { background: rgba(10, 15, 25, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; padding: 0; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+    /* 상세해진 안내사항 및 방패막 패널 */
+    .info-panel-wrap { padding: 0 20px 40px 20px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .guide-box { background: rgba(0, 230, 118, 0.05); border-left: 4px solid #00E676; border-radius: 12px; padding: 25px 20px; }
+    .guide-title { font-size: 16px; font-weight: 900; color: #00E676; margin-bottom: 15px; }
+    .guide-text { font-size: 14px; color: #B0BEC5; line-height: 1.8; word-break: keep-all; }
+    .guide-text b { color: #ffffff; }
+
+    .legal-box { background: rgba(255, 82, 82, 0.05); border: 1px solid rgba(255, 82, 82, 0.2); border-radius: 12px; padding: 25px 20px; }
+    .legal-title { font-size: 15px; font-weight: 900; color: #FF5252; margin-bottom: 15px; }
+    .legal-text { font-size: 13.5px; color: #CFD8DC; line-height: 1.7; word-break: keep-all; }
+
+    /* 차별화된 하단 고정 둥근 플로팅 버튼 */
+    .bottom-fix-panel { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 560px; z-index: 100; }
+    .btn-refresh { width: 100%; background: linear-gradient(135deg, #00BFA5 0%, #00897B 100%); border: none; color: #ffffff; padding: 18px; border-radius: 30px; font-size: 16px; font-weight: 900; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 191, 165, 0.4); transition: 0.2s; letter-spacing: -0.5px; }
+    .btn-refresh:active { transform: scale(0.96); }
+</style>
+
+<!--배경 파티클 요소-->
+<div class="particles-bg">
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
+</div>
+
+<div id="app-container">
+    
+    <div class="header-box">
+        <div class="header-title">글로벌 <span>안전자산</span> 레이더</div><br /><div class="header-title"><br /></div>
+        <div class="header-date" id="ui-date">2026.00.00 실시간 동기화</div>
+    </div>
+
+    <!--1. 흐르는 실시간 티커-->
+    <div class="ticker-wrap">
+        <!--TradingView Widget BEGIN-->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" type="text/javascript">
+          {
+          "symbols": [
+            { "proName": "FX_IDC:USDKRW", "title": "원/달러" },
+            { "proName": "FX_IDC:JPYKRW", "title": "원/엔 (100엔)" },
+            { "proName": "FX_IDC:EURKRW", "title": "원/유로" },
+            { "proName": "OANDA:XAUUSD", "title": "국제 금" },
+            { "proName": "OANDA:XAGUSD", "title": "국제 은" }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": true,
+          "displayMode": "adaptive",
+          "colorTheme": "dark",
+          "locale": "kr"
+        }
+          </script>
+        </div>
+        <!--TradingView Widget END-->
+    </div>
+
+    <div class="widget-container">
+        
+        <!--2. 환율 및 원자재 요약판 (에러 티커 해결됨)-->
+        <div>
+            <div class="section-title">🌐 환율 및 <span>안전자산 동향</span></div>
+            <div class="widget-box" style="height: 420px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" type="text/javascript">
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "1M",
+                  "showChart": false,
+                  "locale": "kr",
+                  "width": "100%",
+                  "height": "100%",
+                  "largeChartUrl": "",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "tabs": [
+                    {
+                      "title": "여행/직구 환율",
+                      "symbols": [
+                        { "s": "FX_IDC:USDKRW", "d": "미국 달러 (USD/KRW)" },
+                        { "s": "FX_IDC:JPYKRW", "d": "일본 엔 (JPY/KRW)" },
+                        { "s": "FX_IDC:EURKRW", "d": "유로 (EUR/KRW)" },
+                        { "s": "FX_IDC:CNYKRW", "d": "중국 위안 (CNY/KRW)" }
+                      ]
+                    },
+                    {
+                      "title": "금/은 시세",
+                      "symbols": [
+                        { "s": "OANDA:XAUUSD", "d": "금 (Gold / USD)" },
+                        { "s": "OANDA:XAGUSD", "d": "은 (Silver / USD)" },
+                        { "s": "OANDA:XPTUSD", "d": "백금 (Platinum)" },
+                        { "s": "OANDA:XCUUSD", "d": "구리 (Copper)" }
+                      ]
+                    },
+                    {
+                      "title": "에너지/유가",
+                      "symbols": [
+                        { "s": "TVC:USOIL", "d": "WTI 서부텍사스산 원유" },
+                        { "s": "TVC:UKOIL", "d": "브렌트유 (Brent Oil)" },
+                        { "s": "TVC:NATGAS", "d": "천연가스 (Natural Gas)" }
+                      ]
+                    }
+                  ]
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--3. 원/달러 환율 미니 차트-->
+        <div>
+            <div class="section-title">💵 원/달러 환율 <span>최근 흐름</span></div>
+            <div class="widget-box" style="height: 300px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" type="text/javascript">
+                  {
+                  "symbol": "FX_IDC:USDKRW",
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "kr",
+                  "dateRange": "1M",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "autosize": true,
+                  "largeChartUrl": ""
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--4. 글로벌 경제 주요 일정-->
+        <div>
+            <div class="section-title">📅 글로벌 경제 <span>주요 일정</span></div>
+            <div class="widget-box" style="height: 350px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" type="text/javascript">
+                  {
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "kr",
+                  "importanceFilter": "-1,0,1",
+                  "currencyFilter": "USD,KRW,EUR,JPY,CNY"
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+    </div>
+
+    <!--정성껏 보강된 텍스트 안내 및 면책 조항-->
+    <div class="info-panel-wrap">
+        <div class="guide-box">
+            <div class="guide-title">💡 스마트한 레이더 활용 가이드</div>
+            <div class="guide-text">
+                1. <b>실시간 환율 모니터링:</b> 해외 출장, 가족 여행, 혹은 해외 직구 결제가 필요하실 때 언제든 상단 탭을 터치해 주십시오. 주요 국가의 환율 변동 추이를 실시간으로 파악하여 가장 유리한 환전 타이밍을 잡으실 수 있습니다.<br /><br />
+                2. <b>안전자산 및 원자재 흐름:</b> 글로벌 경제의 핵심 지표인 금, 은, 그리고 국제 유가의 흐름을 한눈에 보여드립니다. 인플레이션 대비나 자산 관리를 계획하실 때 유용한 나침반이 되어 드립니다.<br /><br />
+                3. <b>주요 경제 일정 확인:</b> 환율과 자산 가격에 큰 영향을 미치는 전 세계 주요 경제 지표 발표 일정을 하단 캘린더를 통해 미리 대비하실 수 있습니다.<br /><br />
+                4. <b>즉시 동기화 시스템:</b> 화면 하단의 둥근 갱신 버튼을 누르시면, 시스템이 가장 최신의 금융 데이터를 즉시 화면에 다시 불러와 정보를 최적화합니다.
+            </div>
+        </div>
+
+        <div class="legal-box">
+            <div class="legal-title">⚠️ 서비스 이용 및 정보 제공 주의사항</div>
+            <div class="legal-text">
+                본 애플리케이션은 사용자의 편리한 경제 생활을 돕기 위해, 공신력 있는 글로벌 시세 제공 플랫폼(TradingView)의 공개 데이터를 시각적으로 정리하여 보여드리는 <b>순수 정보 제공 목적의 서비스</b>입니다.<br /><br />
+                앱 내에서 제공되는 환율, 귀금속, 원자재 등의 모든 수치는 글로벌 외환 시장 및 상품 거래소의 시세를 기반으로 실시간 송출됩니다. 다만, 데이터 전송 과정이나 각 국가별 시장 상황에 따라 <b>실제 은행 고시 환율 또는 귀금속 실거래 가격과 일정 부분 오차가 발생할 수 있습니다.</b><br /><br />
+                또한, 본 서비스는 어떠한 형태의 투자 권유, 금융 상품 추천, 혹은 사행성 행위를 일절 유도하지 않습니다. 제공된 정보를 바탕으로 진행되는 환전, 송금, 자산 매매 등 <b>모든 금융 거래의 최종 선택과 책임은 전적으로 사용자 본인에게 있음</b>을 명확히 안내해 드립니다.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--하단 고정 새로고침 버튼 (URL 파라미터 적용)-->
+<div class="bottom-fix-panel">
+    <button class="btn-refresh" onclick="refreshAndShowAd()">🔄 최신 시세 1초 동기화</button>
+</div>
+
+<script>
+// ES5 엄격 문법 적용
+var d = new Date();
+var yyyy = d.getFullYear();
+var mm = d.getMonth() + 1;
+var dd = d.getDate();
+document.getElementById('ui-date').innerText = yyyy + "." + (mm < 10 ? '0' + mm : mm) + "." + (dd < 10 ? '0' + dd : dd) + " 기준 실시간 동기화";
+
+// 파라미터 강제 갱신 로직
+window.refreshAndShowAd = function() {
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott";
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+}
+</script>
