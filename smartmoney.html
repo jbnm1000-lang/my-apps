@@ -1,0 +1,240 @@
+<!--하이엔드 글로벌 환전 & 경제 레이더 (다크 럭셔리 모드 / 계산기 기반 광고 연동)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;800;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #0B0E14 !important; /* 초고급 딥 블랙/네이비 */
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #E2E8F0;
+    }
+
+    /* 구글 블로그 기본 껍데기 완벽 숨김 처리 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    /* 럭셔리 백그라운드 파티클 효과 */
+    .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at 15% 50%, rgba(107, 70, 193, 0.15), transparent 25%), radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.1), transparent 25%); pointer-events: none; }
+
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 50px; }
+
+    /* 프리미엄 헤더 */
+    .header-box { padding: 40px 20px 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); background: linear-gradient(180deg, #131722 0%, #0B0E14 100%); }
+    .header-title { font-size: 26px; font-weight: 900; color: #ffffff; letter-spacing: -1px; margin-bottom: 8px; }
+    .header-title span { background: linear-gradient(90deg, #D4AF37, #FDE08B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .header-subtitle { font-size: 14px; color: #94A3B8; font-weight: 400; letter-spacing: 0.5px; }
+
+    /* 공통 섹션 및 위젯 스타일 */
+    .section-wrap { padding: 30px 20px 0 20px; }
+    .section-title { font-size: 18px; font-weight: 800; color: #F8FAFC; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+    .section-title span { color: #D4AF37; }
+    
+    .widget-box { background: #131722; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+    /* 하이엔드 환전 계산기 폼 */
+    .calc-box { background: #131722; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+    .calc-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #D4AF37, #FDE08B); }
+    
+    .input-group { margin-bottom: 20px; }
+    .input-group label { display: block; font-size: 14px; font-weight: 600; color: #94A3B8; margin-bottom: 8px; }
+    .input-row { display: flex; gap: 10px; }
+    
+    input, select { flex: 1; background: #1E222D; padding: 15px; border: 1px solid #2B313F; border-radius: 10px; font-size: 16px; font-weight: 600; font-family: 'Pretendard', sans-serif; color: #ffffff; outline: none; transition: 0.3s; }
+    input::placeholder { color: #475569; }
+    input:focus, select:focus { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+    
+    /* 버튼 텍스트 깨짐 방지: word-break 추가 */
+    .btn-calc { width: 100%; background: linear-gradient(135deg, #6B46C1 0%, #4C1D95 100%); color: #ffffff; border: none; padding: 16px 10px; border-radius: 12px; font-size: 16px; font-weight: 800; margin-top: 10px; cursor: pointer; box-shadow: 0 8px 20px rgba(76, 29, 149, 0.4); transition: 0.2s; letter-spacing: -0.5px; word-break: keep-all; }
+    .btn-calc:hover { background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); }
+    .btn-calc:active { transform: scale(0.97); }
+
+    /* 계산 결과창 텍스트 깨짐 방지: 폰트 크기 조정 및 nowrap 추가 */
+    #result-area { display: none; margin-top: 25px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 25px 15px; text-align: center; animation: fadeIn 0.5s; }
+    .result-label { font-size: 14px; color: #D4AF37; font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; word-break: keep-all; }
+    .result-value { font-size: 28px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 10px rgba(255,255,255,0.1); word-break: keep-all; white-space: nowrap; letter-spacing: -0.5px; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* 프리미엄 안내 및 방패막 텍스트 */
+    .info-panel-wrap { padding: 40px 20px 20px 20px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .guide-box { background: rgba(255, 255, 255, 0.03); border-left: 3px solid #6B46C1; border-radius: 12px; padding: 25px 20px; }
+    .guide-title { font-size: 16px; font-weight: 800; color: #A78BFA; margin-bottom: 12px; }
+    .guide-text { font-size: 14px; color: #94A3B8; line-height: 1.7; word-break: keep-all; }
+    .guide-text b { color: #E2E8F0; }
+
+    .legal-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.1); border-radius: 12px; padding: 25px 20px; }
+    .legal-title { font-size: 15px; font-weight: 800; color: #F87171; margin-bottom: 12px; }
+    .legal-text { font-size: 13px; color: #94A3B8; line-height: 1.7; word-break: keep-all; }
+</style>
+
+<div class="bg-gradient"></div>
+
+<div id="app-container">
+    
+    <!--훨씬 전문적인 앱 이름과 타이틀-->
+    <div class="header-box">
+        <div class="header-title"><span>스마트 환전</span> 마스터</div>
+        <div class="separator" style="clear: both; text-align: center;"><br /></div>
+        <div class="header-title"><br /></div>
+        <div class="header-subtitle">해외 직구 및 여행 경비 최적화 솔루션</div>
+    </div>
+
+    <!--1. 핵심 계산기 (앱의 존재 이유이자 광고 송출 포인트)-->
+    <div class="section-wrap">
+        <div class="section-title">🧮 <span>원화 환산</span> 시뮬레이터</div>
+        <div class="calc-box">
+            <div class="input-group">
+                <label>해외 결제 예정 금액 및 통화 선택</label>
+                <div class="input-row">
+                    <input id="input-amount" placeholder="예: 150" type="number" />
+                    <select id="select-currency" style="flex: 0.6 1 0%;">
+                        <option value="달러">미 달러 (USD)</option>
+                        <option value="엔화">일본 엔 (JPY)</option>
+                        <option value="유로">유로화 (EUR)</option>
+                        <option value="위안">중국 위안 (CNY)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>적용할 환율 (하단의 실시간 표 참고)</label>
+                <input id="input-rate" placeholder="예: 1350" type="number" />
+            </div>
+            
+            <button class="btn-calc" onclick="calculateAndShowAd()">실시간 원화 예상 금액 산출</button>
+            
+            <div id="result-area">
+                <div class="result-label">예상 원화 결제 금액</div>
+                <div class="result-value" id="result-text">0 원</div>
+            </div>
+        </div>
+    </div>
+
+    <!--2. 방대한 데이터의 크로스 환율 표 (다크 테마 럭셔리 위젯)-->
+    <div class="section-wrap">
+        <div class="section-title">🌐 글로벌 <span>크로스 환율</span> 보드</div>
+        <div class="widget-box" style="height: 350px;">
+            <!--TradingView Widget BEGIN-->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" type="text/javascript">
+              {
+              "width": "100%",
+              "height": "100%",
+              "currencies": [ "USD", "JPY", "EUR", "KRW", "CNY", "GBP" ],
+              "isTransparent": true,
+              "colorTheme": "dark",
+              "locale": "kr"
+            }
+              </script>
+            </div>
+            <!--TradingView Widget END-->
+        </div>
+    </div>
+
+    <!--3. 환율 변동성 체크를 위한 히트맵 (스토어 심사용 전문성 어필)-->
+    <div class="section-wrap">
+        <div class="section-title">🔥 주요 통화 <span>강세/약세</span> 히트맵</div>
+        <div class="widget-box" style="height: 400px;">
+            <!--TradingView Widget BEGIN-->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" type="text/javascript">
+              {
+              "width": "100%",
+              "height": "100%",
+              "currencies": [ "USD", "JPY", "EUR", "KRW", "CNY" ],
+              "isTransparent": true,
+              "colorTheme": "dark",
+              "locale": "kr"
+            }
+              </script>
+            </div>
+            <!--TradingView Widget END-->
+        </div>
+    </div>
+
+    <!--4. 고급스러운 매뉴얼 및 면책 조항 (방패막)-->
+    <div class="info-panel-wrap">
+        <div class="guide-box">
+            <div class="guide-title">📖 스마트 환전 마스터 활용 가이드</div>
+            <div class="guide-text">
+                1. <b>정확한 예산 기획:</b> 해외여행을 앞두고 계시거나 직구를 준비 중이신가요? 상단의 시뮬레이터에 예상 금액과 현재 환율을 입력하시면, 우리 돈으로 얼마가 지출될지 즉시 계산해 드립니다.<br /><br />
+                2. <b>환전 타이밍 포착:</b> 하단의 크로스 환율 보드와 히트맵을 통해 현재 원화 대비 어느 국가의 통화가 저렴한지 한눈에 파악하실 수 있습니다. 초록색은 강세, 붉은색은 약세를 의미합니다.<br /><br />
+                3. <b>관세 면제 한도 체크:</b> 해외 직구 시 미국 출발 물품은 보통 <b>미화 200달러</b>, 그 외 국가 출발 물품은 <b>미화 150달러</b>를 초과할 경우 관·부가세가 발생할 수 있으니 결제 전 반드시 금액을 시뮬레이션해 보시기 바랍니다.
+            </div>
+        </div>
+
+        <div class="legal-box">
+            <div class="legal-title">⚠️ 서비스 이용 주의사항 및 면책 조항</div>
+            <div class="legal-text">
+                본 '글로벌 스마트 환전 마스터' 애플리케이션은 사용자의 합리적인 소비와 예산 관리를 돕기 위해 제작된 무료 정보 제공 및 계산기 툴입니다.<br /><br />
+                앱 내에서 제공되는 모든 환율 지표와 히트맵 데이터는 글로벌 시세 제공업체(TradingView)의 실시간 데이터를 기반으로 송출됩니다. 다만, 외환 시장의 특성상 <b>실제 은행 고시 환율, 카드사 청구 환율, 그리고 관세청 고시 환율과는 시간차나 오차가 발생할 수 있습니다.</b><br /><br />
+                따라서 본 앱의 계산 결과 및 시세 정보는 참고용으로만 활용해 주시길 정중히 부탁드리며, 이를 바탕으로 진행된 <b>실제 환전, 해외 송금, 물품 구매 등 모든 금융 거래의 최종 결과에 대해 본 개발자는 어떠한 법적 책임도 지지 않음</b>을 명확히 안내해 드립니다.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function calculateAndShowAd() {
+    var amountInput = document.getElementById('input-amount').value;
+    var rateInput = document.getElementById('input-rate').value;
+    var currency = document.getElementById('select-currency').value;
+
+    var amount = Math.abs(parseFloat(amountInput));
+    var rate = Math.abs(parseFloat(rateInput));
+
+    if (!amount || !rate || isNaN(amount) || isNaN(rate)) {
+        alert("정확한 계산을 위해 올바른 숫자(해외 금액과 환율)를 모두 입력해 주세요.");
+        return;
+    }
+
+    if (currency === "엔화" && rate > 500) {
+        rate = rate / 100;
+    }
+
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott&amt=" + encodeURIComponent(amount) + "&rt=" + encodeURIComponent(rate) + "&cur=" + encodeURIComponent(currency);
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 300);
+}
+
+window.onload = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var amt = urlParams.get('amt');
+    var rt = urlParams.get('rt');
+    var cur = urlParams.get('cur');
+
+    if (amt && rt && cur) {
+        var total = Math.floor(parseFloat(amt) * parseFloat(rt));
+        
+        document.getElementById('input-amount').value = amt;
+        document.getElementById('input-rate').value = rt;
+        document.getElementById('select-currency').value = cur;
+
+        var resultArea = document.getElementById('result-area');
+        var resultText = document.getElementById('result-text');
+        
+        resultArea.style.display = 'block';
+        resultText.innerHTML = total.toLocaleString('ko-KR') + " 원";
+        
+        setTimeout(function() {
+            resultArea.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 300);
+    }
+};
+</script>
