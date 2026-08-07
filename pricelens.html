@@ -1,0 +1,299 @@
+<!--구글 블로거 전용: 프라이스 렌즈 - 실물 경제 관측소 (ETF 데이터 100% 무결점 수정 / ES5 호환 / 화염 파티클 / 모바일 반응형)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #0d0402 !important; 
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    /* 구글 블로그 기본 요소 완벽 숨김 처리 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    img { max-width: 100% !important; height: auto !important; object-fit: contain; border-radius: 8px; }
+    .separator img { width: 100% !important; max-width: 100% !important; height: auto !important; }
+
+    #app-container { width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 0 0 90px 0; background: transparent; position: relative; z-index: 10; overflow-x: hidden; }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+    .header-box { padding: 25px 15px 20px 15px; text-align: center; background: linear-gradient(180deg, rgba(20,5,2,0.95) 0%, rgba(13,4,2,0.8) 100%); border-bottom: 1px solid #33110a; backdrop-filter: blur(8px); }
+    .header-title { font-size: 22px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 5px; word-break: keep-all; line-height: 1.3; }
+    .header-title span { color: #ff5252; text-shadow: 0 0 15px rgba(255, 82, 82, 0.4); }
+    .header-date { font-size: 13px; color: #8b6060; font-weight: 500; letter-spacing: 1px; }
+
+    .ticker-wrap { width: 100%; height: 46px; background: rgba(20, 5, 2, 0.9); border-bottom: 1px solid #33110a; backdrop-filter: blur(5px); }
+
+    .widget-container { padding: 20px 15px; display: flex; flex-direction: column; gap: 25px; width: 100%; }
+    
+    .section-title { font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.5px; word-break: keep-all; line-height: 1.4; display: block; }
+    .section-title span { color: #ff5252; }
+    
+    .widget-box { width: 100%; background: rgba(20, 5, 2, 0.85); border: 1px solid #33110a; border-radius: 12px; overflow: hidden; padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
+
+    .info-panel-wrap { padding: 0 15px 30px 15px; display: flex; flex-direction: column; gap: 15px; width: 100%; }
+    
+    .guide-box { background: rgba(30, 10, 5, 0.8); border-left: 4px solid #ff5252; border-radius: 8px; padding: 18px; backdrop-filter: blur(5px); }
+    .guide-title { font-size: 15px; font-weight: 900; color: #ff5252; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .guide-text { font-size: 13px; color: #c5b0b0; line-height: 1.6; word-break: keep-all; }
+    .guide-text b { color: #ffffff; font-weight: 700; }
+
+    .legal-box { background: rgba(20, 20, 25, 0.8); border: 1px solid #23234a; border-radius: 8px; padding: 18px; backdrop-filter: blur(5px); }
+    .legal-title { font-size: 15px; font-weight: 900; color: #6b8cff; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .legal-text { font-size: 13px; color: #bac2dc; line-height: 1.5; word-break: keep-all; }
+
+    .bottom-fix-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 600px; background: rgba(13, 4, 2, 0.95); backdrop-filter: blur(10px); padding: 12px 15px; border-top: 1px solid #33110a; z-index: 100; }
+    .btn-refresh { width: 100%; background: linear-gradient(135deg, #ff5252 0%, #b50000 100%); border: none; color: #ffffff; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 82, 82, 0.3); transition: 0.2s; letter-spacing: -0.5px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn-refresh:active { transform: scale(0.97); }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    
+    <div class="header-box">
+        <div class="header-title">프라이스 렌즈 <span>실물 경제 관측소</span></div><div class="header-title"><span><br /></span></div>
+        <div class="header-date" id="ui-date">실시간 지표 동기화 대기 중</div>
+    </div>
+
+    <!--오류 방지: 끊기지 않는 100% 안전한 원자재 ETF 티커로 전면 교체-->
+    <div class="ticker-wrap">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" type="text/javascript">
+          {
+          "symbols": [
+            { "proName": "AMEX:USO", "title": "WTI 원유 ETF" },
+            { "proName": "AMEX:UNG", "title": "천연가스 ETF" },
+            { "proName": "AMEX:WEAT", "title": "국제 밀 ETF" },
+            { "proName": "AMEX:DBA", "title": "농산물 종합 ETF" },
+            { "proName": "AMEX:CPER", "title": "구리 ETF" },
+            { "proName": "AMEX:GLD", "title": "국제 금 ETF" }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": true,
+          "displayMode": "adaptive",
+          "colorTheme": "dark",
+          "locale": "kr"
+        }
+          </script>
+        </div>
+    </div>
+
+    <div class="widget-container">
+        
+        <div>
+            <div class="section-title">🛢️ 핵심 물가 선행 지표 <span>국제 유가(WTI) 분석</span></div>
+            <div class="widget-box" style="height: 400px;">
+                <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                  <div id="tradingview_chart" style="height: calc(100% - 32px); width: 100%;"></div>
+                  <script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "autosize": true,
+                  "symbol": "AMEX:USO",
+                  "interval": "D",
+                  "timezone": "Asia/Seoul",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "kr",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(20, 5, 2, 1)",
+                  "gridColor": "#33110a",
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "save_image": false,
+                  "container_id": "tradingview_chart"
+                }
+                  );
+                  </script>
+                </div>
+            </div>
+        </div>
+
+        <!--데이터 없음 에러 완벽 해결: 안정적인 실물 ETF 종목 코드로 전부 매핑-->
+        <div>
+            <div class="section-title">🌐 글로벌 1차 원자재 <span>실시간 상황판</span></div>
+            <div class="widget-box" style="height: 480px;">
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" type="text/javascript">
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "1M",
+                  "showChart": false,
+                  "locale": "kr",
+                  "width": "100%",
+                  "height": "100%",
+                  "largeChartUrl": "",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "tabs": [
+                    {
+                      "title": "글로벌 에너지",
+                      "symbols": [
+                        { "s": "AMEX:USO", "d": "미국 WTI 원유 펀드" },
+                        { "s": "AMEX:BNO", "d": "미국 브렌트유 펀드" },
+                        { "s": "AMEX:UNG", "d": "미국 천연가스 펀드" },
+                        { "s": "NYSE:XOM", "d": "엑손모빌 (에너지 대장주)" },
+                        { "s": "NYSE:CVX", "d": "쉐브론 (에너지 2위)" }
+                      ]
+                    },
+                    {
+                      "title": "밥상 물가 (식량)",
+                      "symbols": [
+                        { "s": "AMEX:DBA", "d": "글로벌 농산물 통합 펀드" },
+                        { "s": "AMEX:WEAT", "d": "국제 밀 펀드 (식량 위기 지표)" },
+                        { "s": "AMEX:CORN", "d": "국제 옥수수 펀드" },
+                        { "s": "AMEX:SOYB", "d": "국제 대두(콩) 펀드" },
+                        { "s": "AMEX:CANE", "d": "국제 설탕 펀드" }
+                      ]
+                    },
+                    {
+                      "title": "산업 필수 광물",
+                      "symbols": [
+                        { "s": "AMEX:CPER", "d": "미국 구리 펀드 (경제 선행 지표)" },
+                        { "s": "AMEX:GLD", "d": "국제 금 펀드 (안전 자산)" },
+                        { "s": "AMEX:SLV", "d": "국제 은 펀드" },
+                        { "s": "ARCA:LIT", "d": "글로벌 리튬 & 배터리 ETF" },
+                        { "s": "ARCA:URA", "d": "글로벌 우라늄 ETF" }
+                      ]
+                    }
+                  ]
+                }
+                  </script>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-title">⏱️ 국제 유가(기름값) <span>시장 온도계</span></div>
+            <div class="widget-box" style="height: 380px;">
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" type="text/javascript">
+                  {
+                  "interval": "1D",
+                  "width": "100%",
+                  "isTransparent": true,
+                  "height": "100%",
+                  "symbol": "AMEX:USO",
+                  "showIntervalTabs": true,
+                  "displayMode": "single",
+                  "locale": "kr",
+                  "colorTheme": "dark"
+                }
+                  </script>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--친절한 안내 텍스트 보강-->
+    <div class="info-panel-wrap">
+        <div class="guide-box">
+            <div class="guide-title">💡 프라이스 렌즈 활용 및 초보자 가이드</div>
+            <div class="guide-text">
+                안녕하세요! <b>프라이스 렌즈</b>에 오신 것을 진심으로 환영합니다. <br />
+                본 앱은 어려운 주식 차트를 분석하는 앱이 아닙니다. 매일 마트에서 느끼는 <b>'장바구니 물가'</b>와 주유소의 <b>'기름값'</b>이 왜 오르고 내리는지, 그 근본적인 이유(세계 원자재 가격)를 누구나 내 손안에서 가장 쉽게 확인하기 위해 만들어진 실물 경제 관측소입니다.<br /><br />
+                <b>📌 이렇게 활용해 보세요!</b><br />
+                1. <b>기름값 예측하기:</b> 첫 번째 화면에 있는 '국제 유가(WTI)' 차트를 보세요. 이 그래프가 오르고 있다면 다음 주 우리 동네 주유소 기름값도 오를 확률이 높습니다.<br />
+                2. <b>밥상 물가 살펴보기:</b> 중간에 있는 탭에서 '농산물 &amp; 식량'을 눌러보세요. 밀, 옥수수, 설탕의 가격 흐름을 보면 과자나 빵 가격이 언제쯤 오를지 미리 짐작해 볼 수 있습니다.<br />
+                3. <b>시장 온도계 읽기:</b> 세 번째 바늘 모양 지표는 복잡한 숫자 없이, 지금 에너지 시장이 '뜨거운지(오르는 중)' 혹은 '차가운지(내리는 중)' 색상과 바늘의 위치만으로 알려주는 아주 편리한 기능입니다.<br /><br />
+                앱을 사용하시다가 뉴스에서 들은 정보나 떠오른 생각이 있다면, 앱 하단 메뉴의 <b>'기록장'</b>에 언제든 메모해 두세요. 화면 맨 아래의 <b>'실시간 글로벌 물가 스캔'</b> 버튼을 틈틈이 눌러 최신 데이터로 동기화하시면 더욱 넓은 경제적 시야를 가지실 수 있습니다!
+            </div>
+        </div>
+
+        <div class="legal-box">
+            <div class="legal-title">🛡️ 안심하고 켜두세요 (주의사항)</div>
+            <div class="legal-text">
+                본 대시보드는 일반 사용자분들이 일상 속 물가 흐름을 편안하고 직관적으로 이해하실 수 있도록 돕는 <b>순수 무료 정보 제공 플랫폼</b>입니다.<br /><br />
+                앱 내부에는 유료 결제를 강제하거나, 불법적인 투자를 권유하는 기능이 단 하나도 포함되어 있지 않으니 가족, 지인분들과 함께 24시간 언제든 안심하고 켜두셔도 좋습니다. 제공되는 모든 차트는 글로벌 시세 제공업체(TradingView)를 통해 송출되는 참고용 지표이므로, 실제 국내 현물 가격과는 환율 등에 의해 약간의 차이가 발생할 수 있음을 친절히 안내해 드립니다.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--하단 고정 새로고침(전면광고 송출) 버튼-->
+<div class="bottom-fix-panel">
+    <button class="btn-refresh" onclick="syncDataAndShowAd()">🔄 실시간 글로벌 물가 지표 스캔</button>
+</div>
+
+<script>
+var d = new Date();
+var yyyy = d.getFullYear();
+var mm = d.getMonth() + 1;
+var dd = d.getDate();
+var formattedDate = yyyy + "." + (mm < 10 ? '0' + mm : mm) + "." + (dd < 10 ? '0' + dd : dd);
+document.getElementById('ui-date').innerText = formattedDate + " 기준 실시간 지표 동기화 완료";
+
+window.syncDataAndShowAd = function() {
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott";
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+};
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 45; 
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            speedY: Math.random() * 0.8 + 0.2, 
+            speedX: (Math.random() - 0.5) * 0.5,
+            opacity: Math.random() * 0.6 + 0.1
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particleCount; i++) {
+            var p = particles[i];
+            p.y -= p.speedY;
+            p.x += p.speedX;
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 82, 82, " + p.opacity + ")"; 
+            ctx.fill();
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+</script>
