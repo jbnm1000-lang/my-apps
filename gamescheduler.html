@@ -1,0 +1,422 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Poppins:wght@600;700;900&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 모바일 강제 헤더 및 모든 불필요 요소 원천 파괴 (초강력) */
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body > header { 
+    display: none !important; 
+    visibility: hidden !important; 
+    opacity: 0 !important; 
+    pointer-events: none !important; 
+    height: 0 !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    overflow: hidden !important;
+    position: absolute !important;
+    top: -9999px !important;
+} 
+
+/* 2. 하얀 공백 및 기본 여백 제거, 전체 화면 다크 게이밍 배경 적용 */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #090d16 !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+    top: 0 !important;
+}
+
+/* 3. 프리미엄 사이버네틱 UI 테마 */
+#game-timer-app {
+    --bg-main: #090d16;
+    --bg-card: #111827;
+    --bg-input: #1f2937;
+    --neon-blue: #3b82f6;
+    --neon-purple: #8b5cf6;
+    --neon-green: #10b981;
+    --neon-red: #ef4444;
+    --neon-gold: #f59e0b;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 40px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-container { max-width: 600px; margin: 0 auto; position: relative; z-index: 10; }
+
+/* 메인 헤더 및 대문 이미지 */
+.app-header { text-align: center; margin-bottom: 24px; }
+.app-header h1 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 6px 0; color: #fff; }
+.app-header h1 span { color: var(--neon-purple); text-shadow: 0 0 10px rgba(139, 92, 246, 0.4); }
+.hero-image-wrap { margin: 20px 0; text-align: center; }
+.hero-image-wrap img { width: 100%; max-width: 500px; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); border: 1px solid rgba(139, 92, 246, 0.2); display: block; margin: 0 auto; }
+.app-header p { color: var(--text-muted); font-size: 13px; margin: 0; word-break: keep-all; }
+
+/* 홍보 안내 배너 */
+.info-banner { background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 100%); border: 1px solid #5b21b6; border-radius: 16px; padding: 16px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.banner-title { font-size: 14px; font-weight: 800; color: var(--neon-gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.banner-desc { font-size: 12px; color: #ddd6fe; margin: 0; line-height: 1.5; word-break: keep-all; }
+
+/* 파트 1. 원클릭 퀵 프리셋 구역 */
+.section-title { font-size: 14px; font-weight: 800; color: var(--neon-cyan); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+.preset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+.preset-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.preset-name { display: block; font-size: 13px; font-weight: 700; color: #f3f4f6; margin-bottom: 10px; word-break: keep-all; }
+.preset-select { width: 100%; padding: 8px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 12px; margin-bottom: 12px; outline: none; cursor: pointer; }
+.preset-select:focus { border-color: var(--neon-purple); }
+.preset-action-btn { width: 100%; padding: 10px; background: rgba(59, 130, 246, 0.15); border: 1px solid var(--neon-blue); color: #60a5fa; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; word-break: keep-all; }
+.preset-action-btn:hover { background: var(--neon-blue); color: #fff; }
+
+/* 파트 2. 커스텀 타이머 생성 카드 */
+.custom-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 22px; margin-bottom: 28px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.field-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--neon-blue); }
+.input-box { margin-bottom: 18px; }
+.input-text { width: 100%; padding: 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 12px; color: #fff; font-size: 15px; outline: none; box-sizing: border-box; transition: all 0.2s; }
+.input-text:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+
+.time-box-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.time-field-wrap { position: relative; }
+.time-field-wrap input { width: 100%; padding: 14px 40px 14px 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 12px; color: #fff; font-size: 15px; outline: none; box-sizing: border-box; text-align: right; }
+.time-field-wrap span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--text-muted); }
+
+.create-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); transition: transform 0.1s; }
+.create-btn:active { transform: scale(0.98); }
+
+/* 파트 3. 실시간 상황판 목록 */
+.board-header-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.timer-container-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+.timer-item-card { background-color: var(--bg-card); border-left: 4px solid var(--neon-blue); border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.timer-item-card.loop-complete { border-left-color: var(--neon-green); background: linear-gradient(90deg, rgba(16, 185, 129, 0.04) 0%, var(--bg-card) 100%); }
+
+.card-left-info { flex: 1; min-width: 0; }
+.card-label-title { font-size: 14px; font-weight: 700; color: #f3f4f6; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-time-display { font-family: 'Poppins', monospace; font-size: 22px; font-weight: 900; color: var(--neon-blue); letter-spacing: 0.5px; }
+
+.timer-item-card.loop-complete .card-time-display { color: var(--neon-green); text-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+
+.card-right-controls { display: flex; gap: 6px; align-items: center; }
+.action-loop-btn { background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.timer-item-card.loop-complete .action-loop-btn { background-color: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
+
+.action-del-btn { background-color: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: var(--neon-red); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+
+/* 빈 목록 상태 */
+.no-data-card { text-align: center; padding: 36px 20px; background-color: rgba(255,255,255,0.01); border: 1px dashed var(--border-color); border-radius: 16px; color: var(--text-muted); font-size: 13px; line-height: 1.6; }
+
+/* 화면 전체 점멸 알람 오버레이 레이어 효과 */
+#screen-flash-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(239, 68, 68, 0.25); z-index: 9999; pointer-events: none; animation: flashLoop 0.5s infinite alternate; }
+@keyframes flashLoop { from { opacity: 0; } to { opacity: 1; } }
+
+/* 규정 및 공익 가이드 라인 (글자 깨짐 완벽 방지) */
+.regulatory-box { background-color: #111827; border: 1px solid #dc2626; border-radius: 16px; padding: 20px; margin-top: 10px; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.05); }
+.regulatory-title { color: #ef4444; font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid rgba(220, 38, 38, 0.2); padding-bottom: 8px; }
+.regulatory-desc { font-size: 12px; color: #f87171; margin: 0; line-height: 1.7; text-align: justify; word-break: keep-all; }
+.regulatory-ul { list-style-type: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #fca5a5; }
+.regulatory-ul li { margin-bottom: 8px; line-height: 1.6; word-break: keep-all; padding-left: 0; }
+.alert-icon { font-weight: 900; color: #fca5a5; margin-right: 5px; }
+
+/* 모바일 화면 최적화 */
+@media (max-width: 480px) {
+    .preset-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div id="screen-flash-overlay"></div>
+
+<div id="game-timer-app">
+    <div class="app-container">
+        
+        <div class="app-header">
+            <h1>[타이머] 유니버설 <span>게임 스케줄러</span></h1>
+
+            <p>보스 정각 젠타임, 유효 행동력 충전, 일일 숙제 루프 최적화 시스템</p>
+        </div>
+
+        <div class="info-banner">
+            <div class="banner-title">[안내] 백그라운드 무한 루프 저장소 기동 중</div>
+            <p class="banner-desc">
+                유저가 수동으로 삭제하기 전까지 맞춤형 데이터가 브라우저 내부에 영구 저장됩니다. 앱을 일시적으로 종료하거나 장치를 재부팅하더라도 시각적 카운트다운은 표준 초정밀 연산 레이어를 통해 정밀하게 백그라운드에서 유지됩니다.
+            </p>
+        </div>
+
+        <div class="section-title">[번개] 초고속 프리셋 매크로</div>
+        <div class="preset-grid">
+            <div class="preset-card">
+                <span class="preset-name">일일 숙제</span>
+                <select class="preset-select" id="preset-daily">
+                    <option value="1440">24시간 간격</option>
+                    <option value="720">12시간 간격</option>
+                    <option value="360">6시간 간격</option>
+                    <option value="240">4시간 간격</option>
+                </select>
+                <button class="preset-action-btn" onclick="addPresetSchedule('일일 숙제', 'preset-daily')">즉시 등록</button>
+            </div>
+            
+            <div class="preset-card">
+                <span class="preset-name">필드 보스</span>
+                <select class="preset-select" id="preset-boss">
+                    <option value="60">1시간 젠타임</option>
+                    <option value="120">2시간 젠타임</option>
+                    <option selected="selected" value="240">4시간 젠타임</option>
+                    <option value="360">6시간 젠타임</option>
+                    <option value="480">8시간 젠타임</option>
+                    <option value="720">12시간 젠타임</option>
+                </select>
+                <button class="preset-action-btn" onclick="addPresetSchedule('필드 보스', 'preset-boss')">즉시 등록</button>
+            </div>
+
+            <div class="preset-card">
+                <span class="preset-name">행동력 충전</span>
+                <select class="preset-select" id="preset-stamina">
+                    <option value="60">1시간 충전</option>
+                    <option value="120">2시간 충전</option>
+                    <option selected="selected" value="160">2시간 40분 충전</option>
+                    <option value="240">4시간 충전</option>
+                    <option value="480">8시간 충전</option>
+                </select>
+                <button class="preset-action-btn" onclick="addPresetSchedule('행동력 충전', 'preset-stamina')">즉시 등록</button>
+            </div>
+        </div>
+
+        <div class="custom-card">
+            <div class="input-box">
+                <span class="field-label">작전 및 보스 오브젝트 명칭</span>
+                <input class="input-text" id="custom-title" maxlength="20" placeholder="예: 리니지 월드보스, 세븐나이츠 상점" type="text" />
+            </div>
+            
+            <span class="field-label">카운트다운 주기 직접 입력</span>
+            <div class="time-box-grid">
+                <div class="time-field-wrap">
+                    <input id="custom-h" max="999" type="number" />
+                    <span>시간</span>
+                </div>
+                <div class="time-field-wrap">
+                    <input id="custom-m" max="59" type="number" />
+                    <span>분</span>
+                </div>
+            </div>
+
+            <button class="create-btn" onclick="createNewCustomSchedule()">레이더 감시 스케줄 등록</button>
+        </div>
+
+        <div class="board-header-wrap">
+            <div class="section-title">[상황판] 실시간 작전 통제 보드</div>
+        </div>
+        <div class="timer-container-list" id="live-timer-container">
+            </div>
+
+        <div class="regulatory-box">
+            <div class="regulatory-title">[경고] 과도한 게임 과몰입 및 사행성 방지 안내</div>
+            <p class="regulatory-desc">
+                본 타이머 유틸리티는 한정된 자산을 효율적으로 안배하여 불필요한 인게임 접속 시간 분배를 지원하고자 설계된 공익형 유틸리티입니다. 정해진 스케줄링 일정에 집착하여 과도한 결제를 단행하거나 건강을 저해하는 과몰입 행위는 일상생활 파탄의 주된 원인이 됩니다.
+            </p>
+            <ul class="regulatory-ul">
+                <li><span class="alert-icon">[!]</span> 게임사에서 제공하는 유료 캡슐형 뽑기 재화는 완전한 수학적 독립 시행으로 구동되므로, 스케줄 주기에 따른 당첨률 조정 확률 행위에 과몰입하지 마십시오.</li>
+                <li><span class="alert-icon">[!]</span> 취침 시간이나 일상 업무 영역을 무시한 과도한 보스 레이드 스케줄 알람 강박은 중독성 뇌 활성 질환을 야기할 수 있어 각별한 주의가 요구됩니다.</li>
+                <li><span class="alert-icon">[!]</span> 모바일 콘텐츠 과몰입 증세로 인해 가계 건전성 침해 및 정서적 고립 등 일상 복귀에 중대한 문제점이 포착될 경우 사행성 통합 예방 무료 지원센터(☎ 국번없이 1336)를 통해 지체 없이 조력을 구하십시오.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    /* 3중 우회 저장소(LocalStorage -> Cookie -> 세션)로 모바일 튕김 완벽 차단 */
+    function pullStoredEngineData() {
+        var data = null;
+        
+        try { data = localStorage.getItem('masterGameSchedules'); } catch(e) {}
+        if (data) return JSON.parse(data);
+
+        try {
+            var match = document.cookie.match(new RegExp('(^| )masterGameSchedules=([^;]+)'));
+            if (match) data = decodeURIComponent(match[2]);
+        } catch(e) {}
+        if (data) return JSON.parse(data);
+
+        try {
+            if (window.name && window.name.indexOf('[') === 0) {
+                data = window.name;
+            }
+        } catch(e) {}
+        if (data) return JSON.parse(data);
+
+        return [];
+    }
+
+    function pushStoredEngineData(payload) {
+        var str = JSON.stringify(payload);
+        
+        try { localStorage.setItem('masterGameSchedules', str); } catch(e) {}
+        
+        try {
+            var d = new Date(); 
+            d.setTime(d.getTime() + (365*24*60*60*1000));
+            document.cookie = "masterGameSchedules=" + encodeURIComponent(str) + ";expires=" + d.toUTCString() + ";path=/";
+        } catch(e) {}
+        
+        try { window.name = str; } catch(e) {}
+    }
+
+    /* 전면광고 노출을 위한 필수 새로고침 파라미터 로직 */
+    function triggerAdReload(actionState) {
+        var token = Math.floor(Math.random() * 99999) + 1;
+        var cleanBaseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = cleanBaseUrl + "?state=" + actionState + "&uid_token=" + token;
+    }
+
+    function addPresetSchedule(name, selectElementId) {
+        var totalMinutes = parseInt(document.getElementById(selectElementId).value);
+        if (!totalMinutes || totalMinutes <= 0) return;
+
+        var durationMs = totalMinutes * 60 * 1000;
+        var calculatedEndTime = new Date().getTime() + durationMs;
+
+        var database = pullStoredEngineData();
+        database.push({
+            uid: 'timer_' + new Date().getTime() + '_' + Math.floor(Math.random()*100),
+            title: name,
+            duration: durationMs,
+            targetTime: calculatedEndTime
+        });
+        pushStoredEngineData(database);
+
+        triggerAdReload("preset_fired");
+    }
+
+    function createNewCustomSchedule() {
+        var titleText = document.getElementById('custom-title').value.trim();
+        var hoursVal = parseInt(document.getElementById('custom-h').value) || 0;
+        var minutesVal = parseInt(document.getElementById('custom-m').value) || 0;
+
+        if (!titleText) { alert('작전 혹은 추적 대상의 이름을 지정하십시오.'); return; }
+        if (hoursVal === 0 && minutesVal === 0) { alert('정확한 알람 구동 주기를 시간/분 단위로 환산 기입해 주십시오.'); return; }
+
+        var durationMs = (hoursVal * 60 * 60 * 1000) + (minutesVal * 60 * 1000);
+        var calculatedEndTime = new Date().getTime() + durationMs;
+
+        var database = pullStoredEngineData();
+        database.push({
+            uid: 'timer_' + new Date().getTime() + '_' + Math.floor(Math.random()*100),
+            title: titleText,
+            duration: durationMs,
+            targetTime: calculatedEndTime
+        });
+        pushStoredEngineData(database);
+
+        triggerAdReload("custom_fired");
+    }
+
+    function loopRestartTimer(uid) {
+        var database = pullStoredEngineData();
+        var index = database.findIndex(function(item) { return item.uid === uid; });
+        
+        if (index !== -1) {
+            database[index].targetTime = new Date().getTime() + database[index].duration;
+            pushStoredEngineData(database);
+        }
+
+        triggerAdReload("loop_triggered");
+    }
+
+    function eliminateTimer(uid) {
+        var database = pullStoredEngineData();
+        var filtered = database.filter(function(item) { return item.uid !== uid; });
+        pushStoredEngineData(filtered);
+
+        triggerAdReload("purge_triggered");
+    }
+
+    function doubleDigitFormat(number) {
+        return number < 10 ? '0' + number : number;
+    }
+
+    function runCoreTimerEngine() {
+        var database = pullStoredEngineData();
+        var listWrapper = document.getElementById('live-timer-container');
+        
+        if (database.length === 0) {
+            listWrapper.innerHTML = '<div class="no-data-card">추적 중인 활성 작전 타이머가 공백 상태입니다.<br/>옵션을 선택해 즉시 등록하거나 상단 폼에 자유롭게 세팅하십시오.</div>';
+            document.getElementById('screen-flash-overlay').style.display = 'none';
+            return;
+        }
+
+        var currentStamp = new Date().getTime();
+        var markup = '';
+        var triggerGlobalAlertFlash = false;
+
+        database.forEach(function(item) {
+            var gap = item.targetTime - currentStamp;
+
+            if (gap > 0) {
+                var h = Math.floor(gap / (1000 * 60 * 60));
+                var m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                var s = Math.floor((gap % (1000 * 60)) / 1000);
+                var clockString = doubleDigitFormat(h) + ":" + doubleDigitFormat(m) + ":" + doubleDigitFormat(s);
+
+                markup += '<div class="timer-item-card">';
+                markup += '  <div class="card-left-info">';
+                markup += '    <div class="card-label-title">[목표] ' + item.title + '</div>';
+                markup += '    <div class="card-time-display">' + clockString + '</div>';
+                markup += '  </div>';
+                markup += '  <div class="card-right-controls">';
+                markup += '    <button class="action-loop-btn" onclick="loopRestartTimer(\'' + item.uid + '\')">보스 컷</button>';
+                markup += '    <button class="action-del-btn" onclick="eliminateTimer(\'' + item.uid + '\')">삭제</button>';
+                markup += '  </div>';
+                markup += '</div>';
+            } else {
+                triggerGlobalAlertFlash = true;
+
+                markup += '<div class="timer-item-card loop-complete">';
+                markup += '  <div class="card-left-info">';
+                markup += '    <div class="card-label-title">[완료] ' + item.title + '</div>';
+                markup += '    <div class="card-time-display">작전 즉시 개시!</div>';
+                markup += '  </div>';
+                markup += '  <div class="card-right-controls">';
+                markup += '    <button class="action-loop-btn" onclick="loopRestartTimer(\'' + item.uid + '\')">루프 재시작</button>';
+                markup += '    <button class="action-del-btn" onclick="eliminateTimer(\'' + item.uid + '\')">삭제</button>';
+                markup += '  </div>';
+                markup += '</div>';
+            }
+        });
+
+        listWrapper.innerHTML = markup;
+
+        if (triggerGlobalAlertFlash) {
+            document.getElementById('screen-flash-overlay').style.display = 'block';
+        } else {
+            document.getElementById('screen-flash-overlay').style.display = 'none';
+        }
+    }
+
+    setInterval(runCoreTimerEngine, 1000);
+    runCoreTimerEngine();
+//]]>
+</script>
