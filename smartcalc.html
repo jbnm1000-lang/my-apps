@@ -1,0 +1,421 @@
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Poppins:wght@600;700;900&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+/* 1. 구글 블로그 모바일/PC 테마 강제 레이아웃 및 찌꺼기 원천 파괴 (초강력) */
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body > header { 
+    display: none !important; 
+    visibility: hidden !important; 
+    opacity: 0 !important; 
+    pointer-events: none !important; 
+    height: 0 !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    overflow: hidden !important;
+    position: absolute !important;
+    top: -9999px !important;
+} 
+
+/* 2. 전체 화면 여백 리셋 및 프리미엄 다크 투자 테마 배경 도배 */
+html, body, .page, .main-outer, .main-inner, .columns, .post-body, .post-outer, .content-inner, .content-outer, .region-inner { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #090d16 !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh !important;
+    top: 0 !important;
+}
+
+/* 3. 사이버네틱 하이엔드 투자 UI 메인 스펙 선언 */
+#financial-calc-app {
+    --bg-main: #090d16;
+    --bg-card: #111827;
+    --bg-input: #1f2937;
+    --neon-blue: #3b82f6;
+    --neon-purple: #8b5cf6;
+    --neon-green: #10b981;
+    --neon-red: #ef4444;
+    --neon-gold: #f59e0b;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 50px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-container { max-width: 600px; margin: 0 auto; position: relative; z-index: 10; }
+
+/* 앱 메인 헤더 디스플레이 */
+.app-header { text-align: center; margin-bottom: 24px; }
+.app-header h1 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 6px 0; color: #fff; }
+.app-header h1 span { color: var(--neon-blue); text-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+.app-header p { color: var(--text-muted); font-size: 13px; margin: 0; word-break: keep-all; }
+
+/* 초보자용 가이드 박스 */
+.guide-box { background-color: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+.guide-box-title { font-size: 13px; font-weight: 800; color: #60a5fa; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.guide-box-text { font-size: 12px; color: #cbd5e1; margin: 0; line-height: 1.6; word-break: keep-all; }
+.guide-box-text strong { color: #fff; }
+
+/* 세션 타이틀 폰트 */
+.section-title { font-size: 15px; font-weight: 800; color: #f3f4f6; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-left: 4px solid var(--neon-blue); padding-left: 8px; margin-top: 32px; }
+
+/* 프리미엄 입력 카드 */
+.calc-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.card-sub-header { font-size: 13px; font-weight: 700; color: var(--neon-gold); margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
+
+.input-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.input-field-wrap { position: relative; }
+.input-field-wrap label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.input-field-wrap input { width: 100%; padding: 12px 35px 12px 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; box-sizing: border-box; text-align: right; font-family: 'Poppins', sans-serif; font-weight: 600; }
+.input-field-wrap input:focus { border-color: var(--neon-blue); box-shadow: 0 0 8px rgba(59, 130, 246, 0.2); }
+.input-field-wrap .unit { position: absolute; right: 12px; top: 34px; font-size: 12px; color: var(--text-muted); font-weight: 700; }
+
+/* 수수료 전용 셀렉트 박스 */
+.fee-select-wrap { margin-bottom: 18px; }
+.fee-select-wrap label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.fee-select { width: 100%; padding: 12px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: 10px; font-size: 14px; outline: none; cursor: pointer; font-weight: 600; }
+
+/* 트리거 실행 버튼 */
+.action-calc-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%); color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); transition: all 0.1s; margin-top: 10px; }
+.action-calc-btn:active { transform: scale(0.99); }
+
+/* 초정밀 실시간 연산 출력 보드 */
+.output-display-board { background-color: #0b0f19; border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 14px; padding: 16px; margin-top: 18px; }
+.output-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); }
+.output-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.output-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+.output-value { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 800; color: #fff; text-align: right; }
+.output-value.total-highlight { font-size: 18px; color: var(--neon-green); text-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+.output-value.profit-plus { color: var(--neon-green); }
+.output-value.profit-minus { color: var(--neon-red); }
+
+/* 구글 규정 준수 및 금융 과몰입 경고보드 */
+.compliance-regulatory-box { background-color: #111827; border: 1px solid #dc2626; border-radius: 16px; padding: 20px; margin-top: 32px; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.05); }
+.compliance-title { color: #ef4444; font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid rgba(220, 38, 38, 0.2); padding-bottom: 8px; }
+.compliance-desc { font-size: 12px; color: #f87171; margin: 0; line-height: 1.7; text-align: justify; word-break: keep-all; }
+.compliance-ul { list-style-type: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #fca5a5; }
+.compliance-ul li { margin-bottom: 8px; line-height: 1.6; word-break: keep-all; padding-left: 0; }
+.compliance-marker { font-weight: 900; color: #ef4444; margin-right: 4px; }
+</style>
+
+<div id="screen-flash-overlay"></div>
+
+<div id="financial-calc-app">
+    <div class="app-container">
+        
+        <div class="app-header">
+            <h1>[역산] 스마트 <span>평단가 탈출기</span></h1>
+            
+            <div>
+                <div class="separator" style="clear: both; text-align: center;"><br /></div>
+            </div>
+            
+            <p>초보자도 쉽게! 목표 평단가 및 순수익금 역산 시뮬레이터</p>
+        </div>
+        
+        <div class="section-title">📉 1. 목표 평단가 탈출 역산기 (물타기)</div>
+        <div class="calc-card">
+            
+            <div class="guide-box">
+                <div class="guide-box-title">💡 어떻게 사용하나요?</div>
+                <p class="guide-box-text">
+                    "현재 내 평단가가 너무 높아 탈출하고 싶다!"<br />
+                    내가 <strong>원하는 목표 평단가</strong>와 <strong>현재 시장가(주가)</strong>를 입력하면, 정확히 <strong>'지금 가격에 얼마를 더 사야'</strong> 내 평단가가 그 가격으로 낮춰지는지 계산해 줍니다.
+                </p>
+            </div>
+
+            <div class="card-sub-header">내 자산 상태</div>
+            <div class="input-row-grid">
+                <div class="input-field-wrap">
+                    <label>내 현재 평단가</label>
+                    <input id="p1-cur-price" placeholder="예: 10000" type="number" />
+                    <span class="unit">원</span>
+                </div>
+                <div class="input-field-wrap">
+                    <label>현재 보유 수량</label>
+                    <input id="p1-cur-qty" placeholder="예: 100" type="number" />
+                    <span class="unit">개</span>
+                </div>
+            </div>
+
+            <div class="card-sub-header">탈출 목표 설정</div>
+            <div class="input-row-grid">
+                <div class="input-field-wrap">
+                    <label>원하는 목표 평단가</label>
+                    <input id="p1-target-avg" placeholder="예: 8000" type="number" />
+                    <span class="unit">원</span>
+                </div>
+                <div class="input-field-wrap">
+                    <label>현재 시장가 (물탈 가격)</label>
+                    <input id="p1-market-price" placeholder="예: 6000" type="number" />
+                    <span class="unit">원</span>
+                </div>
+            </div>
+
+            <button class="action-calc-btn" onclick="calcReverseWatering()">탈출 견적 계산하기</button>
+
+            <div class="output-display-board">
+                <div class="output-row">
+                    <span class="output-label">기존 투자 총액</span>
+                    <span class="output-value" id="out1-cur-total">0 원</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">필요 추가 매수 수량</span>
+                    <span class="output-value" id="out1-need-qty">0 개</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">필요 추가 매수 금액</span>
+                    <span class="output-value total-highlight" id="out1-need-money">0 원</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">물타기 후 총 투자금</span>
+                    <span class="output-value" id="out1-final-total">0 원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">💰 2. 목표 순수익금(현금) 역산기 (익절)</div>
+        <div class="calc-card">
+            
+            <div class="guide-box">
+                <div class="guide-box-title">💡 어떻게 사용하나요?</div>
+                <p class="guide-box-text">
+                    "퍼센트(%) 말고, 내 통장에 딱 <strong>100만 원</strong>만 떨어지게 하고 싶다!"<br />
+                    벌고 싶은 <strong>정확한 목표 현금 금액</strong>을 입력하면, 세금과 거래소 수수료를 전부 떼고 <strong>정확히 '얼마에 팔아야'</strong> 그 돈이 남는지 타점을 잡아줍니다.
+                </p>
+            </div>
+
+            <div class="card-sub-header">내 자산 상태</div>
+            <div class="input-row-grid">
+                <div class="input-field-wrap">
+                    <label>내 현재 평단가</label>
+                    <input id="p2-cur-price" type="number" />
+                    <span class="unit">원</span>
+                </div>
+                <div class="input-field-wrap">
+                    <label>현재 보유 수량</label>
+                    <input id="p2-cur-qty" type="number" />
+                    <span class="unit">개</span>
+                </div>
+            </div>
+
+            <div class="card-sub-header">수익 및 수수료 설정</div>
+            <div class="input-row-grid">
+                <div class="input-field-wrap">
+                    <label>원하는 순수익금(현금)</label>
+                    <input id="p2-target-profit" placeholder="예: 1000000" type="number" />
+                    <span class="unit">원</span>
+                </div>
+            </div>
+            <div class="fee-select-wrap">
+                <label>거래 수수료 (편도 기준)</label>
+                <select class="fee-select" id="p2-fee-rate">
+                    <option value="0.00015">국내 주식 모바일 일반 (0.015%)</option>
+                    <option value="0.0005">암호화폐 거래소 일반 (0.05%)</option>
+                    <option value="0.0025">해외 주식 일반 (0.25%)</option>
+                    <option value="0">수수료 무료 (0.00%)</option>
+                </select>
+            </div>
+
+            <button class="action-calc-btn" onclick="calcReverseProfit()">매도 타점 계산하기</button>
+
+            <div class="output-display-board">
+                <div class="output-row">
+                    <span class="output-label">기존 총 매수 금액</span>
+                    <span class="output-value" id="out2-buy-total">0 원</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">예상 납부 수수료 총합</span>
+                    <span class="output-value" id="out2-total-fee">0 원</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">목표 매도 지정가 (타점)</span>
+                    <span class="output-value total-highlight" id="out2-sell-price">0 원</span>
+                </div>
+                <div class="output-row">
+                    <span class="output-label">매도 후 총 회수 금액</span>
+                    <span class="output-value" id="out2-sell-total">0 원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="compliance-regulatory-box">
+            <div class="compliance-title">[필수 고지] 투자 위험성 및 자산 관리 기준 안내</div>
+            <p class="compliance-desc">
+                본 자산 연산 프로그램은 사용자가 직접 기입한 수학적 수치를 단순 연산 공식에 의거하여 결괏값을 도출하는 공익형 범용 유틸리티 도구입니다. 특정 금융 상품, 주식 종목, 암호화폐 토큰의 매수·매도를 권유하는 리딩 및 투자 자문 행위와 무관합니다.
+            </p>
+            <ul class="compliance-ul">
+                <li><span class="compliance-marker">[주의]</span> 본 계산기에서 산출된 정산 내역은 거래소별 세금 부과 방식이나 소수점 처리 기준에 따라 실제 정산금과 미세한 오차가 발생할 수 있으므로 최종 투자 결정의 법적 책임 근거로 활용될 수 없습니다.</li>
+                <li><span class="compliance-marker">[주의]</span> 레버리지 상품이나 변동성이 극심한 고위험성 자산에 대한 과도한 물타기 행위는 원금의 전액 손실과 가계 재정 파탄을 야기하는 지름길이 되므로 절대 지양하십시오.</li>
+                <li><span class="compliance-marker">[주의]</span> 타인의 리딩 행위에 현혹되어 뇌동매매를 반복하거나 일상생활을 저해할 수준의 투자 과몰입 증세가 지속될 경우, 사행성 및 도박 중독 예방 전문 상담센터의 즉각적인 조력을 구하시기 바랍니다.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    /* 3중 우회 저장소 안전 보장 레이어 */
+    function readStateBackup() {
+        var val = null;
+        try { val = localStorage.getItem('financial_reverse_data'); } catch(e) {}
+        if (val) return JSON.parse(val);
+
+        try {
+            var m = document.cookie.match(new RegExp('(^| )financial_reverse_data=([^;]+)'));
+            if (m) val = decodeURIComponent(m[2]);
+        } catch(e) {}
+        if (val) return JSON.parse(val);
+
+        try { 
+            if (window.name) {
+                if (window.name.indexOf('{') === 0) {
+                    val = window.name; 
+                }
+            }
+        } catch(e) {}
+        if (val) return JSON.parse(val);
+
+        return null;
+    }
+
+    function writeStateBackup(obj) {
+        var str = JSON.stringify(obj);
+        try { localStorage.setItem('financial_reverse_data', str); } catch(e) {}
+        try {
+            var d = new Date(); d.setTime(d.getTime() + (30*24*60*60*1000));
+            document.cookie = "financial_reverse_data=" + encodeURIComponent(str) + ";expires=" + d.toUTCString() + ";path=/";
+        } catch(e) {}
+        try { window.name = str; } catch(e) {}
+    }
+
+    function formatMoney(num) {
+        if (!isFinite(num) || isNaN(num)) return "0";
+        return Number(num).toLocaleString('ko-KR', { maximumFractionDigits: 2 });
+    }
+
+    function forceAdInterstitialReload(actionName) {
+        var token = Math.floor(Math.random() * 99999) + 1;
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseUrl + "?calc_action=" + actionName + "\x26r=" + token;
+    }
+
+    function calcReverseWatering() {
+        var Pc = parseFloat(document.getElementById('p1-cur-price').value) || 0;
+        var Qc = parseFloat(document.getElementById('p1-cur-qty').value) || 0;
+        var Pt = parseFloat(document.getElementById('p1-target-avg').value) || 0;
+        var Pm = parseFloat(document.getElementById('p1-market-price').value) || 0;
+
+        if (!(Pc > 0) || !(Qc > 0) || !(Pt > 0) || !(Pm > 0)) {
+            alert("가격을 정확히 입력해 주세요.");
+            return;
+        }
+
+        if (!(Pc > Pt)) {
+            alert("목표 평단가는 현재 평단가보다 낮아야 합니다.");
+            return;
+        }
+        if (!(Pt > Pm)) {
+            alert("현재 시장가(물탈 가격)가 목표 평단가보다 높거나 같으면, 아무리 많이 사도 목표 평단가로 낮출 수 없습니다.");
+            return;
+        }
+
+        var Qa = (Qc * (Pc - Pt)) / (Pt - Pm);
+        var curTotal = Pc * Qc;
+        var needMoney = Pm * Qa;
+        var finalTotal = curTotal + needMoney;
+
+        var backup = readStateBackup() || {};
+        backup.part1 = { Pc: Pc, Qc: Qc, Pt: Pt, Pm: Pm, Qa: Qa, curTotal: curTotal, needMoney: needMoney, finalTotal: finalTotal };
+        writeStateBackup(backup);
+
+        forceAdInterstitialReload("water_calculated");
+    }
+
+    function calcReverseProfit() {
+        var Pb = parseFloat(document.getElementById('p2-cur-price').value) || 0;
+        var Q = parseFloat(document.getElementById('p2-cur-qty').value) || 0;
+        var Target = parseFloat(document.getElementById('p2-target-profit').value) || 0;
+        var F = parseFloat(document.getElementById('p2-fee-rate').value) || 0;
+
+        if (!(Pb > 0) || !(Q > 0)) {
+            alert("현재 평단가와 수량을 정확히 입력해 주세요.");
+            return;
+        }
+        if (!(Target > 0)) {
+            alert("원하시는 목표 순수익 금액을 입력해 주세요.");
+            return;
+        }
+
+        var buyTotal = Pb * Q;
+        var sellPrice = (Target + (Pb * Q * (1 + F))) / (Q * (1 - F));
+        var sellTotal = sellPrice * Q;
+        var totalFee = (buyTotal * F) + (sellTotal * F);
+
+        var backup = readStateBackup() || {};
+        backup.part2 = { Pb: Pb, Q: Q, Target: Target, F: F, buyTotal: buyTotal, sellPrice: sellPrice, sellTotal: sellTotal, totalFee: totalFee };
+        writeStateBackup(backup);
+
+        forceAdInterstitialReload("profit_calculated");
+    }
+
+    function restoreStateAndRender() {
+        var backup = readStateBackup();
+        if (!backup) return;
+
+        if (backup.part1) {
+            var d1 = backup.part1;
+            document.getElementById('p1-cur-price').value = d1.Pc || "";
+            document.getElementById('p1-cur-qty').value = d1.Qc || "";
+            document.getElementById('p1-target-avg').value = d1.Pt || "";
+            document.getElementById('p1-market-price').value = d1.Pm || "";
+
+            document.getElementById('out1-cur-total').innerText = formatMoney(d1.curTotal) + " 원";
+            document.getElementById('out1-need-qty').innerText = formatMoney(d1.Qa) + " 개";
+            document.getElementById('out1-need-money').innerText = formatMoney(d1.needMoney) + " 원";
+            document.getElementById('out1-final-total').innerText = formatMoney(d1.finalTotal) + " 원";
+        }
+
+        if (backup.part2) {
+            var d2 = backup.part2;
+            document.getElementById('p2-cur-price').value = d2.Pb || "";
+            document.getElementById('p2-cur-qty').value = d2.Q || "";
+            document.getElementById('p2-target-profit').value = d2.Target || "";
+            document.getElementById('p2-fee-rate').value = d2.F;
+
+            document.getElementById('out2-buy-total').innerText = formatMoney(d2.buyTotal) + " 원";
+            document.getElementById('out2-total-fee').innerText = formatMoney(d2.totalFee) + " 원";
+            document.getElementById('out2-sell-price').innerText = formatMoney(d2.sellPrice) + " 원";
+            document.getElementById('out2-sell-total').innerText = formatMoney(d2.sellTotal) + " 원";
+        }
+    }
+
+    window.onload = function() {
+        restoreStateAndRender();
+    };
+</script>
