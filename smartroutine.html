@@ -1,0 +1,522 @@
+<!--구글 블로거 전용: 스마트 루틴 챌린지 (UI 깨짐 수정 / 쿠키 이중 저장 / 방패막 메인 배치 완벽 적용)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        margin: 0 !important; padding: 0 !important;
+        background-color: #09090b !important;
+        overflow-x: hidden !important;
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    #app-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at top, #18181b 0%, #09090b 100%); overflow: hidden; pointer-events: none; }
+    .particle { position: absolute; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 10px #3b82f6; opacity: 0; animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.3); opacity: 0; } 20% { opacity: 0.3; } 80% { opacity: 0.1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
+
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 20px; }
+
+    /* 프리미엄 헤더 */
+    .header-box { text-align: center; margin-bottom: 20px; padding-bottom: 15px; }
+    .header-title { font-size: 24px; font-weight: 900; color: #f5f5f4; letter-spacing: 1px; margin-bottom: 5px; }
+    .header-title span { color: #3b82f6; text-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+    .header-date { font-size: 14px; color: #a1a1aa; font-weight: 500; }
+
+    /* 2단 탭 메뉴 */
+    .tab-container { display: flex; gap: 8px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; background: #18181b; border: 1px solid #3f3f46; color: #a1a1aa; padding: 14px 0; border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s; text-align: center; }
+    .tab-btn.active { background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+
+    .view-area { display: flex; flex-direction: column; flex-grow: 1; }
+
+    /* --- [탭 1: 루틴 챌린지 메인] --- */
+    .mission-card { background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 100%); border: 1px solid #3b82f6; border-radius: 16px; padding: 25px 20px; margin-bottom: 20px; text-align: center; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.5); }
+    .mission-title { font-size: 15px; color: #93c5fd; font-weight: 700; margin-bottom: 10px; }
+    
+    /* 글씨 겹침 해결: 폰트 사이즈 조정 및 줄 간격(line-height) 확보 */
+    .mission-value { font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; line-height: 1.4; word-break: keep-all; }
+    .mission-value span { color: #60a5fa; font-size: 28px; }
+    
+    .mission-done { display: none; font-size: 20px; font-weight: 900; color: #34d399; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+    .input-section { background: #18181b; border: 1px solid #3f3f46; border-radius: 12px; padding: 10px; display: flex; gap: 8px; margin-bottom: 20px; }
+    .med-input { flex-grow: 1; background: transparent; border: none; color: #f5f5f4; padding: 10px; font-size: 15px; outline: none; }
+    .med-input::placeholder { color: #71717a; }
+    .btn-add { background: #3f3f46; color: #f5f5f4; border: none; padding: 0 20px; border-radius: 8px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .btn-add:active { transform: scale(0.95); background: #52525b; }
+
+    .med-list { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; padding-bottom: 25px; }
+    .med-card { background: rgba(39, 39, 42, 0.5); border: 1px solid #3f3f46; border-left: 4px solid #60a5fa; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+    .med-header { display: flex; justify-content: space-between; align-items: center; }
+    .med-name { font-size: 17px; font-weight: 800; color: #f5f5f4; letter-spacing: -0.5px; }
+    .btn-del { background: transparent; color: #71717a; border: none; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline; }
+    
+    .med-status { font-size: 13px; color: #a1a1aa; font-weight: 500; background: #18181b; padding: 8px 12px; border-radius: 6px; display: inline-block; align-self: flex-start; }
+    .med-status b { color: #3b82f6; }
+    .med-status.all-done { color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .time-group { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; position: relative; }
+    .time-btn { background: #18181b; border: 1px solid #52525b; color: #a1a1aa; padding: 14px 0; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; overflow: hidden; }
+    .time-btn.checked { background: #10b981; border-color: #059669; color: #ffffff; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+    
+    .plus-one { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: 900; font-size: 18px; text-shadow: 0 0 10px #10b981; pointer-events: none; animation: floatUpText 0.6s ease-out forwards; z-index: 10; }
+    @keyframes floatUpText { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -150%) scale(1.5); } }
+
+    .empty-msg { text-align: center; color: #71717a; padding: 40px 0; font-size: 15px; line-height: 1.6; }
+
+    /* 메인 하단: VIP 안내서 및 방패막 */
+    .vip-guide-box { background: rgba(39, 39, 42, 0.6); border: 1px solid #3f3f46; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+    .vip-guide-title { font-size: 16px; font-weight: 900; color: #3b82f6; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .vip-guide-text { font-size: 14px; color: #d4d4d8; line-height: 1.65; font-weight: 400; word-break: keep-all; }
+    .vip-guide-text b { color: #f5f5f4; font-weight: 700; }
+
+    .legal-shield-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 18px; margin-bottom: 25px; color: #fca5a5; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+    .legal-shield-box b { color: #f87171; font-size: 14.5px; display: block; margin-bottom: 8px; }
+
+    /* --- [탭 2: 내 등급 챌린지] --- */
+    .rank-box { background: linear-gradient(145deg, #18181b, #27272a); border: 1px solid #3f3f46; border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .rank-badge { width: 100px; height: 100px; margin: 0 auto 15px auto; border-radius: 50%; background: #09090b; border: 3px solid #3b82f6; display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: 900; color: #60a5fa; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    .rank-title { font-size: 22px; font-weight: 900; color: #f5f5f4; margin-bottom: 5px; }
+    
+    .streak-compare { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+    .streak-item { background: #18181b; padding: 12px 20px; border-radius: 10px; border: 1px solid #3f3f46; }
+    .streak-label { font-size: 12px; color: #a1a1aa; font-weight: 700; margin-bottom: 4px; }
+    .streak-val { font-size: 20px; font-weight: 900; color: #f5f5f4; }
+    .streak-val.best { color: #f59e0b; }
+    .streak-val.curr { color: #3b82f6; }
+
+    .rank-progress-wrap { margin-top: 25px; text-align: left; }
+    .rank-progress-text { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #a1a1aa; margin-bottom: 8px; }
+    .rank-progress-text b { color: #2dd4bf; }
+    .progress-track { width: 100%; height: 10px; background: #18181b; border-radius: 10px; overflow: hidden; border: 1px solid #3f3f46; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6 0%, #2dd4bf 100%); border-radius: 10px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* 공통 하단 패널 */
+    .bottom-panel { margin-top: auto; padding-top: 15px; border-top: 1px solid #27272a; }
+    .btn-save-main { width: 100%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: none; color: #ffffff; padding: 18px; border-radius: 12px; font-size: 17px; font-weight: 900; cursor: pointer; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); transition: 0.2s; letter-spacing: -0.5px; }
+    .btn-save-main:active { transform: scale(0.97); }
+</style>
+
+<div id="app-bg"></div>
+
+<div id="app-container">
+    
+    <div class="header-box">
+        <div class="header-title">스마트 <span>하루 챌린지</span></div><div class="header-title"><br /><br /><span><br /></span></div>
+        <div class="header-date" id="ui-date">2026년 00월 00일</div>
+    </div>
+
+    <!--2단 탭으로 깔끔하게 정리-->
+    <div class="tab-container">
+        <div class="tab-btn active" id="tab-main" onclick="switchTab('main')">오늘 미션</div>
+        <div class="tab-btn" id="tab-rank" onclick="switchTab('rank')">내 랭크</div>
+    </div>
+
+    <!--[1] 메인 미션 화면-->
+    <div class="view-area" id="view-main">
+        <div class="mission-card">
+            <div id="mission-active">
+                <div class="mission-title">오늘 반드시 완료해야 할 미션</div>
+                <div class="mission-value" id="ui-mission-left">새로운 미션을<br /><span>추가</span>해 주세요!</div>
+            </div>
+            <div class="mission-done" id="mission-complete">
+                🎉 오늘 미션 100% 달성 완료! 🎉<br />
+                <span style="color: #a1a1aa; display: block; font-size: 14.5px; font-weight: 500; margin-top: 10px;">아래 저장 버튼을 눌러 달성 기록을 갱신하세요.</span>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <input class="med-input" id="input-med" onkeypress="handleEnter(event)" placeholder="예: 비타민, 저녁 스트레칭 등" type="text" />
+            <button class="btn-add" onclick="addMed()">추가</button>
+        </div>
+
+        <div class="med-list" id="med-list"></div>
+
+        <!--모두가 볼 수 있도록 메인 하단에 고정된 VIP 안내서 & 방패막-->
+        <div class="vip-guide-box">
+            <div class="vip-guide-title">💡 스마트 챌린지 이용 안내</div>
+            <div class="vip-guide-text">
+                <b>안녕하세요! 오늘도 건강한 하루를 위해 방문해 주셔서 진심으로 환영합니다.</b><br /><br />
+                1. 상단의 입력칸에 매일 챙겨야 할 영양제, 운동, 수분 섭취 등 나만의 미션을 자유롭게 적고 <b>'추가'</b> 버튼을 눌러주세요.<br />
+                2. 시간대별로 목표를 실천하신 뒤 가볍게 터치하시면 기분 좋은 효과와 함께 완료 처리됩니다.<br />
+                3. 모든 일정을 마치신 후에는 반드시 맨 아래의 <b>'오늘 완료하고 등급 올리기'</b> 파란색 버튼을 눌러주세요. 기록이 꼼꼼하게 저장되며 나의 건강 등급이 상승합니다!
+            </div>
+        </div>
+
+        <div class="legal-shield-box">
+            <b>⚠️ 서비스 이용 주의사항 (법적 고지 필독)</b>
+            본 어플리케이션은 사용자님께서 스스로 일상을 꼼꼼하게 기록하고 긍정적인 습관을 만드실 수 있도록 도움을 드리는 <b>'단순 기록용 챌린지 툴'</b>입니다.<br /><br />
+            본 앱은 전문적인 의료 기기 또는 의료 서비스가 아니며, 질병의 진단, 치료, 처방, 예방을 목적으로 하지 않습니다. 건강 관련 상담이나 복약 지도는 반드시 전문 의사 또는 약사님과 상의해 주시기 바랍니다.
+        </div>
+
+        <div class="bottom-panel">
+            <button class="btn-save-main" onclick="saveAndTriggerAd()">오늘 완료하고 등급 올리기</button>
+        </div>
+    </div>
+
+    <!--[2] 내 등급 화면-->
+    <div class="view-area" id="view-rank" style="display: none;">
+        <div class="rank-box">
+            <div class="rank-badge" id="ui-rank-lv">Lv.1</div>
+            <div class="rank-title" id="ui-rank-title">방구석 요양러</div>
+            
+            <div class="streak-compare">
+                <div class="streak-item">
+                    <div class="streak-label">내 최고 기록</div>
+                    <div class="streak-val best" id="ui-best-streak">0일</div>
+                </div>
+                <div class="streak-item">
+                    <div class="streak-label">현재 연속 기록</div>
+                    <div class="streak-val curr" id="ui-curr-streak">0일</div>
+                </div>
+            </div>
+
+            <div class="rank-progress-wrap">
+                <div class="rank-progress-text">
+                    <span>다음 등급까지</span>
+                    <span id="ui-rank-left-text"><b>3일</b> 남음</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="ui-rank-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ES5 엄격 문법 및 철벽 데이터 보존 로직 (쿠키 + 로컬스토리지 이중화)
+var DATA_KEY = "SmartMedApp_VIP";
+var appData = {
+    date: "",
+    streak: 0,
+    bestStreak: 0,
+    lastStreakDate: "",
+    meds: []
+};
+
+var rankConfig = [
+    { req: 0, name: "방구석 요양러" },
+    { req: 3, name: "작심삼일 브레이커" },
+    { req: 7, name: "프로 약챙김러" },
+    { req: 14, name: "인간 비타민" },
+    { req: 30, name: "무병장수 마스터" }
+];
+
+function createParticles() {
+    var bg = document.getElementById('app-bg');
+    for(var i = 0; i < 20; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.style.width = (Math.random() * 4 + 2) + 'px';
+        p.style.height = p.style.width;
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 6 + 4) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        bg.appendChild(p);
+    }
+}
+
+function getTodayString() {
+    var d = new Date();
+    var yyyy = d.getFullYear();
+    var mm = d.getMonth() + 1;
+    var dd = d.getDate();
+    return yyyy + "-" + (mm < 10 ? '0'+mm : mm) + "-" + (dd < 10 ? '0'+dd : dd);
+}
+
+function getYesterdayString() {
+    var d = new Date();
+    d.setDate(d.getDate() - 1);
+    var yyyy = d.getFullYear();
+    var mm = d.getMonth() + 1;
+    var dd = d.getDate();
+    return yyyy + "-" + (mm < 10 ? '0'+mm : mm) + "-" + (dd < 10 ? '0'+dd : dd);
+}
+
+function getDisplayDate() {
+    var d = new Date();
+    var days = ['일', '월', '화', '수', '목', '금', '토'];
+    return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 (" + days[d.getDay()] + ")";
+}
+
+// [핵심 해결] 쿠키와 로컬 스토리지를 동시에 사용하여 데이터 증발 완벽 차단
+function forceSave() {
+    var dataStr = JSON.stringify(appData);
+    
+    // 1. 기본 저장 (LocalStorage)
+    try { localStorage.setItem(DATA_KEY, dataStr); } catch(e) {}
+    
+    // 2. 강제 백업 저장 (Cookie) - 10년 유지
+    try {
+        var d = new Date();
+        d.setTime(d.getTime() + (3650*24*60*60*1000));
+        document.cookie = DATA_KEY + "=" + encodeURIComponent(dataStr) + ";expires=" + d.toUTCString() + ";path=/";
+    } catch(e) {}
+}
+
+function loadData() {
+    document.getElementById('ui-date').innerText = getDisplayDate();
+    var today = getTodayString();
+    var yesterday = getYesterdayString();
+    
+    var saved = null;
+    
+    // 1. 로컬 스토리지에서 먼저 읽어오기 시도
+    try { saved = localStorage.getItem(DATA_KEY); } catch(e) {}
+    
+    // 2. 만약 로컬 스토리지가 날아갔다면 쿠키에서 영혼까지 끌어오기
+    if (!saved || saved === "") {
+        try {
+            var name = DATA_KEY + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) === 0) {
+                    saved = decodeURIComponent(c.substring(name.length, c.length));
+                    break;
+                }
+            }
+        } catch(e) {}
+    }
+
+    if (saved) {
+        try { appData = JSON.parse(saved); } catch(e) {}
+    }
+
+    if (appData.date !== today) {
+        if (appData.lastStreakDate !== "" && appData.lastStreakDate !== yesterday && appData.lastStreakDate !== today) {
+            appData.streak = 0;
+        }
+        
+        appData.date = today;
+        for (var i = 0; i < appData.meds.length; i++) {
+            appData.meds[i].chk = [false, false, false, false];
+        }
+        forceSave();
+    }
+    
+    renderList();
+    updateMainMission();
+    updateRankUI();
+}
+
+function updateMainMission() {
+    var total = appData.meds.length * 4;
+    var done = 0;
+    
+    for (var i = 0; i < appData.meds.length; i++) {
+        for (var j = 0; j < 4; j++) {
+            if (appData.meds[i].chk[j]) done++;
+        }
+    }
+    
+    var left = total - done;
+    var activeEl = document.getElementById('mission-active');
+    var completeEl = document.getElementById('mission-complete');
+    var leftTextEl = document.getElementById('ui-mission-left');
+    
+    if (total === 0) {
+        activeEl.style.display = 'block';
+        completeEl.style.display = 'none';
+        leftTextEl.innerHTML = '새로운 미션을<br><span>추가</span>해 주세요!';
+    } else if (left === 0) {
+        activeEl.style.display = 'none';
+        completeEl.style.display = 'block';
+    } else {
+        activeEl.style.display = 'block';
+        completeEl.style.display = 'none';
+        leftTextEl.innerHTML = '총 <span>' + left + '</span>개 남았습니다';
+    }
+}
+
+function updateRankUI() {
+    if (!appData.bestStreak) appData.bestStreak = 0; 
+    
+    var streak = appData.streak;
+    document.getElementById('ui-curr-streak').innerText = streak + "일";
+    document.getElementById('ui-best-streak').innerText = appData.bestStreak + "일";
+    
+    var currentLv = 1;
+    var currentTitle = rankConfig[0].name;
+    var nextReq = rankConfig[1].req;
+    var baseReq = 0;
+    
+    for (var i = 0; i < rankConfig.length; i++) {
+        if (streak >= rankConfig[i].req) {
+            currentLv = i + 1;
+            currentTitle = rankConfig[i].name;
+            baseReq = rankConfig[i].req;
+            nextReq = (i + 1 < rankConfig.length) ? rankConfig[i+1].req : rankConfig[i].req;
+        }
+    }
+    
+    document.getElementById('ui-rank-lv').innerText = "Lv." + currentLv;
+    document.getElementById('ui-rank-title').innerText = currentTitle;
+    
+    if (currentLv === rankConfig.length) {
+        document.getElementById('ui-rank-left-text').innerHTML = "<b>최고 등급 달성!</b>";
+        document.getElementById('ui-rank-progress').style.width = "100%";
+    } else {
+        var leftDays = nextReq - streak;
+        document.getElementById('ui-rank-left-text').innerHTML = "<b>" + leftDays + "일</b> 남음";
+        var progressPercent = Math.floor(((streak - baseReq) / (nextReq - baseReq)) * 100);
+        document.getElementById('ui-rank-progress').style.width = progressPercent + "%";
+    }
+}
+
+function addMed() {
+    var inputEl = document.getElementById('input-med');
+    var val = inputEl.value.replace(/^\s+|\s+$/g, '');
+    if (val === "") return;
+    
+    appData.meds.push({ name: val, chk: [false, false, false, false] });
+    inputEl.value = "";
+    forceSave();
+    renderList();
+    updateMainMission();
+}
+
+function handleEnter(e) {
+    if ((e.keyCode || e.which) === 13) addMed();
+}
+
+function deleteMed(index) {
+    appData.meds.splice(index, 1);
+    forceSave();
+    renderList();
+    updateMainMission();
+}
+
+function toggleCheck(medIndex, timeIndex, btnId) {
+    var isChecking = !appData.meds[medIndex].chk[timeIndex];
+    appData.meds[medIndex].chk[timeIndex] = isChecking;
+    forceSave();
+    
+    var btnEl = document.getElementById(btnId);
+    
+    if (isChecking && btnEl) {
+        var plus = document.createElement('div');
+        plus.className = 'plus-one';
+        plus.innerText = '+1';
+        btnEl.appendChild(plus);
+        
+        setTimeout(function() {
+            if (plus.parentNode === btnEl) btnEl.removeChild(plus);
+        }, 600);
+    }
+    
+    renderList();
+    updateMainMission();
+}
+
+function renderList() {
+    var listEl = document.getElementById('med-list');
+    if (appData.meds.length === 0) {
+        listEl.innerHTML = '<div class="empty-msg">시작이 반입니다.<br>오늘 달성할 목표를 추가해 주세요.</div>';
+        return;
+    }
+    
+    var html = "";
+    var times = ["아침", "점심", "저녁", "취침"];
+    
+    for (var i = 0; i < appData.meds.length; i++) {
+        var m = appData.meds[i];
+        
+        var doneCnt = 0;
+        var nextTime = "";
+        for (var k = 0; k < 4; k++) {
+            if (m.chk[k]) doneCnt++;
+            else if (nextTime === "") nextTime = times[k]; 
+        }
+        
+        var statusHtml = "";
+        if (doneCnt === 4) {
+            statusHtml = '<div class="med-status all-done">오늘 일정 완벽 클리어!</div>';
+        } else if (doneCnt === 0) {
+            statusHtml = '<div class="med-status">시작 대기 중입니다.</div>';
+        } else {
+            statusHtml = '<div class="med-status">현재 진행 중, <b>' + nextTime + '</b> 챙길 차례!</div>';
+        }
+
+        html += '<div class="med-card">';
+        html += '<div class="med-header">';
+        html += '<div class="med-name">' + m.name + '</div>';
+        html += '<button class="btn-del" onclick="deleteMed(' + i + ')">지우기</button>';
+        html += '</div>';
+        html += statusHtml; 
+        
+        html += '<div class="time-group">';
+        for (var j = 0; j < 4; j++) {
+            var isChecked = m.chk[j] ? ' checked' : '';
+            var btnId = 'btn-' + i + '-' + j;
+            html += '<button id="' + btnId + '" class="time-btn' + isChecked + '" onclick="toggleCheck(' + i + ', ' + j + ', \'' + btnId + '\')">' + times[j] + '</button>';
+        }
+        html += '</div></div>';
+    }
+    listEl.innerHTML = html;
+}
+
+window.switchTab = function(tabId) {
+    var tabs = ['main', 'rank'];
+    for(var i=0; i<tabs.length; i++) {
+        var t = tabs[i];
+        document.getElementById('tab-' + t).className = (tabId === t) ? "tab-btn active" : "tab-btn";
+        document.getElementById('view-' + t).style.display = (tabId === t) ? "flex" : "none";
+    }
+    if(tabId === 'rank') updateRankUI();
+}
+
+window.saveAndTriggerAd = function() {
+    var today = getTodayString();
+    var hasCheckedToday = false;
+    
+    for (var i = 0; i < appData.meds.length; i++) {
+        if (appData.meds[i].chk.indexOf(true) !== -1) {
+            hasCheckedToday = true;
+            break;
+        }
+    }
+    
+    if (hasCheckedToday && appData.lastStreakDate !== today) {
+        appData.streak += 1;
+        appData.lastStreakDate = today;
+        if (!appData.bestStreak) appData.bestStreak = 0;
+        if (appData.streak > appData.bestStreak) {
+            appData.bestStreak = appData.streak;
+        }
+    }
+    
+    forceSave();
+    updateRankUI();
+    
+    // 블로거 모바일 파라미터를 유지하면서 안전하게 새로고침
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott";
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) {}
+    
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+}
+
+window.onload = function() {
+    createParticles();
+    loadData();
+};
+</script>
