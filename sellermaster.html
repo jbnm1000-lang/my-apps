@@ -1,0 +1,227 @@
+<!--글자 튀어나감 완벽 해결 + 꿀팁/주의사항(방패막) 복구 완료 버전-->
+<meta content="notranslate" name="google"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #F8F9FA !important; 
+        overflow-x: hidden !important; 
+        font-family: 'Pretendard', sans-serif; color: #212529;
+    }
+
+    /* 구글 블로그 껍데기 완벽 숨김 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, .mobile-nav, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .breadcrumbs, .footer-outer, #footer, .comments, .search-container, .top-bar, .share-action { 
+        display: none !important; visibility: hidden !important; height: 0 !important; 
+    }
+
+    #app-container { 
+        position: relative; z-index: 1; width: 100%; max-width: 550px; margin: 0 auto; padding: 20px 15px 70px 15px; 
+    }
+
+    .header-box { 
+        background: #FFFFFF; padding: 25px 15px; text-align: center; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 20px; border: 1px solid #F1F3F5;
+    }
+    .header-title { font-size: 24px; font-weight: 900; color: #343A40; margin-bottom: 5px; letter-spacing: -1px; }
+    .header-title span { color: #FF6F0F; } 
+    .header-subtitle { font-size: 13px; color: #868E96; font-weight: 600; }
+
+    .calc-box { 
+        background: #FFFFFF; border-radius: 20px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 20px; border: 1px solid #F1F3F5;
+    }
+    
+    .input-group { margin-bottom: 18px; }
+    .input-group label { display: block; font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 8px; }
+    
+    input, select { 
+        width: 100%; background: #F8F9FA; padding: 14px; border: 1.5px solid #DEE2E6; border-radius: 12px; font-size: 15px; font-weight: 700; color: #212529; outline: none; 
+    }
+    input:focus, select:focus { border-color: #FF6F0F; background: #FFF4E6; }
+    
+    .row-flex { display: flex; gap: 8px; }
+    .row-flex select { flex: 1; padding: 12px 8px; font-size: 13px; } 
+
+    .btn-calc { 
+        width: 100%; background: #FF6F0F; color: #FFFFFF; border: none; padding: 16px 10px; border-radius: 12px; font-size: 16px; font-weight: 800; margin-top: 10px; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 111, 15, 0.3); word-break: keep-all; 
+    }
+
+    #result-area { display: none; margin-top: 20px; animation: slideDown 0.4s ease-out; }
+    
+    .result-card { 
+        background: #F8F9FA; border-radius: 12px; padding: 18px 15px; margin-bottom: 12px; border: 1px solid #DEE2E6;
+    }
+    .result-card.highlight { background: #FFF4E6; border-color: #FFD8A8; }
+    
+    /* 튀어나감 방지 레이아웃 */
+    .flex-col { display: flex; flex-direction: column; gap: 8px; }
+    .label-title { font-size: 14px; font-weight: 700; color: #495057; word-break: keep-all; }
+    .highlight .label-title { color: #E85D00; }
+    
+    .money-value { font-size: 22px; font-weight: 900; color: #212529; text-align: right; word-break: keep-all; }
+    .highlight .money-value { color: #D9480F; font-size: 26px; }
+    
+    .detail-text { font-size: 12px; color: #868E96; font-weight: 600; margin-top: 4px; word-break: keep-all; line-height: 1.4; }
+
+    /* 하단 텍스트 박스 공통 스타일 */
+    .info-box { 
+        border-radius: 20px; padding: 22px 18px; margin-bottom: 15px; border: 1px solid #F1F3F5; line-height: 1.6; 
+    }
+    .tip-box { background: #FFFFFF; }
+    .warn-box { background: #FFF5F5; border-color: #FFE3E3; } /* 주의사항은 옅은 붉은색 배경으로 강조 */
+
+    .info-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; border-bottom: 1px solid #F1F3F5; padding-bottom: 8px; }
+    .tip-title { color: #1C7ED6; }
+    .warn-title { color: #E03131; border-bottom-color: #FFE3E3; }
+    
+    .info-text { font-size: 13px; font-weight: 500; color: #495057; word-break: keep-all; }
+    .info-text b { color: #212529; font-weight: 700; }
+    .warn-text { color: #868E96; font-size: 12px; }
+    .warn-text b { color: #FA5252; }
+
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<div id="app-container">
+    <div class="header-box">
+        <div class="header-title">마켓 <span>셀러 마스터</span></div><div class="header-title"><br /><span><br /></span></div>
+        <div class="header-subtitle">가장 똑똑한 중고거래 순이익 &amp; 택배비 판독기</div>
+    </div>
+
+    <!--계산기 영역-->
+    <div class="calc-box">
+        <div class="input-group">
+            <label>물건 판매 금액 (원)</label>
+            <input id="input-price" placeholder="예: 50000" type="number" />
+        </div>
+
+        <div class="input-group">
+            <label>어떤 택배로 보내실 건가요?</label>
+            <div class="row-flex">
+                <select id="select-delivery">
+                    <option value="direct">직거래(무료)</option>
+                    <option value="half">반값/끼리택배</option>
+                    <option value="normal">편의점 일반</option>
+                    <option value="post">우체국 소포</option>
+                </select>
+                <select id="select-weight">
+                    <option value="light">500g 미만</option>
+                    <option value="medium">1kg 미만</option>
+                    <option value="heavy">5kg 미만</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="btn-calc" onclick="calculateAndShowAd()">수수료/택배비 공제 수익 확인</button>
+        
+        <div id="result-area">
+            <div class="result-card highlight">
+                <div class="flex-col">
+                    <div class="label-title">내 통장 최종 입금액 (당근마켓)</div>
+                    <div class="money-value" id="res-my-money">0원</div>
+                </div>
+                <div class="detail-text" id="res-delivery-cost">택배비 0원 제외됨</div>
+            </div>
+
+            <div class="result-card">
+                <div class="flex-col">
+                    <div class="label-title">구매자 실제 결제액 (번개/중고나라)</div>
+                    <div class="money-value" id="res-buyer-money">0원</div>
+                </div>
+                <div class="detail-text">안전결제 수수료(약 3.5%) 포함 금액입니다. 가격 방어 시 참고하세요.</div>
+            </div>
+        </div>
+    </div>
+
+    <!--앱 가이드 및 꿀팁 영역-->
+    <div class="info-box tip-box">
+        <div class="info-title tip-title">📖 마켓 셀러 마스터 활용 가이드</div>
+        <div class="info-text">
+            안 쓰는 물건을 팔아 쏠쏠한 용돈을 버는 중고거래, 하지만 막상 팔고 나면 내 통장에 진짜 얼마가 들어오는지 헷갈리신 적 없으신가요?<br />
+            안전결제 수수료부터 편의점 택배비까지 은근히 빠져나가는 금액들을 이제 앱 하나로 완벽하게 관리해 보세요.<br /><br />
+            
+            <b>[똑똑한 활용 꿀팁 3가지]</b><br />
+            <b>1. 복잡한 택배비 자동 계산</b><br />
+            편의점 반값택배와 우체국 요금, 이제 검색할 필요 없이 보낼 방법과 무게만 선택하시면 정확한 배송비를 빼고 순수익을 알려드립니다.<br /><br />
+            <b>2. 네고(에누리) 완벽 방어하기</b><br />
+            수수료를 구매자가 낼 때 무리한 할인 요청이 오면, '구매자 결제액'을 미리 확인하시고 "수수료 포함하면 이 정도 금액이니 조금만 양보해 달라"며 유리하게 협상해 보세요.<br /><br />
+            <b>3. 어디에 팔지 고민될 때</b><br />
+            입력 한 번으로 직거래(무료)와 안전결제(약 3.5%) 시 내 통장에 꽂히는 진짜 금액을 비교하여 가장 이득인 곳을 선택하세요.
+        </div>
+    </div>
+
+    <!--법적 방패막 (주의사항) 영역-->
+    <div class="info-box warn-box">
+        <div class="info-title warn-title">🚨 서비스 이용 주의사항 및 면책 조항</div>
+        <div class="info-text warn-text">
+            본 애플리케이션은 중고거래 판매자분들의 편리한 예산 관리를 돕기 위해 제작된 무료 유틸리티 도구입니다.<br /><br />
+            앱에 내장된 택배 요금과 안전결제 수수료율(약 3.5%)은 전국 표준 요금을 기준으로 세팅되어 있습니다. 단, 도서산간 지역이거나 각 중고마켓 플랫폼의 이벤트 진행 여부, 카테고리에 따라 <b>실제 청구되는 금액과는 차이가 있을 수 있습니다.</b><br /><br />
+            따라서 이 앱의 계산 결과는 대략적인 예산을 세우는 <b>참고용</b>으로만 사용해 주시기 바라며, 이를 바탕으로 진행된 실제 중고거래, 안전결제, 택배 발송 등 금전적 거래의 최종 결과 및 분쟁에 대하여 <b>본 개발자는 어떠한 법적 책임도 지지 않음</b>을 명확히 안내해 드립니다.
+        </div>
+    </div>
+
+</div>
+
+<script>
+const deliveryRates = {
+    'direct': { 'light': 0, 'medium': 0, 'heavy': 0 },
+    'half': { 'light': 1800, 'medium': 2100, 'heavy': 2700 }, 
+    'normal': { 'light': 3200, 'medium': 3800, 'heavy': 4300 }, 
+    'post': { 'light': 4000, 'medium': 4500, 'heavy': 5000 } 
+};
+
+function calculateAndShowAd() {
+    var priceInput = document.getElementById('input-price').value;
+    var price = Math.abs(parseFloat(priceInput)) || 0;
+
+    if (price === 0) {
+        alert("판매 금액을 입력해 주세요.");
+        return;
+    }
+
+    var deliveryType = document.getElementById('select-delivery').value;
+    var weightType = document.getElementById('select-weight').value;
+    var shippingCost = deliveryRates[deliveryType][weightType];
+
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott&p=" + encodeURIComponent(price) + "&s=" + encodeURIComponent(shippingCost);
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    setTimeout(function () { window.location.replace(finalUrl); }, 300);
+}
+
+window.onload = function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var p = urlParams.get('p');
+    var s = urlParams.get('s');
+
+    if (p) {
+        var price = parseFloat(p) || 0;
+        var shipping = parseFloat(s) || 0;
+
+        var myProfit = price - shipping;
+        if(myProfit < 0) myProfit = 0;
+
+        var buyerFee = Math.floor(price * 0.035);
+        var buyerTotal = price + buyerFee;
+
+        document.getElementById('input-price').value = price || '';
+        
+        var resultArea = document.getElementById('result-area');
+        resultArea.style.display = 'block';
+        
+        document.getElementById('res-my-money').innerHTML = myProfit.toLocaleString('ko-KR') + "원";
+        document.getElementById('res-delivery-cost').innerHTML = "예상 택배비 " + shipping.toLocaleString('ko-KR') + "원이 제외된 금액입니다.";
+        document.getElementById('res-buyer-money').innerHTML = buyerTotal.toLocaleString('ko-KR') + "원";
+        
+        setTimeout(function() { resultArea.scrollIntoView({ behavior: "smooth", block: "center" }); }, 300);
+    }
+};
+</script>
