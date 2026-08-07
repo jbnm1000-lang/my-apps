@@ -1,0 +1,473 @@
+<!--구글 블로거 전용: 페이가드 (정밀 기회비용 환산기 및 물가 패치 적용본)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        margin: 0 !important; padding: 0 !important;
+        background-color: #080c16 !important;
+        overflow-x: hidden !important;
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+        font-family: 'Pretendard', sans-serif; color: #f8fafc;
+    }
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    /* 디지털 파티클 배경 효과 (에메랄드/블루톤) */
+    #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: #080c16; overflow: hidden; }
+    .particle { position: absolute; background: rgba(52, 211, 153, 0.5); border-radius: 50%; box-shadow: 0 0 10px rgba(52, 211, 153, 0.8); animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-20vh) scale(1.2); opacity: 0; } }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; padding: 40px 20px 90px 20px;
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; }
+    .main-title { font-size: 27px; font-weight: 900; color: #f8fafc; margin-bottom: 10px; letter-spacing: -1px; }
+    .sub-title { font-size: 14px; color: #94a3b8; font-weight: 500; letter-spacing: 0.5px; }
+
+    /* 상세 가이드 아코디언 */
+    .accordion-box { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; margin-bottom: 25px; overflow: hidden; width: 100%; backdrop-filter: blur(5px); }
+    .accordion-header { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; color: #60a5fa; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.2s; background: rgba(0,0,0,0.3); }
+    .accordion-header:active { background: rgba(255,255,255,0.05); }
+    .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: #cbd5e1; font-size: 14px; line-height: 1.7; }
+    .accordion-content.open { padding: 22px 20px; max-height: 5000px; border-top: 1px solid rgba(255,255,255,0.05); }
+    
+    .guide-h4 { color: #3b82f6; font-size: 15px; font-weight: 800; margin-top: 24px; margin-bottom: 12px; border-left: 3px solid #3b82f6; padding-left: 10px; }
+    .guide-h4:first-child { margin-top: 0; }
+    .guide-ul { padding-left: 20px; margin-bottom: 20px; }
+    .guide-ul li { margin-bottom: 8px; }
+    .guide-p { margin-bottom: 12px; word-break: keep-all; }
+    .legal-notice { background: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-left: 4px solid #f43f5e; padding: 16px; border-radius: 8px; color: #fda4af; font-size: 13px; text-align: justify; line-height: 1.6; margin-top: 20px; }
+
+    /* 자산 방어 통계 대시보드 */
+    .stats-board { background: rgba(15, 23, 42, 0.85); border-radius: 16px; padding: 25px; margin-bottom: 35px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.6); width: 100%; backdrop-filter: blur(10px); text-align: center; }
+    .stat-label { font-size: 13.5px; color: #cbd5e1; font-weight: 600; margin-bottom: 12px; }
+    .stat-value { font-size: 36px; font-weight: 900; color: #10b981; letter-spacing: -1px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .stat-currency { font-size: 20px; font-weight: 700; color: #34d399; margin-top: 8px; }
+
+    /* 입력 폼 */
+    .section-title { font-size: 16.5px; font-weight: 800; color: #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .input-wrapper { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 22px; margin-bottom: 40px; width: 100%; backdrop-filter: blur(5px); }
+    .input-row { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
+    .custom-input, .custom-select { background: #020617; border: 1px solid #334155; color: #f8fafc; padding: 15px 16px; border-radius: 10px; font-size: 14.5px; outline: none; font-family: inherit; transition: 0.2s; }
+    .custom-input.full { width: 100%; margin-bottom: 12px; }
+    .custom-input.half { flex: 1.5; }
+    .custom-select { flex: 1; color: #60a5fa; font-weight: 600; }
+    .custom-input:focus, .custom-select:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+    .btn-submit { width: 100%; background: #3b82f6; color: #ffffff; border: none; padding: 16px; border-radius: 10px; font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); margin-top: 10px; }
+    .btn-submit:active { transform: scale(0.98); background: #2563eb; }
+
+    /* 카드 리스트 공통 */
+    .card { background: rgba(30, 41, 59, 0.85); border-radius: 14px; padding: 22px 20px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.4); backdrop-filter: blur(5px); }
+    .card-category { display: inline-block; padding: 5px 12px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 6px; font-size: 11.5px; font-weight: 800; margin-bottom: 12px; }
+    .card-name { font-size: 17px; font-weight: 900; color: #f8fafc; margin-bottom: 10px; word-break: keep-all; line-height: 1.4; }
+    .card-price { font-size: 16px; font-weight: 700; color: #94a3b8; margin-bottom: 15px; }
+    
+    /* 킥포인트: 기회비용 박스 */
+    .opp-cost-box { background: rgba(16, 185, 129, 0.1); border: 1px dashed rgba(16, 185, 129, 0.4); padding: 12px 15px; border-radius: 8px; margin-bottom: 18px; }
+    .opp-cost-title { font-size: 12px; color: #34d399; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .opp-cost-text { font-size: 14.5px; color: #f8fafc; font-weight: 700; word-break: keep-all; line-height: 1.5; }
+
+    /* 쿨다운 진행 중 카드 */
+    .card.cooling { border-left: 4px solid #64748b; }
+    .progress-bg { background: #0f172a; height: 10px; border-radius: 5px; width: 100%; overflow: hidden; margin-top: 5px; }
+    .progress-bar { background: linear-gradient(90deg, #3b82f6, #60a5fa); height: 100%; border-radius: 5px; transition: width 0.5s; }
+    .cool-status { font-size: 13.5px; color: #94a3b8; font-weight: 600; margin-top: 10px; display: flex; justify-content: space-between; }
+    .cool-status b { color: #60a5fa; }
+
+    /* 최종 선택 대기 카드 */
+    .card.decision { border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); }
+    .decision-msg { font-size: 14.5px; color: #34d399; font-weight: 800; margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .action-row { display: flex; gap: 10px; }
+    .btn-action { flex: 1; padding: 16px 0; border-radius: 10px; font-weight: 900; font-size: 14.5px; cursor: pointer; border: none; transition: 0.2s; }
+    .btn-save-money { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .btn-save-money:active { background: rgba(16, 185, 129, 0.4); }
+    .btn-buy-money { background: rgba(244, 63, 94, 0.1); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.2); }
+    .btn-buy-money:active { background: rgba(244, 63, 94, 0.3); }
+
+    /* 하단 기록 버튼 */
+    .btn-final { width: 100%; background: #1e293b; border: 1px solid #475569; color: #f8fafc; padding: 22px; border-radius: 14px; font-weight: 900; font-size: 16px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.5); margin-top: 30px; transition: 0.2s; }
+    .btn-final:active { transform: scale(0.97); background: #334155; }
+
+    .fx-text { position: fixed; font-weight: 900; font-size: 22px; pointer-events: none; animation: floatFx 0.9s forwards; text-shadow: 0 4px 15px rgba(0,0,0,1); z-index: 9999;}
+    @keyframes floatFx { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-60px) scale(1.2); } }
+    .empty-state { text-align: center; color: #94a3b8; font-size: 15px; padding: 45px 20px; font-weight: 600; line-height: 1.6; word-break: keep-all; background: rgba(15, 23, 42, 0.5); border-radius: 14px; border: 1px dashed rgba(255,255,255,0.15); }
+</style>
+
+<div id="bg-layer"></div>
+
+<div id="app-container">
+
+    <div class="header-section">
+        <div class="main-title">페이가드 (PayGuard)</div><br /><div class="main-title"><br /></div>
+        <div class="sub-title">소비 지연 및 자산 방어 플래너</div>
+    </div>
+
+    <!--가이드 및 안내 아코디언-->
+    <div class="accordion-box">
+        <div class="accordion-header" onclick="toggleAcc('guide-content')">
+            <span>📖 이용 방법 및 소비 방어 꿀팁</span>
+            <i id="guide-content-icon">▼</i>
+        </div>
+        <div class="accordion-content" id="guide-content">
+            <div class="guide-h4">앱 이용 방법</div>
+            <p class="guide-p">사고 싶은 물건이 생겼을 때 즉시 결제하지 않고, 본 앱에 물건의 정보와 가격을 등록하세요. 설정한 지연 시간(3일, 7일, 14일) 동안은 물건을 구매할 수 없습니다. 시간이 지난 후 나타나는 알림을 통해 최종 구매 여부를 신중하게 결정할 수 있습니다.</p>
+            
+            <div class="guide-h4">자산 방어를 위한 꿀팁</div>
+            <ul class="guide-ul">
+                <li><b>장바구니 숙성:</b> 온라인 쇼핑몰 장바구니에 물건을 담아두고 본 앱에 등록하는 것만으로도, 순간적인 충동의 70%가량을 낮출 수 있습니다.</li>
+                <li><b>감정적 소비 차단:</b> 스트레스를 받거나 피곤할 때는 충동구매 확률이 급증합니다. 이럴 때는 무조건 7일 이상의 지연 시간을 설정해 보세요.</li>
+                <li><b>현실적인 기회비용 확인:</b> 앱이 자동으로 계산해 주는 '이 돈으로 할 수 있는 다른 가치'를 보며 소비의 무게를 체감해 보세요.</li>
+            </ul>
+
+            <div class="legal-notice">
+                <b>⚠️ 안내 사항</b><br />
+                본 앱은 기기 내부 저장소에 데이터를 안전하게 기록하므로 안심하고 사용하셔도 됩니다. 앱 화면에 표시되는 '지켜낸 총자산'은 사용자의 선택에 따른 가상의 시뮬레이션 누적 수치이며, 실제 금융 계좌 잔고를 의미하지 않습니다.
+            </div>
+        </div>
+    </div>
+
+    <!--자산 방어 통계 대시보드-->
+    <div class="stats-board">
+        <div class="stat-label">충동을 이겨내고 지켜낸 총자산</div>
+        <div class="stat-value"><span id="ui-saved-amount">0</span><span class="stat-currency">원</span></div>
+    </div>
+
+    <!--30개 표준 카테고리가 적용된 입력 폼-->
+    <div class="section-title">➕ 새로운 구매 욕구 보관하기</div>
+    <div class="input-wrapper">
+        <div class="input-row">
+            <select class="custom-select" id="input-category" style="margin-bottom: 2px; width: 100%;">
+                <option value="배달/외식 (야식, 디저트)">배달/외식 (야식, 디저트)</option>
+                <option value="의류/잡화 (옷, 가방)">의류/잡화 (옷, 가방)</option>
+                <option value="신발/스니커즈">신발/스니커즈</option>
+                <option value="스마트폰/태블릿 기기">스마트폰/태블릿 기기</option>
+                <option value="PC/노트북 주변기기">PC/노트북 주변기기</option>
+                <option value="게임 타이틀/아이템">게임 타이틀/아이템</option>
+                <option value="스킨케어/화장품">스킨케어/화장품</option>
+                <option value="향수/디퓨저">향수/디퓨저</option>
+                <option value="악세사리/쥬얼리">악세사리/쥬얼리</option>
+                <option value="피규어/굿즈/장난감">피규어/굿즈/장난감</option>
+                <option value="인테리어/소품">인테리어/소품</option>
+                <option value="도서/e북 (충동구매)">도서/e북 (충동구매)</option>
+                <option value="취미/운동용품">취미/운동용품</option>
+                <option value="커피/음료 (카페)">커피/음료 (카페)</option>
+                <option value="편의점/군것질">편의점/군것질</option>
+                <option value="이모티콘/디지털 상품">이모티콘/디지털 상품</option>
+                <option value="구독/멤버십 결제">구독/멤버십 결제</option>
+                <option value="헤어/네일 미용">헤어/네일 미용</option>
+                <option value="식재료 (대량구매)">식재료 (대량구매)</option>
+                <option value="영양제/건강식품">영양제/건강식품</option>
+                <option value="한정판/콜라보 제품">한정판/콜라보 제품</option>
+                <option value="음향기기 (이어폰, 스피커)">음향기기 (이어폰, 스피커)</option>
+                <option value="카메라/촬영용품">카메라/촬영용품</option>
+                <option value="자동차 용품/세차">자동차 용품/세차</option>
+                <option value="캠핑/아웃도어 용품">캠핑/아웃도어 용품</option>
+                <option value="티켓/공연/전시">티켓/공연/전시</option>
+                <option value="여행/항공권 (특가)">여행/항공권 (특가)</option>
+                <option value="주류/와인/위스키">주류/와인/위스키</option>
+                <option value="반려동물 간식/용품">반려동물 간식/용품</option>
+                <option value="기타 충동구매 물품">기타 충동구매 물품</option>
+            </select>
+        </div>
+        <input class="custom-input full" id="input-name" placeholder="상세 물건명 (예: 브랜드 스니커즈)" type="text" />
+        <div class="input-row">
+            <input class="custom-input half" id="input-price" placeholder="금액 (숫자만 입력)" type="number" />
+            <select class="custom-select" id="input-days">
+                <option value="3">3일 지연</option>
+                <option value="7">7일 지연</option>
+                <option value="14">14일 지연</option>
+            </select>
+        </div>
+        <button class="btn-submit" onclick="addMyItem()">물건 보관하고 소비 지연 시작하기</button>
+    </div>
+
+    <!--최종 선택 대기 리스트-->
+    <div class="section-title" style="color: #10b981;">💡 최종 결정의 시간</div>
+    <div id="decision-items-container" style="margin-bottom: 40px;">
+        <!--JS ES5 렌더링-->
+    </div>
+
+    <!--지연 진행 중 리스트-->
+    <div class="section-title" style="color: #94a3b8;">⏳ 소비 지연이 진행 중인 물건</div>
+    <div id="cooling-items-container">
+        <!--JS ES5 렌더링-->
+    </div>
+
+    <!--안전한 이중 우회 로직이 적용된 최종 버튼-->
+    <button class="btn-final" id="btn-finish">
+        ✅ 자산 방어 데이터 안전하게 동기화하기
+    </button>
+
+</div>
+
+<script>
+// 파티클 배경 효과 생성 (ES5 완벽 호환)
+function createParticles() {
+    var bg = document.getElementById('bg-layer');
+    for(var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        var size = Math.random() * 4 + 2;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        bg.appendChild(p);
+    }
+}
+createParticles();
+
+// 아코디언 토글 기능
+function toggleAcc(id) {
+    var content = document.getElementById(id);
+    var icon = document.getElementById(id + '-icon');
+    if (content.className.indexOf('open') > -1) {
+        content.className = content.className.replace(' open', '');
+        icon.innerHTML = '▼';
+    } else {
+        content.className += ' open';
+        icon.innerHTML = '▲';
+    }
+}
+
+// 숫자 천단위 콤마 찍기
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 정밀 교차 환산 팩트 체크 (넷플릭스 14,900원, 커피 2,000원 정확도 반영)
+function getOpportunityCost(price) {
+    if (price < 2000) return "메가커피 아메리카노 " + Math.floor(price / 1500) + "잔";
+    
+    var netflix = Math.floor(price / 14900);
+    var coffee = Math.floor(price / 2000);
+    var chicken = Math.floor(price / 22000);
+    var stock = Math.floor(price / 80000);
+    var hotel = Math.floor(price / 300000);
+    var flight = Math.floor(price / 120000);
+    
+    if (price >= 300000) {
+        return "5성급 특급호텔 호캉스 <b>" + hotel + "박</b><br>또는 우량주 <b>" + stock + "주</b> 매수 금액";
+    } else if (price >= 120000) {
+        return "제주도 왕복 항공권 <b>" + flight + "장</b><br>또는 우량주 <b>" + stock + "주</b> 매수 금액";
+    } else if (price >= 80000) {
+        return "우량주 <b>" + stock + "주</b> 매수<br>또는 브랜드 치킨 <b>" + chicken + "마리</b>";
+    } else if (price >= 22000) {
+        return "브랜드 치킨 <b>" + chicken + "마리</b><br>또는 넷플릭스 프리미엄 <b>" + netflix + "개월</b> 구독";
+    } else if (price >= 14900) {
+        return "넷플릭스 프리미엄 <b>" + netflix + "개월</b> 구독<br>또는 아메리카노 <b>" + coffee + "잔</b>";
+    } else {
+        return "아메리카노 <b>" + coffee + "잔</b>";
+    }
+}
+
+// 초기화
+var myDB = {
+    items: [],
+    totalSavedAmount: 0
+};
+
+function renderApp() {
+    document.getElementById('ui-saved-amount').innerText = formatNumber(myDB.totalSavedAmount);
+    
+    var decisionItems = [];
+    var coolingItems = [];
+    var now = new Date().getTime();
+
+    for(var i = 0; i < myDB.items.length; i++) {
+        var item = myDB.items[i];
+        if(item.isProcessed) continue; 
+
+        var daysPassedFloat = (now - item.regDate) / 86400000;
+        var daysPassed = Math.floor(daysPassedFloat);
+        if (daysPassed < 0) daysPassed = 0;
+        
+        item.daysPassed = daysPassed;
+        
+        if (daysPassed >= item.waitDays) {
+            decisionItems.push(item);
+        } else {
+            coolingItems.push(item);
+        }
+    }
+    
+    // 최종 선택 리스트 렌더링
+    var decisionHtml = '';
+    if(decisionItems.length === 0) {
+        decisionHtml = '<div class="empty-state">현재 결정을 기다리는 품목이 없습니다.</div>';
+    } else {
+        for(var d = 0; d < decisionItems.length; d++) {
+            var dItem = decisionItems[d];
+            decisionHtml += '<div class="card decision">';
+            decisionHtml += '<div class="decision-msg">설정한 지연 기간(' + dItem.waitDays + '일)이 종료되었습니다. 신중하게 결정해 주세요.</div>';
+            decisionHtml += '<span class="card-category">' + dItem.category + '</span>';
+            decisionHtml += '<div class="card-name">🛒 ' + dItem.name + '</div>';
+            decisionHtml += '<div class="card-price">' + formatNumber(dItem.price) + '원</div>';
+            
+            // 킥포인트 출력
+            decisionHtml += '<div class="opp-cost-box">';
+            decisionHtml += '<div class="opp-cost-title">💡 팩트 체크 (기회비용)</div>';
+            decisionHtml += '<div class="opp-cost-text">이 돈이면 ' + getOpportunityCost(dItem.price) + '입니다.</div>';
+            decisionHtml += '</div>';
+
+            decisionHtml += '<div class="action-row">';
+            decisionHtml += '<button class="btn-action btn-save-money" onclick="makeDecision(\'' + dItem.id + '\', \'save\', event)">사지 않고 자산 지키기</button>';
+            decisionHtml += '<button class="btn-action btn-buy-money" onclick="makeDecision(\'' + dItem.id + '\', \'buy\', event)">필요성을 인정하고 구매</button>';
+            decisionHtml += '</div></div>';
+        }
+    }
+    document.getElementById('decision-items-container').innerHTML = decisionHtml;
+
+    // 쿨다운 진행 리스트 렌더링
+    coolingItems.sort(function(a, b) { return b.regDate - a.regDate; });
+    var coolingHtml = '';
+    if(coolingItems.length === 0) {
+        coolingHtml = '<div class="empty-state">현재 지연 중인 품목이 없습니다.<br>충동구매 욕구가 생길 때마다 위의 폼을 통해 물건을 등록해 보세요.<br>지연 시간이 당신의 자산을 지켜줄 것입니다.</div>';
+    } else {
+        for(var c = 0; c < coolingItems.length; c++) {
+            var cItem = coolingItems[c];
+            var progressPercent = (cItem.daysPassed / cItem.waitDays) * 100;
+            if (progressPercent > 100) progressPercent = 100;
+            
+            coolingHtml += '<div class="card cooling">';
+            coolingHtml += '<span class="card-category">' + cItem.category + '</span>';
+            coolingHtml += '<div class="card-name">🔒 ' + cItem.name + '</div>';
+            coolingHtml += '<div class="card-price">' + formatNumber(cItem.price) + '원</div>';
+            
+            // 킥포인트 출력
+            coolingHtml += '<div class="opp-cost-box">';
+            coolingHtml += '<div class="opp-cost-title">💡 팩트 체크 (기회비용)</div>';
+            coolingHtml += '<div class="opp-cost-text">이 돈이면 ' + getOpportunityCost(cItem.price) + '입니다.</div>';
+            coolingHtml += '</div>';
+
+            coolingHtml += '<div class="progress-bg"><div class="progress-bar" style="width:' + progressPercent + '%;"></div></div>';
+            coolingHtml += '<div class="cool-status"><span>보관 목표: ' + cItem.waitDays + '일</span><span>현재: <b>' + cItem.daysPassed + '일</b> 경과</span></div>';
+            coolingHtml += '</div>';
+        }
+    }
+    document.getElementById('cooling-items-container').innerHTML = coolingHtml;
+}
+
+window.addMyItem = function() {
+    var categorySelect = document.getElementById('input-category');
+    var nameInput = document.getElementById('input-name');
+    var priceInput = document.getElementById('input-price');
+    var daysSelect = document.getElementById('input-days');
+    
+    var nameVal = nameInput.value.replace(/^\s+|\s+$/g, '');
+    var priceVal = parseInt(priceInput.value, 10);
+
+    if(nameVal === '') {
+        alert('사고 싶은 물건의 상세한 이름을 입력해 주세요.');
+        return;
+    }
+    if(isNaN(priceVal) || priceVal <= 0) {
+        alert('올바른 금액을 숫자로만 입력해 주세요.');
+        return;
+    }
+
+    var newItem = {
+        id: 'item_' + new Date().getTime(),
+        category: categorySelect.value,
+        name: nameVal,
+        price: priceVal,
+        waitDays: parseInt(daysSelect.value, 10),
+        regDate: new Date().getTime(),
+        isProcessed: false
+    };
+
+    myDB.items.push(newItem);
+    nameInput.value = '';
+    priceInput.value = '';
+    saveData();
+    renderApp();
+}
+
+window.makeDecision = function(id, action, event) {
+    var index = -1;
+    for(var i = 0; i < myDB.items.length; i++) {
+        if(myDB.items[i].id === id) { index = i; break; }
+    }
+    
+    if(index > -1) {
+        myDB.items[index].isProcessed = true;
+        
+        if (action === 'save') {
+            myDB.totalSavedAmount += myDB.items[index].price;
+            showFx(event, '<span style="font-size:22px;">🛡️</span> 훌륭합니다! 자산을 성공적으로 방어했습니다', '#10b981');
+        } else {
+            showFx(event, '<span style="font-size:22px;">💸</span> 최종 구매 결정을 기록했습니다', '#fb7185');
+        }
+        
+        saveData();
+        renderApp();
+    }
+}
+
+function showFx(e, htmlText, color) {
+    var fx = document.createElement('div');
+    fx.className = 'fx-text';
+    fx.innerHTML = htmlText; 
+    fx.style.color = color;
+    var x = (e && e.clientX) ? e.clientX - 80 : window.innerWidth / 2 - 50;
+    var y = (e && e.clientY) ? e.clientY - 40 : window.innerHeight / 2;
+    fx.style.left = x + 'px';
+    fx.style.top = y + 'px';
+    document.body.appendChild(fx);
+    setTimeout(function() { if (fx.parentNode) fx.parentNode.removeChild(fx); }, 900);
+}
+
+function saveData() {
+    try { localStorage.setItem('PayGuardDB_Final_V2', JSON.stringify(myDB)); } catch(e) {}
+}
+
+function loadData() {
+    try {
+        var saved = localStorage.getItem('PayGuardDB_Final_V2');
+        if(saved) { 
+            myDB = JSON.parse(saved); 
+        }
+    } catch(e) {}
+}
+
+// 안전한 이중 우회 로직 (앱인벤터 통신 보호 및 광고 호출용)
+window.onload = function() {
+    loadData();
+    renderApp();
+
+    var btnFinish = document.getElementById('btn-finish');
+    if (btnFinish) {
+        btnFinish.onclick = function() {
+            var btn = this;
+            if (btn.disabled) return;
+            
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerText = '자산 데이터 안전 동기화 중...';
+            
+            var baseUrl = window.location.href.split('?')[0];
+            var searchStr = window.location.search;
+            var mParam = (searchStr && searchStr.indexOf('m=') > -1) ? "m=1&" : "";
+            
+            try {
+                if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                    window.AppInventor.setWebViewString('action=spin_ott');
+                }
+            } catch (err) {}
+            
+            // 0.5초 뒤 URL 파라미터 강제 추가 및 새로고침
+            setTimeout(function () {
+                window.location.replace(baseUrl + "?" + mParam + "action=spin_ott");
+            }, 500);
+        };
+    }
+};
+</script>
