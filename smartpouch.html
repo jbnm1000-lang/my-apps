@@ -1,0 +1,325 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@600;700;900&display=swap');
+
+/* 1. 구글 블로그 최신 테마(햄버거 메뉴, 상단 제목) 완벽 강제 숨김 */
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+.site-header, .page-header, .header-wrapper, .menu-action, .nav-action, 
+.drawer-toggle, .hamburger-menu, .hamburger-icon, 
+[aria-label="Menu"], [aria-label="메뉴"], [role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; 
+    visibility: hidden !important; 
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+}
+
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #111111 !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+#cosmetic-app {
+    --bg-main: #111111;
+    --bg-card: #1c1c1e;
+    --bg-input: #2c2c2e;
+    --accent-main: #fda4af; 
+    --accent-dark: #e11d48;
+    --accent-red: #ef4444;
+    --accent-green: #10b981;
+    --text-white: #f9fafb;
+    --text-muted: #a1a1aa;
+    --border: #3f3f46;
+
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 80px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+.app-header { text-align: center; margin-bottom: 24px; padding-top: 10px; }
+.app-header h1 { font-size: 26px; font-weight: 900; margin: 0 0 10px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent-main); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; }
+
+.danger-zone {
+    background-color: #2a0a12;
+    border: 2px solid var(--accent-dark);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 26px;
+    box-shadow: 0 0 25px rgba(225, 29, 72, 0.15);
+}
+.danger-title { color: #fff; font-size: 15px; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.danger-text { color: #fecdd3; font-size: 13.5px; font-weight: 400; text-align: left; word-break: keep-all; margin: 0; line-height: 1.7; }
+
+.section-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 12px; margin-top: 30px; border-left: 5px solid var(--accent-main); padding-left: 10px; }
+.card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 22px; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+.group { margin-bottom: 22px; }
+.group label { display: block; font-size: 14px; font-weight: 700; color: #d4d4d8; margin-bottom: 10px; }
+
+.select-box, .date-box {
+    width: 100%; padding: 16px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 14px;
+    color: #fff; font-size: 15px; font-weight: 600; outline: none; box-sizing: border-box; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; background-size: 20px;
+}
+.date-box { background-image: none; cursor: pointer; text-align: center; font-family: 'Poppins', sans-serif; }
+
+.shield-box { background-color: #18181b; border-radius: 16px; padding: 18px; margin-bottom: 20px; border: 1px solid #27272a; }
+.shield-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; cursor: pointer; }
+.shield-item:last-child { margin-bottom: 0; }
+.shield-item input { width: 22px; height: 22px; accent-color: var(--accent-main); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.shield-label { font-size: 13px; color: #d4d4d8; line-height: 1.6; word-break: keep-all; font-weight: 500; text-align: left; }
+.shield-label span { color: var(--accent-main); font-weight: 900; }
+
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%); color: #fff; border: none; border-radius: 16px; font-size: 17px; font-weight: 900; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 20px rgba(225, 29, 72, 0.25); margin-top: 5px; }
+.btn:active { transform: scale(0.98); }
+.btn-save { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25); margin-top: 15px; display: none; }
+
+.dashboard { background-color: #09090b; border-radius: 20px; padding: 22px; margin-top: 28px; border: 1px solid rgba(255,255,255,0.05); }
+.dash-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.dash-row:last-child { border-bottom: none; }
+.dash-title { font-size: 14px; color: #a1a1aa; font-weight: 500; }
+.dash-value { font-size: 17px; font-weight: 800; color: #fff; text-align: right; }
+.highlight { color: var(--accent-main); font-size: 20px; text-shadow: 0 0 15px rgba(253, 164, 175, 0.3); font-family: 'Poppins', sans-serif; }
+
+.expert-box { background-color: #18181b; border-radius: 16px; padding: 20px; margin-top: 20px; border-left: 6px solid var(--accent-main); display: none; }
+.expert-title { color: var(--accent-main); font-size: 15px; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.expert-content { color: #e4e4e7; font-size: 13.5px; line-height: 1.8; word-break: keep-all; text-align: left; }
+
+.legal-footer { background-color: #000; border-top: 2px solid #27272a; padding: 22px; margin-top: 45px; border-radius: 12px; }
+.legal-title { color: #a1a1aa; font-size: 13px; font-weight: 900; margin-bottom: 12px; text-align: center; }
+.legal-text { font-size: 12px; color: #71717a; line-height: 1.8; text-align: left; word-break: keep-all; margin: 0; }
+</style>
+
+<div id="cosmetic-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1><span style="color: #04ff00;">화장품 개봉 후 사용기간<span>&nbsp;계산기</span></span></h1><div><span><br /></span></div>
+            <p>피부 트러블의 주범인 오래된 화장품, 개봉일을 기준으로 언제까지 안전한지 확인해 보세요.</p>
+        </div>
+
+        <div class="danger-zone">
+            <div class="danger-title">📢 사용 중단 및 피부 안전 필수 고지</div>
+            <p class="danger-text">
+                본 계산기는 화장품 업계의 일반적인 개봉 후 사용 기간(PAO) 표준을 따릅니다. 계산된 기한이 남아있더라도 내용물의 색상이 변했거나, 불쾌한 냄새가 나거나, 유수분이 분리되는 현상이 보인다면 세균 번식이 시작된 것이므로 즉시 폐기하셔야 합니다.
+            </p>
+        </div>
+
+        <div class="section-title">📍 화장품 종류 및 개봉일 입력</div>
+        <div class="card">
+            
+            <div class="group">
+                <label>화장품 품목 선택 (아래를 눌러 고르세요)</label>
+                <select class="select-box" id="cosmetic-list">
+                    <option value="">-- 화장품 카테고리를 선택하세요 --</option>
+                    <optgroup label="💧 기초 스킨케어">
+                        <option value="6|15000|스킨/토너|스킨과 토너는 매일 열고 닫으며 공기와 접촉하므로 개봉 후 6개월 이내 사용이 가장 안전합니다. 서늘한 곳에 보관하세요.">스킨 / 토너 (개봉 후 6개월)</option>
+                        <option value="12|25000|로션/에멀전|로션과 에멀전은 수분과 유분이 혼합되어 있어 1년 정도 유지가 가능합니다. 입구 주변을 항상 깨끗하게 닦아주세요.">로션 / 에멀전 (개봉 후 12개월)</option>
+                        <option value="6|40000|에센스/세럼|고농축 영양 성분이 들어간 에센스와 세럼은 산화가 매우 빠릅니다. 성분이 변질되기 전 6개월 이내에 소진하는 것을 권장합니다.">에센스 / 세럼 (개봉 후 6개월)</option>
+                        <option value="12|35000|수분/영양크림|수분크림이나 영양크림은 1년까지 사용 가능하나, 반드시 손이 아닌 스패출러를 사용하여 세균 감염을 막아야 합니다.">수분크림 / 영양크림 (개봉 후 12개월)</option>
+                        <option value="6|45000|아이크림|눈가 피부는 매우 예민합니다. 아이크림은 개봉 후 6개월이 지나면 성분 효과가 떨어지므로 기한을 꼭 지켜주세요.">아이크림 (개봉 후 6개월)</option>
+                    </optgroup>
+
+                    <optgroup label="☀️ 자외선 차단제 (선케어)">
+                        <option value="6|20000|선크림/선블록|자외선 차단 성분은 공기와 만나면 효과가 빠르게 사라집니다. 작년 여름에 쓰다 남은 선크림은 차단 효과가 없으니 과감히 버리세요.">선크림 / 선블록 (개봉 후 6개월)</option>
+                        <option value="6|25000|선쿠션|퍼프가 직접 닿는 선쿠션은 세균 번식 위험이 높습니다. 6개월 이내 사용을 권장하며 퍼프는 자주 세척해야 합니다.">선쿠션 (개봉 후 6개월)</option>
+                        <option value="12|22000|선스틱|고체 형태의 선스틱은 수분이 적어 1년까지 보관이 가능합니다. 단, 피부에 직접 문지르므로 표면을 가끔 티슈로 닦아주세요.">선스틱 (개봉 후 12개월)</option>
+                    </optgroup>
+
+                    <optgroup label="🎨 베이스 메이크업">
+                        <option value="12|45000|리퀴드 파운데이션|리퀴드 파운데이션은 개봉 후 1년까지 사용할 수 있습니다. 사용 전 가볍게 흔들어 주시고, 층이 완전히 분리되었다면 수명이 다한 것입니다.">리퀴드 파운데이션 (개봉 후 12개월)</option>
+                        <option value="6|35000|쿠션 파운데이션|쿠션 파운데이션은 촉촉한 스펀지에 내용물이 머금어져 있어 세균이 가장 좋아하는 환경입니다. 피부 트러블 예방을 위해 6개월마다 교체하세요.">쿠션 파운데이션 (개봉 후 6개월)</option>
+                        <option value="24|30000|파우더/팩트|가루 형태의 파우더나 팩트는 수분이 없어 2년까지도 안전하게 사용할 수 있습니다. 브러시나 퍼프 관리만 철저히 해주세요.">파우더 / 팩트 (개봉 후 24개월)</option>
+                    </optgroup>
+
+                    <optgroup label="👁️ 아이 메이크업">
+                        <option value="3|18000|마스카라|마스카라는 화장품 중 수명이 가장 짧습니다. 브러시가 공기를 내부로 밀어 넣기 때문에 3개월이 지나면 눈 다래끼나 염증을 유발할 수 있습니다.">마스카라 (개봉 후 3개월 - 최단기)</option>
+                        <option value="6|15000|리퀴드 아이라이너|리퀴드 아이라이너 역시 점막 가까이 사용하므로 6개월 이내에 교체하여 안구 건조나 염증을 예방해야 합니다.">리퀴드 아이라이너 (개봉 후 6개월)</option>
+                        <option value="24|40000|아이섀도우|가루 타입의 아이섀도우 팔레트는 2년까지 사용이 가능합니다. 크림 타입 섀도우라면 1년 이내로 줄어듭니다.">아이섀도우 팔레트 (개봉 후 24개월)</option>
+                    </optgroup>
+
+                    <optgroup label="💋 립 메이크업">
+                        <option value="6|20000|립글로스/틴트|입술에 직접 닿고 침이 섞이기 쉬운 틴트와 립글로스는 변질이 매우 빠릅니다. 냄새가 시큼하게 변했다면 즉시 버려주세요.">립글로스 / 틴트 (개봉 후 6개월)</option>
+                        <option value="12|35000|립스틱|고체 형태의 립스틱은 1년 정도 사용이 가능합니다. 표면에 물방울이 맺히거나 냄새가 변했다면 사용하지 마세요.">립스틱 (개봉 후 12개월)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="group">
+                <label>처음 뚜껑을 연 날짜 (개봉일 선택)</label>
+                <input class="date-box" id="open-date" type="date" />
+            </div>
+
+            <div class="shield-box">
+                <label class="shield-item">
+                    <input id="check-1" type="checkbox" />
+                    <span class="shield-label">본 결과는 표준 가이드라인이며, 보관 상태에 따른 피부 트러블이나 <span>최종 사용 여부의 책임은 전적으로 본인</span>에게 있음을 확인합니다.</span>
+                </label>
+                <label class="shield-item">
+                    <input id="check-2" type="checkbox" />
+                    <span class="shield-label">화장품의 냄새, 색상, 제형이 변했을 경우 <span>날짜와 상관없이 즉각 사용을 중단</span>할 것을 확인합니다.</span>
+                </label>
+            </div>
+
+            <button class="btn" onclick="runPAOCalc()">화장품 안심 수명 확인하기</button>
+            <button class="btn btn-save" id="app-save-btn" onclick="sendToApp()">✨ 내 화장대(파우치)에 저장하기</button>
+
+            <div class="dashboard">
+                <div class="dash-row">
+                    <span class="dash-title">표준 권장 사용 기간(PAO)</span>
+                    <span class="dash-value" id="res-months">0 개월</span>
+                </div>
+                <div class="dash-row" style="background-color: rgba(253, 164, 175, 0.08); border-radius: 12px; margin: 10px 0px; padding: 15px 10px;">
+                    <span class="dash-title" style="color: white; font-weight: 800;">✅ 안전 교체 예정일</span>
+                    <span class="dash-value highlight" id="res-date">날짜를 선택하세요</span>
+                </div>
+                <div class="dash-row">
+                    <span class="dash-title">보호된 피부과 예상 진료비</span>
+                    <span class="dash-value" id="res-money" style="color: #10b981;">0 원</span>
+                </div>
+            </div>
+
+            <div class="expert-box" id="expert-area">
+                <div class="expert-title">💡 뷰티 전문가의 안전 보관 팁</div>
+                <div class="expert-content" id="res-tip">위에서 화장품 종류를 선택하고 확인 버튼을 누르시면, 해당 화장품에 대한 상세한 관리 방법과 폐기 안내가 이곳에 출력됩니다.</div>
+            </div>
+        </div>
+
+        <div class="legal-footer">
+            <div class="legal-title">[서비스 고지 및 법적 면책 문서]</div>
+            <p class="legal-text">
+                본 웹페이지에서 제공하는 계산 기능은 화장품 업계에서 통용되는 '개봉 후 사용 기간(PAO)' 일반 표준을 기반으로 한 단순 날짜 연산 서비스입니다. 본 앱은 특정 화장품 브랜드나 정부 기관을 대변하지 않으며 어떠한 공식적 제휴 관계도 없습니다. 제품의 실제 부패 여부나 세균 증식 상태를 직접 검사하는 기능이 아니며, 직사광선을 피한 적정 온도 보관 원칙을 완벽히 지켰을 때의 기대치입니다. 사용자의 부주의한 관리 환경에 따라 실제 위생 상태는 크게 다를 수 있습니다. 따라서 본 앱의 정보 활용으로 인해 발생하는 피부 질환, 알레르기 등 신체적/재산적 손해에 대해 본 서비스 개발자 및 제공자는 어떠한 법적 책임도 지지 않음을 엄중히 고지합니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var appDataString = "";
+
+    function saveCosmeticData(obj) {
+        var str = JSON.stringify(obj);
+        try { localStorage.setItem('cosmetic_pao_final', str); } catch(e) {}
+        try { sessionStorage.setItem('cosmetic_pao_final', str); } catch(e) {}
+        try {
+            var d = new Date(); d.setTime(d.getTime() + (30*24*60*60*1000));
+            document.cookie = "cosmetic_pao_final=" + encodeURIComponent(str) + ";expires=" + d.toUTCString() + ";path=/";
+        } catch(e) {}
+        try { window.name = str; } catch(e) {}
+    }
+
+    function loadCosmeticData() {
+        var val = null;
+        try { val = localStorage.getItem('cosmetic_pao_final'); } catch(e) {}
+        if (!val) try { val = sessionStorage.getItem('cosmetic_pao_final'); } catch(e) {}
+        if (!val) {
+            try {
+                var m = document.cookie.match(new RegExp('(^| )cosmetic_pao_final=([^;]+)'));
+                if (m) val = decodeURIComponent(m[2]);
+            } catch(e) {}
+        }
+        if (!val) try { if (window.name && window.name.indexOf('{') === 0) v = window.name; } catch(e) {}
+        return val ? JSON.parse(val) : null;
+    }
+
+    function runPAOCalc() {
+        var itemSelect = document.getElementById('cosmetic-list');
+        var openDateInput = document.getElementById('open-date').value;
+        var chk1 = document.getElementById('check-1').checked;
+        var chk2 = document.getElementById('check-2').checked;
+
+        if (!chk1 || !chk2) {
+            alert("피부 안전을 위한 두 가지 필수 확인 사항에 모두 체크하셔야 결과를 확인할 수 있습니다.");
+            return;
+        }
+        if (!itemSelect.value) { alert("확인하실 화장품 품목을 선택해 주세요."); return; }
+        if (!openDateInput) { alert("처음 화장품 뚜껑을 연 날짜를 달력에서 선택해 주세요."); return; }
+
+        var metaData = itemSelect.value.split('|');
+        var addMonths = parseInt(metaData[0]);
+        var moneySaved = parseInt(metaData[1]);
+        var nameKo = metaData[2];
+        var expertTip = metaData[3];
+
+        var baseDate = new Date(openDateInput);
+        baseDate.setMonth(baseDate.getMonth() + addMonths);
+        
+        var finalDateString = baseDate.getFullYear() + "년 " + (baseDate.getMonth() + 1) + "월 " + baseDate.getDate() + "일";
+
+        var stateToSave = { 
+            c_val: itemSelect.value, 
+            d_val: openDateInput, 
+            months: addMonths, 
+            money: moneySaved, 
+            name: nameKo,
+            tip: expertTip, 
+            result: finalDateString 
+        };
+        saveCosmeticData(stateToSave);
+
+        var randomNum = Math.floor(Math.random() * 99999) + 1;
+        var currentUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = currentUrl + "?pao_check=" + randomNum + "&r=" + randomNum;
+    }
+
+    /* 앱인벤터로 저장 데이터 전송 스크립트 */
+    function sendToApp() {
+        if(appDataString !== "" && window.AppInventor) {
+            window.AppInventor.setWebViewString(appDataString);
+        } else {
+            alert("확인된 계산 데이터가 없거나 앱 환경이 아닙니다.");
+        }
+    }
+
+    window.onload = function() {
+        var savedState = loadCosmeticData();
+        if (!savedState) return;
+
+        document.getElementById('cosmetic-list').value = savedState.c_val;
+        document.getElementById('open-date').value = savedState.d_val;
+        document.getElementById('check-1').checked = true;
+        document.getElementById('check-2').checked = true;
+
+        document.getElementById('res-months').innerText = "개봉 후 " + savedState.months + "개월";
+        document.getElementById('res-date').innerText = savedState.result;
+        document.getElementById('res-money').innerText = savedState.money.toLocaleString() + " 원 상당";
+        document.getElementById('res-tip').innerText = savedState.tip;
+        document.getElementById('expert-area').style.display = 'block';
+        
+        /* 앱인벤터 전송용 데이터 포맷 구성 (구분자: |) - 예쁘게 저장되도록 수정 완료 */
+        appDataString = "SAVE|" + savedState.name + " (교체 기한: " + savedState.result + ")";
+        document.getElementById('app-save-btn').style.display = 'block';
+    };
+//]]>
+</script>
