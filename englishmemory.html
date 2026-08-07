@@ -1,0 +1,544 @@
+<!--구글 블로거 전용: 하이엔드 영단어 자동 복습기 (모바일 최적화 / 150단어 탑재 / ES5 완벽 호환 / 이중 우회 로직)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #050505 !important;
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    /* 구글 블로그 기본 요소 숨김 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    #app-container { width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: transparent; position: relative; padding-bottom: 50px; z-index: 10; }
+
+    /* 배경 파티클 캔버스 */
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+    /* 헤더 */
+    .header-box { padding: 30px 20px 25px 20px; text-align: center; background: linear-gradient(180deg, rgba(17,17,17,0.95) 0%, rgba(5,5,5,0.95) 100%); border-bottom: 1px solid #222222; backdrop-filter: blur(5px); }
+    .header-title { font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .header-title span { color: #d4af37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+    .header-status { font-size: 14px; color: #999999; font-weight: 500; letter-spacing: 1px; }
+
+    /* 메인 카드 */
+    .card-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 20px; }
+    .word-card { background: rgba(15, 15, 15, 0.85); border: 1px solid #333333; border-radius: 16px; padding: 50px 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.9); position: relative; margin-bottom: 20px; backdrop-filter: blur(10px); }
+    .progress-text { position: absolute; top: 20px; right: 20px; font-size: 14px; color: #888888; font-weight: 700; }
+    .word-en { font-size: 40px; font-weight: 900; color: #ffffff; margin-bottom: 15px; letter-spacing: -1px; word-break: break-word; text-shadow: 0 0 20px rgba(255,255,255,0.1); line-height: 1.2; }
+    .word-ko { font-size: 22px; font-weight: 500; color: #d4af37; margin-bottom: 25px; word-break: keep-all; }
+    .word-ex { font-size: 15px; color: #aaaaaa; line-height: 1.6; word-break: keep-all; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; border: 1px solid #222; }
+
+    /* 버튼 영역 */
+    .bottom-action-panel { padding: 0 20px 20px 20px; }
+    .btn-group { display: flex; gap: 12px; }
+    .btn { flex: 1; padding: 20px 0; border-radius: 12px; font-size: 17px; font-weight: 900; cursor: pointer; border: none; transition: 0.2s; letter-spacing: -0.5px; }
+    .btn:active { transform: scale(0.96); }
+    .btn-know { background: #1a1a1a; color: #aaaaaa; border: 1px solid #444444; }
+    .btn-unknown { background: linear-gradient(135deg, #d4af37 0%, #aa8822 100%); color: #000000; box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4); }
+
+    /* 친절한 안내 및 방패막 텍스트 패널 */
+    .info-panel-wrap { padding: 0 20px 20px 20px; display: flex; flex-direction: column; gap: 15px; }
+    .guide-box { background: rgba(17, 17, 17, 0.8); border-left: 4px solid #d4af37; border-radius: 8px; padding: 22px; backdrop-filter: blur(5px); }
+    .guide-title { font-size: 17px; font-weight: 900; color: #d4af37; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .guide-text { font-size: 14px; color: #dddddd; line-height: 1.7; word-break: keep-all; }
+    .guide-text b { color: #ffffff; font-weight: 700; }
+    
+    .legal-box { background: rgba(26, 15, 15, 0.8); border: 1px solid #442222; border-radius: 8px; padding: 22px; backdrop-filter: blur(5px); }
+    .legal-title { font-size: 16px; font-weight: 900; color: #ff6666; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .legal-text { font-size: 14px; color: #ddaaaa; line-height: 1.6; word-break: keep-all; }
+
+    /* 결과 화면 전용 스타일 */
+    .result-box { padding: 40px 20px; }
+    .result-header { text-align: center; margin-bottom: 35px; }
+    .result-icon { font-size: 55px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+    .result-title { font-size: 26px; font-weight: 900; color: #ffffff; margin-bottom: 12px; }
+    .result-subtitle { color: #cccccc; font-size: 15px; line-height: 1.5; word-break: keep-all; }
+    
+    .history-list { background: rgba(15, 15, 15, 0.85); border: 1px solid #333333; border-radius: 12px; padding: 25px; margin-bottom: 20px; backdrop-filter: blur(10px); }
+    .history-title { font-size: 16px; font-weight: 700; color: #d4af37; margin-bottom: 18px; border-bottom: 1px solid #333333; padding-bottom: 12px; }
+    .history-item { font-size: 16px; color: #eeeeee; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .history-item span { color: #aaaaaa; font-size: 14px; text-align: right; word-break: keep-all; max-width: 60%; }
+    
+    .btn-download { width: 100%; background: #222222; color: #ffffff; border: 1px solid #555555; padding: 20px; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+    .btn-download:active { background: #333333; }
+</style>
+
+<!--배경 파티클 효과-->
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-box">
+        <div class="header-title">하루 5분 영단어 <span>기억 보관소</span></div><div class="header-title"><br /><span><br /></span></div>
+        <div class="header-status" id="ui-status">오늘의 자동 복습 루틴을 준비하고 있습니다.</div>
+    </div>
+
+    <!--학습 영역-->
+    <div id="main-content">
+        <div class="card-wrap">
+            <div class="word-card">
+                <div class="progress-text" id="progress-indicator">1 / 10</div>
+                <div class="word-en" id="display-word">Loading...</div>
+                <div class="word-ko" id="display-meaning">단어 데이터를 정돈하고 있습니다.</div>
+                <div class="word-ex" id="display-example">잠시만 기다려 주시면 금방 시작됩니다.</div>
+            </div>
+        </div>
+
+        <div class="bottom-action-panel">
+            <div class="btn-group">
+                <button class="btn btn-know" onclick="handleWord(true)">알아요 (통과)</button>
+                <button class="btn btn-unknown" onclick="handleWord(false)">몰라요 (복습)</button>
+            </div>
+        </div>
+
+        <div class="info-panel-wrap">
+            <div class="guide-box">
+                <div class="guide-title">💡 이렇게 활용해 보세요!</div>
+                <div class="guide-text">
+                    안녕하세요! 이곳은 잊어버리기 쉬운 영단어를 시스템이 알아서 챙겨주는 친절한 자동 복습 공간입니다.<br /><br />
+                    - <b>알아요 (통과):</b> 뜻을 완벽하게 아는 단어라면 가볍게 넘겨주세요. 당분간 화면에 나타나지 않습니다.<br />
+                    - <b>몰라요 (복습):</b> 조금이라도 헷갈린다면 편하게 눌러주세요. 완전히 내 것이 될 때까지 다음 날 다시 등장하여 기억을 도와줍니다.<br /><br />
+                    매일 하루 5분, 부담 없이 버튼을 누르다 보면 어느새 수많은 단어들이 머릿속에 오래도록 자리 잡게 될 것입니다.
+                </div>
+            </div>
+            <div class="legal-box">
+                <div class="legal-title">🛡️ 안심하고 사용하세요</div>
+                <div class="legal-text">
+                    본 애플리케이션은 사용자분들의 편리한 어학 학습을 돕기 위해 정성껏 만들어진 <b>무료 교육용 도구</b>입니다.<br /><br />
+                    숨겨진 유료 결제를 유도하거나, 어떠한 사행성 요소도 전혀 포함하고 있지 않으니 안심하셔도 좋습니다. 시스템이 안내해 드리는 루틴에 따라 편안하고 즐겁게 학습에만 집중해 주시기를 바랍니다.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--결과 화면 영역 (기본적으로 숨김 처리)-->
+    <div id="result-content" style="display: none;">
+        <div class="result-box">
+            <div class="result-header">
+                <div class="result-icon">✨</div>
+                <div class="result-title">정말 고생 많으셨습니다!</div>
+                <div class="result-subtitle">오늘의 학습을 무사히 마치셨습니다.<br />선택하신 내용은 내일 복습 루틴에 안전하게 반영됩니다.</div>
+            </div>
+
+            <div class="history-list" id="review-list-container">
+                <div class="history-title">📚 내일 다시 만나게 될 단어들 (몰라요)</div>
+                <div id="review-items"></div>
+            </div>
+
+            <div class="history-list" id="passed-list-container">
+                <div class="history-title">✅ 오늘 완벽하게 외운 단어들 (알아요)</div>
+                <div id="passed-items"></div>
+            </div>
+
+            <button class="btn-download" onclick="downloadReviewWords()">💾 나만의 복습 단어장 파일(TXT)로 받기</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* 모바일 최적화 및 ES5 엄격 문법 적용 */
+
+var wordDatabase = [
+    { id: 1, en: "Profound", ko: "깊은, 심오한", ex: "He has a profound knowledge of history." },
+    { id: 2, en: "Trivial", ko: "사소한, 하찮은", ex: "Don't waste time on trivial matters." },
+    { id: 3, en: "Inevitable", ko: "불가피한, 필연적인", ex: "Change is inevitable in life." },
+    { id: 4, en: "Adequate", ko: "충분한, 적절한", ex: "Make sure you have an adequate supply of water." },
+    { id: 5, en: "Vulnerable", ko: "취약한, 상처받기 쉬운", ex: "Old people are particularly vulnerable to the flu." },
+    { id: 6, en: "Implement", ko: "실행하다, 이행하다", ex: "The changes will be implemented next year." },
+    { id: 7, en: "Consistent", ko: "일관된, 한결같은", ex: "We need a consistent approach to the problem." },
+    { id: 8, en: "Paradox", ko: "역설, 모순", ex: "It is a paradox that computers need maintenance so often." },
+    { id: 9, en: "Endure", ko: "견디다, 인내하다", ex: "She had to endure a lot of pain." },
+    { id: 10, en: "Ambiguous", ko: "애매한, 모호한", ex: "His reply to my question was somewhat ambiguous." },
+    { id: 11, en: "Comprehend", ko: "이해하다, 파악하다", ex: "I cannot comprehend this situation." },
+    { id: 12, en: "Diligence", ko: "근면, 성실", ex: "Diligence is the key to success." },
+    { id: 13, en: "Evident", ko: "분명한, 명백한", ex: "It was evident that she was exhausted." },
+    { id: 14, en: "Fascinate", ko: "매혹하다, 마음을 빼앗다", ex: "The beauty of the city fascinated him." },
+    { id: 15, en: "Genuine", ko: "진짜의, 진실한", ex: "He is a genuine expert in this field." },
+    { id: 16, en: "Hesitate", ko: "망설이다, 주저하다", ex: "Don't hesitate to contact me." },
+    { id: 17, en: "Isolate", ko: "고립시키다, 격리하다", ex: "The patient was isolated immediately." },
+    { id: 18, en: "Justify", ko: "정당화하다", ex: "Nothing can justify your actions." },
+    { id: 19, en: "Kinetic", ko: "운동의, 운동에 의해 생기는", ex: "Kinetic energy is energy of motion." },
+    { id: 20, en: "Lucrative", ko: "수익성이 좋은", ex: "He runs a very lucrative business." },
+    { id: 21, en: "Meticulous", ko: "꼼꼼한, 세심한", ex: "She is meticulous about her work." },
+    { id: 22, en: "Nourish", ko: "영양분을 주다, 기르다", ex: "Good food nourishes the body." },
+    { id: 23, en: "Obscure", ko: "모호한, 잘 알려지지 않은", ex: "The meaning of his words remains obscure." },
+    { id: 24, en: "Prominent", ko: "저명한, 두드러진", ex: "He is a prominent figure in the industry." },
+    { id: 25, en: "Reluctant", ko: "꺼리는, 마지못한", ex: "She was reluctant to admit she was wrong." },
+    { id: 26, en: "Subtle", ko: "미묘한, 감지하기 힘든", ex: "There is a subtle difference between the two." },
+    { id: 27, en: "Tolerate", ko: "용인하다, 참다", ex: "I will not tolerate such behavior." },
+    { id: 28, en: "Unanimous", ko: "만장일치의", ex: "The decision was unanimous." },
+    { id: 29, en: "Versatile", ko: "다재다능한, 다용도의", ex: "He is a highly versatile actor." },
+    { id: 30, en: "Wander", ko: "거닐다, 돌아다니다", ex: "We wandered around the old town." },
+    { id: 31, en: "Yield", ko: "산출하다, 양보하다", ex: "The trees yielded plenty of fruit." },
+    { id: 32, en: "Zealous", ko: "열성적인", ex: "He is a zealous supporter of the team." },
+    { id: 33, en: "Abolish", ko: "폐지하다", ex: "The law was abolished in 2020." },
+    { id: 34, en: "Abundant", ko: "풍부한", ex: "There is an abundant supply of food." },
+    { id: 35, en: "Accommodate", ko: "수용하다, 편의를 도모하다", ex: "The hotel can accommodate 500 guests." },
+    { id: 36, en: "Acquire", ko: "얻다, 획득하다", ex: "He acquired a new skill." },
+    { id: 37, en: "Adapt", ko: "적응하다, 맞추다", ex: "You must adapt to the new environment." },
+    { id: 38, en: "Advocate", ko: "지지하다, 옹호하다", ex: "She advocates equal rights for everyone." },
+    { id: 39, en: "Alleviate", ko: "완화하다, 덜다", ex: "This medicine will alleviate the pain." },
+    { id: 40, en: "Ambitious", ko: "야심 찬", ex: "He is an ambitious young lawyer." },
+    { id: 41, en: "Anticipate", ko: "예상하다, 기대하다", ex: "We anticipate a large crowd." },
+    { id: 42, en: "Apparent", ko: "분명한, 명백한", ex: "His guilt is apparent to everyone." },
+    { id: 43, en: "Assert", ko: "주장하다, 단언하다", ex: "He continues to assert his innocence." },
+    { id: 44, en: "Assess", ko: "평가하다", ex: "We need to assess the damage." },
+    { id: 45, en: "Authentic", ko: "진짜의, 진품의", ex: "Is this an authentic painting?" },
+    { id: 46, en: "Beneficial", ko: "유익한, 이로운", ex: "Exercise is beneficial to health." },
+    { id: 47, en: "Brief", ko: "짧은, 간결한", ex: "Let's keep this meeting brief." },
+    { id: 48, en: "Capable", ko: "유능한, 할 수 있는", ex: "She is a highly capable worker." },
+    { id: 49, en: "Clarify", ko: "명확하게 하다", ex: "Could you clarify your point?" },
+    { id: 50, en: "Collaborate", ko: "협력하다", ex: "They agreed to collaborate on the project." },
+    { id: 51, en: "Compel", ko: "강요하다", ex: "The law will compel employers to provide health insurance." },
+    { id: 52, en: "Compensate", ko: "보상하다", ex: "Nothing can compensate for the loss of a loved one." },
+    { id: 53, en: "Competent", ko: "유능한", ex: "He is highly competent in his job." },
+    { id: 54, en: "Compile", ko: "엮다, 편집하다", ex: "We are compiling a list of potential clients." },
+    { id: 55, en: "Complement", ko: "보완하다", ex: "The wine complements the food perfectly." },
+    { id: 56, en: "Comply", ko: "따르다, 준수하다", ex: "You must comply with the rules." },
+    { id: 57, en: "Conceal", ko: "숨기다", ex: "She tried to conceal her anger." },
+    { id: 58, en: "Concede", ko: "인정하다", ex: "He reluctantly conceded the point." },
+    { id: 59, en: "Condemn", ko: "비난하다", ex: "The government condemned the attack." },
+    { id: 60, en: "Confine", ko: "국한하다, 가두다", ex: "Please confine your remarks to the topic." },
+    { id: 61, en: "Consent", ko: "동의하다", ex: "He finally consented to the plan." },
+    { id: 62, en: "Conserve", ko: "보존하다", ex: "We must conserve our natural resources." },
+    { id: 63, en: "Contradict", ko: "모순되다, 반박하다", ex: "His actions contradict his words." },
+    { id: 64, en: "Contribute", ko: "기여하다", ex: "Many people contributed to the project." },
+    { id: 65, en: "Controversy", ko: "논란", ex: "The new law caused a lot of controversy." },
+    { id: 66, en: "Convey", ko: "전달하다", ex: "Please convey my apologies to him." },
+    { id: 67, en: "Convince", ko: "설득하다", ex: "I managed to convince him to stay." },
+    { id: 68, en: "Crucial", ko: "중대한, 결정적인", ex: "The next few weeks are crucial." },
+    { id: 69, en: "Cultivate", ko: "경작하다, 기르다", ex: "We need to cultivate a better relationship." },
+    { id: 70, en: "Decline", ko: "감소하다, 거절하다", ex: "Sales have declined recently." },
+    { id: 71, en: "Deficient", ko: "부족한, 결함이 있는", ex: "His diet is deficient in vitamin C." },
+    { id: 72, en: "Deliberate", ko: "고의의, 신중한", ex: "It was a deliberate attempt to ruin my career." },
+    { id: 73, en: "Deprive", ko: "빼앗다", ex: "They were deprived of their basic rights." },
+    { id: 74, en: "Derive", ko: "끌어내다, 유래하다", ex: "Many words derive from Latin." },
+    { id: 75, en: "Despair", ko: "절망", ex: "He gave up in despair." },
+    { id: 76, en: "Deteriorate", ko: "악화되다", ex: "Her health began to deteriorate rapidly." },
+    { id: 77, en: "Determine", ko: "결정하다, 알아내다", ex: "The police are trying to determine the cause of the fire." },
+    { id: 78, en: "Devastate", ko: "완전히 파괴하다", ex: "The town was devastated by a hurricane." },
+    { id: 79, en: "Devote", ko: "바치다, 헌신하다", ex: "He devoted his life to helping the poor." },
+    { id: 80, en: "Dictate", ko: "지시하다, 받아쓰게 하다", ex: "You cannot dictate how I live my life." },
+    { id: 81, en: "Diminish", ko: "줄어들다", ex: "His influence has diminished over time." },
+    { id: 82, en: "Discard", ko: "버리다", ex: "He discarded the old clothes." },
+    { id: 83, en: "Disclose", ko: "밝히다, 폭로하다", ex: "The company refused to disclose financial details." },
+    { id: 84, en: "Discriminate", ko: "차별하다, 구별하다", ex: "It is illegal to discriminate on the basis of race." },
+    { id: 85, en: "Disperse", ko: "흩어지다, 해산하다", ex: "The crowd dispersed quickly." },
+    { id: 86, en: "Distinguish", ko: "구별하다", ex: "It is hard to distinguish between the two." },
+    { id: 87, en: "Distract", ko: "주의를 딴 데로 돌리다", ex: "Don't distract me while I'm studying." },
+    { id: 88, en: "Distribute", ko: "분배하다", ex: "The food was distributed equally." },
+    { id: 89, en: "Diverse", ko: "다양한", ex: "New York is a culturally diverse city." },
+    { id: 90, en: "Dominate", ko: "지배하다", ex: "He likes to dominate the conversation." },
+    { id: 91, en: "Drastic", ko: "과감한, 극단적인", ex: "Drastic measures are needed." },
+    { id: 92, en: "Eager", ko: "열렬한, 간절히 바라는", ex: "She is eager for success." },
+    { id: 93, en: "Eccentric", ko: "괴짜인, 별난", ex: "He has some very eccentric habits." },
+    { id: 94, en: "Eliminate", ko: "제거하다", ex: "We must eliminate all errors." },
+    { id: 95, en: "Emphasize", ko: "강조하다", ex: "I must emphasize the importance of this task." },
+    { id: 96, en: "Encounter", ko: "맞닥뜨리다", ex: "We encountered several problems." },
+    { id: 97, en: "Enhance", ko: "향상시키다", ex: "The lighting enhances the beauty of the room." },
+    { id: 98, en: "Enormous", ko: "거대한, 막대한", ex: "The project costs an enormous amount of money." },
+    { id: 99, en: "Ensure", ko: "보장하다, 반드시 ~하게 하다", ex: "Please ensure that the door is locked." },
+    { id: 100, en: "Enthusiastic", ko: "열광적인", ex: "He is very enthusiastic about the new plan." },
+    { id: 101, en: "Evaluate", ko: "평가하다", ex: "We need to evaluate the results." },
+    { id: 102, en: "Evolve", ko: "진화하다, 발전하다", ex: "The company has evolved into a global brand." },
+    { id: 103, en: "Exaggerate", ko: "과장하다", ex: "Don't exaggerate the problem." },
+    { id: 104, en: "Exceed", ko: "넘다, 초과하다", ex: "The results exceeded our expectations." },
+    { id: 105, en: "Exclude", ko: "제외하다", ex: "Women were excluded from the club." },
+    { id: 106, en: "Execute", ko: "실행하다, 처형하다", ex: "The plan was executed perfectly." },
+    { id: 107, en: "Exhaust", ko: "지치게 하다, 고갈시키다", ex: "The long journey exhausted us." },
+    { id: 108, en: "Exhibit", ko: "전시하다, 보여주다", ex: "He exhibited great courage." },
+    { id: 109, en: "Expand", ko: "확장하다", ex: "The company plans to expand into Europe." },
+    { id: 110, en: "Exploit", ko: "착취하다, 활용하다", ex: "He exploited the situation for his own benefit." },
+    { id: 111, en: "Extensive", ko: "광범위한", ex: "The building suffered extensive damage." },
+    { id: 112, en: "Extract", ko: "추출하다, 발췌하다", ex: "Oil is extracted from the ground." },
+    { id: 113, en: "Familiar", ko: "익숙한", ex: "His face looks familiar to me." },
+    { id: 114, en: "Feasible", ko: "실현 가능한", ex: "It is not feasible to finish this by tomorrow." },
+    { id: 115, en: "Fierce", ko: "사나운, 치열한", ex: "There is fierce competition in the market." },
+    { id: 116, en: "Flourish", ko: "번창하다", ex: "The business is flourishing." },
+    { id: 117, en: "Fluctuate", ko: "변동하다", ex: "Prices fluctuate wildly." },
+    { id: 118, en: "Formulate", ko: "만들어 내다, 공식화하다", ex: "We need to formulate a new strategy." },
+    { id: 119, en: "Fragile", ko: "부서지기 쉬운", ex: "Be careful with that vase, it is fragile." },
+    { id: 120, en: "Fulfill", ko: "실현하다, 이행하다", ex: "He finally fulfilled his dream." },
+    { id: 121, en: "Fundamental", ko: "근본적인", ex: "There is a fundamental difference between us." },
+    { id: 122, en: "Generate", ko: "발생시키다", ex: "The wind turbines generate electricity." },
+    { id: 123, en: "Grasp", ko: "꽉 잡다, 이해하다", ex: "I don't completely grasp the concept." },
+    { id: 124, en: "Halt", ko: "멈추다", ex: "The project was halted due to lack of funds." },
+    { id: 125, en: "Harmonious", ko: "조화로운", ex: "They have a harmonious relationship." },
+    { id: 126, en: "Hazard", ko: "위험", ex: "Smoking is a serious health hazard." },
+    { id: 127, en: "Hostile", ko: "적대적인", ex: "The crowd was very hostile." },
+    { id: 128, en: "Ignorant", ko: "무지한", ex: "He is completely ignorant of the facts." },
+    { id: 129, en: "Illustrate", ko: "설명하다, 삽화를 넣다", ex: "This graph illustrates the problem perfectly." },
+    { id: 130, en: "Imitate", ko: "모방하다", ex: "Parrots can imitate human speech." },
+    { id: 131, en: "Immense", ko: "거대한, 엄청난", ex: "The pressure was immense." },
+    { id: 132, en: "Impact", ko: "영향, 충격", ex: "The law will have a major impact on business." },
+    { id: 133, en: "Impose", ko: "도입하다, 부과하다", ex: "The government imposed a new tax." },
+    { id: 134, en: "Incentive", ko: "장려책, 동기", ex: "There is little incentive to work hard." },
+    { id: 135, en: "Incorporate", ko: "포함하다, 설립하다", ex: "We will incorporate your suggestions." },
+    { id: 136, en: "Indicate", ko: "나타내다", ex: "The map indicates where the treasure is." },
+    { id: 137, en: "Indispensable", ko: "없어서는 안 될", ex: "A smartphone is indispensable to many people." },
+    { id: 138, en: "Induce", ko: "유도하다", ex: "The medicine will induce sleep." },
+    { id: 139, en: "Inferior", ko: "열등한, 하위의", ex: "This product is inferior to the old one." },
+    { id: 140, en: "Initiate", ko: "개시하다, 착수하다", ex: "The company initiated a new policy." },
+    { id: 141, en: "Innovative", ko: "혁신적인", ex: "It is an innovative approach to the problem." },
+    { id: 142, en: "Inquire", ko: "묻다, 알아보다", ex: "I called to inquire about the schedule." },
+    { id: 143, en: "Insight", ko: "통찰력", ex: "The book gives great insight into history." },
+    { id: 144, en: "Inspire", ko: "영감을 주다", ex: "His speech inspired the crowd." },
+    { id: 145, en: "Instinct", ko: "본능", ex: "Animals have a strong survival instinct." },
+    { id: 146, en: "Integrate", ko: "통합하다", ex: "We need to integrate the two systems." },
+    { id: 147, en: "Interfere", ko: "간섭하다", ex: "Please don't interfere in my affairs." },
+    { id: 148, en: "Interpret", ko: "해석하다", ex: "It is difficult to interpret his behavior." },
+    { id: 149, en: "Intricate", ko: "복잡한", ex: "The machine has a very intricate design." },
+    { id: 150, en: "Investigate", ko: "조사하다", ex: "The police are investigating the crime." },
+
+/* 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 */
+/* 🔴                                                                                🔴 */
+/* 🔴  [단어 추가 공간] 나중에 새로운 단어를 넣으실 때는 여기 바로 밑에 붙여넣어 주세요! 🔴 */
+/* 🔴  형식: { id: 숫자, en: "영어", ko: "뜻", ex: "예문" },                         🔴 */
+/* 🔴                                                                                🔴 */
+/* 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 */
+
+
+
+]; // <--- 이 괄호는 지우지 마세요! 단어장 배열이 끝나는 표시입니다.
+
+var cumulativeUnknownIds = []; 
+var todayStudyList = []; 
+var sessionPassedIds = []; 
+var sessionReviewIds = []; 
+var currentIndex = 0;
+var maxStudyCount = 10; // 오늘 학습할 단어 개수(1세트 10개)
+
+function getWordObj(id) {
+    for (var i = 0; i < wordDatabase.length; i++) {
+        if (wordDatabase[i].id === parseInt(id, 10)) {
+            return wordDatabase[i];
+        }
+    }
+    return null;
+}
+
+window.onload = function() {
+    initParticles(); // 배경 금가루 효과 실행
+
+    var queryStr = window.location.search;
+    // URL에 파라미터가 있다면 전면광고 시청이 끝난 결과 화면으로 전환
+    if (queryStr.indexOf('step=result') !== -1) {
+        showResultScreen(queryStr);
+        return;
+    }
+
+    document.getElementById('ui-status').innerText = "오늘의 복습 루틴 진행 중";
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.getWebViewString === 'function') {
+            var savedData = window.AppInventor.getWebViewString();
+            if (savedData && savedData.length > 0) {
+                var stringArray = savedData.split(',');
+                for (var i = 0; i < stringArray.length; i++) {
+                    var parsedId = parseInt(stringArray[i], 10);
+                    if (!isNaN(parsedId)) cumulativeUnknownIds.push(parsedId);
+                }
+            }
+        }
+    } catch (err) {}
+
+    // 단어를 학습할 때마다 무작위로 섞어서 지루함을 방지합니다.
+    var shuffled = wordDatabase.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+    }
+    
+    for (var k = 0; k < maxStudyCount && k < shuffled.length; k++) {
+        todayStudyList.push(shuffled[k]);
+    }
+    
+    renderCurrentWord();
+};
+
+window.renderCurrentWord = function() {
+    if (currentIndex >= todayStudyList.length) {
+        finishStudyAndRefresh();
+        return;
+    }
+    var currentWord = todayStudyList[currentIndex];
+    document.getElementById('progress-indicator').innerText = (currentIndex + 1) + " / " + todayStudyList.length;
+    document.getElementById('display-word').innerText = currentWord.en;
+    document.getElementById('display-meaning').innerText = currentWord.ko;
+    document.getElementById('display-example').innerText = currentWord.ex;
+};
+
+window.handleWord = function(isKnown) {
+    var currentWordId = todayStudyList[currentIndex].id;
+
+    if (isKnown === false) {
+        // 몰라요를 눌렀을 때
+        sessionReviewIds.push(currentWordId);
+        var exists = false;
+        for (var i = 0; i < cumulativeUnknownIds.length; i++) {
+            if (cumulativeUnknownIds[i] === currentWordId) { exists = true; break; }
+        }
+        if (!exists) cumulativeUnknownIds.push(currentWordId);
+    } else {
+        // 알아요를 눌렀을 때
+        sessionPassedIds.push(currentWordId);
+        var newArray = [];
+        for (var k = 0; k < cumulativeUnknownIds.length; k++) {
+            if (cumulativeUnknownIds[k] !== currentWordId) newArray.push(cumulativeUnknownIds[k]);
+        }
+        cumulativeUnknownIds = newArray;
+    }
+
+    currentIndex++;
+    renderCurrentWord();
+};
+
+window.finishStudyAndRefresh = function() {
+    document.getElementById('ui-status').innerText = "소중한 학습 결과를 저장하고 있습니다...";
+    var savedString = cumulativeUnknownIds.join(',');
+    
+    var baseUrl = window.location.href.split('?')[0];
+    var pStr = sessionPassedIds.join(',');
+    var rStr = sessionReviewIds.join(',');
+    
+    // 이중 우회 로직을 적용한 최종 URL 생성 (전면광고 유도)
+    var finalUrl = baseUrl + "?step=result&action=spin_ott&p=" + pStr + "&r=" + rStr + "&c=" + savedString;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("SAVE_REVIEW|" + savedString);
+        }
+    } catch (err) {}
+
+    // 데이터가 처리될 아주 짧은 여유 시간을 둔 뒤, 페이지를 이동시켜 확실하게 결과를 보여줍니다.
+    setTimeout(function() {
+        window.location.replace(finalUrl);
+    }, 500);
+};
+
+window.showResultScreen = function(queryStr) {
+    document.getElementById('ui-status').innerText = "모든 일일 루틴이 완료되었습니다.";
+    document.getElementById('main-content').style.display = "none";
+    document.getElementById('result-content').style.display = "block";
+
+    function getParam(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(queryStr);
+        return results === null ? "" : decodeURIComponent(results[1]) || "";
+    }
+
+    var passedStr = getParam('p');
+    var reviewStr = getParam('r');
+    var cumulativeStr = getParam('c');
+    
+    if(cumulativeStr) {
+        cumulativeUnknownIds = cumulativeStr.split(',');
+    } else if(reviewStr) {
+        cumulativeUnknownIds = reviewStr.split(',');
+    }
+
+    function renderList(strData, elementId, emptyMsg) {
+        var html = "";
+        if (!strData || strData === "") {
+            html = "<div style='color:#777777; font-size:14px; padding: 10px 0;'>" + emptyMsg + "</div>";
+        } else {
+            var ids = strData.split(',');
+            for (var i = 0; i < ids.length; i++) {
+                var w = getWordObj(ids[i]);
+                if (w) {
+                    html += "<div class='history-item'>" + w.en + " <span>" + w.ko + "</span></div>";
+                }
+            }
+        }
+        document.getElementById(elementId).innerHTML = html;
+    }
+
+    renderList(reviewStr, 'review-items', "복습할 단어가 하나도 없습니다. 완벽한 실력이시군요!");
+    renderList(passedStr, 'passed-items', "오늘은 통과한 단어가 없습니다. 내일 조금 더 힘내주세요!");
+};
+
+window.downloadReviewWords = function() {
+    if (cumulativeUnknownIds.length === 0 || (cumulativeUnknownIds.length === 1 && cumulativeUnknownIds[0] === "")) {
+        alert("현재 복습할 단어가 비어 있습니다. 조금 더 학습을 진행해 주세요!");
+        return;
+    }
+
+    var textContent = "나만의 특별한 복습 단어장\n=========================\n\n";
+    for (var i = 0; i < cumulativeUnknownIds.length; i++) {
+        var parsed = parseInt(cumulativeUnknownIds[i], 10);
+        if (!isNaN(parsed)) {
+            var w = getWordObj(parsed);
+            if (w) {
+                textContent += "- " + w.en + " : " + w.ko + " (예문: " + w.ex + ")\n";
+            }
+        }
+    }
+
+    var blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
+    var link = document.createElement("a");
+    if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, "나만의_복습_단어장.txt");
+    } else {
+        var url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = "나만의_복습_단어장.txt";
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(function() {
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 0);
+    }
+};
+
+/* --- 부드러운 파티클(Gold Dust) 애니메이션 로직 --- */
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 40; 
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            speedY: Math.random() * 0.5 + 0.1,
+            opacity: Math.random() * 0.5 + 0.1
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particleCount; i++) {
+            var p = particles[i];
+            p.y -= p.speedY; 
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(212, 175, 55, " + p.opacity + ")"; 
+            ctx.fill();
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+</script>
