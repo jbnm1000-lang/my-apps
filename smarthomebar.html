@@ -1,0 +1,452 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 블로그 레이아웃 강제 숨김 */
+.return_link, .sidebar-back, .navigation, 
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; 
+    width: 100% !important; min-height: 100vh !important;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+}
+
+#bar-app {
+    --bg-main: #0f172a; --bg-card: #1e293b; --bg-tab: #334155;
+    --accent: #eab308; --accent-hover: #ca8a04; --text-white: #f8fafc; 
+    --text-muted: #94a3b8; --border: #475569;
+
+    background-color: var(--bg-main); color: var(--text-white);
+    font-family: 'Noto Sans KR', sans-serif; min-height: 100vh;
+    padding: 20px 16px 80px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+/* 헤더 */
+.app-header { text-align: center; margin-bottom: 20px; padding-top: 15px; }
+.app-header h1 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; line-height: 1.5; text-align: center; }
+
+/* 바텐더의 꿀팁 영역 */
+.tip-panel { background-color: rgba(234, 179, 8, 0.08); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px; margin-bottom: 25px; }
+.tip-title { color: #fde047; font-size: 14px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.tip-text { font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0; word-break: keep-all; text-align: left; }
+
+/* 선택된 재료 표시 영역 */
+.selected-tray { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 20px; min-height: 80px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.2); }
+.empty-text { color: #64748b; font-size: 14px; font-weight: 500; }
+.sel-chip { background-color: var(--accent); color: #0f172a; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px; animation: popIn 0.2s ease-out; }
+.sel-chip .remove { font-size: 16px; font-weight: 900; cursor: pointer; }
+@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* 카테고리 탭 */
+.tab-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 12px; margin-bottom: 15px; scrollbar-width: none; }
+.tab-scroll::-webkit-scrollbar { display: none; }
+.tab-btn { flex-shrink: 0; background-color: var(--bg-tab); border: 1px solid var(--border); color: var(--text-muted); padding: 10px 18px; border-radius: 25px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.tab-btn.active { background-color: var(--accent); color: #0f172a; border-color: var(--accent); font-weight: 800; }
+
+/* 재료 그리드 */
+.ing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 10px; background-color: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; min-height: 200px; align-content: start; }
+.ing-item { background-color: var(--bg-tab); border: 1px solid var(--border); border-radius: 12px; padding: 12px 5px; text-align: center; cursor: pointer; transition: 0.1s; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ing-item:active { transform: scale(0.95); }
+.ing-item.selected { border-color: var(--accent); background-color: rgba(234, 179, 8, 0.15); }
+.ing-icon { font-size: 22px; line-height: 1; }
+.ing-name { font-size: 12px; color: var(--text-white); font-weight: 500; word-break: keep-all; }
+
+/* 메인 버튼 */
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #0f172a; border: none; border-radius: 16px; font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 25px rgba(234, 179, 8, 0.3); margin-bottom: 15px; }
+.btn:active { transform: scale(0.97); }
+
+/* 버튼 그룹 (리셋/다시뽑기) */
+.btn-group { display: flex; gap: 10px; margin-top: 25px; }
+.btn-half { flex: 1; padding: 16px 10px; border: none; border-radius: 12px; font-size: 14.5px; font-weight: 800; cursor: pointer; transition: 0.1s; color: #fff; word-break: keep-all; }
+.btn-half:active { transform: scale(0.96); }
+.btn-reroll { background: #334155; border: 1px solid #475569; }
+.btn-reset { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); color: #fb7185; }
+
+/* 결과 영역 */
+.result-box { display: none; background-color: var(--bg-card); border-radius: 20px; padding: 25px; border: 1px solid var(--border); border-top: 5px solid var(--accent); margin-bottom: 25px; animation: slideUp 0.3s ease-out; position: relative; z-index: 10; }
+@keyframes slideUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+.res-title-area { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.res-tag { display: inline-block; background-color: #422006; color: #fde047; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 12px; margin-bottom: 12px; }
+.res-name { font-size: 21px; font-weight: 900; color: #fff; margin: 0; word-break: keep-all; }
+.res-desc { color: var(--text-muted); font-size: 13.5px; margin-top: 10px; line-height: 1.5; text-align: center; }
+
+.recipe-step { margin-top: 20px; }
+.step-title { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.step-list { list-style: none; padding: 0; margin: 0; }
+.step-list li { background-color: var(--bg-tab); padding: 15px 16px; border-radius: 12px; margin-bottom: 10px; font-size: 14px; color: #e2e8f0; line-height: 1.6; word-break: keep-all; display: flex; gap: 12px; text-align: left; }
+.step-num { font-weight: 900; color: var(--accent); font-size: 15px; }
+
+/* 방패막 (경고/주의) */
+.shield-panel { background-color: rgba(244, 63, 94, 0.05); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 16px; padding: 20px; margin-top: 30px; }
+.shield-title { color: #fb7185; font-size: 14px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.shield-text { font-size: 13px; color: #cbd5e1; line-height: 1.7; text-align: left; word-break: keep-all; margin: 0; }
+.shield-text b { color: #fda4af; }
+
+/* 샴페인 기포(파티클) 효과 CSS */
+.particle { position: fixed; bottom: -10px; width: 8px; height: 8px; border-radius: 50%; z-index: 9999; opacity: 0.6; pointer-events: none; animation: floatUp linear forwards; box-shadow: 0 0 5px rgba(234, 179, 8, 0.5); }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+</style>
+
+<div id="bar-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1>스마트 홈텐딩 <span>라운지</span></h1>
+            <p>보유하신 음료와 재료를 선택하시면, 프리미엄 홈카페 및 홈바 레시피를 제안해 드립니다.</p>
+        </div>
+
+        <div class="tip-panel" id="tip-panel">
+            <div class="tip-title">💡 바텐더의 조합 팁</div>
+            <p class="tip-text">
+                기본이 되는 베이스(주류 또는 우유/커피) 1가지와 음료(탄산수, 주스 등) 1가지를 함께 선택하시면 가장 완벽한 비율의 레시피가 도출됩니다. 부재료(과일, 시럽)를 추가하면 풍미가 더욱 살아납니다.
+            </p>
+        </div>
+
+        <div class="selected-tray" id="selected-tray">
+            <div class="empty-text" id="empty-tray-text">보유하신 재료를 터치하여 주십시오. (최대 5개)</div>
+        </div>
+
+        <div class="tab-scroll" id="tab-container"></div>
+        <div class="ing-grid" id="ing-grid"></div>
+
+        <button class="btn" id="btn-search" onclick="executeRecipeSearch()">🍸 선택한 재료로 레시피 확인</button>
+        
+        <div class="result-box" id="result-box">
+            <div class="res-title-area">
+                <span class="res-tag">오늘의 추천 프리미엄 레시피</span>
+                <h2 class="res-name" id="res-name">결과 대기 중</h2>
+                <div class="res-desc" id="res-desc">...</div>
+            </div>
+            <div class="recipe-step">
+                <div class="step-title">📋 바텐더의 제조 과정</div>
+                <ul class="step-list" id="res-steps">
+                </ul>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn-half btn-reroll" onclick="executeRecipeSearch()">🎲 이 재료로 다시 뽑기</button>
+                <button class="btn-half btn-reset" onclick="resetIngredients()">🔄 재료 초기화</button>
+            </div>
+        </div>
+
+        <div class="shield-panel">
+            <div class="shield-title">🚨 안전 및 면책 주의사항</div>
+            <p class="shield-text">
+                • 본 서비스에서 제안하는 알코올음료 레시피는 성인을 대상으로 하며, <b>미성년자의 음주는 법으로 엄격히 금지</b>되어 있습니다.<br /><br />
+                • 지나친 음주는 뇌졸중, 기억력 손상이나 치매를 유발하며 임신 중 음주는 기형아 출생 위험을 높입니다. 건강을 위해 <b>적정량의 음주</b>를 권장합니다.<br /><br />
+                • 특정 식재료(우유, 과일, 견과류 등)에 대한 <b>식품 알레르기</b>가 있으신 경우 반드시 해당 재료를 제외하고 제조하십시오. 사용자 부주의로 인해 발생한 문제에 대하여 서비스 제공자는 법적 책임을 지지 않습니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var ingredientDB = [
+    { cat: "베이스(주류)", items: ["소주|🍶","위스키|🥃","보드카|🧊","진(Gin)|🍸","럼(Rum)|🥃","화이트와인|🥂","레드와인|🍷","맥주|🍺","청주/사케|🍶"] },
+    { cat: "베이스(논알콜)", items: ["에스프레소|☕","콜드브루|☕","흰우유|🥛","두유/오트밀크|🥛","홍차(티백)|🍵","녹차(티백)|🍵","얼그레이|🍵"] },
+    { cat: "믹서(탄산/음료)", items: ["탄산수|🫧","콜라|🥤","사이다|🥤","토닉워터|🫧","진저에일|🍾","오렌지주스|🧃","사과주스|🧃","크랜베리주스|🧃","포카리스웨트|💧"] },
+    { cat: "과일/가니쉬", items: ["레몬|🍋","라임|🍋‍🟩","오렌지|🍊","자몽|🍊","애플민트|🌿","로즈마리|🌿","시나몬스틱|🪵","올리브|🫒"] },
+    { cat: "시럽/당류", items: ["설탕|🧂","꿀|🍯","바닐라시럽|🍯","초코시럽|🍫","카라멜시럽|🍮","유자청|🍋","매실청|🫒"] }
+];
+
+// 스마트 텍스트 치환을 위한 [기주], [믹서], [가니쉬], [시럽] 태그 사용
+var recipeDB = [
+    {
+        names: ["클린 스피릿 스파클링 믹스", "시그니처 청량 하이볼"],
+        match: ["소주", "보드카", "진(Gin)"],
+        desc: "투명한 [기주]의 깔끔한 맛과 청량감을 극대화한 프레시한 음료입니다.",
+        steps: [
+            "유리잔에 얼음을 80% 이상 가득 채운 뒤, 잔이 겉면까지 차가워지도록 스푼으로 가볍게 저어 칠링(Chilling)합니다.",
+            "잔 바닥에 고인 물을 버려내고, [기주]를 1비율(약 40ml)로 붓습니다. 투명한 주류는 차가울수록 알코올의 거친 향이 정돈됩니다.",
+            "준비된 [믹서]를 3비율(약 120ml)로 부어줍니다. 탄산이 깨지지 않도록 얼음을 피해 잔 벽을 타고 흐르게 붓는 것이 핵심입니다.",
+            "([가니쉬]가 있다면 즙을 가볍게 짜서 넣고 껍질째 잔에 띄워 시트러스한 풍미를 한층 끌어올립니다.)",
+            "단맛이 필요하다면 [시럽]을 약간 더한 뒤, 스푼을 잔 바닥까지 넣고 단 한 번만 부드럽게 끌어올려 섞어 완성합니다."
+        ]
+    },
+    {
+        names: ["오크 아로마 프리미엄 하이볼", "클래식 딥 라운지 믹스"],
+        match: ["위스키", "럼(Rum)"],
+        desc: "숙성된 [기주] 특유의 깊은 오크 향과 바디감을 온전히 음미할 수 있는 클래식 칵테일입니다.",
+        steps: [
+            "하이볼 글라스에 크고 단단한 얼음을 채워 넣습니다. 얼음이 클수록 천천히 녹아 [기주]의 진한 맛이 흐려지지 않습니다.",
+            "[기주]를 1비율(약 30ml)로 따릅니다. 향이 풍부한 주류이므로 믹서를 붓기 전 잔에 코를 대고 고유의 아로마를 먼저 느껴보세요.",
+            "얼음에 직접 닿지 않도록 주의하며 [믹서]를 3비율로 천천히 붓습니다. 급하게 부으면 고유의 향취가 날아갈 수 있습니다.",
+            "([가니쉬]를 잔 입구에 가볍게 문질러 향을 입힌 뒤 잔 속에 살짝 떨어뜨려 줍니다.)",
+            "바스푼으로 얼음을 들었다 놓는 느낌으로 딱 반 바퀴만 섞어줍니다. 너무 많이 저으면 얼음이 녹아 맛이 밍밍해집니다."
+        ]
+    },
+    {
+        names: ["스위트 트로피컬 선라이즈", "프루티 라운지 베버리지"],
+        match: ["오렌지주스", "사과주스", "크랜베리주스", "유자청", "매실청"],
+        desc: "과일의 달콤함과 상큼함이 완벽한 밸런스를 이루는 기분 좋은 한 잔입니다.",
+        steps: [
+            "잔에 얼음을 반 정도 채우고, [믹서]를 잔의 절반가량 부어 단맛의 기초를 탄탄하게 잡습니다.",
+            "(알코올을 추가하셨다면, 이 단계에서 [기주]를 1소주잔 분량으로 첨가하여 풍미의 깊이를 더해 줍니다.)",
+            "나머지 빈 공간을 얼음으로 채워 온도를 시원하게 맞추고, [시럽]이 있다면 기호에 맞게 당도를 조절합니다.",
+            "아래에 가라앉은 과즙이나 청이 고루 섞일 수 있도록 스푼으로 바닥부터 힘차게 섞어줍니다.",
+            "[가니쉬]를 잔 테두리에 예쁘게 꽂아 시각적인 즐거움까지 완성합니다."
+        ]
+    },
+    {
+        names: ["부드러운 시그니처 라떼", "바리스타 특선 밀크 베버리지"],
+        match: ["에스프레소", "콜드브루", "흰우유", "두유/오트밀크"],
+        desc: "부드러운 베이스와 깊은 향이 만나 마음을 편안하게 해주는 프리미엄 라떼입니다.",
+        steps: [
+            "차갑게 즐기실 경우 잔에 얼음을 가득 채워 [믹서](또는 우유류)를 붓습니다.",
+            "[시럽]을 1~2펌프(약 10ml) 넣고 베이스 액체와 완전히 섞일 때까지 부드럽게 저어줍니다.",
+            "준비된 [기주](커피 등)를 액체 위로 아주 천천히 부어줍니다. 층이 예쁘게 분리되며 카페 수준의 시각적 퀄리티를 보여줍니다.",
+            "([가니쉬]가 있다면 폼 위에 살짝 얹어 훌륭한 디테일을 완성합니다.)"
+        ]
+    }
+];
+
+var standardRecipe = {
+    names: ["시그니처 커스텀 믹스", "홈텐더 추천 데일리 베버리지"],
+    desc: "선택하신 재료들의 개성을 조화롭게 살려낸 나만의 맞춤형 시그니처 음료입니다.",
+    steps: [
+        "준비된 잔을 깨끗하게 닦고, 시원하게 즐기실 경우 얼음을 잔에 가득 채워 온도를 낮춰줍니다.",
+        "[시럽] 등 가장 맛이 진하거나 단맛이 강한 재료를 먼저 잔 바닥에 깔아줍니다.",
+        "그 위로 [기주]와 [믹서]를 천천히 부어줍니다. 비율은 1:3 (기주 1, 믹서 3)을 기본으로 맞춥니다.",
+        "모든 재료가 고르게 섞이도록 바스푼이나 머들러를 이용해 위아래로 가볍게 저어줍니다.",
+        "[가니쉬]로 멋을 낸 뒤, 예쁜 코스터(컵받침) 위에 올려 홈바의 분위기를 제대로 즐기며 음미합니다."
+    ]
+};
+
+var selectedIngredients = [];
+
+function getUrlParams() {
+    var params = {};
+    var search = window.location.search.substring(1);
+    if (search) {
+        var pairs = search.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1] || '');
+        }
+    }
+    return params;
+}
+
+function initApp() {
+    var params = getUrlParams();
+    if (params['ings']) {
+        selectedIngredients = params['ings'].split(',');
+    }
+
+    renderTabs();
+    
+    if (selectedIngredients.length > 0) {
+        updateSelectedTray();
+    } else {
+        renderIngredients(ingredientDB[0].cat);
+    }
+    
+    if (params['action'] === 'drink') {
+        document.getElementById('result-box').style.display = 'block';
+        document.getElementById('tip-panel').style.display = 'none';
+        generateSmartRecipe();
+        setTimeout(function() {
+            document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+    }
+}
+
+function renderTabs() {
+    var tabContainer = document.getElementById('tab-container');
+    tabContainer.innerHTML = '';
+    ingredientDB.forEach(function(db, index) {
+        var btn = document.createElement('div');
+        btn.className = 'tab-btn' + (index === 0 && selectedIngredients.length === 0 ? ' active' : '');
+        btn.innerText = db.cat;
+        btn.onclick = function() {
+            document.querySelectorAll('.tab-btn').forEach(function(e) { e.classList.remove('active'); });
+            btn.classList.add('active');
+            renderIngredients(db.cat);
+        };
+        tabContainer.appendChild(btn);
+    });
+
+    if(selectedIngredients.length > 0) {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        renderIngredients(ingredientDB[0].cat);
+    }
+}
+
+function renderIngredients(categoryName) {
+    var grid = document.getElementById('ing-grid');
+    grid.innerHTML = '';
+    
+    var categoryData = ingredientDB.find(function(db) { return db.cat === categoryName; });
+    if (!categoryData) return;
+
+    categoryData.items.forEach(function(itemStr) {
+        var parts = itemStr.split('|');
+        var name = parts[0];
+        var icon = parts[1];
+        var isSelected = selectedIngredients.includes(name);
+
+        var el = document.createElement('div');
+        el.className = 'ing-item' + (isSelected ? ' selected' : '');
+        el.innerHTML = '<span class="ing-icon">' + icon + '</span><span class="ing-name">' + name + '</span>';
+        
+        el.onclick = function() {
+            if (isSelected) {
+                selectedIngredients = selectedIngredients.filter(function(i) { return i !== name; });
+            } else {
+                if (selectedIngredients.length >= 5) {
+                    alert("가장 중요한 핵심 재료를 5개까지만 선택해 주십시오.");
+                    return;
+                }
+                selectedIngredients.push(name);
+            }
+            renderIngredients(categoryName);
+            updateSelectedTray();
+        };
+        grid.appendChild(el);
+    });
+}
+
+function updateSelectedTray() {
+    var tray = document.getElementById('selected-tray');
+    if (selectedIngredients.length === 0) {
+        tray.innerHTML = '<div class="empty-text" id="empty-tray-text">보유하신 재료를 터치하여 주십시오. (최대 5개)</div>';
+        return;
+    }
+    tray.innerHTML = '';
+    selectedIngredients.forEach(function(name) {
+        var chip = document.createElement('div');
+        chip.className = 'sel-chip';
+        chip.innerHTML = name + ' <span class="remove">×</span>';
+        chip.onclick = function() {
+            selectedIngredients = selectedIngredients.filter(function(i) { return i !== name; });
+            var activeTabElement = document.querySelector('.tab-btn.active');
+            var activeTab = activeTabElement ? activeTabElement.innerText : ingredientDB[0].cat;
+            renderIngredients(activeTab);
+            updateSelectedTray();
+        };
+        tray.appendChild(chip);
+    });
+}
+
+function executeRecipeSearch() {
+    if(selectedIngredients.length === 0) {
+        alert("최소 1개 이상의 재료를 선택해 주십시오.");
+        return;
+    }
+    var ingsParam = encodeURIComponent(selectedIngredients.join(","));
+    var baseUrl = window.location.href.split('?')[0];
+    window.location.href = baseUrl + "?m=1&action=drink&ings=" + ingsParam + "&t=" + new Date().getTime();
+}
+
+function resetIngredients() {
+    var baseUrl = window.location.href.split('?')[0];
+    window.location.href = baseUrl + "?m=1";
+}
+
+function createBubbles() {
+    var colors = ['#fde047', '#fef08a', '#ffffff', '#eab308'];
+    for (var i = 0; i < 35; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+        p.style.animationDelay = (Math.random() * 0.5) + 's';
+        var size = (Math.random() * 6 + 4) + 'px';
+        p.style.width = size;
+        p.style.height = size;
+        document.body.appendChild(p);
+        
+        setTimeout(function(particle) {
+            if (particle && particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 4000, p);
+    }
+}
+
+function generateSmartRecipe() {
+    var candidates = [];
+    
+    // 사용자가 선택한 실제 재료를 식별 (텍스트 치환용)
+    var allItems = ingredientDB.reduce((acc, curr) => acc.concat(curr.items.map(i => i.split('|')[0])), []);
+    var actualBase = selectedIngredients.find(i => ingredientDB[0].items.some(x=>x.includes(i)) || ingredientDB[1].items.some(x=>x.includes(i))) || "베이스 주류";
+    var actualMixer = selectedIngredients.find(i => ingredientDB[2].items.some(x=>x.includes(i))) || "탄산 및 음료";
+    var actualGarnish = selectedIngredients.find(i => ingredientDB[3].items.some(x=>x.includes(i))) || "과일 장식";
+    var actualSyrup = selectedIngredients.find(i => ingredientDB[4].items.some(x=>x.includes(i))) || "시럽(당류)";
+
+    if (selectedIngredients.length > 0) {
+        candidates = recipeDB.filter(function(r) {
+            return selectedIngredients.some(function(sel) {
+                return r.match.indexOf(sel) !== -1;
+            });
+        });
+    }
+
+    if (candidates.length === 0) {
+        candidates = [standardRecipe];
+    }
+
+    var baseRecipe = candidates[Math.floor(Math.random() * candidates.length)];
+    
+    var prefixList = ["프리미엄 ", "시그니처 ", "스페셜 ", "바텐더 추천 "];
+    var randomPrefix = prefixList[Math.floor(Math.random() * prefixList.length)];
+    
+    // 제목에도 선택한 기주 이름이 명확히 들어가도록 수정
+    var titleStr = actualBase !== "베이스 주류" ? actualBase + " " : "";
+    var finalTitle = randomPrefix + titleStr + baseRecipe.names[Math.floor(Math.random() * baseRecipe.names.length)];
+    
+    document.getElementById('res-name').innerText = finalTitle;
+    
+    // 설명(desc) 동적 치환
+    var dynamicDesc = baseRecipe.desc.replace(/\[기주\]/g, actualBase).replace(/\[믹서\]/g, actualMixer);
+    document.getElementById('res-desc').innerText = dynamicDesc;
+    
+    var stepsUl = document.getElementById('res-steps');
+    stepsUl.innerHTML = '';
+    
+    // 스텝(steps) 내부 텍스트 동적 치환
+    baseRecipe.steps.forEach(function(step, index) {
+        var dynamicStep = step
+            .replace(/\[기주\]/g, "<b>" + actualBase + "</b>")
+            .replace(/\[믹서\]/g, "<b>" + actualMixer + "</b>")
+            .replace(/\[가니쉬\]/g, "<b>" + actualGarnish + "</b>")
+            .replace(/\[시럽\]/g, "<b>" + actualSyrup + "</b>");
+            
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="step-num">' + (index + 1) + '.</span> <span>' + dynamicStep + '</span>';
+        stepsUl.appendChild(li);
+    });
+
+    createBubbles();
+}
+
+document.addEventListener("DOMContentLoaded", initApp);
+//]]>
+</script>
