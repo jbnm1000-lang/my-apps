@@ -1,0 +1,558 @@
+<!--스마트 마이카 주치의: URL 찰거머리 데이터 보존 + 3중 방탄 백업 완벽 패치-->
+<meta content="notranslate" name="google"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #0F172A !important; 
+        overflow-x: hidden !important; 
+        font-family: 'Pretendard', sans-serif; color: #F8FAFC;
+    }
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, .mobile-nav, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .breadcrumbs, .footer-outer, #footer, .comments, .search-container, .top-bar, .share-action { 
+        display: none !important; visibility: hidden !important; height: 0 !important; 
+    }
+
+    #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; }
+
+    #app-container { 
+        position: relative; z-index: 1; width: 100%; max-width: 550px; margin: 0 auto; padding: 25px 18px 70px 18px; 
+    }
+
+    .header-box { text-align: center; margin-bottom: 25px; }
+    .header-title { font-size: 26px; font-weight: 900; color: #FFFFFF; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(6, 182, 212, 0.3); }
+    .header-title span { color: #06B6D4; } 
+    .header-subtitle { font-size: 14px; color: #94A3B8; font-weight: 500; margin-top: 6px; }
+
+    .card-box { 
+        background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border-radius: 20px; padding: 22px 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .input-title { font-size: 15px; font-weight: 700; color: #CBD5E1; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+    
+    .main-input { 
+        width: 100%; background: #0F172A; padding: 20px; border: 2px solid #334155; border-radius: 14px; font-size: 24px; font-weight: 900; color: #06B6D4; text-align: center; outline: none; transition: 0.3s;
+    }
+    .main-input:focus { border-color: #06B6D4; box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); }
+    .main-input::placeholder { color: #475569; font-weight: 500; font-size: 18px; }
+
+    .settings-header { 
+        font-size: 14px; font-weight: 700; color: #94A3B8; text-align: center; padding: 14px; background: #1E293B; border-radius: 10px; cursor: pointer; margin-top: 20px; border: 1px solid #334155; 
+    }
+    .settings-body { display: none; margin-top: 15px; animation: fadeIn 0.3s ease; }
+    
+    .setting-group { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #334155; }
+    .setting-group.no-border { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .setting-group.highlight-group { border-top: 2px solid #38BDF8; padding-top: 15px; margin-top: 15px; border-bottom: none; }
+    
+    .setting-label { font-size: 14px; font-weight: 700; color: #F1F5F9; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+    .highlight-label { color: #38BDF8; }
+    
+    .row-flex { display: flex; gap: 8px; width: 100%; }
+    .sub-input { 
+        flex: 1; min-width: 0; width: 100%; background: #0F172A; padding: 12px 8px; border: 1px solid #334155; border-radius: 8px; font-size: 13px; color: #E2E8F0; outline: none; 
+    }
+    .sub-input:focus { border-color: #06B6D4; }
+    .sub-input::placeholder { font-size: 12px; letter-spacing: -0.5px; }
+
+    .btn-calc { 
+        width: 100%; background: linear-gradient(135deg, #06B6D4, #3B82F6); color: #FFFFFF; border: none; padding: 18px 10px; border-radius: 14px; font-size: 18px; font-weight: 900; margin-top: 20px; cursor: pointer; box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4); 
+    }
+    
+    .btn-backup {
+        width: 100%; background: #1E293B; color: #94A3B8; border: 1px solid #334155; padding: 14px 10px; border-radius: 10px; font-size: 14px; font-weight: 700; margin-top: 15px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+    }
+    .btn-backup:active { background: #334155; }
+
+    #result-area { display: none; margin-top: 25px; animation: slideUp 0.5s ease-out; }
+    .result-title { font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 15px; color: #F8FAFC; }
+    
+    .status-card { 
+        background: rgba(30, 41, 59, 0.9); border-radius: 12px; padding: 18px; margin-bottom: 12px; border-left: 5px solid #475569; display: flex; flex-direction: column; gap: 6px;
+    }
+    .status-card.good { border-left-color: #10B981; background: rgba(16, 185, 129, 0.05); }
+    .status-card.warn { border-left-color: #F59E0B; background: rgba(245, 158, 11, 0.05); }
+    .status-card.danger { border-left-color: #EF4444; background: rgba(239, 68, 68, 0.05); }
+    .status-card.fuel { border-left-color: #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    
+    .item-name { font-size: 16px; font-weight: 800; color: #F1F5F9; }
+    .item-desc { font-size: 13px; color: #94A3B8; font-weight: 500; line-height: 1.4; }
+    .item-msg { font-size: 14px; font-weight: 700; margin-top: 4px; }
+    .good .item-msg { color: #10B981; } .warn .item-msg { color: #F59E0B; } .danger .item-msg { color: #EF4444; } .fuel .item-msg { color: #3B82F6; }
+
+    .expert-advice {
+        background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 13px; color: #E0F2FE; line-height: 1.5; font-weight: 500;
+    }
+    .expert-advice strong { color: #38BDF8; font-weight: 800; }
+
+    .info-box { border-radius: 16px; padding: 22px; margin-bottom: 15px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); line-height: 1.6; }
+    .info-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; color: #06B6D4; display: flex; align-items: center; gap: 6px; }
+    .info-text { font-size: 14px; color: #CBD5E1; word-break: keep-all; font-weight: 400; }
+    .info-text b { color: #F8FAFC; font-weight: 700; }
+    
+    .warn-box { background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2); }
+    .warn-box .info-title { color: #EF4444; }
+    .warn-box .info-text { color: #94A3B8; font-size: 13px; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particles-js"></canvas>
+
+<div id="app-container">
+    <div class="header-box">
+        <div class="header-title">스마트 <span>마이카 주치의</span></div>
+        <div class="header-subtitle">정비소 가기 전 1분 투자로 과잉 정비 완벽 차단!</div>
+    </div>
+
+    <div class="card-box">
+        <div class="input-title">🚙 현재 내 차의 계기판 숫자는?</div>
+        <input class="main-input" id="cur-km" placeholder="예: 52000" type="number" />
+        
+        <div class="settings-header" onclick="toggleSettings()">⚙️ 10종 교체 기록 및 자율 설정 (최초 1회만) ▼</div>
+        
+        <div class="settings-body" id="settings-area">
+            <div class="setting-group">
+                <div class="setting-label">🛢️ 엔진오일</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="oil-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="oil-int" placeholder="주기 (기본: 10000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">🛞 타이어 (위치교환/교체)</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="tire-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="tire-int" placeholder="주기 (기본: 40000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">🛑 브레이크 패드</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="pad-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="pad-int" placeholder="주기 (기본: 40000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">💧 브레이크 오일</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="brakefluid-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="brakefluid-int" placeholder="주기 (기본: 40000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">⚙️ 미션 오일 (변속기)</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="mission-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="mission-int" placeholder="주기 (기본: 80000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">🌬️ 에어컨 필터</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="air-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="air-int" placeholder="주기 (기본: 10000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">🌧️ 와이퍼 브러쉬</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="wiper-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="wiper-int" placeholder="주기 (기본: 10000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">🔋 자동차 배터리</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="battery-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="battery-int" placeholder="주기 (기본: 60000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">⚡ 점화 플러그</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="spark-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="spark-int" placeholder="주기 (기본: 60000)" type="number" />
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting-label">❄️ 부동액 (냉각수)</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="coolant-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="coolant-int" placeholder="주기 (기본: 40000)" type="number" />
+                </div>
+            </div>
+
+            <div class="setting-group highlight-group">
+                <div class="setting-label highlight-label">🔧 기타 자율 추가 항목 (선택)</div>
+                <input class="sub-input" id="custom-name" placeholder="항목 이름 (예: 연료필터)" style="margin-bottom: 8px; width: 100%;" type="text" />
+                <div class="row-flex">
+                    <input class="sub-input" id="custom-last" placeholder="마지막 교체 (km)" type="number" />
+                    <input class="sub-input" id="custom-int" placeholder="주기 설정 (km)" type="number" />
+                </div>
+            </div>
+
+            <div class="setting-group highlight-group no-border">
+                <div class="setting-label highlight-label">⛽ 최근 주유 기록 (선택)</div>
+                <div class="row-flex">
+                    <input class="sub-input" id="fuel-memo" placeholder="주유소 이름 또는 날짜" type="text" />
+                    <input class="sub-input" id="fuel-cost" placeholder="결제 금액 (원)" type="number" />
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-calc" onclick="runDiagnosis()">내 차 건강 상태 종합 진단하기</button>
+        
+        <button class="btn-backup" onclick="downloadBackup()">💾 내 차 기록 텍스트(.txt)로 안전하게 백업하기</button>
+    </div>
+    
+    <div id="result-area">
+        <div class="result-title">📋 마이카 맞춤형 진단 리포트</div>
+        <div id="result-cards"></div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">💡 마이카 주치의 완벽 사용 및 데이터 관리 설명서</div>
+        <div class="info-text">
+            차량 관리가 어렵고 막막하신가요? 본 앱은 바쁜 일상을 위해 설계된 <b>'초간편 방치형 관리'</b> 시스템입니다. 아래의 순서와 꿀팁을 참고해 스마트하게 관리해 보세요.<br /><br />
+            <b>1단계. 최초 1회 맞춤 설정하기</b><br />
+            화면 중간의 <b>[⚙️ 10종 교체 기록 및 자율 설정]</b> 버튼을 누르세요. 과거 정비 명세서를 참고하여 각 부품을 마지막으로 언제 교체했는지 주행거리(km)를 기록해 주시면 됩니다. 주기가 헷갈리신다면 기본 설정값을 그대로 사용하셔도 무방합니다.<br /><br />
+            <b>2단계. 일상생활 방치 및 주유 기록</b><br />
+            설정을 마치셨다면 평소에는 편안하게 운전만 하시면 됩니다. 입력하신 모든 정보는 앱을 종료해도 <b>스마트폰 내부에 안전하게 자동 보관</b>됩니다. 주유를 하셨을 때만 가끔 앱을 켜서 하단의 주유 기록을 업데이트해 주세요.<br /><br />
+            <b>3단계. 정비소 방문 전 필수 점검</b><br />
+            정비소에 가기 전, 맨 위 칸에 <b>현재 계기판의 주행거리</b>만 입력하고 진단하기를 누르세요. 10가지 부품의 상태와 함께, 정비사에게 직접 건넬 수 있는 <b>전문가 수준의 실전 방어 멘트</b>를 즉시 확인하실 수 있습니다.<br /><br />
+            <b>⭐ [중요 꿀팁] 데이터 영구 백업 방법</b><br />
+            스마트폰을 교체하시거나 데이터를 삭제하실 경우 기록이 초기화될 수 있습니다. 이를 방지하기 위해 정기적으로 진단 버튼 아래에 있는 <b>[💾 텍스트로 백업하기]</b> 버튼을 눌러주세요. 현재까지 기록하신 모든 소모품 주행거리와 주유 내역이 문서 파일로 스마트폰에 영구 저장됩니다.
+        </div>
+    </div>
+
+    <div class="info-box warn-box">
+        <div class="info-title">🚨 서비스 이용 주의사항 및 면책 조항 (필독)</div>
+        <div class="info-text">
+            본 애플리케이션은 운전자의 편리한 차량 소모품 일정 관리와 예산 계획을 돕기 위해 무료로 제공되는 보조 유틸리티 도구입니다.<br /><br />
+            <b>1. 데이터 보관 안내</b><br />
+            사용자가 입력한 정보는 외부 서버가 아닌 스마트폰 기기 내부에 저장됩니다. 기기 분실, 앱 삭제 등의 사유로 정보가 유실될 수 있으며, 개발자는 복구 의무가 없습니다. 중요한 기록은 반드시 앱 내의 '백업 기능'을 활용해 보관하시길 권장합니다.<br /><br />
+            <b>2. 진단 결과의 한계성</b><br />
+            제공되는 부품 교체 주기 및 진단 결과표는 사용자가 입력한 산술적인 주행거리 수치에 기반한 단순 예측 모델입니다. 실제 부품의 마모도와 수명은 <b>차종, 개인의 운전 습관, 주행 환경, 계절 및 기후 조건</b>에 따라 매우 큰 편차가 발생할 수 있습니다.<br /><br />
+            <b>3. 법적 책임의 제한</b><br />
+            본 진단 리포트는 어디까지나 정비를 위한 <b>참고용 자료</b>로만 활용해 주시길 바랍니다. 정확한 차량의 상태 점검 및 부품 교체 시기는 반드시 공인된 전문 정비사에게 의뢰하시어 결정하시길 권장합니다. 본 앱의 결과물을 근거로 발생한 실제 차량의 고장, 교통사고, 수리 지연, 과잉 정비로 인한 금전적 손실 및 기타 모든 직간접적인 피해에 대하여 본 앱과 개발자는 <b>어떠한 법적 책임도 부담하지 않음</b>을 명확히 고지해 드립니다.
+        </div>
+    </div>
+</div>
+
+<script>
+// 10가지 부품 정보 (아이디 매칭용)
+var partsData = [
+    { id: 'oil', kl: 'ol', ki: 'oi', name: "🛢️ 엔진오일", def: 10000, adv: "사장님, 광유 말고 합성유로 넣어주시고 기존 잔유는 확실하게 제거 부탁드립니다." },
+    { id: 'tire', kl: 'tl', ki: 'ti', name: "🛞 타이어", def: 40000, adv: "타이어 편마모 있는지 점검해 주시고, 필요하면 앞뒤 위치 교환도 같이 진행해 주세요." },
+    { id: 'pad', kl: 'pl', ki: 'pi', name: "🛑 브레이크 패드", def: 40000, adv: "교체하기 전에 패드 두께가 몇 mm 정도 남았는지 직접 눈으로 확인시켜 주실 수 있나요?" },
+    { id: 'brakefluid', kl: 'bl', ki: 'bi', name: "💧 브레이크 오일", def: 40000, adv: "수분 테스트기 수치 먼저 확인해 주시겠어요? 3% 넘어가면 그때 교체하겠습니다." },
+    { id: 'mission', kl: 'ml', ki: 'mi', name: "⚙️ 미션 오일", def: 80000, adv: "순환식으로 꼼꼼하게 교체해 주시고, 오일 레벨링 정확하게 맞춰주시길 바랍니다." },
+    { id: 'air', kl: 'al', ki: 'ai', name: "🌬️ 에어컨 필터", def: 10000, adv: "에어컨 필터는 활성탄 필터로 교체해 주시고, 에바포레이터 청소는 다음에 진행하겠습니다." },
+    { id: 'wiper', kl: 'wl', ki: 'wi', name: "🌧️ 와이퍼 브러쉬", def: 10000, adv: "와이퍼는 제가 인터넷으로 부품을 사서 직접 교체할 예정이니 놔두셔도 됩니다." },
+    { id: 'battery', kl: 'btl', ki: 'bti', name: "🔋 자동차 배터리", def: 60000, adv: "배터리 전압 체크 먼저 꼼꼼히 해주시고, 시동 능력이 기준치 이하일 때만 교체할게요." },
+    { id: 'spark', kl: 'sl', ki: 'si', name: "⚡ 점화 플러그", def: 60000, adv: "플러그 팁 마모 상태 점검해 주시고, 교체할 때 점화 코일도 함께 교체가 필요한지 봐주세요." },
+    { id: 'coolant', kl: 'cl', ki: 'ci', name: "❄️ 부동액 (냉각수)", def: 40000, adv: "비중계로 어는점 확인 부탁드리고, 오염이 심하면 일반 보충 말고 순환식으로 교환해 주세요." }
+];
+
+function getVal(id) {
+    var el = document.getElementById(id);
+    return el ? el.value : "";
+}
+
+function setVal(id, val) {
+    var el = document.getElementById(id);
+    if(el && val) el.value = decodeURIComponent(val);
+}
+
+// 3중 방탄 저장 시스템 (URL이 끊겨도 쿠키와 로컬저장소에서 가져옴)
+function saveAllData() {
+    var data = {};
+    data['cur'] = getVal('cur-km');
+    data['cn'] = getVal('custom-name'); data['cla'] = getVal('custom-last'); data['cin'] = getVal('custom-int');
+    data['fm'] = getVal('fuel-memo'); data['fc'] = getVal('fuel-cost');
+    for(var i=0; i<partsData.length; i++) {
+        var p = partsData[i];
+        data[p.kl] = getVal(p.id + '-last');
+        data[p.ki] = getVal(p.id + '-int');
+    }
+
+    for(var key in data) {
+        var val = data[key];
+        try { localStorage.setItem('myCar_' + key, val); } catch(e) {}
+        try {
+            var d = new Date();
+            d.setTime(d.getTime() + (3650*24*60*60*1000)); // 10년짜리 쿠키 생명력
+            document.cookie = 'myCar_' + key + "=" + encodeURIComponent(val) + ";expires=" + d.toUTCString() + ";path=/";
+        } catch(e) {}
+    }
+    return data;
+}
+
+function loadAllDataFromStorage() {
+    var keys = ['cur', 'cn', 'cla', 'cin', 'fm', 'fc'];
+    for(var i=0; i<partsData.length; i++) { keys.push(partsData[i].kl); keys.push(partsData[i].ki); }
+    
+    var data = {};
+    for(var j=0; j<keys.length; j++) {
+        var k = keys[j];
+        var val = null;
+        try { val = localStorage.getItem('myCar_' + k); } catch(e) {}
+        if(!val) {
+            var nameEQ = 'myCar_' + k + "=";
+            var ca = document.cookie.split(';');
+            for(var x=0; x < ca.length; x++) {
+                var c = ca[x];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) val = decodeURIComponent(c.substring(nameEQ.length,c.length));
+            }
+        }
+        data[k] = val || "";
+    }
+    return data;
+}
+
+function getQueryParam(param) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i<vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] === param) return decodeURIComponent(pair[1] || "");
+    }
+    return null;
+}
+
+// 애니메이션 입자 효과
+var canvas = document.getElementById('particles-js');
+var ctx = canvas.getContext('2d');
+var particlesArray = [];
+if(canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+function Particle() {
+    this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5; this.speedY = Math.random() * -0.5 - 0.2;
+    this.opacity = Math.random() * 0.5 + 0.1;
+}
+Particle.prototype.update = function() {
+    this.y += this.speedY;
+    if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; }
+};
+Particle.prototype.draw = function() {
+    ctx.fillStyle = 'rgba(6, 182, 212, ' + this.opacity + ')';
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+};
+
+function initParticles() { if(!canvas) return; for (var i = 0; i < 50; i++) { particlesArray.push(new Particle()); } }
+function animateParticles() {
+    if(!canvas) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); particlesArray[i].draw(); }
+    requestAnimationFrame(animateParticles);
+}
+initParticles(); animateParticles();
+window.addEventListener('resize', function() { if(canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } });
+
+// 앱이 켜질 때 실행되는 무적의 로드 함수
+window.onload = function() {
+    var diagnosed = getQueryParam('diagnosed');
+    var data = {};
+    
+    // 1. 광고를 보고 돌아왔다면 무조건 URL에 달린 찰거머리 데이터를 뜯어서 저장
+    if(diagnosed === 'true') {
+        var keys = ['cur', 'cn', 'cla', 'cin', 'fm', 'fc'];
+        for(var i=0; i<partsData.length; i++) { keys.push(partsData[i].kl); keys.push(partsData[i].ki); }
+        
+        for(var j=0; j<keys.length; j++) {
+            var k = keys[j];
+            var val = getQueryParam(k);
+            if(val !== null) {
+                data[k] = val;
+                // 다시 튕겨나가지 않게 3중 저장
+                try { localStorage.setItem('myCar_' + k, val); } catch(e) {}
+                try {
+                    var d = new Date(); d.setTime(d.getTime() + (3650*24*60*60*1000));
+                    document.cookie = 'myCar_' + k + "=" + encodeURIComponent(val) + ";expires=" + d.toUTCString() + ";path=/";
+                } catch(e) {}
+            }
+        }
+    } else {
+        // 2. 평소에 켰을 때는 저장소와 쿠키에서 싹싹 긁어옴
+        data = loadAllDataFromStorage();
+    }
+
+    // 3. 화면 입력칸에 데이터 채워넣기
+    setVal('cur-km', data['cur']);
+    setVal('custom-name', data['cn']); setVal('custom-last', data['cla']); setVal('custom-int', data['cin']);
+    setVal('fuel-memo', data['fm']); setVal('fuel-cost', data['fc']);
+    for(var x=0; x<partsData.length; x++) {
+        var p = partsData[x];
+        setVal(p.id + '-last', data[p.kl]);
+        setVal(p.id + '-int', data[p.ki]);
+    }
+
+    // 4. 진단하기 버튼을 눌렀던 상태면 곧바로 결과창 출력
+    if(diagnosed === 'true') {
+        showResults(data);
+    }
+};
+
+function toggleSettings() {
+    var area = document.getElementById('settings-area');
+    if(area) area.style.display = (area.style.display === 'block') ? 'none' : 'block';
+}
+
+// 진단하기 버튼 클릭 시 실행
+function runDiagnosis() {
+    var curKm = getVal('cur-km');
+    if(!curKm || parseInt(curKm) === 0) { 
+        alert("현재 주행거리를 확인하여 정확히 입력해 주세요."); 
+        return; 
+    }
+
+    // 입력된 모든 데이터를 무조건 저장하고 URL 꼬리에 매달 준비
+    var data = saveAllData();
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott&diagnosed=true";
+    
+    for(var key in data) {
+        if(data[key]) finalUrl += "&" + key + "=" + encodeURIComponent(data[key]);
+    }
+    
+    // 앱인벤터로 전면광고 신호 발사
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    // 0.3초 뒤 URL 파라미터를 통째로 달고 강제 새로고침
+    setTimeout(function () { window.location.replace(finalUrl); }, 300);
+}
+
+function showResults(data) {
+    var curKm = parseInt(data['cur']) || 0;
+    var htmlContent = "";
+
+    if(data['fm'] || parseInt(data['fc']) > 0) {
+        htmlContent += '<div class="status-card fuel">' +
+            '<div class="item-name">⛽ 최근 주유 기록</div>' +
+            '<div class="item-desc">내역: ' + (data['fm'] ? data['fm'] : '미입력') + '</div>' +
+            '<div class="item-msg">💰 결제 금액: ' + (parseInt(data['fc']) > 0 ? parseInt(data['fc']).toLocaleString() + '원' : '미입력') + '</div>' +
+        '</div>';
+    }
+
+    for(var j=0; j<partsData.length; j++) {
+        var p = partsData[j];
+        var lastKm = parseInt(data[p.kl]) || 0;
+        var interval = parseInt(data[p.ki]) || p.def;
+        
+        if(lastKm === 0) continue; 
+        var driven = curKm - lastKm;
+        if(driven < 0) continue; 
+
+        var ratio = driven / interval;
+        var statusClass = "", msg = "", expertBox = "";
+
+        if(ratio < 0.7) {
+            statusClass = "good"; msg = "🟢 아직 충분히 여유가 있습니다.";
+        } else if(ratio < 1.0) {
+            statusClass = "warn"; msg = "🟡 슬슬 교체를 준비해 주세요.";
+            expertBox = '<div class="expert-advice"><strong>💡 정비소 실전 방어 멘트</strong><br>"' + p.adv + '"</div>';
+        } else {
+            statusClass = "danger"; msg = "🔴 교체 시기가 지났습니다! 점검 요망";
+            expertBox = '<div class="expert-advice"><strong>💡 정비소 실전 방어 멘트</strong><br>"' + p.adv + '"</div>';
+        }
+
+        htmlContent += '<div class="status-card ' + statusClass + '">' +
+            '<div class="item-name">' + p.name + '</div>' +
+            '<div class="item-desc">교체 후 <b>' + driven.toLocaleString() + 'km</b> 주행 (설정 주기: ' + interval.toLocaleString() + 'km)</div>' +
+            '<div class="item-msg">' + msg + '</div>' +
+            expertBox +
+        '</div>';
+    }
+
+    var cName = data['cn'];
+    var cLast = parseInt(data['cla']) || 0;
+    var cInt = parseInt(data['cin']) || 0;
+
+    if(cName && cLast > 0 && cInt > 0) {
+        var driven2 = curKm - cLast;
+        if(driven2 >= 0) {
+            var ratio2 = driven2 / cInt;
+            var statusClass2 = "", msg2 = "";
+            if(ratio2 < 0.7) { statusClass2 = "good"; msg2 = "🟢 아직 충분히 여유가 있습니다."; }
+            else if(ratio2 < 1.0) { statusClass2 = "warn"; msg2 = "🟡 슬슬 교체를 준비해 주세요."; }
+            else { statusClass2 = "danger"; msg2 = "🔴 교체 시기가 지났습니다! 점검 요망"; }
+
+            htmlContent += '<div class="status-card ' + statusClass2 + '">' +
+                '<div class="item-name">🔧 ' + cName + ' (자율 추가)</div>' +
+                '<div class="item-desc">교체 후 <b>' + driven2.toLocaleString() + 'km</b> 주행 (설정 주기: ' + cInt.toLocaleString() + 'km)</div>' +
+                '<div class="item-msg">' + msg2 + '</div>' +
+            '</div>';
+        }
+    }
+
+    if(htmlContent === "") {
+        htmlContent = '<div class="status-card"><div class="item-desc">입력된 정비 기록이 없습니다. 맞춤 설정을 진행해 주세요.</div></div>';
+    }
+
+    var resCards = document.getElementById('result-cards');
+    if(resCards) resCards.innerHTML = htmlContent;
+    
+    var resArea = document.getElementById('result-area');
+    if(resArea) {
+        resArea.style.display = 'block';
+        setTimeout(function() { resArea.scrollIntoView({ behavior: "smooth", block: "center" }); }, 300);
+    }
+}
+
+function downloadBackup() {
+    var data = loadAllDataFromStorage();
+    var backupText = "====== 스마트 마이카 주치의 데이터 백업 ======\n\n";
+    backupText += "🚙 최근 점검 기준 주행거리: " + (data['cur'] ? data['cur'] + " km" : "미입력") + "\n\n";
+    backupText += "[필수 10종 교체 기록 및 설정 주기]\n";
+    
+    for(var i=0; i<partsData.length; i++) {
+        var p = partsData[i];
+        var last = data[p.kl] || "기록없음";
+        var interval = data[p.ki] || p.def;
+        backupText += "- " + p.name + ": 마지막 교체 [" + last + "], 설정 주기 [" + interval + "]\n";
+    }
+    
+    backupText += "\n[자율 추가 항목]\n";
+    if (data['cn']) {
+        backupText += "- " + data['cn'] + ": 마지막 교체 [" + (data['cla'] || "기록없음") + "], 설정 주기 [" + (data['cin'] || "기록없음") + "]\n";
+    } else {
+        backupText += "- 추가된 항목 없음\n";
+    }
+
+    backupText += "\n[최근 주유 기록]\n";
+    backupText += "- 내역: " + (data['fm'] ? data['fm'] : '미입력') + "\n";
+    backupText += "- 결제 금액: " + (data['fc'] ? data['fc'] + '원' : '미입력') + "\n";
+    
+    backupText += "\n============================================\n";
+    backupText += "※ 이 텍스트 파일을 보관해두시면, 스마트폰 변경 시 참고하여 다시 세팅하실 수 있습니다.";
+
+    try {
+        var blob = new Blob([backupText], { type: "text/plain;charset=utf-8" });
+        var link = document.createElement("a");
+        var today = new Date();
+        var dateString = today.getFullYear() + ("0" + (today.getMonth() + 1)).slice(-2) + ("0" + today.getDate()).slice(-2);
+        
+        link.href = URL.createObjectURL(blob);
+        link.download = "마이카주치의_백업_" + dateString + ".txt";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        alert("스마트폰의 '다운로드' 폴더에 백업 텍스트 파일이 안전하게 저장되었습니다.");
+    } catch(e) {
+        alert("현재 기기에서는 파일 다운로드를 지원하지 않습니다.");
+    }
+}
+</script>
