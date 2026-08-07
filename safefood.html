@@ -1,0 +1,314 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@600;700;900&display=swap');
+
+/* 1. 구글 블로그 찌꺼기 완벽 제거 */
+.Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, 
+.b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, 
+.mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, 
+.post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, 
+.sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, 
+#footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, 
+.bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, 
+.BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, 
+.drawer, .drawer-container, .nav-sidebar, .centered-top-container, 
+.sticky-top-container, .search-action, .search-container, .top-bar-container, 
+.top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, 
+#navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, 
+[role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; 
+    visibility: hidden !important; 
+    height: 0 !important;
+    position: absolute !important;
+} 
+
+/* 2. 전체 화면 리셋 및 고급 다크 테마 */
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    background-color: #0b111d !important; 
+    background-image: none !important; 
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+#safe-food-app {
+    --bg-main: #0b111d;
+    --bg-card: #1a2332;
+    --bg-input: #242f42;
+    --accent-gold: #f59e0b;
+    --accent-blue: #3b82f6;
+    --accent-red: #ef4444;
+    --accent-green: #10b981;
+    --text-white: #f9fafb;
+    --text-muted: #9ca3af;
+    --border: #374151;
+
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 80px 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.container { max-width: 600px; margin: 0 auto; position: relative; }
+
+/* 헤더 디자인 */
+.app-header { text-align: center; margin-bottom: 24px; }
+.app-header h1 { font-size: 26px; font-weight: 900; margin: 0 0 8px 0; color: #fff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--accent-gold); }
+.app-header p { color: var(--text-muted); font-size: 14px; margin: 0; word-break: keep-all; }
+
+/* 사진 추가 전용 공간 */
+.photo-insert-area {
+    background-color: #1e293b;
+    border: 2px dashed #475569;
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+.photo-insert-area p { color: #94a3b8; font-size: 14px; font-weight: 700; margin: 0; }
+
+/* 절대적 경고창 */
+.danger-zone {
+    background-color: #450a0a;
+    border: 2px solid var(--accent-red);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.15);
+}
+.danger-title { color: #fff; font-size: 15px; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.danger-text { color: #fecaca; font-size: 13.5px; font-weight: 400; text-align: left; word-break: keep-all; margin: 0; line-height: 1.7; }
+
+/* 카드 구역 */
+.section-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 12px; margin-top: 30px; border-left: 5px solid var(--accent-gold); padding-left: 10px; }
+.card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 22px; margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+
+/* 입력 필드 */
+.group { margin-bottom: 22px; }
+.group label { display: block; font-size: 14px; font-weight: 700; color: #d1d5db; margin-bottom: 10px; }
+
+.select-box, .date-box {
+    width: 100%; padding: 16px; background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 14px;
+    color: #fff; font-size: 15px; font-weight: 600; outline: none; box-sizing: border-box; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; background-size: 20px;
+}
+.date-box { background-image: none; cursor: pointer; text-align: center; font-family: 'Poppins', sans-serif; }
+
+/* 방어용 체크박스 */
+.shield-box { background-color: #0f172a; border-radius: 16px; padding: 18px; margin-bottom: 20px; border: 1px solid #1e293b; }
+.shield-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; cursor: pointer; }
+.shield-item:last-child { margin-bottom: 0; }
+.shield-item input { width: 22px; height: 22px; accent-color: var(--accent-gold); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.shield-label { font-size: 13px; color: #cbd5e1; line-height: 1.6; word-break: keep-all; font-weight: 500; text-align: left; }
+.shield-label span { color: var(--accent-red); font-weight: 900; }
+
+/* 버튼 디자인 */
+.btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; border: none; border-radius: 16px; font-size: 17px; font-weight: 900; cursor: pointer; transition: 0.1s; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3); margin-top: 5px; }
+.btn:active { transform: scale(0.98); }
+.btn-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); margin-top: 15px; font-size: 14px; padding: 14px; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2); }
+
+/* 전광판 결과 대시보드 */
+.dashboard { background-color: #080c14; border-radius: 20px; padding: 22px; margin-top: 28px; border: 1px solid rgba(255,255,255,0.05); }
+.dash-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.dash-row:last-child { border-bottom: none; }
+.dash-title { font-size: 14px; color: #9ca3af; font-weight: 500; }
+.dash-value { font-size: 17px; font-weight: 800; color: #fff; text-align: right; }
+.gold { color: var(--accent-gold); font-size: 20px; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); font-family: 'Poppins', sans-serif; }
+
+/* 전문가 상세 설명창 */
+.expert-box { background-color: #1e293b; border-radius: 16px; padding: 20px; margin-top: 20px; border-left: 6px solid var(--accent-blue); display: none; }
+.expert-title { color: var(--accent-blue); font-size: 15px; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.expert-content { color: #e2e8f0; font-size: 13.5px; line-height: 1.8; word-break: keep-all; text-align: left; }
+
+/* 법적 면책 고지 */
+.legal-footer { background-color: #111827; border-top: 2px solid #374151; padding: 22px; margin-top: 45px; border-radius: 12px; }
+.legal-title { color: #9ca3af; font-size: 13px; font-weight: 900; margin-bottom: 12px; text-align: center; }
+.legal-text { font-size: 12px; color: #6b7280; line-height: 1.8; text-align: left; word-break: keep-all; margin: 0; }
+</style>
+
+<div id="safe-food-app">
+    <div class="container">
+        
+        <div class="app-header">
+            <h1>식품 소비기한 <span>안심 변환기</span></h1>
+            <p>버릴지 먹을지 고민되는 순간, 국가 표준 데이터로 계산하세요.</p>
+        </div>
+
+        <div class="photo-insert-area">
+            <p>📢 취약계층 식품 이용 절대 금지</p></div><div class="danger-zone">
+            <p class="danger-text">
+                본 프로그램은 식약처 보고서를 근거로 한 건강한 성인용 가이드입니다. 영유아용 식품(이유식, 분유), 임산부, 환자, 노약자용 음식에는 절대 이 결과를 적용하지 마시고 유통기한을 엄격히 준수하세요. 위반 시 발생하는 모든 책임은 본인에게 있습니다.
+            </p>
+        </div>
+
+        <div class="section-title">📍 식품 품목 및 유통기한 입력</div>
+        <div class="card">
+            
+            <div class="group">
+                <label>품목 선택 (아래를 눌러 고르세요)</label>
+                <select class="select-box" id="food-list">
+                    <option value="">-- 식품 카테고리를 선택하세요 --</option>
+                    <optgroup label="유제품 및 치즈 (냉장 보관 필수)">
+                        <option value="50|2500|우유는 살균 처리되어 미개봉 상태에서 소비기한이 깁니다. 개봉 후에는 5일 이내 섭취를 권장하며, 시큼한 냄새가 나거나 덩어리가 보이면 즉시 폐기해야 합니다.">일반 우유 (유통기한 경과 후 +50일)</option>
+                        <option value="20|1500|요거트나 마시는 유산균 음료는 자체 산도가 높아 세균 번식이 늦습니다. 단, 표면에 곰팡이가 조금이라도 피었다면 전체가 오염된 것이니 모두 버리셔야 합니다.">요거트 / 마시는 유제품 (+20일)</option>
+                        <option value="70|4500|비닐로 낱개 포장된 가공 치즈는 밀봉 시 미생물 증식이 강력하게 억제됩니다. 포장이 부풀어 오르거나 표면이 미끌거리면 상한 것입니다.">슬라이스 치즈 (+70일)</option>
+                        <option value="15|3000|생크림은 우유보다 유지방이 많아 산패(기름이 상함)가 훨씬 빠릅니다. 유통기한이 지나면 층이 분리되거나 쓴맛이 날 수 있으니 주의하세요.">생크림 / 휘핑크림 (+15일)</option>
+                    </optgroup>
+
+                    <optgroup label="베이커리 및 떡류">
+                        <option value="20|3500|식빵은 수분이 적어 비교적 오래 보관할 수 있습니다. 하지만 푸른색이나 흰색의 반점 모양 곰팡이가 한 군데라도 보이면, 눈에 보이지 않는 곰팡이 뿌리가 빵 전체에 퍼진 것이므로 절대 드시면 안 됩니다.">일반 식빵 (+20일)</option>
+                        <option value="3|6000|크림이 들어간 빵이나 생과일 케이크는 유통기한 경과 후 2~3일 이내에 반드시 버리셔야 합니다. 크림과 과일의 수분 때문에 식중독균 번식이 매우 빠릅니다.">크림빵 / 생크림 케이크 (+3일)</option>
+                        <option value="10|5000|포장된 가래떡, 떡국떡, 절편 등은 수분이 많아 상하기 쉽습니다. 겉면에 끈적한 진액(쉰내 나는 액체)이 생겼거나 시큼한 냄새가 나면 폐기하세요.">포장 떡류 (+10일)</option>
+                    </optgroup>
+
+                    <optgroup label="면류 및 간편식">
+                        <option value="240|1200|유탕면(일반 봉지라면)은 면을 기름에 튀겨 수분을 완전히 날렸기 때문에 보존력이 최고 수준입니다. 다만 너무 오래되면 기름이 산화되어 찌든 냄새가 날 수 있으니 냄새를 꼭 확인하세요.">유탕면 / 일반 라면 (+240일)</option>
+                        <option value="25|4000|수분을 날린 건면이나 파스타면은 매우 오래 보관이 가능합니다. 끓이기 전 면발에 벌레(쌀벌레 등)가 생기지 않았는지 육안으로 꼼꼼히 확인하세요.">건면 / 파스타면 (+25일)</option>
+                        <option value="3|3500|우동면이나 칼국수 같은 생면은 수분이 그대로 남아있어 유통기한 경과 시 곰팡이가 생기기 쉽습니다. 포장지가 빵빵하게 부풀었다면 가스가 찬 것이니 드시지 마세요.">생면 / 우동면 (+3일)</option>
+                    </optgroup>
+
+                    <optgroup label="고기, 계란 및 수산물 가공품">
+                        <option value="180|8500|스팸, 참치캔 등의 통조림은 진공 멸균 상태라 보존성이 매우 뛰어납니다. 하지만 캔이 조금이라도 찌그러져 있거나 뚜껑이 부풀어 올랐다면 틈새로 세균이 들어간 것이니 버려야 합니다.">캔 가공햄 / 참치캔 (+180일)</option>
+                        <option value="5|6000|비엔나 소시지나 핫도그 등 살균 육가공품은 개봉하는 순간 수명이 급감합니다. 미개봉 상태를 완벽히 유지했을 때만 5일 정도 연장 섭취를 권장합니다.">비엔나 / 포장 소시지 (+5일)</option>
+                        <option value="25|6500|계란은 껍질이 보호막 역할을 하여 냉장 보관 시 기한이 넉넉합니다. 물에 담갔을 때 둥둥 뜬다면 부패 가스가 찬 것이고, 깨뜨렸을 때 노른자가 힘없이 터지면 상한 것입니다.">신선 계란 (+25일)</option>
+                        <option value="30|3000|어묵은 생선 살에 전분과 수분이 섞여 있어 변질이 빠릅니다. 표면에 끈적거리는 점액질이 생겼거나 비릿한 산패취가 난다면 바로 버리세요.">포장 어묵 (+30일)</option>
+                    </optgroup>
+
+                    <optgroup label="냉동식품 및 양념류">
+                        <option value="365|9000|냉동 만두, 냉동 볶음밥 등은 영하 18도 이하를 철저히 유지하면 1년 이상도 거뜬합니다. 단, 봉지 안에 성에(얼음 결정)가 너무 많다면 유통 과정에서 녹았다가 다시 언 것이니 품질이 떨어집니다.">냉동 만두 / 냉동 간편식 (+365일)</option>
+                        <option value="30|5000|고추장, 된장 같은 장류는 발효 식품이라 생명력이 깁니다. 하지만 물 묻은 숟가락을 사용했거나 표면에 하얀 또는 푸른 곰팡이가 피었다면 주의가 필요합니다.">고추장 / 된장 (+30일)</option>
+                        <option value="90|2500|마요네즈는 식초가 들어있어 의외로 오래가지만, 온도가 변하면 기름층과 물층이 분리됩니다. 짜냈을 때 맑은 기름과 흰색 덩어리가 따로 나온다면 버리셔야 합니다.">마요네즈 / 소스류 (+90일)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="group">
+                <label>포장지에 적힌 유통기한 (날짜 선택)</label>
+                <input class="date-box" id="target-date" type="date" />
+            </div>
+
+            <div class="shield-box">
+                <label class="shield-item">
+                    <input id="agree-1" type="checkbox" />
+                    <span class="shield-label">본 결과는 식약처 평균 통계이며, <span>최종 섭취 여부와 식중독 등 위험 판단 책임</span>은 전적으로 본인에게 있음에 동의합니다.</span>
+                </label>
+                <label class="shield-item">
+                    <input id="agree-2" type="checkbox" />
+                    <span class="shield-label">영유아, 임산부, 노약자용 식품에는 <span>절대로 본 계산 결과를 대입하지 않을 것</span>임을 약속하며 동의합니다.</span>
+                </label>
+            </div>
+
+            <button class="btn" onclick="goCalc()">소비기한 안심 가이드 확인</button>
+            <button class="btn btn-blue" onclick="window.open('https://www.foodsafetykorea.go.kr', '_blank')">🛡️ 식약처 공식 홈페이지(식품안전나라) 확인</button>
+
+            <div class="dashboard">
+                <div class="dash-row">
+                    <span class="dash-title">식약처 권장 연장일수</span>
+                    <span class="dash-value" id="res-days">0 일</span>
+                </div>
+                <div class="dash-row" style="background-color: rgba(245, 158, 11, 0.08); border-radius: 12px; margin: 10px 0px; padding: 15px 10px;">
+                    <span class="dash-title" style="color: white; font-weight: 800;">✅ 예측 최대 소비기한</span>
+                    <span class="dash-value gold" id="res-date">날짜를 선택하세요</span>
+                </div>
+                <div class="dash-row">
+                    <span class="dash-title">음식을 살려 절약한 식비</span>
+                    <span class="dash-value" id="res-money" style="color: #10b981;">0 원</span>
+                </div>
+            </div>
+
+            <div class="expert-box" id="expert-area">
+                <div class="expert-title">💡 식품별 안전 보관 및 폐기 팁</div>
+                <div class="expert-content" id="res-tip">위에서 식품 종류를 선택하고 버튼을 누르시면, 해당 식품에 대한 식약처의 상세한 보관 및 주의사항 가이드가 이곳에 출력됩니다.</div>
+            </div>
+        </div>
+
+        <div class="legal-footer">
+            <div class="legal-title">[식품 안전 정보 및 법적 한계선 고지]</div>
+            <p class="legal-text">
+                본 앱은 대한민국 식품의약품안전처의 연구 보고서를 기반으로 한 단순 날짜 연산 유틸리티입니다. 제품의 실제 부패 여부나 세균 증식 상태를 직접 검사하는 장비가 아니며, 미개봉 및 적정 온도 보관 원칙을 완벽히 지켰을 때의 통계적 수치입니다. 사용자의 보관 부주의, 제품 개봉 유무에 따라 실제 상태는 다를 수 있으므로 섭취 전 육안 및 냄새 검사를 반드시 직접 수행하십시오. 본 서비스 활용으로 발생하는 신체적, 재산적 손해에 대해 개발자는 법적 책임을 지지 않습니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    /* 데이터 기억 엔진 (모바일 앱 새로고침 완벽 방어) */
+    function saveData(obj) {
+        var s = JSON.stringify(obj);
+        try { localStorage.setItem('safe_food_final_v3', s); } catch(e) {}
+        try { sessionStorage.setItem('safe_food_final_v3', s); } catch(e) {}
+        try {
+            var d = new Date(); d.setTime(d.getTime() + (30*24*60*60*1000));
+            document.cookie = "safe_food_final_v3=" + encodeURIComponent(s) + ";expires=" + d.toUTCString() + ";path=/";
+        } catch(e) {}
+        try { window.name = s; } catch(e) {}
+    }
+
+    function loadData() {
+        var v = null;
+        try { v = localStorage.getItem('safe_food_final_v3'); } catch(e) {}
+        if (!v) try { v = sessionStorage.getItem('safe_food_final_v3'); } catch(e) {}
+        if (!v) {
+            try {
+                var m = document.cookie.match(new RegExp('(^| )safe_food_final_v3=([^;]+)'));
+                if (m) v = decodeURIComponent(m[2]);
+            } catch(e) {}
+        }
+        if (!v) try { if (window.name && window.name.indexOf('{') === 0) v = window.name; } catch(e) {}
+        return v ? JSON.parse(v) : null;
+    }
+
+    function goCalc() {
+        var food = document.getElementById('food-list');
+        var date = document.getElementById('target-date').value;
+        var c1 = document.getElementById('agree-1').checked;
+        var c2 = document.getElementById('agree-2').checked;
+
+        if (!c1 || !c2) {
+            alert("두 가지 법적 면책 동의 및 취약계층 사용 금지에 모두 체크하셔야 결과가 나타납니다.");
+            return;
+        }
+        if (!food.value) { alert("식품 종류를 선택해 주세요."); return; }
+        if (!date) { alert("유통기한 날짜를 선택해 주세요."); return; }
+
+        var meta = food.value.split('|');
+        var ext = parseInt(meta[0]);
+        var mon = parseInt(meta[1]);
+        var tip = meta[2];
+
+        var base = new Date(date);
+        base.setDate(base.getDate() + ext);
+        var resStr = base.getFullYear() + "년 " + (base.getMonth() + 1) + "월 " + base.getDate() + "일";
+
+        var state = { f: food.value, d: date, ex: ext, m: mon, t: tip, r: resStr };
+        saveData(state);
+
+        var r = Math.floor(Math.random() * 99999);
+        var u = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = u + "?calc=" + r + "&r=" + r;
+    }
+
+    window.onload = function() {
+        var s = loadData();
+        if (!s) return;
+
+        document.getElementById('food-list').value = s.f;
+        document.getElementById('target-date').value = s.d;
+        document.getElementById('agree-1').checked = true;
+        document.getElementById('agree-2').checked = true;
+        document.getElementById('res-days').innerText = s.ex + " 일";
+        document.getElementById('res-date').innerText = s.r;
+        document.getElementById('res-money').innerText = s.m.toLocaleString() + " 원";
+        document.getElementById('res-tip').innerText = s.t;
+        document.getElementById('expert-area').style.display = 'block';
+    };
+//]]>
+</script>
