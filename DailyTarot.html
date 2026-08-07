@@ -1,0 +1,552 @@
+<style>
+  /* 1. 구글 블로그 기본 테마 숨기기 (인기글, 피드 포함 완벽 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+  
+    /* -------------------------------------------------------------
+       1. 글로벌 스타일 및 블로그 기본 여백 초기화
+    ------------------------------------------------------------- */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #020617;
+        color: #f8fafc;
+        font-family: 'Pretendard', -apple-system, sans-serif;
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* 구글 블로그 자체 여백 및 불필요한 상단바 억제 */
+    .post-body img {
+        display: block !important;
+        margin: 0 auto !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+    .post-title, .date-header, .post-header, .blog-title-outer, .header-widget, #navbar-iframe, .mobile-index-title, .mobile-nav { 
+        display: none !important; 
+    }
+    .main-inner, .post-body { 
+        padding: 0 !important; 
+        margin: 0 !important; 
+    }
+
+    .app-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        padding-top: 30px;
+    }
+
+    /* 최상단 스크롤 진행 상태바 */
+    #progressBarContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: rgba(30, 41, 59, 0.5);
+        z-index: 10000;
+        display: none; 
+    }
+    #progressBar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #38bdf8, #6366f1);
+        box-shadow: 0 0 8px #38bdf8;
+        transition: width 0.1s ease-out;
+    }
+
+    /* 구글 정책 심사 통과를 위한 사행성 방지 알림 */
+    .notice-box {
+        background-color: #0f172a;
+        border: 1px solid #1e293b;
+        border-left: 5px solid #38bdf8;
+        padding: 18px;
+        margin-bottom: 30px;
+        border-radius: 4px 12px 12px 4px;
+        font-size: 13px;
+        color: #94a3b8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .notice-box strong {
+        color: #38bdf8;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .header-text {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+    .header-text h1 {
+        font-size: 26px;
+        color: #f1f5f9;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+    .header-text p {
+        color: #64748b;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    /* 테마 선택 및 드로우 버튼 */
+    .selection-area {
+        background-color: #0f172a;
+        padding: 22px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        border: 1px solid #1e293b;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .selection-area select {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+        background-color: #1e293b;
+        color: #f8fafc;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        outline: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    .draw-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        color: #020617;
+        padding: 16px;
+        font-size: 18px;
+        font-weight: 700;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+        transition: all 0.2s ease;
+    }
+    .draw-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+    }
+
+    /* -------------------------------------------------------------
+       2. 핵심 업그레이드: 3D 타로 카드 플립 프레임
+    ------------------------------------------------------------- */
+    .card-scene {
+        perspective: 1000px;
+        width: 220px;
+        height: 360px;
+        margin: 35px auto;
+        display: none; 
+    }
+    .card-flip {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1.0s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+    .card-flip.flipped {
+        transform: rotateY(180deg);
+    }
+    .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 16px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        text-align: center;
+    }
+    
+    .card-back {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 3px solid #38bdf8;
+        box-shadow: 0 0 25px rgba(58, 189, 248, 0.25), inset 0 0 30px rgba(58, 189, 248, 0.1);
+    }
+    .card-back-pattern {
+        border: 1px dashed rgba(58, 189, 248, 0.4);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-back-symbol {
+        font-size: 48px;
+        color: #38bdf8;
+        animation: pulse 2s infinite ease-in-out;
+    }
+    .card-back-text {
+        font-size: 13px;
+        color: #64748b;
+        margin-top: 15px;
+        letter-spacing: 1px;
+    }
+
+    .card-front {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: 3px solid #6366f1;
+        transform: rotateY(180deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+    .card-front-container {
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(2, 6, 23, 0.4);
+    }
+    .front-symbol {
+        font-size: 44px;
+        margin-bottom: 15px;
+    }
+    .front-name {
+        font-size: 19px;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 8px;
+    }
+    .front-direction {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+    .dir-up { background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .dir-down { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* -------------------------------------------------------------
+       3. 해설 출력 영역 (띄어쓰기 중구난방 완벽 해결)
+    ------------------------------------------------------------- */
+    .details-container {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.8s ease, max-height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .details-container.show {
+        opacity: 1;
+        max-height: 5000px;
+        margin-top: 35px;
+    }
+
+    .result-section {
+        background-color: #0f172a;
+        border: 1px solid #1e293b;
+        padding: 26px;
+        border-radius: 16px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .result-section h3 {
+        color: #38bdf8;
+        font-size: 17px;
+        margin-top: 0;
+        margin-bottom: 14px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+    }
+    .result-section h3::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 16px;
+        background-color: #38bdf8;
+        margin-right: 10px;
+        border-radius: 2px;
+    }
+    .result-section p {
+        color: #cbd5e1;
+        font-size: 15px;
+        margin: 0;
+        text-align: left; /* 띄어쓰기 문제의 핵심 해결책 */
+        word-break: keep-all;
+        line-height: 1.7; /* 가독성을 위한 줄간격 최적화 */
+    }
+
+    .lucky-matrix-box {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: 1px solid #334155;
+        padding: 22px;
+        border-radius: 16px;
+        margin-bottom: 40px;
+    }
+    .matrix-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+    }
+    .matrix-item:last-child {
+        border-bottom: none;
+    }
+    .matrix-label {
+        color: #94a3b8;
+        font-size: 14px;
+    }
+    .matrix-value {
+        color: #38bdf8;
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+    }
+</style>
+
+<div id="progressBarContainer"><div id="progressBar"></div></div>
+
+<div class="app-container">
+    <div class="notice-box">
+        <strong>사용자 안내 및 준수사항</strong>
+        본 시스템이 매칭하는 타로 콘텐츠는 긍정적인 일상 흐름을 보조하는 조언 도구입니다. 어떠한 사행성 유도나 금전적 요소도 포함하지 않으며 과학적 귀결을 증명하지 않으므로 건전한 참고 지표로만 향유해 주십시오.
+    </div>
+
+    <div class="header-text">
+        <h1>오늘의 타로 리딩</h1><div><br /></div>
+        <p>엄격하게 정렬된 112,320가지 변수 행렬식 구조</p>
+    </div>
+
+    <div class="selection-area">
+        <select id="themeSelect">
+            <option value="general">종합적인 일상의 에너지 흐름 점검</option>
+            <option value="money">현재적 재화 흐름 및 자산 운용 조언</option>
+            <option value="love">감정의 교류 및 대인관계 거시적 분석</option>
+            <option value="work">생산성 지표 및 학업·커리어 성취 방향</option>
+        </select>
+        <button class="draw-btn" onclick="drawCard()">운명의 타로 어레이 드로우</button>
+    </div>
+
+    <div class="card-scene" id="cardScene">
+        <div class="card-flip" id="cardFlip" onclick="executeFlipLogic()">
+            <div class="card-face card-back">
+                <div class="card-back-pattern">
+                    <div class="card-back-symbol">🔮</div>
+                    <div class="card-back-text">TOUCH TO FLIP</div>
+                </div>
+            </div>
+            <div class="card-face card-front">
+                <div class="card-front-container">
+                    <div class="front-symbol" id="frontSymbol">✨</div>
+                    <div class="front-name" id="frontName">CARD NAME</div>
+                    <div class="front-direction" id="frontDirection">ORIENTATION</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-container" id="detailsContainer">
+        <div class="result-section">
+            <h3>추출된 아르카나의 본질적 궤적</h3>
+            <p id="txtMeaning">본질 텍스트 데이터 로딩 오류</p>
+        </div>
+
+        <div class="result-section">
+            <h3>상황에 직면하는 거시적 환경 해설</h3>
+            <p id="txtExplanation">환경 해설 데이터 로딩 오류</p>
+        </div>
+
+        <div class="result-section">
+            <h3>수정 행위를 위한 정밀 전략 조언</h3>
+            <p id="txtAdvice">전략 조언 데이터 로딩 오류</p>
+        </div>
+
+        <div class="lucky-matrix-box">
+            <div class="matrix-item">
+                <span class="matrix-label">🎨 정화용 행운 색상</span>
+                <span class="matrix-value" id="valColor">값 도출 중</span>
+            </div>
+            <div class="matrix-item">
+                <span class="matrix-label">⏰ 최적 동기화 시간</span>
+                <span class="matrix-value" id="valTime">값 도출 중</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // <![CDATA[
+    /* -------------------------------------------------------------
+       4. 정밀 타로 메트릭스 데이터 자산 구축
+    ------------------------------------------------------------- */
+    const majorArcana = [
+        { id:0, name: "0. 바보 (The Fool)", symbol: "🃏", keyword: "새로운 차원의 시작, 순수한 잠재성의 개화, 기존 경계선의 초월" },
+        { id:1, name: "I. 마법사 (The Magician)", symbol: "🪄", keyword: "보이지 않는 아이디어의 물질적 창조, 강력한 자기 확신, 다재다능한 자원 활용" },
+        { id:2, name: "II. 고위 여사제 (The High Priestess)", symbol: "🌙", keyword: "고도의 내면적 통찰, 직관적 지혜의 발현, 표면 아래 감춰진 진실 규명" },
+        { id:3, name: "III. 여황제 (The Empress)", symbol: "👑", keyword: "풍요로운 결실의 수확, 감각적 포용력의 확장, 생명력 넘치는 양육과 성장" },
+        { id:4, name: "IV. 황제 (The Emperor)", symbol: "🏰", keyword: "안정적인 질서와 체계 구축, 확고한 리더십, 책임감 기반의 영역 통제" },
+        { id:5, name: "V. 교황 (The Hierophant)", symbol: "📜", keyword: "전통적 가치 체계의 계승, 정신적 인도와 중재, 신뢰할 수 있는 제휴와 교육" },
+        { id:6, name: "VI. 연인 (The Lovers)", symbol: "❤️", keyword: "상호 보완적 조화와 선택, 깊은 정서적 교감, 동반자적 가치의 정렬" },
+        { id:7, name: "VII. 전차 (The Chariot)", symbol: "🛡️", keyword: "강인한 돌파력과 추진, 장애물의 통제력 확보, 목표를 향한 전략적 돌격" },
+        { id:8, name: "VIII. 힘 (Strength)", symbol: "🦁", keyword: "외유내강의 부드러운 카리스마, 인내와 자비심, 본능적 충동의 이성적 제어" },
+        { id:9, name: "IX. 은둔자 (The Hermit)", symbol: "⏳", keyword: "내적 성찰을 위한 의도적 고독, 본질에 대한 탐구, 현명한 길잡이의 조력" },
+        { id:10, name: "X. 운명의 수레바퀴 (Wheel of Fortune)", symbol: "☸️", keyword: "거시적 흐름의 필연적 전환점, 예기치 못한 타이밍의 도래, 정체기의 종식" },
+        { id:11, name: "XI. 정의 (Justice)", symbol: "⚖️", keyword: "공정한 저울질과 균형, 인과응보의 법칙성, 객관적 사실에 근거한 명확한 분석" },
+        { id:12, name: "XII. 매달린 사람 (The Hanged Man)", symbol: "🧘", keyword: "새로운 관점으로의 전도, 일시 정지를 통한 통찰력 획득, 의도된 희생과 수용" },
+        { id:13, name: "XIII. 죽음 (Death)", symbol: "💀", keyword: "낡은 구조의 필연적 종결, 과감한 패러다임 전환, 새로운 탄생을 위한 여백" },
+        { id:14, name: "XIV. 절제 (Temperance)", symbol: "🧪", keyword: "서로 다른 요소의 조화로운 연금술, 과유불급의 제어, 평화로운 절충안 도출" },
+        { id:15, name: "XV. 악마 (The Devil)", symbol: "🔥", keyword: "물질적 집착과 한계성의 자각, 강력한 무의식적 속박, 경계해야 할 유혹의 감지" },
+        { id:16, name: "XVI. 탑 (The Tower)", symbol: "⚡", keyword: "인위적 거짓의 급격한 붕괴, 예리한 진실의 충격, 근본적인 혁신과 재건축" },
+        { id:17, name: "XVII. 별 (The Star)", symbol: "⭐", keyword: "지속 가능한 희망의 이정표, 영적 영감의 획득, 상처 치유와 낙관적 비전" },
+        { id:18, name: "XVIII. 달 (The Moon)", symbol: "🐺", keyword: "잠재적 불확실성의 안개, 무의식적 불안의 정화 과정, 직관을 따르는 야간 통행" },
+        { id:19, name: "XIX. 태양 (The Sun)", symbol: "☀️", keyword: "명백한 성공과 활력의 분출, 순수한 기쁨의 회복, 모든 의혹의 완전한 해소" },
+        { id:20, name: "XX. 심판 (Judgement)", symbol: "🎺", keyword: "지난 과오의 정당한 보상, 명확한 소명의 각성, 중대한 결단과 부활의 신호" },
+        { id:21, name: "XXI. 세계 (The World)", symbol: "🌍", keyword: "하나의 대주기 완성, 완벽한 통합과 성취, 글로벌 차원으로의 확장과 도약" }
+    ];
+
+    const suits = ["지팡이(Wands)", "컵(Cups)", "검(Swords)", "펜타클(Pentacles)"];
+    const ranks = ["에이스(Ace)", "2", "3", "4", "5", "6", "7", "8", "9", "10", "시종(Page)", "기사(Knight)", "여왕(Queen)", "왕(King)"];
+    const minorArcana = [];
+    
+    suits.forEach((suit, sIdx) => {
+        let symbol = sIdx === 0 ? "🪵" : sIdx === 1 ? "🏆" : sIdx === 2 ? "⚔️" : "🪙";
+        ranks.forEach(rank => {
+            minorArcana.push({
+                id: 22 + minorArcana.length,
+                name: `${suit}의 ${rank}`,
+                symbol: symbol,
+                keyword: `${suit}가 상징하는 원형적 에너지가 현재 ${rank} 구조의 환경 지표와 상호 결합하고 있는 단계`
+            });
+        });
+    });
+
+    const allCards = majorArcana.concat(minorArcana);
+    
+    const luckyColors = ["차분한 네이비블루", "따뜻한 코랄 핑크", "신뢰의 딥 그린", "활기찬 오렌지", "낙관적인 카나리아 옐로우", "안정적인 모카 베이지", "순수한 크리스탈 화이트", "세련된 메탈릭 실버", "깊이 있는 버건디 와인", "강렬한 스칼렛 레드", "우아한 로얄 퍼플", "청량한 아쿠아 스카이블루", "조화로운 파스텔 올리브", "포근한 어스 브라운", "이성적인 차콜 그레이"];
+    const luckyTimes = ["00:00 - 02:00 심야", "02:00 - 04:00 새벽", "04:00 - 06:00 여명", "06:00 - 08:00 아침", "08:00 - 10:00 오전", "10:00 - 12:00 정오 전", "12:00 - 14:00 오후 초기", "14:00 - 16:00 오후 중기", "16:00 - 18:00 저녁 전 환기", "18:00 - 20:00 저녁 안착", "20:00 - 22:00 야간 집중", "22:00 - 24:00 취침 전 정리"];
+
+    /* -------------------------------------------------------------
+       5. 상황 메트릭스 분석 알고리즘
+    ------------------------------------------------------------- */
+    const txtPool = {
+        general: {
+            up: "현재 당신을 둘러싼 거시적 에너지는 왜곡됨 없이 매우 직관적이고 순조롭게 진행되는 흐름입니다. 내부적 열망과 외부적 기회 요소가 이상적인 정렬을 이끌어내고 있으므로, 스스로 구상해 왔던 아젠다가 있다면 적극적으로 현실에 대입하여 구체화하기에 완벽한 시점입니다. 주저하기보다는 순리를 따르십시오.",
+            down: "전반적인 파동이 정체되거나 내부적 피로가 누적되고 있음을 시사하는 지표입니다. 에너지가 역방향으로 흐를 때는 외연을 무리하게 확장하려 하기보다, 내실을 다지며 누수 지점을 탐색하는 정비 작업을 최우선 과제로 삼아야 합니다. 속도전보다는 리스크 관리에 집중해야 다가올 상승기를 온전히 맞이할 수 있습니다."
+        },
+        money: {
+            up: "자산의 순환 체계가 긍정적인 가시권 안으로 진입하였습니다. 과거의 정당한 노력에 상응하는 합리적인 보상이 실현되거나 예산 범주 내에서 잉여 흐름을 확보할 수 있는 기운이 우세합니다. 충동적 분산 투자보다는 주력 자산의 가치를 보존하며 차분하고 거시적인 안목으로 자본적 효율성을 제고할 타이밍입니다.",
+            down: "단기적인 과욕이나 감정적 선택에 기인한 유동성 경색을 각별히 경계해야 하는 신호입니다. 대규모 지출 계약이나 투기적 자산 배분 계획이 있다면 결정을 잠시 뒤로 미루고 복기하는 과정이 절대적으로 요구됩니다. 현재는 지갑을 굳건히 통제하고 보수적인 현금 보유 비율을 늘리는 전략만이 자산 건전성을 방어하는 유일한 해법입니다."
+        },
+        love: {
+            up: "관계의 지평선 위에 신뢰와 화합의 온기가 깊게 자리 잡는 시기입니다. 표면적인 마찰을 뛰어넘어 서로의 영혼과 생각의 진심이 오해의 소지 없이 투명하게 공유될 수 있는 기류가 조성되었습니다. 가까운 인연일수록 진정성 있는 경청의 자세를 유지한다면 유대 관계의 밀도가 한층 더 견고해질 것입니다.",
+            down: "가장 친밀한 유대 영역에서 사소한 자존심이나 감정적 왜곡으로 인한 단절이 발생하지 않도록 감정적 자기 절제가 강력하게 요구되는 시점입니다. 상대방의 언행 이면에 숨겨진 취약성을 인지하고 관조적인 태도를 유지하십시오. 먼저 한 걸음 물러나 공간적 여유를 주는 행위가 불필요한 마찰을 소멸시킵니다."
+        },
+        work: {
+            up: "조직 내 입지와 학업 성취도 측면에서 본인의 집중력과 역량이 최고조로 가시화되는 주간입니다. 그동안 외부의 시선에 흔들리지 않고 묵묵히 축적해 온 업무적 인프라가 드디어 가치를 인정받기 시작합니다. 주어진 태스크를 논리적이고 깔끔하게 완수할 수 있는 주도권이 확보되었으니 에너지를 아끼지 마십시오.",
+            down: "진행 중인 프로젝트나 연구 방향성에 대해 구조적인 재평가와 궤도 수정이 강력하게 개입되어야 함을 나타냅니다. 성과가 눈에 띄게 도출되지 않는다면 고집스럽게 기존 방식을 고수할 것이 아니라, 전체 프로세스를 잠시 멈추고 제3자의 시선에서 점검하는 지혜를 발휘해야 합니다. 관점을 바꾸면 즉시 돌파구가 보입니다."
+        }
+    };
+
+    /* -------------------------------------------------------------
+       6. 구글 블로그 전면광고 유도 리다이렉트
+    ------------------------------------------------------------- */
+    function drawCard() {
+        const theme = document.getElementById('themeSelect').value;
+        const seed = new Date().getTime();
+        window.location.href = window.location.pathname + '?theme=' + theme + '\x26draw=' + seed;
+    }
+
+    /* -------------------------------------------------------------
+       7. 새로고침 상태 감지 및 프리미엄 인터랙션 렌더링
+    ------------------------------------------------------------- */
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const drawVal = params.get('draw');
+        const themeVal = params.get('theme');
+
+        if (drawVal && themeVal) {
+            document.getElementById('themeSelect').value = themeVal;
+            
+            const cardScene = document.getElementById('cardScene');
+            cardScene.style.display = 'block';
+
+            const cardIdx = Math.floor(Math.random() * allCards.length);
+            const dirIdx = Math.floor(Math.random() * 2);
+            const colorIdx = Math.floor(Math.random() * luckyColors.length);
+            const timeIdx = Math.floor(Math.random() * luckyTimes.length);
+
+            const card = allCards[cardIdx];
+            const direction = dirIdx === 0 ? "정방향" : "역방향";
+
+            document.getElementById('frontSymbol').innerHTML = card.symbol;
+            document.getElementById('frontName').innerHTML = card.name;
+            
+            const dirElement = document.getElementById('frontDirection');
+            dirElement.innerHTML = direction;
+            if (dirIdx === 0) {
+                dirElement.className = "front-direction dir-up";
+            } else {
+                dirElement.className = "front-direction dir-down";
+            }
+
+            document.getElementById('txtMeaning').innerHTML = `선택된 아르카나는 [ ${card.name} ]의 고유 파동과 강력하게 동기화되어 있습니다. 이 카드가 표출하는 핵심 상징 원형은 '${card.keyword}'이며, 현재 질문하신 주제의 근본적인 토대를 명확하게 투영하고 있습니다.`;
+            document.getElementById('txtExplanation').innerHTML = txtPool[themeVal][dirIdx === 0 ? 'up' : 'down'];
+            
+            let adviceString = "";
+            if (dirIdx === 0) {
+                adviceString = "주저함 없이 본인의 고유한 내부 직관과 축적된 분석을 굳게 신뢰하고 전진하십시오. 우주의 긍정적 흐름이 당신의 선택을 뒷받침하고 있습니다. 복잡다단한 주변의 소음에 시선을 빼앗기지 말고 가장 자연스럽고 명료한 상식적 결단을 행동으로 옮기는 것이 최선의 결과를 견인해 줍니다.";
+            } else {
+                adviceString = "현재는 행동의 크기를 확장하기보다 마음의 조급함을 통제하고 내려놓아야 하는 수성의 국면입니다. 모든 일에는 고유한 임계점과 성숙의 주기가 존재하는 법이므로 인위적으로 형세를 바꾸려 무리수를 두지 마십시오. 유연하고 부드러운 태도로 외부 자극을 수용하는 정적인 내공을 발휘해야 안전합니다.";
+            }
+            document.getElementById('txtAdvice').innerHTML = adviceString;
+
+            document.getElementById('valColor').innerHTML = luckyColors[colorIdx];
+            document.getElementById('valTime').innerHTML = luckyTimes[timeIdx];
+
+            cardScene.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
+    /* -------------------------------------------------------------
+       8. 3D 카드 반전 및 진행바 액션
+    ------------------------------------------------------------- */
+    function executeFlipLogic() {
+        const cardFlip = document.getElementById('cardFlip');
+        
+        if (!cardFlip.classList.contains('flipped')) {
+            cardFlip.classList.add('flipped');
+            
+            setTimeout(() => {
+                document.getElementById('detailsContainer').classList.add('show');
+                document.getElementById('progressBarContainer').style.display = 'block';
+                
+                document.getElementById('detailsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 400);
+        }
+    }
+
+    /* -------------------------------------------------------------
+       9. 프리미엄 스크롤 상태바
+    ------------------------------------------------------------- */
+    window.addEventListener('scroll', () => {
+        const bar = document.getElementById('progressBar');
+        const container = document.getElementById('detailsContainer');
+        
+        if (container.classList.contains('show')) {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            bar.style.width = scrolled + '%';
+        }
+    });
+    // ]]>
+</script>
