@@ -1,0 +1,273 @@
+<style>
+  /* 1. 구글 블로그 기본 테마 숨기기 (인기글, 피드 포함 완벽 제거) */
+.sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar { display: none !important; }
+  
+    /* 블로거 내 충돌 방지를 위한 독립적인 스타일 설정 */
+    #food-app-wrapper {
+        font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+        background-color: #020617;
+        color: #f8fafc;
+        padding: 25px;
+        border-radius: 16px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        box-sizing: border-box;
+    }
+    #food-app-wrapper * { box-sizing: border-box; }
+    
+    /* 주의사항 배너 */
+    .app-warning-banner {
+        background-color: #1e293b;
+        border-left: 4px solid #ef4444;
+        padding: 18px;
+        margin-bottom: 25px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: #cbd5e1;
+        line-height: 1.6;
+    }
+    .app-warning-banner strong { color: #f8fafc; display:block; margin-bottom: 5px;}
+    
+    /* 헤더 및 설명 영역 */
+    .app-header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #1e293b; padding-bottom: 20px; }
+    .app-header h1 { font-size: 28px; color: #38bdf8; margin: 0 0 10px 0; font-weight: 800; line-height: 1.3;}
+    .app-header p { color: #94a3b8; font-size: 15px; margin: 0; line-height: 1.5; }
+    
+    .app-info-box {
+        background: linear-gradient(145deg, #0f172a, #1e293b);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        font-size: 14px;
+        color: #cbd5e1;
+        line-height: 1.7;
+        border: 1px solid #334155;
+    }
+    .app-info-box h3 { color: #38bdf8; margin-top: 0; font-size: 16px; margin-bottom: 12px; }
+    
+    /* 입력 폼 영역 */
+    .app-form-group { margin-bottom: 25px; }
+    .app-form-group label { display: block; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #e2e8f0; }
+    .app-select { width: 100%; padding: 16px; background-color: #0f172a; border: 1px solid #38bdf8; color: #f8fafc; border-radius: 8px; font-size: 16px; outline: none; appearance: none; }
+    
+    /* 버튼 */
+    .app-btn { display: block; width: 100%; padding: 20px; background-color: #38bdf8; color: #020617; font-size: 18px; font-weight: bold; text-align: center; border: none; border-radius: 12px; cursor: pointer; transition: 0.3s; margin-top: 20px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); }
+    .app-btn:hover { background-color: #0ea5e9; }
+    .app-btn-outline { background-color: transparent; border: 1px solid #38bdf8; color: #38bdf8; margin-top: 15px; box-shadow: none; padding: 15px; font-size: 16px;}
+    
+    /* 결과 영역 */
+    #resultArea { display: none; text-align: center; padding-top: 10px; }
+    .score-circle { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #818cf8); margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: bold; color: white; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4); border: 4px solid #020617;}
+    
+    .card-container { display: flex; gap: 15px; margin-bottom: 20px; }
+    .menu-card { flex: 1; background-color: #0f172a; border: 1px solid #1e293b; border-radius: 16px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
+    .menu-card .label { font-size: 13px; color: #94a3b8; margin-bottom: 12px; font-weight: bold; }
+    .menu-card .name { font-size: 22px; font-weight: bold; color: #f8fafc; margin-bottom: 12px; word-break: keep-all; line-height: 1.3;}
+    .menu-card .price { font-size: 16px; color: #38bdf8; font-weight: bold;}
+    .plus-icon { display: flex; align-items: center; justify-content: center; font-size: 28px; color: #475569; font-weight: bold; }
+    
+    .total-price { font-size: 18px; font-weight: bold; padding: 20px; background-color: #1e293b; border-radius: 12px; margin-bottom: 25px; color: #cbd5e1; border: 1px solid #334155;}
+    .total-price span { color: #38bdf8; font-size: 22px; margin-left: 10px;}
+    
+    .review-text { font-size: 16px; line-height: 1.7; color: #e2e8f0; background-color: #0f172a; padding: 25px; border-radius: 12px; margin-bottom: 30px; text-align: left; border-left: 4px solid #818cf8;}
+</style>
+
+<div id="food-app-wrapper">
+    <div class="app-warning-banner">
+        <strong>[이용 안내 및 주의사항]</strong>
+        본 서비스는 이용자의 원활한 식사 메뉴 선정을 돕기 위한 순수 정보 제공 목적의 편의 도구입니다. 어떠한 형태의 사행성 행위, 금전적 베팅, 도박성 기능과도 무관함을 명확히 안내해 드립니다. 표시되는 가격은 평균적인 시세로 실제 배달 앱 및 매장과 다를 수 있습니다.
+    </div>
+
+    <div class="app-header">
+        <h1>🍜FoodPairing 환상의 짝꿍 음식 조합기🍣&nbsp;</h1><div><br /></div>
+        <p>빅데이터 기반 56,000가지 메뉴 매칭 시스템</p>
+    </div>
+
+    <div id="setupArea">
+        <div class="app-info-box">
+            <h3>💡 매일 반복되는 "뭐 먹지?" 고민, 이제 끝내세요!</h3>
+            메인 요리 40종, 사이드 메뉴 40종, 그리고 35가지의 세밀한 상황별 태그를 교차 분석합니다. 총 56,000가지 이상의 경우의 수 중에서 현재 사용자님의 예산과 상황에 가장 완벽하게 어울리는 최고의 음식 궁합을 자동으로 찾아 제안해 드립니다.
+        </div>
+
+        <div class="app-form-group">
+            <label>오늘 식사에 사용할 총 예산은?</label>
+            <select class="app-select" id="budgetSelect">
+                <option value="15000">15,000원 이하 (가성비 중심)</option>
+                <option value="25000">25,000원 이하 (적당하고 든든하게)</option>
+                <option value="40000">40,000원 이하 (푸짐한 파티)</option>
+                <option value="999999">예산 상관없음 (최고급 플렉스)</option>
+            </select>
+        </div>
+        <div class="app-form-group">
+            <label>지금 어떤 상황이신가요?</label>
+            <select class="app-select" id="tagSelect">
+                </select>
+        </div>
+        <button class="app-btn" onclick="generateCombination()">최적의 조합 분석 및 추천받기</button>
+    </div>
+
+    <div id="resultArea">
+        <div class="score-circle" id="scoreDisplay">99점</div>
+        
+        <div class="card-container">
+            <div class="menu-card">
+                <div class="label">MAIN DISH</div>
+                <div class="name" id="mainName">-</div>
+                <div class="price" id="mainPrice">-</div>
+            </div>
+            <div class="plus-icon">+</div>
+            <div class="menu-card">
+                <div class="label">SIDE DISH</div>
+                <div class="name" id="sideName">-</div>
+                <div class="price" id="sidePrice">-</div>
+            </div>
+        </div>
+
+        <div class="total-price">
+            예상 총금액 <span><span id="totalPriceDisplay">0</span>원</span>
+        </div>
+
+        <div class="review-text" id="reviewDisplay">
+            리뷰가 입력되는 공간입니다.
+        </div>
+
+        <button class="app-btn" onclick="goToHome()">새로운 조건으로 다시 분석하기</button>
+        <button class="app-btn-outline" onclick="reloadSameCondition()">이 조건으로 한 번 더 추천 (새로고침)</button>
+    </div>
+</div>
+
+<script>
+    const tags = [
+        "#스트레스_폭발하는_날", "#월급날_플렉스", "#비_오는_날_감성", "#넷플릭스_정주행_야식", 
+        "#다이어트_중_치팅데이", "#부모님과_함께_든든하게", "#연인과_분위기_있게", "#친구들과_파티_타임", 
+        "#게임하며_한손으로", "#해장이_시급할_때", "#캠핑_온_것_처럼", "#매운맛으로_눈물_쏙", 
+        "#느끼한게_당길_때", "#단짠단짠의_정석", "#건강하게_프레시", "#가성비_끝판왕", 
+        "#신생아도_먹는_순한맛", "#혼밥도_외롭지_않게", "#야근_후_나에게_주는_보상", "#주말_오후의_여유", 
+        "#눈_오는_날_따뜻하게", "#입맛_없을_때_입터짐", "#소주가_생각나는_밤", "#맥주와_찰떡궁합", 
+        "#와인과_함께_우아하게", "#아이들이_좋아하는", "#할매니얼_입맛_저격", "#트렌디한_인싸_조합", 
+        "#추억의_그_맛", "#바다_내음_가득", "#육식주의자_전용", "#탄수화물_파티", 
+        "#몸보신이_필요한_날", "#침샘_자극_새콤달콤", "#간단하게_허기만_달래기"
+    ];
+
+    const mains = [
+        { name: "삼겹살 구이", price: 16000 }, { name: "매운 족발", price: 28000 }, { name: "촉촉한 보쌈", price: 25000 },
+        { name: "마라탕", price: 12000 }, { name: "엽기적인 떡볶이", price: 14000 }, { name: "황금올리브 치킨", price: 20000 },
+        { name: "양념치킨", price: 21000 }, { name: "페퍼로니 피자", price: 18000 }, { name: "유니 짜장면", price: 7000 },
+        { name: "얼큰 해물짬뽕", price: 9000 }, { name: "모듬 초밥", price: 15000 }, { name: "경양식 돈까스", price: 10000 },
+        { name: "순대국밥", price: 9000 }, { name: "간장 찜닭", price: 22000 }, { name: "아구찜", price: 30000 },
+        { name: "낙지볶음", price: 24000 }, { name: "광어+우럭 회", price: 35000 }, { name: "뼈해장국", price: 10000 },
+        { name: "닭도리탕", price: 24000 }, { name: "까르보나라", price: 14000 }, { name: "찹스테이크", price: 28000 },
+        { name: "수제 버거", price: 9000 }, { name: "클럽 샌드위치", price: 7000 }, { name: "연어 포케", price: 12000 },
+        { name: "소고기 쌀국수", price: 10000 }, { name: "팟타이", price: 11000 }, { name: "비프 타코", price: 9000 },
+        { name: "스테이크 덮밥", price: 13000 }, { name: "일본식 카레", price: 8000 }, { name: "육회 비빔밥", price: 11000 },
+        { name: "소곱창 구이", price: 22000 }, { name: "돼지 막창", price: 15000 }, { name: "철판 닭갈비", price: 14000 },
+        { name: "바지락 칼국수", price: 8000 }, { name: "얼큰 수제비", price: 8000 }, { name: "사골 떡만두국", price: 9000 },
+        { name: "전주 비빔밥", price: 9000 }, { name: "매콤 쫄면", price: 7000 }, { name: "새우튀김 우동", price: 8000 },
+        { name: "마라샹궈", price: 18000 }
+    ];
+
+    const sides = [
+        { name: "비빔냉면", price: 8000 }, { name: "살얼음 물냉면", price: 8000 }, { name: "쟁반 막국수", price: 10000 },
+        { name: "참치마요 주먹밥", price: 4000 }, { name: "화산 계란찜", price: 5000 }, { name: "깍두기 볶음밥", price: 4000 },
+        { name: "크림 치즈볼", price: 5000 }, { name: "케이준 감자튀김", price: 4000 }, { name: "왕새우튀김", price: 6000 },
+        { name: "바삭 멘보샤", price: 7000 }, { name: "쫀득 꿔바로우", price: 12000 }, { name: "미니 탕수육", price: 10000 },
+        { name: "바삭 군만두", price: 5000 }, { name: "촉촉 물만두", price: 5000 }, { name: "명란 바게트", price: 6000 },
+        { name: "떡꼬치", price: 3000 }, { name: "소떡소떡", price: 3500 }, { name: "미니 우동", price: 3000 },
+        { name: "미니 냉모밀", price: 4000 }, { name: "타코야끼 8알", price: 5000 }, { name: "오징어튀김", price: 4000 },
+        { name: "당면 김말이", price: 3000 }, { name: "찰순대", price: 4000 }, { name: "간/허파 모듬", price: 4000 },
+        { name: "갈릭 치즈 감자", price: 6000 }, { name: "콘치즈", price: 5000 }, { name: "나초와 치즈소스", price: 4000 },
+        { name: "추억의 감자사라다", price: 3000 }, { name: "어니언 링", price: 4000 }, { name: "롱 치즈스틱", price: 3000 },
+        { name: "파인애플 샤베트", price: 7000 }, { name: "버팔로윙", price: 6000 }, { name: "해쉬브라운", price: 3000 },
+        { name: "인절미 빙수", price: 10000 }, { name: "구슬 아이스크림", price: 4000 }, { name: "달콤 츄러스", price: 3000 },
+        { name: "생크림 와플", price: 4000 }, { name: "뚱카롱 2구", price: 6000 }, { name: "조각 케이크", price: 6500 },
+        { name: "계절 과일 팩", price: 8000 }
+    ];
+
+    const reviews = [
+        "이 둘의 만남은 우연이 아닙니다. 식감과 맛의 밸런스가 완벽하게 맞아떨어지는 절대 실패 없는 조합입니다. 메인 요리의 아쉬운 점을 사이드 메뉴가 완벽하게 보완해줍니다.",
+        "메인 요리의 묵직함을 사이드 메뉴가 깔끔하게 받쳐줍니다. 첫 입부터 마지막 입까지 질리지 않고 맛있게 즐길 수 있는 최고의 구성입니다.",
+        "서로의 단점은 가려주고 장점은 극대화하는 구성입니다. 오늘 메뉴 선정, 아주 탁월합니다. 식사 만족도를 200% 끌어올려 줄 것입니다.",
+        "이 가격대에서 누릴 수 있는 최고의 호사입니다. 예산 안에서 가성비와 맛을 동시에 잡은 똑똑하고 현명한 선택입니다.",
+        "입맛이 확 도는 매력적인 조합입니다. 오늘 이 조합을 선택한 자신을 칭찬하게 되실 겁니다. 든든하고 행복한 한 끼가 될 것입니다."
+    ];
+
+    function initApp() {
+        const tagSelect = document.getElementById("tagSelect");
+        if(tagSelect.options.length === 0) {
+            tags.forEach(tag => {
+                let option = document.createElement("option");
+                option.value = tag;
+                option.text = tag;
+                tagSelect.appendChild(option);
+            });
+        }
+        checkUrlParameters();
+    }
+
+    function generateCombination() {
+        const budget = document.getElementById("budgetSelect").value;
+        const tag = document.getElementById("tagSelect").value;
+        const currentUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        const newUrl = currentUrl + "?budget=" + budget + "&tag=" + encodeURIComponent(tag) + "&refresh=true";
+        window.location.href = newUrl;
+    }
+
+    function checkUrlParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('refresh')) {
+            document.getElementById("setupArea").style.display = "none";
+            document.getElementById("resultArea").style.display = "block";
+            const budget = parseInt(urlParams.get('budget'));
+            const tag = urlParams.get('tag');
+            calculateResult(budget, tag);
+        }
+    }
+
+    function calculateResult(budget, tag) {
+        let validCombinations = [];
+        for(let m of mains) {
+            for(let s of sides) {
+                if((m.price + s.price) <= budget) {
+                    validCombinations.push({ main: m, side: s });
+                }
+            }
+        }
+
+        let finalCombo;
+        if(validCombinations.length > 0) {
+            const randomIndex = Math.floor(Math.random() * validCombinations.length);
+            finalCombo = validCombinations[randomIndex];
+        } else {
+            finalCombo = { main: {name: "편의점 도시락", price: 5000}, side: {name: "컵라면", price: 1500} };
+        }
+
+        const randomScore = Math.floor(Math.random() * 11) + 90;
+        const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+
+        document.getElementById("scoreDisplay").innerText = randomScore + "점";
+        document.getElementById("mainName").innerText = finalCombo.main.name;
+        document.getElementById("mainPrice").innerText = finalCombo.main.price.toLocaleString() + "원";
+        document.getElementById("sideName").innerText = finalCombo.side.name;
+        document.getElementById("sidePrice").innerText = finalCombo.side.price.toLocaleString() + "원";
+        document.getElementById("totalPriceDisplay").innerText = (finalCombo.main.price + finalCombo.side.price).toLocaleString();
+        
+        document.getElementById("reviewDisplay").innerHTML = `<span style="color:#38bdf8; font-weight:bold; font-size: 18px; margin-bottom: 10px; display: block;">선택하신 상황 : ${tag}</span>${randomReview}`;
+    }
+
+    function goToHome() {
+        window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    }
+
+    function reloadSameCondition() {
+        const urlParams = new URLSearchParams(window.location.search);
+        generateCombination(urlParams.get('budget'), urlParams.get('tag'));
+    }
+
+    // 블로거 환경에서도 안정적으로 실행되도록 다중 실행 방지
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        setTimeout(initApp, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", initApp);
+    }
+</script>
