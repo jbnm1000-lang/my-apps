@@ -1,0 +1,257 @@
+<!--구글 블로거 전용: 글로벌 퀀트 레이더 (KRX 블라인드 우회 / ES5 완벽 호환 / 이중 우회 로직)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #000000 !important;
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    /* 구글 블로그 기본 껍데기 완벽 숨김 처리 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    #app-container { width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 0 0 90px 0; background: #000000; }
+
+    /* 하이엔드 헤더 (중앙 정렬) */
+    .header-box { padding: 25px 20px; text-align: center; background: linear-gradient(180deg, #111111 0%, #000000 100%); border-bottom: 1px solid #333333; }
+    .header-title { font-size: 26px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 5px; }
+    .header-title span { color: #d4af37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+    .header-date { font-size: 14px; color: #888888; font-weight: 500; letter-spacing: 1px; }
+
+    /* 티커(흐르는 시세표) 영역 */
+    .ticker-wrap { width: 100%; height: 46px; background: #0a0a0a; border-bottom: 1px solid #222222; }
+
+    /* 위젯 공통 컨테이너 */
+    .widget-container { padding: 25px 20px; display: flex; flex-direction: column; gap: 30px; }
+    .section-title { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+    .section-title span { color: #d4af37; }
+    
+    .widget-box { background: #0a0a0a; border: 1px solid #222222; border-radius: 12px; overflow: hidden; padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8); min-height: 300px; }
+
+    /* 안내사항 및 방패막 패널 */
+    .info-panel-wrap { padding: 0 20px 30px 20px; display: flex; flex-direction: column; gap: 15px; }
+    
+    .guide-box { background: #111111; border-left: 4px solid #d4af37; border-radius: 8px; padding: 20px; }
+    .guide-title { font-size: 16px; font-weight: 900; color: #d4af37; margin-bottom: 10px; }
+    .guide-text { font-size: 14px; color: #cccccc; line-height: 1.7; word-break: keep-all; }
+    .guide-text b { color: #ffffff; }
+
+    .legal-box { background: #1a0f0f; border: 1px solid #331a1a; border-radius: 8px; padding: 20px; }
+    .legal-title { font-size: 15px; font-weight: 900; color: #ff4444; margin-bottom: 10px; }
+    .legal-text { font-size: 13px; color: #bb8888; line-height: 1.6; word-break: keep-all; }
+
+    /* 하단 고정 새로고침(광고) 버튼 */
+    .bottom-fix-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 600px; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); padding: 15px 20px; border-top: 1px solid #222222; z-index: 100; }
+    .btn-refresh { width: 100%; background: linear-gradient(135deg, #d4af37 0%, #aa8822 100%); border: none; color: #000000; padding: 18px; border-radius: 8px; font-size: 17px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3); transition: 0.2s; letter-spacing: -0.5px; }
+    .btn-refresh:active { transform: scale(0.97); }
+</style>
+
+<div id="app-container">
+    
+    <div class="header-box">
+        <div class="header-title">글로벌 <span>퀀트</span> 레이더</div><br /><br /><div class="header-title"><br /></div>
+        <div class="header-date" id="ui-date">2026.00.00 UPDATE</div>
+    </div><br /><br />
+
+    <!--최상단 티커-->
+    <div class="ticker-wrap">
+        <!--TradingView Widget BEGIN-->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" type="text/javascript">
+          {
+          "symbols": [
+            { "proName": "KRX:KOSPI", "title": "코스피" },
+            { "proName": "KRX:KOSDAQ", "title": "코스닥" },
+            { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+            { "proName": "FOREXCOM:NSXUSD", "title": "나스닥 100" },
+            { "proName": "BINANCE:BTCUSDT", "title": "비트코인" }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": true,
+          "displayMode": "adaptive",
+          "colorTheme": "dark",
+          "locale": "kr"
+        }
+          </script>
+        </div>
+        <!--TradingView Widget END-->
+    </div>
+
+    <div class="widget-container">
+        
+        <!--심층 차트 (개별 종목은 여기서 검색!)-->
+        <div>
+            <div class="section-title">🔍 전 세계 종목 <span>자유 검색 및 분석</span></div>
+            <div class="widget-box" style="height: 450px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                  <div id="tradingview_chart" style="height: calc(100% - 32px); width: 100%;"></div>
+                  <script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "autosize": true,
+                  "symbol": "NASDAQ:AAPL",
+                  "interval": "D",
+                  "timezone": "Asia/Seoul",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "kr",
+                  "enable_publishing": false,
+                  "backgroundColor": "#0a0a0a",
+                  "gridColor": "#1a1a1a",
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "save_image": false,
+                  "container_id": "tradingview_chart"
+                }
+                  );
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--마켓 빅데이터 (국내 탭의 빈칸 문제 완벽 해결)-->
+        <div>
+            <div class="section-title">🌐 글로벌 핵심 마켓 <span>빅데이터</span></div>
+            <div class="widget-box" style="height: 400px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" type="text/javascript">
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "1M",
+                  "showChart": false,
+                  "locale": "kr",
+                  "width": "100%",
+                  "height": "100%",
+                  "largeChartUrl": "",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "tabs": [
+                    {
+                      "title": "국내 동향",
+                      "symbols": [
+                        { "s": "KRX:KOSPI", "d": "코스피 지수" },
+                        { "s": "KRX:KOSDAQ", "d": "코스닥 지수" },
+                        { "s": "FX_IDC:USDKRW", "d": "원/달러 환율" },
+                        { "s": "AMEX:EWY", "d": "한국 투자 ETF (MSCI)" },
+                        { "s": "NYSE:CPNG", "d": "쿠팡 (미국 상장)" }
+                      ]
+                    },
+                    {
+                      "title": "미국 테크",
+                      "symbols": [
+                        { "s": "NASDAQ:AAPL", "d": "Apple" },
+                        { "s": "NASDAQ:NVDA", "d": "NVIDIA" },
+                        { "s": "NASDAQ:TSLA", "d": "Tesla" },
+                        { "s": "NASDAQ:MSFT", "d": "Microsoft" },
+                        { "s": "NASDAQ:AMZN", "d": "Amazon" }
+                      ]
+                    },
+                    {
+                      "title": "가상자산",
+                      "symbols": [
+                        { "s": "BINANCE:BTCUSDT", "d": "Bitcoin" },
+                        { "s": "BINANCE:ETHUSDT", "d": "Ethereum" },
+                        { "s": "BINANCE:SOLUSDT", "d": "Solana" }
+                      ]
+                    }
+                  ]
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--실시간 시장 온도계 (계기판)-->
+        <div>
+            <div class="section-title">⏱️ 현재 코스피 시장 <span>AI 매매 지표</span></div>
+            <div class="widget-box" style="height: 350px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" type="text/javascript">
+                  {
+                  "interval": "1D",
+                  "width": "100%",
+                  "isTransparent": true,
+                  "height": "100%",
+                  "symbol": "KRX:KOSPI",
+                  "showIntervalTabs": true,
+                  "displayMode": "single",
+                  "locale": "kr",
+                  "colorTheme": "dark"
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+    </div>
+
+    <!--텍스트 안내 및 사행성 방패막-->
+    <div class="info-panel-wrap">
+        <div class="guide-box">
+            <div class="guide-title">💡 레이더 이용 방법</div>
+            <div class="guide-text">
+                1. <b>전 세계 종목 자유 검색:</b> 상단의 차트 영역 좌측 상단에 있는 돋보기 아이콘(또는 종목명)을 누르시면, 삼성전자 등 국내 주식은 물론 미국 주식, 암호화폐 등 원하시는 모든 종목을 직접 검색하여 확인하실 수 있습니다.<br /><br />
+                2. <b>글로벌 빅데이터 탭:</b> 중단 영역의 탭을 터치하여 전 세계 주요 자산의 거시적인 흐름을 한눈에 파악해 보십시오.<br /><br />
+                3. <b>데이터 동기화:</b> 가장 최신의 실시간 시세를 확인하시려면 화면 하단의 <b>'최신 시세 동기화 및 갱신'</b> 골드 버튼을 눌러주십시오.
+            </div>
+        </div>
+
+        <div class="legal-box">
+            <div class="legal-title">⚠️ 서비스 주의사항 및 사행성 방지 안내</div>
+            <div class="legal-text">
+                본 애플리케이션은 사용자에게 글로벌 금융 시장의 객관적인 시세 데이터를 시각적으로 제공하기 위해 제작된 <b>'단순 정보 제공용 대시보드'</b>입니다.<br /><br />
+                본 앱은 어떠한 형태의 사행성 행위, 금전적 배팅, 유료 리딩, 불법 투자 권유를 일절 진행하지 않으며, 이와 관련된 기능이 전혀 포함되어 있지 않습니다. 앱 내에서 제공되는 모든 금융 데이터와 차트는 글로벌 시세 제공업체(TradingView)를 통해 전달되는 참고용 정보이며, 시장 상황에 따라 실제 시세와 시간차가 발생할 수 있습니다. <br /><br />
+                본 앱은 사용자의 투자 결과에 대하여 어떠한 법적 책임도 지지 않으며, 모든 투자의 최종 선택과 책임은 전적으로 투자자 본인에게 있음을 명확히 안내해 드립니다.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--하단 고정 새로고침 버튼-->
+<div class="bottom-fix-panel">
+    <button class="btn-refresh" onclick="refreshAndShowAd()">🔄 최신 시세 동기화 및 갱신</button>
+</div>
+
+<script>
+// ES5 엄격 문법 적용
+var d = new Date();
+var yyyy = d.getFullYear();
+var mm = d.getMonth() + 1;
+var dd = d.getDate();
+document.getElementById('ui-date').innerText = yyyy + "." + (mm < 10 ? '0' + mm : mm) + "." + (dd < 10 ? '0' + dd : dd) + " 실시간";
+
+// 이중 우회 로직을 적용한 새로고침 및 광고 송출 함수
+window.refreshAndShowAd = function() {
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott";
+    
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) { }
+    
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+}
+</script>
