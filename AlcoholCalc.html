@@ -1,0 +1,268 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 블로그 불필요한 기본 테마 요소 완벽하게 숨기기 (오류 방지) */
+.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important; 
+} 
+
+/* 전체 다크 네이비 배경 및 여백 초기화 */
+html, body, .main-inner, .post-body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    width: 100% !important; min-height: 100vh !important; 
+    background-color: #0b1120 !important; 
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    overflow-x: hidden;
+}
+
+/* 파티클 애니메이션 (고급스러운 배경 효과) */
+.particle { position: fixed; bottom: -10px; border-radius: 50%; pointer-events: none; opacity: 0; z-index: 1; animation: floatUp linear infinite; }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.3; }
+    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* 메인 컨테이너 */
+.calc-container { max-width: 600px; margin: 0 auto; padding: 25px 20px 100px 20px; box-sizing: border-box; position: relative; z-index: 10; }
+
+/* 럭셔리 상단 타이틀 영역 */
+.top-header { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; text-align: center; }
+.top-header h2 { font-size: 22px; font-weight: 900; color: #ffffff; margin: 0 0 15px 0; letter-spacing: -0.5px; word-break: keep-all; }
+
+/* 이미지 모서리 둥글게 처리 */
+.img-wrapper { border-radius: 15px; overflow: hidden; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); }
+.img-wrapper img { display: block; width: 100%; height: auto; }
+
+/* 안전 경고 박스 (다크 레드 톤) */
+.warning-box { background-color: rgba(225, 29, 72, 0.08); border-left: 4px solid #e11d48; padding: 18px; border-radius: 12px; margin-bottom: 30px; }
+.warning-box p { margin: 0; font-size: 13.5px; color: #fda4af; line-height: 1.6; word-break: keep-all; font-weight: 500; }
+.warning-box strong { color: #fff1f2; }
+
+/* 정보 입력 폼 다크 스타일 */
+.input-section { background: #1e293b; padding: 30px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 40px rgba(0,0,0,0.4); margin-bottom: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 14px; color: #cbd5e1; word-break: keep-all; }
+.calc-input, .calc-select { width: 100%; padding: 16px; background-color: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #ffffff; font-size: 15px; font-family: 'Noto Sans KR', sans-serif; box-sizing: border-box; outline: none; transition: 0.3s; }
+.calc-input:focus, .calc-select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+.calc-select option { background-color: #1e293b; color: #ffffff; }
+
+.flex-row { display: flex; gap: 15px; }
+.flex-row > div { flex: 1; }
+
+/* 계산 실행 버튼 (황금색 그라데이션) */
+.calc-btn { width: 100%; background: linear-gradient(135deg, #facc15 0%, #eab308 100%); color: #422006; padding: 20px; border: none; border-radius: 16px; font-size: 17px; font-weight: 900; cursor: pointer; margin-top: 10px; transition: transform 0.2s; box-shadow: 0 8px 25px rgba(234, 179, 8, 0.25); letter-spacing: -0.5px; }
+.calc-btn:active { transform: scale(0.97); }
+
+/* 결과창 스타일 (프리미엄 다크) */
+#resultArea { display: none; margin-top: 20px; }
+.result-card { background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 25px; }
+.result-title { font-size: 16px; font-weight: 800; color: #94a3b8; margin-bottom: 10px; word-break: keep-all; }
+.bac-value { font-size: 42px; font-weight: 900; color: #facc15; margin: 15px 0; letter-spacing: 1px; }
+
+/* 상태 메시지 색상 조정 (다크 테마 호환) */
+.status-msg { font-size: 15px; font-weight: 800; margin-bottom: 25px; padding: 15px; border-radius: 12px; word-break: keep-all; line-height: 1.5; }
+.status-danger { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+.status-warning { background: rgba(234, 179, 8, 0.15); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.3); }
+.status-safe { background: rgba(34, 197, 94, 0.15); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); }
+
+/* 상세 결과 박스 */
+.detail-box { text-align: left; background: #0b1120; padding: 20px; border-radius: 12px; font-size: 14.5px; line-height: 1.7; border: 1px solid #334155; margin-bottom: 10px; word-break: keep-all; color: #cbd5e1; }
+.detail-box b { color: #ffffff; }
+.detail-highlight { color: #38bdf8; font-weight: 800; font-size: 16px; }
+
+/* 수익화 배너 및 하단 버튼 */
+.ad-btn { display: block; width: 100%; padding: 18px; margin-bottom: 12px; text-align: center; text-decoration: none; border-radius: 14px; font-weight: 800; font-size: 15px; box-sizing: border-box; transition: transform 0.2s; border: none; cursor: pointer; }
+.ad-btn:active { transform: scale(0.98); }
+.btn-driver { background-color: #facc15; color: #422006 !important; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2); }
+.btn-law { background-color: #ef4444; color: #ffffff !important; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); }
+.btn-reset { background-color: #334155; color: #f8fafc; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); }
+</style>
+
+<div class="calc-container">
+    <div class="top-header">
+        <h2>스마트 혈중알코올농도 계산기</h2>
+        <div class="img-wrapper"><br /></div>
+    </div>
+    
+    <div class="warning-box">
+        <p><strong>※ 주의사항 (필수 확인)</strong><br />
+        본 계산기는 도로교통공단 위드마크(Widmark) 공식을 기반으로 한 단순 추정치이며, 개인의 체질, 식사 여부, 그날의 컨디션에 따라 실제 수치와 큰 차이가 날 수 있습니다. 어떠한 경우에도 법적 증거나 음주운전의 처분 기준으로 사용될 수 없으며, 단 한 잔의 술이라도 마셨다면 절대 운전대를 잡지 마세요.</p>
+    </div>
+
+    <div class="input-section" id="inputArea">
+        <div class="flex-row">
+            <div class="form-group">
+                <label>성별</label>
+                <select class="calc-select" id="gender">
+                    <option value="M">남성</option>
+                    <option value="F">여성</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>몸무게 (kg)</label>
+                <input class="calc-input" id="weight" placeholder="예: 70" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>마신 주종 (도수)</label>
+            <select class="calc-select" id="drinkType">
+                <option value="16.5">일반 소주 (16.5%)</option>
+                <option value="20.1">독한 소주/전통주 (20.1%)</option>
+                <option value="4.5">맥주 (4.5%)</option>
+                <option value="6.0">막걸리/동동주 (6.0%)</option>
+                <option value="13.0">와인/과실주 (13.0%)</option>
+                <option value="15.0">청주/사케 (15.0%)</option>
+                <option value="40.0">위스키/보드카 (40.0%)</option>
+                <option value="50.0">고량주 (50.0%)</option>
+                <option value="8.0">하이볼/칵테일 (8.0%)</option>
+            </select>
+        </div>
+
+        <div class="flex-row">
+            <div class="form-group">
+                <label>마신 양</label>
+                <input class="calc-input" id="amount" placeholder="예: 2" type="number" />
+            </div>
+            <div class="form-group">
+                <label>단위 (용량)</label>
+                <select class="calc-select" id="unit">
+                    <option value="360">소주병 (360ml)</option>
+                    <option value="500">맥주병/큰캔 (500ml)</option>
+                    <option value="355">맥주작은캔 (355ml)</option>
+                    <option value="750">막걸리/와인병 (750ml)</option>
+                    <option value="50">소주잔 (50ml)</option>
+                    <option value="200">맥주잔 (200ml)</option>
+                    <option value="150">와인잔 (150ml)</option>
+                    <option value="30">양주샷잔 (30ml)</option>
+                    <option value="2000">생맥주 피처 (2000ml)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>음주 시작 후 경과 시간 (시간)</label>
+            <input class="calc-input" id="time" placeholder="예: 3 (3시간 지났다면 3 입력)" type="number" />
+        </div>
+
+        <button class="calc-btn" onclick="submitCalculation()">결과 확인하기</button>
+    </div>
+
+    <div id="resultArea">
+        <div class="result-card">
+            <div class="result-title">현재 추정 혈중알코올농도</div>
+            <div class="bac-value" id="bacResult">0.000%</div>
+            <div class="status-msg" id="statusMessage">상태 메시지</div>
+            
+            <div class="detail-box">
+                • <b>알코올 완전 분해까지:</b> 약 <span class="detail-highlight" id="soberTime">0</span> 소요 예상<br /><br />
+                • <b>최대 알코올 농도:</b> <span id="maxBac" style="color: #fca5a5; font-weight: bold;">0.000</span>% (음주 직후 기준)<br />
+                <small style="color: #64748b; display: block; font-size: 12px; margin-top: 15px;">* 성인 평균 분해량(시간당 0.015%)을 적용한 수치로 개인의 체질에 따라 실제와 다를 수 있습니다.</small>
+            </div>
+        </div>
+
+        <a class="ad-btn btn-driver" href="https://soonddo.blogspot.com/2026/06/blog-post_05.html" target="_blank">🚕 대리운전 신규가입 혜택 총정리</a>
+        <a class="ad-btn btn-law" href="https://soonddo.blogspot.com/2026/06/blog-post_627.html" target="_blank">🚨 음주운전 적발 시 처벌 기준 및 벌금</a>
+        
+        <button class="ad-btn btn-reset" onclick="resetForm()">다시 계산하기</button>
+    </div>
+</div>
+
+<script>
+    // 파티클 생성 함수 (우주/밤하늘 느낌)
+    function createParticles() {
+        const colors = ['#facc15', '#00f0ff', '#ffffff']; 
+        for (let i = 0; i < 20; i++) {
+            let particle = document.createElement('div');
+            particle.className = 'particle';
+            let size = Math.random() * 4 + 2; 
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
+            particle.style.animationDelay = (Math.random() * 15) + 's';
+            document.body.appendChild(particle);
+        }
+    }
+
+    function submitCalculation() {
+        var g = document.getElementById("gender").value;
+        var w = document.getElementById("weight").value;
+        var t = document.getElementById("drinkType").value;
+        var a = document.getElementById("amount").value;
+        var u = document.getElementById("unit").value;
+        var tm = document.getElementById("time").value;
+
+        if (!w || !a || !tm) {
+            alert("조금 더 정확한 계산을 위해 몸무게, 마신 양, 경과 시간을 모두 입력해 주세요.");
+            return;
+        }
+
+        var queryString = "?calc=true&g=" + g + "&w=" + w + "&t=" + t + "&a=" + a + "&u=" + u + "&tm=" + tm;
+        window.location.href = window.location.pathname + queryString;
+    }
+
+    window.onload = function() {
+        createParticles(); // 화면 로드 시 파티클 실행
+
+        var params = new URLSearchParams(window.location.search);
+        
+        if (params.get("calc") === "true") {
+            document.getElementById("inputArea").style.display = "none";
+            document.getElementById("resultArea").style.display = "block";
+
+            var gender = params.get("g");
+            var weight = parseFloat(params.get("w"));
+            var abv = parseFloat(params.get("t")); 
+            var amount = parseFloat(params.get("a")); 
+            var unitMl = parseFloat(params.get("u")); 
+            var timePassed = parseFloat(params.get("tm")); 
+
+            var totalMl = amount * unitMl;
+            var alcoholGram = totalMl * (abv / 100) * 0.7894;
+
+            var rFactor = (gender === "M") ? 0.86 : 0.64;
+            var maxBac = (alcoholGram * 0.7) / (weight * rFactor * 10);
+            var currentBac = maxBac - (0.015 * timePassed);
+            if (currentBac < 0) currentBac = 0;
+
+            var totalSoberTimeHours = maxBac / 0.015;
+            var remainSoberTimeHours = totalSoberTimeHours - timePassed;
+            if (remainSoberTimeHours < 0) remainSoberTimeHours = 0;
+
+            var soberHours = Math.floor(remainSoberTimeHours);
+            var soberMins = Math.round((remainSoberTimeHours - soberHours) * 60);
+            var soberText = (remainSoberTimeHours > 0) ? soberHours + "시간 " + soberMins + "분" : "분해 완료";
+
+            document.getElementById("bacResult").innerText = currentBac.toFixed(3) + "%";
+            document.getElementById("maxBac").innerText = maxBac.toFixed(3);
+            document.getElementById("soberTime").innerText = soberText;
+
+            var statusDiv = document.getElementById("statusMessage");
+            if (currentBac >= 0.08) {
+                statusDiv.innerText = "🚨 면허 취소 수준입니다. 절대 운전대를 잡지 마세요!";
+                statusDiv.className = "status-msg status-danger";
+            } else if (currentBac >= 0.03) {
+                statusDiv.innerText = "⚠️ 면허 정지 수준입니다. 지금 운전하시면 매우 위험합니다!";
+                statusDiv.className = "status-msg status-warning";
+            } else if (currentBac > 0) {
+                statusDiv.innerText = "주의! 알코올이 아직 몸에 남아있어 운전 시 위험할 수 있습니다.";
+                statusDiv.className = "status-msg status-warning";
+            } else {
+                statusDiv.innerText = "✅ 알코올 분해가 완료된 것으로 추정됩니다.";
+                statusDiv.className = "status-msg status-safe";
+            }
+            
+            // 결과 화면으로 부드럽게 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    function resetForm() {
+        window.location.href = window.location.pathname;
+    }
+</script>
