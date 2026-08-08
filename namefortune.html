@@ -1,0 +1,449 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 구글 블로그 기본 요소 완벽 차단 */
+.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+} 
+
+html, body, .page, .main-outer, .main-inner, .post-body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0d1512 !important; background-image: none !important; 
+    width: 100% !important; min-height: 100vh !important;
+}
+
+/* 성명학 앱 전용 고유 스타일링 정의 */
+#onomancy-app {
+    --bg-deep: #0d1512; --bg-card: #16221f; --bg-input: #1f302b;
+    --gold: #d4af37; --gold-dark: #aa8c2c; --gold-light: #f3e5ab;
+    --text-pure: #f8fafc; --text-muted: #94a3b8; --border-gold: rgba(212, 175, 55, 0.25);
+    background-color: var(--bg-deep); color: var(--text-pure);
+    font-family: 'Noto Sans KR', sans-serif; min-height: 100vh;
+    padding: 24px 16px 100px 16px; box-sizing: border-box; line-height: 1.6;
+}
+
+.app-wrapper { max-width: 600px; margin: 0 auto; }
+
+/* 메인 브랜딩 헤더 영역 */
+.app-header { text-align: center; margin-bottom: 25px; padding: 25px 15px; background: linear-gradient(180deg, #16221f 0%, #0d1512 100%); border-radius: 16px; border: 1px solid var(--border-gold); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.app-header h1 { font-size: 24px; font-weight: 900; margin: 0 0 12px 0; color: #ffffff; letter-spacing: -0.5px; }
+.app-header h1 span { color: var(--gold); text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+.app-header p { color: var(--text-muted); font-size: 13.5px; margin: 0; word-break: keep-all; }
+
+/* 안내 가이드 텍스트 */
+.academic-info { background-color: var(--bg-card); border-left: 4px solid var(--gold); border-radius: 8px; padding: 18px; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.academic-info h2 { font-size: 14.5px; font-weight: 800; color: var(--gold-light); margin: 0 0 8px 0; }
+.academic-info p { font-size: 13.5px; color: #cbd5e1; margin: 0; text-align: left; word-break: keep-all; line-height: 1.6; letter-spacing: -0.3px; }
+
+/* 입력 제어 카드 구성 */
+.input-card { background-color: var(--bg-card); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+.section-indicator { font-size: 15px; font-weight: 800; color: #ffffff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-indicator::before { content: ''; display: inline-block; width: 6px; height: 14px; background-color: var(--gold); border-radius: 2px; }
+
+.flex-container { display: flex; gap: 12px; margin-bottom: 15px; }
+.input-group { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.input-group label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.name-input { width: 100%; padding: 14px; background-color: var(--bg-input); border: 1px solid var(--border-gold); border-radius: 10px; color: #ffffff; font-size: 15px; font-weight: 700; box-sizing: border-box; outline: none; transition: all 0.2s; text-align: center; }
+.name-input:focus { border-color: var(--gold); box-shadow: 0 0 8px rgba(212,175,55,0.2); }
+
+/* 실행 제어 장치 */
+.action-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%); color: #000000; border: none; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; transition: all 0.1s; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2); margin-bottom: 15px; letter-spacing: 0.5px; }
+.action-btn:active { transform: scale(0.99); box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1); }
+.share-btn { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: #ffffff; box-shadow: 0 6px 20px rgba(46, 204, 113, 0.2); display: none; }
+
+/* 정밀 연산 리포트 대시보드 */
+.report-dashboard { background-color: var(--bg-card); border-radius: 16px; border: 1px solid var(--gold); padding: 25px 20px; margin-bottom: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.5); display: none; }
+.dashboard-title { text-align: center; font-size: 18px; font-weight: 800; color: var(--gold); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px dashed var(--border-gold); }
+
+.score-badge-box { text-align: center; margin-bottom: 25px; }
+.score-circle { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; width: 110px; height: 110px; border-radius: 50%; border: 3px double var(--gold); background-color: #0d1512; box-shadow: 0 0 15px rgba(212,175,55,0.15); }
+.score-val { font-size: 32px; font-weight: 900; color: var(--gold-light); line-height: 1.1; }
+.score-unit { font-size: 11px; color: var(--text-muted); }
+
+/* 상세 해설 카드 */
+.detail-card { background-color: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.2); border-radius: 10px; padding: 18px; margin-bottom: 15px; }
+.detail-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; margin-bottom: 12px; }
+.detail-title { font-size: 15px; font-weight: 800; color: var(--gold-light); }
+.detail-tag { font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: 4px; }
+.detail-desc { font-size: 14.5px; color: #cbd5e1; line-height: 1.6; text-align: left; word-break: keep-all; letter-spacing: -0.5px; margin: 0; }
+
+/* 궁합 특화 섹션 */
+.affinity-box { background-color: rgba(212, 175, 55, 0.04); border: 1px dashed var(--gold); border-radius: 12px; padding: 18px; margin-top: 25px; text-align: center; }
+.affinity-title { font-size: 15px; font-weight: 800; color: var(--gold-light); margin-bottom: 12px; }
+.affinity-desc { font-size: 14.5px; color: #cbd5e1; margin: 0; word-break: keep-all; text-align: left; letter-spacing: -0.5px; line-height: 1.6; }
+
+/* 종합 서술형 리포트 */
+.narrative-report { background-color: #0d1512; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin-top: 25px; }
+.narrative-title { font-size: 15px; font-weight: 800; color: var(--gold); margin-bottom: 10px; text-align: left; }
+.narrative-content { font-size: 14.5px; color: #cbd5e1; text-align: left; margin: 0; word-break: keep-all; letter-spacing: -0.5px; line-height: 1.6; }
+
+/* 법적 책임 제한 및 사행성 방지 안전 장치 */
+.safety-disclaimer { background-color: #000000; border: 1px solid #222222; padding: 18px; border-radius: 10px; margin-top: 30px; }
+.disclaimer-title { color: #777777; font-size: 12px; font-weight: 800; margin-bottom: 8px; text-align: center; letter-spacing: 0.5px; }
+.disclaimer-text { font-size: 11.5px; color: #555555; line-height: 1.6; text-align: left; letter-spacing: -0.3px; word-break: keep-all; margin: 0; }
+
+/* 성명학 격식 컬러 매핑 */
+.luck-대길 { background-color: #9b1c1c; color: #ffffff; }
+.luck-길 { background-color: #b45309; color: #ffffff; }
+.luck-소길 { background-color: #047857; color: #ffffff; }
+.luck-무난 { background-color: #4b5563; color: #ffffff; }
+</style>
+
+<div id="onomancy-app">
+    <div class="app-wrapper">
+        
+        <!--브랜딩 영역-->
+        <div class="app-header">
+            <h1>이름으로 보는 <span>내 인생 운세</span></h1><div><span><br /></span></div>
+            <p>이름의 글자 획수를 더하여 초년, 중년, 말년의 흐름을 알아보는 쉽고 재미있는 운세 확인 프로그램입니다.</p>
+        </div>
+
+        <!--안내 가이드-->
+        <div class="academic-info">
+            <h2>📜 평생 변하지 않는 이름 운세</h2>
+            <p>
+                이름의 자음과 모음 획수를 더하여 정해진 규칙에 따라 인생의 시기별 운세를 보여줍니다. 입력하신 이름에 따라 수학적인 규칙으로 결과가 정해지므로, 언제 확인하셔도 일관된 결과를 보실 수 있습니다.
+            </p>
+        </div>
+
+        <!--입력 장치 구성-->
+        <div class="input-card">
+            <div class="section-indicator">운세를 확인할 이름 입력</div>
+            <p style="color: var(--text-muted); font-size: 13px; letter-spacing: -0.3px; margin: 0px 0px 15px; word-break: keep-all;">두 사람의 궁합을 함께 보고 싶으시다면 '상대방 이름'도 적어주세요. 혼자만의 운세를 보시려면 본인 이름만 입력하시면 됩니다.</p>
+            
+            <div class="flex-container">
+                <div class="input-group">
+                    <label>본인 이름 (한글)</label>
+                    <input class="name-input" id="target-p1" maxlength="4" placeholder="이름 입력" type="text" />
+                </div>
+                <div class="input-group">
+                    <label>상대방 이름 (선택)</label>
+                    <input class="name-input" id="target-p2" maxlength="4" placeholder="이름 입력" type="text" />
+                </div>
+            </div>
+        </div>
+
+        <!--액션 제어 버튼-->
+        <button class="action-btn" onclick="processOnomancyCalculation()">🧬 이름 운세 확인하기</button>
+        <button class="action-btn share-btn" id="app-save-btn" onclick="transmitAffinityToApp()">💌 카카오톡으로 결과 공유하기</button>
+
+        <!--정밀 결과 대시보드-->
+        <div class="report-dashboard" id="report-view-area">
+            <div class="dashboard-title">👑 이름 운세 종합 결과</div>
+            
+            <div class="score-badge-box">
+                <div class="score-circle">
+                    <span class="score-unit">종합 운세 점수</span>
+                    <span class="score-val" id="render-score">0</span>
+                    <span class="score-unit">/ 100점</span>
+                </div>
+            </div>
+
+            <div class="section-indicator" id="p1-title-area" style="font-size: 16px; margin-bottom: 12px;">나의 시기별 상세 운세</div>
+            <div id="render-grid-p1">
+                <!--자바스크립트 동적 연산 노드 삽입-->
+            </div>
+
+            <div id="affinity-dynamic-block" style="display: none;">
+                <div class="section-indicator" id="p2-title-area" style="font-size: 16px; margin-bottom: 12px; margin-top: 25px;">상대방의 시기별 상세 운세</div>
+                <div id="render-grid-p2">
+                    <!--상대방 연산 노드 삽입-->
+                </div>
+
+                <div class="affinity-box">
+                    <div class="affinity-title">💞 두 사람의 이름 궁합 결과</div>
+                    <p class="affinity-desc" id="render-affinity-text"></p>
+                </div>
+            </div>
+
+            <div class="narrative-report">
+                <div class="narrative-title">💡 내 인생 전체를 위한 조언</div>
+                <p class="narrative-content" id="render-total-desc"></p>
+            </div>
+        </div>
+
+        <!--면책 및 안전 장치-->
+        <div class="safety-disclaimer">
+            <div class="disclaimer-title">[운세 결과 참고 사항]</div>
+            <p class="disclaimer-text">
+                이 결과는 이름의 획수를 더해 통계적인 규칙으로 풀어낸 가벼운 운세입니다. 실제 일어날 미래를 확정 지어 말해주는 것이 아니니, 일상의 즐거움과 긍정적인 다짐을 위한 참고 자료로만 편안하게 읽어주시길 바랍니다.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var appCommunicationString = "";
+
+    // 한글 고유 획수 데이터베이스
+    var dbInitialStrokes = [2, 4, 3, 6, 4, 4, 2, 1, 3, 4, 3, 4, 4, 4, 4, 6, 8, 4, 6]; 
+    var dbMedialStrokes  = [2, 3, 3, 4, 2, 3, 3, 4, 2, 4, 5, 3, 3, 2, 4, 5, 3, 3, 1, 2, 1]; 
+    var dbFinalStrokes   = [0, 2, 4, 4, 2, 5, 6, 3, 5, 7, 9, 9, 7, 9, 9, 9, 4, 4, 6, 2, 4, 1, 3, 4, 3, 4, 4, 4, 4];
+
+    // 81가지 결과 (중복 없는 다채로운 멘트)
+    var dbSuRiInterpretations = {
+        1: { name: "탄탄한 기초", luck: "대길", desc: "시작이 매우 좋습니다. 무엇을 하든 튼튼한 기초를 바탕으로 흔들림 없이 목표를 이루어내는 아주 좋은 흐름입니다." },
+        2: { name: "독립적인 성공", luck: "무난", desc: "여러 사람과 함께 일하기보다는, 혼자서 조용히 집중할 때 본인의 실력이 가장 크게 발휘됩니다." },
+        3: { name: "풍부한 인복", luck: "대길", desc: "사람들에게 인기가 많고 주변의 도움을 많이 받습니다. 좋은 인맥이 곧 든든한 재산이 되어줍니다." },
+        4: { name: "꾸준한 인내", luck: "무난", desc: "초반에는 조금 답답할 수 있지만, 중간에 포기하지 않고 끈기 있게 밀고 나가면 결국 큰 보상을 받습니다." },
+        5: { name: "리더의 자질", luck: "대길", desc: "주변 사람들을 잘 이끌어가는 리더십이 뛰어납니다. 많은 사람의 신뢰를 받아 크게 성공할 수 있습니다." },
+        6: { name: "평안한 일상", luck: "길", desc: "큰 욕심을 내기보다는 지금 주어진 것에 만족할 때 마음이 가장 편안하며, 가족들과 화목하게 지냅니다." },
+        7: { name: "강한 자립심", luck: "길", desc: "남에게 기대지 않고 스스로 문제를 해결하는 능력이 뛰어납니다. 강한 의지력으로 어려운 일도 잘 이겨냅니다." },
+        8: { name: "새로운 도전", luck: "대길", desc: "남들이 가지 않은 새로운 길을 개척하는 데 소질이 있습니다. 새로운 아이디어로 큰 이익을 얻습니다." },
+        9: { name: "유연한 대처", luck: "무난", desc: "환경이 자주 바뀔 수 있지만, 적응력이 뛰어나서 오히려 낯선 곳에서 좋은 기회를 잡게 됩니다." },
+        10: { name: "조용한 성찰", luck: "무난", desc: "겉으로 화려하게 꾸미기보다는 내실을 다지는 것이 좋습니다. 조용히 실력을 키우면 나중에 크게 인정받습니다." },
+        11: { name: "위기 극복", luck: "대길", desc: "어려운 일이 생겨도 곧바로 회복하는 힘이 강합니다. 비 온 뒤에 땅이 굳어지듯 시련을 겪을수록 더욱 단단해집니다." },
+        12: { name: "현상 유지", luck: "무난", desc: "무리하게 일을 크게 벌이는 것보다, 지금 하고 있는 일에 집중하고 지켜내는 것이 훨씬 안전하고 좋습니다." },
+        13: { name: "뛰어난 두뇌", luck: "대길", desc: "눈치가 빠르고 머리가 아주 비상합니다. 복잡한 문제도 남들보다 쉽고 빠르게 해결하는 능력이 있습니다." },
+        14: { name: "전문가의 길", luck: "무난", desc: "남들과 부딪히며 일하기보다, 본인만의 특별한 기술이나 자격증을 살려 일할 때 가장 빛이 납니다." },
+        15: { name: "부드러운 포용", luck: "대길", desc: "성격이 부드럽고 따뜻해서 주변에 좋은 사람들이 많이 모입니다. 인맥을 통해 큰 행운이 들어옵니다." },
+        16: { name: "행운의 연속", luck: "대길", desc: "위험한 순간마다 신기하게도 누군가의 도움을 받거나 상황이 좋게 풀려나가는 든든한 운을 가졌습니다." },
+        17: { name: "활기찬 에너지", luck: "길", desc: "항상 에너지가 넘치고 활동적입니다. 가만히 앉아 있기보다는 부지런히 움직일 때 기분 좋은 일이 많이 생깁니다." },
+        18: { name: "뛰어난 감각", luck: "대길", desc: "유행을 읽는 눈이나 예술적인 감각이 남다릅니다. 남들이 생각하지 못한 참신한 방식으로 좋은 성과를 냅니다." },
+        19: { name: "나만의 세상", luck: "무난", desc: "혼자만의 시간을 중요하게 생각합니다. 남들의 시선을 신경 쓰지 않고 내가 좋아하는 일에 푹 빠지면 성공합니다." },
+        20: { name: "돌다리도 두들겨라", luck: "무난", desc: "조심성이 많아서 큰 실수를 하지 않습니다. 결정을 내릴 때 두 번, 세 번 확인하는 습관이 재산을 지켜줍니다." },
+        21: { name: "책임감과 리더십", luck: "대길", desc: "어떤 모임에서든 자연스럽게 리더 역할을 맡게 됩니다. 책임감이 강해 많은 사람의 존경을 한 몸에 받습니다." },
+        22: { name: "한 우물 파기", luck: "무난", desc: "이것저것 손대기보다 딱 한 가지 목표를 정해서 꾸준히 밀고 나가는 것이 중요합니다. 인내가 정답입니다." },
+        23: { name: "계단식 성장", luck: "대길", desc: "처음에는 평범해 보일지 몰라도, 시간이 지날수록 실력이 차곡차곡 쌓여 결국 아주 높은 자리에 오릅니다." },
+        24: { name: "타고난 재물운", luck: "대길", desc: "돈 냄새를 맡는 감각이 타고났습니다. 작은 돈도 크게 불리는 재주가 있어 금전적으로 아주 여유롭습니다." },
+        25: { name: "안전이 제일", luck: "길", desc: "모험을 즐기기보다는 규칙적이고 안정적인 생활을 좋아합니다. 덕분에 큰 스트레스 없이 편안한 일상을 보냅니다." },
+        26: { name: "해결사 기질", luck: "무난", desc: "어려운 문제나 위기가 닥쳤을 때 오히려 침착하게 상황을 정리하는 능력이 뛰어납니다. 믿음직한 사람입니다." },
+        27: { name: "철저한 자기관리", luck: "길", desc: "스스로 세운 규칙을 아주 잘 지킵니다. 나이가 들수록 건강하고 중후한 매력이 생겨 사람들의 부러움을 삽니다." },
+        28: { name: "역동적인 삶", luck: "무난", desc: "변화가 많은 환경에서 오히려 재미를 느낍니다. 매일 똑같은 일보다는 매번 새로운 도전을 할 때 큰 발전이 있습니다." },
+        29: { name: "아이디어 뱅크", luck: "대길", desc: "머릿속에 재미있고 유익한 생각들이 넘쳐납니다. 그 생각들을 실제 행동으로 옮기기만 하면 무조건 성공합니다." },
+        30: { name: "올바른 성품", luck: "길", desc: "거짓말을 싫어하고 솔직해서 믿고 다가오는 사람들이 많습니다. 바른 생활 사나이/여장부 스타일입니다." },
+        31: { name: "화합의 상징", luck: "대길", desc: "어디를 가든 둥글둥글하게 분위기를 좋게 만듭니다. 적을 만들지 않기 때문에 인생이 항상 평탄하고 즐겁습니다." },
+        32: { name: "뜻밖의 행운", luck: "대길", desc: "마치 뒤로 넘어져도 좋은 일이 생기는 것처럼, 우연히 시작한 일이 대박이 나는 아주 운이 좋은 편입니다." },
+        33: { name: "강한 추진력", luck: "대길", desc: "한 번 마음먹은 일은 절대 포기하지 않고 끝까지 밀어붙입니다. 그 열정 덕분에 큰 부와 명예를 얻습니다." },
+        34: { name: "유연한 사고", luck: "무난", desc: "세상 돌아가는 트렌드를 아주 잘 읽습니다. 고집을 부리기보다 흐름에 맞게 유연하게 행동하면 무조건 유리합니다." },
+        35: { name: "우아하고 고상함", luck: "길", desc: "싸우고 다투는 것을 싫어하며 평화로운 것을 사랑합니다. 품위 있고 넉넉한 삶을 즐길 줄 압니다." },
+        36: { name: "의리파", luck: "무난", desc: "친구나 동료를 챙기는 마음이 아주 깊습니다. 내 사람이다 싶으면 팍팍 밀어주기 때문에 평생 갈 진짜 친구가 많습니다." },
+        37: { name: "도움의 손길", luck: "길", desc: "내가 도움이 필요할 때 신기하게도 귀인이 나타나 도와줍니다. 평소 사람들에게 잘 베푼 덕분입니다." },
+        38: { name: "섬세한 재능", luck: "길", desc: "남들이 보지 못하는 아주 작은 부분까지 챙기는 섬세함이 있습니다. 손재주나 글솜씨로 칭찬을 많이 받습니다." },
+        39: { name: "불사조의 기운", luck: "대길", desc: "실패를 겪어도 오뚝이처럼 툭툭 털고 일어나는 힘이 있습니다. 그 회복력 덕분에 남들보다 크게 대성합니다." },
+        40: { name: "철벽 방어", luck: "무난", desc: "공격적으로 돈을 벌기보다는, 이미 가진 것을 꼼꼼하게 잘 지키고 아끼는 데 아주 탁월한 재능이 있습니다." },
+        41: { name: "존경받는 어른", luck: "대길", desc: "지혜가 깊고 덕이 많아 나이가 들수록 젊은 사람들에게 존경받습니다. 넉넉하고 편안한 노후가 보장됩니다." },
+        42: { name: "팔방미인", luck: "길", desc: "못하는 것이 없을 정도로 재주가 아주 많습니다. 다양한 취미나 여러 가지 부업을 통해 즐겁게 돈을 멉니다." },
+        43: { name: "큰 손", luck: "무난", desc: "씀씀이가 크고 대범합니다. 돈을 아끼기보다는 쓸 땐 확실하게 쓰면서 더 큰 기회를 잡아내는 배포가 있습니다." },
+        44: { name: "시선을 끄는 매력", luck: "무난", desc: "가만히 있어도 사람들의 시선을 사로잡는 묘한 매력이 있습니다. 사람을 상대하는 일에서 능력을 크게 발휘합니다." },
+        45: { name: "집안의 기둥", luck: "대길", desc: "가족들을 편안하게 이끌어주고 보살피는 든든한 기둥 역할을 합니다. 덕분에 가정이 항상 화목하고 넉넉합니다." },
+        46: { name: "맨땅에 헤딩", luck: "무난", desc: "남들이 다 차려놓은 밥상보다는, 아무것도 없는 곳에서 내 힘으로 무언가를 만들어낼 때 짜릿한 성취감을 느낍니다." },
+        47: { name: "명예와 승진", luck: "대길", desc: "회사나 조직에서 능력을 빠르게 인정받습니다. 남들보다 승진도 빠르고 명예로운 자리에 쉽게 올라갑니다." },
+        48: { name: "좋은 조언자", luck: "대길", desc: "남의 이야기를 잘 들어주고 현명한 조언을 해줍니다. 내 조언을 듣고 잘 된 사람들이 나중에 나를 크게 돕습니다." },
+        49: { name: "효율적인 삶", luck: "무난", desc: "젊을 때 바짝 고생해서 일찌감치 자리를 잡고, 나중에는 취미 생활을 하며 여유롭게 사는 것을 좋아합니다." },
+        50: { name: "위기 관리", luck: "무난", desc: "상황이 안 좋을 때 당황하지 않고 피해를 최소화하는 능력이 좋습니다. 매사 유연하게 대처하는 지혜가 있습니다." },
+        51: { name: "꾸준한 우상향", luck: "길", desc: "한 번에 벼락부자가 되지는 않지만, 매년 조금씩 통장 잔고와 실력이 늘어나면서 아주 탄탄하게 성장합니다." },
+        52: { name: "앞을 내다보는 눈", luck: "대길", desc: "남들이 아직 모르는 유망한 투자처나 좋은 아이템을 기가 막히게 먼저 찾아내는 아주 특별한 직관력이 있습니다." },
+        53: { name: "실속파", luck: "무난", desc: "겉모습을 화려하게 꾸미는 것에는 관심이 없습니다. 남들 눈에 띄지 않게 조용히 진짜 알짜배기 재산을 모읍니다." },
+        54: { name: "어려운 숙제 해결", luck: "무난", desc: "남들이 피하고 싶어 하는 복잡한 문제를 풀어내는 데 재미를 느낍니다. 꼬인 실타래를 푸는 능력자입니다." },
+        55: { name: "건강하고 무탈함", luck: "길", desc: "큰 병치레 없이 몸과 마음이 아주 건강합니다. 스트레스를 잘 받지 않아 매일매일이 평화롭고 즐겁습니다." },
+        56: { name: "결핍이 곧 원동력", luck: "무난", desc: "부족한 것을 채우고 싶은 강한 욕심이 오히려 본인을 움직이게 만드는 가장 강력한 에너지가 되어줍니다." },
+        57: { name: "성실함의 승리", luck: "길", desc: "요행을 바라지 않고 정직하게 땀 흘린 만큼 정확하게 보상을 받습니다. 배신 없는 아주 정직한 운세입니다." },
+        58: { name: "대기만성", luck: "대길", desc: "어릴 때보다 나이가 들수록 운이 훨씬 더 좋아집니다. 인생 후반전이 남들보다 백 배는 더 화려하고 행복합니다." },
+        59: { name: "비대면의 강자", luck: "무난", desc: "사람들을 직접 만나는 것보다 인터넷이나 온라인 화면 너머로 활동할 때 훨씬 더 큰 수익과 성과를 냅니다." },
+        60: { name: "안전장치 마련", luck: "무난", desc: "혹시 모를 상황에 대비해 보험이나 비상금을 꼼꼼하게 잘 챙겨둡니다. 덕분에 어떤 일이 생겨도 안심입니다." },
+        61: { name: "가족의 자랑", luck: "대길", desc: "본인의 성공뿐만 아니라 자녀들이나 가족들에게 기쁜 일이 많이 생겨서 항상 웃음꽃이 피는 좋은 운입니다." },
+        62: { name: "깊은 생각", luck: "무난", desc: "눈에 보이는 돈보다는 철학적이고 정신적인 가치를 중요하게 생각합니다. 생각의 깊이가 아주 남다릅니다." },
+        63: { name: "탄탄대로", luck: "대길", desc: "앞을 가로막는 장애물이 거의 없습니다. 고속도로를 달리는 자동차처럼 원하는 목표를 향해 시원하게 나아갑니다." },
+        64: { name: "조용한 부자", luck: "무난", desc: "앞장서서 나서기보다는 뒤에서 조용히 상황을 지켜보며 본인의 몫을 철저하게 챙기는 아주 똑똑한 성격입니다." },
+        65: { name: "큰 그릇", luck: "대길", desc: "재물을 담아두는 그릇의 크기가 남들보다 훨씬 큽니다. 작은 돈에 얽매이지 않으면 아주 큰 부자가 될 수 있습니다." },
+        66: { name: "넓은 세상으로", luck: "무난", desc: "좁은 동네에 머물기보다는 여기저기 여행을 다니거나 멀리 나갈 때 생각지도 못한 좋은 행운을 만나게 됩니다." },
+        67: { name: "타고난 재능", luck: "대길", desc: "어릴 때부터 타고난 센스와 인복 덕분에 남들보다 덜 고생하고 쉽게 성공의 문을 여는 아주 기분 좋은 운입니다." },
+        68: { name: "무에서 유를 창조", luck: "길", desc: "아무것도 없는 빈손에서 기발한 아이디어 하나만으로 큰 수익을 만들어내는 아주 훌륭한 창의력이 있습니다." },
+        69: { name: "확실한 타이밍", luck: "무난", desc: "나서야 할 때와 가만히 지켜봐야 할 때를 아주 잘 압니다. 섣부르게 행동하지 않아서 큰 손해를 피합니다." },
+        70: { name: "소수 정예", luck: "무난", desc: "아무나 폭넓게 사귀기보다는, 정말 믿을 수 있는 몇 명의 진짜 친구들만 곁에 두고 깊게 우정을 나눕니다." },
+        71: { name: "무서운 집중력", luck: "길", desc: "한 번 꽂히는 일이 있으면 밥 먹는 것도 잊을 만큼 엄청난 집중력을 발휘해서 기어코 결과를 만들어 냅니다." },
+        72: { name: "철저한 관리", luck: "무난", desc: "돈을 쓸데없는 곳에 낭비하지 않고 아주 철저하게 계산해서 사용합니다. 꼼꼼한 관리 덕에 재산이 샜지 않습니다." },
+        73: { name: "운명을 스스로 개척", luck: "길", desc: "운이 따라주지 않아도 본인의 엄청난 노력으로 운명을 좋게 바꾸어버리는 아주 강하고 멋진 기질이 있습니다." },
+        74: { name: "휴식의 중요성", luck: "무난", desc: "너무 무리하게 달리기보다는 주말에 푹 쉬면서 에너지를 채워야 다음 주에 훨씬 더 일을 잘하는 타입입니다." },
+        75: { name: "평화로운 매일", luck: "길", desc: "골치 아픈 문제들이 주변에 잘 생기지 않습니다. 좋은 음식 먹고 편안하게 쉴 수 있는 가장 행복한 일상입니다." },
+        76: { name: "놀라운 육감", luck: "무난", desc: "말로 설명할 수 없는 묘한 직감이 아주 잘 맞습니다. 왠지 느낌이 좋은 쪽으로 선택하면 거의 정답입니다." },
+        77: { name: "상위 그룹으로", luck: "길", desc: "능력 있고 배울 점이 많은 사람들과 자연스럽게 친해지게 됩니다. 그 사람들의 도움으로 내 수준도 확 올라갑니다." },
+        78: { name: "값진 경험", luck: "길", desc: "젊은 시절에 겪은 작은 실패나 경험들이 나중에는 몇억 원의 돈을 주고도 못 살 만큼 귀중한 성공의 무기가 됩니다." },
+        79: { name: "새로운 시작", luck: "무난", desc: "낡은 방식을 버리고 과감하게 새로운 도전을 할 때 막혀있던 일들이 시원하게 뻥 뚫리는 경험을 하게 됩니다." },
+        80: { name: "숨은 권력자", luck: "길", desc: "겉보기엔 평범해 보이지만 알고 보면 알짜배기 재산이나 결정권을 쥐고 있는, 실속을 완벽하게 챙기는 타입입니다." },
+        81: { name: "만사형통", luck: "대길", desc: "가장 완성된 형태의 최고 운세입니다. 지금까지 뿌려둔 노력의 씨앗들이 큰 보상과 칭찬으로 돌아와 행복을 누립니다." }
+    };
+
+    // 글자 획수 계산 공식
+    function calculateCharacterStrokes(char) {
+        var code = char.charCodeAt(0);
+        if (code < 44032 || code > 55203) return 4;
+
+        var hangulIndex = code - 44032;
+        var initialIndex = Math.floor(hangulIndex / 588);
+        var medialIndex = Math.floor((hangulIndex % 588) / 28);
+        var finalIndex = hangulIndex % 28;
+
+        return dbInitialStrokes[initialIndex] + dbMedialStrokes[medialIndex] + dbFinalStrokes[finalIndex];
+    }
+
+    // 이름 입력 시 URL 새로고침
+    function processOnomancyCalculation() {
+        var p1 = document.getElementById('target-p1').value.trim();
+        var p2 = document.getElementById('target-p2').value.trim();
+
+        if (!p1) {
+            alert("운세를 알아볼 본인의 이름을 꼭 입력해 주세요.");
+            return;
+        }
+
+        var randomSeed = Math.floor(Math.random() * 99999) + 1;
+        var currentBaseUrl = window.location.href.split('?')[0].split('#')[0];
+        
+        var redirectUrl = currentBaseUrl + "?m=1&name_gen=" + randomSeed + "&p1=" + encodeURIComponent(p1);
+        if (p2) {
+            redirectUrl += "&p2=" + encodeURIComponent(p2);
+        }
+
+        window.location.href = redirectUrl;
+    }
+
+    // 결과 화면 렌더링 엔진 (절대 중복 방지 필터 탑재)
+    function buildDetailedDestinyHTML(name, strokesArray) {
+        var len = strokesArray.length;
+        var s1 = strokesArray[0] || 0;
+        var s2 = strokesArray[1] || 0;
+        var s3 = strokesArray[2] || 0;
+        var s4 = strokesArray[3] || 0;
+
+        var won, hyung, iLuck, jung;
+
+        // 짧은 이름(1글자, 2글자) 가성 획수 부여 보정 로직
+        if (len === 1) {
+            won = s1 + 1; hyung = s1 + 2; iLuck = s1 + 3; jung = s1 + 4;
+        } else if (len === 2) {
+            won = s2 + 1; hyung = s1 + s2; iLuck = s1 + 1; jung = s1 + s2 + 1;
+        } else {
+            won = s2 + s3 + s4;
+            hyung = s1 + s2;
+            iLuck = s1 + s3 + s4;
+            jung = s1 + s2 + s3 + s4;
+        }
+
+        // 출력 결과가 100% 다르게 나오도록 만드는 중복 방지 필터
+        var usedNumbers = [];
+        function getUniqueSuri(num) {
+            var target = num;
+            if (target <= 0) target = 1;
+            if (target > 81) target = (target % 81) + 1;
+            
+            // 이미 뽑힌 운세 번호와 겹치면 다음 번호로 밀어냄
+            while (usedNumbers.indexOf(target) !== -1) {
+                target = (target % 81) + 1;
+            }
+            usedNumbers.push(target);
+            return target;
+        }
+
+        won = getUniqueSuri(won);
+        hyung = getUniqueSuri(hyung);
+        iLuck = getUniqueSuri(iLuck);
+        jung = getUniqueSuri(jung);
+
+        var fourPillars = [
+            { title: "🌱 초년운 (0세 ~ 20세 전후)", val: won, period: "나의 어린 시절 환경과 타고난 재능을 보여줍니다." },
+            { title: "🏃‍♂️ 중년운 (20대 ~ 40대)", val: hyung, period: "가장 활발하게 일하고 사회생활을 하는 시기의 흐름입니다." },
+            { title: "🏡 장년운 (40대 ~ 60대)", val: iLuck, period: "가정을 이루고 안정을 찾아가는 중년 이후의 운세입니다." },
+            { title: "👑 평생의 총운", val: jung, period: "내 인생 전체를 이끌어가는 가장 큰 기운이자 말년의 모습입니다." }
+        ];
+
+        var html = "";
+        for (var i = 0; i < fourPillars.length; i++) {
+            var data = dbSuRiInterpretations[fourPillars[i].val] || dbSuRiInterpretations[1];
+            html += "<div class='detail-card'>";
+            html += "<div class='detail-header'>";
+            html += "<span class='detail-title'>" + fourPillars[i].title + "</span>";
+            html += "<span class='detail-tag luck-" + data.luck + "'>" + data.name + " (" + data.luck + ")</span>";
+            html += "</div>";
+            html += "<p class='detail-desc' style='margin-bottom:8px; color:var(--gold); font-size:13.5px;'>" + fourPillars[i].period + "</p>";
+            html += "<p class='detail-desc'>" + data.desc + "</p>";
+            html += "</div>";
+        }
+        return { html: html, jungScore: jung };
+    }
+
+    // 페이지 시작 시 작동
+    window.onload = function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var name_gen = urlParams.get('name_gen');
+        if (!name_gen) return;
+
+        var p1 = urlParams.get('p1');
+        var p2 = urlParams.get('p2');
+
+        if (p1) document.getElementById('target-p1').value = p1;
+        if (p2) document.getElementById('target-p2').value = p2;
+
+        var p1Strokes = [];
+        for (var i = 0; i < p1.length; i++) {
+            p1Strokes.push(calculateCharacterStrokes(p1.charAt(i)));
+        }
+
+        var resP1 = buildDetailedDestinyHTML(p1, p1Strokes);
+        document.getElementById('render-grid-p1').innerHTML = resP1.html;
+        document.getElementById('p1-title-area').innerText = "📌 [" + p1 + "] 님의 시기별 상세 운세";
+
+        var finalNormalizedScore = 60 + (resP1.jungScore % 41); 
+        if (finalNormalizedScore > 100) finalNormalizedScore = 100;
+
+        var appShareMessage = "";
+
+        if (p2) {
+            var p2Strokes = [];
+            for (var j = 0; j < p2.length; j++) {
+                p2Strokes.push(calculateCharacterStrokes(p2.charAt(j)));
+            }
+            var resP2 = buildDetailedDestinyHTML(p2, p2Strokes);
+            document.getElementById('render-grid-p2').innerHTML = resP2.html;
+            document.getElementById('p2-title-area').innerText = "📌 [" + p2 + "] 님의 시기별 상세 운세";
+
+            var affinityScore = 65 + ((resP1.jungScore + resP2.jungScore) % 36);
+            if (affinityScore > 100) affinityScore = 100;
+            finalNormalizedScore = Math.floor((finalNormalizedScore + affinityScore) / 2);
+
+            document.getElementById('affinity-dynamic-block').style.display = 'block';
+            
+            var affinityEvaluation = "두 분 이름의 기운을 맞춰본 결과, 서로의 장점은 살려주고 부족한 점은 따뜻하게 채워주는 아주 좋은 궁합입니다. 함께 무언가를 계획하거나 같이 시간을 보낼 때 웃을 일이 많아지며, 오래갈수록 서로에게 좋은 귀인이 되어줄 수 있는 든든한 사이입니다.";
+            
+            if (affinityScore < 80) {
+                affinityEvaluation = "두 분의 이름 궁합은 잔잔하고 편안한 흐름을 보여줍니다. 서로 성향이 조금 다를 수는 있지만, 상대방의 생각을 존중해 주고 대화로 맞춰나가면 아주 평화로운 관계를 유지할 수 있습니다. 각자의 생활을 인정해 줄 때 더욱 사이가 좋아집니다.";
+            }
+            document.getElementById('render-affinity-text').innerText = affinityEvaluation;
+            
+            appShareMessage = "[이름으로 보는 인생 운세]\n" + p1 + " 님과 " + p2 + " 님의 이름 궁합 결과\n▶ 종합 상생 점수: " + finalNormalizedScore + "점\n\n나의 시기별 상세 운세 확인하기:";
+        } else {
+            document.getElementById('affinity-dynamic-block').style.display = 'none';
+            appShareMessage = "[이름으로 보는 인생 운세]\n" + p1 + " 님의 이름 운세 분석 완료\n▶ 종합 운세 점수: " + finalNormalizedScore + "점\n\n나의 시기별 상세 운세 확인하기:";
+        }
+
+        document.getElementById('render-score').innerText = finalNormalizedScore;
+        document.getElementById('report-view-area').style.display = 'block';
+        document.getElementById('app-save-btn').style.display = 'block';
+
+        var mainFinalSu = resP1.jungScore;
+        if (mainFinalSu > 81) mainFinalSu = (mainFinalSu % 81) + 1;
+        var finalInterpretationData = dbSuRiInterpretations[mainFinalSu] || dbSuRiInterpretations[1];
+
+        var totalDescriptionNode = "입력하신 이름의 가장 큰 특징은 [" + finalInterpretationData.name + "] 입니다. " + finalInterpretationData.desc + " 평소에 마음속에 이 긍정적인 기운을 담아두고 즐겁게 생활하신다면, 앞으로 더욱 기분 좋은 일들이 많이 생기실 것입니다.";
+        document.getElementById('render-total-desc').innerText = totalDescriptionNode;
+
+        var appPlayStoreLink = "https://play.google.com/store/apps/details?id=appinventor.ai_megabox329.namefortune";
+        appCommunicationString = "SAVE|" + appShareMessage + "\n" + appPlayStoreLink;
+
+        setTimeout(function() {
+            document.getElementById('report-view-area').scrollIntoView({ behavior: 'smooth' });
+        }, 350);
+    };
+
+    function transmitAffinityToApp() {
+        if (appCommunicationString !== "" && window.AppInventor) {
+            window.AppInventor.setWebViewString(appCommunicationString);
+        } else {
+            alert("연산이 제대로 끝나지 않았거나 스마트폰 앱 환경이 아닙니다.");
+        }
+    }
+//]]>
+</script>
