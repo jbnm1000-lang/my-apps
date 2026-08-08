@@ -1,0 +1,467 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 구글 블로그 기본 요소 완벽 차단 */
+.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"][aria-label="Search"], [role="button"][aria-label="Share"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0b1120 !important; 
+    width: 100% !important; min-height: 100vh !important;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f8fafc;
+    overflow-x: hidden;
+}
+
+.app-wrapper { max-width: 600px; margin: 0 auto; padding: 25px 20px 100px 20px; box-sizing: border-box; position: relative; z-index: 10; }
+
+/* 배경 별빛 파티클 애니메이션 */
+.particle { position: fixed; bottom: -20px; border-radius: 50%; pointer-events: none; opacity: 0; z-index: 1; animation: floatUp linear infinite; box-shadow: 0 0 8px rgba(255,255,255,0.4); }
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.7; }
+    80% { opacity: 0.4; }
+    100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* 결과창 축하 폭죽(Confetti) 효과 */
+.confetti { position: fixed; top: -10vh; width: 12px; height: 12px; z-index: 999; pointer-events: none; animation: fall linear forwards; border-radius: 2px; }
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* 텍스트 빛 번짐 효과 */
+@keyframes shine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.top-header { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; text-align: center; position: relative; z-index: 10; }
+.top-header h1 { font-size: 26px; font-weight: 900; color: #ffffff; margin: 0 0 15px 0; letter-spacing: -0.5px; word-break: keep-all; line-height: 1.4; }
+.top-header h1 span { 
+    background: linear-gradient(90deg, #facc15 0%, #ffffff 50%, #facc15 100%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    animation: shine 3s linear infinite;
+}
+.top-header p { font-size: 14.5px; color: #94a3b8; margin: 0; line-height: 1.6; word-break: keep-all; }
+
+/* 안내 박스 */
+.how-to-box { background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); padding: 25px 20px; border-radius: 16px; margin-bottom: 25px; }
+.how-to-title { text-align: center; font-size: 18px; font-weight: 900; color: #7dd3fc; margin-bottom: 20px; }
+.step-container { display: flex; flex-direction: column; gap: 15px; }
+.step-item { display: flex; align-items: flex-start; gap: 15px; background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 12px; }
+.step-icon { font-size: 24px; background: #334155; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; border-radius: 50%; flex-shrink: 0; }
+.step-text h4 { margin: 0 0 5px 0; font-size: 15.5px; color: #ffffff; font-weight: 800; }
+.step-text p { margin: 0; font-size: 13.5px; color: #94a3b8; line-height: 1.5; word-break: keep-all; }
+
+.warning-box { background-color: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 18px; border-radius: 12px; margin-bottom: 25px; position: relative; z-index: 10; }
+.warning-text { font-size: 13.5px; color: #bae6fd; margin: 0; line-height: 1.6; word-break: keep-all; font-weight: 500; text-align: center; }
+
+.game-status-board { background: #1e293b; padding: 15px 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.status-item { text-align: center; }
+.status-label { font-size: 12px; color: #94a3b8; font-weight: 700; margin-bottom: 4px; display: block; }
+.status-value { font-size: 22px; font-weight: 900; color: #facc15; }
+.status-value.time { color: #38bdf8; }
+
+.game-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 30px; perspective: 1000px; }
+
+/* 카드 3D 입체 효과 강화 */
+.card { width: 100%; aspect-ratio: 3/4; background-color: transparent; cursor: pointer; position: relative; border-radius: 12px; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1); }
+.card:active { transform: scale(0.92); } 
+.card.flipped { transform: rotateY(180deg) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.7); z-index: 5; } 
+.card.matched { visibility: hidden; opacity: 0; transition: visibility 0s 0.5s, opacity 0.5s; }
+
+.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 32px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.card-front { background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%); transform: rotateY(180deg); border: 2px solid #fef08a; } 
+.card-back { background: linear-gradient(135deg, #334155 0%, #0f172a 100%); border: 2px solid #475569; color: #f8fafc; font-weight: 900; font-size: 24px; } 
+
+/* 블루 버튼 맥박 효과 */
+@keyframes pulseBlue {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+/* 골드 버튼 맥박 효과 */
+@keyframes pulseGold {
+    0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+}
+
+.primary-btn { width: 100%; padding: 22px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #ffffff; font-size: 18px; font-weight: 900; border: none; border-radius: 16px; box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); cursor: pointer; margin-bottom: 20px; transition: transform 0.2s; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.primary-btn:active { transform: scale(0.97); }
+#start-btn { animation: pulseBlue 2s infinite; } 
+
+#result-section { display: none; text-align: center; }
+.result-card { background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 25px; animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes popUp {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.result-sub { font-size: 16px; font-weight: 800; color: #94a3b8; margin-bottom: 10px; }
+.result-age { font-size: 65px; font-weight: 900; color: #facc15; margin: 15px 0; text-shadow: 0 0 25px rgba(250, 204, 21, 0.5); }
+.result-desc { font-size: 15px; color: #cbd5e1; line-height: 1.6; word-break: keep-all; margin-bottom: 30px; padding: 18px; background: #0b1120; border-radius: 12px; border: 1px solid #334155; }
+.result-card .primary-btn { animation: pulseGold 2s infinite; } 
+
+.link-list-title { color: #ffffff; font-size: 17px; margin-bottom: 15px; text-align: left; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.link-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 18px 16px; margin-bottom: 12px; text-align: left; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14.5px; line-height: 1.4; background-color: #1e293b; color: #f8fafc; border: 1px solid #334155; transition: background 0.2s; box-sizing: border-box; }
+.link-btn:active { background-color: #334155; }
+.link-btn span.icon { font-size: 20px; background: #0b1120; padding: 8px; border-radius: 8px; }
+
+.custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(5px); }
+.custom-modal-box { background: #1e293b; width: 85%; max-width: 400px; padding: 30px 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.custom-modal-box h4 { margin: 0 0 15px 0; font-size: 22px; color: #facc15; font-weight: 900; }
+</style>
+
+<div class="app-wrapper">
+    <div id="game-section">
+        <div class="top-header">
+            <!--치매, 예방 등의 단어를 기억력 훈련, 두뇌 퍼즐로 100% 교체-->
+            <h1>스마트 두뇌 나이 측정<br /><span>매일 두뇌 퍼즐 트레이닝</span></h1><div><span><br /></span></div>
+            <p>잠자는 두뇌를 깨우는 하루 1분 습관!<br />내 두뇌 나이는 지금 몇 살일까요?</p>
+        </div>
+
+        <div class="how-to-box" id="guide-box">
+            <div class="how-to-title">🎯 두뇌 훈련 참여 방법</div>
+            <div class="step-container">
+                <div class="step-item">
+                    <div class="step-icon">👀</div>
+                    <div class="step-text">
+                        <h4>1단계: 집중해서 기억하기</h4>
+                        <p>시작 버튼을 누르면 16장의 그림 카드가 3초 동안 나타납니다. 위치를 빠르게 외워주세요.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">👆</div>
+                    <div class="step-text">
+                        <h4>2단계: 같은 그림 짝맞추기</h4>
+                        <p>카드가 뒤집히면, 기억력을 발휘하여 똑같은 카드 2장을 연속으로 찾아주세요.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">⏱️</div>
+                    <div class="step-text">
+                        <h4>3단계: 기록 단축하기</h4>
+                        <p>실수를 줄이고 빠르게 모든 짝을 맞출수록 나의 추정 두뇌 나이가 젊게 나옵니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--의료 앱 오해 방지를 위한 건전한 퍼즐 게임 안내 문구로 교체-->
+        <div class="warning-box" id="warning-box">
+            <p class="warning-text">※ 본 테스트는 두뇌 회전과 기억력 향상에 도움을 주는 건전한 무료 두뇌 퍼즐 도구입니다. 결제 유도나 과금이 전혀 없으며, 가벼운 두뇌 스트레칭용으로 즐겨주세요.</p>
+        </div>
+
+        <button class="primary-btn" id="start-btn" onclick="startGame()" type="button">🧠 집중! 테스트 시작하기</button>
+
+        <div class="game-status-board" id="status-board" style="display: none;">
+            <div class="status-item">
+                <span class="status-label">진행 시간</span>
+                <span class="status-value time" id="time-display">0초</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">뒤집은 횟수</span>
+                <span class="status-value" id="moves-display">0회</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">맞춘 카드</span>
+                <span class="status-value" id="matches-display">0/8</span>
+            </div>
+        </div>
+
+        <div class="game-board" id="card-board" style="display: none;">
+        </div>
+    </div>
+
+    <div id="result-section">
+        <div class="result-card">
+            <div class="result-sub">분석 완료! 회원님의 현재 추정 두뇌 나이는</div>
+            <div class="result-age" id="final-age">00세</div>
+            <div class="result-desc" id="final-desc">
+                결과 불러오는 중...
+            </div>
+            
+            <button class="primary-btn" onclick="resetAndRestart()" style="background: linear-gradient(135deg, rgb(250, 204, 21) 0%, rgb(234, 179, 8) 100%); color: #422006;" type="button">
+                🔄 기록 단축! 한 번 더 도전하기
+            </button>
+        </div>
+
+        <!--하단 링크 텍스트의 금지어 완벽 제거-->
+        <div class="link-list-title">📌 두뇌 회전 쌩쌩! 일상 속 기억력 꿀팁 모음</div>
+        <a class="link-btn" href="https://soonddo.blogspot.com/2026/03/10.html" target="_blank">
+            <span class="icon">📝</span> 
+            <div>나의 두뇌 회전 속도는? 일상 속 기억력 자가진단표 확인하기</div>
+        </a>
+        <a class="link-btn" href="https://soonddo.blogspot.com/2026/01/60-3.html" target="_blank">
+            <span class="icon">💡</span> 
+            <div>나이가 들어도 총명함을 유지하는 두뇌 스트레칭 습관 3가지</div>
+        </a>
+        <a class="link-btn" href="https://soonddo.blogspot.com/2025/09/blog-post_26.html" target="_blank">
+            <span class="icon">📱</span> 
+            <div>깜빡하는 습관 타파! 스마트폰 의존도 낮추고 디지털 디톡스로 두뇌 깨우기</div>
+        </a>
+    </div>
+</div>
+
+<div class="custom-modal-overlay" id="countdown-modal">
+    <div class="custom-modal-box">
+        <h4>기억력 집중!</h4>
+        <p id="countdown-text" style="color: white; font-size: 60px; font-weight: 900; margin-top: 10px;">3</p>
+        <p style="font-size: 15px; margin-top: 15px;">카드의 위치를 3초간 빠르게 외워주세요!</p>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var totalPairs = 8;
+    var emojis = ['🍎','🍌','🍇','🍉','🍓','🍑','🍒','🍍']; 
+    var cardsArray = [];
+    var firstCard = null;
+    var secondCard = null;
+    var lockBoard = false;
+    var matchedPairs = 0;
+    var movesCount = 0;
+    
+    var startTime = 0;
+    var timerInterval = null;
+    var timeElapsed = 0;
+
+    function createParticles() {
+        var colors = ['#facc15', '#00f0ff', '#ffffff']; 
+        for (var i = 0; i < 25; i++) {
+            var particle = document.createElement('div');
+            particle.className = 'particle';
+            var size = Math.random() * 5 + 2; 
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
+            particle.style.animationDelay = (Math.random() * 15) + 's';
+            document.body.appendChild(particle);
+        }
+    }
+
+    function fireConfetti() {
+        var colors = ['#ef4444', '#3b82f6', '#10b981', '#facc15', '#a855f7'];
+        for (var i = 0; i < 60; i++) {
+            var conf = document.createElement('div');
+            conf.className = 'confetti';
+            conf.style.left = Math.random() * 100 + 'vw';
+            conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            conf.style.animationDelay = (Math.random() * 0.5) + 's';
+            document.body.appendChild(conf);
+        }
+    }
+
+    function getQueryParam(name) {
+        var url = window.location.search.substring(1);
+        var vars = url.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === name) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    window.onload = function() {
+        createParticles();
+        
+        var calculatedAge = getQueryParam('age');
+        
+        if (calculatedAge !== null) {
+            document.getElementById('game-section').style.display = 'none';
+            document.getElementById('result-section').style.display = 'block';
+            
+            // 결과창 폭죽 효과 실행
+            fireConfetti();
+            
+            var finalAgeInt = parseInt(calculatedAge);
+            document.getElementById('final-age').innerText = finalAgeInt + "세";
+            
+            var descObj = document.getElementById('final-desc');
+            if (finalAgeInt <= 30) {
+                descObj.innerText = "놀라운 집중력입니다! 20~30대 수준의 매우 건강하고 쌩쌩한 두뇌 회전 속도를 소유하고 계십니다. 앞으로도 지금처럼 꾸준히 퍼즐을 즐겨주세요.";
+            } else if (finalAgeInt <= 50) {
+                descObj.innerText = "아주 훌륭합니다. 평균 이상의 기억력과 순발력을 유지하고 계십니다. 매일 훈련을 꾸준히 하시면 기록을 더 앞당길 수 있습니다.";
+            } else if (finalAgeInt <= 70) {
+                descObj.innerText = "자연스러운 나이입니다. 조금씩 깜박하는 일이 생길 수 있으니, 매일 1분씩 이 앱으로 두뇌를 자극하며 재미있게 기억력 훈련을 반복해 주세요.";
+            } else {
+                descObj.innerText = "두뇌가 살짝 지쳐있는 상태입니다. 편안하게 휴식을 취하시고, 매일 가벼운 퍼즐 게임으로 스트레스 없이 두뇌를 깨워주세요.";
+            }
+            
+            window.history.replaceState({}, document.title, window.location.pathname);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    function shuffleArray(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+
+    function startGame() {
+        document.getElementById('guide-box').style.display = 'none';
+        document.getElementById('warning-box').style.display = 'none';
+        document.getElementById('start-btn').style.display = 'none';
+        document.getElementById('status-board').style.display = 'flex';
+        
+        var board = document.getElementById('card-board');
+        board.innerHTML = '';
+        board.style.display = 'grid';
+        
+        cardsArray = emojis.concat(emojis); 
+        cardsArray = shuffleArray(cardsArray);
+        
+        for (var i = 0; i < cardsArray.length; i++) {
+            var cardDiv = document.createElement('div');
+            cardDiv.className = 'card flipped'; 
+            cardDiv.setAttribute('data-emoji', cardsArray[i]);
+            
+            cardDiv.innerHTML = 
+                '<div class="card-face card-front">' + cardsArray[i] + '</div>' +
+                '<div class="card-face card-back">?</div>';
+                
+            (function(cardElement) {
+                cardElement.onclick = function() {
+                    handleCardClick(cardElement);
+                };
+            })(cardDiv);
+            
+            board.appendChild(cardDiv);
+        }
+        
+        var modal = document.getElementById('countdown-modal');
+        var countText = document.getElementById('countdown-text');
+        modal.style.display = 'flex';
+        var timeLeft = 3;
+        
+        var countInterval = setInterval(function() {
+            timeLeft--;
+            if (timeLeft > 0) {
+                countText.innerText = timeLeft;
+            } else {
+                clearInterval(countInterval);
+                modal.style.display = 'none';
+                
+                var allCards = document.getElementsByClassName('card');
+                for (var j = 0; j < allCards.length; j++) {
+                    allCards[j].className = allCards[j].className.replace(' flipped', '');
+                }
+                
+                startTimer();
+            }
+        }, 1000);
+    }
+
+    function startTimer() {
+        startTime = new Date().getTime();
+        timerInterval = setInterval(function() {
+            var now = new Date().getTime();
+            timeElapsed = Math.floor((now - startTime) / 1000);
+            document.getElementById('time-display').innerText = timeElapsed + "초";
+        }, 1000);
+    }
+
+    function handleCardClick(clickedCard) {
+        if (lockBoard) return;
+        if (clickedCard === firstCard) return;
+        if (clickedCard.className.indexOf('matched') !== -1) return;
+        
+        clickedCard.className += ' flipped';
+        
+        if (!firstCard) {
+            firstCard = clickedCard;
+            return;
+        }
+        
+        secondCard = clickedCard;
+        movesCount++;
+        document.getElementById('moves-display').innerText = movesCount + "회";
+        
+        checkForMatch();
+    }
+
+    function checkForMatch() {
+        var isMatch = firstCard.getAttribute('data-emoji') === secondCard.getAttribute('data-emoji');
+        
+        if (isMatch) {
+            disableCards();
+        } else {
+            unflipCards();
+        }
+    }
+
+    function disableCards() {
+        matchedPairs++;
+        document.getElementById('matches-display').innerText = matchedPairs + "/" + totalPairs;
+        
+        setTimeout(function() {
+            firstCard.className += ' matched';
+            secondCard.className += ' matched';
+            resetBoard();
+            
+            if (matchedPairs === totalPairs) {
+                endGame();
+            }
+        }, 500);
+    }
+
+    function unflipCards() {
+        lockBoard = true; 
+        
+        setTimeout(function() {
+            firstCard.className = firstCard.className.replace(' flipped', '');
+            secondCard.className = secondCard.className.replace(' flipped', '');
+            resetBoard();
+        }, 800);
+    }
+
+    function resetBoard() {
+        lockBoard = false;
+        firstCard = null;
+        secondCard = null;
+    }
+
+    function endGame() {
+        clearInterval(timerInterval);
+        
+        var baseAge = 20;
+        var extraMoves = movesCount - totalPairs; 
+        if (extraMoves < 0) extraMoves = 0;
+        
+        var timePenalty = Math.floor(timeElapsed / 1.5); 
+        var movesPenalty = extraMoves * 3; 
+        
+        var finalAge = baseAge + timePenalty + movesPenalty;
+        
+        if (finalAge < 20) finalAge = 20;
+        if (finalAge > 99) finalAge = 99;
+        
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseUrl + "?age=" + finalAge;
+    }
+
+    function resetAndRestart() {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseUrl;
+    }
+//]]>
+</script>
