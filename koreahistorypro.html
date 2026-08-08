@@ -1720,7 +1720,7 @@ function quickSearch(keyword) {
 // URL 파라미터 변경을 통한 페이지 새로고침 (전면광고 유도)
 function triggerUrlReload(query, era) {
     const baseUrl = window.location.href.split('?')[0];
-    const newUrl = baseUrl + "?action=search&q=" + encodeURIComponent(query) + "&era=" + encodeURIComponent(era) + "&t=" + new Date().getTime();
+    const newUrl = baseUrl + "?m=1&action=search&q=" + encodeURIComponent(query) + "&era=" + encodeURIComponent(era) + "&t=" + new Date().getTime();
     window.location.href = newUrl;
 }
 </script>
