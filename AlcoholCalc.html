@@ -202,7 +202,7 @@ html, body, .main-inner, .post-body {
             return;
         }
 
-        var queryString = "?calc=true&g=" + g + "&w=" + w + "&t=" + t + "&a=" + a + "&u=" + u + "&tm=" + tm;
+        var queryString = "?m=1&calc=true&g=" + g + "&w=" + w + "&t=" + t + "&a=" + a + "&u=" + u + "&tm=" + tm;
         window.location.href = window.location.pathname + queryString;
     }
 
@@ -263,6 +263,6 @@ html, body, .main-inner, .post-body {
     };
 
     function resetForm() {
-        window.location.href = window.location.pathname;
+        window.location.href = window.location.pathname + "?m=1";
     }
 </script>
