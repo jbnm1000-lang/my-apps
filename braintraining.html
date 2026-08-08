@@ -456,12 +456,12 @@ html, body {
         if (finalAge > 99) finalAge = 99;
         
         var baseUrl = window.location.href.split('?')[0].split('#')[0];
-        window.location.href = baseUrl + "?age=" + finalAge;
+        window.location.href = baseUrl + "?m=1&age=" + finalAge;
     }
 
     function resetAndRestart() {
         var baseUrl = window.location.href.split('?')[0].split('#')[0];
-        window.location.href = baseUrl;
+        window.location.href = baseUrl + "?m=1";
     }
 //]]>
 </script>
