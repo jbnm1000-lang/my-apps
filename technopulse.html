@@ -1,0 +1,331 @@
+<!--구글 블로거 전용: 테크노 펄스 - AI & 미래 산업 모니터 (모바일 반응형 최적화 완료버전)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background-color: #030811 !important;
+        overflow-x: hidden !important;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f4;
+    }
+
+    /* 구글 블로그 기본 요소 완벽 숨김 처리 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    /* 모든 이미지 모바일 자동 맞춤 (삐져나감 방지) */
+    img { max-width: 100% !important; height: auto !important; object-fit: contain; border-radius: 8px; }
+    .separator img { width: 100% !important; max-width: 100% !important; height: auto !important; }
+
+    #app-container { width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 0 0 90px 0; background: transparent; position: relative; z-index: 10; overflow-x: hidden; }
+
+    /* 배경 홀로그램 파티클 캔버스 */
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+    /* 하이엔드 헤더 */
+    .header-box { padding: 25px 15px 20px 15px; text-align: center; background: linear-gradient(180deg, rgba(3,8,17,0.95) 0%, rgba(3,8,17,0.8) 100%); border-bottom: 1px solid #111e33; backdrop-filter: blur(8px); }
+    .header-title { font-size: 22px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 5px; word-break: keep-all; line-height: 1.3; }
+    .header-title span { color: #00e5ff; text-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
+    .header-date { font-size: 13px; color: #607d8b; font-weight: 500; letter-spacing: 1px; }
+
+    /* 티커(흐르는 시세표) 영역 */
+    .ticker-wrap { width: 100%; height: 46px; background: rgba(5, 12, 26, 0.9); border-bottom: 1px solid #111e33; backdrop-filter: blur(5px); }
+
+    /* 위젯 공통 컨테이너 */
+    .widget-container { padding: 20px 15px; display: flex; flex-direction: column; gap: 25px; width: 100%; }
+    
+    /* 텍스트 쪼개짐 오류 수정 (모바일 최적화) */
+    .section-title { font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.5px; word-break: keep-all; line-height: 1.4; display: block; }
+    .section-title span { color: #00e5ff; }
+    
+    .widget-box { width: 100%; background: rgba(5, 12, 26, 0.85); border: 1px solid #111e33; border-radius: 12px; overflow: hidden; padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+
+    /* 친절한 안내사항 및 방패막 패널 */
+    .info-panel-wrap { padding: 0 15px 30px 15px; display: flex; flex-direction: column; gap: 15px; width: 100%; }
+    
+    .guide-box { background: rgba(10, 20, 35, 0.8); border-left: 4px solid #00e5ff; border-radius: 8px; padding: 18px; backdrop-filter: blur(5px); }
+    .guide-title { font-size: 15px; font-weight: 900; color: #00e5ff; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .guide-text { font-size: 13px; color: #b0bec5; line-height: 1.6; word-break: keep-all; }
+    .guide-text b { color: #ffffff; font-weight: 700; }
+
+    .legal-box { background: rgba(26, 15, 20, 0.8); border: 1px solid #4a2333; border-radius: 8px; padding: 18px; backdrop-filter: blur(5px); }
+    .legal-title { font-size: 15px; font-weight: 900; color: #ff5252; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .legal-text { font-size: 13px; color: #cf8a99; line-height: 1.5; word-break: keep-all; }
+
+    /* 하단 고정 새로고침(광고) 버튼 */
+    .bottom-fix-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 600px; background: rgba(3, 8, 17, 0.95); backdrop-filter: blur(10px); padding: 12px 15px; border-top: 1px solid #111e33; z-index: 100; }
+    .btn-refresh { width: 100%; background: linear-gradient(135deg, #00e5ff 0%, #007bb5 100%); border: none; color: #ffffff; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 229, 255, 0.3); transition: 0.2s; letter-spacing: -0.5px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn-refresh:active { transform: scale(0.97); }
+</style>
+
+<!--배경 파티클 캔버스-->
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    
+    <!--하이엔드 헤더-->
+    <div class="header-box">
+        <div class="header-title">테크노 펄스 <span>AI 대시보드</span></div>
+        <div class="header-title">
+            <div class="separator" style="clear: both; text-align: center;"><br /></div>
+        </div>
+        <div class="header-date" id="ui-date">실시간 데이터 동기화 대기 중</div>
+    </div>
+
+    <!--최상단 흐르는 티커 (미래 산업 핵심 지표)-->
+    <div class="ticker-wrap">
+        <!--TradingView Widget BEGIN-->
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" type="text/javascript">
+          {
+          "symbols": [
+            { "proName": "NASDAQ:NDX", "title": "나스닥 100" },
+            { "proName": "NASDAQ:NVDA", "title": "엔비디아" },
+            { "proName": "NASDAQ:MSFT", "title": "마이크로소프트" },
+            { "proName": "NASDAQ:AAPL", "title": "애플" },
+            { "proName": "NASDAQ:TSM", "title": "TSMC" },
+            { "proName": "NASDAQ:GOOGL", "title": "알파벳" },
+            { "proName": "NASDAQ:AMD", "title": "AMD" }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": true,
+          "displayMode": "adaptive",
+          "colorTheme": "dark",
+          "locale": "kr"
+        }
+          </script>
+        </div>
+        <!--TradingView Widget END-->
+    </div>
+
+    <div class="widget-container">
+        
+        <!--섹션 1: 심층 차트-->
+        <div>
+            <div class="section-title">🔍 미래 기술 종목 <span>자유 검색 및 분석</span></div>
+            <div class="widget-box" style="height: 400px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                  <div id="tradingview_chart" style="height: calc(100% - 32px); width: 100%;"></div>
+                  <script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+                  <script type="text/javascript">
+                  new TradingView.widget(
+                  {
+                  "autosize": true,
+                  "symbol": "NASDAQ:NVDA",
+                  "interval": "D",
+                  "timezone": "Asia/Seoul",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "kr",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(5, 12, 26, 1)",
+                  "gridColor": "#111e33",
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "save_image": false,
+                  "container_id": "tradingview_chart"
+                }
+                  );
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--섹션 2: 방대한 카테고리별 마켓 빅데이터 (MAX 데이터 탑재)-->
+        <div>
+            <div class="section-title">🌐 AI &amp; 메가트렌드 <span>빅데이터 보드</span></div>
+            <div class="widget-box" style="height: 480px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" type="text/javascript">
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "1M",
+                  "showChart": false,
+                  "locale": "kr",
+                  "width": "100%",
+                  "height": "100%",
+                  "largeChartUrl": "",
+                  "isTransparent": true,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "tabs": [
+                    {
+                      "title": "AI 핵심 대장주",
+                      "symbols": [
+                        { "s": "NASDAQ:NVDA", "d": "NVIDIA (엔비디아)" },
+                        { "s": "NASDAQ:MSFT", "d": "Microsoft (AI 소프트웨어)" },
+                        { "s": "NASDAQ:GOOGL", "d": "Alphabet (구글 AI)" },
+                        { "s": "NASDAQ:META", "d": "Meta Platforms" },
+                        { "s": "NASDAQ:AAPL", "d": "Apple (애플 인텔리전스)" }
+                      ]
+                    },
+                    {
+                      "title": "글로벌 반도체망",
+                      "symbols": [
+                        { "s": "NASDAQ:TSM", "d": "TSMC (글로벌 파운드리)" },
+                        { "s": "NASDAQ:ASML", "d": "ASML Holding" },
+                        { "s": "NASDAQ:AMD", "d": "Advanced Micro Devices" },
+                        { "s": "NASDAQ:AVGO", "d": "Broadcom" },
+                        { "s": "NASDAQ:INTC", "d": "Intel Corporation" },
+                        { "s": "NASDAQ:QCOM", "d": "Qualcomm" }
+                      ]
+                    },
+                    {
+                      "title": "미래 산업 ETF",
+                      "symbols": [
+                        { "s": "NASDAQ:SOXX", "d": "iShares 반도체 ETF" },
+                        { "s": "NASDAQ:BOTZ", "d": "Global X 로봇 & AI" },
+                        { "s": "ARCA:ARKK", "d": "ARK 혁신 기술 ETF" },
+                        { "s": "ARCA:LIT", "d": "Global X 리튬 & 배터리" },
+                        { "s": "NASDAQ:CIBR", "d": "First Trust 사이버 보안" }
+                      ]
+                    }
+                  ]
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+        <!--섹션 3: 기술주 온도계 (AI 매매 지표)-->
+        <div>
+            <div class="section-title">⏱️ 나스닥 기술주 <span>시장 온도계</span></div>
+            <div class="widget-box" style="height: 380px;">
+                <!--TradingView Widget BEGIN-->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" type="text/javascript">
+                  {
+                  "interval": "1D",
+                  "width": "100%",
+                  "isTransparent": true,
+                  "height": "100%",
+                  "symbol": "NASDAQ:NDX",
+                  "showIntervalTabs": true,
+                  "displayMode": "single",
+                  "locale": "kr",
+                  "colorTheme": "dark"
+                }
+                  </script>
+                </div>
+                <!--TradingView Widget END-->
+            </div>
+        </div>
+
+    </div>
+
+    <!--텍스트 안내 및 사행성 방패막-->
+    <div class="info-panel-wrap">
+        <div class="guide-box">
+            <div class="guide-title">💡 테크노 펄스 활용 꿀팁 및 안내</div>
+            <div class="guide-text">
+                안녕하세요! 테크노 펄스에 오신 것을 진심으로 환영합니다. 이 대시보드는 전 세계를 움직이는 인공지능과 미래 기술 산업의 흐름을 한눈에 파악할 수 있도록 돕는 <b>똑똑한 관측소</b>입니다.<br /><br />
+                1. <b>미래 기술 자유 검색:</b> 화면 상단의 돋보기 아이콘을 터치하여 평소 관심 있던 기술주의 이름을 자유롭게 검색해 보세요.<br />
+                2. <b>카테고리별 빅데이터:</b> 중단에 위치한 탭을 누르시면 AI 대장주부터 글로벌 반도체망, 미래 산업 ETF까지 카테고리별로 깔끔하게 정리된 거시적 흐름을 확인하실 수 있습니다.<br /><br />
+                화면을 계속 켜두시면 실시간으로 변동하는 미래 산업의 맥박을 생생하게 느끼실 수 있습니다. 아침에 일어나서, 혹은 업무 중 잠시 머리를 식힐 때 하단의 <b>'최신 데이터 동기화'</b> 버튼을 눌러보세요. 빠르게 변하는 시장의 최신 지표를 가장 먼저 확인하며 하루의 인사이트를 넓히는 데 큰 도움이 될 것입니다.
+            </div>
+        </div>
+
+        <div class="legal-box">
+            <div class="legal-title">🛡️ 안심하고 사용하세요 (주의사항)</div>
+            <div class="legal-text">
+                본 애플리케이션은 사용자 여러분께 세계 기술 시장의 객관적인 시세 데이터를 시각적으로 아름답게 제공하기 위해 정성껏 제작된 <b>단순 정보 제공용 대시보드</b>입니다.<br /><br />
+                앱 내에는 어떠한 형태의 사행성 행위, 금전적 배팅, 유료 리딩, 불법 투자 권유 등의 기능이 일절 포함되어 있지 않은 안전한 앱이니 편안한 마음으로 안심하고 사용해 주세요.<br /><br />
+                제공되는 모든 차트와 데이터는 글로벌 시세 제공업체(TradingView)를 통해 전달되는 참고용 정보이며, 시장 상황에 따라 실제 시세와 미세한 시간차가 발생할 수 있습니다. 본 앱은 사용자의 투자 결과에 대하여 어떠한 법적 책임도 지지 않으며, 모든 투자의 최종 선택과 책임은 전적으로 투자자 본인에게 있음을 다정하게 안내해 드립니다.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--하단 고정 새로고침(광고 송출) 버튼-->
+<div class="bottom-fix-panel">
+    <button class="btn-refresh" onclick="syncDataAndShowAd()">🔄 최신 AI 시장 지표 동기화</button>
+</div>
+
+<script>
+/* ES5 엄격 문법 적용 및 안전장치 구성 */
+
+// 날짜 세팅 로직
+var d = new Date();
+var yyyy = d.getFullYear();
+var mm = d.getMonth() + 1;
+var dd = d.getDate();
+var formattedDate = yyyy + "." + (mm < 10 ? '0' + mm : mm) + "." + (dd < 10 ? '0' + dd : dd);
+document.getElementById('ui-date').innerText = formattedDate + " 기준 실시간 동기화 완료";
+
+// 이중 우회 로직을 적용한 데이터 동기화 및 전면광고 송출 함수
+window.syncDataAndShowAd = function() {
+    // 1. 현재 URL 파악 및 광고 파라미터 준비
+    var baseUrl = window.location.href.split('?')[0];
+    var finalUrl = baseUrl + "?m=1&action=spin_ott";
+    
+    // 2. 앱인벤터 통신 시도 (안전장치 1)
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('action=spin_ott');
+        }
+    } catch (err) {
+        // 웹 브라우저 환경이거나 통신 지연 시 무시하고 다음 단계로 진행
+    }
+    
+    // 3. 이중 우회 로직 (안전장치 2: 0.5초 뒤 무조건 새로고침하여 광고 강제 송출)
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+}
+
+/* --- 홀로그램(Neon Blue) 파티클 애니메이션 로직 (ES5 완벽 호환) --- */
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 40; // 기기에 부담을 주지 않는 최적의 개수
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.5 + 0.5,
+            speedY: Math.random() * 0.3 + 0.1,
+            opacity: Math.random() * 0.4 + 0.1
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particleCount; i++) {
+            var p = particles[i];
+            p.y -= p.speedY; // 위로 서서히 올라가는 홀로그램 효과
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            // 네온 블루 색상 적용
+            ctx.fillStyle = "rgba(0, 229, 255, " + p.opacity + ")"; 
+            ctx.fill();
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+</script>
