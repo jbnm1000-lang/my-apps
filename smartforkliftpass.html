@@ -191,7 +191,7 @@ function initParticles() {
 /* ========================================================= */
 /* =================== 핵심 기출 150제 풀 ===================== */
 /* ========================================================= */
-// [쉼표 누락 오류 완벽 해결]
+// [쉼표 누락 오류 100% 검수 완료]
 var quizDataPool = [
     { q: "디젤기관에서 연료가 분사되는 시기는 언제인가?", a: ["흡기행정 초", "압축행정 말", "폭발행정 초", "배기행정 말"], c: 1, e: "디젤기관은 공기를 압축하여 고온이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다." },
     { q: "기관의 냉각수 온도가 비정상적으로 높게 올라갈 때의 원인으로 틀린 것은?", a: ["수온 조절기의 고장", "물 펌프의 작동 불량", "냉각수의 부족", "팬 벨트의 장력 과다"], c: 3, e: "팬 벨트의 장력이 과다하다고 온도가 상승하지는 않습니다. 장력이 헐거울 때 펌프가 돌지 않아 온도가 상승합니다." },
@@ -218,7 +218,7 @@ var quizDataPool = [
     { q: "유압 펌프에서 소음이 발생하는 원인과 가장 거리가 먼 것은?", a: ["공기 혼입", "회전속도 과다", "작동유 점도 과소", "축 중심 어긋남"], c: 2, e: "작동유의 점도가 너무 '높을' 때 끈적임 때문에 흡입 저항이 커져 공동현상(소음)이 발생하기 쉽습니다." },
     { q: "유압유가 갖추어야 할 조건으로 옳은 것은?", a: ["인화점이 낮을 것", "비압축성일 것", "점도 지수가 낮을 것", "응고점이 높을 것"], c: 1, e: "유압유는 동력을 확실하게 전달하기 위해 압력을 가해도 부피가 쉽게 변하지 않는 비압축성 유체여야 합니다." },
     { q: "유압 회로에서 작동유의 압력이 설정치 이상으로 올라가는 것을 방지하는 밸브는?", a: ["체크 밸브", "릴리프 밸브", "감압 밸브", "유량 제어 밸브"], c: 1, e: "릴리프 밸브(안전 밸브)는 회로 내 최고 압력을 설정하고 한계를 넘으면 오일을 배출하여 기기를 보호합니다." },
-    { q: "유압 기기에서 '캐비테이션(공동현상)'을 방지하기 위한 조치로 틀린 조치는?", a: ["오일 온도 상승 방지", "흡입 관로 좁게 하기", "적절한 점도 유지", "규정량의 오일 보충"], c: 1, e: "흡입 관로를 좁게 하면 흡입 저항이 더욱 커져 캐비테이션이 더 쉽게 발생합니다." },
+    { q: "유압 기기에서 '캐비테이션(공동현상)'을 방지하기 위한 조치로 틀린 것은?", a: ["오일 온도 상승 방지", "흡입 관로 좁게 하기", "적절한 점도 유지", "규정량의 오일 보충"], c: 1, e: "흡입 관로를 좁게 하면 흡입 저항이 더욱 커져 캐비테이션이 더 쉽게 발생합니다." },
     { q: "기어 펌프의 특징으로 알맞은 것은?", a: ["구조가 복잡하다", "고압 대용량에 적합하다", "구조가 간단하고 값이 싸다", "효율이 가장 높다"], c: 2, e: "기어 펌프는 구조가 단순하여 정비가 쉽고 가격이 저렴하지만, 플런저 펌프 등에 비해 효율이나 압력은 다소 낮습니다." },
     { q: "오일 탱크의 부속 장치가 아닌 것은?", a: ["스트레이너", "배플 플레이트", "유면계", "언로더 밸브"], c: 3, e: "언로더 밸브(무부하 밸브)는 압력 제어 밸브의 일종으로 오일 탱크 자체의 구성품은 아닙니다." },
     { q: "유압 액추에이터에 해당하지 않는 것은?", a: ["유압 실린더", "유압 모터", "요동 모터", "유압 펌프"], c: 3, e: "유압 펌프는 유압 에너지를 발생시키는 발생 장치이며, 액추에이터(구동 장치)가 아닙니다." },
@@ -367,7 +367,7 @@ var manualRecordInput = document.getElementById('manual-record-input');
 
 // 학습 기록 불러오기 및 화면에 그리기
 function loadRecords() {
-    var rawRecords = localStorage.getItem('smart_forklift_records_v3');
+    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
     var records = rawRecords ? JSON.parse(rawRecords) : [];
     recordListContainer.innerHTML = '';
 
@@ -398,7 +398,7 @@ function loadRecords() {
 
 // 자동 기록 추가 (모의고사 20제 완료 시)
 function addAutoRecord(score) {
-    var rawRecords = localStorage.getItem('smart_forklift_records_v3');
+    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
     var records = rawRecords ? JSON.parse(rawRecords) : [];
     
     var tryCount = 1;
@@ -415,7 +415,7 @@ function addAutoRecord(score) {
         date: dateString
     });
     
-    localStorage.setItem('smart_forklift_records_v3', JSON.stringify(records));
+    localStorage.setItem('smart_forklift_records_v4', JSON.stringify(records));
     loadRecords();
 }
 
@@ -427,7 +427,7 @@ function addManualRecord() {
         return;
     }
 
-    var rawRecords = localStorage.getItem('smart_forklift_records_v3');
+    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
     var records = rawRecords ? JSON.parse(rawRecords) : [];
     
     var now = new Date();
@@ -439,7 +439,7 @@ function addManualRecord() {
         date: dateString
     });
 
-    localStorage.setItem('smart_forklift_records_v3', JSON.stringify(records));
+    localStorage.setItem('smart_forklift_records_v4', JSON.stringify(records));
     manualRecordInput.value = "";
     loadRecords();
 }
