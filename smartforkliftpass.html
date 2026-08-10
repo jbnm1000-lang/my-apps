@@ -102,8 +102,8 @@ html, body {
         <div class="record-list" id="record-list-container"></div>
         <div class="record-input-group">
             <input type="text" id="manual-record-input" class="record-input" placeholder="오늘의 다짐이나 목표를 입력하세요.">
-            <!-- 브릿지 오류 방어: window 명시 -->
-            <button class="btn-record" onclick="window.addManualRecord()">기록 남기기</button>
+            <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
+            <button class="btn-record" id="btn-manual-record">기록 남기기</button>
         </div>
     </div>
 
@@ -120,21 +120,21 @@ html, body {
             <div class="explanation-box" id="explanation">해설: </div>
         </div>
 
-        <!-- 브릿지 오류 방어: window 명시 -->
-        <button class="btn-next" id="btn-next" onclick="window.nextQuestion()">다음 문제로 넘어가기</button>
+        <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
+        <button class="btn-next" id="btn-next">다음 문제로 넘어가기</button>
     </div>
 
     <div class="result-card" id="result-section">
         <div class="q-number" style="margin-bottom:20px;">모의고사 종료</div>
         <div class="result-score" id="final-score">0점</div>
         <div class="result-msg" id="final-msg">결과 확인 중...</div>
-        <!-- 브릿지 오류 방어: window 명시 -->
-        <button class="btn-next" style="display:block; margin-bottom:15px;" onclick="window.startNewTest()">새로운 문제 다시 풀기</button>
+        <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
+        <button class="btn-next" id="btn-restart" style="display:block; margin-bottom:15px;">새로운 문제 다시 풀기</button>
     </div>
 </div>
 
 <script>
-// 모든 안드로이드 웹뷰에서 통하는 안전한 URL 파라미터 추출 함수 (URLSearchParams 오류 원천 차단)
+// --- 모바일 WebView 특화: 안전한 파라미터 및 스토리지 처리 ---
 function getQueryParam(name) {
     var url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -150,6 +150,9 @@ function safeGetItem(key) {
 }
 function safeSetItem(key, value) {
     try { localStorage.setItem(key, value); } catch (e) { console.log("Storage Error"); }
+}
+function safeRemoveItem(key) {
+    try { localStorage.removeItem(key); } catch (e) {}
 }
 
 function initParticles() {
@@ -184,6 +187,7 @@ function initParticles() {
     } catch(e) {}
 }
 
+// 문제 데이터베이스 150제
 var quizDataPool = [
     { q: "디젤기관에서 연료가 분사되는 시기는 언제인가?", a: ["흡기행정 초", "압축행정 말", "폭발행정 초", "배기행정 말"], c: 1, e: "디젤기관은 공기를 압축하여 고온이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다." },
     { q: "기관의 냉각수 온도가 비정상적으로 높게 올라갈 때의 원인으로 틀린 것은?", a: ["수온 조절기의 고장", "물 펌프의 작동 불량", "냉각수의 부족", "팬 벨트의 장력 과다"], c: 3, e: "팬 벨트의 장력이 과다하다고 온도가 상승하지는 않습니다. 장력이 헐거울 때 펌프가 돌지 않아 온도가 상승합니다." },
@@ -337,88 +341,6 @@ var quizDataPool = [
     { q: "안전표지 중 노란색 바탕에 검은색 삼각형 테두리를 가진 표지의 의미는?", a: ["출입 금지", "안전모 착용 지시", "낙하물 경고", "비상구 안내"], c: 2, e: "노란색 바탕의 삼각형 표지는 위험 요소를 미리 알려주는 '경고 표지'입니다." }
 ];
 
-// --- 윈도우 스코프 함수 선언 ---
-window.addManualRecord = function() {
-    var inputEl = document.getElementById('manual-record-input');
-    if (!inputEl) return;
-    
-    var memoText = inputEl.value.trim();
-    if (!memoText) {
-        try { alert("기록할 내용을 먼저 입력해 주세요."); } catch(e) {}
-        return;
-    }
-
-    try {
-        var rawRecords = safeGetItem('smart_forklift_records_v5');
-        var records = rawRecords ? JSON.parse(rawRecords) : [];
-        var now = new Date();
-        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
-
-        records.push({ type: 'manual', text: "✏️ " + memoText, date: dateString });
-        safeSetItem('smart_forklift_records_v5', JSON.stringify(records));
-        
-        inputEl.value = ""; 
-        loadRecords();      
-    } catch(e) {
-        document.getElementById('q-text').innerHTML = "<span class='error-text'>저장 에러: " + e.message + "</span>";
-    }
-};
-
-window.nextQuestion = function() {
-    currentIndex++;
-    if (currentIndex < selectedQuiz.length) {
-        loadQuestion();
-    } else {
-        window.showResult();
-    }
-};
-
-window.showResult = function() {
-    var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
-    
-    try {
-        var rawRecords = safeGetItem('smart_forklift_records_v5');
-        var records = rawRecords ? JSON.parse(rawRecords) : [];
-        var tryCount = 1;
-        for(var i=0; i<records.length; i++){ if(records[i].type === 'auto') tryCount++; }
-
-        var now = new Date();
-        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
-        records.push({ type: 'auto', text: "🏆 " + tryCount + "회차 모의고사 완료 - " + finalScore + "점", date: dateString });
-        safeSetItem('smart_forklift_records_v5', JSON.stringify(records));
-    } catch(e) {}
-
-    var randomToken = Math.floor(Math.random() * 999999) + 1;
-    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
-    var finalTargetUrl = cleanUrl + "?m=1&action=exam_finished&score=" + finalScore + "&token=" + randomToken;
-
-    try {
-        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
-            window.AppInventor.setWebViewString("exam_finished");
-        }
-    } catch(e) {}
-
-    setTimeout(function() {
-        window.location.href = finalTargetUrl;
-    }, 500);
-};
-
-window.startNewTest = function() {
-    var randomToken = Math.floor(Math.random() * 999999) + 1;
-    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
-    var finalTargetUrl = cleanUrl + "?m=1&action=restart_test&token=" + randomToken;
-
-    try {
-        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
-            window.AppInventor.setWebViewString("restart_test");
-        }
-    } catch(e) {}
-
-    setTimeout(function() {
-        window.location.href = finalTargetUrl;
-    }, 500);
-};
-
 var currentIndex = 0;
 var correctCount = 0;
 var answered = false;
@@ -429,7 +351,7 @@ function loadRecords() {
         var recordListContainer = document.getElementById('record-list-container');
         if(!recordListContainer) return;
 
-        var rawRecords = safeGetItem('smart_forklift_records_v5');
+        var rawRecords = safeGetItem('smart_forklift_records_v6');
         var records = rawRecords ? JSON.parse(rawRecords) : [];
         recordListContainer.innerHTML = '';
 
@@ -442,11 +364,9 @@ function loadRecords() {
             var rec = records[i];
             var itemDiv = document.createElement('div');
             itemDiv.className = 'record-item ' + rec.type;
-            
             var textDiv = document.createElement('div');
             textDiv.style.fontWeight = '700';
             textDiv.innerHTML = rec.text;
-
             var dateDiv = document.createElement('div');
             dateDiv.className = 'record-date';
             dateDiv.innerText = rec.date;
@@ -455,7 +375,7 @@ function loadRecords() {
             itemDiv.appendChild(dateDiv);
             recordListContainer.appendChild(itemDiv);
         }
-    } catch(e) { console.log("loadRecords Error"); }
+    } catch(e) {}
 }
 
 function loadQuestion() {
@@ -504,12 +424,40 @@ function loadQuestion() {
                     nxtBtn.style.display = 'block';
                 };
             })(i);
-            
             optionsContainer.appendChild(btn);
         }
-    } catch(e) {
-        document.getElementById('q-text').innerHTML = "<span class='error-text'>문제 로딩 에러: " + e.message + "</span>";
-    }
+    } catch(e) {}
+}
+
+function showResult() {
+    var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
+    
+    // 점수 기록 저장
+    try {
+        var rawRecords = safeGetItem('smart_forklift_records_v6');
+        var records = rawRecords ? JSON.parse(rawRecords) : [];
+        var tryCount = 1;
+        for(var i=0; i<records.length; i++){ if(records[i].type === 'auto') tryCount++; }
+        var now = new Date();
+        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
+        records.push({ type: 'auto', text: "🏆 " + tryCount + "회차 모의고사 완료 - " + finalScore + "점", date: dateString });
+        safeSetItem('smart_forklift_records_v6', JSON.stringify(records));
+    } catch(e) {}
+
+    // 모의고사 종료 시에만 전면광고 1회 호출
+    var randomToken = Math.floor(Math.random() * 999999) + 1;
+    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
+    var finalTargetUrl = cleanUrl + "?action=exam_finished&score=" + finalScore + "&token=" + randomToken;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("exam_finished");
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.href = finalTargetUrl;
+    }, 500);
 }
 
 function restoreResultScreen(score) {
@@ -526,33 +474,74 @@ function restoreResultScreen(score) {
 }
 
 window.onload = function() {
-    try {
-        initParticles();
-        loadRecords(); 
-        
-        var action = getQueryParam('action');
-        var score = getQueryParam('score');
+    initParticles();
+    
+    // 버튼 강제 연결 (먹통 현상 완벽 방지)
+    var btnManual = document.getElementById('btn-manual-record');
+    if(btnManual) {
+        btnManual.addEventListener('click', function() {
+            var inputEl = document.getElementById('manual-record-input');
+            if (!inputEl) return;
+            var memoText = inputEl.value.trim();
+            if (!memoText) {
+                alert("기록할 내용을 먼저 입력해 주세요.");
+                return;
+            }
+            try {
+                var rawRecords = safeGetItem('smart_forklift_records_v6');
+                var records = rawRecords ? JSON.parse(rawRecords) : [];
+                var now = new Date();
+                var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
 
-        if (action === 'exam_finished' && score !== null) {
-            restoreResultScreen(score);
-        } else {
-            if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
-                var poolCopy = quizDataPool.slice();
-                for (var i = poolCopy.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var temp = poolCopy[i];
-                    poolCopy[i] = poolCopy[j];
-                    poolCopy[j] = temp;
-                }
-                selectedQuiz = poolCopy.slice(0, 20);
+                records.push({ type: 'manual', text: "✏️ " + memoText, date: dateString });
+                safeSetItem('smart_forklift_records_v6', JSON.stringify(records));
+                
+                inputEl.value = ""; 
+                loadRecords();      
+            } catch(e) {}
+        });
+    }
+
+    var btnNext = document.getElementById('btn-next');
+    if(btnNext) {
+        btnNext.addEventListener('click', function() {
+            currentIndex++;
+            if (currentIndex < selectedQuiz.length) {
                 loadQuestion();
             } else {
-                document.getElementById('q-text').innerHTML = "<span class='error-text'>데이터 오류: 기출문제가 없습니다.</span>";
+                showResult();
             }
+        });
+    }
+
+    var btnRestart = document.getElementById('btn-restart');
+    if(btnRestart) {
+        btnRestart.addEventListener('click', function() {
+            // 다시 풀기 시 광고 호출 삭제 (무조건 1초 뒤 새 문제 시작)
+            window.location.href = window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime();
+        });
+    }
+
+    loadRecords(); 
+    
+    // URL에서 점수를 읽어와 결과 화면 유지
+    var action = getQueryParam('action');
+    var score = getQueryParam('score');
+
+    if (action === 'exam_finished' && score !== null) {
+        restoreResultScreen(score);
+    } else {
+        if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
+            var poolCopy = quizDataPool.slice();
+            for (var i = poolCopy.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = poolCopy[i];
+                poolCopy[i] = poolCopy[j];
+                poolCopy[j] = temp;
+            }
+            selectedQuiz = poolCopy.slice(0, 20);
+            loadQuestion();
         }
-    } catch (e) {
-        var qText = document.getElementById('q-text');
-        if(qText) qText.innerHTML = "<span class='error-text'>앱 초기화 에러: " + e.message + "</span>";
     }
 };
 </script>
