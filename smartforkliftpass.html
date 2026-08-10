@@ -2,7 +2,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&display=swap');
 
-/* 모든 요소 사이즈 고정 (버튼 밀림 완벽 방지) */
+/* 모든 요소 사이즈 고정 */
 *, *::before, *::after { box-sizing: border-box; }
 
 /* 구글 블로그 기본 요소 완벽 차단 */
@@ -22,13 +22,11 @@ html, body {
 
 .app-container { max-width: 600px; margin: 0 auto; padding: 20px 20px 80px 20px; position: relative; z-index: 10; }
 
-/* 전문적이고 깔끔한 헤더 */
 .app-header { text-align: center; margin-bottom: 25px; background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); padding: 30px 20px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
 .app-header h1 { font-size: 24px; font-weight: 800; margin: 0 0 10px 0; color: #f8fafc; letter-spacing: -0.5px; }
 .app-header h1 span { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
 .app-header p { color: #94a3b8; font-size: 14px; margin: 0; line-height: 1.6; word-break: keep-all; }
 
-/* 안내 패널 및 면책 조항 */
 .info-panel { background-color: #1e293b; border: 1px solid #334155; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
 .info-title { color: #38bdf8; font-size: 18px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
 .info-text { color: #e2e8f0; font-size: 14.5px; margin: 0 0 15px 0; line-height: 1.7; word-break: keep-all; text-align: left; }
@@ -38,7 +36,6 @@ html, body {
 .disclaimer-title { color: #fca5a5; font-size: 14.5px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 .disclaimer-text { color: #f87171; font-size: 13.5px; margin: 0; line-height: 1.6; word-break: keep-all; }
 
-/* 누적 기록 및 수동 메모 추가 섹션 */
 .record-panel { background-color: #1e293b; border: 1px solid #334155; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
 .record-title { color: #a78bfa; font-size: 17px; font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
 .record-list { max-height: 200px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; }
@@ -52,13 +49,14 @@ html, body {
 .btn-record { flex-shrink: 0; padding: 12px 16px; background: #8b5cf6; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
 .btn-record:active { transform: scale(0.95); }
 
-/* 문제 풀이 섹션 */
 .status-bar { display: flex; justify-content: space-between; background: #1e293b; padding: 18px 20px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; font-weight: 700; color: #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 .status-bar .score { color: #38bdf8; font-size: 16px; }
 
 .question-card { background: #1e293b; border-radius: 20px; padding: 30px 25px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 25px; }
 .q-number { display: inline-block; background: #38bdf8; color: #0f172a; font-size: 14px; font-weight: 800; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
 .q-text { font-size: 18px; font-weight: 700; color: #f8fafc; line-height: 1.6; margin-bottom: 30px; word-break: keep-all; }
+/* 에러 발생 시 붉은색 표시를 위한 클래스 */
+.error-text { color: #ef4444 !important; font-size: 14px !important; }
 
 .options-group { display: flex; flex-direction: column; gap: 14px; }
 .btn-option { width: 100%; text-align: left; padding: 20px; background: #0f172a; border: 1px solid #475569; color: #e2e8f0; border-radius: 14px; font-size: 15.5px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: 'Pretendard', sans-serif; line-height: 1.5; word-break: keep-all; }
@@ -77,11 +75,21 @@ html, body {
 .btn-restart { width: 100%; padding: 22px; background: #334155; color: #f8fafc; border: 1px solid #475569; border-radius: 16px; font-size: 17px; font-weight: 800; cursor: pointer; margin-bottom: 15px; transition: transform 0.2s; }
 .btn-restart:active { transform: scale(0.97); }
 
-/* 스크롤바 디자인 */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
 ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
 </style>
+
+<!-- 전역 에러 감지기: 모바일 웹뷰에서 스크립트가 죽으면 여기에 빨간 글씨로 띄워줍니다 -->
+<script>
+window.onerror = function(msg, url, lineNo) {
+    var qText = document.getElementById('q-text');
+    if (qText) {
+        qText.innerHTML = "<span class='error-text'>시스템 에러 발생 (WebView)<br>내용: " + msg + "<br>줄 번호: " + lineNo + "</span>";
+    }
+    return false;
+};
+</script>
 
 <canvas id="particle-canvas"></canvas>
 
@@ -91,27 +99,23 @@ html, body {
         <p>최근 3개년 핵심 기출 150선 완벽 복원</p>
     </div>
 
-    <!-- 안내 패널 -->
     <div class="info-panel" id="intro-panel">
         <div class="info-title">📘 스마트 학습 가이드 & 환영 인사</div>
         <p class="info-text">안녕하세요! 새로운 도전을 위해 <b>스마트 지게차 패스</b>를 찾아주신 예비 조종사 여러분을 진심으로 환영합니다. 바쁜 일상 속에서 시험을 준비하시는 여러분의 시간과 노력을 덜어드리고자, 실제 시험에 가장 많이 출제되는 핵심 기출문제들만 엄선하여 정성껏 담았습니다.</p>
         <p class="info-text"><span class="info-highlight">[💡 합격을 위한 200% 활용 꿀팁]</span><br>전체 기출문제 중 <b>매번 무작위로 20문제씩 추출</b>되어 새로운 모의고사가 만들어집니다. 중간에 끊기는 일 없이 20문제를 편안하게 다 푸신 후 결과를 확인하세요! 여러분의 풀이 기록과 점수는 아래 '학습 기록장'에 차곡차곡 안전하게 누적됩니다.</p>
-        
         <div class="disclaimer-box">
             <div class="disclaimer-title">🚨 앱 이용 전 필수 확인 (면책 조항)</div>
             <p class="disclaimer-text">본 애플리케이션은 수험생 여러분의 합격을 돕기 위해 <b>개인 개발자가 무료로 제공하는 참고용 보조 학습 도구</b>입니다. 출제 경향을 반영하여 정답과 해설을 구성하였으나, 실제 시험 결과나 오탈자로 인한 어떠한 문제에 대해서도 법적인 책임을 지지 않으므로 최종 점검은 공식 교재를 활용해 주십시오.</p>
         </div>
     </div>
 
-    <!-- 나만의 학습 기록장 -->
     <div class="record-panel" id="record-panel">
         <div class="record-title">📝 나의 학습 기록장 (자동 저장)</div>
         <div class="record-list" id="record-list-container">
-            <!-- 기록이 여기에 자바스크립트로 쌓입니다 -->
         </div>
         <div class="record-input-group">
             <input type="text" id="manual-record-input" class="record-input" placeholder="오늘의 다짐이나 목표를 입력하세요.">
-            <!-- 퍼플렉시티 조언 적용: 함수 호출 괄호() 명확히 기재 -->
+            <!-- 퍼플렉시티 조언 1: 괄호() 확실히 추가 -->
             <button class="btn-record" onclick="addManualRecord()">기록 남기기</button>
         </div>
     </div>
@@ -124,77 +128,82 @@ html, body {
 
         <div class="question-card">
             <div class="q-number" id="q-num-badge">Q. 1</div>
-            <div class="q-text" id="q-text">문제가 로딩중입니다...</div>
-            
-            <div class="options-group" id="options-container">
-                <!-- Buttons injected via JS -->
-            </div>
-
+            <div class="q-text" id="q-text">문제가 로딩중입니다... (화면이 안 넘어가면 앱 설정에서 저장공간 권한을 확인해주세요)</div>
+            <div class="options-group" id="options-container"></div>
             <div class="explanation-box" id="explanation">해설: </div>
         </div>
 
-        <!-- 퍼플렉시티 조언 적용: 함수 호출 괄호() 명확히 기재 -->
+        <!-- 퍼플렉시티 조언 2: 괄호() 확실히 추가 -->
         <button class="btn-next" id="btn-next" onclick="nextQuestion()">다음 문제로 넘어가기</button>
     </div>
 
     <div class="result-card" id="result-section">
         <div class="q-number" style="margin-bottom:20px;">모의고사 종료</div>
-        <div class="result-score" id="final-score">85점</div>
-        <div class="result-msg" id="final-msg">합격권입니다! 이 기세로 실제 시험도 훌륭하게 통과하실 수 있습니다.</div>
-        <!-- 퍼플렉시티 조언 적용: 함수 호출 괄호() 명확히 기재 -->
+        <div class="result-score" id="final-score">0점</div>
+        <div class="result-msg" id="final-msg">결과 확인 중...</div>
+        <!-- 퍼플렉시티 조언 3: 괄호() 확실히 추가 -->
         <button class="btn-next" style="display:block; margin-bottom:15px;" onclick="startNewTest()">새로운 문제 다시 풀기</button>
     </div>
 </div>
 
 <script>
-// 배경 파티클 효과
-function initParticles() {
-    var canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-    var particleCount = 30; 
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    for (var i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 1,
-            speedY: Math.random() * 0.4 + 0.1,
-            opacity: Math.random() * 0.3 + 0.1
-        });
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0; i < particleCount; i++) {
-            var p = particles[i];
-            p.y -= p.speedY; 
-            if (p.y < -10) {
-                p.y = canvas.height + 10;
-                p.x = Math.random() * canvas.width;
-            }
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(56, 189, 248, " + p.opacity + ")"; 
-            ctx.fill();
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
+// --- 모바일 WebView 특화: 안전한 LocalStorage 래퍼 함수 ---
+// 앱인벤터에서 DOM Storage가 막혀있을 때 나는 치명적 에러(스크립트 중단)를 원천 방지합니다.
+function safeGetItem(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSetItem(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { console.log("Storage Set Error"); }
+}
+function safeRemoveItem(key) {
+    try { localStorage.removeItem(key); } catch (e) { console.log("Storage Remove Error"); }
 }
 
-/* ========================================================= */
-/* =================== 핵심 기출 150제 풀 ===================== */
-/* ========================================================= */
-// [쉼표 누락 및 특수문자 충돌 100% 제거 완료]
+function initParticles() {
+    try {
+        var canvas = document.getElementById('particle-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var particleCount = 30; 
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        for (var i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speedY: Math.random() * 0.4 + 0.1,
+                opacity: Math.random() * 0.3 + 0.1
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particleCount; i++) {
+                var p = particles[i];
+                p.y -= p.speedY; 
+                if (p.y < -10) {
+                    p.y = canvas.height + 10;
+                    p.x = Math.random() * canvas.width;
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(56, 189, 248, " + p.opacity + ")"; 
+                ctx.fill();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    } catch(e) {}
+}
+
 var quizDataPool = [
     { q: "디젤기관에서 연료가 분사되는 시기는 언제인가?", a: ["흡기행정 초", "압축행정 말", "폭발행정 초", "배기행정 말"], c: 1, e: "디젤기관은 공기를 압축하여 고온이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다." },
     { q: "기관의 냉각수 온도가 비정상적으로 높게 올라갈 때의 원인으로 틀린 것은?", a: ["수온 조절기의 고장", "물 펌프의 작동 불량", "냉각수의 부족", "팬 벨트의 장력 과다"], c: 3, e: "팬 벨트의 장력이 과다하다고 온도가 상승하지는 않습니다. 장력이 헐거울 때 펌프가 돌지 않아 온도가 상승합니다." },
@@ -364,118 +373,119 @@ var scoreText = document.getElementById('score-text');
 var recordListContainer = document.getElementById('record-list-container');
 var manualRecordInput = document.getElementById('manual-record-input');
 
-/* ========================================================= */
-/* =================== 로컬 메모리 & 기록 로직 ================ */
-/* ========================================================= */
-
-// 학습 기록 불러오기 및 화면에 그리기
+// 학습 기록 불러오기
 function loadRecords() {
-    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
-    var records = rawRecords ? JSON.parse(rawRecords) : [];
-    recordListContainer.innerHTML = '';
+    try {
+        var rawRecords = safeGetItem('smart_forklift_records_v4');
+        var records = rawRecords ? JSON.parse(rawRecords) : [];
+        recordListContainer.innerHTML = '';
 
-    if (records.length === 0) {
-        recordListContainer.innerHTML = '<div style="color:#64748b; font-size:13.5px; text-align:center; padding:15px 0;">아직 학습 기록이 없습니다. 첫 모의고사에 도전해 보세요!</div>';
-        return;
-    }
+        if (records.length === 0) {
+            recordListContainer.innerHTML = '<div style="color:#64748b; font-size:13.5px; text-align:center; padding:15px 0;">아직 학습 기록이 없습니다. 첫 모의고사에 도전해 보세요!</div>';
+            return;
+        }
 
-    // 최신 기록이 위로 오게 역순 출력
-    for (var i = records.length - 1; i >= 0; i--) {
-        var rec = records[i];
-        var itemDiv = document.createElement('div');
-        itemDiv.className = 'record-item ' + rec.type;
-        
-        var textDiv = document.createElement('div');
-        textDiv.style.fontWeight = '700';
-        textDiv.innerHTML = rec.text;
+        for (var i = records.length - 1; i >= 0; i--) {
+            var rec = records[i];
+            var itemDiv = document.createElement('div');
+            itemDiv.className = 'record-item ' + rec.type;
+            
+            var textDiv = document.createElement('div');
+            textDiv.style.fontWeight = '700';
+            textDiv.innerHTML = rec.text;
 
-        var dateDiv = document.createElement('div');
-        dateDiv.className = 'record-date';
-        dateDiv.innerText = rec.date;
+            var dateDiv = document.createElement('div');
+            dateDiv.className = 'record-date';
+            dateDiv.innerText = rec.date;
 
-        itemDiv.appendChild(textDiv);
-        itemDiv.appendChild(dateDiv);
-        recordListContainer.appendChild(itemDiv);
-    }
+            itemDiv.appendChild(textDiv);
+            itemDiv.appendChild(dateDiv);
+            recordListContainer.appendChild(itemDiv);
+        }
+    } catch(e) { console.log("loadRecords Error"); }
 }
 
-// 자동 기록 추가 (모의고사 20제 완료 시)
+// 자동 기록 추가
 function addAutoRecord(score) {
-    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
-    var records = rawRecords ? JSON.parse(rawRecords) : [];
-    
-    var tryCount = 1;
-    for(var i=0; i<records.length; i++){
-        if(records[i].type === 'auto') tryCount++;
-    }
+    try {
+        var rawRecords = safeGetItem('smart_forklift_records_v4');
+        var records = rawRecords ? JSON.parse(rawRecords) : [];
+        
+        var tryCount = 1;
+        for(var i=0; i<records.length; i++){
+            if(records[i].type === 'auto') tryCount++;
+        }
 
-    var now = new Date();
-    var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
-    
-    records.push({
-        type: 'auto',
-        text: "🏆 " + tryCount + "회차 모의고사 완료 - " + score + "점",
-        date: dateString
-    });
-    
-    localStorage.setItem('smart_forklift_records_v4', JSON.stringify(records));
-    loadRecords();
+        var now = new Date();
+        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
+        
+        records.push({
+            type: 'auto',
+            text: "🏆 " + tryCount + "회차 모의고사 완료 - " + score + "점",
+            date: dateString
+        });
+        
+        safeSetItem('smart_forklift_records_v4', JSON.stringify(records));
+        loadRecords();
+    } catch(e) {}
 }
 
-// 수동 기록(메모) 추가
+// 수동 기록 추가
 function addManualRecord() {
-    var memoText = manualRecordInput.value.trim();
-    if (!memoText) {
-        alert("기록할 내용을 먼저 입력해 주세요.");
-        return;
-    }
+    try {
+        var memoText = manualRecordInput.value.trim();
+        if (!memoText) {
+            alert("기록할 내용을 먼저 입력해 주세요.");
+            return;
+        }
 
-    var rawRecords = localStorage.getItem('smart_forklift_records_v4');
-    var records = rawRecords ? JSON.parse(rawRecords) : [];
-    
-    var now = new Date();
-    var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
+        var rawRecords = safeGetItem('smart_forklift_records_v4');
+        var records = rawRecords ? JSON.parse(rawRecords) : [];
+        
+        var now = new Date();
+        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
 
-    records.push({
-        type: 'manual',
-        text: "✏️ " + memoText,
-        date: dateString
-    });
+        records.push({
+            type: 'manual',
+            text: "✏️ " + memoText,
+            date: dateString
+        });
 
-    localStorage.setItem('smart_forklift_records_v4', JSON.stringify(records));
-    manualRecordInput.value = "";
-    loadRecords();
+        safeSetItem('smart_forklift_records_v4', JSON.stringify(records));
+        manualRecordInput.value = "";
+        loadRecords();
+    } catch(e) {}
 }
-
-/* ========================================================= */
-/* =================== 퀴즈 및 광고 호출 로직 ================= */
-/* ========================================================= */
 
 function loadQuestion() {
-    answered = false;
-    btnNext.style.display = 'none';
-    explanationBox.style.display = 'none';
-    optionsContainer.innerHTML = '';
+    try {
+        answered = false;
+        btnNext.style.display = 'none';
+        explanationBox.style.display = 'none';
+        optionsContainer.innerHTML = '';
 
-    var currentQ = selectedQuiz[currentIndex];
-    
-    qNumBadge.innerText = 'Q. ' + (currentIndex + 1);
-    qText.innerText = currentQ.q;
-    progressText.innerText = '문제 ' + (currentIndex + 1) + ' / ' + selectedQuiz.length;
-
-    var rate = currentIndex === 0 ? 0 : Math.round((correctCount / currentIndex) * 100);
-    scoreText.innerText = '정답률: ' + rate + '%';
-
-    for (var i = 0; i < currentQ.a.length; i++) {
-        var btn = document.createElement('button');
-        btn.className = 'btn-option';
-        btn.innerText = (i + 1) + ". " + currentQ.a[i];
+        var currentQ = selectedQuiz[currentIndex];
         
-        (function(index) {
-            btn.onclick = function() { checkAnswer(index, this); };
-        })(i);
-        
-        optionsContainer.appendChild(btn);
+        qNumBadge.innerText = 'Q. ' + (currentIndex + 1);
+        qText.innerText = currentQ.q;
+        progressText.innerText = '문제 ' + (currentIndex + 1) + ' / ' + selectedQuiz.length;
+
+        var rate = currentIndex === 0 ? 0 : Math.round((correctCount / currentIndex) * 100);
+        scoreText.innerText = '정답률: ' + rate + '%';
+
+        for (var i = 0; i < currentQ.a.length; i++) {
+            var btn = document.createElement('button');
+            btn.className = 'btn-option';
+            btn.innerText = (i + 1) + ". " + currentQ.a[i];
+            
+            (function(index) {
+                btn.onclick = function() { checkAnswer(index, this); };
+            })(i);
+            
+            optionsContainer.appendChild(btn);
+        }
+    } catch(e) {
+        document.getElementById('q-text').innerText = "loadQuestion 실행 에러: " + e.message;
     }
 }
 
@@ -515,17 +525,11 @@ function nextQuestion() {
 function showResult() {
     var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
     
-    // 1. 점수를 로컬 스토리지에 자동 저장 (히스토리)
     addAutoRecord(finalScore);
-
-    // 2. 광고가 뜨고 '새로고침' 되어도 결과 창을 다시 띄우기 위한 '결과 보존 메모리'
-    localStorage.setItem('pending_exam_result', JSON.stringify({ score: finalScore }));
-
-    // 3. 20문제를 모두 푼 지금 이 시점에서만, 단 한 번의 전면 광고를 강제 호출합니다.
+    safeSetItem('pending_exam_result', JSON.stringify({ score: finalScore }));
     triggerAd('exam_finished');
 }
 
-// 스마트폰 새로고침 후 결과 복구 함수
 function restoreResultScreen(score) {
     document.getElementById('intro-panel').style.display = 'none';
     document.getElementById('record-panel').style.display = 'none';
@@ -545,58 +549,59 @@ function restoreResultScreen(score) {
     document.getElementById('final-msg').innerText = msg;
 }
 
-// [완벽 수정 완료] 모바일 앱 환경 최적화 브릿지 연동 로직
+// 퍼플렉시티 조언 적용: 가장 안전한 브릿지 연동 및 location.href 처리
 function triggerAd(actionName) {
-    var randomToken = Math.floor(Math.random() * 999999) + 1;
-    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
-    // encodeURIComponent를 사용하여 특수문자로 인한 연결 끊김 완벽 방지
-    var finalTargetUrl = cleanUrl + "?m=1&action=" + encodeURIComponent(actionName) + "&token=" + randomToken;
-
     try {
-        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
-            window.AppInventor.setWebViewString("action=" + actionName);
-        }
-    } catch (err) {}
+        var randomToken = Math.floor(Math.random() * 999999) + 1;
+        var cleanUrl = window.location.href.split('?')[0].split('#')[0];
+        var finalTargetUrl = cleanUrl + "?m=1&action=" + encodeURIComponent(actionName) + "&token=" + randomToken;
 
-    setTimeout(function() {
-        // location.replace 대신 안전한 location.href 사용
-        window.location.href = finalTargetUrl;
-    }, 500);
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString(actionName);
+        }
+
+        setTimeout(function() {
+            window.location.href = finalTargetUrl;
+        }, 500);
+    } catch (err) {
+        document.getElementById('q-text').innerHTML = "<span class='error-text'>광고 호출 에러: " + err.message + "</span>";
+    }
 }
 
 function startNewTest() {
     triggerAd('restart_test');
     setTimeout(function() {
-        window.location.reload();
+        window.location.href = window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime();
     }, 800);
 }
 
 window.onload = function() {
-    initParticles();
-    loadRecords(); // 기록장 불러오기
-    
-    // 이전에 광고로 인해 새로고침된 결과 창 메모리가 남아있다면, 퀴즈를 띄우지 않고 바로 결과 창 복원
-    var pendingResult = localStorage.getItem('pending_exam_result');
-    if (pendingResult) {
-        var data = JSON.parse(pendingResult);
-        localStorage.removeItem('pending_exam_result'); // 한 번 복구 후 메모리 삭제
-        restoreResultScreen(data.score);
-    } else {
-        // 정상적인 새 퀴즈 시작 (무작위 20문제 추출)
-        // 배열 파싱이 꼬이지 않도록 안전장치 추가
-        if (quizDataPool && quizDataPool.length > 0) {
-            var poolCopy = quizDataPool.slice();
-            for (var i = poolCopy.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = poolCopy[i];
-                poolCopy[i] = poolCopy[j];
-                poolCopy[j] = temp;
-            }
-            selectedQuiz = poolCopy.slice(0, 20);
-            loadQuestion();
+    try {
+        initParticles();
+        loadRecords(); 
+        
+        var pendingResult = safeGetItem('pending_exam_result');
+        if (pendingResult) {
+            var data = JSON.parse(pendingResult);
+            safeRemoveItem('pending_exam_result'); 
+            restoreResultScreen(data.score);
         } else {
-            console.error("문제 데이터를 불러오는 데 실패했습니다.");
+            if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
+                var poolCopy = quizDataPool.slice();
+                for (var i = poolCopy.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = poolCopy[i];
+                    poolCopy[i] = poolCopy[j];
+                    poolCopy[j] = temp;
+                }
+                selectedQuiz = poolCopy.slice(0, 20);
+                loadQuestion();
+            } else {
+                document.getElementById('q-text').innerHTML = "<span class='error-text'>데이터 오류: 기출문제 데이터를 불러올 수 없습니다.</span>";
+            }
         }
+    } catch (e) {
+        document.getElementById('q-text').innerHTML = "<span class='error-text'>앱 실행 에러: " + e.message + "</span>";
     }
 };
 </script>
