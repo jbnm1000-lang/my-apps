@@ -35,18 +35,17 @@ html, body {
 .disclaimer-title { color: #fca5a5; font-size: 14.5px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 .disclaimer-text { color: #f87171; font-size: 13.5px; margin: 0; line-height: 1.6; word-break: keep-all; }
 
-.record-panel { background-color: #1e293b; border: 1px solid #334155; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-.record-title { color: #a78bfa; font-size: 17px; font-weight: 800; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-.record-list { max-height: 200px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; }
-.record-item { background: #0f172a; padding: 12px 15px; border-radius: 10px; margin-bottom: 8px; font-size: 13.5px; color: #cbd5e1; border: 1px solid #334155; display: flex; flex-direction: column; gap: 4px; }
-.record-item.auto { border-left: 4px solid #38bdf8; }
-.record-item.manual { border-left: 4px solid #a78bfa; }
-.record-date { font-size: 11.5px; color: #64748b; }
-.record-input-group { display: flex; gap: 8px; width: 100%; }
-.record-input { flex: 1; min-width: 0; padding: 12px 15px; background: #0f172a; border: 1px solid #475569; color: #ffffff; border-radius: 10px; font-family: 'Pretendard', sans-serif; outline: none; font-size: 14px; transition: 0.3s; }
-.record-input:focus { border-color: #a78bfa; }
-.btn-record { flex-shrink: 0; padding: 12px 16px; background: #8b5cf6; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-.btn-record:active { transform: scale(0.95); }
+/* 신규 추가: 접기/펴기 꿀팁 아코디언 디자인 */
+.tips-panel { background-color: #1e293b; border: 1px solid #334155; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden; }
+.tips-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #0f172a; transition: background 0.3s; }
+.tips-header:active { background: #1e293b; }
+.tips-title { color: #a78bfa; font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.tips-arrow { color: #a78bfa; font-size: 14px; font-weight: 800; transition: transform 0.3s; }
+.tips-content { padding: 20px 25px; display: none; border-top: 1px solid #334155; }
+.tips-content ul { margin: 0; padding-left: 20px; color: #cbd5e1; font-size: 14.5px; line-height: 1.7; word-break: keep-all; }
+.tips-content li { margin-bottom: 12px; }
+.tips-content li:last-child { margin-bottom: 0; }
+.tips-content li b { color: #fde047; }
 
 .status-bar { display: flex; justify-content: space-between; background: #1e293b; padding: 18px 20px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; font-weight: 700; color: #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 .status-bar .score { color: #38bdf8; font-size: 16px; }
@@ -89,21 +88,27 @@ html, body {
     <div class="info-panel" id="intro-panel">
         <div class="info-title">📘 스마트 학습 가이드 & 환영 인사</div>
         <p class="info-text">안녕하세요! 새로운 도전을 위해 <b>스마트 지게차 패스</b>를 찾아주신 예비 조종사 여러분을 진심으로 환영합니다. 바쁜 일상 속에서 시험을 준비하시는 여러분의 시간과 노력을 덜어드리고자, 실제 시험에 가장 많이 출제되는 핵심 기출문제들만 엄선하여 정성껏 담았습니다.</p>
-        <p class="info-text"><span class="info-highlight">[💡 합격을 위한 200% 활용 꿀팁]</span><br>전체 기출문제 중 <b>매번 무작위로 20문제씩 추출</b>되어 새로운 모의고사가 만들어집니다. 중간에 끊기는 일 없이 20문제를 편안하게 다 푸신 후 결과를 확인하세요! 여러분의 풀이 기록과 점수는 아래 '학습 기록장'에 차곡차곡 안전하게 누적됩니다.</p>
+        <p class="info-text"><span class="info-highlight">[💡 합격을 위한 200% 활용 꿀팁]</span><br>전체 기출문제 중 <b>매번 무작위로 20문제씩 추출</b>되어 새로운 모의고사가 만들어집니다. 중간에 끊기는 일 없이 20문제를 편안하게 다 푸신 후 결과를 확인하세요!</p>
         <div class="disclaimer-box">
             <div class="disclaimer-title">🚨 앱 이용 전 필수 확인 (면책 조항)</div>
             <p class="disclaimer-text">본 애플리케이션은 수험생 여러분의 합격을 돕기 위해 <b>개인 개발자가 무료로 제공하는 참고용 보조 학습 도구</b>입니다. 출제 경향을 반영하여 정답과 해설을 구성하였으나, 실제 시험 결과나 오탈자로 인한 어떠한 문제에 대해서도 법적인 책임을 지지 않으므로 최종 점검은 공식 교재를 활용해 주십시오.</p>
         </div>
     </div>
 
-    <!-- 나만의 학습 기록장 -->
-    <div class="record-panel" id="record-panel">
-        <div class="record-title">📝 나의 학습 기록장 (자동 저장)</div>
-        <div class="record-list" id="record-list-container"></div>
-        <div class="record-input-group">
-            <input type="text" id="manual-record-input" class="record-input" placeholder="오늘의 다짐이나 목표를 입력하세요.">
-            <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
-            <button class="btn-record" id="btn-manual-record">기록 남기기</button>
+    <!-- 신규 추가: 꿀팁 아코디언 패널 (기존 기록장 대체) -->
+    <div class="tips-panel" id="tips-panel">
+        <div class="tips-header" onclick="toggleTips()">
+            <div class="tips-title">💡 필기시험 완벽 대비 꿀팁 & 주의사항</div>
+            <div class="tips-arrow" id="tips-arrow">▼</div>
+        </div>
+        <div class="tips-content" id="tips-content">
+            <ul>
+                <li><b>신분증 필수 지참:</b> 규정 신분증(주민등록증, 운전면허증, 여권 등) 미지참 시 절대 시험에 응시할 수 없습니다. 모바일 신분증도 가능하나 실물을 권장합니다.</li>
+                <li><b>CBT 시험 방식 적응:</b> 종이 시험지가 아닌 컴퓨터 모니터로 문제가 출제되고 마우스로 클릭하는 방식입니다. 본 스마트폰 앱으로 눈에 익히는 것이 큰 도움이 됩니다.</li>
+                <li><b>시간 배분 (60문항 60분):</b> 1문제당 1분의 시간이 주어집니다. 모르는 문제는 화면 우측의 '나중에 풀기'를 누르고 아는 것부터 빠르게 푸는 것이 핵심입니다.</li>
+                <li><b>과락 없음, 평균 60점 합격:</b> 과목별 과락 제도가 없습니다. 유압이나 엔진 등 너무 어려운 파트는 기출만 외우고, 안전 및 법규 파트에서 확실하게 점수를 챙기는 전략이 좋습니다.</li>
+                <li><b>종료 전 재확인:</b> '답안 제출' 버튼을 누르기 전, 혹시라도 안 푼 문제가 있는지 화면에 표시된 번호판의 색깔을 반드시 한 번 더 확인하세요.</li>
+            </ul>
         </div>
     </div>
 
@@ -120,21 +125,19 @@ html, body {
             <div class="explanation-box" id="explanation">해설: </div>
         </div>
 
-        <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
-        <button class="btn-next" id="btn-next">다음 문제로 넘어가기</button>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()">다음 문제로 넘어가기</button>
     </div>
 
     <div class="result-card" id="result-section">
         <div class="q-number" style="margin-bottom:20px;">모의고사 종료</div>
         <div class="result-score" id="final-score">0점</div>
         <div class="result-msg" id="final-msg">결과 확인 중...</div>
-        <!-- onclick 속성 제거: 자바스크립트에서 직접 제어합니다 -->
-        <button class="btn-next" id="btn-restart" style="display:block; margin-bottom:15px;">새로운 문제 다시 풀기</button>
+        <button class="btn-restart" style="display:block; margin-bottom:15px;" onclick="startNewTest()">새로운 문제 다시 풀기</button>
     </div>
 </div>
 
 <script>
-// --- 모바일 WebView 특화: 안전한 파라미터 및 스토리지 처리 ---
+// --- URL 파라미터 안전 추출 함수 ---
 function getQueryParam(name) {
     var url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -145,14 +148,17 @@ function getQueryParam(name) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function safeGetItem(key) {
-    try { return localStorage.getItem(key); } catch (e) { return null; }
-}
-function safeSetItem(key, value) {
-    try { localStorage.setItem(key, value); } catch (e) { console.log("Storage Error"); }
-}
-function safeRemoveItem(key) {
-    try { localStorage.removeItem(key); } catch (e) {}
+// 꿀팁 패널 열고 닫기 함수
+function toggleTips() {
+    var content = document.getElementById('tips-content');
+    var arrow = document.getElementById('tips-arrow');
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        arrow.innerText = '▲';
+    } else {
+        content.style.display = 'none';
+        arrow.innerText = '▼';
+    }
 }
 
 function initParticles() {
@@ -187,7 +193,6 @@ function initParticles() {
     } catch(e) {}
 }
 
-// 문제 데이터베이스 150제
 var quizDataPool = [
     { q: "디젤기관에서 연료가 분사되는 시기는 언제인가?", a: ["흡기행정 초", "압축행정 말", "폭발행정 초", "배기행정 말"], c: 1, e: "디젤기관은 공기를 압축하여 고온이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다." },
     { q: "기관의 냉각수 온도가 비정상적으로 높게 올라갈 때의 원인으로 틀린 것은?", a: ["수온 조절기의 고장", "물 펌프의 작동 불량", "냉각수의 부족", "팬 벨트의 장력 과다"], c: 3, e: "팬 벨트의 장력이 과다하다고 온도가 상승하지는 않습니다. 장력이 헐거울 때 펌프가 돌지 않아 온도가 상승합니다." },
@@ -346,107 +351,62 @@ var correctCount = 0;
 var answered = false;
 var selectedQuiz = [];
 
-function loadRecords() {
-    try {
-        var recordListContainer = document.getElementById('record-list-container');
-        if(!recordListContainer) return;
-
-        var rawRecords = safeGetItem('smart_forklift_records_v6');
-        var records = rawRecords ? JSON.parse(rawRecords) : [];
-        recordListContainer.innerHTML = '';
-
-        if (records.length === 0) {
-            recordListContainer.innerHTML = '<div style="color:#64748b; font-size:13.5px; text-align:center; padding:15px 0;">아직 학습 기록이 없습니다. 첫 모의고사에 도전해 보세요!</div>';
-            return;
-        }
-
-        for (var i = records.length - 1; i >= 0; i--) {
-            var rec = records[i];
-            var itemDiv = document.createElement('div');
-            itemDiv.className = 'record-item ' + rec.type;
-            var textDiv = document.createElement('div');
-            textDiv.style.fontWeight = '700';
-            textDiv.innerHTML = rec.text;
-            var dateDiv = document.createElement('div');
-            dateDiv.className = 'record-date';
-            dateDiv.innerText = rec.date;
-
-            itemDiv.appendChild(textDiv);
-            itemDiv.appendChild(dateDiv);
-            recordListContainer.appendChild(itemDiv);
-        }
-    } catch(e) {}
-}
-
 function loadQuestion() {
-    try {
-        answered = false;
-        document.getElementById('btn-next').style.display = 'none';
-        document.getElementById('explanation').style.display = 'none';
+    answered = false;
+    document.getElementById('btn-next').style.display = 'none';
+    document.getElementById('explanation').style.display = 'none';
+    
+    var optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    var currentQ = selectedQuiz[currentIndex];
+    document.getElementById('q-num-badge').innerText = 'Q. ' + (currentIndex + 1);
+    document.getElementById('q-text').innerText = currentQ.q;
+    document.getElementById('progress-text').innerText = '문제 ' + (currentIndex + 1) + ' / ' + selectedQuiz.length;
+
+    var rate = currentIndex === 0 ? 0 : Math.round((correctCount / currentIndex) * 100);
+    document.getElementById('score-text').innerText = '정답률: ' + rate + '%';
+
+    for (var i = 0; i < currentQ.a.length; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'btn-option';
+        btn.innerText = (i + 1) + ". " + currentQ.a[i];
         
-        var optionsContainer = document.getElementById('options-container');
-        optionsContainer.innerHTML = '';
+        (function(index) {
+            btn.onclick = function() { 
+                if (answered) return;
+                answered = true;
+                
+                if (index === currentQ.c) {
+                    this.classList.add('correct');
+                    correctCount++;
+                } else {
+                    this.classList.add('wrong');
+                    optionsContainer.getElementsByClassName('btn-option')[currentQ.c].classList.add('correct');
+                }
 
-        var currentQ = selectedQuiz[currentIndex];
-        document.getElementById('q-num-badge').innerText = 'Q. ' + (currentIndex + 1);
-        document.getElementById('q-text').innerText = currentQ.q;
-        document.getElementById('progress-text').innerText = '문제 ' + (currentIndex + 1) + ' / ' + selectedQuiz.length;
-
-        var rate = currentIndex === 0 ? 0 : Math.round((correctCount / currentIndex) * 100);
-        document.getElementById('score-text').innerText = '정답률: ' + rate + '%';
-
-        for (var i = 0; i < currentQ.a.length; i++) {
-            var btn = document.createElement('button');
-            btn.className = 'btn-option';
-            btn.innerText = (i + 1) + ". " + currentQ.a[i];
-            
-            (function(index) {
-                btn.onclick = function() { 
-                    if (answered) return;
-                    answered = true;
-                    
-                    if (index === currentQ.c) {
-                        this.classList.add('correct');
-                        correctCount++;
-                    } else {
-                        this.classList.add('wrong');
-                        optionsContainer.getElementsByClassName('btn-option')[currentQ.c].classList.add('correct');
-                    }
-
-                    var expBox = document.getElementById('explanation');
-                    expBox.innerText = "💡 해설: " + currentQ.e;
-                    expBox.style.display = 'block';
-                    
-                    var nxtBtn = document.getElementById('btn-next');
-                    if (currentIndex === selectedQuiz.length - 1) {
-                        nxtBtn.innerText = "결과 및 채점표 확인하기";
-                    }
-                    nxtBtn.style.display = 'block';
-                };
-            })(i);
-            optionsContainer.appendChild(btn);
-        }
-    } catch(e) {}
+                var expBox = document.getElementById('explanation');
+                expBox.innerText = "💡 해설: " + currentQ.e;
+                expBox.style.display = 'block';
+                
+                var nxtBtn = document.getElementById('btn-next');
+                if (currentIndex === selectedQuiz.length - 1) {
+                    nxtBtn.innerText = "결과 및 채점표 확인하기";
+                }
+                nxtBtn.style.display = 'block';
+            };
+        })(i);
+        optionsContainer.appendChild(btn);
+    }
 }
 
 function showResult() {
     var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
     
-    // 점수 기록 저장
-    try {
-        var rawRecords = safeGetItem('smart_forklift_records_v6');
-        var records = rawRecords ? JSON.parse(rawRecords) : [];
-        var tryCount = 1;
-        for(var i=0; i<records.length; i++){ if(records[i].type === 'auto') tryCount++; }
-        var now = new Date();
-        var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
-        records.push({ type: 'auto', text: "🏆 " + tryCount + "회차 모의고사 완료 - " + finalScore + "점", date: dateString });
-        safeSetItem('smart_forklift_records_v6', JSON.stringify(records));
-    } catch(e) {}
-
-    // 모의고사 종료 시에만 전면광고 1회 호출
     var randomToken = Math.floor(Math.random() * 999999) + 1;
     var cleanUrl = window.location.href.split('?')[0].split('#')[0];
+    
+    // URL에 점수 달아서 강제 이동
     var finalTargetUrl = cleanUrl + "?action=exam_finished&score=" + finalScore + "&token=" + randomToken;
 
     try {
@@ -462,7 +422,7 @@ function showResult() {
 
 function restoreResultScreen(score) {
     document.getElementById('intro-panel').style.display = 'none';
-    document.getElementById('record-panel').style.display = 'none';
+    document.getElementById('tips-panel').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'none';
     
     var resultSection = document.getElementById('result-section');
@@ -473,58 +433,14 @@ function restoreResultScreen(score) {
     document.getElementById('final-msg').innerText = msg;
 }
 
+// 다시 풀기 버튼 클릭 시 광고 없이 바로 초기화
+function startNewTest() {
+    window.location.href = window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime();
+}
+
 window.onload = function() {
     initParticles();
     
-    // 버튼 강제 연결 (먹통 현상 완벽 방지)
-    var btnManual = document.getElementById('btn-manual-record');
-    if(btnManual) {
-        btnManual.addEventListener('click', function() {
-            var inputEl = document.getElementById('manual-record-input');
-            if (!inputEl) return;
-            var memoText = inputEl.value.trim();
-            if (!memoText) {
-                alert("기록할 내용을 먼저 입력해 주세요.");
-                return;
-            }
-            try {
-                var rawRecords = safeGetItem('smart_forklift_records_v6');
-                var records = rawRecords ? JSON.parse(rawRecords) : [];
-                var now = new Date();
-                var dateString = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일 " + now.getHours() + ":" + now.getMinutes();
-
-                records.push({ type: 'manual', text: "✏️ " + memoText, date: dateString });
-                safeSetItem('smart_forklift_records_v6', JSON.stringify(records));
-                
-                inputEl.value = ""; 
-                loadRecords();      
-            } catch(e) {}
-        });
-    }
-
-    var btnNext = document.getElementById('btn-next');
-    if(btnNext) {
-        btnNext.addEventListener('click', function() {
-            currentIndex++;
-            if (currentIndex < selectedQuiz.length) {
-                loadQuestion();
-            } else {
-                showResult();
-            }
-        });
-    }
-
-    var btnRestart = document.getElementById('btn-restart');
-    if(btnRestart) {
-        btnRestart.addEventListener('click', function() {
-            // 다시 풀기 시 광고 호출 삭제 (무조건 1초 뒤 새 문제 시작)
-            window.location.href = window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime();
-        });
-    }
-
-    loadRecords(); 
-    
-    // URL에서 점수를 읽어와 결과 화면 유지
     var action = getQueryParam('action');
     var score = getQueryParam('score');
 
@@ -542,6 +458,15 @@ window.onload = function() {
             selectedQuiz = poolCopy.slice(0, 20);
             loadQuestion();
         }
+    }
+};
+
+window.nextQuestion = function() {
+    currentIndex++;
+    if (currentIndex < selectedQuiz.length) {
+        loadQuestion();
+    } else {
+        showResult();
     }
 };
 </script>
