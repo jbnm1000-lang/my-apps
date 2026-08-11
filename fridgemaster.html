@@ -1,0 +1,463 @@
+<!--구글 블로거 전용: 하이엔드 냉장고 생존 플래너 VIP (글자 잘림 레이아웃 완벽 수정본)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
+
+    /* 화면 쏠림 원천 차단 */
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        margin: 0 !important; padding: 0 !important;
+        background-color: #0b0f19 !important;
+        overflow-x: hidden !important;
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+        font-family: 'Pretendard', sans-serif; color: #f8fafc;
+    }
+
+    /* 블로거 기본 껍데기 완벽 제거 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: radial-gradient(circle at 50% 0%, #171e36 0%, #0b0f19 70%); }
+
+    /* 메인 앱 컨테이너 */
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; padding: 40px 20px 90px 20px;
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-size: 26px; font-weight: 900; color: #38bdf8; margin-bottom: 8px; letter-spacing: -1px; text-shadow: 0 4px 20px rgba(56, 189, 248, 0.4); }
+    .sub-title { font-size: 13px; color: #94a3b8; font-weight: 500; letter-spacing: 1px; }
+
+    /* 아코디언 메뉴 */
+    .accordion-box { background: #151b2b; border: 1px solid #2e3c5a; border-radius: 14px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.4); width: 100%; }
+    .accordion-header { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; color: #e2e8f0; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s; }
+    .accordion-header:active { background: #1e293b; }
+    .accordion-header i { font-size: 12px; color: #94a3b8; transition: transform 0.3s; }
+    .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: #cbd5e1; font-size: 13.5px; line-height: 1.7; background: #0f1423; }
+    .accordion-content.open { padding: 20px; max-height: 5000px; border-top: 1px solid #2e3c5a; }
+    
+    .guide-h4 { color: #38bdf8; font-size: 15px; font-weight: 800; margin-top: 25px; margin-bottom: 12px; border-left: 3px solid #38bdf8; padding-left: 8px; }
+    .guide-h4:first-child { margin-top: 0; }
+    .guide-ul { padding-left: 20px; margin-bottom: 20px; }
+    .guide-ul li { margin-bottom: 8px; }
+    .legal-notice { background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); padding: 15px; border-radius: 8px; color: #fda4af; font-size: 12.5px; text-align: justify; }
+
+    /* 통계 보드 */
+    .stats-board { background: #151b2b; border-radius: 16px; padding: 22px; margin-bottom: 35px; display: flex; justify-content: space-between; border: 1px solid #2e3c5a; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 100%; }
+    .stat-col { flex: 1; text-align: center; position: relative; }
+    .stat-col:first-child::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: #2e3c5a; }
+    .stat-label { font-size: 12px; color: #94a3b8; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-value { font-size: 26px; font-weight: 900; letter-spacing: -1px; }
+    .text-green { color: #10b981; }
+    .text-red { color: #f43f5e; }
+
+    /* 폼 영역 */
+    .section-title { font-size: 16px; font-weight: 800; color: #f1f5f9; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .input-wrapper { background: #151b2b; border: 1px solid #2e3c5a; border-radius: 14px; padding: 20px; margin-bottom: 35px; width: 100%; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 15px; width: 100%; }
+    .custom-input, .custom-select { background: #0b0f19; border: 1px solid #334155; color: #f8fafc; padding: 15px; border-radius: 10px; font-size: 15px; outline: none; font-family: inherit; transition: 0.2s; }
+    .custom-input { flex: 2; width: 60%; }
+    .custom-select { flex: 1; width: 40%; }
+    .custom-input:focus { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2); }
+    .btn-submit { width: 100%; background: #38bdf8; color: #0b0f19; border: none; padding: 16px; border-radius: 10px; font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.2s; }
+    .btn-submit:active { transform: scale(0.98); background: #0ea5e9; }
+
+    /* 카드 리스트 (글자 잘림 해결) */
+    .card { background: #151b2b; border-radius: 14px; padding: 16px 14px; margin-bottom: 12px; border: 1px solid #2e3c5a; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; cursor: pointer; width: 100%; gap: 10px; }
+    .card:active { transform: scale(0.98); background: #1e293b; }
+    .card.level-danger { border-color: rgba(244, 63, 94, 0.5); background: linear-gradient(to right, rgba(244, 63, 94, 0.05), #151b2b); }
+    .card.level-warning { border-color: rgba(245, 158, 11, 0.5); background: linear-gradient(to right, rgba(245, 158, 11, 0.05), #151b2b); }
+    
+    /* 여기서 min-width: 0; 추가 및 overflow 설정 변경으로 글자 자동 줄바꿈 허용 */
+    .card-content { flex: 1; min-width: 0; pointer-events: none; }
+    .card-name { font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; word-break: keep-all; line-height: 1.3; display: block; }
+    .card-meta { font-size: 12px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    
+    .badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .b-room { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .b-fridge { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .b-freezer { background: rgba(129, 140, 248, 0.2); color: #a5b4fc; border: 1px solid rgba(129, 140, 248, 0.4); }
+
+    .action-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-action { border: none; padding: 12px 14px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; }
+    .btn-save { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .btn-save:active { background: rgba(16, 185, 129, 0.3); }
+    .btn-drop { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .btn-drop:active { background: rgba(148, 163, 184, 0.3); }
+
+    .sample-card { background: #0b0f19; border: 1px solid #1e293b; padding: 12px 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .sample-name { font-size: 14px; color: #cbd5e1; font-weight: 600; }
+    .sample-score { font-size: 13px; font-weight: 800; }
+
+    /* 하단 기록 버튼 */
+    .btn-final { width: 100%; background: linear-gradient(135deg, #6366f1, #a855f7); border: none; color: white; padding: 22px; border-radius: 14px; font-weight: 900; font-size: 17px; cursor: pointer; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); margin-top: 20px; transition: 0.2s; }
+    .btn-final:active { transform: scale(0.97); }
+
+    /* 모달 */
+    .modal-wrap { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 20, 0.9); z-index: 10000; padding: 20px; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+    .modal-box { background: #151b2b; width: 100%; max-width: 440px; border-radius: 20px; border: 1px solid #38bdf8; box-shadow: 0 25px 60px rgba(0,0,0,0.6); padding: 30px 25px; position: relative; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); max-height: 90vh; overflow-y: auto; }
+    @keyframes slideUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+    
+    .m-header { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 25px; border-bottom: 1px solid #2e3c5a; padding-bottom: 15px; text-align: center; letter-spacing: -0.5px; }
+    .m-section { background: #0b0f19; border: 1px solid #2e3c5a; border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+    .m-sec-title { font-size: 13px; color: #38bdf8; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .m-text { font-size: 14.5px; color: #cbd5e1; line-height: 1.7; word-break: keep-all; }
+    .m-text b { color: #f8fafc; }
+    .m-highlight { color: #f43f5e; font-weight: 800; }
+    
+    .m-btn-search { width: 100%; background: #0ea5e9; color: #fff; border: none; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; margin-bottom: 12px; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .m-btn-search:active { background: #0284c7; }
+    .m-btn-close { width: 100%; background: transparent; border: 1px solid #475569; color: #94a3b8; padding: 16px; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s; }
+    .m-btn-close:active { background: #1e293b; color: #fff; }
+
+    .fx-text { position: fixed; font-weight: 900; font-size: 20px; pointer-events: none; animation: floatFx 0.8s forwards; text-shadow: 0 2px 10px rgba(0,0,0,0.8); z-index: 9999;}
+    @keyframes floatFx { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-50px) scale(1.2); } }
+    .empty-state { text-align: center; color: #64748b; font-size: 14px; padding: 40px 0; font-weight: 500; line-height: 1.6; }
+</style>
+
+<div id="bg-layer"></div>
+<div id="app-container">
+
+    <div class="header-section">
+        <div class="main-title">오늘 먼저 먹기</div><br /><div class="main-title"><br /></div>
+        <div class="sub-title">프리미엄 식재료 생존 분석 플래너</div>
+    </div>
+
+    <!--가이드-->
+    <div class="accordion-box">
+        <div class="accordion-header" onclick="toggleAcc('guide-content')">
+            <span>📖 전문 컨설팅 가이드 및 이용 방법</span>
+            <i id="guide-content-icon">▼</i>
+        </div>
+        <div class="accordion-content" id="guide-content">
+            <div class="guide-h4">앱의 목적 및 원리</div>
+            <p>본 플래너는 번거로운 유통기한 입력 없이, 알고리즘이 식재료의 부패 위험도를 자동 산출하는 <b>하이엔드 방치형 솔루션</b>입니다. 초기 세팅 후 매일 접속하여 가장 위험한 상위 품목만 관리하면 냉장고의 낭비를 완벽히 통제할 수 있습니다.</p>
+            
+            <div class="guide-h4">위험도 점수 산출 로직</div>
+            <ul class="guide-ul">
+                <li><b>초기 가중치:</b> 보관 환경에 따라 기본 위험 점수가 다르게 부여됩니다. (상온: 5점 / 냉장: 3점 / 냉동: 1점)</li>
+                <li><b>시간 경과:</b> 등록된 시점부터 24시간이 지날 때마다 위험 지수가 1점씩 누적 상승합니다.</li>
+                <li><b>위험 구간:</b> 8점 이상은 '주의 구간', 12점 이상은 '심각 구간'으로 분류되어 메인 화면에 우선 노출됩니다.</li>
+            </ul>
+
+            <div class="legal-notice">
+                <b>⚠️ 법적 고지 및 면책 조항</b><br />
+                본 앱이 제공하는 '위험도 지수' 및 '분석 내용'은 보편적인 식품 통계에 기반한 <b>참고용 시뮬레이션 결과</b>이며, 실제 식품의 절대적인 섭취 가능 여부를 보장하지 않습니다. 식품 섭취 전 반드시 시각(곰팡이 등)과 후각(이취 등)을 통한 개인의 확인이 필수적이며, 본 앱의 정보를 맹신하여 발생한 건강상, 재산상 피해에 대해 운영자는 일체의 법적 책임을 지지 않습니다.
+            </div>
+        </div>
+    </div>
+
+    <!--샘플 데이터-->
+    <div class="accordion-box">
+        <div class="accordion-header" onclick="toggleAcc('sample-content')">
+            <span>📊 부패 위험도 시뮬레이션 샘플 보기</span>
+            <i id="sample-content-icon">▼</i>
+        </div>
+        <div class="accordion-content" id="sample-content">
+            <p style="color: #94a3b8; font-size: 13px; margin: 15px 0px;">※ 아래는 알고리즘 이해를 돕기 위한 <b>가상의 시뮬레이션 데이터</b>입니다. 실제 데이터에는 영향을 주지 않습니다.</p>
+            <div id="sample-list-container"></div>
+        </div>
+    </div>
+
+    <div class="stats-board">
+        <div class="stat-col">
+            <div class="stat-label">성공적 구출</div>
+            <div class="stat-value text-green" id="ui-eaten">0</div>
+        </div>
+        <div class="stat-col">
+            <div class="stat-label">안전 폐기</div>
+            <div class="stat-value text-red" id="ui-trashed">0</div>
+        </div>
+    </div>
+
+    <div class="section-title">➕ 신규 식재료 자산 등록</div>
+    <div class="input-wrapper">
+        <div class="input-row">
+            <input class="custom-input" id="input-name" placeholder="예: 한우 등심, 양파" type="text" />
+            <select class="custom-select" id="input-loc">
+                <option value="room">상온 보관</option>
+                <option value="fridge">냉장 보관</option>
+                <option value="freezer">냉동 보관</option>
+            </select>
+        </div>
+        <button class="btn-submit" onclick="addMyItem()">내 냉장고에 등록하기</button>
+    </div>
+
+    <div class="section-title">🗄️ 내 냉장고 리스트 (위험도 순)</div>
+    <div id="my-fridge-list">
+        <!--JS 렌더링-->
+    </div>
+
+    <button class="btn-final" id="btn-finish">
+        ✅ 오늘의 냉장고 생존 일지 기록하기
+    </button>
+
+</div>
+
+<!--모달-->
+<div class="modal-wrap" id="detail-modal">
+    <div class="modal-box">
+        <div class="m-header" id="m-title">[식재료] 정밀 분석</div>
+        
+        <div class="m-section">
+            <div class="m-sec-title">📈 위험도 점수 산출 근거</div>
+            <div class="m-text" id="m-calc"></div>
+        </div>
+
+        <div class="m-section">
+            <div class="m-sec-title">🔬 전문가 소견 및 취급 가이드</div>
+            <div class="m-text" id="m-expert"></div>
+        </div>
+
+        <button class="m-btn-search" id="m-search-btn">
+            🔍 네이버 지식백과 보관/폐기법 검색
+        </button>
+        <button class="m-btn-close" onclick="closeModal()">분석 창 닫기</button>
+    </div>
+</div>
+
+<script>
+// ES5 모바일 호환성 유지
+function toggleAcc(id) {
+    var content = document.getElementById(id);
+    var icon = document.getElementById(id + '-icon');
+    if (content.className.indexOf('open') > -1) {
+        content.className = content.className.replace(' open', '');
+        icon.innerHTML = '▼';
+    } else {
+        content.className += ' open';
+        icon.innerHTML = '▲';
+    }
+}
+
+function closeModal() {
+    document.getElementById('detail-modal').style.display = 'none';
+}
+
+var sampleData = [
+    { name: "상온 보관 바나나", loc: "room", days: 3 },
+    { name: "먹다 남은 양념치킨", loc: "fridge", days: 6 },
+    { name: "유기농 우유 1L", loc: "fridge", days: 12 },
+    { name: "손질 안 한 흙당근", loc: "room", days: 8 },
+    { name: "얼려둔 식빵", loc: "freezer", days: 15 },
+    { name: "한우 국거리용 소고기", loc: "fridge", days: 2 }
+];
+
+var myDB = {
+    items: [],
+    stats: { eaten: 0, trashed: 0 }
+};
+
+function analyzeScore(loc, daysPassed) {
+    var base = 0; var locStr = ''; var bClass = '';
+    if (loc === 'room') { base = 5; locStr = '상온 보관'; bClass = 'b-room'; }
+    else if (loc === 'fridge') { base = 3; locStr = '냉장 보관'; bClass = 'b-fridge'; }
+    else if (loc === 'freezer') { base = 1; locStr = '냉동 보관'; bClass = 'b-freezer'; }
+    
+    var total = base + daysPassed;
+    var statusClass = ''; var icon = '✅';
+    if (total >= 12) { statusClass = 'level-danger'; icon = '🚨'; }
+    else if (total >= 8) { statusClass = 'level-warning'; icon = '⚠️'; }
+
+    return { base: base, locStr: locStr, bClass: bClass, total: total, statusClass: statusClass, icon: icon, daysPassed: daysPassed };
+}
+
+function renderSampleList() {
+    var html = '';
+    for(var i = 0; i < sampleData.length; i++) {
+        var item = sampleData[i];
+        var s = analyzeScore(item.loc, item.days);
+        var color = s.total >= 12 ? '#f43f5e' : (s.total >= 8 ? '#f59e0b' : '#34d399');
+        html += '<div class="sample-card">';
+        html += '<div class="sample-name">' + s.icon + ' ' + item.name + ' <span style="font-size:11px; color:#64748b;">(' + s.days + '일 경과)</span></div>';
+        html += '<div class="sample-score" style="color:' + color + ';">' + s.total + ' Pts</div>';
+        html += '</div>';
+    }
+    document.getElementById('sample-list-container').innerHTML = html;
+}
+
+function renderApp() {
+    document.getElementById('ui-eaten').innerText = myDB.stats.eaten;
+    document.getElementById('ui-trashed').innerText = myDB.stats.trashed;
+
+    var activeItems = [];
+    for(var i = 0; i < myDB.items.length; i++) {
+        if(!myDB.items[i].isEaten && !myDB.items[i].isTrashed) {
+            activeItems.push(myDB.items[i]);
+        }
+    }
+    
+    var now = new Date().getTime();
+    for(var j = 0; j < activeItems.length; j++) {
+        var days = Math.floor((now - activeItems[j].regDate) / 86400000); 
+        activeItems[j].currentScoreData = analyzeScore(activeItems[j].loc, days > 0 ? days : 0);
+    }
+    
+    activeItems.sort(function(a, b) {
+        return b.currentScoreData.total - a.currentScoreData.total;
+    });
+
+    var html = '';
+    if(activeItems.length === 0) {
+        html = '<div class="empty-state">내 냉장고가 비어있습니다.<br>위의 입력창을 통해 관리할 식재료를 추가해 주세요.</div>';
+    } else {
+        for(var k = 0; k < activeItems.length; k++) {
+            var item = activeItems[k];
+            var s = item.currentScoreData;
+            html += '<div class="card ' + s.statusClass + '" onclick="openDetailModal(\'' + item.id + '\')">';
+            html += '<div class="card-content">';
+            html += '<div class="card-name">' + s.icon + ' ' + item.name + '</div>';
+            html += '<div class="card-meta">';
+            html += '<span class="badge ' + s.bClass + '">' + s.locStr + '</span>';
+            html += '<span>위험 지수: <b style="color:#f8fafc;">' + s.total + ' Pts</b></span>';
+            html += '</div></div>';
+            html += '<div class="action-btns">';
+            html += '<button class="btn-action btn-save" onclick="event.stopPropagation(); processMyItem(\'' + item.id + '\', \'eat\', event)">구출</button>';
+            html += '<button class="btn-action btn-drop" onclick="event.stopPropagation(); processMyItem(\'' + item.id + '\', \'trash\', event)">폐기</button>';
+            html += '</div></div>';
+        }
+    }
+    document.getElementById('my-fridge-list').innerHTML = html;
+}
+
+window.openDetailModal = function(id) {
+    var item = null;
+    for(var i = 0; i < myDB.items.length; i++) {
+        if(myDB.items[i].id === id) {
+            item = myDB.items[i];
+            break;
+        }
+    }
+    if(!item) return;
+
+    var s = item.currentScoreData;
+    
+    document.getElementById('m-title').innerText = '[' + item.name + '] 정밀 분석';
+    
+    var calcHtml = '기본 환경 위험도 (' + s.locStr + '): <b>' + s.base + '점</b><br>';
+    calcHtml += '등록 후 방치된 기간: <b>' + s.daysPassed + '일</b> (1일당 1점 가산)<br>';
+    calcHtml += '<div style="margin-top:10px; padding-top:10px; border-top:1px dashed #334155;">';
+    calcHtml += '합산 부패 위험 지수: <span class="m-highlight">' + s.total + ' Pts</span></div>';
+    document.getElementById('m-calc').innerHTML = calcHtml;
+
+    var expertMsg = "";
+    if (s.total >= 12) {
+        expertMsg = '<b>[심각한 부패 위험 단계]</b><br>내부 산출 기준 한계치(12점)를 초과했습니다. 유통기한 경과와 무관하게 곰팡이 포자 및 식중독균 번식 확률이 기하급수적으로 높아진 상태입니다. 시각적으로 멀쩡해 보이더라도 내부 부패가 진행되었을 가능성이 높습니다.<br><br>▶ <b style="color:#f43f5e;">조치 지침:</b> 아까워하지 말고 즉시 폐기하는 것을 강력히 권장합니다.';
+    } else if (s.total >= 8) {
+        expertMsg = '<b>[부패 진행 주의 단계]</b><br>식재료의 선도가 급격히 떨어지는 구간입니다. 수분 손실로 인한 식감 저하 및 미세한 산패가 시작될 수 있는 타이밍입니다.<br><br>▶ <b style="color:#f59e0b;">조치 지침:</b> 냄새(시큼함)와 겉면(미끈거림)을 먼저 확인하십시오. 조리 시 반드시 75도 이상에서 중심부까지 완전히 가열해야 하며, 오늘 내 소비가 불가능하다면 즉시 냉동실로 밀봉하여 이동시키십시오.';
+    } else {
+        expertMsg = '<b>[안전 보관 단계]</b><br>현재 식재료 고유의 신선도가 비교적 잘 유지되고 있는 안정적인 상태입니다. 다만, 온도 변화가 잦은 냉장고 문 쪽 보관 여부나 개봉 상태에 따라 부패 속도가 가속될 수 있습니다.<br><br>▶ <b style="color:#34d399;">조치 지침:</b> 본래의 맛과 영양을 온전히 즐기기 위해 가급적 1~2일 내 소진을 계획하십시오. 밀폐 용기를 사용하여 공기 접촉을 최소화하는 것이 선도 유지에 좋습니다.';
+    }
+    document.getElementById('m-expert').innerHTML = expertMsg;
+
+    document.getElementById('m-search-btn').onclick = function() {
+        var query = encodeURIComponent(item.name + " 소비기한 보관법 식중독");
+        window.open("https://search.naver.com/search.naver?query=" + query, "_blank");
+    };
+
+    document.getElementById('detail-modal').style.display = 'flex';
+}
+
+window.addMyItem = function() {
+    var nameInput = document.getElementById('input-name');
+    var locSelect = document.getElementById('input-loc');
+    
+    if(nameInput.value.replace(/^\s+|\s+$/g, '') === '') {
+        alert('식재료의 명칭을 입력해 주십시오.');
+        return;
+    }
+
+    var newItem = {
+        id: 'item_' + new Date().getTime(),
+        name: nameInput.value.replace(/^\s+|\s+$/g, ''),
+        loc: locSelect.value,
+        regDate: new Date().getTime(),
+        isEaten: false,
+        isTrashed: false
+    };
+
+    myDB.items.push(newItem);
+    nameInput.value = '';
+    saveData();
+    renderApp();
+}
+
+window.processMyItem = function(id, action, event) {
+    var index = -1;
+    for(var i = 0; i < myDB.items.length; i++) {
+        if(myDB.items[i].id === id) { index = i; break; }
+    }
+    if(index > -1) {
+        if(action === 'eat') {
+            myDB.items[index].isEaten = true;
+            myDB.stats.eaten += 1;
+            showFx(event, '<span style="font-size:22px;">✨</span> 구출 완료', '#34d399');
+        } else if(action === 'trash') {
+            myDB.items[index].isTrashed = true;
+            myDB.stats.trashed += 1;
+            showFx(event, '<span style="font-size:22px;">🗑️</span> 폐기 완료', '#94a3b8');
+        }
+        saveData();
+        renderApp();
+    }
+}
+
+function showFx(e, htmlText, color) {
+    var fx = document.createElement('div');
+    fx.className = 'fx-text';
+    fx.innerHTML = htmlText; 
+    fx.style.color = color;
+    var x = (e && e.clientX) ? e.clientX - 30 : window.innerWidth / 2;
+    var y = (e && e.clientY) ? e.clientY - 30 : window.innerHeight / 2;
+    fx.style.left = x + 'px';
+    fx.style.top = y + 'px';
+    document.body.appendChild(fx);
+    setTimeout(function() { if (fx.parentNode) fx.parentNode.removeChild(fx); }, 800);
+}
+
+function saveData() {
+    try { localStorage.setItem('PlannerDB_VIP_V4', JSON.stringify(myDB)); } catch(e) {}
+}
+
+function loadData() {
+    try {
+        var saved = localStorage.getItem('PlannerDB_VIP_V4');
+        if(saved) { myDB = JSON.parse(saved); } 
+    } catch(e) {}
+}
+
+window.onload = function() {
+    loadData();
+    renderSampleList();
+    renderApp();
+
+    var btnFinish = document.getElementById('btn-finish');
+    if (btnFinish) {
+        btnFinish.onclick = function() {
+            var btn = this;
+            if (btn.disabled) return;
+            
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerText = '데이터 동기화 및 일지 저장 중...';
+            
+            var baseUrl = window.location.href.split('?')[0];
+            var searchStr = window.location.search;
+            var mParam = (searchStr && searchStr.indexOf('m=') > -1) ? "m=1&" : "";
+            
+            try {
+                if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                    window.AppInventor.setWebViewString('action=spin_ott');
+                }
+            } catch (err) {}
+            
+            setTimeout(function () {
+                window.location.replace(baseUrl + "?" + mParam + "action=spin_ott");
+            }, 500);
+        };
+    }
+};
+</script>
