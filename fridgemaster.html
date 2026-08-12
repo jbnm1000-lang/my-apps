@@ -53,6 +53,10 @@
     .text-green { color: #10b981; }
     .text-red { color: #f43f5e; }
 
+    /* 결과창 3단 통계 전용 스타일 */
+    .r-stat-col { flex: 1; text-align: center; border-right: 1px solid #2e3c5a; }
+    .r-stat-col:last-child { border-right: none; }
+
     /* 폼 영역 */
     .section-title { font-size: 16px; font-weight: 800; color: #f1f5f9; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
     .input-wrapper { background: #151b2b; border: 1px solid #2e3c5a; border-radius: 14px; padding: 20px; margin-bottom: 35px; width: 100%; }
@@ -203,27 +207,31 @@
         </button>
     </div>
 
-    <!-- 성공적인 일지 기록 결과창 (새로 추가됨!) -->
+    <!-- 성공적인 일지 기록 결과창 -->
     <div id="success-wrap" style="display: none;">
         <div class="result-card">
             <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
             <div class="result-score">일지 기록 완료!</div>
             <div class="result-msg">
-                오늘의 냉장고 생존 일지가<br>서버에 안전하게 동기화되었습니다.
+                오늘의 냉장고 상태와 생존 일지가<br>서버에 안전하게 동기화되었습니다.
             </div>
             
-            <div class="stats-board" style="margin-bottom: 30px;">
-                <div class="stat-col">
-                    <div class="stat-label">총 구출 횟수</div>
+            <div class="stats-board" style="padding: 20px 10px; margin-bottom: 30px; display: flex;">
+                <div class="r-stat-col">
+                    <div class="stat-label">현재 보관 중</div>
+                    <div class="stat-value" style="color: #38bdf8;" id="success-active">0</div>
+                </div>
+                <div class="r-stat-col">
+                    <div class="stat-label">총 구출(먹음)</div>
                     <div class="stat-value text-green" id="success-eaten">0</div>
                 </div>
-                <div class="stat-col">
-                    <div class="stat-label">총 폐기 횟수</div>
+                <div class="r-stat-col">
+                    <div class="stat-label">총 폐기(버림)</div>
                     <div class="stat-value text-red" id="success-trashed">0</div>
                 </div>
             </div>
 
-            <button class="btn-restart" onclick="window.location.replace(window.location.href.split('?')[0] + '?v=2')">메인 화면으로 돌아가기</button>
+            <button class="btn-restart" onclick="window.location.replace(window.location.href.split('?')[0] + '?v=' + new Date().getTime())">메인 화면으로 돌아가기</button>
         </div>
     </div>
 
@@ -480,8 +488,19 @@ window.onload = function() {
         document.getElementById('success-wrap').style.display = 'block';
         
         loadData();
-        document.getElementById('success-eaten').innerText = myDB.stats.eaten;
-        document.getElementById('success-trashed').innerText = myDB.stats.trashed;
+        
+        // 현재 보관 중인 활성 아이템 수 계산
+        var activeCount = 0;
+        for(var i = 0; i < myDB.items.length; i++) {
+            if(!myDB.items[i].isEaten && !myDB.items[i].isTrashed) {
+                activeCount++;
+            }
+        }
+        
+        // 결과창에 데이터 반영
+        document.getElementById('success-active').innerText = activeCount + '개';
+        document.getElementById('success-eaten').innerText = myDB.stats.eaten + '번';
+        document.getElementById('success-trashed').innerText = myDB.stats.trashed + '번';
     } else {
         // 일반 메인 화면 표시
         loadData();
