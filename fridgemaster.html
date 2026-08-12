@@ -260,7 +260,7 @@
 </div>
 
 <script>
-// ES5 모바일 호환성 유지
+// ES5 모바일 호환성 유지 - URL 파라미터 추출
 function getQueryParam(name) {
     var url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -299,6 +299,14 @@ var sampleData = [
 var myDB = {
     items: [],
     stats: { eaten: 0, trashed: 0 }
+};
+
+// 모바일 웹뷰 환경에서 버튼 먹통 버그를 해결하는 최강의 클릭 핸들러
+window.clickAction = function(e, id, actionStr) {
+    if (!e) e = window.event;
+    if (e && e.stopPropagation) { e.stopPropagation(); }
+    else if (e && e.cancelBubble !== undefined) { e.cancelBubble = true; }
+    processMyItem(id, actionStr, e);
 };
 
 function analyzeScore(loc, daysPassed) {
@@ -364,9 +372,11 @@ function renderApp() {
             html += '<span class="badge ' + s.bClass + '">' + s.locStr + '</span>';
             html += '<span>위험 지수: <b style="color:#f8fafc;">' + s.total + ' Pts</b></span>';
             html += '</div></div>';
+            
+            // 먹통 버그 방지를 위해 개선된 클릭 핸들러 (window.clickAction) 적용
             html += '<div class="action-btns">';
-            html += '<button class="btn-action btn-save" onclick="event.stopPropagation(); processMyItem(\'' + item.id + '\', \'eat\', event)">구출</button>';
-            html += '<button class="btn-action btn-drop" onclick="event.stopPropagation(); processMyItem(\'' + item.id + '\', \'trash\', event)">폐기</button>';
+            html += '<button class="btn-action btn-save" onclick="window.clickAction(event, \'' + item.id + '\', \'eat\')">구출</button>';
+            html += '<button class="btn-action btn-drop" onclick="window.clickAction(event, \'' + item.id + '\', \'trash\')">폐기</button>';
             html += '</div></div>';
         }
     }
@@ -482,27 +492,19 @@ function loadData() {
 window.onload = function() {
     var action = getQueryParam('action');
     
-    // action=spin_ott (광고 송출 후) 일 경우 성공 결과 화면 표시
+    // 메모리 증발 방지: URL에서 데이터를 직접 뽑아와서 결과창에 박아넣습니다!
     if (action === 'spin_ott') {
         document.getElementById('main-wrap').style.display = 'none';
         document.getElementById('success-wrap').style.display = 'block';
         
-        loadData();
+        var urlActive = getQueryParam('active') || '0';
+        var urlEaten = getQueryParam('eaten') || '0';
+        var urlTrashed = getQueryParam('trashed') || '0';
         
-        // 현재 보관 중인 활성 아이템 수 계산
-        var activeCount = 0;
-        for(var i = 0; i < myDB.items.length; i++) {
-            if(!myDB.items[i].isEaten && !myDB.items[i].isTrashed) {
-                activeCount++;
-            }
-        }
-        
-        // 결과창에 데이터 반영
-        document.getElementById('success-active').innerText = activeCount + '개';
-        document.getElementById('success-eaten').innerText = myDB.stats.eaten + '번';
-        document.getElementById('success-trashed').innerText = myDB.stats.trashed + '번';
+        document.getElementById('success-active').innerText = urlActive + '개';
+        document.getElementById('success-eaten').innerText = urlEaten + '번';
+        document.getElementById('success-trashed').innerText = urlTrashed + '번';
     } else {
-        // 일반 메인 화면 표시
         loadData();
         renderSampleList();
         renderApp();
@@ -518,6 +520,14 @@ window.onload = function() {
             btn.style.opacity = '0.7';
             btn.innerText = '데이터 동기화 및 일지 저장 중...';
             
+            // 현재 화면의 진짜 숫자 계산하기
+            var activeCount = 0;
+            for(var i = 0; i < myDB.items.length; i++) {
+                if(!myDB.items[i].isEaten && !myDB.items[i].isTrashed) {
+                    activeCount++;
+                }
+            }
+            
             var baseUrl = window.location.href.split('?')[0];
             
             try {
@@ -526,8 +536,11 @@ window.onload = function() {
                 }
             } catch (err) {}
             
+            // URL 꼬리표에 점수를 꽉 묶어서 절대 날아가지 않게 던집니다!
+            var finalUrl = baseUrl + "?action=spin_ott&active=" + activeCount + "&eaten=" + myDB.stats.eaten + "&trashed=" + myDB.stats.trashed;
+            
             setTimeout(function () {
-                window.location.replace(baseUrl + "?action=spin_ott");
+                window.location.replace(finalUrl);
             }, 500);
         };
     }
