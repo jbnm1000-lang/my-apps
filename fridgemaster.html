@@ -1,4 +1,3 @@
-<!--구글 블로거 전용: 하이엔드 냉장고 생존 플래너 VIP (글자 잘림 레이아웃 완벽 수정본)-->
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;900&display=swap');
@@ -65,13 +64,12 @@
     .btn-submit { width: 100%; background: #38bdf8; color: #0b0f19; border: none; padding: 16px; border-radius: 10px; font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.2s; }
     .btn-submit:active { transform: scale(0.98); background: #0ea5e9; }
 
-    /* 카드 리스트 (글자 잘림 해결) */
+    /* 카드 리스트 */
     .card { background: #151b2b; border-radius: 14px; padding: 16px 14px; margin-bottom: 12px; border: 1px solid #2e3c5a; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; cursor: pointer; width: 100%; gap: 10px; }
     .card:active { transform: scale(0.98); background: #1e293b; }
     .card.level-danger { border-color: rgba(244, 63, 94, 0.5); background: linear-gradient(to right, rgba(244, 63, 94, 0.05), #151b2b); }
     .card.level-warning { border-color: rgba(245, 158, 11, 0.5); background: linear-gradient(to right, rgba(245, 158, 11, 0.05), #151b2b); }
     
-    /* 여기서 min-width: 0; 추가 및 overflow 설정 변경으로 글자 자동 줄바꿈 허용 */
     .card-content { flex: 1; min-width: 0; pointer-events: none; }
     .card-name { font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 6px; word-break: keep-all; line-height: 1.3; display: block; }
     .card-meta { font-size: 12px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -95,6 +93,13 @@
     /* 하단 기록 버튼 */
     .btn-final { width: 100%; background: linear-gradient(135deg, #6366f1, #a855f7); border: none; color: white; padding: 22px; border-radius: 14px; font-weight: 900; font-size: 17px; cursor: pointer; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); margin-top: 20px; transition: 0.2s; }
     .btn-final:active { transform: scale(0.97); }
+
+    /* 결과 성공 화면 스타일 */
+    .result-card { background: #151b2b; border-radius: 20px; padding: 50px 20px; border: 1px solid #38bdf8; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; margin-top: 20px; animation: slideUp 0.4s ease; }
+    .result-score { font-size: 34px; font-weight: 900; color: #38bdf8; margin-bottom: 15px; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+    .result-msg { font-size: 16px; color: #cbd5e1; margin-bottom: 35px; line-height: 1.7; word-break: keep-all; font-weight: 500; }
+    .btn-restart { width: 100%; padding: 20px; background: #334155; color: #f8fafc; border: 1px solid #475569; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+    .btn-restart:active { transform: scale(0.97); }
 
     /* 모달 */
     .modal-wrap { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 9, 20, 0.9); z-index: 10000; padding: 20px; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
@@ -122,78 +127,105 @@
 <div id="app-container">
 
     <div class="header-section">
-        <div class="main-title">오늘 먼저 먹기</div><br /><div class="main-title"><br /></div>
+        <div class="main-title">오늘 먼저 먹기</div>
         <div class="sub-title">프리미엄 식재료 생존 분석 플래너</div>
     </div>
 
-    <!--가이드-->
-    <div class="accordion-box">
-        <div class="accordion-header" onclick="toggleAcc('guide-content')">
-            <span>📖 전문 컨설팅 가이드 및 이용 방법</span>
-            <i id="guide-content-icon">▼</i>
-        </div>
-        <div class="accordion-content" id="guide-content">
-            <div class="guide-h4">앱의 목적 및 원리</div>
-            <p>본 플래너는 번거로운 유통기한 입력 없이, 알고리즘이 식재료의 부패 위험도를 자동 산출하는 <b>하이엔드 방치형 솔루션</b>입니다. 초기 세팅 후 매일 접속하여 가장 위험한 상위 품목만 관리하면 냉장고의 낭비를 완벽히 통제할 수 있습니다.</p>
-            
-            <div class="guide-h4">위험도 점수 산출 로직</div>
-            <ul class="guide-ul">
-                <li><b>초기 가중치:</b> 보관 환경에 따라 기본 위험 점수가 다르게 부여됩니다. (상온: 5점 / 냉장: 3점 / 냉동: 1점)</li>
-                <li><b>시간 경과:</b> 등록된 시점부터 24시간이 지날 때마다 위험 지수가 1점씩 누적 상승합니다.</li>
-                <li><b>위험 구간:</b> 8점 이상은 '주의 구간', 12점 이상은 '심각 구간'으로 분류되어 메인 화면에 우선 노출됩니다.</li>
-            </ul>
+    <!-- 메인 입력 및 리스트 영역 -->
+    <div id="main-wrap">
+        <!--가이드-->
+        <div class="accordion-box">
+            <div class="accordion-header" onclick="toggleAcc('guide-content')">
+                <span>📖 전문 컨설팅 가이드 및 이용 방법</span>
+                <i id="guide-content-icon">▼</i>
+            </div>
+            <div class="accordion-content" id="guide-content">
+                <div class="guide-h4">앱의 목적 및 원리</div>
+                <p>본 플래너는 번거로운 유통기한 입력 없이, 알고리즘이 식재료의 부패 위험도를 자동 산출하는 <b>하이엔드 방치형 솔루션</b>입니다. 초기 세팅 후 매일 접속하여 가장 위험한 상위 품목만 관리하면 냉장고의 낭비를 완벽히 통제할 수 있습니다.</p>
+                
+                <div class="guide-h4">위험도 점수 산출 로직</div>
+                <ul class="guide-ul">
+                    <li><b>초기 가중치:</b> 보관 환경에 따라 기본 위험 점수가 다르게 부여됩니다. (상온: 5점 / 냉장: 3점 / 냉동: 1점)</li>
+                    <li><b>시간 경과:</b> 등록된 시점부터 24시간이 지날 때마다 위험 지수가 1점씩 누적 상승합니다.</li>
+                    <li><b>위험 구간:</b> 8점 이상은 '주의 구간', 12점 이상은 '심각 구간'으로 분류되어 메인 화면에 우선 노출됩니다.</li>
+                </ul>
 
-            <div class="legal-notice">
-                <b>⚠️ 법적 고지 및 면책 조항</b><br />
-                본 앱이 제공하는 '위험도 지수' 및 '분석 내용'은 보편적인 식품 통계에 기반한 <b>참고용 시뮬레이션 결과</b>이며, 실제 식품의 절대적인 섭취 가능 여부를 보장하지 않습니다. 식품 섭취 전 반드시 시각(곰팡이 등)과 후각(이취 등)을 통한 개인의 확인이 필수적이며, 본 앱의 정보를 맹신하여 발생한 건강상, 재산상 피해에 대해 운영자는 일체의 법적 책임을 지지 않습니다.
+                <div class="legal-notice">
+                    <b>⚠️ 법적 고지 및 면책 조항</b><br />
+                    본 앱이 제공하는 '위험도 지수' 및 '분석 내용'은 보편적인 식품 통계에 기반한 <b>참고용 시뮬레이션 결과</b>이며, 실제 식품의 절대적인 섭취 가능 여부를 보장하지 않습니다. 식품 섭취 전 반드시 시각(곰팡이 등)과 후각(이취 등)을 통한 개인의 확인이 필수적이며, 본 앱의 정보를 맹신하여 발생한 건강상, 재산상 피해에 대해 운영자는 일체의 법적 책임을 지지 않습니다.
+                </div>
             </div>
         </div>
+
+        <!--샘플 데이터-->
+        <div class="accordion-box">
+            <div class="accordion-header" onclick="toggleAcc('sample-content')">
+                <span>📊 부패 위험도 시뮬레이션 샘플 보기</span>
+                <i id="sample-content-icon">▼</i>
+            </div>
+            <div class="accordion-content" id="sample-content">
+                <p style="color: #94a3b8; font-size: 13px; margin: 15px 0px;">※ 아래는 알고리즘 이해를 돕기 위한 <b>가상의 시뮬레이션 데이터</b>입니다. 실제 데이터에는 영향을 주지 않습니다.</p>
+                <div id="sample-list-container"></div>
+            </div>
+        </div>
+
+        <div class="stats-board">
+            <div class="stat-col">
+                <div class="stat-label">성공적 구출</div>
+                <div class="stat-value text-green" id="ui-eaten">0</div>
+            </div>
+            <div class="stat-col">
+                <div class="stat-label">안전 폐기</div>
+                <div class="stat-value text-red" id="ui-trashed">0</div>
+            </div>
+        </div>
+
+        <div class="section-title">➕ 신규 식재료 자산 등록</div>
+        <div class="input-wrapper">
+            <div class="input-row">
+                <input class="custom-input" id="input-name" placeholder="예: 한우 등심, 양파" type="text" />
+                <select class="custom-select" id="input-loc">
+                    <option value="room">상온 보관</option>
+                    <option value="fridge">냉장 보관</option>
+                    <option value="freezer">냉동 보관</option>
+                </select>
+            </div>
+            <button class="btn-submit" onclick="addMyItem()">내 냉장고에 등록하기</button>
+        </div>
+
+        <div class="section-title">🗄️ 내 냉장고 리스트 (위험도 순)</div>
+        <div id="my-fridge-list">
+            <!--JS 렌더링-->
+        </div>
+
+        <button class="btn-final" id="btn-finish">
+            ✅ 오늘의 냉장고 생존 일지 기록하기
+        </button>
     </div>
 
-    <!--샘플 데이터-->
-    <div class="accordion-box">
-        <div class="accordion-header" onclick="toggleAcc('sample-content')">
-            <span>📊 부패 위험도 시뮬레이션 샘플 보기</span>
-            <i id="sample-content-icon">▼</i>
-        </div>
-        <div class="accordion-content" id="sample-content">
-            <p style="color: #94a3b8; font-size: 13px; margin: 15px 0px;">※ 아래는 알고리즘 이해를 돕기 위한 <b>가상의 시뮬레이션 데이터</b>입니다. 실제 데이터에는 영향을 주지 않습니다.</p>
-            <div id="sample-list-container"></div>
+    <!-- 성공적인 일지 기록 결과창 (새로 추가됨!) -->
+    <div id="success-wrap" style="display: none;">
+        <div class="result-card">
+            <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
+            <div class="result-score">일지 기록 완료!</div>
+            <div class="result-msg">
+                오늘의 냉장고 생존 일지가<br>서버에 안전하게 동기화되었습니다.
+            </div>
+            
+            <div class="stats-board" style="margin-bottom: 30px;">
+                <div class="stat-col">
+                    <div class="stat-label">총 구출 횟수</div>
+                    <div class="stat-value text-green" id="success-eaten">0</div>
+                </div>
+                <div class="stat-col">
+                    <div class="stat-label">총 폐기 횟수</div>
+                    <div class="stat-value text-red" id="success-trashed">0</div>
+                </div>
+            </div>
+
+            <button class="btn-restart" onclick="window.location.replace(window.location.href.split('?')[0] + '?v=2')">메인 화면으로 돌아가기</button>
         </div>
     </div>
-
-    <div class="stats-board">
-        <div class="stat-col">
-            <div class="stat-label">성공적 구출</div>
-            <div class="stat-value text-green" id="ui-eaten">0</div>
-        </div>
-        <div class="stat-col">
-            <div class="stat-label">안전 폐기</div>
-            <div class="stat-value text-red" id="ui-trashed">0</div>
-        </div>
-    </div>
-
-    <div class="section-title">➕ 신규 식재료 자산 등록</div>
-    <div class="input-wrapper">
-        <div class="input-row">
-            <input class="custom-input" id="input-name" placeholder="예: 한우 등심, 양파" type="text" />
-            <select class="custom-select" id="input-loc">
-                <option value="room">상온 보관</option>
-                <option value="fridge">냉장 보관</option>
-                <option value="freezer">냉동 보관</option>
-            </select>
-        </div>
-        <button class="btn-submit" onclick="addMyItem()">내 냉장고에 등록하기</button>
-    </div>
-
-    <div class="section-title">🗄️ 내 냉장고 리스트 (위험도 순)</div>
-    <div id="my-fridge-list">
-        <!--JS 렌더링-->
-    </div>
-
-    <button class="btn-final" id="btn-finish">
-        ✅ 오늘의 냉장고 생존 일지 기록하기
-    </button>
 
 </div>
 
@@ -221,6 +253,16 @@
 
 <script>
 // ES5 모바일 호환성 유지
+function getQueryParam(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    var results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
 function toggleAcc(id) {
     var content = document.getElementById(id);
     var icon = document.getElementById(id + '-icon');
@@ -430,9 +472,22 @@ function loadData() {
 }
 
 window.onload = function() {
-    loadData();
-    renderSampleList();
-    renderApp();
+    var action = getQueryParam('action');
+    
+    // action=spin_ott (광고 송출 후) 일 경우 성공 결과 화면 표시
+    if (action === 'spin_ott') {
+        document.getElementById('main-wrap').style.display = 'none';
+        document.getElementById('success-wrap').style.display = 'block';
+        
+        loadData();
+        document.getElementById('success-eaten').innerText = myDB.stats.eaten;
+        document.getElementById('success-trashed').innerText = myDB.stats.trashed;
+    } else {
+        // 일반 메인 화면 표시
+        loadData();
+        renderSampleList();
+        renderApp();
+    }
 
     var btnFinish = document.getElementById('btn-finish');
     if (btnFinish) {
@@ -445,8 +500,6 @@ window.onload = function() {
             btn.innerText = '데이터 동기화 및 일지 저장 중...';
             
             var baseUrl = window.location.href.split('?')[0];
-            var searchStr = window.location.search;
-            var mParam = (searchStr && searchStr.indexOf('m=') > -1) ? "m=1&" : "";
             
             try {
                 if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
@@ -455,7 +508,7 @@ window.onload = function() {
             } catch (err) {}
             
             setTimeout(function () {
-                window.location.replace(baseUrl + "?" + mParam + "action=spin_ott");
+                window.location.replace(baseUrl + "?action=spin_ott");
             }, 500);
         };
     }
