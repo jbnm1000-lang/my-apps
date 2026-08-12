@@ -1,0 +1,434 @@
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&display=swap');
+
+/* 모든 요소 사이즈 고정 (오류 원천 차단) */
+*, *::before, *::after { box-sizing: border-box; }
+
+.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"], body header { 
+    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+} 
+
+html, body { 
+    padding: 0 !important; margin: 0 !important; border: none !important; 
+    background-color: #0f172a !important; 
+    width: 100% !important; min-height: 100vh !important;
+    font-family: 'Pretendard', sans-serif; color: #f1f5f9;
+    overflow-x: hidden; -webkit-tap-highlight-color: transparent;
+}
+
+#particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
+.app-container { max-width: 600px; margin: 0 auto; padding: 20px 20px 80px 20px; position: relative; z-index: 10; }
+
+/* 중장비 느낌의 딥 네이비 + 옐로우(골드) 테마 적용 */
+.app-header { text-align: center; margin-bottom: 25px; background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); padding: 30px 20px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.app-header h1 { font-size: 26px; font-weight: 800; margin: 0 0 10px 0; color: #f8fafc; letter-spacing: -0.5px; word-break: keep-all; }
+.app-header h1 span { color: #f59e0b; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+.app-header p { color: #94a3b8; font-size: 15px; margin: 0; line-height: 1.6; word-break: keep-all; }
+
+.info-panel { background-color: #1e293b; border: 1px solid #334155; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+.info-title { color: #f59e0b; font-size: 19px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+.info-text { color: #e2e8f0; font-size: 16.5px; margin: 0 0 15px 0; line-height: 1.7; word-break: keep-all; text-align: left; }
+.info-highlight { color: #38bdf8; font-weight: 700; }
+
+.disclaimer-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid #ef4444; padding: 18px 20px; border-radius: 12px; margin-top: 20px; }
+.disclaimer-title { color: #fca5a5; font-size: 15px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.disclaimer-text { color: #f87171; font-size: 14.5px; margin: 0; line-height: 1.6; word-break: keep-all; }
+
+/* 꿀팁 아코디언 패널 */
+.tips-panel { background-color: #1e293b; border: 1px solid #334155; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden; }
+.tips-header { padding: 22px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #0f172a; transition: background 0.3s; }
+.tips-header:active { background: #1e293b; }
+.tips-title { color: #38bdf8; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.tips-arrow { color: #38bdf8; font-size: 16px; font-weight: 800; transition: transform 0.3s; }
+.tips-content { padding: 20px 25px; display: none; border-top: 1px solid #334155; }
+.tips-content ul { margin: 0; padding-left: 20px; color: #cbd5e1; font-size: 16px; line-height: 1.7; word-break: keep-all; }
+.tips-content li { margin-bottom: 15px; }
+.tips-content li:last-child { margin-bottom: 0; }
+.tips-content li b { color: #f59e0b; }
+
+.status-bar { display: flex; justify-content: space-between; background: #1e293b; padding: 20px 22px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; font-weight: 800; color: #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-size: 18px; }
+.status-bar .score { color: #f59e0b; font-size: 18px; }
+
+.question-card { background: #1e293b; border-radius: 20px; padding: 35px 25px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 25px; }
+.q-number { display: inline-block; background: #f59e0b; color: #0f172a; font-size: 16px; font-weight: 900; padding: 8px 18px; border-radius: 20px; margin-bottom: 22px; }
+.q-text { font-size: 24px; font-weight: 700; color: #f8fafc; line-height: 1.5; margin-bottom: 35px; word-break: keep-all; }
+
+.error-text { color: #ef4444 !important; font-size: 16px !important; font-weight: bold; }
+
+.options-group { display: flex; flex-direction: column; gap: 16px; }
+.btn-option { width: 100%; text-align: left; padding: 22px 25px; background: #0f172a; border: 1px solid #475569; color: #e2e8f0; border-radius: 16px; font-size: 19px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: 'Pretendard', sans-serif; line-height: 1.5; word-break: keep-all; }
+.btn-option:active { transform: scale(0.97); background: #1e293b; }
+.btn-option.correct { background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #f59e0b; font-weight: 800; }
+.btn-option.wrong { background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #ef4444; font-weight: 800; }
+
+.explanation-box { display: none; margin-top: 30px; padding: 22px; background: rgba(245, 158, 11, 0.05); border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 17px; color: #e2e8f0; line-height: 1.7; font-weight: 400; word-break: keep-all; }
+
+.btn-next { width: 100%; padding: 25px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; border-radius: 16px; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); margin-top: 15px; display: none; transition: transform 0.2s; }
+.btn-next:active { transform: scale(0.97); }
+
+.result-card { text-align: center; padding: 50px 20px; display: none; background: #1e293b; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.result-score { font-size: 60px; font-weight: 900; color: #f59e0b; margin-bottom: 20px; text-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+.result-msg { font-size: 19px; color: #cbd5e1; margin-bottom: 40px; line-height: 1.7; word-break: keep-all; font-weight: 600; }
+.btn-restart { width: 100%; padding: 25px; background: #334155; color: #f8fafc; border: 1px solid #475569; border-radius: 16px; font-size: 20px; font-weight: 800; cursor: pointer; margin-bottom: 15px; transition: transform 0.2s; }
+.btn-restart:active { transform: scale(0.97); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+</style>
+
+<script>
+window.onerror = function(msg, url, line) {
+    document.body.innerHTML = "<div style='padding:30px; background:#ffffff; color:#ef4444; font-size:18px; font-weight:bold; line-height:1.6; z-index:9999; position:relative;'><h2 style='color:black;'>[에러 발생]</h2>앱 초기화 실패<br>내용: " + msg + "<br>발생 줄 번호: " + line + "</div>";
+    return false;
+};
+</script>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-container">
+    <div class="app-header">
+        <h1>스마트 굴착기 <span>패스</span></h1>
+        <p>현장 맞춤형 큼직한 글씨 &amp; 100% 무료</p>
+    </div>
+
+    <div class="info-panel" id="intro-panel">
+        <div class="info-title">🚜 스마트 학습 가이드 &amp; 환영 인사</div>
+        <p class="info-text">예비 굴착기 조종사 여러분, 진심으로 환영합니다! 현장 일로 바쁘시고 눈이 침침하신 수험생분들도 돋보기 없이 편안하게 공부하실 수 있도록 <b>가장 큼직한 글씨와 시원한 화면</b>으로 정성껏 만들었습니다.</p>
+        <p class="info-text"><span class="info-highlight">[💡 합격을 위한 200% 활용 꿀팁]</span><br />방대한 이론서 대신, <b>실제 시험과 똑같이 핵심 20문제씩 새롭게 섞여서 출제</b>됩니다. 출퇴근길이나 현장 쉬는 시간 10분씩만 편안하게 누르며 풀어보세요. 학원 선생님처럼 친절한 정답 해설이 바로 뜹니다!</p>
+        <div class="disclaimer-box">
+            <div class="disclaimer-title">🚨 이용 전 필수 확인 (면책 조항)</div>
+            <p class="disclaimer-text">본 앱은 수험생분들의 단기 합격을 돕기 위해 개인 개발자가 무료로 제공하는 <b>참고용 보조 도구</b>입니다. 출제 경향을 반영하여 정답을 구성하였으나, 실제 시험 결과나 오탈자에 대해 법적 책임을 지지 않으므로 최종 점검은 공식 교재를 활용해 주십시오.</p>
+        </div>
+    </div>
+
+    <div class="tips-panel" id="tips-panel">
+        <div class="tips-header" onclick="window.toggleTips()">
+            <div class="tips-title">💡 필기시험장 가기 전 꼭 읽어보세요</div>
+            <div class="tips-arrow" id="tips-arrow">▼</div>
+        </div>
+        <div class="tips-content" id="tips-content">
+            <ul>
+                <li><b>신분증 필수 지참:</b> 주민등록증이나 운전면허증을 안 챙기시면 절대 시험을 볼 수 없습니다. 전날 가방에 꼭 챙기세요.</li>
+                <li><b>컴퓨터 시험(CBT) 글씨 확대:</b> 모니터로 시험을 볼 때 화면 우측 상단에 <b>'화면 확대'</b> 버튼이 있습니다. 글씨가 작으면 무조건 150%로 키우고 편하게 보세요.</li>
+                <li><b>건설기계 공통 과목 공략:</b> 굴착기 필기시험은 지게차 등 다른 장비와 '엔진/유압/안전' 과목이 똑같이 출제됩니다. 공통 과목에서 확실히 점수를 따는 것이 합격의 지름길입니다.</li>
+                <li><b>시간 배분:</b> 60문제를 60분 안에 풀어야 합니다. 계산 문제나 모르는 문제는 화면 우측의 '나중에 풀기'를 누르고 아는 것부터 빠르게 푸세요.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="quiz-section">
+        <div class="status-bar">
+            <div id="progress-text">문제 1 / 20</div>
+            <div class="score" id="score-text">정답률: 0%</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-number" id="q-num-badge">Q. 1</div>
+            <div class="q-text" id="q-text">문제가 로딩중입니다... (잠시만 기다려주세요)</div>
+            <div class="options-group" id="options-container"></div>
+            <div class="explanation-box" id="explanation">해설: </div>
+        </div>
+
+        <button class="btn-next" id="btn-next" onclick="window.nextQuestion()">다음 문제로 넘어가기</button>
+    </div>
+
+    <div class="result-card" id="result-section">
+        <div class="q-number" style="margin-bottom: 20px;">모의고사 종료</div>
+        <div class="result-score" id="final-score">0점</div>
+        <div class="result-msg" id="final-msg">결과 확인 중...</div>
+        <button class="btn-restart" onclick="window.startNewTest()" style="display: block; margin-bottom: 15px;">새로운 모의고사 다시 풀기</button>
+    </div>
+</div>
+
+<script>
+function getQueryParam(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    var results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+window.toggleTips = function() {
+    var content = document.getElementById('tips-content');
+    var arrow = document.getElementById('tips-arrow');
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        arrow.innerHTML = '&#9650;';
+    } else {
+        content.style.display = 'none';
+        arrow.innerHTML = '&#9660;';
+    }
+};
+
+function initParticles() {
+    try {
+        var canvas = document.getElementById('particle-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        for (var i = 0; i < 25; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1.5,
+                speedY: Math.random() * 0.3 + 0.1,
+                opacity: Math.random() * 0.3 + 0.1
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < 25; i++) {
+                var p = particles[i];
+                p.y -= p.speedY; 
+                if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(245, 158, 11, " + p.opacity + ")"; 
+                ctx.fill();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    } catch(e) {}
+}
+
+// 굴착기 운전기능사 핵심 기출 100제
+var quizDataPool = [
+{q:"디젤기관에서 연료가 분사되는 시기는 언제인가?",a:["흡기행정 초","압축행정 말","폭발행정 초","배기행정 말"],c:1,e:"디젤기관은 공기를 압축하여 고온, 고압이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다."},
+{q:"굴착기에서 무한궤도(트랙)의 장력을 조절하는 장치는 무엇인가?",a:["트랙 롤러","스프로킷","아이들러","트랙 슈"],c:2,e:"굴착기 앞쪽에 위치한 아이들러(유동륜) 안의 그리스 실린더에 그리스를 주입하거나 빼내어 트랙의 팽팽함을 조절합니다."},
+{q:"4행정 기관에서 1사이클을 완료할 때 크랭크축은 몇 회전하는가?",a:["1회전","2회전","3회전","4회전"],c:1,e:"4행정 기관은 흡입, 압축, 폭발, 배기의 과정을 거치며 크랭크축이 2회전(720도) 할 때 1사이클을 완료합니다."},
+{q:"엔진 오일의 주요 기능이 아닌 것은?",a:["윤활 작용","냉각 작용","밀봉 작용","폭발 작용"],c:3,e:"엔진 오일은 마찰을 줄이고(윤활), 열을 식히며(냉각), 틈새를 막아주지만(밀봉) 폭발과는 무관합니다."},
+{q:"굴착기로 도랑을 파거나 관로 작업을 할 때 가장 적합한 버킷은?",a:["V형 버킷","사각 버킷","이젝터 버킷","크램쉘 버킷"],c:0,e:"V형 버킷은 도랑 파기, 배수로 작업, 관로 매설 작업에 가장 특화된 굴착기 작업 장치입니다."},
+{q:"수랭식 엔진에서 냉각수 온도를 일정하게 조절하는 장치는?",a:["워터 펌프","수온 조절기(서모스탯)","라디에이터 캡","냉각 팬"],c:1,e:"수온 조절기(서모스탯)는 온도에 따라 밸브를 열고 닫아 엔진을 적정 온도로 유지시킵니다."},
+{q:"굴착기의 동력 전달 순서로 가장 올바른 것은?",a:["엔진 -> 유압펌프 -> 컨트롤 밸브 -> 주행모터 -> 스프로킷","엔진 -> 주행모터 -> 유압펌프 -> 컨트롤 밸브 -> 스프로킷","엔진 -> 컨트롤 밸브 -> 유압펌프 -> 주행모터 -> 스프로킷","엔진 -> 스프로킷 -> 주행모터 -> 유압펌프 -> 컨트롤 밸브"],c:0,e:"무한궤도식 굴착기는 엔진의 힘으로 유압펌프를 돌리고, 조종레버(컨트롤 밸브)를 통해 유압을 주행모터로 보내 스프로킷을 회전시킵니다."},
+{q:"가동 중인 엔진을 정지시키는 가장 올바른 방법은?",a:["가속 후 바로 끈다.","공회전 후 서서히 끈다.","주행 중 끈다.","배터리를 분리한다."],c:1,e:"고속 회전 직후 바로 끄지 않고, 3~5분 정도 공회전시켜 엔진 온도를 서서히 낮춘 후 끄는 것이 안전합니다."},
+{q:"크랭크축과 캠축의 회전 비율은 얼마인가?",a:["1 : 1","2 : 1","1 : 2","4 : 1"],c:1,e:"4행정 기관에서 크랭크축이 2회전 할 때, 캠축은 1회전하여 밸브를 한 번씩 열고 닫습니다."},
+{q:"굴착기의 붐과 암을 움직이는 유압 실린더는 어떤 종류인가?",a:["단동 실린더","복동 실린더","다단 실린더","로터리 실린더"],c:1,e:"붐, 암, 버킷을 작동시키는 실린더는 피스톤 양쪽에 유압이 번갈아 작용하여 밀고 당기는 힘을 모두 내는 복동 실린더입니다."},
+{q:"라디에이터 캡에 압력 밸브가 있는 가장 큰 이유는?",a:["냉각수 증발 방지","냉각수 비등점(끓는점) 상승","라디에이터 파손 방지","냉각 효율 저하"],c:1,e:"압력을 높여 냉각수의 끓는점을 100도 이상으로 올려 냉각 효율을 극대화하기 위함입니다."},
+{q:"터보차저(과급기)의 주된 역할은 무엇인가?",a:["연료 소비 절감","엔진 출력 증대","소음 감소","배기가스 정화"],c:1,e:"배기가스의 힘으로 터빈을 돌려 더 많은 공기를 실린더로 강제 압송하여 엔진의 출력을 높입니다."},
+{q:"굴착기 작업 중 지반이 약한 곳을 통과할 때 가장 안전한 방법은?",a:["주행 속도를 최고로 높여 통과한다.","버킷을 지면에 닿을 듯 낮추고 천천히 통과한다.","붐을 최대한 높이 들고 통과한다.","상부 선회체를 계속 회전시키며 통과한다."],c:1,e:"연약 지반을 지날 때는 무게 중심을 낮추기 위해 버킷을 지면 가까이 낮추고 저속으로 주행하여 전복을 방지해야 합니다."},
+{q:"오일 여과기(필터)의 막힘을 대비하여 오일이 우회할 수 있게 하는 밸브는?",a:["릴리프 밸브","바이패스 밸브","체크 밸브","초크 밸브"],c:1,e:"오일 필터가 막혔을 때 엔진 소착을 막기 위해 오일을 여과 없이 바로 통과시키는 것이 바이패스 밸브입니다."},
+{q:"에어 클리너가 막혔을 때 나타나는 현상으로 옳은 것은?",a:["출력 증가","매연 감소","연료 소비 증가","엔진 과랭"],c:2,e:"공기 저항이 커져 공기 흡입량이 줄어들고 불완전 연소로 인해 연료 소비가 증가하며 검은 매연이 발생합니다."},
+{q:"디젤 연료의 착화성을 나타내는 수치는?",a:["옥탄가","세탄가","비중","인화점"],c:1,e:"가솔린은 옥탄가, 디젤(경유)은 세탄가를 사용하여 착화성을 나타냅니다."},
+{q:"타이어식 굴착기에서 작업 시 차체가 흔들리는 것을 막아주는 장치는?",a:["아우트리거 (Outrigger)","도저 블레이드","스프로킷","슈 파드"],c:0,e:"타이어식 장비는 지지력이 약하므로 작업 시 아우트리거(지주대)를 땅에 내려 차체의 수평과 안정을 유지합니다."},
+{q:"실린더 헤드 볼트를 조일 때 가장 올바른 순서는?",a:["바깥쪽에서 안쪽으로 대각선으로","안쪽에서 바깥쪽으로 대각선으로","시계 방향으로 차례대로","임의의 순서대로"],c:1,e:"변형을 방지하고 기밀을 유지하기 위해 중앙(안쪽)에서 시작하여 바깥쪽을 향해 나선형 또는 대각선으로 조입니다."},
+{q:"유압 장치에서 작동유의 온도가 상승할 때 나타나는 현상이 아닌 것은?",a:["점도 저하","체적 효율 감소","캐비테이션 발생","점도 상승"],c:3,e:"온도가 상승하면 유체는 묽어지므로 점도가 저하됩니다. 점도 상승은 틀린 설명입니다."},
+{q:"유압 펌프에서 소음이 발생하는 원인과 가장 거리가 먼 것은?",a:["공기 혼입","회전속도 과다","작동유 점도 과소","축 중심 어긋남"],c:2,e:"작동유의 점도가 너무 '높을' 때 끈적임 때문에 흡입 저항이 커져 공동현상(소음)이 발생하기 쉽습니다."},
+{q:"유압유가 갖추어야 할 조건으로 옳은 것은?",a:["인화점이 낮을 것","비압축성일 것","점도 지수가 낮을 것","응고점이 높을 것"],c:1,e:"유압유는 동력을 확실하게 전달하기 위해 압력을 가해도 부피가 쉽게 변하지 않는 비압축성 유체여야 합니다."},
+{q:"유압 회로에서 작동유의 압력이 설정치 이상으로 올라가는 것을 방지하는 밸브는?",a:["체크 밸브","릴리프 밸브","감압 밸브","유량 제어 밸브"],c:1,e:"릴리프 밸브(안전 밸브)는 회로 내 최고 압력을 설정하고 한계를 넘으면 오일을 배출하여 기기를 보호합니다."},
+{q:"굴착기의 상부 선회체(Swing)가 회전할 수 있도록 동력을 전달하는 장치는?",a:["주행 모터","선회 모터 (Swing Motor)","붐 실린더","트랙 롤러"],c:1,e:"상부 선회체는 유압의 힘을 회전력으로 바꾸는 선회 모터와 감속기를 통해 360도 회전할 수 있습니다."},
+{q:"기어 펌프의 특징으로 알맞은 것은?",a:["구조가 복잡하다","고압 대용량에 적합하다","구조가 간단하고 값이 싸다","효율이 가장 높다"],c:2,e:"기어 펌프는 구조가 단순하여 정비가 쉽고 가격이 저렴하지만, 플런저 펌프 등에 비해 효율이나 압력은 다소 낮습니다."},
+{q:"유압 액추에이터에 해당하지 않는 것은?",a:["유압 실린더","유압 모터","요동 모터","유압 펌프"],c:3,e:"유압 펌프는 유압 에너지를 발생시키는 발생 장치이며, 액추에이터(구동 장치)가 아닙니다."},
+{q:"방향 제어 밸브 중 한쪽 방향으로만 흐르게 하고 역류를 방지하는 밸브는?",a:["릴리프 밸브","체크 밸브","초크 밸브","감압 밸브"],c:1,e:"체크 밸브는 유체의 흐름을 한쪽 방향으로만 허용하고 반대 방향의 흐름은 차단합니다."},
+{q:"유압 장치에서 플러싱(Flushing) 작업의 주된 목적은?",a:["관로 내 이물질 제거","오일 온도 상승","점도 조절","압력 증가"],c:0,e:"플러싱은 관로 내부의 찌꺼기, 쇳가루 등의 이물질을 씻어내어 유압 시스템의 고장을 예방하는 작업입니다."},
+{q:"오일 쿨러(냉각기)의 설치 목적은?",a:["오일 온도 상승","적정 점도 유지","먼지 제거","유량 조절"],c:1,e:"오일의 온도가 너무 올라가면 점도가 떨어지므로, 적정 온도로 식혀주어 점도와 윤활성을 유지하기 위해 설치합니다."},
+{q:"무한궤도식 굴착기로 내리막길을 주행할 때 가장 안전한 자세는?",a:["버킷을 높이 들고 주행","주행 모터가 앞쪽을 향하게 하고 주행","주행 모터가 뒤쪽을 향하게 하고 버킷을 지면에서 20~30cm 띄우고 주행","기어를 중립에 놓고 주행"],c:2,e:"언덕이나 경사로를 내려갈 때는 기계를 조작하는 주행 모터(스프로킷)가 뒤쪽에 오도록 하여 안전을 확보해야 합니다."},
+{q:"작동유에 수분이 혼입되었을 때 오일의 색깔은?",a:["검은색","우유빛(백색)","붉은색","투명한 색"],c:1,e:"기름에 물(수분)이 섞이면 유화 현상이 일어나면서 우유빛(백탁색)으로 변하게 됩니다."},
+{q:"어큐뮬레이터(축압기)의 사용 목적이 아닌 것은?",a:["에너지 축적","충격 흡수","맥동 감쇠","유체 온도 하강"],c:3,e:"축압기는 압력 에너지를 저장하고 충격이나 맥동(떨림)을 흡수하지만, 온도를 낮추는 기능은 없습니다."},
+{q:"유압 장치에서 사용하는 여과기 중 탱크 흡입구 쪽에 설치되는 것은?",a:["라인 필터","마그네틱 플러그","스트레이너","리턴 필터"],c:2,e:"스트레이너는 여과망이 비교적 굵어 펌프가 흡입할 때 저항을 최소화하도록 탱크 흡입구에 설치합니다."},
+{q:"두 개의 유압 실린더를 정해진 순서대로 작동시키기 위해 사용하는 밸브는?",a:["시퀀스 밸브","감압 밸브","무부하 밸브","체크 밸브"],c:0,e:"시퀀스(순차) 밸브는 일정 압력에 도달하면 밸브가 열려 다음 단계의 실린더가 순서대로 작동하도록 합니다."},
+{q:"굴착기의 굴착력(파는 힘)이 가장 크게 발생하는 작업 장치의 부위는?",a:["붐(Boom) 실린더","암(Arm) 실린더","버킷(Bucket) 실린더","선회 모터"],c:2,e:"흙을 파고 끌어당길 때 버킷 실린더와 암 실린더가 함께 작동하며, 가장 직접적인 파괴력은 버킷 실린더에서 발생합니다."},
+{q:"유압 기기 취급 시 안전 사항으로 틀린 것은?",a:["고압 상태에서 배관을 분리하지 않는다.","작동유는 피부에 닿지 않도록 주의한다.","누유 부위 점검 시 손으로 직접 만져 확인한다.","정비 전에는 릴리프 밸브 등으로 압력을 완전히 뺀다."],c:2,e:"고압의 미세한 누유는 피부를 뚫고 들어갈 위험이 있으므로 절대 맨손으로 점검해서는 안 됩니다."},
+{q:"납산 축전지의 전해액으로 사용되는 것은?",a:["염산","황산","묽은 황산","질산"],c:2,e:"납산 축전지는 증류수와 진한 황산을 혼합한 비중 1.280 내외의 '묽은 황산'을 전해액으로 사용합니다."},
+{q:"기동 전동기(스타트 모터)의 피니언 기어가 엔진을 회전시키는 원리는?",a:["플레밍의 오른손 법칙","플레밍의 왼손 법칙","패러데이의 법칙","옴의 법칙"],c:1,e:"모터(전동기)는 전기를 공급받아 회전력을 얻어내는 기기로 '플레밍의 왼손 법칙'이 적용됩니다."},
+{q:"교류 발전기에서 교류를 직류로 변환시키는 부품은?",a:["로터","스테이터","슬립링","실리콘 다이오드"],c:3,e:"발전기에서 발생한 교류 전기는 배터리 충전을 위해 직류로 바뀌어야 하며, 이 역할을 실린더 다이오드가 합니다."},
+{q:"납산 배터리의 충전 시 폭발 위험이 있어 발생하는 가스는?",a:["산소","수소","질소","이산화탄소"],c:1,e:"배터리를 충전할 때는 내부의 화학 반응으로 인해 가연성과 폭발성이 강한 수소 가스가 발생합니다."},
+{q:"굴착기 작업 중 도로 밑에 매설된 도시가스 배관을 건드려 손상시켰을 때 가장 먼저 해야 할 조치는?",a:["흙으로 신속하게 덮어버린다.","테이프로 배관을 감는다.","즉시 작업을 중지하고 가스회사나 119에 신고한다.","작업 반장에게만 조용히 보고한다."],c:2,e:"가스 누출은 대형 폭발로 이어질 수 있으므로, 즉시 기계 시동을 끄고 대피한 후 가스회사 및 119에 신고해야 합니다."},
+{q:"축전지의 용량을 나타내는 단위는?",a:["Ah (암페어시)","V (볼트)","W (와트)","Ω (옴)"],c:0,e:"배터리 용량은 일정한 전류로 방전할 수 있는 시간의 곱인 암페어아워(Ah)로 표시합니다."},
+{q:"퓨즈(Fuse)가 자주 끊어질 때 올바른 조치 방법은?",a:["더 굵은 퓨즈로 바꾼다.","구리선이나 은박지로 감싼다.","끊어지는 원인을 찾아 수리 후 규격 퓨즈를 사용한다.","퓨즈를 아예 제거하고 직결한다."],c:2,e:"퓨즈가 끊어지는 것은 회로에 과전류나 합선이 있다는 뜻이므로 반드시 원인을 먼저 해결해야 화재를 막을 수 있습니다."},
+{q:"교류 발전기에서 회전하는 부품(전자석 역할)은?",a:["스테이터","로터","다이오드","레귤레이터"],c:1,e:"로터(회전자)는 엔진의 동력으로 회전하며 자기장을 형성하는 전자석 역할을 합니다."},
+{q:"발전기에서 출력 전압을 일정하게 유지시켜 주는 장치는?",a:["정류기","전압 조정기(레귤레이터)","콘덴서","브러시"],c:1,e:"엔진 회전수에 따라 변하는 발전기의 전압을 일정하게 유지하여 배터리와 전장품을 보호하는 것이 레귤레이터입니다."},
+{q:"굴착기로 트렌치(참호)를 굴착할 때 굴착기 무한궤도의 방향은 어떻게 두어야 하는가?",a:["트렌치 방향과 직각으로 둔다.","트렌치 방향과 평행하게 둔다.","임의의 방향으로 둔다.","뒤로 물러설 수 없도록 밀착시킨다."],c:1,e:"굴착 작업 중 지반이 붕괴될 경우 신속하게 후진하여 대피할 수 있도록 무한궤도(트랙)를 도랑과 평행하게 두어야 합니다."},
+{q:"배터리 단자에 녹이나 부식이 발생했을 때 조치로 가장 적절한 것은?",a:["그리스나 윤활유를 발라둔다.","따뜻한 물로 씻어내고 건조시킨 후 그리스를 얇게 바른다.","망치로 두드려 털어낸다.","교체할 때까지 방치한다."],c:1,e:"단자의 부식물은 따뜻한 물로 녹여 세척하고, 재부식을 막기 위해 그리스나 바셀린을 얇게 도포합니다."},
+{q:"시동 스위치를 START 위치로 돌렸을 때 딱, 딱 소리만 나고 엔진이 회전하지 않는 원인은?",a:["배터리 방전 또는 단자 접촉 불량","연료 부족","점화 플러그 불량","냉각수 부족"],c:0,e:"마그네틱 스위치는 작동하지만 모터를 돌릴 만큼의 전력이 공급되지 않을 때 나는 전형적인 소리입니다."},
+{q:"방향 지시등이 평소보다 비정상적으로 빠르게 깜빡일 때 의심할 수 있는 원인은?",a:["배터리 과충전","전조등 전구 단선","한쪽 방향 지시등 전구의 단선","퓨즈 단선"],c:2,e:"플래셔 유닛 방식에서 앞뒤 중 하나의 전구가 끊어지면 회로 저항이 바뀌어 깜빡이는 속도가 빨라집니다."},
+{q:"회로에서 저항을 측정하는 기기는?",a:["전압계","전류계","멀티미터(회로시험기)","비중계"],c:2,e:"멀티미터는 전압, 전류, 저항을 모두 측정할 수 있는 대표적인 전기 회로 시험기입니다."},
+{q:"작업용 조명등(작업등)의 설치 목적으로 알맞은 것은?",a:["차량의 방향 지시","야간 작업 시 시야 확보","후방 차량에 경고","제동 상태 표시"],c:1,e:"야간이나 어두운 현장에서 안전하고 정확한 작업을 수행하기 위해 넓은 시야를 확보해 주는 등입니다."},
+{q:"굴착기의 일상 점검 사항 중 매일 작업 전 반드시 점검해야 하는 것은?",a:["엔진 오일 교환","유압유 교환","엔진 오일, 냉각수, 연료량 점검","무한궤도 교체"],c:2,e:"장비 가동 전 오일류, 냉각수, 연료량 및 누유 부위 점검은 가장 기본적인 매일 일상 점검 사항입니다."},
+{q:"도체와 부도체의 설명으로 옳은 것은?",a:["철, 구리는 부도체이다.","고무, 플라스틱은 도체이다.","도체는 전기가 잘 통하는 물질이다.","부도체는 전류를 증폭시킨다."],c:2,e:"도체는 전자가 자유롭게 이동하여 전기가 잘 통하는 금속 등의 물질이며, 부도체(절연체)는 전기가 통하지 않습니다."},
+{q:"계기판에 엔진 오일 압력 경고등이 켜지는 조건은?",a:["오일 압력이 정상일 때","오일 압력이 규정치 이하로 떨어졌을 때","연료가 부족할 때","배터리 충전이 불량할 때"],c:1,e:"엔진 오일이 부족하거나 펌프 고장 등으로 유압이 규정치 이하로 떨어지면 경고등이 켜지며 즉시 시동을 꺼야 합니다."},
+{q:"기동 전동기의 사용 시 주의사항으로 옳은 것은?",a:["시동이 안 걸리면 걸릴 때까지 계속 돌린다.","1회 작동 시간은 10~15초 이내로 한다.","시동 중 가속 페달을 끝까지 밟는다.","주행 중에 시동 스위치를 START로 돌린다."],c:1,e:"모터의 과열과 배터리 손상을 막기 위해 한 번에 15초 이상 돌리지 않고, 다시 걸 때는 일정 시간 쉰 후 작동합니다."},
+{q:"무한궤도식 건설기계에서 스프로킷(Sprocket)의 마모를 촉진하는 원인은?",a:["주행 속도가 느릴 때","트랙의 장력이 너무 팽팽할 때","엔진 오일이 부족할 때","붐 실린더의 유압이 셀 때"],c:1,e:"트랙(궤도)의 장력이 너무 팽팽하면 핀, 부싱, 스프로킷, 아이들러 등에 과도한 부하가 걸려 마모가 급격히 빨라집니다."},
+{q:"건설기계 조종사 면허를 취소하거나 정지시킬 수 있는 자는?",a:["경찰서장","시·도지사","국토부장관","시장·군수·구청장"],c:3,e:"건설기계 관련 면허의 관리 및 행정 처분 권한은 관할 시장, 군수 또는 구청장에게 있습니다."},
+{q:"화재 발생 시 가장 먼저 취해야 할 조치는?",a:["물건 반출","초기 진화 시도 및 주변 전파","가족에게 전화","창문 열기"],c:1,e:"불이 난 것을 확인하면 즉시 '불이야'를 외쳐 대피시키고, 소화기 등을 이용해 초기 진화를 시도합니다."},
+{q:"안전표지 중 녹색 바탕의 표지가 의미하는 것은?",a:["금지","경고","지시","안전 및 구호"],c:3,e:"녹색은 비상구, 구급 상자 등 안전과 구호, 피난, 진행의 의미를 담고 있습니다."},
+{q:"건설 현장 내에서 안전모를 착용하는 가장 주된 이유는?",a:["햇빛 차단","머리 손질 불편 해소","비래(날아오는 물체) 및 낙하물로부터 머리 보호","식별 용이"],c:2,e:"건설 현장이나 작업장에서는 위에서 떨어지거나 날아오는 물체에 의한 두부 손상을 막는 것이 최우선입니다."},
+{q:"건설기계의 정기검사 유효기간이 끝난 날부터 며칠 이내에 정기검사를 받아야 하는가?",a:["10일","15일","30일","31일"],c:3,e:"건설기계관리법상 정기검사는 유효기간 만료일 전후 각각 31일 이내에 받아야 합니다."},
+{q:"건설기계 조종 중 고의로 인명 피해를 입힌 경우의 처분은?",a:["면허 정지 30일","정지 60일","정지 90일","면허 취소"],c:3,e:"고의를 가지고 타인에게 중상 이상의 인명 피해를 입힌 경우 중대 과실로 즉시 면허가 취소됩니다."},
+{q:"스패너 사용 시의 안전수칙으로 가장 거리가 먼 것은?",a:["규격에 맞는 것 사용","몸 쪽으로 당기며 사용","파이프를 끼워 연장 사용","해머 대용 금지"],c:2,e:"파이프를 끼워 길이를 연장하면 과도한 힘이 작용하여 볼트가 부러지거나 공구가 튕겨 다칠 위험이 큽니다."},
+{q:"중량물을 들어 올릴 때 가장 올바른 자세는?",a:["허리 굽히고 팔 힘으로","무릎 펴고 허리 굽혀서","등 펴고 무릎 굽혀 하체 힘으로","멀리 떨어져서"],c:2,e:"물건에 몸을 밀착시키고, 허리는 편 상태에서 무릎을 굽혔다가 펴는 하체의 힘으로 들어야 요통을 예방합니다."},
+{q:"기계 작업 시 회전하는 부분에 말려들어 갈 위험이 있어 착용을 금지하는 것은?",a:["안전모","안전화","면장갑","보안경"],c:2,e:"드릴, 선반, 축 등 회전체 작업 시에는 올이 엉성한 면장갑이 회전부에 감겨 손이 절단될 위험이 매우 큽니다."},
+{q:"야간 차도에서 고장으로 주차 시 2차 사고 예방을 위해 설치해야 하는 것은?",a:["고장자동차 표지(삼각대)","안전모","소화기","작업등"],c:0,e:"뒤따르는 차량이 멀리서도 고장 차량을 인지할 수 있도록 차체 후방 도로에 고장자동차 표지(삼각대)를 설치해야 합니다."},
+{q:"굴착기의 1회 사이클 작업 순서로 가장 올바른 것은?",a:["굴착 -> 선회 -> 적재 -> 선회 후 귀환","적재 -> 굴착 -> 선회 -> 귀환","선회 -> 굴착 -> 적재 -> 귀환","굴착 -> 적재 -> 선회 -> 귀환"],c:0,e:"굴착기 작업은 흙을 파고(굴착), 덤프트럭 쪽으로 돌려서(선회), 흙을 쏟아붓고(적재), 다시 파기 위해 제자리로 돌아오는(귀환) 과정으로 이루어집니다."},
+{q:"화재 분류 중 B급 화재(유류 화재) 진압에 가장 적합 소화기는?",a:["물 소화기","포말 소화기","이산화탄소 소화기","마른 모래"],c:2,e:"기름에 불이 붙은 B급 화재에 물을 뿌리면 기름이 튀어 확산되므로, 산소를 차단하는 이산화탄소나 분말 소화기를 씁니다."},
+{q:"음주 운전의 처벌 기준이 되는 혈중알코올농도의 최소 수치는?",a:["0.01%","0.03%","0.05%","0.08%"],c:1,e:"도로교통법 개정 이후, 혈중알코올농도 0.03% 이상부터 음주 운전으로 단속 및 처벌됩니다."},
+{q:"도로를 주행하는 건설기계 조종사가 반드시 휴대해야 하는 것은?",a:["주민등록증","여권","건설기계 조종사 면허증","자격증 수첩"],c:2,e:"조종 중에는 경찰공무원이나 단속 공무원의 요구가 있을 시 제시할 수 있도록 해당 면허증을 상시 휴대해야 합니다."},
+{q:"제1종 대형면허로 조종할 수 없는 건설기계는?",a:["덤프트럭","아스팔트 살포기","노상안정기","굴착기"],c:3,e:"굴착기나 지게차 등은 자동차 운전면허 외에 별도의 해당 건설기계 조종사 면허가 반드시 필요합니다."},
+{q:"교통사고 발생 시 가장 먼저 조치해야 할 사항은?",a:["보험회사 연락","경찰서 신고","사상자 구호","잘잘못 따지기"],c:2,e:"사고 발생 시 즉시 차량을 세우고, 부상자가 있는지 확인하여 119 구급대 요청 등 사상자 구호 조치가 1순위입니다."},
+{q:"소화기 사용 방법으로 틀린 것은?",a:["안전핀을 뽑는다.","바람을 등지고 선다.","바람을 마주 보고 쏜다.","빗자루로 쓸듯이 뿌린다."],c:2,e:"바람을 마주 보고 쏘면 소화 약제가 흩어지거나 화염이 나에게 덮칠 수 있으므로 반드시 바람을 등지고 분사해야 합니다."},
+{q:"수랭식 기관에서 오버히트(과열)가 발생하는 원인은?",a:["서모스탯(수온조절기) 닫힘 채로 고장","서모스탯이 열린 채로 고장","라디에이터 캡의 진공 밸브 열림","냉각수 양 과다"],c:0,e:"서모스탯이 닫힌 채로 고장 나면 뜨거워진 냉각수가 라디에이터로 가지 못해 엔진이 급격히 과열됩니다."},
+{q:"디젤 엔진의 연료 여과기(필터)에 물이 고였을 때 빼내는 장치는?",a:["에어 블리더","프라이밍 펌프","드레인 플러그","인젝터"],c:2,e:"필터 하단에 있는 드레인 플러그(배수 밸브)를 열어 비중 차이로 가라앉은 물을 주기적으로 빼주어야 합니다."},
+{q:"밀폐된 공간에서 디젤 엔진을 가동할 때 가장 주의해야 할 유해가스는?",a:["산소","일산화탄소","질소","수소"],c:1,e:"엔진 연소 시 발생하는 일산화탄소(CO)는 무색무취이며 인체에 치명적인 중독을 일으키므로 환기가 필수입니다."},
+{q:"배터리 충전 시 전해액의 비중과 온도는 어떻게 변하는가?",a:["비중은 높아지고, 온도는 올라간다","비중은 낮아지고, 온도는 내려간다","비중은 높아지고, 온도는 내려간다","비중과 온도는 변하지 않는다"],c:0,e:"충전이 진행되면 화학 반응으로 수분이 줄어들고 황산 성분이 많아져 비중이 올라가며 열이 발생해 온도가 상승합니다."},
+{q:"굴착기의 붐과 암의 연결부에 주유하는 윤활제로 가장 적합한 것은?",a:["엔진 오일","브레이크 오일","그리스(Grease)","자동변속기 오일"],c:2,e:"핀과 부싱 등 마찰이 심하고 외부 압력을 강하게 받는 관절 부위에는 점성이 높아 흘러내리지 않는 반고체 윤활제인 그리스를 사용합니다."},
+{q:"다음 중 건설기계 대여업의 등록은 누구에게 하는가?",a:["경찰서장","시·도지사","국토교통부장관","시장·군수·구청장"],c:3,e:"건설기계 대여업, 정비업, 매매업 등의 사업 등록은 관할 시장, 군수, 구청장에게 합니다."},
+{q:"엔진 오일에 냉각수가 섞였을 때 나타나는 오일의 색깔은?",a:["검은색","우유빛(탁한 흰색)","투명색","붉은색"],c:1,e:"엔진 오일에 냉각수(물)가 혼입되면 유화 작용이 일어나 오일이 우유색이나 탁한 크림색으로 변합니다."},
+{q:"안전표지 중 노란색 바탕에 검은색 삼각형 테두리를 가진 표지의 의미는?",a:["출입 금지","안전모 착용 지시","경고","비상구 안내"],c:2,e:"노란색 바탕의 삼각형 표지는 위험 요소를 미리 알려주는 경고 표지입니다."},
+{q:"타이어 트레드 중앙 부분이 주로 마모되는 원인은?",a:["공기압 부족","공기압 과다","캠버각 틀어짐","급제동의 반복"],c:1,e:"공기압이 과다하면 타이어가 부풀어올라 접지면의 중앙 부분만 노면에 닿아 집중적으로 닳게 됩니다."},
+{q:"굴착기를 상하차할 때 사용하는 발판(경사로)의 안전한 각도는?",a:["10~15도 이하","30~45도","45~60도","60도 이상"],c:0,e:"굴착기를 트레일러에 싣거나 내릴 때 전복 사고를 막기 위해 경사판의 각도는 15도 이하로 매우 완만하게 설치해야 합니다."},
+{q:"무한궤도 굴착기로 주행 시 방향 전환을 하는 올바른 방법은?",a:["조향 핸들을 돌린다.","좌우 주행 모터의 회전 속도를 다르게 한다.","붐을 좌우로 크게 흔든다.","버킷으로 땅을 찍고 튼다."],c:1,e:"무한궤도(트랙) 장비는 자동차처럼 핸들이 없으며, 왼쪽과 오른쪽 트랙을 돌리는 주행 모터의 속도 차이를 이용해 회전(조향)합니다."},
+{q:"공압 장치와 비교할 때 유압 장치의 단점은?",a:["힘의 증폭이 불가능하다","원격 제어가 어렵다","온도 변화에 민감하여 작동 속도가 변한다","무단 변속이 불가능하다"],c:2,e:"유압유는 주위 온도가 낮아지면 끈적해지고(점도 상승), 높아지면 묽어져서(점도 하락) 기계의 작동 속도가 온도에 영향을 받는 것이 단점입니다."},
+{q:"디젤 엔진 연료 계통에서 연료 탱크와 분사 펌프 사이에 설치되는 부품은?",a:["연료 필터(여과기)","점화 코일","점화 플러그","배전기"],c:0,e:"연료 탱크에서 나온 연료는 피드 펌프와 연료 필터(여과기)를 거쳐 불순물이 걸러진 후 분사 펌프로 들어갑니다."},
+{q:"블리드 오프(Bleed-off) 회로에 대한 설명으로 알맞은 것은?",a:["효율이 가장 높은 회로","펌프에서 나온 여분의 기름을 탱크로 빼내어 속도를 제어하는 회로","공기를 빼내는 회로","압력을 높이는 회로"],c:1,e:"블리드 오프 회로는 액추에이터로 들어가는 유량을 제어하기 위해 오일의 일부를 탱크로 바이패스(배출)시키는 속도 제어 회로입니다."},
+{q:"굴착기 작업 시 지켜야 할 안전 수칙으로 틀린 것은?",a:["작업 반경 내에 사람의 출입을 통제한다.","평탄하고 단단한 지반에서 작업한다.","버킷에 사람을 태워 높은 곳으로 이동시킨다.","지하 매설물의 위치를 사전에 파악한다."],c:2,e:"어떤 경우에도 굴착기의 버킷(바가지)이나 작업 장치에 사람을 태우고 이동하거나 승강기로 사용해서는 절대 안 됩니다."},
+{q:"굴착기로 트럭에 흙을 적재할 때 가장 안전한 방법은?",a:["트럭의 운전석 위를 통과하여 싣는다.","트럭의 후방이나 측면에서 적재함의 정중앙에 싣는다.","버킷을 높이 들어 한 번에 쏟아붓는다.","운전자가 차에 탄 상태에서 싣는다."],c:1,e:"트럭 운전석 위로 버킷이 지나가면 흙이 떨어져 큰 사고가 날 수 있으므로, 반드시 후방이나 측면에서 트럭 적재함 중앙에 낮게 쏟아부어야 합니다."},
+{q:"도로에서 굴착기를 주행할 때 붐과 암의 올바른 자세는?",a:["붐을 최고로 높이 들고 주행한다.","암을 최대한 뻗고 주행한다.","버킷을 지면에서 약 40~50cm 띄우고 주행한다.","선회체를 계속 돌리며 주행한다."],c:2,e:"일반 도로 주행 시 시야를 확보하고 무게 중심을 낮추기 위해 버킷을 지면에서 40~50cm (약 무릎 높이) 정도만 들고 주행해야 안전합니다."},
+{q:"지하에 매설된 전력 케이블 주변에서 굴착 작업을 할 때의 주의사항으로 틀린 것은?",a:["도면을 통해 매설 위치를 파악한다.","매설물 근처에서는 장비를 멈추고 인력(수작업)으로 판다.","지중 전선 표지기가 나오면 즉시 굴착기를 세게 찍어 확인한다.","작업 전 해당 관리 기관(한전 등)에 연락한다."],c:2,e:"지중 전선 표지기나 보호판이 나오면 즉시 기계 굴착을 멈추고 삽 등을 이용해 조심스럽게 인력 굴착을 해야 감전 사고를 막을 수 있습니다."},
+{q:"유압 실린더의 종류 중 피스톤의 한쪽 면에만 유압이 작용하여 한 방향으로만 힘을 내는 실린더는?",a:["단동 실린더","복동 실린더","다단 실린더","로터리 실린더"],c:0,e:"단동 실린더는 유압으로 밀어내고, 돌아올 때는 내장된 스프링이나 자체 무게(외력)로 복귀하는 방식입니다."},
+{q:"크랭크축의 메인 저널이 마모되었을 때 이를 측정하는 정밀 공구는?",a:["마이크로미터","시크니스 게이지","버니어 캘리퍼스","플라스틱 게이지"],c:0,e:"크랭크축 저널의 바깥지름 마모나 타원형 등을 0.01mm 단위로 정밀하게 측정할 때는 외측 마이크로미터를 사용합니다."}
+];
+
+// 변수 선언 누락 복구! (이 4줄이 없어서 에러가 났었습니다)
+var currentIndex = 0;
+var correctCount = 0;
+var answered = false;
+var selectedQuiz = [];
+
+// 브릿지 오류 원천 차단 로직 (ES5 구버전 완벽 호환)
+window.nextQuestion = function() {
+    currentIndex++;
+    if (currentIndex < selectedQuiz.length) {
+        loadQuestion();
+    } else {
+        window.showResult();
+    }
+};
+
+window.showResult = function() {
+    var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
+    var randomToken = Math.floor(Math.random() * 999999) + 1;
+    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
+    
+    // URL 파라미터 강제 주입
+    var finalTargetUrl = cleanUrl + "?action=exam_finished&score=" + finalScore + "&token=" + randomToken;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("exam_finished");
+        }
+    } catch(e) {}
+
+    // window.location.replace 이중 안전장치
+    setTimeout(function() {
+        window.location.replace(finalTargetUrl);
+    }, 500);
+};
+
+function restoreResultScreen(score) {
+    document.getElementById('intro-panel').style.display = 'none';
+    document.getElementById('tips-panel').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'none';
+    
+    var resultSection = document.getElementById('result-section');
+    resultSection.style.display = 'block';
+
+    document.getElementById('final-score').innerText = score + '점';
+    var msg = (score >= 60) ? "🎉 합격권입니다! 이 기세로 실제 시험도 통과하실 수 있습니다." : "합격 기준(60점) 미달입니다. 오답 노트를 확인하고 다시 도전해 보십시오.";
+    document.getElementById('final-msg').innerText = msg;
+}
+
+window.startNewTest = function() {
+    window.location.replace(window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime());
+};
+
+function loadQuestion() {
+    try {
+        answered = false;
+        document.getElementById('btn-next').style.display = 'none';
+        document.getElementById('explanation').style.display = 'none';
+        
+        var optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        var currentQ = selectedQuiz[currentIndex];
+        document.getElementById('q-num-badge').innerText = 'Q. ' + (currentIndex + 1);
+        document.getElementById('q-text').innerText = currentQ.q;
+        document.getElementById('progress-text').innerText = '문제 ' + (currentIndex + 1) + ' / ' + selectedQuiz.length;
+
+        var rate = currentIndex === 0 ? 0 : Math.round((correctCount / currentIndex) * 100);
+        document.getElementById('score-text').innerText = '정답률: ' + rate + '%';
+
+        for (var i = 0; i < currentQ.a.length; i++) {
+            var btn = document.createElement('button');
+            btn.className = 'btn-option';
+            btn.innerText = (i + 1) + ". " + currentQ.a[i];
+            
+            (function(index) {
+                btn.onclick = function() { 
+                    if (answered) return;
+                    answered = true;
+                    
+                    if (index === currentQ.c) {
+                        this.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        this.classList.add('wrong');
+                        optionsContainer.getElementsByClassName('btn-option')[currentQ.c].classList.add('correct');
+                    }
+
+                    var expBox = document.getElementById('explanation');
+                    expBox.innerText = "💡 해설: " + currentQ.e;
+                    expBox.style.display = 'block';
+                    
+                    var nxtBtn = document.getElementById('btn-next');
+                    if (currentIndex === selectedQuiz.length - 1) {
+                        nxtBtn.innerText = "결과 및 채점표 확인하기";
+                    }
+                    nxtBtn.style.display = 'block';
+                };
+            })(i);
+            optionsContainer.appendChild(btn);
+        }
+    } catch(e) {
+        throw new Error("문제 로딩 실패: " + e.message);
+    }
+}
+
+function startApp() {
+    try {
+        initParticles();
+        
+        var action = getQueryParam('action');
+        var score = getQueryParam('score');
+
+        if (action === 'exam_finished' && score !== null) {
+            restoreResultScreen(score);
+        } else {
+            if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
+                var poolCopy = quizDataPool.slice();
+                for (var i = poolCopy.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = poolCopy[i];
+                    poolCopy[i] = poolCopy[j];
+                    poolCopy[j] = temp;
+                }
+                selectedQuiz = poolCopy.slice(0, 20);
+                loadQuestion();
+            } else {
+                throw new Error("문제 데이터가 없습니다.");
+            }
+        }
+    } catch (e) {
+        document.body.innerHTML = "<div style='padding:30px; background:#ffffff; color:#ef4444; font-size:18px; font-weight:bold; line-height:1.6; z-index:9999; position:relative;'><h2 style='color:black;'>[에러 발생]</h2>앱 초기화 실패<br>내용: " + e.message + "</div>";
+    }
+}
+
+// 딜레이 없이 스크립트 도달 즉시 실행
+startApp();
+</script>
