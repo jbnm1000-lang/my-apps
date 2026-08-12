@@ -1,125 +1,120 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800;900&display=swap');
 
-/* 모든 요소 사이즈 고정 (오류 원천 차단) */
-*, *::before, *::after { box-sizing: border-box; }
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        margin: 0 !important; padding: 0 !important;
+        background-color: #0b0f19 !important; 
+        overflow-x: hidden !important;
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+        font-family: 'Pretendard', sans-serif; color: #f8fafc;
+    }
 
-.return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .widget-area, .bg-photo-overlay, .PopularPosts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, aside, .Profile, .PageList, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .centered-top-container, .sticky-top-container, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .icon-search, .icon-share, [role="button"], body header { 
-    display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
-} 
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
 
-html, body { 
-    padding: 0 !important; margin: 0 !important; border: none !important; 
-    background-color: #0f172a !important; 
-    width: 100% !important; min-height: 100vh !important;
-    font-family: 'Pretendard', sans-serif; color: #f1f5f9;
-    overflow-x: hidden; -webkit-tap-highlight-color: transparent;
-}
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
-#particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    #app-container {
+        position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 25px 20px 90px 20px;
+    }
 
-.app-container { max-width: 600px; margin: 0 auto; padding: 20px 20px 80px 20px; position: relative; z-index: 10; }
+    /* 프리미엄 헤더 */
+    .header-section { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #b45309 0%, #78350f 100%); padding: 35px 20px; border-radius: 20px; border: 1px solid #f59e0b; box-shadow: 0 12px 30px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+    .header-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+    .main-title { font-size: 28px; font-weight: 900; color: #ffffff; margin-bottom: 8px; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); position: relative; z-index: 1; }
+    .sub-title { font-size: 14px; color: #fde68a; font-weight: 600; letter-spacing: 0.5px; position: relative; z-index: 1; }
 
-/* 중장비 느낌의 딥 네이비 + 옐로우(골드) 테마 적용 */
-.app-header { text-align: center; margin-bottom: 25px; background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); padding: 30px 20px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-.app-header h1 { font-size: 26px; font-weight: 800; margin: 0 0 10px 0; color: #f8fafc; letter-spacing: -0.5px; word-break: keep-all; }
-.app-header h1 span { color: #f59e0b; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-.app-header p { color: #94a3b8; font-size: 15px; margin: 0; line-height: 1.6; word-break: keep-all; }
+    .screen { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .screen.active { display: block; }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
 
-.info-panel { background-color: #1e293b; border: 1px solid #334155; padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-.info-title { color: #f59e0b; font-size: 19px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-.info-text { color: #e2e8f0; font-size: 16.5px; margin: 0 0 15px 0; line-height: 1.7; word-break: keep-all; text-align: left; }
-.info-highlight { color: #38bdf8; font-weight: 700; }
+    /* 전체 공개 가이드 패널 */
+    .open-guide-card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+    .guide-main-title { color: #f8fafc; font-size: 18px; font-weight: 900; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #334155; padding-bottom: 15px; }
+    .guide-h4 { color: #f59e0b; font-size: 16px; font-weight: 800; margin-top: 20px; margin-bottom: 10px; }
+    .guide-h4:first-child { margin-top: 0; }
+    .guide-text { color: #cbd5e1; font-size: 14.5px; line-height: 1.7; word-break: keep-all; margin-bottom: 15px; }
+    .legal-notice { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 18px; border-radius: 10px; color: #fca5a5; font-size: 14px; margin-top: 20px; line-height: 1.6; word-break: keep-all; }
 
-.disclaimer-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-left: 4px solid #ef4444; padding: 18px 20px; border-radius: 12px; margin-top: 20px; }
-.disclaimer-title { color: #fca5a5; font-size: 15px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-.disclaimer-text { color: #f87171; font-size: 14.5px; margin: 0; line-height: 1.6; word-break: keep-all; }
+    .status-bar { display: flex; justify-content: space-between; background: #1e293b; padding: 20px 22px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; font-weight: 800; color: #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-size: 18px; }
+    .status-bar .score { color: #f59e0b; font-size: 18px; }
 
-/* 꿀팁 아코디언 패널 */
-.tips-panel { background-color: #1e293b; border: 1px solid #334155; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden; }
-.tips-header { padding: 22px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #0f172a; transition: background 0.3s; }
-.tips-header:active { background: #1e293b; }
-.tips-title { color: #38bdf8; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-.tips-arrow { color: #38bdf8; font-size: 16px; font-weight: 800; transition: transform 0.3s; }
-.tips-content { padding: 20px 25px; display: none; border-top: 1px solid #334155; }
-.tips-content ul { margin: 0; padding-left: 20px; color: #cbd5e1; font-size: 16px; line-height: 1.7; word-break: keep-all; }
-.tips-content li { margin-bottom: 15px; }
-.tips-content li:last-child { margin-bottom: 0; }
-.tips-content li b { color: #f59e0b; }
+    .question-card { background: #1e293b; border-radius: 20px; padding: 35px 25px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 25px; }
+    .q-number { display: inline-block; background: #f59e0b; color: #0f172a; font-size: 16px; font-weight: 900; padding: 8px 18px; border-radius: 20px; margin-bottom: 22px; }
+    .q-text { font-size: 22px; font-weight: 800; color: #f8fafc; line-height: 1.5; margin-bottom: 35px; word-break: keep-all; }
 
-.status-bar { display: flex; justify-content: space-between; background: #1e293b; padding: 20px 22px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; font-weight: 800; color: #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-size: 18px; }
-.status-bar .score { color: #f59e0b; font-size: 18px; }
+    .options-group { display: flex; flex-direction: column; gap: 16px; }
+    .btn-option { width: 100%; text-align: left; padding: 22px 25px; background: #0f172a; border: 1px solid #475569; color: #e2e8f0; border-radius: 16px; font-size: 18px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: 'Pretendard', sans-serif; line-height: 1.5; word-break: keep-all; }
+    .btn-option:active { transform: scale(0.97); background: #1e293b; }
+    .btn-option.correct { background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #f59e0b; font-weight: 800; }
+    .btn-option.wrong { background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #ef4444; font-weight: 800; }
 
-.question-card { background: #1e293b; border-radius: 20px; padding: 35px 25px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 25px; }
-.q-number { display: inline-block; background: #f59e0b; color: #0f172a; font-size: 16px; font-weight: 900; padding: 8px 18px; border-radius: 20px; margin-bottom: 22px; }
-.q-text { font-size: 24px; font-weight: 700; color: #f8fafc; line-height: 1.5; margin-bottom: 35px; word-break: keep-all; }
+    .explanation-box { display: none; margin-top: 30px; padding: 22px; background: rgba(245, 158, 11, 0.05); border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 16px; color: #e2e8f0; line-height: 1.7; font-weight: 500; word-break: keep-all; }
 
-.error-text { color: #ef4444 !important; font-size: 16px !important; font-weight: bold; }
+    .btn-next { width: 100%; padding: 24px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; border-radius: 16px; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); margin-top: 15px; display: none; transition: transform 0.2s; }
+    .btn-next:active { transform: scale(0.97); }
+    .btn-start { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); color: #ffffff; border: none; padding: 24px; border-radius: 18px; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); transition: transform 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+    .btn-start:active { transform: scale(0.96); }
 
-.options-group { display: flex; flex-direction: column; gap: 16px; }
-.btn-option { width: 100%; text-align: left; padding: 22px 25px; background: #0f172a; border: 1px solid #475569; color: #e2e8f0; border-radius: 16px; font-size: 19px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: 'Pretendard', sans-serif; line-height: 1.5; word-break: keep-all; }
-.btn-option:active { transform: scale(0.97); background: #1e293b; }
-.btn-option.correct { background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #f59e0b; font-weight: 800; }
-.btn-option.wrong { background: rgba(239, 68, 68, 0.15); border-color: #ef4444; color: #ef4444; font-weight: 800; }
+    /* 프리미엄 결과 화면 */
+    .result-card { background: #1e293b; border-radius: 24px; padding: 40px 20px; border: 1px solid #facc15; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+    .result-main-title { font-size: 26px; font-weight: 900; color: #ffffff; margin-bottom: 30px; position:relative; z-index:1; text-shadow:0 2px 5px rgba(0,0,0,0.8); }
+    
+    .mvp-panel { border-radius: 20px; padding: 40px 20px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); position: relative; }
+    .mvp-panel.pass { background: linear-gradient(135deg, #10b981 0%, #047857 100%); border: 2px solid #6ee7b7; }
+    .mvp-panel.fail { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border: 2px solid #fca5a5; }
+    .mvp-label { font-size: 18px; color: #ffffff; font-weight: 800; margin-bottom: 15px; letter-spacing: 1px; }
+    .mvp-score { font-size: 45px; font-weight: 900; color: #ffffff; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+    .mvp-msg { font-size: 16px; color: #f8fafc; font-weight: 600; line-height: 1.6; word-break: keep-all; }
 
-.explanation-box { display: none; margin-top: 30px; padding: 22px; background: rgba(245, 158, 11, 0.05); border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 17px; color: #e2e8f0; line-height: 1.7; font-weight: 400; word-break: keep-all; }
-
-.btn-next { width: 100%; padding: 25px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; border-radius: 16px; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); margin-top: 15px; display: none; transition: transform 0.2s; }
-.btn-next:active { transform: scale(0.97); }
-
-.result-card { text-align: center; padding: 50px 20px; display: none; background: #1e293b; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-.result-score { font-size: 60px; font-weight: 900; color: #f59e0b; margin-bottom: 20px; text-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
-.result-msg { font-size: 19px; color: #cbd5e1; margin-bottom: 40px; line-height: 1.7; word-break: keep-all; font-weight: 600; }
-.btn-restart { width: 100%; padding: 25px; background: #334155; color: #f8fafc; border: 1px solid #475569; border-radius: 16px; font-size: 20px; font-weight: 800; cursor: pointer; margin-bottom: 15px; transition: transform 0.2s; }
-.btn-restart:active { transform: scale(0.97); }
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
-::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #ffffff; border: none; padding: 24px; border-radius: 18px; font-size: 20px; font-weight: 900; cursor: pointer; margin-top: 20px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); transition: 0.1s; position: relative; z-index: 1; }
+    .btn-save-ad:active { transform: scale(0.96); }
+    .btn-reset { width: 100%; background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 18px; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 15px; position: relative; z-index: 1; }
 </style>
 
-<script>
-window.onerror = function(msg, url, line) {
-    document.body.innerHTML = "<div style='padding:30px; background:#ffffff; color:#ef4444; font-size:18px; font-weight:bold; line-height:1.6; z-index:9999; position:relative;'><h2 style='color:black;'>[에러 발생]</h2>앱 초기화 실패<br>내용: " + msg + "<br>발생 줄 번호: " + line + "</div>";
-    return false;
-};
-</script>
-
+<!-- 금빛 반딧불이 파티클 캔버스 -->
 <canvas id="particle-canvas"></canvas>
 
-<div class="app-container">
-    <div class="app-header">
-        <h1>스마트 굴착기 <span>패스</span></h1>
-        <p>현장 맞춤형 큼직한 글씨 &amp; 100% 무료</p>
+<div id="app-container">
+
+    <div class="header-section">
+        <div class="main-title">굴착기 패스</div>
+        <div class="sub-title">무거운 책 없이 편안하게 합격하는 비결</div>
     </div>
 
-    <div class="info-panel" id="intro-panel">
-        <div class="info-title">🚜 스마트 학습 가이드 &amp; 환영 인사</div>
-        <p class="info-text">예비 굴착기 조종사 여러분, 진심으로 환영합니다! 현장 일로 바쁘시고 눈이 침침하신 수험생분들도 돋보기 없이 편안하게 공부하실 수 있도록 <b>가장 큼직한 글씨와 시원한 화면</b>으로 정성껏 만들었습니다.</p>
-        <p class="info-text"><span class="info-highlight">[💡 합격을 위한 200% 활용 꿀팁]</span><br />방대한 이론서 대신, <b>실제 시험과 똑같이 핵심 20문제씩 새롭게 섞여서 출제</b>됩니다. 출퇴근길이나 현장 쉬는 시간 10분씩만 편안하게 누르며 풀어보세요. 학원 선생님처럼 친절한 정답 해설이 바로 뜹니다!</p>
-        <div class="disclaimer-box">
-            <div class="disclaimer-title">🚨 이용 전 필수 확인 (면책 조항)</div>
-            <p class="disclaimer-text">본 앱은 수험생분들의 단기 합격을 돕기 위해 개인 개발자가 무료로 제공하는 <b>참고용 보조 도구</b>입니다. 출제 경향을 반영하여 정답을 구성하였으나, 실제 시험 결과나 오탈자에 대해 법적 책임을 지지 않으므로 최종 점검은 공식 교재를 활용해 주십시오.</p>
+    <!-- 가이드 및 시작 화면 -->
+    <div id="screen-setup" class="screen active">
+        <div class="open-guide-card">
+            <div class="guide-main-title">📖 앱 이용 가이드 및 필수 안내</div>
+            
+            <div class="guide-h4">📌 쉽고 편한 모의고사 이용 방법</div>
+            <div class="guide-text">
+                이 앱은 방대한 이론서 대신, 최근 시험에서 가장 많이 출제된 핵심 기출문제 100제를 수록하고 있습니다. 하단의 '모의고사 시작하기' 버튼을 누르시면, 100문제 중 20문제가 무작위로 섞여서 출제됩니다. 출퇴근길이나 쉬는 시간에 가볍게 화면을 터치하며 풀어보십시오. 정답을 누르시면 즉시 채점이 이루어지며 상세한 해설이 제공됩니다.
+            </div>
+            
+            <div class="guide-h4">💡 시험장 가기 전 꼭 확인하세요</div>
+            <div class="guide-text">
+                1. <b>신분증 필수 지참:</b> 규정된 신분증(주민등록증, 운전면허증 등)을 소지하지 않으시면 시험 응시가 불가능합니다.<br>
+                2. <b>컴퓨터 시험(CBT) 글씨 확대:</b> 시험 모니터 화면의 우측 상단에 <b>'화면 확대'</b> 버튼이 있습니다. 글씨가 작아 불편하시다면 150%로 키우고 편안하게 응시하시기 바랍니다.<br>
+                3. <b>여유로운 시간 배분:</b> 계산 문제나 헷갈리는 문제는 화면 우측의 '나중에 풀기' 기능을 활용하시고, 확실히 아는 문제부터 먼저 푸는 것이 유리합니다.
+            </div>
+
+            <div class="legal-notice">
+                <b>🚨 주의사항 및 면책 조항</b><br>
+                본 앱은 수험생 여러분의 효율적인 학습을 지원하기 위해 개인 개발자가 대가 없이 무료로 제공하는 참고용 보조 도구입니다. 출제 경향을 성실히 반영하여 제작하였으나, 실제 국가기술자격시험의 결과 및 오탈자에 대하여 법적인 책임을 지지 않음을 다정하게 안내해 드립니다. 최종 점검은 반드시 공식 수험서를 활용해 주십시오.
+            </div>
+            
+            <button class="btn-start" style="margin-top: 20px;" onclick="startQuiz()">🚜 실전 모의고사 시작하기</button>
         </div>
     </div>
 
-    <div class="tips-panel" id="tips-panel">
-        <div class="tips-header" onclick="window.toggleTips()">
-            <div class="tips-title">💡 필기시험장 가기 전 꼭 읽어보세요</div>
-            <div class="tips-arrow" id="tips-arrow">▼</div>
-        </div>
-        <div class="tips-content" id="tips-content">
-            <ul>
-                <li><b>신분증 필수 지참:</b> 주민등록증이나 운전면허증을 안 챙기시면 절대 시험을 볼 수 없습니다. 전날 가방에 꼭 챙기세요.</li>
-                <li><b>컴퓨터 시험(CBT) 글씨 확대:</b> 모니터로 시험을 볼 때 화면 우측 상단에 <b>'화면 확대'</b> 버튼이 있습니다. 글씨가 작으면 무조건 150%로 키우고 편하게 보세요.</li>
-                <li><b>건설기계 공통 과목 공략:</b> 굴착기 필기시험은 지게차 등 다른 장비와 '엔진/유압/안전' 과목이 똑같이 출제됩니다. 공통 과목에서 확실히 점수를 따는 것이 합격의 지름길입니다.</li>
-                <li><b>시간 배분:</b> 60문제를 60분 안에 풀어야 합니다. 계산 문제나 모르는 문제는 화면 우측의 '나중에 풀기'를 누르고 아는 것부터 빠르게 푸세요.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="quiz-section">
+    <!-- 문제 풀이 화면 -->
+    <div id="screen-play" class="screen">
         <div class="status-bar">
             <div id="progress-text">문제 1 / 20</div>
             <div class="score" id="score-text">정답률: 0%</div>
@@ -132,73 +127,35 @@ window.onerror = function(msg, url, line) {
             <div class="explanation-box" id="explanation">해설: </div>
         </div>
 
-        <button class="btn-next" id="btn-next" onclick="window.nextQuestion()">다음 문제로 넘어가기</button>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()">다음 문제로 넘어가기</button>
     </div>
 
-    <div class="result-card" id="result-section">
-        <div class="q-number" style="margin-bottom: 20px;">모의고사 종료</div>
-        <div class="result-score" id="final-score">0점</div>
-        <div class="result-msg" id="final-msg">결과 확인 중...</div>
-        <button class="btn-restart" onclick="window.startNewTest()" style="display: block; margin-bottom: 15px;">새로운 모의고사 다시 풀기</button>
+    <!-- 최종 결과 화면 -->
+    <div id="screen-result" class="screen">
+        <div class="result-card">
+            <div class="result-main-title">모의고사 최종 채점 결과</div>
+            
+            <div id="mvp-container">
+                <!-- 결과 패널 자동 생성 -->
+            </div>
+
+            <button class="btn-save-ad" id="btn-final-save" onclick="saveAndShowAd()">
+                ✅ 채점 기록 안전하게 저장하기
+            </button>
+            <button class="btn-reset" onclick="window.location.replace(window.location.href.split('?')[0] + '?v=' + new Date().getTime())">새로운 모의고사 다시 풀기</button>
+        </div>
     </div>
+
 </div>
 
 <script>
-function getQueryParam(name) {
-    var url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-    var results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+// ES5 구버전 문법으로 모바일 에러를 완벽하게 차단합니다.
+var currentIndex = 0;
+var correctCount = 0;
+var answered = false;
+var selectedQuiz = [];
 
-window.toggleTips = function() {
-    var content = document.getElementById('tips-content');
-    var arrow = document.getElementById('tips-arrow');
-    if (content.style.display === 'none' || content.style.display === '') {
-        content.style.display = 'block';
-        arrow.innerHTML = '&#9650;';
-    } else {
-        content.style.display = 'none';
-        arrow.innerHTML = '&#9660;';
-    }
-};
-
-function initParticles() {
-    try {
-        var canvas = document.getElementById('particle-canvas');
-        if (!canvas) return;
-        var ctx = canvas.getContext('2d');
-        var particles = [];
-        for (var i = 0; i < 25; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2 + 1.5,
-                speedY: Math.random() * 0.3 + 0.1,
-                opacity: Math.random() * 0.3 + 0.1
-            });
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (var i = 0; i < 25; i++) {
-                var p = particles[i];
-                p.y -= p.speedY; 
-                if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(245, 158, 11, " + p.opacity + ")"; 
-                ctx.fill();
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-    } catch(e) {}
-}
-
-// 굴착기 운전기능사 핵심 기출 100제
+// 100문제 원본 데이터
 var quizDataPool = [
 {q:"디젤기관에서 연료가 분사되는 시기는 언제인가?",a:["흡기행정 초","압축행정 말","폭발행정 초","배기행정 말"],c:1,e:"디젤기관은 공기를 압축하여 고온, 고압이 된 상태(압축행정 말)에서 연료를 분사하여 자연 발화시킵니다."},
 {q:"굴착기에서 무한궤도(트랙)의 장력을 조절하는 장치는 무엇인가?",a:["트랙 롤러","스프로킷","아이들러","트랙 슈"],c:2,e:"굴착기 앞쪽에 위치한 아이들러(유동륜) 안의 그리스 실린더에 그리스를 주입하거나 빼내어 트랙의 팽팽함을 조절합니다."},
@@ -219,7 +176,7 @@ var quizDataPool = [
 {q:"타이어식 굴착기에서 작업 시 차체가 흔들리는 것을 막아주는 장치는?",a:["아우트리거 (Outrigger)","도저 블레이드","스프로킷","슈 파드"],c:0,e:"타이어식 장비는 지지력이 약하므로 작업 시 아우트리거(지주대)를 땅에 내려 차체의 수평과 안정을 유지합니다."},
 {q:"실린더 헤드 볼트를 조일 때 가장 올바른 순서는?",a:["바깥쪽에서 안쪽으로 대각선으로","안쪽에서 바깥쪽으로 대각선으로","시계 방향으로 차례대로","임의의 순서대로"],c:1,e:"변형을 방지하고 기밀을 유지하기 위해 중앙(안쪽)에서 시작하여 바깥쪽을 향해 나선형 또는 대각선으로 조입니다."},
 {q:"유압 장치에서 작동유의 온도가 상승할 때 나타나는 현상이 아닌 것은?",a:["점도 저하","체적 효율 감소","캐비테이션 발생","점도 상승"],c:3,e:"온도가 상승하면 유체는 묽어지므로 점도가 저하됩니다. 점도 상승은 틀린 설명입니다."},
-{q:"유압 펌프에서 소음이 발생하는 원인과 가장 거리가 먼 것은?",a:["공기 혼입","회전속도 과다","작동유 점도 과소","축 중심 어긋남"],c:2,e:"작동유의 점도가 너무 '높을' 때 끈적임 때문에 흡입 저항이 커져 공동현상(소음)이 발생하기 쉽습니다."},
+{q:"유압 펌프에서 소음이 발생하는 원인과 가장 거리가 먼 것은?",a:["공기 혼입","회전속도 과다","작동유 점도 과소","축 중심 어긋남"],c:2,e:"작동유의 점도가 너무 높을 때 끈적임 때문에 흡입 저항이 커져 공동현상(소음)이 발생하기 쉽습니다."},
 {q:"유압유가 갖추어야 할 조건으로 옳은 것은?",a:["인화점이 낮을 것","비압축성일 것","점도 지수가 낮을 것","응고점이 높을 것"],c:1,e:"유압유는 동력을 확실하게 전달하기 위해 압력을 가해도 부피가 쉽게 변하지 않는 비압축성 유체여야 합니다."},
 {q:"유압 회로에서 작동유의 압력이 설정치 이상으로 올라가는 것을 방지하는 밸브는?",a:["체크 밸브","릴리프 밸브","감압 밸브","유량 제어 밸브"],c:1,e:"릴리프 밸브(안전 밸브)는 회로 내 최고 압력을 설정하고 한계를 넘으면 오일을 배출하여 기기를 보호합니다."},
 {q:"굴착기의 상부 선회체(Swing)가 회전할 수 있도록 동력을 전달하는 장치는?",a:["주행 모터","선회 모터 (Swing Motor)","붐 실린더","트랙 롤러"],c:1,e:"상부 선회체는 유압의 힘을 회전력으로 바꾸는 선회 모터와 감속기를 통해 360도 회전할 수 있습니다."},
@@ -235,8 +192,8 @@ var quizDataPool = [
 {q:"두 개의 유압 실린더를 정해진 순서대로 작동시키기 위해 사용하는 밸브는?",a:["시퀀스 밸브","감압 밸브","무부하 밸브","체크 밸브"],c:0,e:"시퀀스(순차) 밸브는 일정 압력에 도달하면 밸브가 열려 다음 단계의 실린더가 순서대로 작동하도록 합니다."},
 {q:"굴착기의 굴착력(파는 힘)이 가장 크게 발생하는 작업 장치의 부위는?",a:["붐(Boom) 실린더","암(Arm) 실린더","버킷(Bucket) 실린더","선회 모터"],c:2,e:"흙을 파고 끌어당길 때 버킷 실린더와 암 실린더가 함께 작동하며, 가장 직접적인 파괴력은 버킷 실린더에서 발생합니다."},
 {q:"유압 기기 취급 시 안전 사항으로 틀린 것은?",a:["고압 상태에서 배관을 분리하지 않는다.","작동유는 피부에 닿지 않도록 주의한다.","누유 부위 점검 시 손으로 직접 만져 확인한다.","정비 전에는 릴리프 밸브 등으로 압력을 완전히 뺀다."],c:2,e:"고압의 미세한 누유는 피부를 뚫고 들어갈 위험이 있으므로 절대 맨손으로 점검해서는 안 됩니다."},
-{q:"납산 축전지의 전해액으로 사용되는 것은?",a:["염산","황산","묽은 황산","질산"],c:2,e:"납산 축전지는 증류수와 진한 황산을 혼합한 비중 1.280 내외의 '묽은 황산'을 전해액으로 사용합니다."},
-{q:"기동 전동기(스타트 모터)의 피니언 기어가 엔진을 회전시키는 원리는?",a:["플레밍의 오른손 법칙","플레밍의 왼손 법칙","패러데이의 법칙","옴의 법칙"],c:1,e:"모터(전동기)는 전기를 공급받아 회전력을 얻어내는 기기로 '플레밍의 왼손 법칙'이 적용됩니다."},
+{q:"납산 축전지의 전해액으로 사용되는 것은?",a:["염산","황산","묽은 황산","질산"],c:2,e:"납산 축전지는 증류수와 진한 황산을 혼합한 비중 1.280 내외의 묽은 황산을 전해액으로 사용합니다."},
+{q:"기동 전동기(스타트 모터)의 피니언 기어가 엔진을 회전시키는 원리는?",a:["플레밍의 오른손 법칙","플레밍의 왼손 법칙","패러데이의 법칙","옴의 법칙"],c:1,e:"모터(전동기)는 전기를 공급받아 회전력을 얻어내는 기기로 플레밍의 왼손 법칙이 적용됩니다."},
 {q:"교류 발전기에서 교류를 직류로 변환시키는 부품은?",a:["로터","스테이터","슬립링","실리콘 다이오드"],c:3,e:"발전기에서 발생한 교류 전기는 배터리 충전을 위해 직류로 바뀌어야 하며, 이 역할을 실린더 다이오드가 합니다."},
 {q:"납산 배터리의 충전 시 폭발 위험이 있어 발생하는 가스는?",a:["산소","수소","질소","이산화탄소"],c:1,e:"배터리를 충전할 때는 내부의 화학 반응으로 인해 가연성과 폭발성이 강한 수소 가스가 발생합니다."},
 {q:"굴착기 작업 중 도로 밑에 매설된 도시가스 배관을 건드려 손상시켰을 때 가장 먼저 해야 할 조치는?",a:["흙으로 신속하게 덮어버린다.","테이프로 배관을 감는다.","즉시 작업을 중지하고 가스회사나 119에 신고한다.","작업 반장에게만 조용히 보고한다."],c:2,e:"가스 누출은 대형 폭발로 이어질 수 있으므로, 즉시 기계 시동을 끄고 대피한 후 가스회사 및 119에 신고해야 합니다."},
@@ -256,7 +213,7 @@ var quizDataPool = [
 {q:"기동 전동기의 사용 시 주의사항으로 옳은 것은?",a:["시동이 안 걸리면 걸릴 때까지 계속 돌린다.","1회 작동 시간은 10~15초 이내로 한다.","시동 중 가속 페달을 끝까지 밟는다.","주행 중에 시동 스위치를 START로 돌린다."],c:1,e:"모터의 과열과 배터리 손상을 막기 위해 한 번에 15초 이상 돌리지 않고, 다시 걸 때는 일정 시간 쉰 후 작동합니다."},
 {q:"무한궤도식 건설기계에서 스프로킷(Sprocket)의 마모를 촉진하는 원인은?",a:["주행 속도가 느릴 때","트랙의 장력이 너무 팽팽할 때","엔진 오일이 부족할 때","붐 실린더의 유압이 셀 때"],c:1,e:"트랙(궤도)의 장력이 너무 팽팽하면 핀, 부싱, 스프로킷, 아이들러 등에 과도한 부하가 걸려 마모가 급격히 빨라집니다."},
 {q:"건설기계 조종사 면허를 취소하거나 정지시킬 수 있는 자는?",a:["경찰서장","시·도지사","국토부장관","시장·군수·구청장"],c:3,e:"건설기계 관련 면허의 관리 및 행정 처분 권한은 관할 시장, 군수 또는 구청장에게 있습니다."},
-{q:"화재 발생 시 가장 먼저 취해야 할 조치는?",a:["물건 반출","초기 진화 시도 및 주변 전파","가족에게 전화","창문 열기"],c:1,e:"불이 난 것을 확인하면 즉시 '불이야'를 외쳐 대피시키고, 소화기 등을 이용해 초기 진화를 시도합니다."},
+{q:"화재 발생 시 가장 먼저 취해야 할 조치는?",a:["물건 반출","초기 진화 시도 및 주변 전파","가족에게 전화","창문 열기"],c:1,e:"불이 난 것을 확인하면 즉시 불이야를 외쳐 대피시키고, 소화기 등을 이용해 초기 진화를 시도합니다."},
 {q:"안전표지 중 녹색 바탕의 표지가 의미하는 것은?",a:["금지","경고","지시","안전 및 구호"],c:3,e:"녹색은 비상구, 구급 상자 등 안전과 구호, 피난, 진행의 의미를 담고 있습니다."},
 {q:"건설 현장 내에서 안전모를 착용하는 가장 주된 이유는?",a:["햇빛 차단","머리 손질 불편 해소","비래(날아오는 물체) 및 낙하물로부터 머리 보호","식별 용이"],c:2,e:"건설 현장이나 작업장에서는 위에서 떨어지거나 날아오는 물체에 의한 두부 손상을 막는 것이 최우선입니다."},
 {q:"건설기계의 정기검사 유효기간이 끝난 날부터 며칠 이내에 정기검사를 받아야 하는가?",a:["10일","15일","30일","31일"],c:3,e:"건설기계관리법상 정기검사는 유효기간 만료일 전후 각각 31일 이내에 받아야 합니다."},
@@ -294,57 +251,109 @@ var quizDataPool = [
 {q:"크랭크축의 메인 저널이 마모되었을 때 이를 측정하는 정밀 공구는?",a:["마이크로미터","시크니스 게이지","버니어 캘리퍼스","플라스틱 게이지"],c:0,e:"크랭크축 저널의 바깥지름 마모나 타원형 등을 0.01mm 단위로 정밀하게 측정할 때는 외측 마이크로미터를 사용합니다."}
 ];
 
-// 변수 선언 누락 복구! (이 4줄이 없어서 에러가 났었습니다)
-var currentIndex = 0;
-var correctCount = 0;
-var answered = false;
-var selectedQuiz = [];
+function initParticles() {
+    try {
+        var canvas = document.getElementById('particle-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
 
-// 브릿지 오류 원천 차단 로직 (ES5 구버전 완벽 호환)
-window.nextQuestion = function() {
-    currentIndex++;
-    if (currentIndex < selectedQuiz.length) {
+        for (var i = 0; i < 30; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2.5 + 1,
+                speedY: Math.random() * 0.5 + 0.2,
+                opacity: Math.random() * 0.5 + 0.1
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                p.y -= p.speedY; 
+                if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(245, 158, 11, " + p.opacity + ")"; 
+                ctx.fill();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    } catch(e) {}
+}
+
+function getQueryParam(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    var results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+window.startQuiz = function() {
+    document.getElementById('screen-setup').className = 'screen';
+    document.getElementById('screen-play').className = 'screen active';
+    
+    if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
+        var poolCopy = quizDataPool.slice();
+        for (var i = poolCopy.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = poolCopy[i];
+            poolCopy[i] = poolCopy[j];
+            poolCopy[j] = temp;
+        }
+        selectedQuiz = poolCopy.slice(0, 20);
         loadQuestion();
-    } else {
-        window.showResult();
     }
 };
 
-window.showResult = function() {
-    var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
-    var randomToken = Math.floor(Math.random() * 999999) + 1;
-    var cleanUrl = window.location.href.split('?')[0].split('#')[0];
-    
-    // URL 파라미터 강제 주입
-    var finalTargetUrl = cleanUrl + "?action=exam_finished&score=" + finalScore + "&token=" + randomToken;
+window.onload = function() {
+    initParticles();
+    var action = getQueryParam('action');
+    var score = getQueryParam('score');
 
-    try {
-        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
-            window.AppInventor.setWebViewString("exam_finished");
+    // 앱인벤터 통신 후 안전하게 결과창 띄우기 (데이터 증발 방어)
+    if (action === 'exam_finished' && score !== null) {
+        document.getElementById('screen-setup').className = 'screen';
+        document.getElementById('screen-play').className = 'screen';
+        document.getElementById('screen-result').className = 'screen active';
+        
+        var mvpContainer = document.getElementById('mvp-container');
+        var numericScore = parseInt(score, 10);
+        var mvpHtml = '';
+        
+        if (numericScore >= 60) {
+            mvpHtml = '<div class="mvp-panel pass">';
+            mvpHtml += '<div class="mvp-label">🎉 합격 예상권입니다!</div>';
+            mvpHtml += '<div class="mvp-score">' + numericScore + ' 점</div>';
+            mvpHtml += '<div class="mvp-msg">현재의 훌륭한 실력을 시험 당일까지 계속 유지하시길 진심으로 응원합니다.</div>';
+            mvpHtml += '</div>';
+        } else {
+            mvpHtml = '<div class="mvp-panel fail">';
+            mvpHtml += '<div class="mvp-label">🚨 합격(60점) 기준 미달</div>';
+            mvpHtml += '<div class="mvp-score">' + numericScore + ' 점</div>';
+            mvpHtml += '<div class="mvp-msg">조금만 더 노력하시면 충분히 합격할 수 있습니다. 틀린 문제를 다시 점검해 주십시오.</div>';
+            mvpHtml += '</div>';
         }
-    } catch(e) {}
-
-    // window.location.replace 이중 안전장치
-    setTimeout(function() {
-        window.location.replace(finalTargetUrl);
-    }, 500);
-};
-
-function restoreResultScreen(score) {
-    document.getElementById('intro-panel').style.display = 'none';
-    document.getElementById('tips-panel').style.display = 'none';
-    document.getElementById('quiz-section').style.display = 'none';
-    
-    var resultSection = document.getElementById('result-section');
-    resultSection.style.display = 'block';
-
-    document.getElementById('final-score').innerText = score + '점';
-    var msg = (score >= 60) ? "🎉 합격권입니다! 이 기세로 실제 시험도 통과하실 수 있습니다." : "합격 기준(60점) 미달입니다. 오답 노트를 확인하고 다시 도전해 보십시오.";
-    document.getElementById('final-msg').innerText = msg;
-}
-
-window.startNewTest = function() {
-    window.location.replace(window.location.href.split('?')[0].split('#')[0] + "?v=" + new Date().getTime());
+        
+        mvpContainer.innerHTML = mvpHtml;
+        
+        var btnSave = document.getElementById('btn-final-save');
+        btnSave.innerHTML = "⭐ 점수 기록이 완료되었습니다 ⭐";
+        btnSave.style.background = "#10b981"; 
+        btnSave.disabled = true;
+    }
 };
 
 function loadQuestion() {
@@ -370,7 +379,11 @@ function loadQuestion() {
             btn.innerText = (i + 1) + ". " + currentQ.a[i];
             
             (function(index) {
-                btn.onclick = function() { 
+                btn.onclick = function(e) { 
+                    if (!e) e = window.event;
+                    if (e && e.stopPropagation) { e.stopPropagation(); }
+                    else if (e && e.cancelBubble !== undefined) { e.cancelBubble = true; }
+                    
                     if (answered) return;
                     answered = true;
                     
@@ -388,47 +401,50 @@ function loadQuestion() {
                     
                     var nxtBtn = document.getElementById('btn-next');
                     if (currentIndex === selectedQuiz.length - 1) {
-                        nxtBtn.innerText = "결과 및 채점표 확인하기";
+                        nxtBtn.innerText = "종료 및 채점 결과 보기";
                     }
                     nxtBtn.style.display = 'block';
                 };
             })(i);
             optionsContainer.appendChild(btn);
         }
-    } catch(e) {
-        throw new Error("문제 로딩 실패: " + e.message);
-    }
+    } catch(e) {}
 }
 
-function startApp() {
+window.nextQuestion = function() {
+    currentIndex++;
+    if (currentIndex < selectedQuiz.length) {
+        loadQuestion();
+    } else {
+        saveAndShowAd();
+    }
+};
+
+// ⚠️ 모바일 에러 방지 이중 우회 로직 ⚠️
+window.saveAndShowAd = function() {
+    var btn = document.getElementById('btn-next');
+    if (btn) {
+        btn.innerText = "채점 데이터 안전 기록 중...";
+        btn.style.opacity = "0.7";
+        btn.disabled = true;
+    }
+
+    var finalScore = Math.round((correctCount / selectedQuiz.length) * 100);
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    
+    // URL에 점수 데이터를 박아서 화면 새로고침 시 데이터 증발 방어
+    var finalUrl = baseUrl + "?action=exam_finished&score=" + finalScore + "&t=" + new Date().getTime();
+
+    // 1. 앱인벤터 내부 통신 (성공 시 광고 송출)
     try {
-        initParticles();
-        
-        var action = getQueryParam('action');
-        var score = getQueryParam('score');
-
-        if (action === 'exam_finished' && score !== null) {
-            restoreResultScreen(score);
-        } else {
-            if (typeof quizDataPool !== 'undefined' && quizDataPool.length > 0) {
-                var poolCopy = quizDataPool.slice();
-                for (var i = poolCopy.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var temp = poolCopy[i];
-                    poolCopy[i] = poolCopy[j];
-                    poolCopy[j] = temp;
-                }
-                selectedQuiz = poolCopy.slice(0, 20);
-                loadQuestion();
-            } else {
-                throw new Error("문제 데이터가 없습니다.");
-            }
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString('exam_finished');
         }
-    } catch (e) {
-        document.body.innerHTML = "<div style='padding:30px; background:#ffffff; color:#ef4444; font-size:18px; font-weight:bold; line-height:1.6; z-index:9999; position:relative;'><h2 style='color:black;'>[에러 발생]</h2>앱 초기화 실패<br>내용: " + e.message + "</div>";
-    }
-}
+    } catch (err) {}
 
-// 딜레이 없이 스크립트 도달 즉시 실행
-startApp();
+    // 2. 0.5초 뒤 강제 URL 새로고침 (데이터 화면 고정)
+    setTimeout(function () {
+        window.location.replace(finalUrl);
+    }, 500);
+};
 </script>
