@@ -13,89 +13,79 @@
         font-family: 'Pretendard', sans-serif; color: #f8fafc;
     }
 
-    /* 블로거 플랫폼 찌꺼기 완벽 숨김 */
     .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
         display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
     }
 
-    /* 금빛 파티클 캔버스 */
     #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
     #app-container {
-        position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 25px 20px 90px 20px;
+        position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px 15px 90px 15px; box-sizing: border-box;
     }
 
-    /* 프리미엄 헤더 (파크골프 잔디 느낌) */
-    .header-section { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #166534 0%, #064e3b 100%); padding: 35px 20px; border-radius: 20px; border: 1px solid #22c55e; box-shadow: 0 12px 30px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
-    .header-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
-    .main-title { font-size: 28px; font-weight: 900; color: #ffffff; margin-bottom: 8px; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); position: relative; z-index: 1; }
-    .sub-title { font-size: 14px; color: #bbf7d0; font-weight: 600; letter-spacing: 0.5px; position: relative; z-index: 1; }
+    .header-section { text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #166534 0%, #064e3b 100%); padding: 25px 15px; border-radius: 20px; border: 1px solid #22c55e; box-shadow: 0 12px 30px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+    .main-title { font-size: 26px; font-weight: 900; color: #ffffff; margin-bottom: 6px; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
+    .sub-title { font-size: 13.5px; color: #bbf7d0; font-weight: 600; }
 
     .screen { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .screen.active { display: block; }
-    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
-    /* 전체 공개 가이드 패널 (리젝 방지 방패막) */
-    .open-guide-card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-    .guide-main-title { color: #f8fafc; font-size: 18px; font-weight: 900; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #334155; padding-bottom: 15px; }
-    .guide-h4 { color: #22c55e; font-size: 16px; font-weight: 800; margin-top: 20px; margin-bottom: 10px; }
-    .guide-h4:first-child { margin-top: 0; }
-    .guide-text { color: #cbd5e1; font-size: 14.5px; line-height: 1.7; word-break: keep-all; margin-bottom: 15px; }
-    .legal-notice { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 18px; border-radius: 10px; color: #fca5a5; font-size: 14px; margin-top: 20px; line-height: 1.6; word-break: keep-all; }
+    /* 화면 짤림 방지 완벽 대응 패널 */
+    .setup-card { background: #1e293b; border-radius: 20px; padding: 25px 15px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 100%; box-sizing: border-box; overflow: hidden; }
+    .setup-title { font-size: 18px; font-weight: 900; color: #22c55e; margin-bottom: 18px; text-align: center; }
+    .player-input-row { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; box-sizing: border-box; }
+    .player-input { flex: 1; min-width: 0; width: 100%; background: #0f172a; border: 1px solid #475569; color: #ffffff; padding: 16px 10px; border-radius: 12px; font-size: 17px; font-weight: 800; text-align: center; outline: none; font-family: 'Pretendard', sans-serif; box-sizing: border-box; }
+    .player-input:focus { border-color: #22c55e; }
+    .btn-add-player { width: 100%; background: transparent; color: #94a3b8; border: 2px dashed #475569; padding: 15px; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; margin-bottom: 20px; }
 
-    /* 참가자 설정 화면 */
-    .setup-card { background: #1e293b; border-radius: 20px; padding: 30px 25px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .setup-title { font-size: 19px; font-weight: 900; color: #22c55e; margin-bottom: 20px; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-    .player-input-row { display: flex; gap: 10px; margin-bottom: 15px; }
-    .player-input { flex: 1; background: #0f172a; border: 1px solid #475569; color: #ffffff; padding: 20px; border-radius: 14px; font-size: 18px; font-weight: 800; text-align: center; outline: none; transition: 0.3s; font-family: 'Pretendard', sans-serif; }
-    .player-input:focus { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
-    .btn-add-player { width: 100%; background: transparent; color: #94a3b8; border: 2px dashed #475569; padding: 18px; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-bottom: 30px; transition: 0.2s; }
-    .btn-add-player:active { background: #334155; color: #ffffff; }
+    /* 지난 기록 보관함 디자인 */
+    .history-card { background: #1e293b; border-radius: 18px; padding: 20px 15px; border: 1px solid #3b82f6; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); width: 100%; box-sizing: border-box; }
+    .history-title { font-size: 17px; font-weight: 900; color: #60a5fa; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .history-item { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 14px; margin-bottom: 10px; font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+    .history-date { color: #94a3b8; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .history-winner { color: #facc15; font-weight: 800; font-size: 15px; }
+
+    .btn-start { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); }
+
+    .hole-info-board { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 18px 15px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; }
+    .hole-number { font-size: 32px; font-weight: 900; color: #22c55e; }
+    .hole-nav-btn { background: #334155; color: #e2e8f0; border: none; padding: 14px 18px; border-radius: 10px; font-size: 16px; font-weight: 900; cursor: pointer; }
+
+    .score-row { display: flex; align-items: center; justify-content: space-between; background: #1e293b; padding: 18px 12px; border-radius: 16px; margin-bottom: 14px; border: 1px solid #334155; box-sizing: border-box; }
+    .player-name { font-size: 20px; font-weight: 900; color: #ffffff; width: 30%; word-break: keep-all; }
+    .score-controls { display: flex; align-items: center; gap: 10px; }
+    .btn-score { width: 58px; height: 58px; border-radius: 16px; border: none; font-size: 32px; font-weight: 900; color: #ffffff; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    .btn-minus { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .btn-plus { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+    .current-score { font-size: 36px; font-weight: 900; color: #34d399; width: 45px; text-align: center; font-family: Tahoma, sans-serif; }
+
+    .btn-finish-hole { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 20px; font-weight: 900; cursor: pointer; margin-top: 20px; }
+
+    .result-card { background: #1e293b; border-radius: 22px; padding: 30px 15px; border: 1px solid #22c55e; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+    .result-main-title { font-size: 24px; font-weight: 900; color: #ffffff; margin-bottom: 25px; }
     
-    .btn-start { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; border: none; padding: 24px; border-radius: 18px; font-size: 22px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); transition: transform 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-    .btn-start:active { transform: scale(0.96); }
+    .mvp-panel { background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%); border-radius: 18px; padding: 25px 15px; margin-bottom: 20px; border: 2px solid #fef08a; position: relative; }
+    .mvp-panel::after { content: '👑'; font-size: 50px; position: absolute; top: -20px; right: -5px; transform: rotate(15deg); }
+    .mvp-label { font-size: 14px; color: #fef08a; font-weight: 800; margin-bottom: 8px; }
+    .mvp-name { font-size: 30px; font-weight: 900; color: #ffffff; margin-bottom: 6px; }
+    .mvp-score { font-size: 20px; font-weight: 800; color: #fef08a; }
 
-    /* 메인 점수판 화면 (초대형 버튼) */
-    .hole-info-board { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 20px; border-radius: 18px; border: 1px solid #334155; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
-    .hole-number { font-size: 36px; font-weight: 900; color: #22c55e; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .hole-nav-btn { background: #334155; color: #e2e8f0; border: none; padding: 16px 22px; border-radius: 12px; font-size: 18px; font-weight: 900; cursor: pointer; transition: 0.2s; }
-    .hole-nav-btn:active { background: #475569; transform: scale(0.95); }
+    .rank-row { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 18px 12px; border-radius: 14px; margin-bottom: 10px; border: 1px solid #334155; }
+    .rank-medal { font-size: 18px; font-weight: 900; white-space: nowrap; min-width: 50px; text-align: left; }
+    .rank-name { font-size: 18px; font-weight: 900; color: #f8fafc; flex: 1; text-align: left; padding-left: 8px; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-score { font-size: 22px; font-weight: 900; color: #34d399; font-family: Tahoma, sans-serif; white-space: nowrap; }
 
-    .score-row { display: flex; align-items: center; justify-content: space-between; background: #1e293b; padding: 22px 20px; border-radius: 18px; margin-bottom: 16px; border: 1px solid #334155; box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
-    .player-name { font-size: 22px; font-weight: 900; color: #ffffff; width: 30%; word-break: keep-all; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 19px; font-weight: 900; cursor: pointer; margin-top: 25px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); }
+    .btn-reset { width: 100%; background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; margin-top: 12px; }
     
-    .score-controls { display: flex; align-items: center; gap: 15px; }
-    .btn-score { width: 65px; height: 65px; border-radius: 18px; border: none; font-size: 36px; font-weight: 900; color: #ffffff; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; }
-    .btn-minus { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); box-shadow: 0 6px 0 #991b1b; }
-    .btn-minus:active { transform: translateY(6px); box-shadow: 0 0 0 #991b1b; }
-    .btn-plus { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 6px 0 #1e40af; }
-    .btn-plus:active { transform: translateY(6px); box-shadow: 0 0 0 #1e40af; }
-    .current-score { font-size: 40px; font-weight: 900; color: #34d399; width: 55px; text-align: center; font-family: Tahoma, sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-
-    .btn-finish-hole { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; padding: 24px; border-radius: 18px; font-size: 22px; font-weight: 900; cursor: pointer; margin-top: 25px; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); transition: 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-    .btn-finish-hole:active { transform: scale(0.96); }
-
-    /* 프리미엄 결과 화면 (글자 깨짐 방지 레이아웃) */
-    .result-card { background: #1e293b; border-radius: 24px; padding: 40px 20px; border: 1px solid #22c55e; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
-    .result-main-title { font-size: 26px; font-weight: 900; color: #ffffff; margin-bottom: 30px; position:relative; z-index:1; text-shadow:0 2px 5px rgba(0,0,0,0.8); }
-    
-    .mvp-panel { background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%); border-radius: 20px; padding: 30px 20px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); border: 2px solid #fef08a; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .mvp-panel::after { content: '👑'; font-size: 60px; position: absolute; top: -25px; right: -10px; transform: rotate(15deg); }
-    .mvp-label { font-size: 15px; color: #fef08a; font-weight: 800; margin-bottom: 10px; letter-spacing: 1px; }
-    .mvp-name { font-size: 34px; font-weight: 900; color: #ffffff; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); word-break: keep-all; }
-    .mvp-score { font-size: 22px; font-weight: 800; color: #fef08a; }
-
-    .rank-row { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 22px 15px; border-radius: 16px; margin-bottom: 12px; border: 1px solid #334155; position: relative; z-index: 1; }
-    .rank-medal { font-size: 20px; font-weight: 900; white-space: nowrap; min-width: 60px; text-align: left; }
-    .rank-name { font-size: 20px; font-weight: 900; color: #f8fafc; flex: 1; text-align: left; padding-left: 10px; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .rank-score { font-size: 24px; font-weight: 900; color: #34d399; font-family: Tahoma, sans-serif; white-space: nowrap; padding-left: 10px; }
-
-    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #ffffff; border: none; padding: 24px; border-radius: 18px; font-size: 20px; font-weight: 900; cursor: pointer; margin-top: 35px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); transition: 0.1s; position: relative; z-index: 1; }
-    .btn-save-ad:active { transform: scale(0.96); }
-    .btn-reset { width: 100%; background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 18px; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 15px; position: relative; z-index: 1; }
+    .open-guide-card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 20px 15px; margin-bottom: 20px; }
+    .guide-main-title { color: #f8fafc; font-size: 16px; font-weight: 900; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+    .guide-h4 { color: #22c55e; font-size: 15px; font-weight: 800; margin-top: 15px; margin-bottom: 8px; }
+    .guide-text { color: #cbd5e1; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+    .legal-notice { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px 10px; border-radius: 8px; color: #fca5a5; font-size: 13px; margin-top: 15px; line-height: 1.5; }
 </style>
 
-<!--금빛 반딧불이 파티클 캔버스-->
 <canvas id="particle-canvas"></canvas>
 
 <div id="app-container">
@@ -105,30 +95,20 @@
         <div class="sub-title">복잡한 종이와 펜은 이제 집에 두고 오십시오.</div>
     </div>
 
-    <!--전체 공개 가이드 화면 (리젝 방지 및 투명성 강화)-->
-    <div class="open-guide-card" id="guide-panel">
-        <div class="guide-main-title">📖 앱 이용 가이드 및 필수 안내</div>
-        
-        <div class="guide-h4">📌 쉽고 편한 점수 관리 방법</div>
-        <div class="guide-text">
-            1. 라운딩 전, 화면에 동반자분들의 이름을 입력합니다. (최대 4명)<br />
-            2. 각 홀마다 공을 치신 횟수(타수)만큼 파란색 <b>[+] 버튼</b>을 눌러 점수를 올립니다. 실수하셨다면 빨간색 <b>[-] 버튼</b>으로 수정할 수 있습니다.<br />
-            3. 18홀을 모두 돌고 종료 버튼을 누르시면, 타수가 가장 적은 순서대로 최종 우승자와 순위표가 자동으로 정리됩니다.
-        </div>
-        
-        <div class="guide-h4">💡 파크골프 기본 매너</div>
-        <div class="guide-text">
-            파크골프는 배려의 스포츠입니다. 앞 팀이 안전하게 홀아웃(공을 홀에 넣음)을 마친 것을 확인한 후에 티샷을 준비해 주십시오. 그린 위에서는 다른 분의 퍼팅 라인을 밟지 않도록 항상 주의해야 합니다.
-        </div>
-
-        <div class="legal-notice">
-            <b>🚨 주의사항 및 면책 조항</b><br />
-            본 앱은 파크골프 동호인 여러분의 명랑하고 편안한 라운딩을 위해 개인 개발자가 대가 없이 무료로 제공하는 참고용 보조 수첩입니다. 사행성 내기 등을 엄격히 금지합니다. 스마트폰 기기 변경이나 앱 삭제 시 데이터가 초기화될 수 있으며, 기기 조작 오류로 인한 점수 분쟁에 대하여 개발자는 어떠한 법적 책임도 지지 않습니다. 최종 순위 기록은 공식적인 대회 증빙 자료로 사용하실 수 없으므로 친목 도모 용도로만 활용해 주시기 바랍니다.
-        </div>
-    </div>
-
-    <!--1. 참가자 입력 화면-->
+    <!-- 1. 참가자 입력 및 기록 보관함 화면 -->
     <div class="screen active" id="screen-setup">
+        
+        <!-- 지난 기록 보관함 -->
+        <div class="history-card">
+            <div class="history-title">
+                <span>📁 지난 라운딩 기록 보관함</span>
+                <button onclick="clearHistory()" style="background:transparent; border:none; color:#ef4444; font-size:12px; cursor:pointer;">전체삭제</button>
+            </div>
+            <div id="history-list-container">
+                <div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">저장된 지난 기록이 없습니다.</div>
+            </div>
+        </div>
+
         <div class="setup-card">
             <div class="setup-title">동반자 이름 입력 (최대 4명)</div>
             <div id="player-inputs-container">
@@ -142,9 +122,23 @@
             <button class="btn-add-player" onclick="addPlayerInput()">+ 인원 추가하기</button>
             <button class="btn-start" onclick="startGame()">⛳ 18홀 라운딩 시작하기</button>
         </div>
+
+        <div class="open-guide-card" style="margin-top:20px;">
+            <div class="guide-main-title">📖 앱 이용 가이드 및 필수 안내</div>
+            <div class="guide-h4">📌 쉽고 편한 점수 관리 방법</div>
+            <div class="guide-text">
+                1. 라운딩 전 동반자 이름을 입력합니다. (최대 4명)<br />
+                2. 각 홀마다 공을 치신 횟수만큼 파란색 <b>[+] 버튼</b>을 누릅니다. 실수하셨다면 <b>[-] 버튼</b>으로 수정합니다.<br />
+                3. 18홀을 마치고 종료하면, 타수가 가장 적은 순서대로 우승자와 순위표가 정리됩니다.
+            </div>
+            <div class="legal-notice">
+                <b>🚨 주의사항 및 면책 조항</b><br />
+                본 앱은 개인 개발자가 무료로 제공하는 참고용 보조 수첩입니다. 스마트폰 변경/삭제 시 데이터가 초기화될 수 있으며, 기기 조작 오류로 인한 점수 분쟁에 대하여 개발자는 어떠한 법적 책임도 지지 않습니다.
+            </div>
+        </div>
     </div>
 
-    <!--2. 점수 기록 화면-->
+    <!-- 2. 점수 기록 화면 -->
     <div class="screen" id="screen-play">
         <div class="hole-info-board">
             <button class="hole-nav-btn" onclick="prevHole()">◀ 이전</button>
@@ -152,37 +146,29 @@
             <button class="hole-nav-btn" onclick="nextHole()">다음 ▶</button>
         </div>
 
-        <div id="score-rows-container">
-            <!--자바스크립트로 참가자 수만큼 자동 생성-->
-        </div>
+        <div id="score-rows-container"></div>
 
         <button class="btn-finish-hole" id="btn-next-action" onclick="nextHole()">다음 홀로 넘어가기</button>
     </div>
 
-    <!--3. 프리미엄 최종 결과 화면-->
+    <!-- 3. 최종 결과 화면 -->
     <div class="screen" id="screen-result">
         <div class="result-card">
             <div class="result-main-title">18홀 라운딩 최종 결과</div>
             
-            <div id="mvp-container">
-                <!--우승자 패널 자동 생성-->
-            </div>
-
-            <div id="ranking-container">
-                <!--나머지 순위표 자동 생성-->
-            </div>
+            <div id="mvp-container"></div>
+            <div id="ranking-container"></div>
 
             <button class="btn-save-ad" id="btn-final-save" onclick="saveAndShowAd()">
-                ✅ 최종 점수표 안전하게 기록하기
+                ✅ 최종 점수표 기록 보관함에 저장하기
             </button>
-            <button class="btn-reset" onclick="window.location.replace(window.location.href.split('?')[0] + '?v=' + new Date().getTime())">새로운 게임 다시 시작하기</button>
+            <button class="btn-reset" onclick="startNewGame()">새로운 게임 다시 시작하기</button>
         </div>
     </div>
 
 </div>
 
 <script>
-// ES5 구버전 문법 (구형 스마트폰 완벽 호환, 오류 원천 차단)
 var players = [];
 var currentHole = 1;
 var totalHoles = 18;
@@ -201,13 +187,13 @@ function initParticles() {
         window.addEventListener('resize', resize);
         resize();
 
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 25; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 2.5 + 1,
-                speedY: Math.random() * 0.5 + 0.2,
-                opacity: Math.random() * 0.5 + 0.1
+                size: Math.random() * 2 + 1,
+                speedY: Math.random() * 0.4 + 0.1,
+                opacity: Math.random() * 0.4 + 0.1
             });
         }
         function animate() {
@@ -227,64 +213,45 @@ function initParticles() {
     } catch(e) {}
 }
 
-function getQueryParam(name) {
-    var url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-    var results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+// 기록 보관함 전용 로드 및 표시 함수
+function loadHistory() {
+    var container = document.getElementById('history-list-container');
+    var rawData = localStorage.getItem('parkgolf_history_data');
+    if (!rawData) {
+        container.innerHTML = '<div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">저장된 지난 기록이 없습니다.</div>';
+        return;
+    }
+    try {
+        var historyArray = JSON.parse(rawData);
+        if (historyArray.length === 0) {
+            container.innerHTML = '<div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">저장된 지난 기록이 없습니다.</div>';
+            return;
+        }
+        var html = '';
+        for (var i = 0; i < historyArray.length; i++) {
+            var item = historyArray[i];
+            html += '<div class="history-item">';
+            html += '<div class="history-date">🗓️ ' + item.date + '</div>';
+            html += '<div class="history-winner">🥇 우승: ' + item.winner + ' (' + item.winnerScore + '타)</div>';
+            html += '<div style="margin-top:4px; font-size:13px; color:#94a3b8;">' + item.details + '</div>';
+            html += '</div>';
+        }
+        container.innerHTML = html;
+    } catch(e) {
+        container.innerHTML = '<div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">기록을 불러오지 못했습니다.</div>';
+    }
+}
+
+function clearHistory() {
+    if (confirm("저장된 모든 지난 라운딩 기록을 삭제하시겠습니까?")) {
+        localStorage.removeItem('parkgolf_history_data');
+        loadHistory();
+    }
 }
 
 window.onload = function() {
     initParticles();
-    var action = getQueryParam('action');
-    var rankData = getQueryParam('rank');
-
-    // 앱인벤터에서 전면광고 송출 후 URL 강제 이동으로 복귀 시 화면 구성 (메모리 증발 철통 방어)
-    if (action === 'save_score' && rankData) {
-        document.getElementById('guide-panel').style.display = 'none';
-        document.getElementById('screen-setup').className = 'screen';
-        document.getElementById('screen-result').className = 'screen active';
-        
-        var mvpContainer = document.getElementById('mvp-container');
-        var rankContainer = document.getElementById('ranking-container');
-        mvpContainer.innerHTML = '';
-        rankContainer.innerHTML = '';
-
-        // 이름|점수^이름|점수 형식 파싱
-        var pArray = rankData.split('^');
-        for (var k = 0; k < pArray.length; k++) {
-            var parts = pArray[k].split('|');
-            if(parts.length === 2) {
-                var name = parts[0];
-                var score = parts[1];
-
-                if (k === 0) {
-                    // 1등(MVP) 스포트라이트 패널
-                    var mvpHtml = '<div class="mvp-panel">';
-                    mvpHtml += '<div class="mvp-label">오늘의 우승자 (MVP)</div>';
-                    mvpHtml += '<div class="mvp-name">' + name + ' 님</div>';
-                    mvpHtml += '<div class="mvp-score">최종 ' + score + ' 타</div>';
-                    mvpHtml += '</div>';
-                    mvpContainer.innerHTML = mvpHtml;
-                } else {
-                    // 나머지 순위표 (글자 깨짐 방지 레이아웃)
-                    var row = document.createElement('div');
-                    row.className = 'rank-row';
-                    var medal = (k + 1) + "위";
-                    row.innerHTML = '<div class="rank-medal">' + medal + '</div><div class="rank-name">' + name + '</div><div class="rank-score">' + score + ' 타</div>';
-                    rankContainer.appendChild(row);
-                }
-            }
-        }
-        
-        var btnSave = document.getElementById('btn-final-save');
-        btnSave.innerHTML = "⭐ 점수 기록이 완료되었습니다 ⭐";
-        btnSave.style.background = "#10b981"; 
-        btnSave.disabled = true;
-    }
+    loadHistory();
 };
 
 window.addPlayerInput = function() {
@@ -320,7 +287,6 @@ window.startGame = function() {
     }
 
     currentHole = 1;
-    document.getElementById('guide-panel').style.display = 'none';
     document.getElementById('screen-setup').className = 'screen';
     document.getElementById('screen-play').className = 'screen active';
     renderHoleBoard();
@@ -340,7 +306,6 @@ function renderHoleBoard() {
         
         var html = '<div class="player-name">' + p.name + '</div>';
         html += '<div class="score-controls">';
-        // ES5 모바일 버튼 오작동 원천 차단 핸들러
         html += '<button class="btn-score btn-minus" onclick="window.clickAction(event, ' + i + ', -1)">-</button>';
         html += '<div class="current-score" id="score-text-' + i + '">' + currentStrokes + '</div>';
         html += '<button class="btn-score btn-plus" onclick="window.clickAction(event, ' + i + ', 1)">+</button>';
@@ -354,15 +319,12 @@ function renderHoleBoard() {
     if (currentHole === totalHoles) {
         nextBtn.innerText = "종료 및 최종 순위 보기";
         nextBtn.style.background = "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)";
-        nextBtn.style.boxShadow = "0 10px 25px rgba(59, 130, 246, 0.4)";
     } else {
         nextBtn.innerText = "다음 홀로 넘어가기";
         nextBtn.style.background = "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)";
-        nextBtn.style.boxShadow = "0 10px 25px rgba(245, 158, 11, 0.4)";
     }
 }
 
-// 이벤트 버블링 차단 클릭 핸들러
 window.clickAction = function(e, playerIndex, amount) {
     if (!e) e = window.event;
     if (e && e.stopPropagation) { e.stopPropagation(); }
@@ -403,7 +365,6 @@ function showResults() {
         players[i].totalScore = total;
     }
 
-    // 골프 룰: 타수가 적은 사람이 1등 (오름차순 정렬)
     players.sort(function(a, b) {
         return a.totalScore - b.totalScore;
     });
@@ -431,34 +392,55 @@ function showResults() {
     }
 }
 
-// ⚠️ 모바일 에러 원천 차단 이중 우회 로직 ⚠️
+// ⚠️ 기록 저장 및 앱인벤터 전면광고 호출 ⚠️
 window.saveAndShowAd = function() {
     var btn = document.getElementById('btn-final-save');
     if (btn.disabled) return;
-    
-    btn.innerHTML = "점수 안전 저장 중...";
-    btn.style.opacity = "0.7";
+
+    // 1. 스마트폰 내부 보관함(localStorage)에 실제 저장
+    try {
+        var now = new Date();
+        var dateStr = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + (now.getMinutes()<10?'0':'') + now.getMinutes();
+        
+        var winnerName = players[0] ? players[0].name : '없음';
+        var winnerScore = players[0] ? players[0].totalScore : 0;
+        
+        var detailsArr = [];
+        for (var i = 0; i < players.length; i++) {
+            detailsArr.push(players[i].name + ': ' + players[i].totalScore + '타');
+        }
+
+        var newRecord = {
+            date: dateStr,
+            winner: winnerName,
+            winnerScore: winnerScore,
+            details: detailsArr.join(' / ')
+        };
+
+        var rawData = localStorage.getItem('parkgolf_history_data');
+        var historyArray = rawData ? JSON.parse(rawData) : [];
+        historyArray.unshift(newRecord); // 최신 기록을 맨 앞에 추가
+        if (historyArray.length > 10) historyArray.pop(); // 최근 10개만 유지
+
+        localStorage.setItem('parkgolf_history_data', JSON.stringify(historyArray));
+    } catch(e) {}
+
+    // 2. 버튼 상태 변경
+    btn.innerHTML = "⭐ 기록 보관함 저장 완료 ⭐";
+    btn.style.background = "#10b981";
     btn.disabled = true;
 
-    // 데이터를 URL에 안전하게 묶어버림
-    var resultStr = "";
-    for(var i = 0; i < players.length; i++) {
-        resultStr += players[i].name + "|" + players[i].totalScore + (i < players.length - 1 ? "^" : "");
-    }
-
-    var baseUrl = window.location.href.split('?')[0].split('#')[0];
-    var finalUrl = baseUrl + "?action=save_score&rank=" + encodeURIComponent(resultStr) + "&t=" + new Date().getTime();
-
-    // 1. 앱인벤터 내부 통신 (광고 송출 트리거)
+    // 3. 앱인벤터로 광고 신호 전송
     try {
         if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
             window.AppInventor.setWebViewString('action=save_score');
         }
     } catch (err) {}
+};
 
-    // 2. 0.5초 뒤 강제 URL 이동 (메모리 백지화 현상 완벽 방어)
-    setTimeout(function () {
-        window.location.replace(finalUrl);
-    }, 500);
+window.startNewGame = function() {
+    loadHistory(); // 메인으로 돌아갈 때 보관함 목록 갱신
+    document.getElementById('screen-result').className = 'screen';
+    document.getElementById('screen-setup').className = 'screen active';
 };
 </script>
