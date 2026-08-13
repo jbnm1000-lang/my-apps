@@ -13,16 +13,19 @@
         font-family: 'Pretendard', sans-serif; color: #f8fafc;
     }
 
+    /* 블로거 플랫폼 찌꺼기 완벽 숨김 */
     .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
         display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
     }
 
+    /* 금빛 파티클 캔버스 */
     #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
     #app-container {
         position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px 15px 90px 15px; box-sizing: border-box;
     }
 
+    /* 프리미엄 헤더 */
     .header-section { text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #166534 0%, #064e3b 100%); padding: 25px 15px; border-radius: 20px; border: 1px solid #22c55e; box-shadow: 0 12px 30px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
     .main-title { font-size: 26px; font-weight: 900; color: #ffffff; margin-bottom: 6px; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
     .sub-title { font-size: 13.5px; color: #bbf7d0; font-weight: 600; }
@@ -31,7 +34,7 @@
     .screen.active { display: block; }
     @keyframes fadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
-    /* 화면 짤림 방지 완벽 대응 패널 */
+    /* 참가자 설정 화면 */
     .setup-card { background: #1e293b; border-radius: 20px; padding: 25px 15px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 100%; box-sizing: border-box; overflow: hidden; }
     .setup-title { font-size: 18px; font-weight: 900; color: #22c55e; margin-bottom: 18px; text-align: center; }
     .player-input-row { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; box-sizing: border-box; }
@@ -48,6 +51,7 @@
 
     .btn-start { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 20px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); }
 
+    /* 메인 점수판 화면 */
     .hole-info-board { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 18px 15px; border-radius: 16px; border: 1px solid #334155; margin-bottom: 20px; }
     .hole-number { font-size: 32px; font-weight: 900; color: #22c55e; }
     .hole-nav-btn { background: #334155; color: #e2e8f0; border: none; padding: 14px 18px; border-radius: 10px; font-size: 16px; font-weight: 900; cursor: pointer; }
@@ -62,6 +66,7 @@
 
     .btn-finish-hole { width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 20px; font-weight: 900; cursor: pointer; margin-top: 20px; }
 
+    /* 최종 결과 화면 */
     .result-card { background: #1e293b; border-radius: 22px; padding: 30px 15px; border: 1px solid #22c55e; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
     .result-main-title { font-size: 24px; font-weight: 900; color: #ffffff; margin-bottom: 25px; }
     
@@ -74,18 +79,22 @@
     .rank-row { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 18px 12px; border-radius: 14px; margin-bottom: 10px; border: 1px solid #334155; }
     .rank-medal { font-size: 18px; font-weight: 900; white-space: nowrap; min-width: 50px; text-align: left; }
     .rank-name { font-size: 18px; font-weight: 900; color: #f8fafc; flex: 1; text-align: left; padding-left: 8px; word-break: keep-all; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .rank-score { font-size: 22px; font-weight: 900; color: #34d399; font-family: Tahoma, sans-serif; white-space: nowrap; }
+    .rank-score { font-size: 22px; font-weight: 900; color: #34d399; font-family: Tahoma, sans-serif; white-space: nowrap; padding-left: 10px; }
 
-    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 19px; font-weight: 900; cursor: pointer; margin-top: 25px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); }
-    .btn-reset { width: 100%; background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; margin-top: 12px; }
+    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #ffffff; border: none; padding: 20px; border-radius: 16px; font-size: 19px; font-weight: 900; cursor: pointer; margin-top: 25px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); transition: 0.1s; position: relative; z-index: 10; }
+    .btn-reset { width: 100%; background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 15px; position: relative; z-index: 10; }
+    .btn-reset:active { background: #334155; color: #ffffff; }
     
-    .open-guide-card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 20px 15px; margin-bottom: 20px; }
+    /* 장문 텍스트 복구 패널 */
+    .open-guide-card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 20px 15px; margin-bottom: 20px; text-align: left; }
     .guide-main-title { color: #f8fafc; font-size: 16px; font-weight: 900; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-    .guide-h4 { color: #22c55e; font-size: 15px; font-weight: 800; margin-top: 15px; margin-bottom: 8px; }
-    .guide-text { color: #cbd5e1; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
-    .legal-notice { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px 10px; border-radius: 8px; color: #fca5a5; font-size: 13px; margin-top: 15px; line-height: 1.5; }
+    .guide-h4 { color: #22c55e; font-size: 15px; font-weight: 800; margin-top: 20px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .guide-h4:first-child { margin-top: 0; }
+    .guide-text { color: #cbd5e1; font-size: 13.5px; line-height: 1.7; word-break: keep-all; }
+    .legal-notice { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px; border-radius: 8px; color: #fca5a5; font-size: 13.5px; margin-top: 20px; line-height: 1.6; word-break: keep-all; }
 </style>
 
+<!--금빛 반딧불이 파티클 캔버스-->
 <canvas id="particle-canvas"></canvas>
 
 <div id="app-container">
@@ -102,7 +111,7 @@
         <div class="history-card">
             <div class="history-title">
                 <span>📁 지난 라운딩 기록 보관함</span>
-                <button onclick="clearHistory()" style="background:transparent; border:none; color:#ef4444; font-size:12px; cursor:pointer;">전체삭제</button>
+                <button onclick="clearHistory()" style="background:transparent; border:none; color:#ef4444; font-size:12px; cursor:pointer; font-weight:bold;">전체삭제</button>
             </div>
             <div id="history-list-container">
                 <div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">저장된 지난 기록이 없습니다.</div>
@@ -123,17 +132,25 @@
             <button class="btn-start" onclick="startGame()">⛳ 18홀 라운딩 시작하기</button>
         </div>
 
+        <!-- 삭제되었던 정성스러운 가이드라인 100% 복구 -->
         <div class="open-guide-card" style="margin-top:20px;">
             <div class="guide-main-title">📖 앱 이용 가이드 및 필수 안내</div>
+            
             <div class="guide-h4">📌 쉽고 편한 점수 관리 방법</div>
             <div class="guide-text">
-                1. 라운딩 전 동반자 이름을 입력합니다. (최대 4명)<br />
-                2. 각 홀마다 공을 치신 횟수만큼 파란색 <b>[+] 버튼</b>을 누릅니다. 실수하셨다면 <b>[-] 버튼</b>으로 수정합니다.<br />
-                3. 18홀을 마치고 종료하면, 타수가 가장 적은 순서대로 우승자와 순위표가 정리됩니다.
+                1. 라운딩 전, 화면에 동반자분들의 이름을 입력합니다. (최대 4명)<br />
+                2. 각 홀마다 공을 치신 횟수(타수)만큼 파란색 <b>[+] 버튼</b>을 눌러 점수를 올립니다. 실수하셨다면 빨간색 <b>[-] 버튼</b>으로 수정할 수 있습니다.<br />
+                3. 18홀을 모두 돌고 종료 버튼을 누르시면, 타수가 가장 적은 순서대로 최종 우승자와 순위표가 자동으로 정리됩니다.
             </div>
+            
+            <div class="guide-h4">💡 파크골프 명랑 라운딩 꿀팁</div>
+            <div class="guide-text">
+                파크골프는 배려의 스포츠입니다. 앞 팀이 안전하게 홀아웃(공을 홀에 넣음)을 마친 것을 확인한 후에 티샷을 준비해 주십시오. 그린 위에서는 다른 분의 퍼팅 라인을 밟지 않도록 항상 주의해야 합니다. 멋진 샷이 나왔을 때는 아낌없는 박수와 칭찬으로 명랑한 분위기를 만들어보세요!
+            </div>
+
             <div class="legal-notice">
                 <b>🚨 주의사항 및 면책 조항</b><br />
-                본 앱은 개인 개발자가 무료로 제공하는 참고용 보조 수첩입니다. 스마트폰 변경/삭제 시 데이터가 초기화될 수 있으며, 기기 조작 오류로 인한 점수 분쟁에 대하여 개발자는 어떠한 법적 책임도 지지 않습니다.
+                본 앱은 파크골프 동호인 여러분의 명랑하고 편안한 라운딩을 위해 개인 개발자가 대가 없이 무료로 제공하는 참고용 보조 수첩입니다. 사행성 내기 등을 엄격히 금지합니다. 스마트폰 기기 변경이나 앱 삭제 시 데이터가 초기화될 수 있으며, 기기 조작 오류로 인한 점수 분쟁에 대하여 개발자는 어떠한 법적 책임도 지지 않습니다. 최종 순위 기록은 공식적인 대회 증빙 자료로 사용하실 수 없으므로 친목 도모 용도로만 활용해 주시기 바랍니다.
             </div>
         </div>
     </div>
@@ -162,6 +179,7 @@
             <button class="btn-save-ad" id="btn-final-save" onclick="saveAndShowAd()">
                 ✅ 최종 점수표 기록 보관함에 저장하기
             </button>
+            <!-- 멈춤 현상(프리징)을 완벽 해결한 강력한 새로고침 버튼 -->
             <button class="btn-reset" onclick="startNewGame()">새로운 게임 다시 시작하기</button>
         </div>
     </div>
@@ -169,6 +187,7 @@
 </div>
 
 <script>
+// ES5 구버전 문법 (구형 스마트폰 완벽 호환, 오류 원천 차단)
 var players = [];
 var currentHole = 1;
 var totalHoles = 18;
@@ -216,6 +235,8 @@ function initParticles() {
 // 기록 보관함 전용 로드 및 표시 함수
 function loadHistory() {
     var container = document.getElementById('history-list-container');
+    if (!container) return;
+    
     var rawData = localStorage.getItem('parkgolf_history_data');
     if (!rawData) {
         container.innerHTML = '<div style="color:#94a3b8; font-size:13px; text-align:center; padding:10px;">저장된 지난 기록이 없습니다.</div>';
@@ -392,7 +413,7 @@ function showResults() {
     }
 }
 
-// ⚠️ 기록 저장 및 앱인벤터 전면광고 호출 ⚠️
+// ⚠️ 기록 저장 및 앱인벤터 전면광고 호출 (프리징 현상 제거) ⚠️
 window.saveAndShowAd = function() {
     var btn = document.getElementById('btn-final-save');
     if (btn.disabled) return;
@@ -419,8 +440,8 @@ window.saveAndShowAd = function() {
 
         var rawData = localStorage.getItem('parkgolf_history_data');
         var historyArray = rawData ? JSON.parse(rawData) : [];
-        historyArray.unshift(newRecord); // 최신 기록을 맨 앞에 추가
-        if (historyArray.length > 10) historyArray.pop(); // 최근 10개만 유지
+        historyArray.unshift(newRecord); 
+        if (historyArray.length > 10) historyArray.pop(); 
 
         localStorage.setItem('parkgolf_history_data', JSON.stringify(historyArray));
     } catch(e) {}
@@ -438,9 +459,10 @@ window.saveAndShowAd = function() {
     } catch (err) {}
 };
 
+// ⚠️ 화면 먹통(프리징) 완벽 해결을 위한 강제 새로고침 함수 ⚠️
 window.startNewGame = function() {
-    loadHistory(); // 메인으로 돌아갈 때 보관함 목록 갱신
-    document.getElementById('screen-result').className = 'screen';
-    document.getElementById('screen-setup').className = 'screen active';
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    // 캐시나 찌꺼기 메모리를 완벽히 날려버리고 앱을 켠 처음 상태로 되돌립니다.
+    window.location.replace(baseUrl + '?v=' + new Date().getTime());
 };
 </script>
