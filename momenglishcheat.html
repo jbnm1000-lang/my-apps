@@ -483,16 +483,16 @@ function renderList(categoryId) {
     }
 }
 
-// ⚠️ HTML5 내장 웹 스피치 API (API 비용 0원)
+// ⚠️ 앱인벤터 네이티브 TTS 부품으로 음성 신호 완벽 전달 ⚠️
 window.speakText = function(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); 
-        var msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'en-US'; 
-        msg.rate = 0.85; 
-        window.speechSynthesis.speak(msg);
-    } else {
-        showToast("현재 기기에서는 음성 지원 기능을 사용할 수 없습니다.");
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=play_tts&text=" + text);
+        } else {
+            showToast("앱인벤터 환경에서만 음성이 지원됩니다.");
+        }
+    } catch(e) {
+        showToast("음성 신호 전송에 실패했습니다.");
     }
 };
 
