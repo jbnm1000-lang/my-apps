@@ -1,0 +1,346 @@
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    /* 럭셔리 금융 앱 테마 (소프트 그린 & 그레이지) */
+    html, body {
+        width: 100% !important; min-height: 100vh !important;
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important; 
+        overflow-x: hidden !important;
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+        font-family: 'Pretendard', sans-serif !important; color: #1e293b !important;
+    }
+
+    /* 블로거 찌꺼기 완벽 숨김 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important;
+    }
+
+    #app-container {
+        position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 25px 15px 90px 15px; box-sizing: border-box;
+    }
+
+    /* 하이엔드 뱅킹 스타일 헤더 */
+    .header-section { text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); padding: 35px 20px; border-radius: 24px; box-shadow: 0 15px 30px rgba(6, 78, 59, 0.2); position: relative; overflow: hidden; border: 1px solid #166534; }
+    .header-section::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(52, 211, 153, 0.1) 0%, transparent 60%); pointer-events: none; }
+    .main-title { font-size: 26px; font-weight: 900; color: #34d399; margin-bottom: 10px; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1;}
+    .sub-title { font-size: 14.5px; color: #cbd5e1; font-weight: 600; position: relative; z-index: 1; letter-spacing: 0.5px;}
+
+    /* 🌟 상시 노출되는 가이드 및 심사 방어막 (화살표 제거) */
+    .static-guide { background: #ffffff; border-radius: 24px; margin-bottom: 25px; border: 1px solid #d1d5db; box-shadow: 0 12px 30px rgba(0,0,0,0.04); padding: 25px 20px; position: relative; overflow: hidden;}
+    .static-guide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: #10b981; }
+    
+    .g-header-title { font-size: 18px; font-weight: 900; color: #064e3b; text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px dashed #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 8px;}
+    
+    .g-title { color: #059669; font-size: 16px; font-weight: 800; margin-top: 20px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .g-text { font-size: 14.5px; color: #475569; line-height: 1.7; word-break: keep-all; }
+    .g-notice { background: rgba(5, 150, 105, 0.05); border-left: 4px solid #059669; padding: 18px; border-radius: 12px; font-size: 13.5px; color: #064e3b; margin-top: 25px; line-height: 1.6; }
+
+    /* 메인 대시보드 카드 (통장 스타일) */
+    .dashboard-card { background: #ffffff; border-radius: 24px; padding: 30px 20px; border: 1px solid #e5e7eb; box-shadow: 0 12px 30px rgba(0,0,0,0.05); text-align: center; margin-bottom: 25px; position: relative; overflow: hidden; }
+    .card-label { font-size: 16px; font-weight: 700; color: #64748b; margin-bottom: 10px; }
+    .money-amount { font-size: 42px; font-weight: 900; color: #0f172a; margin-bottom: 5px; font-family: 'Pretendard', sans-serif; letter-spacing: -1px; }
+    .money-unit { font-size: 24px; font-weight: 700; color: #475569; }
+    .days-badge { display: inline-block; background: #ecfdf5; color: #059669; font-size: 15px; font-weight: 800; padding: 8px 18px; border-radius: 20px; border: 1px solid #a7f3d0; margin-bottom: 25px; }
+    
+    /* 목표 타겟 정보 요약 */
+    .target-info { background: #f8fafc; border-radius: 16px; padding: 18px; border: 1px dashed #cbd5e1; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; text-align: left; }
+    .t-label { font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 4px; }
+    .t-value { font-size: 18px; color: #1e293b; font-weight: 800; }
+    .btn-reset { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .btn-reset:active { background: #fee2e2; }
+
+    /* 초기 설정 뷰 (입력 폼) */
+    .setup-view { display: none; background: #ffffff; border-radius: 24px; padding: 35px 25px; border: 1px solid #e5e7eb; box-shadow: 0 12px 30px rgba(0,0,0,0.05); margin-bottom: 25px;}
+    .input-group { margin-bottom: 20px; }
+    .input-label { display: block; font-size: 15px; font-weight: 800; color: #334155; margin-bottom: 8px; text-align: left; }
+    .input-field { width: 100%; padding: 18px; border-radius: 16px; border: 1px solid #cbd5e1; font-size: 16px; font-weight: 600; color: #0f172a; background: #f8fafc; font-family: 'Pretendard', sans-serif; transition: 0.2s; }
+    .input-field:focus { outline: none; border-color: #10b981; background: #ffffff; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
+    .btn-start { width: 100%; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #ffffff; border: none; padding: 22px; border-radius: 18px; font-size: 18px; font-weight: 900; cursor: pointer; margin-top: 15px; box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3); transition: 0.2s; }
+    .btn-start:active { transform: scale(0.97); }
+
+    /* ⚠️ 저장 및 광고 트리거 (이중 우회) 버튼 */
+    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; border: none; padding: 24px; border-radius: 20px; font-size: 19px; font-weight: 900; cursor: pointer; box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4); transition: 0.2s; position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; gap: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 10px;}
+    .btn-save-ad:active { transform: scale(0.97); }
+    .btn-save-ad.disabled { background: #94a3b8; box-shadow: none; cursor: not-allowed; text-shadow: none;}
+
+    /* 토스트 알림창 */
+    .toast-msg { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(2, 44, 34, 0.95); color: #a7f3d0; padding: 16px 28px; border-radius: 30px; font-size: 15px; font-weight: 800; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid #064e3b;}
+    .toast-msg.show { opacity: 1; }
+
+    /* 동전 떨어지는 파티클 효과 */
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; display: none; }
+</style>
+
+<div class="toast-msg" id="toast">알림 메시지</div>
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+
+    <div class="header-section">
+        <div class="main-title">건강 저금통 💰</div>
+        <div class="sub-title">나쁜 습관을 끊고 매일 돈을 모아보세요!</div>
+    </div>
+
+    <!--🌟 상시 노출 가이드 및 심사 방어막 (화살표 제거됨)-->
+    <div class="static-guide">
+        <div class="g-header-title">📖 앱 이용 가이드 및 꿀팁 안내</div>
+        
+        <div class="g-title">💡 이렇게 활용해 보세요!</div>
+        <div class="g-text">
+            단순히 꾹 참기만 하는 과정은 괴롭지만, 나를 위해 아낀 돈이 차곡차곡 쌓이는 것을 눈으로 직접 확인하면 성취감과 즐거움이 배가 됩니다.<br /><br />
+            1. 내가 끊고 싶은 나쁜 습관(매일 피우는 담배, 잦은 야식, 불필요한 커피 등)을 자유롭게 적어주세요.<br />
+            2. 그 습관을 그대로 유지했을 때 매일 무의미하게 낭비되던 금액을 입력해 주세요.<br />
+            3. 매일 하루를 건강하고 성공적으로 보냈다면 <b>[오늘도 참기 성공!]</b> 버튼을 자랑스럽게 눌러주세요.<br />
+            4. 버튼을 누를 때마다 내 건강 저금통에 돈이 쌓입니다. 이렇게 쌓인 금액으로 나를 위한 진짜 뜻깊은 선물을 사보세요!
+        </div>
+
+        <div class="g-title">💖 건강한 삶을 위한 꿀팁</div>
+        <div class="g-text">
+            결심이 작심삼일로 끝났더라도 실망하거나 자책하지 않으셔도 괜찮습니다. 실패했다면 [초기화] 버튼을 누르고 오늘부터 다시 새로운 마음으로 시작하면 됩니다. 가장 중요한 것은 포기하지 않고, 나의 나쁜 습관을 '돈'이라는 아주 직관적이고 명확한 숫자로 바꾸어 강력한 동기부여를 꾸준히 얻는 것입니다.
+        </div>
+
+        <div class="g-notice">
+            <b>🚨 주의사항 및 면책 조항 (이용 전 필수 확인)</b><br />
+            본 애플리케이션은 사용자의 건강한 습관 형성과 일상적인 긍정적 동기부여를 돕기 위해 개인 개발자가 무료로 제공하는 오프라인 전용 보조 기록 도구입니다.<br /><br />
+            앱 내에 표시되는 모든 금액은 사용자가 임의로 입력한 가상의 수치일 뿐이며, 실제 금융 기관의 이자 수익이나 자산 증식을 보장하는 실제 금융 및 은행 상품이 절대 아님을 명확히 안내해 드립니다.<br /><br />
+            본 앱은 어떠한 형태의 사행성 조장, 도박, 실제 금전 거래 및 이체 기능을 전혀 포함하고 있지 않습니다. 아울러 사용자의 질병에 대한 전문적인 의학적 진단이나 치료를 결코 대체할 수 없으므로, 건강상의 문제가 있을 시 반드시 전문 의료 기관을 방문하시기 바랍니다.
+        </div>
+    </div>
+
+    <!--초기 설정 뷰 (앱 처음 켰을 때만 나옴)-->
+    <div class="setup-view" id="setup-view">
+        <div class="card-label" style="color: #0f172a; font-size: 18px; margin-bottom: 25px; text-align: center;">새로운 건강 목표 설정하기</div>
+        
+        <div class="input-group">
+            <label class="input-label">목표 이름 (무엇을 참을까요?)</label>
+            <input class="input-field" id="input-name" placeholder="예: 매일 피우는 담배, 야식, 커피" type="text" />
+        </div>
+        
+        <div class="input-group">
+            <label class="input-label">하루 절약 금액 (숫자만 입력)</label>
+            <input class="input-field" id="input-cost" pattern="[0-9]*" placeholder="예: 4500" type="number" />
+        </div>
+
+        <button class="btn-start" onclick="startHabit()">목표 저장하고 시작하기</button>
+    </div>
+
+    <!--메인 대시보드 화면 (통장)-->
+    <div id="dashboard-view" style="display: none;">
+        
+        <div class="dashboard-card">
+            <div class="days-badge" id="ui-days">진행 중 1일차</div>
+            <div class="card-label">현재까지 절약한 금액</div>
+            <div class="money-amount"><span id="ui-total">0</span><span class="money-unit">원</span></div>
+        </div>
+
+        <div class="target-info">
+            <div>
+                <div class="t-label">나의 절약 목표</div>
+                <div class="t-value" id="ui-name">목표</div>
+                <div class="t-label" id="ui-cost" style="font-size: 13px; margin-top: 5px;">하루 0원씩 저축 중</div>
+            </div>
+            <button class="btn-reset" onclick="resetHabit()">초기화</button>
+        </div>
+
+        <!--⚠️ 절대 멈추지 않는 이중 우회 로직 버튼 ⚠️-->
+        <button class="btn-save-ad" id="btn-save" onclick="saveAndShowAd()">
+            🎉 오늘도 참기 성공! (기록 및 적립)
+        </button>
+    </div>
+
+</div>
+
+<script>
+// ES5 구버전 완벽 호환, 서버 비용 제로 로컬 스토리지 로직
+
+// 토스트 알림창
+var toastTimeout;
+function showToast(msg) {
+    var toast = document.getElementById("toast");
+    toast.innerText = msg;
+    toast.className = "toast-msg show";
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function(){ toast.className = toast.msg; }, 2500);
+}
+
+// 데이터 로드
+var habitKey = 'health_saving_data_v1';
+var appData = null;
+
+function loadData() {
+    var raw = localStorage.getItem(habitKey);
+    if(raw) {
+        try { appData = JSON.parse(raw); } catch(e) {}
+    }
+}
+
+function updateUI() {
+    if(appData) {
+        document.getElementById('setup-view').style.display = 'none';
+        document.getElementById('dashboard-view').style.display = 'block';
+        
+        document.getElementById('ui-name').innerText = appData.name;
+        document.getElementById('ui-cost').innerText = "하루 " + parseInt(appData.cost).toLocaleString() + "원씩 저축 중";
+        document.getElementById('ui-days').innerText = "진행 중 " + appData.days + "일차";
+        document.getElementById('ui-total').innerText = parseInt(appData.total).toLocaleString();
+
+        // 오늘 이미 눌렀는지 체크
+        var today = new Date().toDateString();
+        var btn = document.getElementById('btn-save');
+        if(appData.lastDate === today) {
+            btn.innerHTML = "✅ 오늘의 저축 완료 (내일 또 만나요!)";
+            btn.className = "btn-save-ad disabled";
+        } else {
+            btn.innerHTML = "🎉 오늘도 참기 성공! (기록 및 적립)";
+            btn.className = "btn-save-ad";
+            btn.disabled = false;
+        }
+    } else {
+        document.getElementById('setup-view').style.display = 'block';
+        document.getElementById('dashboard-view').style.display = 'none';
+    }
+}
+
+// 목표 시작 버튼
+function startHabit() {
+    var name = document.getElementById('input-name').value;
+    var cost = document.getElementById('input-cost').value;
+    
+    if(!name || name.trim() === "") { showToast("목표 이름을 입력해주세요."); return; }
+    if(!cost || isNaN(cost) || parseInt(cost) <= 0) { showToast("올바른 금액을 숫자로 입력해주세요."); return; }
+    
+    appData = {
+        name: name,
+        cost: parseInt(cost),
+        days: 0,
+        total: 0,
+        lastDate: "" 
+    };
+    
+    localStorage.setItem(habitKey, JSON.stringify(appData));
+    showToast("건강 저금통이 개설되었습니다! 파이팅!");
+    updateUI();
+}
+
+// 목표 초기화
+function resetHabit() {
+    if(confirm("정말 기록을 초기화하시겠습니까? (저축된 금액이 모두 사라집니다)")) {
+        localStorage.removeItem(habitKey);
+        appData = null;
+        document.getElementById('input-name').value = "";
+        document.getElementById('input-cost').value = "";
+        updateUI();
+    }
+}
+
+// ⚠️ 앱인벤터 통신 및 이중 우회 철벽 로직 (광고 트리거) ⚠️
+window.saveAndShowAd = function() {
+    if(!appData) return;
+    
+    var today = new Date().toDateString();
+    if(appData.lastDate === today) {
+        showToast("오늘은 이미 저축했습니다. 내일 다시 눌러주세요!");
+        return;
+    }
+
+    var btn = document.getElementById('btn-save');
+    if (btn.disabled) return;
+    
+    btn.innerHTML = "통장에 입금 중... ⏳";
+    btn.disabled = true;
+
+    // 1단계 다이렉트 통신
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=add_saving");
+        }
+    } catch(e) {}
+
+    // 2단계 이중 우회 통신 (0.5초 뒤 강제 리로드로 에러 차단)
+    setTimeout(function() {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.replace(baseUrl + "?action=add_saving&t=" + new Date().getTime());
+    }, 500);
+};
+
+// 동전 파티클 효과 (시각적 성취감)
+function triggerCoinEffect() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    canvas.style.display = 'block';
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    for (var i = 0; i < 40; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: -20 - Math.random() * 100,
+            size: Math.random() * 10 + 5,
+            speedY: Math.random() * 3 + 2,
+            speedX: (Math.random() - 0.5) * 2,
+            color: Math.random() > 0.5 ? '#fde047' : '#fbbf24' // 금화 색상
+        });
+    }
+    
+    var frame = 0;
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var active = false;
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.y += p.speedY;
+            p.x += p.speedX;
+            if (p.y < canvas.height) active = true;
+            
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+        }
+        frame++;
+        if(active && frame < 150) {
+            requestAnimationFrame(animate);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+        }
+    }
+    animate();
+}
+
+// URL 파라미터 감지하여 저축 완료 처리 (새로고침 무결점)
+function checkSuccess() {
+    var searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('action') === 'add_saving' && appData) {
+        
+        var today = new Date().toDateString();
+        if(appData.lastDate !== today) {
+            appData.days += 1;
+            appData.total += appData.cost;
+            appData.lastDate = today;
+            localStorage.setItem(habitKey, JSON.stringify(appData));
+            
+            triggerCoinEffect();
+            showToast("🎉 " + appData.cost.toLocaleString() + "원이 통장에 저축되었습니다!");
+        }
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+            updateUI();
+        }, 2000);
+    }
+}
+
+window.onload = function() {
+    loadData();
+    updateUI();
+    checkSuccess();
+};
+</script>
