@@ -22,7 +22,7 @@
         position: relative; z-index: 10; width: 100%; max-width: 600px; margin: 0 auto; padding: 25px 15px 90px 15px; box-sizing: border-box;
     }
 
-    /* 🌟 화면 전환 클래스 (굴착기 앱과 100% 동일) */
+    /* 🌟 화면 전환 클래스 (절대 멈추지 않는 굴착기 앱 무적 방식) */
     .screen { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .screen.active { display: block; }
     @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -113,8 +113,8 @@
                 <input class="input-field" id="input-cost" pattern="[0-9]*" placeholder="예: 4500" type="number" />
             </div>
 
-            <!-- type="button" 명시로 오류 원천 차단 -->
-            <button type="button" class="btn-start" onclick="startHabit()">목표 저장하고 시작하기</button>
+            <!-- type="button" 명시로 폼 제출(새로고침) 오류 원천 차단 -->
+            <button type="button" class="btn-start" onclick="window.startHabit()">목표 저장하고 시작하기</button>
         </div>
     </div>
 
@@ -132,10 +132,10 @@
                 <div class="t-value" id="ui-name">목표</div>
                 <div class="t-label" id="ui-cost" style="font-size: 13px; margin-top: 5px;">하루 0원씩 저축 중</div>
             </div>
-            <button type="button" class="btn-reset" onclick="resetHabit()">초기화</button>
+            <button type="button" class="btn-reset" onclick="window.resetHabit()">초기화</button>
         </div>
 
-        <button type="button" class="btn-save-ad" id="btn-save-habit" onclick="saveAndShowAd()">
+        <button type="button" class="btn-save-ad" id="btn-save-habit" onclick="window.saveAndShowAd()">
             🎉 오늘도 참기 성공! (기록 및 적립)
         </button>
     </div>
@@ -143,19 +143,19 @@
 </div>
 
 <script>
-// ES5 구버전 무적 방어 로직 (스마트폰 저장소 에러 완벽 회피)
+// ES5 구버전 호환, 메모리 증발 버그 완벽 수정본
 
 var toastTimeout;
-function showToast(msg) {
+window.showToast = function(msg) {
     var toast = document.getElementById("toast");
     if(!toast) return;
     toast.innerText = msg;
     toast.className = "toast-msg show";
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(function(){ toast.className = "toast-msg"; }, 2500);
-}
+};
 
-function getQueryParam(param) {
+window.getQueryParam = function(param) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
@@ -163,34 +163,35 @@ function getQueryParam(param) {
         if (pair[0] === param) { return pair[1]; }
     }
     return null;
-}
+};
 
-var habitKey = 'health_saving_data_v1';
+var habitKey = 'health_saving_data_final';
 var appData = null;
 
-// 안전한 데이터 불러오기 (에러가 나도 앱이 죽지 않음)
-function safeLoadData() {
-    try {
-        var raw = localStorage.getItem(habitKey);
-        if(raw) { appData = JSON.parse(raw); }
-    } catch(e) {
-        appData = null; // 저장소 차단 시 무시
+// 스마트폰 저장소 에러 무시 백업 기능 (쿠키 추가)
+window.safeSaveData = function(data) {
+    var rawStr = JSON.stringify(data);
+    try { localStorage.setItem(habitKey, rawStr); } catch(e) {}
+    try { document.cookie = habitKey + "=" + encodeURIComponent(rawStr) + "; max-age=31536000; path=/"; } catch(e) {}
+};
+
+// 앱 켤 때 딱 1번만 부르는 데이터 로드 함수
+window.safeLoadData = function() {
+    var raw = null;
+    try { raw = localStorage.getItem(habitKey); } catch(e) {}
+    if (!raw) {
+        try {
+            var match = document.cookie.match(new RegExp('(^| )' + habitKey + '=([^;]+)'));
+            if (match) raw = decodeURIComponent(match[2]);
+        } catch(e) {}
     }
-}
-
-// 안전한 데이터 저장하기
-function safeSaveData(data) {
-    try {
-        localStorage.setItem(habitKey, JSON.stringify(data));
-    } catch(e) {
-        // 스마트폰이 저장을 막아도 무시하고 진행
+    if (raw) {
+        try { appData = JSON.parse(raw); } catch(e) {}
     }
-}
+};
 
-// 화면 전환 및 UI 업데이트
-function updateUI() {
-    safeLoadData();
-
+// 화면 전환 및 UI 그리기 (절대 메모리를 날리지 않음!)
+window.updateUI = function() {
     if(appData) {
         document.getElementById('screen-setup').className = 'screen';
         document.getElementById('screen-dash').className = 'screen active';
@@ -202,31 +203,34 @@ function updateUI() {
 
         var today = new Date().toDateString();
         var btn = document.getElementById('btn-save-habit');
-        if(appData.lastDate === today) {
-            btn.innerHTML = "✅ 오늘의 저축 완료 (내일 또 만나요!)";
-            btn.className = "btn-save-ad disabled";
-            btn.disabled = true;
-        } else {
-            btn.innerHTML = "🎉 오늘도 참기 성공! (기록 및 적립)";
-            btn.className = "btn-save-ad";
-            btn.disabled = false;
+        if(btn) {
+            if(appData.lastDate === today) {
+                btn.innerHTML = "✅ 오늘의 저축 완료 (내일 또 만나요!)";
+                btn.className = "btn-save-ad disabled";
+                btn.disabled = true;
+            } else {
+                btn.innerHTML = "🎉 오늘도 참기 성공! (기록 및 적립)";
+                btn.className = "btn-save-ad";
+                btn.disabled = false;
+            }
         }
     } else {
         document.getElementById('screen-setup').className = 'screen active';
         document.getElementById('screen-dash').className = 'screen';
     }
-}
+};
 
-// 1. 목표 저장 시작 함수 (버튼 클릭 시)
-function startHabit() {
+// 1. 목표 저장 시작 (버튼 클릭 시)
+window.startHabit = function() {
     var nameEl = document.getElementById('input-name');
     var costEl = document.getElementById('input-cost');
     var name = nameEl ? nameEl.value : "";
     var cost = costEl ? costEl.value : "";
     
-    if(!name || name.trim() === "") { showToast("목표 이름을 입력해주세요."); return; }
-    if(!cost || isNaN(cost) || parseInt(cost) <= 0) { showToast("올바른 금액을 숫자로 입력해주세요."); return; }
+    if(!name || name.trim() === "") { window.showToast("목표 이름을 입력해주세요."); return; }
+    if(!cost || isNaN(cost) || parseInt(cost) <= 0) { window.showToast("올바른 금액을 숫자로 입력해주세요."); return; }
     
+    // 💡 메모리에 직접 박아넣고 무조건 화면 전환
     appData = {
         name: name,
         cost: parseInt(cost),
@@ -235,31 +239,32 @@ function startHabit() {
         lastDate: "" 
     };
     
-    safeSaveData(appData); // 에러 무시 저장
+    window.safeSaveData(appData); // 저장 시도 (실패해도 앱Data는 살아있음)
     
-    showToast("건강 저금통이 개설되었습니다! 파이팅!");
-    updateUI(); // 무조건 화면 전환!
-}
+    window.showToast("건강 저금통이 개설되었습니다! 파이팅!");
+    window.updateUI(); // 💡 무조건 화면 넘어감!
+};
 
 // 2. 초기화 함수
-function resetHabit() {
+window.resetHabit = function() {
     if(confirm("정말 기록을 초기화하시겠습니까? (저축된 금액이 모두 사라집니다)")) {
         try { localStorage.removeItem(habitKey); } catch(e) {}
+        try { document.cookie = habitKey + "=; max-age=0; path=/"; } catch(e) {}
         appData = null;
         var nameEl = document.getElementById('input-name');
         var costEl = document.getElementById('input-cost');
         if(nameEl) nameEl.value = "";
         if(costEl) costEl.value = "";
-        updateUI();
+        window.updateUI();
     }
-}
+};
 
-// 3. 기록 저장 및 이중우회 광고 호출 함수
-function saveAndShowAd() {
+// 3. 기록 저장 및 이중우회 광고 호출
+window.saveAndShowAd = function() {
     if(!appData) return;
     var today = new Date().toDateString();
     if(appData.lastDate === today) {
-        showToast("오늘은 이미 저축했습니다. 내일 다시 눌러주세요!");
+        window.showToast("오늘은 이미 저축했습니다. 내일 다시 눌러주세요!");
         return;
     }
 
@@ -279,10 +284,10 @@ function saveAndShowAd() {
         var baseUrl = window.location.href.split('?')[0].split('#')[0];
         window.location.replace(baseUrl + "?action=add_saving&t=" + new Date().getTime());
     }, 500);
-}
+};
 
 // 4. 동전 파티클 효과
-function triggerCoinEffect() {
+window.triggerCoinEffect = function() {
     var canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
     canvas.style.display = 'block';
@@ -318,23 +323,24 @@ function triggerCoinEffect() {
         else { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.style.display = 'none'; }
     }
     animate();
-}
+};
 
-// 5. 페이지가 로드될 때 무조건 실행
+// 5. 페이지 로드 시 무조건 실행 (새로고침 무결점 대응)
 window.onload = function() {
-    updateUI(); // 무조건 화면 구성 시작
+    window.safeLoadData();
+    window.updateUI(); // 우선 화면부터 뿌림
     
-    var actionVal = getQueryParam('action');
+    var actionVal = window.getQueryParam('action');
     if (actionVal === 'add_saving' && appData) {
         var today = new Date().toDateString();
         if(appData.lastDate !== today) {
             appData.days += 1;
             appData.total += appData.cost;
             appData.lastDate = today;
-            safeSaveData(appData);
+            window.safeSaveData(appData);
             
-            triggerCoinEffect();
-            showToast("🎉 " + appData.cost.toLocaleString() + "원이 통장에 저축되었습니다!");
+            window.triggerCoinEffect();
+            window.showToast("🎉 " + appData.cost.toLocaleString() + "원이 통장에 저축되었습니다!");
         }
         
         setTimeout(function() {
@@ -342,7 +348,7 @@ window.onload = function() {
                 var baseUrl = window.location.href.split('?')[0];
                 window.history.replaceState({}, document.title, baseUrl);
             } catch(e) {}
-            updateUI();
+            window.updateUI();
         }, 2000);
     }
 };
