@@ -28,7 +28,7 @@
     .main-title { font-size: 26px; font-weight: 900; color: #34d399; margin-bottom: 10px; letter-spacing: -0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1;}
     .sub-title { font-size: 14.5px; color: #cbd5e1; font-weight: 600; position: relative; z-index: 1; letter-spacing: 0.5px;}
 
-    /* 🌟 상시 노출되는 가이드 및 심사 방어막 (화살표 제거) */
+    /* 🌟 상시 노출 가이드 및 심사 방어막 */
     .static-guide { background: #ffffff; border-radius: 24px; margin-bottom: 25px; border: 1px solid #d1d5db; box-shadow: 0 12px 30px rgba(0,0,0,0.04); padding: 25px 20px; position: relative; overflow: hidden;}
     .static-guide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: #10b981; }
     
@@ -52,8 +52,8 @@
     .btn-reset { background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; }
     .btn-reset:active { background: #fee2e2; }
 
-    /* 초기 설정 뷰 (입력 폼) */
-    .setup-view { display: none; background: #ffffff; border-radius: 24px; padding: 35px 25px; border: 1px solid #e5e7eb; box-shadow: 0 12px 30px rgba(0,0,0,0.05); margin-bottom: 25px;}
+    /* 초기 설정 뷰 (앱 구동 시 무조건 보이도록 변경) */
+    .setup-view { background: #ffffff; border-radius: 24px; padding: 35px 25px; border: 1px solid #e5e7eb; box-shadow: 0 12px 30px rgba(0,0,0,0.05); margin-bottom: 25px;}
     .input-group { margin-bottom: 20px; }
     .input-label { display: block; font-size: 15px; font-weight: 800; color: #334155; margin-bottom: 8px; text-align: left; }
     .input-field { width: 100%; padding: 18px; border-radius: 16px; border: 1px solid #cbd5e1; font-size: 16px; font-weight: 600; color: #0f172a; background: #f8fafc; font-family: 'Pretendard', sans-serif; transition: 0.2s; }
@@ -84,7 +84,7 @@
         <div class="sub-title">나쁜 습관을 끊고 매일 돈을 모아보세요!</div>
     </div>
 
-    <!--🌟 상시 노출 가이드 및 심사 방어막 (화살표 제거됨)-->
+    <!--🌟 상시 노출 가이드 및 심사 방어막-->
     <div class="static-guide">
         <div class="g-header-title">📖 앱 이용 가이드 및 꿀팁 안내</div>
         
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    <!--초기 설정 뷰 (앱 처음 켰을 때만 나옴)-->
+    <!--초기 설정 뷰-->
     <div class="setup-view" id="setup-view">
         <div class="card-label" style="color: #0f172a; font-size: 18px; margin-bottom: 25px; text-align: center;">새로운 건강 목표 설정하기</div>
         
@@ -164,6 +164,17 @@ function showToast(msg) {
     toast.className = "toast-msg show";
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(function(){ toast.className = toast.msg; }, 2500);
+}
+
+// URL 파라미터 감지기 (최신 문법 URLSearchParams 완전 제거, ES5 원초적 방식 적용)
+function getQueryParam(param) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] === param) { return pair[1]; }
+    }
+    return null;
 }
 
 // 데이터 로드
@@ -284,7 +295,7 @@ function triggerCoinEffect() {
             size: Math.random() * 10 + 5,
             speedY: Math.random() * 3 + 2,
             speedX: (Math.random() - 0.5) * 2,
-            color: Math.random() > 0.5 ? '#fde047' : '#fbbf24' // 금화 색상
+            color: Math.random() > 0.5 ? '#fde047' : '#fbbf24'
         });
     }
     
@@ -314,10 +325,10 @@ function triggerCoinEffect() {
     animate();
 }
 
-// URL 파라미터 감지하여 저축 완료 처리 (새로고침 무결점)
+// URL 파라미터 감지하여 저축 완료 처리 (ES5 호환 방식 적용)
 function checkSuccess() {
-    var searchParams = new URLSearchParams(window.location.search);
-    if (searchParams.get('action') === 'add_saving' && appData) {
+    var actionVal = getQueryParam('action');
+    if (actionVal === 'add_saving' && appData) {
         
         var today = new Date().toDateString();
         if(appData.lastDate !== today) {
@@ -338,9 +349,8 @@ function checkSuccess() {
     }
 }
 
-window.onload = function() {
-    loadData();
-    updateUI();
-    checkSuccess();
-};
+// 블로거 에러 완벽 차단: 스크립트 도달 즉시 100% 무조건 실행
+loadData();
+updateUI();
+checkSuccess();
 </script>
