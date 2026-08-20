@@ -1,4 +1,3 @@
-<!--구글 블로거 백색 화면 무력화: 방치형 미니게임 (설명 완벽 복원 + 터치 최적화 버전)-->
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap');
@@ -78,7 +77,6 @@
     .upgrade-desc { display: block; font-size: 12px; color: #94a3b8; margin-top: 4px; padding-right: 10px; }
     .upgrade-cost { font-size: 15px; font-weight: 800; color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 8px 12px; border-radius: 8px; white-space: nowrap; pointer-events: none; }
 
-    /* 게임 가이드 및 주의사항 패널 스타일 복원 */
     .info-panel { width: 100%; max-width: 450px; background: rgba(15, 23, 42, 0.8); border-radius: 16px; padding: 20px; border: 1px solid #1e293b; margin-bottom: 20px; box-sizing: border-box; text-align: left; }
     .info-heading { font-size: 16px; font-weight: 800; color: #10b981; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .info-text { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 12px; }
@@ -89,7 +87,7 @@
 </style>
 
 <div id="master-app-wrapper">
-    <h1 class="app-title">✨ 네온 보석 광산</h1><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUtBdMZyiZpvyJYG7XZKbvCSpXENTTlTch2HmrJ9BGAMqfduMZ8knw4BQB9tkKIu7eLLxWiqVtsTOnP9BUAMkWxmC99D9Cod1lWcinIKsmCMJ7JwoKxS8LReJzczTj4dfbJGhvOAqc2csuQG8PCartsOVSK4W50rSLKVgy5uCnyIUphYdssPS87PWHybpy/s1168/main.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img alt="네온 보석 광산" border="0" data-original-height="784" data-original-width="1168" height="430" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUtBdMZyiZpvyJYG7XZKbvCSpXENTTlTch2HmrJ9BGAMqfduMZ8knw4BQB9tkKIu7eLLxWiqVtsTOnP9BUAMkWxmC99D9Cod1lWcinIKsmCMJ7JwoKxS8LReJzczTj4dfbJGhvOAqc2csuQG8PCartsOVSK4W50rSLKVgy5uCnyIUphYdssPS87PWHybpy/w640-h430/main.jpg" title="네온 보석 광산" width="640" /></a></div><br /><div><br /></div>
+    <h1 class="app-title">✨ 네온 보석 광산</h1>
     
     <div class="score-board">
         <div class="coin-title">현재 보유 코인</div>
@@ -100,7 +98,6 @@
         <div class="buff-active-text" id="buff-status">🔥 피버 타임 적용 중! (모든 코인 획득량 2배) 🔥</div>
     </div>
 
-    <!--터치 영역 즉각 반응용 id-->
     <div class="gem-container" id="gem-container">
         <div class="big-gem" id="main-gem">💎</div>
     </div>
@@ -160,7 +157,6 @@
         </button>
     </div>
 
-    <!--완벽하게 복원된 게임 가이드-->
     <div class="info-panel">
         <div class="info-heading">🎮 게임 이용 방법 및 최종 목표</div>
         <div class="info-text">
@@ -175,7 +171,6 @@
         </div>
     </div>
 
-    <!--사행성 방지 및 법적 고지 복원-->
     <div class="info-panel" style="margin-bottom: 40px;">
         <div class="info-heading">🚨 주의사항 및 법적 고지</div>
         <div class="warning-box">
@@ -254,7 +249,6 @@
         }
     }
 
-    // 터치 반응 즉각 처리
     function handleGemClick(event) {
         if(event) event.preventDefault();
         
@@ -367,16 +361,36 @@
         }
     }
 
+    // ⚠️ 완벽하게 수정된 이중 우회 로직 (광고 보고 피버타임)
     function watchAdForBuff() {
         try { localStorage.setItem('neon_game_pending_buff', 'true'); } catch(e){}
-        var baseUrl = window.location.href.split('?')[0];
-        window.location.replace(baseUrl + "?m=1&action=ad_reward&t=" + new Date().getTime());
+        
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=ad_reward");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            window.location.replace(baseUrl + "?m=1&action=ad_reward&t=" + new Date().getTime());
+        }, 500);
     }
 
+    // ⚠️ 완벽하게 수정된 이중 우회 로직 (광고 보고 뽑기)
     function watchAdForGacha() {
         try { localStorage.setItem('neon_game_pending_gacha', 'true'); } catch(e){}
-        var baseUrl = window.location.href.split('?')[0];
-        window.location.replace(baseUrl + "?m=1&action=ad_gacha&t=" + new Date().getTime());
+        
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=ad_gacha");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            window.location.replace(baseUrl + "?m=1&action=ad_gacha&t=" + new Date().getTime());
+        }, 500);
     }
 
     function checkSpecialActions() {
