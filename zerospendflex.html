@@ -1,0 +1,474 @@
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800;900&display=swap');
+
+    * { box-sizing: border-box !important; margin: 0; padding: 0; }
+    
+    html, body {
+        width: 100% !important; height: 100% !important;
+        background-color: #0a0a0a !important; 
+        overflow: hidden !important; 
+        -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+    }
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, .post-share-buttons, .post-meta, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; z-index: -999 !important;
+    }
+
+    #master-app-wrapper {
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        width: 100% !important; height: 100% !important;
+        background-color: #0a0a0a !important;
+        z-index: 99999999 !important;
+        display: flex; flex-direction: column; align-items: center; 
+        padding: 20px 15px 90px 15px;
+        font-family: 'Pretendard', sans-serif; color: #f5f5f5;
+        box-sizing: border-box;
+        overflow-y: auto !important; 
+    }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999999999; display: none; }
+
+    .screen { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; max-width: 600px;}
+    .screen.active { display: block; }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    .header-section { width: 100%; max-width: 600px; text-align: center; margin-bottom: 25px; padding: 35px 20px; border-radius: 20px; background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); border: 1px solid #333; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8); }
+    .main-title { font-size: 28px; font-weight: 900; color: #d4af37; margin-bottom: 10px; letter-spacing: -0.5px; text-transform: uppercase; }
+    .sub-title { font-size: 14.5px; color: #a3a3a3; font-weight: 600; letter-spacing: 0.5px; }
+
+    .dashboard-card { background: linear-gradient(135deg, #1f1f1f 0%, #121212 100%); border-radius: 20px; padding: 35px 20px; border: 1px solid #d4af37; text-align: center; margin-bottom: 25px; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15); position: relative; overflow: hidden; }
+    .dashboard-card::before { content: 'VVIP'; position: absolute; top: 10px; right: 10px; font-size: 70px; font-weight: 900; color: rgba(212, 175, 55, 0.05); pointer-events: none; z-index: 0;}
+    .dashboard-card > * { position: relative; z-index: 1; }
+    .d-label { font-size: 15px; font-weight: 700; color: #a3a3a3; margin-bottom: 12px; }
+    .d-amount { font-size: 42px; font-weight: 900; color: #ffffff; margin-bottom: 25px; line-height: 1.1; letter-spacing: -1px; }
+    .money-unit { font-size: 22px; font-weight: 700; color: #d4af37; margin-left: 4px; }
+    .tier-badge { display: inline-block; background: #332a00; color: #d4af37; font-size: 15px; font-weight: 800; padding: 10px 20px; border-radius: 25px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
+
+    /* 직접 입력 카드 스타일 */
+    .custom-flex-card { background: #121212; border: 1px dashed #d4af37; border-radius: 16px; padding: 25px 20px; text-align: center; margin-bottom: 35px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
+    .custom-title { font-size: 16px; font-weight: 800; color: #d4af37; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 18px; }
+    .custom-input { flex: 1; background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 12px; font-size: 14.5px; font-weight: 600; font-family: 'Pretendard', sans-serif; transition: 0.2s; width: 100%;}
+    .custom-input:focus { outline: none; border-color: #d4af37; background: #000; }
+    .custom-input::placeholder { color: #666; font-weight: 400; }
+    .btn-custom-buy { width: 100%; background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%); color: #000; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);}
+    .btn-custom-buy:active { transform: scale(0.96); }
+
+    .section-title { font-size: 19px; font-weight: 800; color: #ffffff; margin-bottom: 20px; padding-left: 5px; border-left: 4px solid #d4af37; padding-left: 12px; margin-top: 10px; text-align: left;}
+    .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px; }
+    .item-card { background: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 22px 15px; text-align: center; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between; position: relative;}
+    .item-card:hover { border-color: #555; }
+    .item-icon { font-size: 42px; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); line-height: 1.1; }
+    .item-name { font-size: 15px; font-weight: 700; color: #e5e5e5; margin-bottom: 10px; word-break: keep-all; line-height: 1.4; }
+    .item-price { font-size: 17px; font-weight: 900; color: #d4af37; margin-bottom: 18px; }
+    
+    .btn-buy { width: 100%; background: #ffffff; color: #000000; border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(255,255,255,0.1);}
+    .btn-buy:active { transform: scale(0.96); background: #d4af37; color: #ffffff; }
+
+    .action-card { background: #1a1a1a; border-radius: 20px; padding: 50px 20px; text-align: center; border: 1px solid #333; margin-top: 30px; }
+    .box-icon { font-size: 85px; margin-bottom: 30px; display: inline-block; animation: shake 0.5s infinite; line-height: 1.1; }
+    @keyframes shake {
+        0% { transform: translateX(0) rotate(0deg); }
+        25% { transform: translateX(-5px) rotate(-5deg); }
+        50% { transform: translateX(5px) rotate(5deg); }
+        75% { transform: translateX(-5px) rotate(-5deg); }
+        100% { transform: translateX(0) rotate(0deg); }
+    }
+    .action-msg { font-size: 22px; font-weight: 800; color: #d4af37; margin-bottom: 12px; }
+    .action-sub { font-size: 16px; color: #a3a3a3; }
+
+    .btn-save-ad { width: 100%; background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%); color: #000; border: none; padding: 24px; border-radius: 16px; font-size: 19px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); margin-top: 30px; transition: 0.2s;}
+    .btn-save-ad:active { transform: scale(0.97); }
+    .btn-save-ad.disabled { background: #333; color: #777; box-shadow: none; cursor: not-allowed; }
+
+    .guide-panel { background: #121212; border-radius: 18px; padding: 30px 20px; border: 1px solid #333; margin-bottom: 30px; text-align: left; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
+    .g-title { font-size: 18px; font-weight: 800; color: #d4af37; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #333;}
+    .g-text { font-size: 14.5px; color: #a3a3a3; line-height: 1.7; margin-bottom: 20px; word-break: keep-all; }
+    .g-text b { color: #f5f5f5; }
+    .g-notice { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-left: 4px solid #ef4444; padding: 18px; border-radius: 10px; font-size: 13.5px; color: #fca5a5; line-height: 1.6; word-break: keep-all;}
+
+    .toast-msg { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(212, 175, 55, 0.95); color: #000; padding: 16px 28px; border-radius: 30px; font-size: 15px; font-weight: 800; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+    .toast-msg.show { opacity: 1; }
+</style>
+
+<div class="toast-msg" id="toast">알림 메시지</div>
+<canvas id="particle-canvas"></canvas>
+
+<!--완벽 덮어씌우기 래퍼-->
+<div id="master-app-wrapper">
+
+    <div class="header-section">
+        <div class="main-title">무지출 플렉스 💳</div>
+        <div class="sub-title">시뮬레이션 소비로 통장 잔고를 지키는 마법</div>
+    </div>
+
+    <!--메인 쇼핑 대시보드-->
+    <div class="screen active" id="screen-main">
+        <div class="dashboard-card">
+            <div class="d-label">나의 방어 자산 (누적 무지출 금액)</div>
+            <div class="d-amount" id="ui-total">0<span class="money-unit">원</span></div>
+            <div class="tier-badge" id="ui-tier">브론즈 🥉</div>
+        </div>
+
+        <!--💡 새로 추가된 직접 입력 기능-->
+        <div class="custom-flex-card">
+            <div class="custom-title">✍️ 나만의 위시리스트 직접 입력</div>
+            <div style="color: #a3a3a3; font-size: 13px; margin-bottom: 15px; word-break: keep-all;">목록에 없는 배달 음식이나 사고 싶었던 물건을 직접 적어서 방어해 보세요!</div>
+            <div class="input-row">
+                <input class="custom-input" id="custom-name" placeholder="상품명 (예: 마라탕 2인분)" style="flex: 1.5 1 0%;" type="text" />
+                <input class="custom-input" id="custom-price" placeholder="금액 (숫자만)" style="flex: 1 1 0%;" type="number" />
+            </div>
+            <button class="btn-custom-buy" onclick="window.startCustomFlex()">내 맘대로 홧김에 결제하기</button>
+        </div>
+
+        <div class="section-title">☕ 일상 속 소소한 일탈</div>
+        <div class="item-grid">
+            <div class="item-card">
+                <div class="item-icon">🍰</div>
+                <div class="item-name">프리미엄 카페 디저트 세트</div>
+                <div class="item-price">18,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('디저트 세트', 18000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🍗</div>
+                <div class="item-name">야심한 밤, 치킨과 생맥주</div>
+                <div class="item-price">32,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('치맥 세트', 32000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🎮</div>
+                <div class="item-name">스팀 AAA급 신작 게임 타이틀</div>
+                <div class="item-price">79,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('게임 타이틀', 79000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🍣</div>
+                <div class="item-name">미들급 스시 오마카세 (디너)</div>
+                <div class="item-price">150,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('오마카세', 150000)">홧김에 결제하기</button>
+            </div>
+        </div>
+
+        <div class="section-title">🛍️ 나를 위한 확실한 보상</div>
+        <div class="item-grid">
+            <div class="item-card">
+                <div class="item-icon">👟</div>
+                <div class="item-name">리셀가 붙은 한정판 스니커즈</div>
+                <div class="item-price">350,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('한정판 신발', 350000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🏨</div>
+                <div class="item-name">5성급 호텔 프리미엄 호캉스</div>
+                <div class="item-price">650,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('호캉스', 650000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">📱</div>
+                <div class="item-name">최신형 프로 맥스 스마트폰</div>
+                <div class="item-price">1,950,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('최신 스마트폰', 1950000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">✈️</div>
+                <div class="item-name">유럽 왕복 비즈니스 항공권</div>
+                <div class="item-price">4,500,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('비즈니스 항공권', 4500000)">홧김에 결제하기</button>
+            </div>
+        </div>
+
+        <div class="section-title">💎 하이엔드 럭셔리 라이프</div>
+        <div class="item-grid">
+            <div class="item-card">
+                <div class="item-icon">👜</div>
+                <div class="item-name">C사 클래식 미디움 플랩백</div>
+                <div class="item-price">14,500,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('명품 가방', 14500000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">⌚</div>
+                <div class="item-name">R사 스위스 명품 오토매틱 시계</div>
+                <div class="item-price">28,000,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('명품 시계', 28000000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🏎️</div>
+                <div class="item-name">독일 프리미엄 스포츠 세단</div>
+                <div class="item-price">95,000,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('스포츠카', 95000000)">홧김에 결제하기</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">⛵</div>
+                <div class="item-name">프라이빗 럭셔리 레저 요트</div>
+                <div class="item-price">450,000,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('럭셔리 요트', 450000000)">홧김에 결제하기</button>
+            </div>
+        </div>
+
+        <div class="section-title">🏰 범접 불가 VVIP 컬렉션</div>
+        <div class="item-grid" style="grid-template-columns: 1fr;">
+            <div class="item-card" style="padding: 30px 20px;">
+                <div class="item-icon" style="font-size: 65px; margin-bottom: 25px;">🏢</div>
+                <div class="item-name" style="font-size: 18px;">강남 한강뷰 파노라마 펜트하우스</div>
+                <div class="item-price" style="font-size: 24px;">4,500,000,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('강남 펜트하우스', 4500000000)" style="font-size: 16px; padding: 18px;">영끌해서 결제하기</button>
+            </div>
+            <div class="item-card" style="padding: 30px 20px;">
+                <div class="item-icon" style="font-size: 65px; margin-bottom: 25px;">🚀</div>
+                <div class="item-name" style="font-size: 18px;">민간 우주여행 왕복 티켓</div>
+                <div class="item-price" style="font-size: 24px;">35,000,000,000원</div>
+                <button class="btn-buy" onclick="window.startFlex('우주여행 티켓', 35000000000)" style="font-size: 16px; padding: 18px;">화끈하게 결제하기</button>
+            </div>
+        </div>
+
+        <div class="guide-panel">
+            <div class="g-title">💡 무지출 플렉스 시스템 활용 가이드</div>
+            <div class="g-text">
+                스트레스나 피로감으로 인해 습관적으로 배달 앱이나 쇼핑몰 장바구니를 채우고 계신가요? 충동구매의 본질은 물건 그 자체보다 <b>'결제 버튼을 누를 때 분비되는 도파민'</b>에 있습니다.<br /><br />
+                이제 실제 카드를 긁는 대신 본 앱의 <b>[홧김에 결제하기]</b> 버튼을 누르십시오. 뇌가 원하는 소비의 쾌감은 완벽하게 충족시키면서, 실제 통장의 잔고는 안전하게 보존하는 현대인의 필수 절약 솔루션입니다. 절약(방어)한 금액이 누적될수록 당신의 자산 등급은 계속해서 상승합니다. 최종 목표인 강남 펜트하우스를 구매하는 그날까지 무지출 챌린지를 이어가세요.
+            </div>
+            <div class="g-notice">
+                <b>🚨 법적 면책 조항 및 서비스 이용 안내</b><br />
+                본 애플리케이션은 사용자의 충동 소비 억제와 건전한 자산 관리를 돕기 위해 설계된 오프라인 기반의 가상 시뮬레이터입니다. 앱 내에 표기된 모든 상품, 가격, 결제 프로세스는 가상(Fake)의 연출이며, 어떠한 형태의 실제 금융 거래, 결제 청구, 물품 배송도 발생하지 않습니다. 사용자의 이용 기록은 기기 내부에만 보관되며 외부로 수집되지 않습니다.
+            </div>
+        </div>
+    </div>
+
+    <!--결제 애니메이션 화면-->
+    <div class="screen" id="screen-action">
+        <div class="action-card">
+            <div class="box-icon" id="anim-box">💳</div>
+            <div class="action-msg" id="anim-msg">보안 채널을 통해 결제 진행 중...</div>
+            <div class="action-sub" id="anim-sub">통장에서 자금이 이체되고 있습니다.</div>
+            
+            <button class="btn-save-ad" id="btn-save-ad" onclick="window.triggerAdAndSave()" style="display: none;" type="button">
+                💰 무지출 방어 완료 (내 통장에 적립)
+            </button>
+            <button class="btn-buy" id="btn-cancel" onclick="window.goBack()" style="background: transparent; border: 1px solid rgb(85, 85, 85); color: #a3a3a3; display: none; margin-top: 20px;" type="button">
+                결제 취소하고 메인으로 돌아가기
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+var toastTimeout;
+window.showToast = function(msg) {
+    var toast = document.getElementById("toast");
+    if(!toast) return;
+    toast.innerText = msg;
+    toast.className = "toast-msg show";
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function(){ toast.className = "toast-msg"; }, 2500);
+};
+
+window.getQueryParam = function(param) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] === param) { return pair[1]; }
+    }
+    return null;
+};
+
+var dataKey = 'zero_spend_flex_v2_pro';
+var appData = { totalSaved: 0 };
+var currentItem = { name: "", price: 0 };
+
+window.safeSaveData = function() {
+    var rawStr = JSON.stringify(appData);
+    try { localStorage.setItem(dataKey, rawStr); } catch(e) {}
+    try { document.cookie = dataKey + "=" + encodeURIComponent(rawStr) + "; max-age=31536000; path=/"; } catch(e) {}
+};
+
+window.safeLoadData = function() {
+    var raw = null;
+    try { raw = localStorage.getItem(dataKey); } catch(e) {}
+    if (!raw) {
+        try {
+            var match = document.cookie.match(new RegExp('(^| )' + dataKey + '=([^;]+)'));
+            if (match) raw = decodeURIComponent(match[2]);
+        } catch(e) {}
+    }
+    if (raw) {
+        try { 
+            var parsed = JSON.parse(raw); 
+            if(parsed && parsed.totalSaved !== undefined) appData = parsed;
+        } catch(e) {}
+    }
+};
+
+window.switchScreen = function(screenId) {
+    document.getElementById('screen-main').className = 'screen';
+    document.getElementById('screen-action').className = 'screen';
+    document.getElementById(screenId).className = 'screen active';
+    window.scrollTo(0, 0);
+};
+
+window.updateUI = function() {
+    window.safeLoadData();
+    
+    document.getElementById('ui-total').innerHTML = appData.totalSaved.toLocaleString() + "<span class='money-unit'>원</span>";
+    
+    var tier = "소비 방어 비기너 🥉";
+    var tierColor = "#cd7f32";
+    var val = appData.totalSaved;
+    
+    if (val >= 10000000000) { tier = "세계 최상위 무지출 엠페러 👑"; tierColor = "#e5e4e2"; }
+    else if (val >= 1000000000) { tier = "레전더리 홀더 🏆"; tierColor = "#ffb6c1"; }
+    else if (val >= 100000000) { tier = "VVIP 인베스터 🎖️"; tierColor = "#9b59b6"; }
+    else if (val >= 10000000) { tier = "다이아몬드 지갑 💎"; tierColor = "#b9f2ff"; }
+    else if (val >= 1000000) { tier = "골드 스마트컨슈머 🥇"; tierColor = "#d4af37"; }
+    else if (val >= 100000) { tier = "실버 알뜰족 🥈"; tierColor = "#c0c0c0"; }
+    
+    var tierEl = document.getElementById('ui-tier');
+    tierEl.innerText = tier;
+    tierEl.style.color = tierColor;
+    tierEl.style.borderColor = tierColor;
+};
+
+// 직접 입력 기능 함수
+window.startCustomFlex = function() {
+    var name = document.getElementById('custom-name').value;
+    var priceStr = document.getElementById('custom-price').value;
+    var price = parseFloat(priceStr);
+
+    if (!name || name.trim() === "") {
+        window.showToast("구매를 방어할 상품명을 입력해 주세요.");
+        return;
+    }
+    if (isNaN(price) || price <= 0) {
+        window.showToast("올바른 결제 금액을 입력해 주세요.");
+        return;
+    }
+    
+    // 입력창 초기화
+    document.getElementById('custom-name').value = "";
+    document.getElementById('custom-price').value = "";
+
+    // 기존 결제 함수 호출
+    window.startFlex(name, price);
+};
+
+window.startFlex = function(name, price) {
+    currentItem.name = name;
+    currentItem.price = price;
+    
+    var animBox = document.getElementById('anim-box');
+    animBox.innerHTML = "💳";
+    animBox.style.animation = "shake 0.5s infinite";
+    animBox.style.fontSize = "85px"; 
+    
+    document.getElementById('anim-msg').innerText = "결제 보안 모듈 작동 중...";
+    document.getElementById('anim-msg').style.color = "#a3a3a3";
+    document.getElementById('anim-sub').innerText = "요청하신 " + price.toLocaleString() + "원을 승인 대기 중입니다.";
+    
+    document.getElementById('btn-save-ad').style.display = "none";
+    document.getElementById('btn-cancel').style.display = "none";
+    
+    window.switchScreen('screen-action');
+    
+    setTimeout(function() {
+        animBox.innerHTML = "🔒"; 
+        animBox.style.animation = "none";
+        animBox.style.fontSize = "95px"; 
+        
+        document.getElementById('anim-msg').innerText = "충동구매 완벽 방어!";
+        document.getElementById('anim-msg').style.color = "#d4af37";
+        document.getElementById('anim-sub').innerText = "결제를 차단하여 " + price.toLocaleString() + "원을 지켜냈습니다.";
+        
+        document.getElementById('btn-save-ad').style.display = "block";
+        document.getElementById('btn-cancel').style.display = "block";
+    }, 1800);
+};
+
+window.goBack = function() {
+    window.switchScreen('screen-main');
+};
+
+window.triggerAdAndSave = function() {
+    var btn = document.getElementById('btn-save-ad');
+    if (btn) {
+        btn.innerHTML = "자산 데이터 동기화 중... ⏳";
+        btn.className = "btn-save-ad disabled";
+        btn.disabled = true;
+    }
+
+    if(currentItem.price > 0) {
+        window.safeLoadData();
+        appData.totalSaved += currentItem.price;
+        window.safeSaveData();
+        currentItem.price = 0; 
+    }
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=save_flex");
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        window.location.href = baseUrl + "?m=1&action=save_flex&t=" + new Date().getTime();
+    }, 800);
+};
+
+window.triggerParticleEffect = function() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    canvas.style.display = 'block';
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    for (var i = 0; i < 70; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: -20 - Math.random() * 100, 
+            size: Math.random() * 14 + 6,
+            speedY: Math.random() * 6 + 4,
+            speedX: (Math.random() - 0.5) * 5,
+            color: Math.random() > 0.5 ? '#d4af37' : '#ffffff' 
+        });
+    }
+    
+    var frame = 0;
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var active = false;
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.y += p.speedY; p.x += p.speedX;
+            if (p.y < canvas.height) active = true;
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color; ctx.fill();
+        }
+        frame++;
+        if(active && frame < 160) { requestAnimationFrame(animate); } 
+        else { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.style.display = 'none'; }
+    }
+    animate();
+};
+
+window.onload = function() {
+    window.updateUI(); 
+    
+    var actionVal = window.getQueryParam('action');
+    if (actionVal === 'save_flex') {
+        window.triggerParticleEffect();
+        window.showToast("💰 방어 성공! 지켜낸 자산이 누적되었습니다.");
+        
+        setTimeout(function() {
+            try {
+                var baseUrl = window.location.href.split('?')[0];
+                window.history.replaceState({}, document.title, baseUrl);
+            } catch(e) {}
+        }, 1000);
+    }
+};
+</script>
