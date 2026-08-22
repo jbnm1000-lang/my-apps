@@ -42,11 +42,13 @@
     .dashboard-card::before { content: 'VVIP'; position: absolute; top: 10px; right: 10px; font-size: 70px; font-weight: 900; color: rgba(212, 175, 55, 0.05); pointer-events: none; z-index: 0;}
     .dashboard-card > * { position: relative; z-index: 1; }
     .d-label { font-size: 15px; font-weight: 700; color: #a3a3a3; margin-bottom: 12px; }
-    .d-amount { font-size: 42px; font-weight: 900; color: #ffffff; margin-bottom: 25px; line-height: 1.1; letter-spacing: -1px; }
-    .money-unit { font-size: 22px; font-weight: 700; color: #d4af37; margin-left: 4px; }
+    
+    /* 💡 금액 글자 깨짐 방지: 반응형 폰트 사이즈 및 줄바꿈 적용 */
+    .d-amount { font-size: clamp(24px, 8vw, 42px); font-weight: 900; color: #ffffff; margin-bottom: 25px; line-height: 1.2; letter-spacing: -1px; word-break: break-all; }
+    .money-unit { font-size: 22px; font-weight: 700; color: #d4af37; margin-left: 4px; display: inline-block; }
+    
     .tier-badge { display: inline-block; background: #332a00; color: #d4af37; font-size: 15px; font-weight: 800; padding: 10px 20px; border-radius: 25px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
 
-    /* 직접 입력 카드 스타일 */
     .custom-flex-card { background: #121212; border: 1px dashed #d4af37; border-radius: 16px; padding: 25px 20px; text-align: center; margin-bottom: 35px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
     .custom-title { font-size: 16px; font-weight: 800; color: #d4af37; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .input-row { display: flex; gap: 10px; margin-bottom: 18px; }
@@ -112,7 +114,7 @@
             <div class="tier-badge" id="ui-tier">브론즈 🥉</div>
         </div>
 
-        <!--💡 새로 추가된 직접 입력 기능-->
+        <!--직접 입력 기능-->
         <div class="custom-flex-card">
             <div class="custom-title">✍️ 나만의 위시리스트 직접 입력</div>
             <div style="color: #a3a3a3; font-size: 13px; margin-bottom: 15px; word-break: keep-all;">목록에 없는 배달 음식이나 사고 싶었던 물건을 직접 적어서 방어해 보세요!</div>
@@ -331,7 +333,6 @@ window.updateUI = function() {
     tierEl.style.borderColor = tierColor;
 };
 
-// 직접 입력 기능 함수
 window.startCustomFlex = function() {
     var name = document.getElementById('custom-name').value;
     var priceStr = document.getElementById('custom-price').value;
@@ -346,11 +347,9 @@ window.startCustomFlex = function() {
         return;
     }
     
-    // 입력창 초기화
     document.getElementById('custom-name').value = "";
     document.getElementById('custom-price').value = "";
 
-    // 기존 결제 함수 호출
     window.startFlex(name, price);
 };
 
@@ -417,6 +416,7 @@ window.triggerAdAndSave = function() {
     }, 800);
 };
 
+/* 💡 화려한 황금 폭죽 파티클 이펙트로 대폭 강화 */
 window.triggerParticleEffect = function() {
     var canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
@@ -426,30 +426,45 @@ window.triggerParticleEffect = function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    for (var i = 0; i < 70; i++) {
+    // 파티클 개수 증가 및 폭죽 효과
+    for (var i = 0; i < 150; i++) {
         particles.push({
-            x: Math.random() * canvas.width,
-            y: -20 - Math.random() * 100, 
-            size: Math.random() * 14 + 6,
-            speedY: Math.random() * 6 + 4,
-            speedX: (Math.random() - 0.5) * 5,
-            color: Math.random() > 0.5 ? '#d4af37' : '#ffffff' 
+            x: canvas.width / 2, // 화면 중앙에서 시작
+            y: canvas.height / 2 + 100,
+            size: Math.random() * 8 + 3,
+            speedY: (Math.random() - 1) * 15, // 위로 솟구침
+            speedX: (Math.random() - 0.5) * 15, // 좌우로 퍼짐
+            gravity: 0.3, // 중력 적용
+            color: Math.random() > 0.4 ? '#d4af37' : (Math.random() > 0.5 ? '#fde08b' : '#ffffff'), // 황금빛 위주
+            alpha: 1
         });
     }
     
-    var frame = 0;
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         var active = false;
         for (var i = 0; i < particles.length; i++) {
             var p = particles[i];
-            p.y += p.speedY; p.x += p.speedX;
-            if (p.y < canvas.height) active = true;
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color; ctx.fill();
+            
+            p.speedY += p.gravity; // 중력 효과로 아래로 떨어짐
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.alpha -= 0.008; // 서서히 투명해짐
+
+            if (p.alpha > 0) {
+                active = true;
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.beginPath(); 
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color; 
+                ctx.shadowBlur = 10; // 빛나는 글로우 효과
+                ctx.shadowColor = p.color;
+                ctx.fill();
+                ctx.restore();
+            }
         }
-        frame++;
-        if(active && frame < 160) { requestAnimationFrame(animate); } 
+        if(active) { requestAnimationFrame(animate); } 
         else { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.style.display = 'none'; }
     }
     animate();
