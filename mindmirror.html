@@ -1,0 +1,363 @@
+<!--구글 블로거 전용: 마음의 거울 (조합형 5만 가지 경우의 수, ES5 완벽 호환, 이중 우회)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #121212 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Noto Serif KR', serif;
+        color: #e0d8c8; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #d4af37 0%, rgba(212,175,55,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.4; }
+        80% { opacity: 0.2; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: #121212;
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 24px; font-weight: 700; color: #d4af37; margin-bottom: 8px; letter-spacing: 1px;}
+    .sub-title { font-size: 13px; color: #9c9384; font-weight: 300; letter-spacing: 2px;}
+
+    .text-panel { background: #1c1c1c; border-radius: 10px; padding: 22px; border: 1px solid #332b22; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 16px; font-weight: 700; color: #d4af37; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #332b22; padding-bottom: 10px;}
+    .panel-desc { font-size: 14.5px; color: #b8b0a1; line-height: 1.8; word-break: keep-all; text-align: left; margin-bottom: 10px;}
+
+    .card-container { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;}
+    .tarot-card { 
+        background: #1f1f1f;
+        border: 1px solid #332b22;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .card-label { font-size: 15px; font-weight: 700; color: #8a7f71; transition: 0.3s;}
+    .card-status { font-size: 13px; color: #6a5f52; margin-top: 8px;}
+    
+    .tarot-card.selected { 
+        border-color: #d4af37; 
+        background: #2a241a;
+    }
+    .tarot-card.selected .card-label { color: #d4af37; }
+    .tarot-card.selected .card-status { color: #e0d8c8; font-weight: 700;}
+
+    .submit-btn { 
+        width: 100%; padding: 20px; 
+        background: #d4af37; 
+        border: none; border-radius: 8px; 
+        color: #121212; font-size: 16px; font-weight: 700; 
+        cursor: pointer; transition: 0.3s; 
+    }
+    .submit-btn:disabled { 
+        background: #2c2c2c; color: #555; 
+        cursor: not-allowed; 
+        border: 1px solid #444;
+    }
+
+    .disclaimer-box { background: rgba(0,0,0,0.3); border: 1px solid #222; border-radius: 8px; padding: 20px; margin-top: 40px; }
+    .disclaimer-title { font-size: 13.5px; font-weight: 700; color: #777; margin-bottom: 12px;}
+    .disclaimer-text { font-size: 12.5px; color: #666; line-height: 1.7; word-break: keep-all; text-align: left; margin-bottom: 10px;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(18, 18, 18, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1c1c1c; border-radius: 10px; padding: 35px 20px; border: 1px solid #d4af37;}
+    
+    .res-tag { display: inline-block; padding: 5px 14px; background: #2a241a; color: #d4af37; font-size: 12px; font-weight: 700; border-radius: 15px; margin-bottom: 15px; border: 1px solid #d4af37;}
+    .res-title { font-size: 22px; font-weight: 700; color: #e0d8c8; line-height: 1.4; word-break: keep-all; text-align: left; margin-bottom: 30px;}
+    
+    .section-label { font-size: 15px; font-weight: 700; color: #d4af37; margin-bottom: 10px; margin-top: 25px; border-bottom: 1px solid #332b22; padding-bottom: 8px;}
+    .res-desc { font-size: 15px; color: #c8bca1; line-height: 1.8; word-break: keep-all; text-align: left;}
+    
+    .close-btn { width: 100%; padding: 16px; background: transparent; border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 40px;}
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">마음의 거울</div>
+        <div class="sub-title">데일리 타로와 사주 조언</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🌙 마음의 거울 이용 안내</div>
+        <div class="panel-desc">
+            현대인들은 매일 수많은 선택의 기로에 서며, 보이지 않는 미래에 대한 불안감과 고독함을 안고 살아갑니다. 이 공간은 지치고 복잡한 당신의 심연을 고요하게 비추어주는 '마음의 거울'입니다.
+        </div>
+        <div class="panel-desc">
+            본 서비스는 수천 년간 전해 내려온 동양의 명리학(사주) 데이터와 서양 타로 카드의 상징적 원형을 현대인의 삶에 맞게 재해석하여 제공합니다. 단편적인 길흉화복을 점치는 것이 아니라, 당신이 현재 처한 상황을 객관적으로 바라보고 더 나은 내일을 준비할 수 있도록 돕는 심리적 나침반 역할을 합니다.
+        </div>
+        <div class="panel-desc">
+            <strong>[이용 방법]</strong><br />
+            1. 주변의 소음을 차단하고 마음을 차분히 가라앉혀 주십시오.<br />
+            2. 현재 가장 고민되는 일, 인간관계, 혹은 오늘 하루의 방향성에 대해 마음속으로 조용히 질문을 던져보세요.<br />
+            3. 준비가 되셨다면, 아래에 놓인 세 장의 카드(과거의 발자취, 현재의 모습, 미래의 방향성)를 순서대로 터치하여 당신의 고유한 기운을 불어넣어 주십시오.<br />
+            4. 세 장의 카드에 기운이 모두 깃들면, 당신만을 위해 조합된 5만여 가지의 심층적인 조언 중 하나가 펼쳐집니다.
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="tarot-card" id="card-1">
+            <div class="card-label">과거의 발자취</div>
+            <div class="card-status">터치하여 기운 불어넣기</div>
+        </div>
+        <div class="tarot-card" id="card-2">
+            <div class="card-label">현재의 모습</div>
+            <div class="card-status">터치하여 기운 불어넣기</div>
+        </div>
+        <div class="tarot-card" id="card-3">
+            <div class="card-label">미래의 방향성</div>
+            <div class="card-status">터치하여 기운 불어넣기</div>
+        </div>
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        세 장의 카드를 모두 선택해 주십시오
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ 서비스 이용을 위한 면책 및 주의사항</div>
+        <div class="disclaimer-text">
+            본 '마음의 거울' 애플리케이션에서 제공하는 모든 타로 및 사주 명리학 해설은 사용자의 심리적 안정과 가벼운 자기 성찰을 돕기 위해 구성된 교양 및 오락 목적의 콘텐츠입니다. 
+        </div>
+        <div class="disclaimer-text">
+            본 서비스가 제공하는 결과는 통계적, 상징적 데이터를 바탕으로 조합된 조언일 뿐이며, 특정 개인의 미래를 절대적으로 예측하거나 보장하지 않습니다. 또한 본 조언은 전문적인 의학적, 재무적, 투자적, 법률적 상담을 결코 대신할 수 없습니다. 중대한 인생의 결정, 금전 투자, 질병의 치료 등은 반드시 해당 분야의 공인된 전문가와 상의하셔야 합니다.
+        </div>
+        <div class="disclaimer-text">
+            운명은 정해진 궤도가 아니라 사용자의 긍정적인 의지와 실천을 통해 끊임없이 변화하고 개척되는 것입니다. 본 앱의 개발자 및 제공자는 사용자가 본 앱의 결과를 바탕으로 내린 결정이나 그로 인해 발생한 직·간접적인 손해, 분쟁에 대하여 일체의 법적 책임을 지지 않음을 명확히 고지합니다. 조언은 일상의 가벼운 참고 자료로만 즐겁게 활용해 주시기를 간곡히 당부드립니다.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <span class="res-tag">당신을 위한 50,625가지 조언 중 하나</span>
+        <div class="res-title" id="res-title">제목</div>
+        
+        <div class="section-label">📌 종합적인 마음의 흐름</div>
+        <div class="res-desc" id="res-flow">흐름 내용</div>
+
+        <div class="section-label">💼 일과 금전에 관한 조언</div>
+        <div class="res-desc" id="res-work">일/금전 내용</div>
+
+        <div class="section-label">🌿 사주 명리학 기반의 솔루션</div>
+        <div class="res-desc" id="res-saju">사주 내용</div>
+
+        <button class="close-btn" id="close-btn">조언을 마음에 새기고 메인으로 돌아가기</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 파티클 생성 (ES5)
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 3 + 2; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 방치형 완벽 조합 시스템 (15x15x15x15 = 50,625 조합)
+    // 5만 가지 이상의 결과가 나오므로 평생 업데이트 하실 필요가 없습니다.
+    
+    var titleList = [
+        "새로운 시작의 문턱, 두려움을 내려놓으세요.",
+        "잠시 멈추어 내실을 단단하게 다져야 할 시점",
+        "얼어붙은 땅이 녹고 따뜻한 인연이 피어나는 시기",
+        "고요한 인내 끝에 맺어지는 달콤한 결실",
+        "낡은 껍질을 벗고 새로운 자아를 마주하는 때",
+        "갑작스러운 변화 속에서 중심을 잡아야 할 하루",
+        "흩어졌던 조각들이 제자리를 찾아가는 흐름",
+        "지나친 욕심을 버리고 가진 것에 감사해야 할 시기",
+        "숨겨왔던 재능과 매력이 세상 밖으로 드러나는 날",
+        "오랜 오해가 풀리고 인간관계가 회복되는 긍정의 기운",
+        "뜻밖의 귀인을 만나 막힌 길이 시원하게 뚫리는 형국",
+        "과거의 상처를 치유하고 앞으로 힘차게 나아갈 시점",
+        "어둠이 걷히고 여명이 밝아오는 희망찬 변화의 시기",
+        "선택의 기로에서 직관과 이성이 완벽한 조화를 이루는 날",
+        "조급함을 버리고 물 흐르듯 자연스럽게 맡겨야 할 때"
+    ];
+
+    var flowList = [
+        "과거의 크고 작은 실패나 아쉬움이 당신의 발목을 잡고 있을지 모릅니다. 하지만 지금은 그 모든 짐을 내려놓고 새로운 시작을 맞이할 때입니다. 정체되어 있던 기운이 서서히 풀리며, 당신의 내면에 잠들어 있던 열정이 다시 깨어날 준비를 하고 있습니다. 변화를 두려워하지 말고 작은 것부터 실천해 보시길 바랍니다.",
+        "주변 환경이 빠르게 변하고 여러 가지 유혹이 다가오는 시기입니다. 마음이 조급해질 수 있으나, 지금은 무리하게 앞으로 나아가기보다 잠시 걸음을 멈추고 흩어진 마음을 정돈해야 할 때입니다. 겉모습을 화려하게 꾸미기보다는, 당신이 진정으로 원하는 것이 무엇인지 스스로에게 되물어보는 차분한 시간이 필요합니다.",
+        "오랫동안 혼자 안고 있던 무거운 고민들이 서서히 해결의 실마리를 찾게 됩니다. 특히 사람과 사람 사이의 얽혀있던 오해가 부드러운 대화로 풀릴 수 있는 아주 좋은 흐름입니다. 마음의 벽을 조금만 허물고 먼저 부드러운 미소로 다가가 보세요. 얼어붙은 땅에도 반드시 봄은 찾아옵니다.",
+        "당신이 남모르게 흘렸던 땀방울과 인고의 시간들이 드디어 정당한 보상을 받기 시작하는 시기입니다. 때로는 아무도 알아주지 않는 것 같아 외롭고 지쳤겠지만, 당신의 묵묵한 노력은 결코 배신하지 않습니다. 자신감을 가지셔도 좋습니다. 당신은 이 보상을 누릴 자격이 충분합니다.",
+        "지금까지 당신을 지탱해주던 낡은 습관이나 미련, 혹은 건강하지 못한 인연을 이제는 과감하게 끊어내야 할 시점입니다. 익숙한 것을 버리는 것은 두렵지만, 비워낸 자리에는 반드시 새롭고 더 좋은 기운이 채워지기 마련입니다. 자신을 위한 용기 있는 결심을 내리시기를 응원합니다.",
+        "예상치 못한 소식이나 급격한 상황 변화로 인해 다소 당황할 수 있는 흐름입니다. 하지만 이러한 변화는 장기적으로 보았을 때 당신을 더 나은 곳으로 이끌기 위한 과정입니다. 감정적인 동요를 가라앉히고 상황을 객관적으로 주시한다면 훌륭한 해결책을 찾을 수 있습니다.",
+        "머릿속이 복잡하고 여러 가지 생각이 엉켜있다면, 지금이 바로 실타래를 풀 수 있는 적기입니다. 주변의 산만한 요소들이 하나둘씩 정리되면서 당신이 진정 집중해야 할 목표가 뚜렷해집니다. 선택과 집중의 지혜를 발휘하여 에너지를 낭비하지 마십시오.",
+        "당신의 의도와는 다르게 상황이 오해를 낳거나 지연될 수 있는 시기입니다. 이럴 때일수록 억지로 상황을 통제하려 들면 부작용이 생길 수 있습니다. 한 발짝 물러서서 관망하는 여유를 가지세요. 시간이 자연스럽게 모든 것을 원래의 평온한 궤도로 돌려놓을 것입니다.",
+        "다른 사람들의 시선이나 평가에 지나치게 얽매여 자신의 진짜 목소리를 외면하고 있지는 않은지 돌아보아야 합니다. 당신 내면의 깊은 곳에서 들려오는 직관을 믿어보세요. 타인의 기준이 아닌, 오직 당신만의 기준으로 삶의 방향을 설정할 때 진정한 행복이 찾아옵니다.",
+        "새로운 것을 배우거나 낯선 환경에 뛰어들기에 매우 좋은 긍정의 에너지가 가득합니다. 평소 망설였던 취미나 공부가 있다면 과감히 시작해 보십시오. 그 과정에서 만나는 새로운 인연들이 당신의 삶을 더욱 풍요롭고 다채롭게 만들어 줄 것입니다.",
+        "감정의 기복이 심해지고 예민해질 수 있는 흐름입니다. 사소한 일에 날이 서거나 타인과 마찰이 생길 수 있으니, 말과 행동을 각별히 조심해야 합니다. 혼자만의 시간을 가지며 명상이나 독서로 내면의 평화를 다스리는 데 집중하는 것이 좋습니다.",
+        "지금까지 당신을 괴롭히던 장애물이나 방해꾼이 자연스럽게 물러나는 형국입니다. 막혀있던 담벼락이 무너지고 시야가 탁 트이는 쾌감을 느낄 수 있습니다. 이 기세를 몰아 평소 미루어 두었던 중요한 계획들을 차근차근 실행에 옮겨보시길 바랍니다.",
+        "당신의 숨겨진 매력과 장점이 주변 사람들에게 강력하게 어필되는 시기입니다. 모임이나 단체 활동에서 리더십을 발휘하거나 중심적인 역할을 맡게 될 수 있습니다. 쑥스러워하지 말고 당신의 능력을 마음껏 펼쳐보세요. 많은 이들이 당신을 지지할 것입니다.",
+        "과거의 영광이나 성공 경험에 갇혀 현재의 문제점을 놓치고 있을 수 있습니다. 시대는 변하고 상황은 달라졌습니다. 고정관념을 버리고 백지상태에서 새로운 관점으로 문제를 바라본다면, 그동안 보이지 않았던 아주 획기적이고 명쾌한 돌파구를 찾게 될 것입니다.",
+        "체력적으로나 정신적으로 번아웃(Burnout)이 오기 쉬운 아슬아슬한 시기입니다. 목표를 향해 달리는 것도 중요하지만, 당신의 몸과 마음이 보내는 휴식의 신호를 결코 무시해서는 안 됩니다. 오늘 하루만큼은 모든 짐을 내려놓고 온전히 자신만을 위한 힐링의 시간을 가지십시오."
+    ];
+
+    var workList = [
+        "금전과 업무의 흐름에 새로운 활력이 돕니다. 그동안 미뤄두었던 서류 작업이나 막혀있던 계약이 귀인의 도움으로 순조롭게 진행될 가능성이 높습니다. 누군가에게 도움을 요청하는 것을 부끄러워하지 마십시오. 협력을 통해 훨씬 더 큰 성과를 얻을 수 있는 시기입니다.",
+        "금전적으로는 수익을 좇아 무리한 투자를 하거나, 충동적으로 새로운 일을 벌이는 것을 주의하셔야 합니다. 현재 쥐고 있는 자산을 안전하게 지키고, 직장 내에서도 묵묵히 본인의 전문성을 갈고닦는 것이 훗날 더 큰 도약을 위한 든든한 밑거름이 될 것입니다.",
+        "인간관계가 곧 금전운과 직결되는 시기입니다. 업무상 부딪히던 동료나 거래처 사람에게 먼저 따뜻한 커피 한 잔을 건네보는 것은 어떨까요? 이러한 작은 배려가 뜻밖의 큰 계약이나 성과로 돌아올 수 있습니다. 사람을 얻는 것이 곧 재물을 얻는 길입니다.",
+        "직장에서 승진이나 중요한 직책을 맡게 될 가능성이 엿보입니다. 혹은 잊고 있었던 곳에서 뜻밖의 수익이나 금전적 보상이 들어올 수 있습니다. 다만, 기쁨에 취해 자만하지 마시고 주변 동료들에게 공을 나누는 겸손한 태도를 보여주시면 더욱 큰 존경을 받게 될 것입니다.",
+        "현재의 업무 방식이나 투자 포트폴리오에 근본적인 변화가 필요할 수 있습니다. 손실이 난 곳에 미련을 두기보다는, 빠르게 실패를 인정하고 새로운 트렌드나 지식을 받아들이는 유연성이 요구됩니다. 변화를 두려워하지 않는 사람만이 위기를 기회로 바꿀 수 있습니다.",
+        "지출 관리에 각별한 주의가 필요한 시기입니다. 기분 전환을 위한 충동구매나 불필요한 과소비가 발생하기 쉬우니, 지갑을 열기 전에 세 번 이상 심사숙고하십시오. 반면, 자기 계발이나 교육을 위한 지출은 장기적으로 훌륭한 투자가 될 것입니다.",
+        "경쟁자나 라이벌의 등장으로 인해 직장에서 적지 않은 긴장감을 느끼게 될 수 있습니다. 하지만 이는 오히려 당신의 잠재력을 최대한으로 끌어올리는 강력한 자극제가 될 것입니다. 상대를 견제하기보다 당신 본연의 실력을 증명하는 데 온전히 에너지를 쏟으십시오.",
+        "안정적이고 평온한 금전 흐름이 유지됩니다. 큰 대박을 노리기보다는 소소하지만 확실한 수익을 챙기는 데 집중하는 것이 현명합니다. 업무적으로도 무리한 목표 설정보다는 매일 주어지는 루틴한 일들을 실수 없이 깔끔하게 처리하는 것이 인정을 받는 비결입니다.",
+        "뜻밖의 지출이나 금전적 손실이 발생할 수 있는 징후가 보입니다. 보증을 서주거나 무리하게 돈을 빌려주는 행위는 인간관계까지 파탄 낼 수 있으므로 단호하게 거절하셔야 합니다. 철저한 리스크 관리와 현금 확보가 가장 중요한 방어 전략입니다.",
+        "당신의 창의적인 아이디어나 기획이 직장에서 큰 호평을 받게 되는 시기입니다. 평소 상사나 팀원들에게 말하지 못했던 혁신적인 제안이 있다면 이번 기회에 자신 있게 발표해 보십시오. 금전적으로도 지식 재산이나 아이디어를 통한 부가 수익이 창출될 수 있습니다.",
+        "업무의 양이 갑작스럽게 늘어나 과로할 위험이 매우 높습니다. 모든 일을 완벽하게 혼자 처리하려는 완벽주의를 내려놓고, 적절히 주변에 업무를 위임하는 지혜가 필요합니다. 건강을 잃으면 금전적 보상도 아무런 의미가 없음을 명심하십시오.",
+        "과거에 투자해 두었던 주식이나 부동산, 혹은 잊고 지냈던 채권에서 긍정적인 소식이 들려올 가능성이 있습니다. 직장에서는 과거의 훌륭한 업무 성과가 재평가되어 뒤늦은 포상이나 인센티브로 연결될 수 있는 매우 기분 좋은 금전운이 흐르고 있습니다.",
+        "이직이나 전업을 고민하고 계신다면 현재는 다소 성급한 시기입니다. 겉보기에는 조건이 좋아 보이는 제안일지라도 막상 들어가 보면 숨겨진 함정이 있을 수 있습니다. 이력서를 정비하며 시장의 동향을 살피되, 결정은 다음으로 미루는 것이 안전합니다.",
+        "당신을 시기하거나 질투하는 구설수에 휘말릴 수 있으니 직장 내에서 언행을 각별히 조심해야 합니다. 험담에 동참하지 말고 중립적인 태도를 지키십시오. 금전적으로는 유행에 편승하는 투자를 절대 경계하고 객관적 사실에 기반한 이성적 선택이 필수입니다.",
+        "파트너십이나 동업의 기운이 매우 강하게 들어옵니다. 혼자서는 뚫기 힘들었던 벽을, 마음이 맞는 파트너와 함께라면 쉽게 넘을 수 있습니다. 계약서의 세부 조항만 꼼꼼히 확인한다면, 서로에게 도움이 될 수 있는 훌륭한 비즈니스 협력이 성사될 것입니다."
+    ];
+
+    var sajuList = [
+        "오늘은 목(木) 기운이 당신을 부드럽게 감싸는 날입니다. 싹을 틔우는 나무처럼 생명력과 추진력이 강해집니다. 마음의 안정이 필요할 때는 따뜻한 카모마일 차를 드시거나, 책상 위에 작은 식물을 두어 긍정적인 기운을 흡수해 보시기를 권유 드립니다.",
+        "토(土) 기운이 강하게 작용하여 포용력과 인내심이 요구되는 하루입니다. 모든 일을 당신이 통제하려 하지 말고, 때로는 흐르는 물처럼 자연스럽게 상황을 관망하는 지혜가 필요합니다. 흙길을 산책하며 땅의 묵직한 에너지를 받아보시는 것을 추천합니다.",
+        "화(火) 기운이 밝고 따뜻하게 당신을 비추고 있습니다. 오늘은 어두운 색상보다는 밝고 화사한 붉은색 계열이나 핑크빛 소품을 지니시면 인복(人福)을 끌어당기는 데 큰 도움이 됩니다. 밝은 에너지는 주변 사람들을 당신의 편으로 만들어 줍니다.",
+        "수(水) 기운이 충만한 날로, 지혜와 유연함이 빛을 발합니다. 중요한 서류나 계약서에 서명하기에 매우 길한 날이며, 감정에 치우치기보다는 이성적이고 차분한 선택을 내리는 것이 좋습니다. 따뜻한 반신욕으로 몸의 피로를 풀어주시면 운기가 더욱 상승합니다.",
+        "금(金) 기운이 예리하게 들어와 당신의 결단력을 돕는 날입니다. 우유부단한 태도는 오히려 스트레스를 가중시킵니다. 오늘은 주변 환경을 깨끗하게 정리 정돈하거나, 불필요한 물건을 버리는 것만으로도 마음의 짐을 크게 덜어낼 수 있습니다.",
+        "목(木)과 화(火)의 기운이 조화롭게 만나 창조적인 영감이 폭발하는 날입니다. 동쪽이나 남쪽을 향해 창문을 활짝 열어 환기를 시키면 집안에 쌓인 탁한 기운이 빠져나가고 신선한 복이 들어옵니다. 초록색 계열의 옷차림이 행운을 부릅니다.",
+        "금(金)과 수(水)의 기운이 차갑게 흐르니 이성적 판단력은 뛰어나지만 정서적으로 차가워 보일 수 있습니다. 타인에게 말을 건넬 때 평소보다 한 톤 부드럽고 다정하게 신경 써 보십시오. 은이나 메탈 소재의 액세서리가 나쁜 액운을 튕겨내는 방패 역할을 해줍니다.",
+        "토(土) 기운이 과도하여 자칫 고집이 세지거나 타협을 모르는 태도를 보일 수 있습니다. 오늘은 '내 방식만이 정답은 아니다'라는 열린 마음가짐이 반드시 필요합니다. 노란색이나 베이지색 등 차분한 대지(Earth) 톤의 컬러가 당신의 날 선 감정을 부드럽게 중화시켜 줍니다.",
+        "수(水)와 목(木)의 상생 기운이 가득하여 새로운 것을 배우거나 흡수하기에 최적의 명리학적 흐름입니다. 중요한 결정을 내려야 한다면 혼자서 끙끙대지 말고 북쪽 방향에 위치한 윗사람이나 선배에게 조언을 구하십시오. 명쾌한 해답을 얻게 될 것입니다.",
+        "화(火) 기운이 지나치게 강해져 쉽게 욱하거나 분노가 치밀어 오를 수 있는 아슬아슬한 날입니다. 차가운 물을 자주 마셔 심장의 화기를 식혀주고, 격렬한 운동보다는 가벼운 스트레칭이나 명상을 추천합니다. 검은색 지갑이나 가방이 금전의 유출을 막아줍니다.",
+        "모든 오행(목화토금수)의 기운이 아주 평온하고 균형 있게 흘러가는 평탄한 날입니다. 특별한 행운도, 불운도 없는 고요한 상태이니 무리한 계획보다는 평범한 일상의 소중함을 누리십시오. 따뜻한 우드 톤의 공간(카페 등)에서 보내는 시간이 매우 길합니다.",
+        "금(金) 기운이 재물운을 강하게 자극하는 긍정적인 사주 흐름입니다. 서쪽 방향에서 뜻밖의 이득이나 기쁜 소식이 들려올 수 있습니다. 오늘 하루만큼은 결제를 하거나 계약을 맺을 때 흰색이나 밝은 회색 옷을 입으시면 금전운을 최고조로 끌어올릴 수 있습니다.",
+        "토(土)와 화(火)의 기운이 만나 열정이 지나치게 앞설 수 있습니다. 마음은 급한데 현실이 따라주지 않아 답답함을 느낄 수 있으니 페이스 조절이 필수입니다. 땀을 낼 수 있는 가벼운 조깅 후 미지근한 물로 샤워를 하면 뭉쳐있던 나쁜 기운이 씻겨 내려갑니다.",
+        "목(木) 기운이 역마(驛馬)를 자극하여 가만히 앉아있기보다는 밖으로 돌아다녀야 운이 풀리는 날입니다. 출장이나 외근, 혹은 짧은 드라이브라도 다녀오는 것이 당신의 막힌 운로를 뚫어줍니다. 숲이 우거진 곳이나 공원을 찾아 깊은숨을 들이마셔 보십시오.",
+        "수(水) 기운이 깊어 심해처럼 생각이 많아지고 우울감에 빠지기 쉬운 흐름입니다. 부정적인 상상에 꼬리를 물지 않도록 주의해야 합니다. 밝고 경쾌한 음악을 듣거나, 집안의 조명을 평소보다 훨씬 밝게 켜두어 양(陽)의 에너지를 인위적으로 보충해 주는 것이 필요합니다."
+    ];
+
+    var selectedCount = 0;
+    var cards = document.querySelectorAll('.tarot-card');
+    var submitBtn = document.getElementById('submit-btn');
+
+    // 이벤트 리스너 (ES5 완벽 호환, arrow function 배제)
+    for (var j = 0; j < cards.length; j++) {
+        cards[j].addEventListener('click', function() {
+            if (this.className.indexOf('selected') === -1) {
+                this.className += ' selected';
+                this.querySelector('.card-status').innerText = "기운이 조용히 깃들었습니다";
+                selectedCount++;
+
+                if (selectedCount === 3) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = "✨ 마음의 거울 들여다보기 (해설 확인)";
+                }
+            }
+        });
+    }
+
+    // ⚠️ 100% 무적 에러 방지 이중 우회 로직
+    submitBtn.addEventListener('click', function() {
+        if (selectedCount < 3) return;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "당신의 운명을 신중하게 짚어보는 중입니다...";
+
+        // 1단계: 앱인벤터 내부 통신
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        // 2단계: 최강의 이중 우회 안전장치 (0.5초 딜레이 후 강제 URL 교체)
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    });
+
+    // 화면 진입 시 파라미터 확인 후 모달 띄우기
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            showRandomResult();
+        }
+    }
+
+    function showRandomResult() {
+        // 배열 중 랜덤으로 결과 추출 (조합형)
+        var tIndex = Math.floor(Math.random() * titleList.length);
+        var fIndex = Math.floor(Math.random() * flowList.length);
+        var wIndex = Math.floor(Math.random() * workList.length);
+        var sIndex = Math.floor(Math.random() * sajuList.length);
+
+        document.getElementById('res-title').innerText = titleList[tIndex];
+        document.getElementById('res-flow').innerText = flowList[fIndex];
+        document.getElementById('res-work').innerText = workList[wIndex];
+        document.getElementById('res-saju').innerText = sajuList[sIndex];
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    // 닫기 버튼: 모달 숨기고 모든 상태 원상복구
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        for (var k = 0; k < cards.length; k++) {
+            cards[k].className = 'tarot-card';
+            cards[k].querySelector('.card-status').innerText = "터치하여 기운 불어넣기";
+        }
+        selectedCount = 0;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "세 장의 카드를 모두 선택해 주십시오";
+        
+        // URL 파라미터 꼬임 방지를 위한 복구
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
