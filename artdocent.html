@@ -1,0 +1,383 @@
+<!--구글 블로거 전용: 명화의 온도 (10만 조합 도슨트, ES5 완벽 호환, 이중 우회)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0a0a0a !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Noto Serif KR', serif;
+        color: #dcd0bc; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #e5c07b 0%, rgba(229,192,123,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.3; }
+        80% { opacity: 0.1; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #141010 0%, #0a0a0a 100%);
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 26px; font-weight: 700; color: #e5c07b; margin-bottom: 8px; letter-spacing: 2px;}
+    .sub-title { font-size: 13px; color: #8c8273; font-weight: 300; letter-spacing: 3px; border-bottom: 1px solid rgba(229, 192, 123, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: rgba(20, 16, 16, 0.8); border-radius: 8px; padding: 22px; border: 1px solid #3d3024; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.6);}
+    .panel-title { font-size: 16px; font-weight: 700; color: #e5c07b; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #3d3024; padding-bottom: 12px;}
+    .panel-desc { font-size: 14.5px; color: #a89f91; line-height: 1.8; word-break: keep-all; text-align: left; margin-bottom: 12px;}
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 40px; height: 350px; overflow-y: auto; padding-right: 5px;}
+    .gallery-grid::-webkit-scrollbar { width: 5px; }
+    .gallery-grid::-webkit-scrollbar-thumb { background: #3d3024; border-radius: 5px; }
+    
+    .art-card { 
+        background: #1a1514;
+        border: 1px solid #3d3024;
+        border-radius: 6px;
+        padding: 20px 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .art-title { font-size: 14.5px; font-weight: 700; color: #c8bca1; margin-bottom: 6px; word-break: keep-all; line-height: 1.3;}
+    .art-artist { font-size: 12px; color: #7a6e5d;}
+    
+    .art-card.selected { 
+        border-color: #e5c07b; 
+        background: #2a221c;
+        box-shadow: 0 0 15px rgba(229, 192, 123, 0.15);
+        transform: translateY(-2px);
+    }
+    .art-card.selected .art-title { color: #e5c07b; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: linear-gradient(135deg, #e5c07b, #b58d4a); 
+        border: none; border-radius: 6px; 
+        color: #141010; font-size: 16px; font-weight: 700; 
+        cursor: pointer; transition: 0.3s; 
+    }
+    .submit-btn:disabled { 
+        background: #241e1d; color: #554a40; 
+        cursor: not-allowed; 
+        border: 1px solid #3d3024;
+    }
+
+    .disclaimer-box { border-top: 1px dashed #3d3024; padding-top: 25px; margin-top: 40px; }
+    .disclaimer-title { font-size: 13.5px; font-weight: 700; color: #7a6e5d; margin-bottom: 12px; text-align: center;}
+    .disclaimer-text { font-size: 12.5px; color: #665c4e; line-height: 1.7; word-break: keep-all; text-align: justify; margin-bottom: 10px;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 10, 10, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #141010; border-radius: 8px; padding: 35px 20px; border: 1px solid #e5c07b; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .res-tag { display: inline-block; padding: 6px 14px; background: #2a221c; color: #e5c07b; font-size: 12px; font-weight: 700; border-radius: 4px; margin-bottom: 15px; border: 1px solid #3d3024;}
+    .res-title { font-size: 22px; font-weight: 700; color: #e5c07b; line-height: 1.4; word-break: keep-all; text-align: left; margin-bottom: 5px;}
+    .res-artist { font-size: 14px; color: #8c8273; margin-bottom: 30px; display: block; border-bottom: 1px solid #3d3024; padding-bottom: 15px;}
+    
+    .section-label { font-size: 15px; font-weight: 700; color: #e5c07b; margin-bottom: 10px; margin-top: 30px;}
+    .res-desc { 
+        font-size: 15px; color: #c8bca1; line-height: 1.8; 
+        word-break: keep-all; text-align: left; 
+        background: rgba(26, 21, 20, 0.5); 
+        padding: 18px; border-radius: 6px; border-left: 2px solid #e5c07b;
+    }
+    
+    .close-btn { width: 100%; padding: 18px; background: #1a1514; border: 1px solid #e5c07b; border-radius: 6px; color: #e5c07b; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 40px;}
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">명화의 온도</div>
+        <div class="sub-title">데일리 아트 도슨트</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">이용 안내 및 마음 챙김 팁</div>
+        <div class="panel-desc">
+            세상에 알려진 아름다운 명화들, 그 캔버스 뒷면에는 예술가들의 치열한 삶의 흔적과 숨겨진 이야기들이 가득합니다. 바쁘고 지친 일상 속에서 잠시 시간을 내어 명화가 건네는 따뜻한 온기를 느껴보세요.
+        </div>
+        <div class="panel-desc">
+            아래에 나열된 작품 목록을 천천히 살펴보시고, 오늘 직감적으로 마음이 이끌리는 명화를 하나 선택해 주시면 됩니다. 작품에 얽힌 흥미로운 역사적 사실과 함께, 10만 가지 이상의 조합으로 분석된 '오늘 당신만을 위한 따뜻한 심리 조언'을 확인하실 수 있습니다.
+        </div>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+        <!--자바스크립트로 명화 목록이 자동 생성됩니다-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        명화를 선택해 주십시오
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">서비스 이용 주의사항 및 면책 조항</div>
+        <div class="disclaimer-text">
+            본 '명화의 온도' 애플리케이션에서 제공하는 명화의 역사적 배경은 대중의 교양을 돕기 위해 스토리텔링으로 재구성되었으며, 심리적 조언 및 해석은 예술 작품을 모티브로 한 교양 목적의 콘텐츠입니다.
+        </div>
+        <div class="disclaimer-text">
+            본 해설은 절대적인 역사적 사실이나 전문적인 의료 및 심리 상담을 결코 대체할 수 없습니다. 일상의 스트레스를 풀고 예술적 영감을 얻는 긍정적인 참고 자료로만 즐겁게 활용해 주시기를 진심으로 당부드립니다.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <span class="res-tag">도슨트 해설 열람 중</span>
+        <div class="res-title" id="res-title">명화 제목</div>
+        <span class="res-artist" id="res-artist">화가 이름</span>
+        
+        <div class="section-label">작품에 숨겨진 이야기</div>
+        <div class="res-desc" id="res-fact">역사적 사실</div>
+
+        <div class="section-label">큐레이터의 시선</div>
+        <div class="res-desc" id="res-perspective">조합형 해석</div>
+
+        <div class="section-label">명화가 건네는 조언</div>
+        <div class="res-desc" id="res-advice">조합형 조언</div>
+
+        <div class="section-label">오늘의 예술적 영감</div>
+        <div class="res-desc" id="res-inspiration">조합형 영감</div>
+
+        <button class="close-btn" id="close-btn">작품 덮고 갤러리로 돌아가기</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 3 + 1; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    var artDB = [
+        { id: "A1", title: "모나리자", artist: "레오나르도 다빈치", fact: "세상에서 가장 유명한 미소 뒤에는 치밀한 해부학적 집착이 숨어 있습니다. 다빈치는 이 완벽한 미소를 그리기 위해 수십 구의 시체를 해동해 입술 근육을 연구했습니다. 또한 그녀의 오른쪽 눈동자에는 아주 미세한 'L.V'라는 다빈치의 이니셜이 암호처럼 숨겨져 있다는 주장이 제기되기도 했습니다." },
+        { id: "A2", title: "최후의 만찬", artist: "레오나르도 다빈치", fact: "예수와 제자들의 성스러운 식사 자리. 하지만 배신자 유다의 팔꿈치 아래를 자세히 보면 소금통이 엎질러져 있습니다. 당시 소금은 황금만큼 비쌌기에, 소금을 쏟는 행위는 불운과 배신을 상징하는 다빈치의 의도적인 복선이었습니다." },
+        { id: "A3", title: "별이 빛나는 밤", artist: "빈센트 반 고흐", fact: "이 아름다운 그림은 고흐가 자신의 귀를 자른 후 갇혀 있던 정신병원 창문 너머의 풍경입니다. 천문학자들이 분석한 결과 그림 속 별의 소용돌이 위치가 1889년 당시 실제 프랑스 남부 하늘의 은하수 위치와 소수점 단위까지 일치한다는 사실이 밝혀졌습니다." },
+        { id: "A4", title: "아르놀피니 부부의 초상", artist: "얀 반 에이크", fact: "가운데 벽에 걸린 볼록거울을 확대해 보면, 그림을 그리고 있는 화가 자신의 모습이 아주 정밀하게 반사되어 있습니다. 거울 위에는 '얀 반 에이크가 이곳에 있었다'라는 낙서 같은 서명이 라틴어로 적혀 있어, 당시 부유층에 대한 화가의 비틀린 과시욕을 보여줍니다." },
+        { id: "A5", title: "절규", artist: "에드바르 뭉크", fact: "이 그림의 핏빛 하늘은 화가의 정신병적 상상력이 아닙니다. 당시 인도네시아 크라카토아 화산이 대폭발하면서, 그 화산재가 유럽 상공까지 덮쳐 몇 달 동안 노르웨이의 하늘이 실제로 핏빛으로 물들었던 기괴한 자연 현상을 그대로 묘사한 것입니다." },
+        { id: "A6", title: "아담의 창조", artist: "미켈란젤로", fact: "시스티나 성당 천장에 그려진 신과 인간의 조우. 하지만 신을 감싸고 있는 붉은 망토와 천사들의 형상을 자세히 보면, 인간의 '뇌(Brain)' 단면도와 소름 끼치도록 똑같습니다. 인체 해부학에 통달했던 미켈란젤로가 '인간의 지성은 신이 뇌를 통해 준 것'이라는 메시지를 교황 몰래 숨겨놓은 것입니다." },
+        { id: "A7", title: "키스", artist: "구스타프 클림트", fact: "황금빛으로 눈부시게 아름다운 연인의 키스 장면. 그러나 여자의 발끝을 자세히 보면 낭떠러지 끝에 위태롭게 꺾여 있습니다. 남자의 억압적인 포옹을 피하려다 벼랑 끝으로 몰린 여성의 공포를 그렸다는 해석이 존재합니다." },
+        { id: "A8", title: "진주 귀걸이를 한 소녀", artist: "요하네스 페르메이르", fact: "이 신비로운 소녀는 실존 인물이 아니라, 화가의 상상력으로 만들어낸 이상형(트로니)입니다. 결정적으로 그녀가 귀에 걸고 있는 진주는 물리적으로 존재할 수 없는 압도적인 크기를 자랑하며, 빛의 굴절을 조작해 인간의 시선을 강제로 끌어당기도록 치밀하게 설계된 가짜 보석입니다." },
+        { id: "A9", title: "비너스의 탄생", artist: "산드로 보티첼리", fact: "그림 속 눈부신 비너스의 실제 모델은 당시 피렌체 최고의 미녀 '시모네타 베스푸치'입니다. 하지만 그녀는 폐결핵으로 22살에 피를 토하며 비참하게 사망했습니다. 보티첼리는 그녀를 평생 짝사랑했고, 죽을 때 그녀의 발치에 묻어달라는 유언을 남겨 실제로 그녀의 무덤 아래에 안장되었습니다." },
+        { id: "A10", title: "기억의 지속", artist: "살바도르 달리", fact: "시계가 녹아내리는 이 초현실적인 명작은, 상대성이론이나 복잡한 철학적 고뇌에서 나온 것이 아닙니다. 더운 여름날, 달리가 저녁 식사로 먹다 남긴 카망베르 치즈가 식탁 위에서 찐득하게 녹아내리는 모습을 보고 충동적으로 시계에 덧그린 것에 불과합니다." },
+        { id: "A11", title: "밤의 사람들 (Nighthawks)", artist: "에드워드 호퍼", fact: "한밤중 환하게 불이 켜진 식당 안의 사람들. 하지만 그림을 아무리 살펴봐도 식당 밖으로 나갈 수 있는 '문(Door)'이 그려져 있지 않습니다. 호퍼는 현대인의 지독한 고독과 사회로부터의 완벽한 단절을 '출구 없는 식당'으로 묘사했습니다." },
+        { id: "A12", title: "게르니카", artist: "파블로 피카소", fact: "스페인 내전의 참상을 고발한 흑백의 대작. 캔버스 곳곳에 숨겨진 형상들을 이어보면 거대한 해골의 모습과 숨통이 끊어진 아기의 얼굴이 나타납니다. 나치 장교가 이 그림을 보고 '당신이 한 짓이오?'라고 묻자, 피카소는 '아니, 당신들이 한 짓이오'라고 차갑게 응수했습니다." },
+        { id: "A13", title: "쾌락의 정원", artist: "히에로니무스 보스", fact: "지옥의 참상을 묘사한 오른쪽 패널을 자세히 보면, 거대한 악기에 깔려 고문당하는 죄인의 맨엉덩이에 악보가 하나 적혀 있습니다. 현대의 음악가들이 이 '엉덩이 악보'를 실제로 연주해 본 결과, 매우 불길한 화음의 멜로디가 흘러나왔습니다." },
+        { id: "A14", title: "풀밭 위의 점심 식사", artist: "에두아르 마네", fact: "당시 파리 예술계를 발칵 뒤집어놓은 스캔들 작품. 정장을 입은 신사들 사이에 발가벗은 여성이 당당하게 관객을 쳐다보고 있습니다. 이는 신화 속 여신만 벗을 수 있다는 위선적인 규칙을 박살 내고, 당시 귀족들의 은밀한 문화를 캔버스 위로 끌어올려 꼬집은 마네의 도발이었습니다." },
+        { id: "A15", title: "마라의 죽음", artist: "자크루이 다비드", fact: "욕조에서 펜을 쥔 채 피 흘리며 죽어있는 혁명가 마라의 모습입니다. 그림 속 마라는 성자처럼 성스럽고 아름답게 묘사되었으나, 실제 마라는 심각한 피부병으로 인해 온몸에 진물이 흘러 하루 종일 약물 욕조에 몸을 담가야만 했던 상황이었습니다. 예술을 통한 정치적 선전입니다." },
+        { id: "A16", title: "시녀들", artist: "디에고 벨라스케스", fact: "어린 공주를 그리는 것 같지만, 캔버스 너머를 응시하는 화가(벨라스케스)의 시선과 뒤쪽 거울에 비친 국왕 부부의 모습을 통해, 사실은 국왕의 시선에서 그림을 관찰하는 구조입니다. 즉, 이 그림을 보고 있는 당신이 바로 '스페인의 국왕'이 되는 마법 같은 원근법의 장난입니다." },
+        { id: "A17", title: "오펠리아", artist: "존 에버렛 밀레이", fact: "물에 빠져 죽어가는 아름다운 여인을 묘사하기 위해, 화가는 모델을 실제 물이 가득 찬 욕조에 며칠 동안 들어가 있게 했습니다. 결국 물이 차갑게 식어 모델은 심한 감기에 걸려 목숨을 잃을 뻔했고, 화가는 막대한 치료비 청구서를 물어내야만 했습니다." },
+        { id: "A18", title: "사절단", artist: "한스 홀바인", fact: "두 명의 화려한 외교관 발밑에 기이하게 찌그러진 형상이 있습니다. 그림의 오른쪽 모서리 아래에서 비스듬히 이 형상을 바라보면, 완벽한 입체감을 가진 '거대한 해골'이 나타납니다. 인간의 권력과 부가 결국엔 부질없음을 경고하는 극단적인 왜상(Anamorphosis) 기법입니다." },
+        { id: "A19", title: "야경", artist: "렘브란트", fact: "제목은 '야경'이지만, 사실 이 그림의 배경은 환한 대낮입니다. 시간이 흐르면서 그림 표면에 발라둔 바니시가 산화되어 새까맣게 변색된 것을 후대 사람들이 밤 풍경으로 착각한 것입니다. 화려한 영광의 순간이 세월의 때를 입어 어둠으로 묻혀버린 아이러니한 현상입니다." },
+        { id: "A20", title: "그랑드 오달리스크", artist: "장 오귀스트 도미니크 앵그르", fact: "관능적으로 등을 돌린 나체의 여인. 하지만 의사들이 해부학적으로 분석한 결과, 이 여인의 허리는 정상인보다 척추뼈가 최소 3개에서 5개 더 길게 그려져 있습니다. 화가는 여체의 곡선을 극대화하기 위해 의도적으로 인체의 구조를 기괴하게 변형시켰습니다." }
+    ];
+
+    var perspectiveList = [
+        "이 작품은 겉보기의 아름다움 뒤에 얽혀있는 인간의 복잡한 감정을 교묘하게 담아냈습니다. 캔버스 표면의 붓 터치는 부드럽지만, 세상을 향한 화가의 깊은 고민과 통찰이 느껴집니다.",
+        "화려한 색감으로 관객의 눈을 사로잡은 뒤, 그 속에 삶의 허무함과 상실이라는 묵직한 메시지를 심어놓았습니다. 눈에 보이는 것이 전부가 아님을 시각적으로 훌륭하게 증명해 냅니다.",
+        "그림 속 인물들의 엇갈린 시선 처리에 주목해 보시길 바랍니다. 그들은 서로를 마주 보는 대신 불편하게 시선을 빗겨내며, 현대 사회에서도 흔히 느낄 수 있는 소통의 단절과 고립감을 묘사합니다.",
+        "당대의 엄격한 규칙과 억압에 정면으로 부딪히는 캔버스 위의 외침입니다. 화가는 상징적인 기호들을 통해 권력의 눈을 속인 채 자신만의 진실을 후세에 온전히 전달하고자 노력했습니다.",
+        "빛과 그림자의 극적인 대비는 화가 내면의 불안정한 심리 상태를 그대로 비추는 거울과 같습니다. 밝게 빛나는 부분은 세상에 보여주고 싶은 긍정, 어두운 그늘은 숨기고 싶은 두려움을 의미합니다.",
+        "완벽해 보이는 구도 이면에는 사랑, 집착, 그리고 질투라는 세속적인 감정들이 엉켜 있습니다. 예술이라는 포장지를 걷어내고 보면 결국 인간 본연의 모습을 솔직하게 기록한 증거물과도 같습니다.",
+        "시대를 앞서간 천재의 외로운 상상력이 빚어낸 결과물입니다. 동시대 사람들은 쉽게 이해하지 못했으나, 화가는 타협하지 않고 자신만의 굳건한 철학을 캔버스에 영원히 새겨 넣었습니다.",
+        "화면의 정중앙보다 구석에 무심하게 방치된 작은 사물들에 화가의 진짜 의도가 숨어 있는 경우가 많습니다. 진실은 늘 사람들이 쉽게 주목하지 않는 가장자리에 조용히 자리하고 있습니다.",
+        "육체의 아름다움과 화려한 풍경을 찬미하는 듯 보이나, 결국 시간이 지나면 모두 변한다는 씁쓸한 허무주의가 밑바탕에 깔려 있습니다. 찰나의 순간을 얼려버림으로써 영원의 의미를 묻고 있습니다.",
+        "이 캔버스에는 지난날에 대한 화가의 후회와 참회의 흔적이 조용히 묻어 있습니다. 덧칠해진 물감의 두께를 통해, 화가가 얼마나 오랫동안 심리적인 무게감을 견뎌냈는지 짐작할 수 있습니다.",
+        "단순한 풍경을 넘어, 사회적 성취와 인정을 향한 화가의 처절한 열망이 담긴 일종의 출사표와 같습니다. 화려한 질감 묘사는 스스로의 가치를 증명하려는 소리 없는 외침입니다.",
+        "마음의 상처나 현실의 고통에서 벗어나기 위해 치유의 목적으로 그려진 작품입니다. 기묘하게 왜곡된 형태와 붓 자국은 화가가 겪던 내면의 아픔이 외부로 솔직하게 표출된 기록입니다.",
+        "답답한 현실에서 도피하고 싶었던 화가의 간절한 바람이 만든 가상의 이상향입니다. 삶이 고단할수록 그림 속 세상만큼은 규칙도 억압도 없는 완벽히 자유로운 공간으로 창조되었습니다.",
+        "상업적인 이유로 그려진 작품인 동시에, 타협할 수 없는 예술가의 자존심이 은밀하게 섞여 있습니다. 겉으로는 조화로워 보이지만 특정 각도에서 바라보면 날카로운 비판이 숨어 있는 흥미로운 구도입니다.",
+        "인생의 전환점을 맞이한 화가가 세상에 남기고 싶었던 묵직한 메시지와도 같습니다. 생명력을 상징하는 요소들이 점차 흐릿해지도록 설계하여 깊은 여운을 자아냅니다."
+    ];
+
+    var adviceList = [
+        "눈에 보이는 화려한 겉모습에 섣불리 마음을 주지 마십시오. 당신을 현혹하는 달콤한 포장 이면에는 누군가의 다른 의도가 숨어 있을 수 있습니다. 상황의 뒷면을 냉정하고 차분하게 살피는 지혜가 필요한 시기입니다.",
+        "모든 약점을 억지로 세상에 드러내며 피곤하게 살 필요는 없습니다. 때로는 적당한 거리 유지와 부드러운 침묵이 당신을 지키는 가장 견고한 방어막이 됩니다. 솔직함이 늘 최선의 정답은 아님을 기억하세요.",
+        "집착과 고뇌가 결국 위대한 명작을 남겼듯, 지금 당신을 괴롭히는 그 고민이 훗날 삶을 한 단계 성장시키는 소중한 기폭제가 될 것입니다. 현재의 어려움을 피하려 하기보다 긍정적인 에너지로 바꾸어 보십시오.",
+        "통제할 수 없는 타인의 마음이나 이미 지나가 버린 기회에 미련을 두는 것은 마음의 에너지를 소모할 뿐입니다. 지나간 것은 부드럽게 흘려보내고, 철저하게 '지금 내가 할 수 있는 일'에만 온전히 집중하세요.",
+        "교묘한 원근법의 속임수처럼, 꽉 막힌 문제도 '바라보는 관점'을 살짝 비틀어보면 의외로 쉽게 풀릴 수 있습니다. 기존의 굳어진 생각들을 내려놓고 완전히 새로운 입장에서 상황을 다시 조망해 보십시오.",
+        "당신이 이룬 성과와 공로가 묻히지 않도록 확실한 '당신만의 표식'을 남길 줄 알아야 합니다. 무조건 겸손하게 뒤로 물러나기보다는, 노력한 만큼의 권리를 당당하고 부드럽게 주장하는 연습이 필요합니다.",
+        "어두운 물감 아래 밝은 색이 층층이 숨겨져 있듯, 타인의 시선 때문에 당신의 재능과 감정을 억누르지 마십시오. 당신의 인생이라는 소중한 캔버스를 다른 사람의 붓에 맡겨둔 채 방치해서는 안 됩니다.",
+        "불필요한 배경을 뭉개버리고 주제에만 집중한 화가처럼, 당신의 삶에서도 불필요한 감정 소모와 무리한 인간관계를 가볍게 정리할 때입니다. 선택과 집중을 통해 어깨 위의 짐을 덜어내시길 바랍니다.",
+        "가끔은 묵묵히 따르던 기존의 방식에서 벗어나 조금은 용기 있는 도전을 해보셔도 좋습니다. 미움받는 것을 두려워하지 않고 한 걸음 나아갈 때, 세상은 비로소 당신의 진짜 가치를 발견하게 될 것입니다.",
+        "좋은 작품이 완성되기까지 긴 시간이 걸리듯, 당신의 계획이 당장 빛을 보지 못한다고 해서 좌절할 필요는 전혀 없습니다. 조급한 마음을 버리고 당신만의 페이스를 유지하며 묵묵히 나아가십시오.",
+        "그림 속 주인공이 느끼는 고독감은 누구나 마음 한구석에 품고 있는 자연스러운 감정입니다. 홀로 남겨진 듯한 기분이 들 때 그것을 피하지 말고 고요히 마주해 보세요. 스스로를 알아가는 귀중한 시간이 됩니다.",
+        "현실의 복잡한 인간관계 역시 캔버스 위의 구도처럼 보이지 않는 균형이 중요합니다. 감정에 지나치게 휘둘리지 말고 상대방의 마음을 배려하면서도, 잃지 말아야 할 중심은 단단하게 지켜내십시오.",
+        "때로는 너무 완벽하게 정돈된 모습보다, 조금 서투르고 솔직한 감정 표현이 사람들의 마음을 더 크게 움직입니다. 완벽주의의 부담감을 내려놓고, 당신의 진심을 있는 그대로 부드럽게 전해 보십시오.",
+        "비극을 아름다운 예술로 승화시킨 화가의 터치처럼, 과거의 실패를 단순한 상처로만 남겨두지 마세요. 그 경험을 어떻게 받아들이느냐에 따라 흉터가 아닌 당신만의 단단한 내면을 증명하는 훈장이 될 것입니다.",
+        "작은 소품 하나에 암시를 숨겨둔 기법을 당신의 삶에도 적용해 보세요. 결정적인 생각이나 계획을 너무 일찍 드러내지 말고, 신중하게 때를 기다리며 조용히 내실을 다지는 것이 훨씬 유리할 수 있습니다."
+    ];
+
+    var inspirationList = [
+        "오늘 하루, 완벽하게 정돈된 물건의 배치를 의도적으로 조금만 다르게 바꾸어 보십시오. 일상적인 공간의 작은 불균형이 굳어있던 뇌를 부드럽게 자극하여 새로운 영감을 불어넣어 줄 것입니다.",
+        "평소 즐겨 입던 익숙한 색상을 잠시 내려놓고, 평소 시도하지 않았던 밝은 포인트 컬러의 소품을 착용해 보세요. 신선한 색채의 변화가 당신의 기분과 운기를 순식간에 화사하게 전환시켜 줍니다.",
+        "이동하는 길에 스마트폰을 잠시 주머니에 넣고, 풍경 속에 드리워진 '그림자'의 모양과 짙은 정도를 집중해서 관찰해 보십시오. 평소 보지 못했던 세상의 이면을 발견하는 예리한 감각이 깨어납니다.",
+        "자주 가는 카페나 공간에서 평소 앉던 자리가 아닌, 완전히 반대편 낯선 자리에 앉아보십시오. 바라보는 시야의 각도를 살짝 바꾸는 것만으로도 막혀있던 생각의 환풍구가 열리게 됩니다.",
+        "오늘 대화하는 사람들의 미세한 눈빛이나 손짓을 마치 초상화가처럼 차분하게 관찰해 보세요. 말소리 너머에 숨겨진 상대방의 진짜 감정을 부드럽게 읽어내는 공감의 능력이 길러질 것입니다.",
+        "평소 쓰지 않던 향수나 새로운 향기의 차(Tea)를 즐겨보십시오. 후각을 통한 부드러운 자극은 잊고 지냈던 기분 좋은 기억과 직관력을 자연스럽게 수면 위로 끌어올려 마음의 긴장을 풀어줍니다.",
+        "오늘 하루 동안 '하지만', '어차피' 같은 스스로를 가두는 부정적인 접속사를 의식적으로 줄여 보십시오. 언어 습관을 조금만 긍정적으로 바꾸어도 사고방식이 몰라보게 유연해지는 것을 느낄 수 있습니다.",
+        "종이 한 장을 꺼내어 지금 당신의 마음을 무겁게 하는 고민을 적은 뒤, 새까만 펜으로 덧칠해 덮어버리십시오. 아주 단순하고 원초적인 이 행위가 생각보다 큰 심리적 해방감과 가벼움을 선물해 줍니다.",
+        "책상 위의 평범한 물건 하나를 골라, 마치 박물관에 전시된 소중한 유물인 것처럼 1분 동안 천천히 감상해 보십시오. 무심코 지나치던 일상 속에서 비범한 가치를 찾아내는 따뜻한 시선이 생겨납니다.",
+        "오늘 식사는 평소 익숙하게 먹던 메뉴가 아닌 완전히 새로운 음식을 시도하며 그 맛에 온전히 집중해 보십시오. 낯선 미각의 경험은 타성에 젖어있던 하루에 활기찬 리듬을 되찾아 줄 것입니다.",
+        "스마트폰 배경화면을 당신의 마음을 가장 편안하게 해주는 아름다운 명화나 자연 풍경으로 바꾸어 보십시오. 화면을 켤 때마다 전해지는 고요한 예술의 파동이 어지러운 감정을 차분하게 가라앉혀 줍니다.",
+        "하루의 끝, 방 안의 불을 모두 끄고 작은 조명이나 향초 하나만 켠 채 5분간 멍하니 빛을 응시해 보세요. 어둠과 빛의 조화 속에서 복잡했던 마음의 찌꺼기들이 조용히 바닥으로 가라앉게 됩니다.",
+        "당신의 목소리를 짧게 녹음해서 다시 들어보는 낯선 경험을 해보십시오. 스스로도 몰랐던 억양과 한숨 속에서 당신의 지친 상태를 다독여 주고 더 나은 소통의 방향을 잡을 수 있는 힌트를 얻게 됩니다.",
+        "오래된 과거의 흑백 사진을 찬찬히 들여다보며, 그 시대 사람들의 평범한 일상을 상상해 보십시오. 좁았던 현재의 시야가 시간이라는 거대한 차원으로 넓어지며 마음의 여유가 생기는 명상법입니다.",
+        "오늘 하루, 친한 누군가에게 아주 작고 의미 있는 칭찬이나 선의를 가볍게 건네 보십시오. 대가를 바라지 않는 다정한 행동 하나가 당신의 하루를 그 어떤 명화보다 더 아름답게 물들여 줄 것입니다."
+    ];
+
+    var selectedId = null;
+    var galleryGrid = document.getElementById('gallery-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    // 갤러리 리스트 동적 생성 (ES5)
+    for (var j = 0; j < artDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'art-card';
+        card.setAttribute('data-id', artDB[j].id);
+        
+        var title = document.createElement('div');
+        title.className = 'art-title';
+        title.innerText = artDB[j].title;
+        
+        var artist = document.createElement('div');
+        artist.className = 'art-artist';
+        artist.innerText = artDB[j].artist;
+
+        card.appendChild(title);
+        card.appendChild(artist);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.art-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "명화의 숨겨진 이야기 확인하기";
+        });
+
+        galleryGrid.appendChild(card);
+    }
+
+    // 이중 우회 로직 (캐시 방지 및 강제 새로고침)
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "프라이빗 갤러리 문을 엽니다...";
+
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + selectedId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                var targetId = idMatch[1];
+                showResult(targetId);
+            }
+        }
+    }
+
+    function showResult(id) {
+        var artData = null;
+        for (var i = 0; i < artDB.length; i++) {
+            if (artDB[i].id === id) {
+                artData = artDB[i];
+                break;
+            }
+        }
+        if (!artData) return;
+
+        var pIndex = Math.floor(Math.random() * perspectiveList.length);
+        var aIndex = Math.floor(Math.random() * adviceList.length);
+        var iIndex = Math.floor(Math.random() * inspirationList.length);
+
+        // 글씨 깨짐의 원인이었던 붓 이모티콘을 완전히 제거하고 '화가: ' 텍스트로 안전하게 교체
+        document.getElementById('res-title').innerText = artData.title;
+        document.getElementById('res-artist').innerText = "화가: " + artData.artist;
+        document.getElementById('res-fact').innerText = artData.fact;
+        document.getElementById('res-perspective').innerText = perspectiveList[pIndex];
+        document.getElementById('res-advice').innerText = adviceList[aIndex];
+        document.getElementById('res-inspiration').innerText = inspirationList[iIndex];
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.art-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "명화를 선택해 주십시오";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
