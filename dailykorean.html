@@ -1,0 +1,479 @@
+<!--구글 블로거 전용: Daily Korean Touch (카테고리 12개 매칭형 MAX 데이터, ES5, 이중 우회)-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0d0d12 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #e2e8f0; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #d4af37 0%, rgba(212,175,55,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #16161e 0%, #0d0d12 100%);
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 28px; font-weight: 700; color: #d4af37; margin-bottom: 8px; letter-spacing: 1px;}
+    .sub-title { font-size: 13px; color: #94a3b8; font-weight: 300; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: rgba(22, 22, 30, 0.85); border-radius: 8px; padding: 25px; border: 1px solid #292938; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 17px; font-weight: 700; color: #d4af37; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #292938; padding-bottom: 12px;}
+    .panel-desc { font-size: 14.5px; color: #cbd5e1; line-height: 1.8; word-break: keep-all; text-align: justify; margin-bottom: 15px;}
+    .panel-desc:last-child { margin-bottom: 0; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; height: 380px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #292938; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #1c1c26;
+        border: 1px solid #292938;
+        border-radius: 6px;
+        padding: 22px 15px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .cat-title { font-size: 16px; font-weight: 700; color: #f1f5f9; }
+    .cat-sub { font-size: 12px; color: #94a3b8; margin-top: 4px;}
+    
+    .cat-card.selected { 
+        border-color: #d4af37; 
+        background: #252530;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        transform: translateY(-2px);
+    }
+    .cat-card.selected .cat-title { color: #d4af37; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: linear-gradient(135deg, #d4af37, #b8860b); 
+        border: none; border-radius: 6px; 
+        color: #0d0d12; font-size: 16px; font-weight: 700; 
+        cursor: pointer; transition: 0.3s; letter-spacing: 0.5px;
+    }
+    .submit-btn:disabled { 
+        background: #1c1c26; color: #64748b; 
+        cursor: not-allowed; 
+        border: 1px solid #292938;
+    }
+
+    .disclaimer-box { border-top: 1px dashed #292938; padding-top: 25px; margin-top: 40px; }
+    .disclaimer-title { font-size: 13.5px; font-weight: 700; color: #94a3b8; margin-bottom: 12px; text-align: center;}
+    .disclaimer-text { font-size: 12.5px; color: #64748b; line-height: 1.7; word-break: keep-all; text-align: justify;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 13, 18, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #16161e; border-radius: 8px; padding: 35px 20px; border: 1px solid #d4af37; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .res-tag { display: inline-block; padding: 6px 14px; background: #1c1c26; color: #d4af37; font-size: 12px; font-weight: 700; border-radius: 4px; margin-bottom: 20px; border: 1px solid #292938; text-transform: uppercase;}
+    
+    .res-korean { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 5px; text-align: center;}
+    .res-pron { font-size: 15px; color: #d4af37; text-align: center; margin-bottom: 15px; font-style: italic;}
+    .res-meaning { font-size: 18px; font-weight: 700; color: #cbd5e1; text-align: center; padding-bottom: 25px; border-bottom: 1px solid #292938; margin-bottom: 25px;}
+    
+    .section-label { font-size: 15px; font-weight: 700; color: #d4af37; margin-bottom: 10px;}
+    .res-desc { 
+        font-size: 15px; color: #e2e8f0; line-height: 1.8; 
+        text-align: left; 
+        background: rgba(28, 28, 38, 0.5); 
+        padding: 20px; border-radius: 6px; border-left: 3px solid #d4af37;
+        margin-bottom: 25px;
+    }
+    
+    .close-btn { width: 100%; padding: 18px; background: #1c1c26; border: 1px solid #d4af37; border-radius: 6px; color: #d4af37; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 20px;}
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Daily Korean Touch</div>
+        <div class="sub-title">Culture &amp; Language Companion</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">Welcome to Your Korean Journey</div>
+        <div class="panel-desc">
+            Welcome to Daily Korean Touch, your personal gateway to the rich and vibrant world of South Korea. Whether you are planning an unforgettable trip to Seoul, deeply immersed in your favorite K-Drama, or simply expanding your cultural horizons, this application is designed to be your daily companion.
+        </div>
+        <div class="panel-desc">
+            Please select a category below that naturally draws your interest today. We will provide you with a carefully selected Korean phrase, its exact pronunciation, and profound cultural insights strictly related to your chosen topic. Consistency is the key to mastery.
+        </div>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS generates categories here-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Topic to Begin
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">Service Disclaimer &amp; Notice</div>
+        <div class="disclaimer-text">
+            The cultural insights, etiquette guidelines, and language expressions provided within this application are strictly crafted for educational purposes and cultural appreciation. While we strive for the utmost accuracy to assist travelers and cultural enthusiasts, please note that local customs, slang, and social norms may vary significantly by region, generation, or specific social context. This application should be used as a helpful and engaging reference rather than an absolute rulebook.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div style="text-align: center;"><span class="res-tag" id="res-tag-title">Today's Insight</span></div>
+        
+        <div class="res-korean" id="res-korean">한국어</div>
+        <div class="res-pron" id="res-pron">[ Pronunciation ]</div>
+        <div class="res-meaning" id="res-meaning">English Meaning</div>
+        
+        <div class="section-label">Cultural Context</div>
+        <div class="res-desc" id="res-tip">Cultural explanation goes here.</div>
+
+        <div class="section-label">Daily Guidance</div>
+        <div class="res-desc" id="res-advice">Advice goes here.</div>
+
+        <button class="close-btn" id="close-btn">Keep Learning &amp; Return</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 25; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 4 + 1; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 12개 카테고리 (메인 화면 볼륨업)
+    var catDB = [
+        { id: "C1", title: "Essential Greetings", sub: "Start conversations gracefully" },
+        { id: "C2", title: "Dining & Restaurant", sub: "Order meals like a true local" },
+        { id: "C3", title: "Cafe Culture", sub: "Navigate Seoul's coffee scene" },
+        { id: "C4", title: "Shopping & Markets", sub: "Negotiate prices with a smile" },
+        { id: "C5", title: "Public Transit", sub: "Subways, buses, and getting around" },
+        { id: "C6", title: "K-Drama Expressions", sub: "Phrases from your favorite shows" },
+        { id: "C7", title: "Respect & Manners", sub: "Polite actions for elders" },
+        { id: "C8", title: "Emergency & Safety", sub: "Crucial words for assistance" },
+        { id: "C9", title: "Romance & Dating", sub: "Expressing feelings and affection" },
+        { id: "C10", title: "Drinking Culture", sub: "Soju, Chimaek, and cheers" },
+        { id: "C11", title: "Trendy Slang", sub: "Words used by the MZ generation" },
+        { id: "C12", title: "Farewells & Goodbyes", sub: "Ending conversations properly" }
+    ];
+
+    // 💡 구조화된 MAX 데이터: 카테고리별로 정확히 일치하는 문장과 팁
+    var dataDB = {
+        "C1": {
+            phrases: [
+                { ko: "안녕하세요", pron: "An-nyeong-ha-se-yo", en: "Hello / Good morning" },
+                { ko: "반갑습니다", pron: "Ban-gap-seum-ni-da", en: "Nice to meet you" },
+                { ko: "잘 부탁드립니다", pron: "Jal bu-tak-deu-rim-ni-da", en: "Please look favorably upon me" }
+            ],
+            tips: [
+                "Bowing is the most fundamental sign of respect. A simple nod of the head is perfectly fine for foreigners.",
+                "First impressions matter deeply in Korea. Greeting someone with a bright voice and a slight bow sets a positive tone instantly.",
+                "Handshakes are common in business, but always support your right forearm with your left hand to show respect."
+            ]
+        },
+        "C2": {
+            phrases: [
+                { ko: "여기요!", pron: "Yeo-gi-yo!", en: "Over here! (Calling staff)" },
+                { ko: "메뉴판 주세요", pron: "Me-nyu-pan ju-se-yo", en: "Menu, please" },
+                { ko: "잘 먹겠습니다", pron: "Jal meok-get-seum-ni-da", en: "I will eat well (Before eating)" }
+            ],
+            tips: [
+                "Korean dining is communal. Side dishes (Banchan) are meant to be shared and are usually refilled for free if you ask politely.",
+                "Tipping is not customary in South Korea. Leaving extra money on the table might confuse the restaurant staff.",
+                "Don't wait for the bill to be brought to you. Take the bill left on your table and pay at the counter near the exit."
+            ]
+        },
+        "C3": {
+            phrases: [
+                { ko: "아이스 아메리카노 주세요", pron: "A-i-seu a-me-ri-ka-no ju-se-yo", en: "Iced Americano, please" },
+                { ko: "먹고 갈게요", pron: "Meok-go gal-ge-yo", en: "For here (Dine-in)" },
+                { ko: "포장해 주세요", pron: "Po-jang-hae ju-se-yo", en: "To go, please (Takeout)" }
+            ],
+            tips: [
+                "Koreans love 'Iced Americano' regardless of freezing winter weather. Seoul boasts one of the highest densities of cafes globally.",
+                "It is common to leave your laptop or phone on a cafe table unattended while going to the restroom. Korea is exceptionally safe.",
+                "Most cafes have a self-return station. It is basic etiquette to bring your empty cups and trays back to the counter or designated area."
+            ]
+        },
+        "C4": {
+            phrases: [
+                { ko: "이거 얼마예요?", pron: "I-geo eol-ma-ye-yo?", en: "How much is this?" },
+                { ko: "조금 깎아주세요", pron: "Jo-geum kka-kka-ju-se-yo", en: "Please give me a little discount" },
+                { ko: "영수증 버려주세요", pron: "Yeong-su-jeung beo-ryeo-ju-se-yo", en: "Please throw away the receipt" }
+            ],
+            tips: [
+                "Friendly haggling is acceptable in traditional markets like Namdaemun. Using a bright smile might earn you a better price.",
+                "The word 'Service' (서비스) in Korean shops means a free item given to a customer as a bonus for their purchase.",
+                "When receiving change or a credit card back, receiving it with two hands is the standard polite gesture."
+            ]
+        },
+        "C5": {
+            phrases: [
+                { ko: "서울역 가는 길 맞나요?", pron: "Seoul-yeok ga-neun gil man-na-yo?", en: "Is this the right way to Seoul Station?" },
+                { ko: "여기서 세워주세요", pron: "Yeo-gi-seo se-wo-ju-se-yo", en: "Please drop me off here" },
+                { ko: "카드 충전해 주세요", pron: "Ka-deu chung-jeon-hae ju-se-yo", en: "Please recharge my transit card" }
+            ],
+            tips: [
+                "Remember to tap your T-money transit card both when entering AND when exiting the bus or subway to avoid penalty fares.",
+                "Pink seats on the subway are strictly reserved for pregnant women. Locals leave these empty even during packed rush hours.",
+                "Speaking loudly on public transit is considered rude. Keep your voice down and put your smartphone on vibrate (manner mode)."
+            ]
+        },
+        "C6": {
+            phrases: [
+                { ko: "대박!", pron: "Dae-bak!", en: "Awesome! / Unbelievable!" },
+                { ko: "진짜요?", pron: "Jin-jja-yo?", en: "Really? / Are you serious?" },
+                { ko: "어떡해", pron: "Eo-tteok-hae", en: "What should I do? / Oh no!" }
+            ],
+            tips: [
+                "K-Dramas heavily reflect the 'Pali-Pali' (Hurry, Hurry) culture. Things move incredibly fast in modern Korean society.",
+                "First names are rarely used unless you are close friends. Titles like 'Hyung' or 'Unnie' denote respect and social hierarchy.",
+                "The concept of 'Nunchi' (gauging others' moods) is the invisible social glue of Korea, often portrayed silently in dramas."
+            ]
+        },
+        "C7": {
+            phrases: [
+                { ko: "죄송합니다", pron: "Joe-song-ham-ni-da", en: "I am sorry" },
+                { ko: "괜찮아요", pron: "Gwaen-chan-a-yo", en: "It is okay / I am fine" },
+                { ko: "먼저 가세요", pron: "Meon-jeo ga-se-yo", en: "Please go ahead (After you)" }
+            ],
+            tips: [
+                "Many traditional restaurants or houses require taking off shoes before entering. Wearing clean socks is highly recommended.",
+                "Writing someone's name in red ink is historically considered a bad omen. Always use black or blue ink for names.",
+                "Blowing your nose loudly at a dining table is frowned upon. It is polite to excuse yourself to the restroom to do so."
+            ]
+        },
+        "C8": {
+            phrases: [
+                { ko: "도와주세요!", pron: "Do-wa-ju-se-yo!", en: "Please help me!" },
+                { ko: "길을 잃었어요", pron: "Gil-eul il-eo-sseo-yo", en: "I am lost" },
+                { ko: "경찰을 불러주세요", pron: "Gyeong-chal-eul bul-leo-ju-se-yo", en: "Please call the police" }
+            ],
+            tips: [
+                "Korea is one of the safest countries globally, with low crime rates and CCTV everywhere. Still, it's good to know emergency phrases.",
+                "In an emergency, dial 112 for the police and 119 for fire and medical emergencies. Translators are usually available.",
+                "Pharmacies (Yak-guk) are everywhere. Pharmacists are highly trained and can recommend medicine for minor ailments directly."
+            ]
+        },
+        "C9": {
+            phrases: [
+                { ko: "보고 싶어요", pron: "Bo-go si-peo-yo", en: "I miss you" },
+                { ko: "사랑해요", pron: "Sa-rang-hae-yo", en: "I love you" },
+                { ko: "데이트 할래요?", pron: "De-i-teu hal-lae-yo?", en: "Would you like to go on a date?" }
+            ],
+            tips: [
+                "Couples in Korea love wearing 'couple items', from matching t-shirts to identical sneakers, to show their affection publicly.",
+                "The 100th-day anniversary is a massive milestone in Korean dating culture, often celebrated with gifts and special events.",
+                "Public displays of affection are generally more conservative in Korea than in Western countries. Hand-holding is fine, but intense kissing is rare."
+            ]
+        },
+        "C10": {
+            phrases: [
+                { ko: "건배!", pron: "Geon-bae!", en: "Cheers!" },
+                { ko: "한 잔 더 할까요?", pron: "Han jan deo hal-kka-yo?", en: "Shall we have one more drink?" },
+                { ko: "취했어요", pron: "Chwi-hae-sseo-yo", en: "I am drunk" }
+            ],
+            tips: [
+                "When drinking with an elder, it is polite to turn your head slightly away from them while taking a sip from your glass.",
+                "It is customary to pour drinks for others before your own. Use two hands when pouring for someone older than you.",
+                "'Chimaek' (Fried Chicken and Beer) is a cultural staple. Ordering it for delivery to a park by the Han River is a must-do."
+            ]
+        },
+        "C11": {
+            phrases: [
+                { ko: "꿀잼", pron: "Kkul-jaem", en: "Super fun / Entertaining" },
+                { ko: "노잼", pron: "No-jaem", en: "Not fun / Boring" },
+                { ko: "인싸", pron: "In-ssa", en: "Insider / Popular person" }
+            ],
+            tips: [
+                "Korean internet culture moves fast. Slang words are often created by abbreviating longer phrases to type faster on smartphones.",
+                "KakaoTalk is the dominant messaging app in Korea. Using the app's emoticons is a vital part of modern digital communication.",
+                "The MZ generation (Millennials and Gen Z) heavily influences trends, cafes, and fashion, rapidly shaping the culture of Seoul."
+            ]
+        },
+        "C12": {
+            phrases: [
+                { ko: "안녕히 계세요", pron: "An-nyeong-hi gye-se-yo", en: "Goodbye (To someone staying)" },
+                { ko: "안녕히 가세요", pron: "An-nyeong-hi ga-se-yo", en: "Goodbye (To someone leaving)" },
+                { ko: "다음에 또 올게요", pron: "Da-eum-e tto ol-ge-yo", en: "I will come back next time" }
+            ],
+            tips: [
+                "Korean has distinct ways of saying goodbye depending on whether you are leaving or the other person is leaving. It shows attentiveness.",
+                "When leaving a restaurant or shop, a polite 'An-nyeong-hi gye-se-yo' leaves a great impression on the staff.",
+                "Saying 'Let's eat together next time' is often used as a polite, friendly farewell rather than an actual concrete plan."
+            ]
+        }
+    };
+
+    // 💡 4. 공통 학습 조언 데이터
+    var adviceList = [
+        "Language is the key to the heart. Practicing this short phrase today will make your future interactions much more memorable.",
+        "Don't worry about perfect pronunciation. Locals deeply appreciate any foreigner who tries to speak their language.",
+        "Try repeating this phrase three times out loud. Muscle memory helps you recall it naturally when you actually need it.",
+        "Write this phrase down in your phone's notepad. Reviewing it before you sleep will lock it into your long-term memory.",
+        "Confidence is more important than grammar. Speak clearly and use a warm smile—it works like magic in Korea.",
+        "Learning a language is a marathon, not a sprint. Mastering just one sentence a day means 365 sentences in a year.",
+        "Imagine yourself walking down the busy streets of Seoul using this exact phrase. Visualizing success accelerates learning.",
+        "Language holds the soul of a culture. By understanding this tip, you are one step closer to understanding the local mindset.",
+        "Great job today! Close the app with pride, knowing you have learned something valuable for your next adventure.",
+        "Consistency builds habits, and small daily habits are the foundation of monumental achievements. See you tomorrow!"
+    ];
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    // 카테고리 렌더링 (ES5)
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var textWrapper = document.createElement('div');
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Unlock Today's Lesson";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ⚠️ 0.5초 딜레이 완벽 이중 우회
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Curating your experience...";
+
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + selectedId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var catData = dataDB[categoryId];
+        if (!catData) return;
+
+        // 선택한 카테고리 '내에서만' 랜덤 매칭 (맥락 완벽 일치)
+        var pIndex = Math.floor(Math.random() * catData.phrases.length);
+        var tIndex = Math.floor(Math.random() * catData.tips.length);
+        var aIndex = Math.floor(Math.random() * adviceList.length);
+
+        document.getElementById('res-korean').innerText = catData.phrases[pIndex].ko;
+        document.getElementById('res-pron').innerText = "[ " + catData.phrases[pIndex].pron + " ]";
+        document.getElementById('res-meaning').innerText = catData.phrases[pIndex].en;
+        
+        document.getElementById('res-tip').innerText = catData.tips[tIndex];
+        document.getElementById('res-advice').innerText = adviceList[aIndex];
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Topic to Begin";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
