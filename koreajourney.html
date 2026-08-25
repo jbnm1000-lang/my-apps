@@ -1,0 +1,410 @@
+<!--구글 블로거 전용: Korea Journey Essentials (특수문자 깨짐 완벽 해결, 하이엔드 여행 가이드, ES5, 이중 우회)-->
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0c1017 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f0f6fc; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #e2b714 0%, rgba(226,183,20,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #161b22 0%, #0c1017 100%);
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 30px; font-weight: 800; color: #e2b714; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 13.5px; color: #8b949e; font-weight: 300; letter-spacing: 1.5px; border-bottom: 1px solid rgba(226, 183, 20, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: rgba(33, 38, 45, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #30363d; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);}
+    .panel-title { font-size: 17px; font-weight: 800; color: #e2b714; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #30363d; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #c9d1d9; line-height: 1.8; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #c9d1d9; line-height: 1.8; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 10px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 360px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 18px 20px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16.5px; font-weight: 600; color: #f0f6fc; }
+    .cat-sub { font-size: 13px; color: #8b949e; margin-top: 4px;}
+    
+    .cat-card.selected { 
+        border-color: #e2b714; 
+        background: #1f1f1c;
+    }
+    .cat-card.selected .cat-title { color: #e2b714; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: linear-gradient(135deg, #e2b714, #c29b0a);
+        border: none; border-radius: 10px; 
+        color: #0c1017; font-size: 16.5px; font-weight: 800; 
+        cursor: pointer; 
+        box-shadow: 0 4px 15px rgba(226, 183, 20, 0.2);
+    }
+    .submit-btn:disabled { 
+        background: #30363d; color: #8b949e; border: 1px solid #484f58; box-shadow: none;
+    }
+
+    .disclaimer-box { background: rgba(248, 81, 73, 0.05); border: 1px solid rgba(248, 81, 73, 0.3); border-radius: 12px; padding: 22px; margin-top: 40px; }
+    .disclaimer-title { font-size: 15px; font-weight: 800; color: #f85149; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 13.5px; color: #8b949e; line-height: 1.7; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12, 16, 23, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #161b22; border-radius: 16px; padding: 30px 20px; border: 1px solid #e2b714; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #30363d;}
+    .modal-emoji { font-size: 55px; margin-bottom: 15px; }
+    .modal-title { font-size: 24px; font-weight: 800; color: #e2b714; }
+
+    .accordion-item { margin-bottom: 10px; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; background: #0c1017;}
+    .accordion-header { padding: 20px 15px; background: #21262d; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #f0f6fc; font-size: 15.5px; transition: background 0.2s;}
+    .accordion-header:active { background: #30363d; }
+    .accordion-icon { color: #e2b714; font-weight: 800; transition: transform 0.3s; font-size: 20px;}
+    .accordion-content { padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #0c1017; }
+    .accordion-inner { padding: 20px 0; font-size: 14.5px; color: #c9d1d9; line-height: 1.8; text-align: left;}
+    
+    .close-btn { width: 100%; padding: 20px; background: #30363d; border: 1px solid #e2b714; border-radius: 12px; color: #e2b714; font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 25px; transition: all 0.2s;}
+    .close-btn:active { background: #e2b714; color: #0c1017; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Korea Journey Essentials</div>
+        <div class="sub-title">Your Premium Travel Companion</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">👋 Welcome to Your Journey</div>
+        <div class="panel-desc">
+            Hello there! We are absolutely thrilled to help you prepare for your adventure in South Korea. Traveling to a new country can feel a bit overwhelming, but please do not worry at all. We have carefully organized everything you need to know so you can focus purely on making wonderful memories.
+        </div>
+        <ul class="info-list">
+            <li><strong>Explore Categories:</strong> Simply browse through the categories below—such as transportation, emergencies, or etiquette.</li>
+            <li><strong>Tap to Learn:</strong> Click on any category to safely open a detailed, easy-to-read checklist designed just for you.</li>
+            <li><strong>Offline Ready:</strong> The information is safely stored right here, meaning you can check these guides even if you lose your internet connection while exploring the streets of Seoul.</li>
+        </ul>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">💡 Golden Tips for Travelers</div>
+        <div class="panel-desc">
+            To make your trip truly seamless, here are a few gentle reminders that many travelers find incredibly helpful:
+        </div>
+        <ul class="info-list" style="margin-bottom: 0;">
+            <li><strong>Maps:</strong> Google Maps often does not provide walking directions here. For the best experience, we highly recommend downloading <em>Naver Map</em> or <em>KakaoMap</em> before you arrive.</li>
+            <li><strong>Transit Card:</strong> Getting a 'T-Money' card at the airport convenience store will make your life so much easier. You can tap it on subways, buses, and even use it in taxis. Just remember, it can only be recharged with physical cash!</li>
+            <li><strong>Translation:</strong> The <em>Papago</em> app is wonderfully accurate for translating Korean signs or communicating with lovely locals who might not speak English perfectly.</li>
+        </ul>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!-- JS generates categories here -->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Category to Open Guide
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ A Gentle Note on Travel Policies (Disclaimer)</div>
+        <div class="disclaimer-text">
+            We sincerely want your trip to be safe and flawless. Please keep in mind that government policies regarding visas (like K-ETA), public transportation fares, and emergency protocols can change occasionally without prior notice.<br><br>
+            The information provided in this application is lovingly prepared for your general guidance and convenience. However, to ensure absolute certainty, we strongly advise you to double-check all critical travel requirements with your local South Korean embassy or official government websites before your departure. The creators of this guide assume no legal liability for any unexpected travel disruptions or financial matters you might experience. Safe travels!
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">📘</div>
+            <div class="modal-title" id="modal-title">Category Title</div>
+        </div>
+        
+        <div id="accordion-container">
+            <!-- Accordion items injected here -->
+        </div>
+
+        <button class="close-btn" id="close-btn">Close & Return</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 5 + 2; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    var catDB = [
+        { id: "S1", emoji: "✈️", title: "Pre-Departure Checklist", sub: "Visas, Apps, and Connectivity" },
+        { id: "S2", emoji: "🚇", title: "Arrival & Transportation", sub: "Airport, T-Money, and Subway" },
+        { id: "S3", emoji: "🚨", title: "Emergency & Health", sub: "Police, Hospitals, and Pharmacies" },
+        { id: "S4", emoji: "🙇", title: "Culture & Etiquette", sub: "Manners, and Taboos" },
+        { id: "S5", emoji: "💳", title: "Money & Shopping", sub: "Currency, Cards, and Tax Refund" },
+        { id: "S6", emoji: "🗣️", title: "Survival Phrases", sub: "Essential Korean for daily use" }
+    ];
+
+    var guideDB = {
+        "S1": [
+            { q: "Do I need a Visa or K-ETA?", a: "Many nationalities require a K-ETA (Electronic Travel Authorization) applied for at least 72 hours before boarding. It is a very simple online process, but always verify your specific requirements on the official K-ETA website." },
+            { q: "How do I get internet connectivity?", a: "Korea has incredibly fast internet. However, for continuous navigation, pre-purchase an eSIM online before you arrive, or simply rent a portable Wi-Fi egg at Incheon Airport's arrival hall." },
+            { q: "What apps are absolutely essential?", a: "Please remember that Google Maps does not provide walking directions here due to security laws. You MUST download 'Naver Map' or 'KakaoMap'. Also, download 'Papago', which is the best translator for the Korean language." },
+            { q: "What about power adapters?", a: "South Korea uses Type C and Type F plugs (two round pins) with a standard voltage of 220V. It is always a good idea to pack a universal adapter in your suitcase." }
+        ],
+        "S2": [
+            { q: "What is a T-Money Card?", a: "T-Money is a magical rechargeable transit card used for all subways, buses, and even taxis. You can buy one at any airport convenience store (like CU, GS25, or 7-Eleven). Just remember, you can ONLY recharge it using physical Korean cash!" },
+            { q: "How do I get from the airport to the city?", a: "You have great options! The AREX (Airport Railroad Express) train is the fastest route to Seoul Station. Alternatively, Airport Limousine Buses are very comfortable and drop you off directly near major hotels." },
+            { q: "Are there rules for the subway?", a: "Yes, Koreans are very polite on public transit. Please keep your voice down. Also, never sit in the pink seats (reserved for pregnant women) or the end seats (for the elderly), even if the train is completely full." },
+            { q: "How do I take a taxi safely?", a: "Taxis are safe and relatively affordable. We highly recommend using the 'Kakao T' app to hail rides safely. Most taxis accept credit cards and your T-Money card." }
+        ],
+        "S3": [
+            { q: "What are the emergency numbers?", a: "If you ever need help, dial 112 for the Police, and 119 for Fire and Medical Emergencies. Don't worry, the operators can usually connect you to an English translator." },
+            { q: "How do I find a pharmacy?", a: "Look for bright signs with the word '약' (Yak). Korean pharmacists are highly trained and very kind. Use the Papago app to translate your symptoms, and they will provide the right medicine for you." },
+            { q: "Is the tap water safe to drink?", a: "Yes, tap water in South Korea is heavily purified and perfectly safe for brushing your teeth or boiling. However, for daily drinking, most locals prefer to buy inexpensive bottled water from convenience stores." },
+            { q: "Is there help for tourists?", a: "Absolutely. Korea has a dedicated Tourist Police force to help you with lost items or translation issues. You can reach the friendly Travel Helpline by dialing 1330 anytime." }
+        ],
+        "S4": [
+            { q: "Should I leave a tip?", a: "There is absolutely NO tipping culture in South Korea! Please do not leave tips at restaurants, cafes, or for taxi drivers; it will cause confusion and the kind staff will likely run after you to return your money." },
+            { q: "Do I need to take off my shoes?", a: "When entering a traditional Korean restaurant with floor seating, or a local's home, it is a strict rule to take off your shoes at the entrance. Wearing clean, nice socks is highly recommended." },
+            { q: "How should I hand things to people?", a: "When giving or receiving items (especially credit cards or gifts) to someone older or a cashier, it is very polite to use both hands, or gently support your right arm with your left hand." },
+            { q: "Where are the public trash cans?", a: "Public trash cans can be surprisingly hard to find on the streets. Please be prepared to carry your small trash (like coffee cups) with you until you find a designated bin." }
+        ],
+        "S5": [
+            { q: "Cash vs. Credit Cards?", a: "Korea is largely a very convenient cashless society. Visa and Mastercard are accepted almost everywhere. However, you MUST carry some cash for delicious street food, small markets, and recharging your transit card." },
+            { q: "Where is the best place to exchange money?", a: "Try to avoid exchanging all your money at the airport due to higher rates. Exchange just a small amount for your first day, and visit exchange booths in areas like Myeongdong for much better rates." },
+            { q: "How does Tax Refund work?", a: "Many stores offer an 'Immediate Tax Refund' if you present your passport when purchasing items over 30,000 KRW. Always look for the friendly 'Tax Free' logo on the shop window!" }
+        ],
+        "S6": [
+            { q: "How to say Hello and Thank you", a: "Hello: 안녕하세요 (An-nyeong-ha-se-yo)\nThank you: 감사합니다 (Gam-sa-ham-ni-da). Adding a slight, warm bow of the head will make a wonderful impression on locals." },
+            { q: "Asking for the restroom", a: "Where is the restroom? : 화장실 어디에요? (Hwa-jang-sil eo-di-e-yo?). By the way, restrooms in subway stations are usually very clean and completely free to use." },
+            { q: "Ordering something smoothly", a: "Please give me this : 이거 주세요 (I-geo ju-se-yo). Simply smile, point at the menu item, and say this helpful phrase." },
+            { q: "Asking for help in an emergency", a: "Help me! : 도와주세요! (Do-wa-ju-se-yo!). Use this loudly if you ever feel you are in immediate danger. People will surely come to your aid." }
+        ]
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Open Guide: " + this.querySelector('.cat-title').innerText;
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Your Guide safely...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var items = guideDB[categoryId];
+        if (!items) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        var accContainer = document.getElementById('accordion-container');
+        accContainer.innerHTML = ""; 
+
+        for (var k = 0; k < items.length; k++) {
+            var aItem = document.createElement('div');
+            aItem.className = 'accordion-item';
+
+            var aHeader = document.createElement('div');
+            aHeader.className = 'accordion-header';
+            
+            var aTitle = document.createElement('span');
+            aTitle.innerText = items[k].q;
+            
+            var aIcon = document.createElement('span');
+            aIcon.className = 'accordion-icon';
+            aIcon.innerText = "+";
+            
+            aHeader.appendChild(aTitle);
+            aHeader.appendChild(aIcon);
+
+            var aContent = document.createElement('div');
+            aContent.className = 'accordion-content';
+            
+            var aInner = document.createElement('div');
+            aInner.className = 'accordion-inner';
+            aInner.innerHTML = items[k].a.replace(/\n/g, "<br>");
+            
+            aContent.appendChild(aInner);
+            
+            aItem.appendChild(aHeader);
+            aItem.appendChild(aContent);
+            accContainer.appendChild(aItem);
+
+            // ES5 클로저: 글자 깨짐 해결을 위해 일반 키보드 기호 '-' 사용
+            (function(header, content, icon) {
+                header.addEventListener('click', function() {
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.innerText = "+";
+                        icon.style.transform = "rotate(0deg)";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.innerText = "-";
+                        icon.style.transform = "rotate(180deg)";
+                    }
+                });
+            })(aHeader, aContent, aIcon);
+        }
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Category to Open Guide";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
