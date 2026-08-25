@@ -1,0 +1,481 @@
+<!--구글 블로거 전용: K-Food Explorer (글자 깨짐 완벽 수정, 화면/데이터 MAX 확장, ES5, 이중 우회)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0f1115 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f8f9fa; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #ff6b6b 0%, rgba(255,107,107,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #171920 0%, #0f1115 100%);
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 32px; font-weight: 800; color: #ff6b6b; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 13px; color: #adb5bd; font-weight: 300; letter-spacing: 1.5px; border-bottom: 1px solid rgba(255, 107, 107, 0.2); padding-bottom: 20px;}
+
+    /* 메인 화면 텍스트 패널 보강 */
+    .text-panel { background: rgba(30, 33, 43, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #2d313d; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);}
+    .panel-title { font-size: 18px; font-weight: 800; color: #ff6b6b; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #2d313d; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #ced4da; line-height: 1.7; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14px; color: #ced4da; line-height: 1.8; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 8px; }
+
+    .roulette-btn {
+        width: 100%; padding: 20px;
+        background: linear-gradient(135deg, #ff6b6b, #d6336c);
+        border: none; border-radius: 12px;
+        color: #fff; font-size: 17px; font-weight: 800;
+        cursor: pointer; margin-bottom: 25px;
+        display: flex; justify-content: center; align-items: center; gap: 10px;
+        box-shadow: 0 4px 20px rgba(214, 51, 108, 0.25);
+        transition: transform 0.2s ease;
+    }
+    .roulette-btn:active { transform: scale(0.98); }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 380px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #2d313d; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #1e212b;
+        border: 1px solid #2d313d;
+        border-radius: 10px;
+        padding: 18px 20px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 17px; font-weight: 600; color: #f8f9fa; }
+    .cat-sub { font-size: 13px; color: #adb5bd; margin-top: 4px;}
+    
+    .cat-card.selected { 
+        border-color: #ff6b6b; 
+        background: #2a1f22;
+    }
+    .cat-card.selected .cat-title { color: #ff6b6b; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #ff6b6b; 
+        border: none; border-radius: 10px; 
+        color: #ffffff; font-size: 16px; font-weight: 800; 
+        cursor: pointer; 
+    }
+    .submit-btn:disabled { 
+        background: #2d313d; color: #6c757d; border: 1px solid #3f4452;
+    }
+
+    .disclaimer-box { background: rgba(255, 193, 7, 0.05); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 12px; padding: 22px; margin-top: 40px; }
+    .disclaimer-title { font-size: 15px; font-weight: 800; color: #ffc107; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 13.5px; color: #adb5bd; line-height: 1.7; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 17, 21, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1e212b; border-radius: 16px; padding: 35px 20px; border: 1px solid #ff6b6b; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .res-emoji { font-size: 65px; text-align: center; margin-bottom: 15px; }
+    .res-en-name { font-size: 28px; font-weight: 800; color: #f8f9fa; text-align: center; margin-bottom: 5px;}
+    .res-ko-name { font-size: 22px; font-weight: 600; color: #ff6b6b; text-align: center; margin-bottom: 8px;}
+    .res-pron { font-size: 15px; color: #adb5bd; text-align: center; font-style: italic; margin-bottom: 30px; border-bottom: 1px solid #2d313d; padding-bottom: 25px;}
+    
+    .tag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+    .info-tag { padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px;}
+    .tag-spicy { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border: 1px solid #ff6b6b; }
+    .tag-meat { background: rgba(253, 126, 20, 0.15); color: #fd7e14; border: 1px solid #fd7e14; }
+    .tag-vegan { background: rgba(81, 207, 102, 0.15); color: #51cf66; border: 1px solid #51cf66; }
+    
+    .section-label { font-size: 14px; font-weight: 800; color: #adb5bd; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+    .res-desc { 
+        font-size: 15.5px; color: #e9ecef; line-height: 1.8; text-align: left; 
+        background: #171920; padding: 22px; border-radius: 12px; border: 1px solid #2d313d;
+        margin-bottom: 25px;
+    }
+    
+    .order-box { background: rgba(255, 107, 107, 0.08); border-left: 4px solid #ff6b6b; padding: 20px; border-radius: 8px; margin-bottom: 30px;}
+    .order-text { font-size: 20px; font-weight: 800; color: #ff6b6b; margin-bottom: 8px; }
+    .order-pron { font-size: 15px; color: #ced4da; }
+
+    .close-btn { width: 100%; padding: 20px; background: #2d313d; border: 1px solid #ff6b6b; border-radius: 12px; color: #ff6b6b; font-size: 17px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: all 0.2s;}
+    .close-btn:active { background: #ff6b6b; color: #fff; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Food Explorer</div>
+        <div class="sub-title">Your Safe &amp; Authentic Culinary Guide</div>
+    </div>
+
+    <!--앱 사용 방법 및 꿀팁 (UI 보강)-->
+    <div class="text-panel">
+        <div class="panel-title">💡 How to Use This Guide</div>
+        <div class="panel-desc">
+            Navigating local Korean menus can be intimidating. We designed this guide to help you explore authentic flavors safely.
+        </div>
+        <ul class="info-list">
+            <li><strong>Select a Category:</strong> Browse through 8 distinct food categories below based on your current craving.</li>
+            <li><strong>Food Roulette:</strong> Cannot decide? Tap the Roulette button for a delicious surprise recommendation.</li>
+            <li><strong>Dietary Tags:</strong> Every dish includes visual tags indicating spice levels, meat content, and vegan options.</li>
+            <li><strong>How to Order:</strong> Show the generated Korean phrase to the restaurant staff for effortless ordering.</li>
+        </ul>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🥢 Local Dining Pro Tips</div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li>Side dishes (Banchan) are always free and can be refilled simply by asking the staff politely.</li>
+            <li>In many casual restaurants, you pay at the front counter when you are ready to leave. Tipping is not required in Korea.</li>
+            <li>Do not stick your chopsticks vertically into a bowl of rice; it is considered bad luck.</li>
+        </ul>
+    </div>
+
+    <button class="roulette-btn" id="roulette-btn">
+        🎲 Food Roulette (Pick for me!)
+    </button>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS generates categories here-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Category to Explore
+    </button>
+
+    <!--더욱 강화된 법적 면책 조항-->
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Important Food Safety &amp; Allergy Notice</div>
+        <div class="disclaimer-text">
+            The dietary tags (such as Vegan, Pork-Free, or Spicy levels) provided in this application are based on <strong>general, traditional Korean recipes</strong>. However, ingredients, cooking methods, sauces, and broths can vary significantly depending on the specific restaurant, chef, or regional style. Cross-contamination may also easily occur in busy local kitchens.<br /><br />
+            This application serves strictly as a helpful general guide and <strong>CANNOT guarantee</strong> that any dish is 100% free of specific allergens or ingredients. If you have severe food allergies, strict dietary restrictions, or religious food requirements, you MUST confirm the ingredients directly with the restaurant staff before ordering and consuming. The developers of this application hold absolutely no legal liability for any allergic reactions, dietary issues, or misunderstandings encountered. Use this guide responsibly.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-emoji" id="res-emoji">🍲</div>
+        <div class="res-en-name" id="res-en-name">Food Name</div>
+        <div class="res-ko-name" id="res-ko-name">음식 이름</div>
+        <div class="res-pron" id="res-pron">[ Pronunciation ]</div>
+        
+        <div class="tag-container" id="tag-container">
+            <!--Tags injected here-->
+        </div>
+        
+        <div class="section-label">What is it?</div>
+        <div class="res-desc" id="res-desc">Description goes here.</div>
+
+        <div class="section-label">How to Order</div>
+        <div class="order-box">
+            <div class="order-text" id="order-text">이거 하나 주세요.</div>
+            <div class="order-pron" id="order-pron">[ I-geo ha-na ju-se-yo ]</div>
+            <div style="color: #adb5bd; font-size: 13.5px; margin-top: 8px;">(Please give me one of this.)</div>
+        </div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Find More</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 5 + 2; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 1. 럭셔리 카테고리 구성 (8개로 MAX 확장)
+    var catDB = [
+        { id: "C1", emoji: "🍢", title: "Street Food & Snacks", sub: "Quick, cheap, and delicious treats" },
+        { id: "C2", emoji: "🥩", title: "Korean BBQ & Grill", sub: "The ultimate tabletop meat experience" },
+        { id: "C3", emoji: "🍲", title: "Hearty Soups & Stews", sub: "Warm and comforting local bowls" },
+        { id: "C4", emoji: "🍜", title: "Noodles & Cold Dishes", sub: "Spicy, icy, or savory noodles" },
+        { id: "C5", emoji: "🍚", title: "Rice & Traditional Meals", sub: "Classic Korean everyday dining" },
+        { id: "C6", emoji: "🍗", title: "Late Night & Chicken", sub: "The legendary Chimaek and snacks" },
+        { id: "C7", emoji: "🦑", title: "Seafood Delights", sub: "Fresh catches and spicy stews" },
+        { id: "C8", emoji: "🍵", title: "Traditional Desserts", sub: "Sweet treats and soothing teas" }
+    ];
+
+    // 💡 2. 방대한 MAX 푸드 데이터 (오프라인)
+    var foodDB = {
+        "C1": [
+            { ko: "떡볶이", en: "Tteokbokki", pron: "Tteok-bok-ki", emoji: "🌶️", desc: "Chewy rice cakes cooked in a sweet and highly spicy gochujang sauce. A beloved street food classic.", spicy: 3, pork: false, vegan: false },
+            { ko: "어묵", en: "Fish Cake Skewers", pron: "Eo-muk", emoji: "🍢", desc: "Folded fish cakes served on skewers in a warm, savory seafood broth. Perfect for chilly days.", spicy: 0, pork: false, vegan: false },
+            { ko: "호떡", en: "Sweet Pancake", pron: "Ho-tteok", emoji: "🥞", desc: "A pan-fried street dough stuffed with dark brown sugar, cinnamon, and chopped nuts.", spicy: 0, pork: false, vegan: true },
+            { ko: "김밥", en: "Gimbap", pron: "Gim-bap", emoji: "🍙", desc: "Seaweed rice rolls filled with veggies, egg, and sometimes meat or tuna. A healthy meal on the go.", spicy: 0, pork: true, vegan: false },
+            { ko: "순대", en: "Korean Blood Sausage", pron: "Sun-dae", emoji: "🌭", desc: "Steamed cow or pig intestines stuffed with glass noodles and blood. A savory street delicacy.", spicy: 0, pork: true, vegan: false },
+            { ko: "붕어빵", en: "Fish-shaped Pastry", pron: "Bung-eo-ppang", emoji: "🐟", desc: "A winter street snack shaped like a fish, traditionally filled with sweet red bean paste.", spicy: 0, pork: false, vegan: true },
+            { ko: "계란빵", en: "Egg Bread", pron: "Gye-ran-ppang", emoji: "🍞", desc: "A warm, fluffy mini loaf of sweet bread baked with a whole egg inside.", spicy: 0, pork: false, vegan: false },
+            { ko: "핫도그", en: "Korean Corn Dog", pron: "Hat-do-geu", emoji: "🌭", desc: "A deep-fried corn dog coated in sugar and ketchup, often filled with sausage or mozzarella cheese.", spicy: 0, pork: true, vegan: false }
+        ],
+        "C2": [
+            { ko: "삼겹살", en: "Pork Belly", pron: "Sam-gyeop-sal", emoji: "🥩", desc: "Thick, fatty slices of pork belly grilled right at your table. Wrap it in lettuce with garlic.", spicy: 0, pork: true, vegan: false },
+            { ko: "불고기", en: "Bulgogi", pron: "Bul-go-gi", emoji: "🍖", desc: "Thinly sliced, tender beef marinated in a sweet and savory soy sauce blend. A universally loved dish.", spicy: 0, pork: false, vegan: false },
+            { ko: "갈비", en: "Galbi", pron: "Gal-bi", emoji: "🥓", desc: "Premium marinated beef or pork short ribs. Sweeter and more tender than regular BBQ cuts.", spicy: 0, pork: true, vegan: false },
+            { ko: "막창", en: "Grilled Intestines", pron: "Mak-chang", emoji: "🔥", desc: "Chewy and rich pork or beef intestines grilled over charcoal. Very popular among locals.", spicy: 0, pork: true, vegan: false },
+            { ko: "닭갈비", en: "Spicy Stir-fried Chicken", pron: "Dak-gal-bi", emoji: "🥘", desc: "Diced chicken marinated in a spicy gochujang sauce, stir-fried with cabbage and sweet potatoes.", spicy: 2, pork: false, vegan: false },
+            { ko: "한우", en: "Premium Korean Beef", pron: "Han-woo", emoji: "🥩", desc: "Top-tier domestic beef known for its high marbling and melt-in-your-mouth texture. Very expensive but worth it.", spicy: 0, pork: false, vegan: false }
+        ],
+        "C3": [
+            { ko: "김치찌개", en: "Kimchi Stew", pron: "Kim-chi Jji-gae", emoji: "🍲", desc: "A robust, spicy stew made with deeply fermented kimchi, tofu, and usually fatty pork.", spicy: 2, pork: true, vegan: false },
+            { ko: "된장찌개", en: "Soybean Paste Stew", pron: "Doen-jang Jji-gae", emoji: "🥣", desc: "A savory, earthy stew made from Korean soybean paste, tofu, and vegetables.", spicy: 1, pork: false, vegan: false },
+            { ko: "삼계탕", en: "Ginseng Chicken Soup", pron: "Sam-gye-tang", emoji: "🍲", desc: "A whole young chicken stuffed with garlic, rice, and ginseng, boiled in a clear broth.", spicy: 0, pork: false, vegan: false },
+            { ko: "순두부찌개", en: "Soft Tofu Stew", pron: "Sun-du-bu Jji-gae", emoji: "🥘", desc: "A bubbling, spicy stew made with freshly curdled soft tofu, egg, and often seafood or minced pork.", spicy: 2, pork: true, vegan: false },
+            { ko: "설렁탕", en: "Ox Bone Soup", pron: "Seol-leong-tang", emoji: "🥣", desc: "A milky-white, deeply comforting soup made by boiling ox bones for hours. Season with salt yourself.", spicy: 0, pork: false, vegan: false },
+            { ko: "감자탕", en: "Pork Bone Stew", pron: "Gam-ja-tang", emoji: "🍲", desc: "A spicy, hearty stew made with pork spine bones, potatoes, and wild sesame leaves.", spicy: 2, pork: true, vegan: false },
+            { ko: "부대찌개", en: "Army Stew", pron: "Bu-dae Jji-gae", emoji: "🥘", desc: "A spicy fusion stew featuring spam, sausages, baked beans, and kimchi, created after the Korean War.", spicy: 2, pork: true, vegan: false }
+        ],
+        "C4": [
+            { ko: "냉면", en: "Cold Buckwheat Noodles", pron: "Naeng-myeon", emoji: "🍜", desc: "Chewy buckwheat noodles served in a freezing cold, tangy beef broth.", spicy: 0, pork: false, vegan: false },
+            { ko: "비빔냉면", en: "Spicy Cold Noodles", pron: "Bi-bim Naeng-myeon", emoji: "🍝", desc: "Cold buckwheat noodles mixed in a bright red, sweet and highly spicy chili sauce.", spicy: 3, pork: false, vegan: false },
+            { ko: "칼국수", en: "Knife-cut Noodles", pron: "Kal-guk-su", emoji: "🍲", desc: "Hand-cut wheat noodles served in a warm, comforting seafood or chicken broth.", spicy: 0, pork: false, vegan: false },
+            { ko: "짜장면", en: "Black Bean Noodles", pron: "Jja-jang-myeon", emoji: "🥢", desc: "Korean-Chinese noodle dish topped with a thick sauce made of chunjang (black bean paste) and diced pork.", spicy: 0, pork: true, vegan: false },
+            { ko: "짬뽕", en: "Spicy Seafood Noodle Soup", pron: "Jjam-ppong", emoji: "🦐", desc: "A fiery red Korean-Chinese noodle soup loaded with various seafood and vegetables.", spicy: 3, pork: false, vegan: false },
+            { ko: "쫄면", en: "Chewy Spicy Noodles", pron: "Jjol-myeon", emoji: "🍝", desc: "Extremely chewy noodles served cold with fresh vegetables and a sweet and spicy sauce.", spicy: 2, pork: false, vegan: false }
+        ],
+        "C5": [
+            { ko: "비빔밥", en: "Bibimbap", pron: "Bi-bim-bap", emoji: "🥗", desc: "A beautiful bowl of warm rice topped with sautéed vegetables, an egg, and spicy chili paste.", spicy: 1, pork: false, vegan: false },
+            { ko: "국밥", en: "Pork Soup with Rice", pron: "Guk-bap", emoji: "🍚", desc: "A hearty, milky-white pork bone soup served with a bowl of rice to mix inside.", spicy: 0, pork: true, vegan: false },
+            { ko: "제육볶음", en: "Spicy Stir-fried Pork", pron: "Je-yuk Bok-keum", emoji: "🔥", desc: "Thinly sliced pork marinated in a spicy ginger-gochujang sauce and stir-fried.", spicy: 2, pork: true, vegan: false },
+            { ko: "김치볶음밥", en: "Kimchi Fried Rice", pron: "Kim-chi Bok-keum-bap", emoji: "🍳", desc: "Fried rice made with chopped kimchi, often topped with a fried egg and sometimes spam.", spicy: 1, pork: true, vegan: false },
+            { ko: "오므라이스", en: "Omurice", pron: "O-meu-ra-i-seu", emoji: "🍛", desc: "Fried rice wrapped in a thin omelet, generously topped with ketchup or demi-glace sauce.", spicy: 0, pork: false, vegan: false }
+        ],
+        "C6": [
+            { ko: "양념치킨", en: "Sweet & Spicy Fried Chicken", pron: "Yang-nyeom Chi-kin", emoji: "🍗", desc: "Korean fried chicken coated in a sticky, sweet, and mildly spicy red sauce.", spicy: 1, pork: false, vegan: false },
+            { ko: "후라이드 치킨", en: "Crispy Fried Chicken", pron: "Hu-ra-i-deu Chi-kin", emoji: "🍗", desc: "Ultra-crispy traditional Korean fried chicken. Famous for its thin, crunchy batter.", spicy: 0, pork: false, vegan: false },
+            { ko: "족발", en: "Braised Pig's Trotters", pron: "Jok-bal", emoji: "🍖", desc: "Pig's trotters glazed in a soy sauce and ginger marinade, served sliced and eaten in lettuce wraps.", spicy: 0, pork: true, vegan: false },
+            { ko: "해물파전", en: "Seafood Scallion Pancake", pron: "Hae-mul Pa-jeon", emoji: "🥞", desc: "A savory pancake packed with green onions and fresh seafood. Best enjoyed with Makgeolli.", spicy: 0, pork: false, vegan: false },
+            { ko: "보쌈", en: "Boiled Pork Wraps", pron: "Bos-sam", emoji: "🥬", desc: "Tender, boiled pork slices served with spicy radish salad and wrapped in fresh cabbage leaves.", spicy: 0, pork: true, vegan: false }
+        ],
+        "C7": [
+            { ko: "산낙지", en: "Live Octopus", pron: "San-nak-ji", emoji: "🐙", desc: "Freshly chopped raw octopus, still squirming on the plate, served with sesame oil and salt.", spicy: 0, pork: false, vegan: false },
+            { ko: "해물탕", en: "Spicy Seafood Stew", pron: "Hae-mul-tang", emoji: "🦐", desc: "A boiling pot of various fresh seafood like crab, shrimp, and clams in a spicy red broth.", spicy: 2, pork: false, vegan: false },
+            { ko: "간장게장", en: "Soy Sauce Marinated Crab", pron: "Gan-jang Ge-jang", emoji: "🦀", desc: "Raw crabs fermented in a rich, savory soy sauce marinade. Known as a 'rice thief'.", spicy: 0, pork: false, vegan: false },
+            { ko: "회", en: "Korean Raw Fish (Sashimi)", pron: "Hoe", emoji: "🐟", desc: "Thinly sliced fresh raw fish, traditionally eaten wrapped in lettuce with a spicy dipping sauce.", spicy: 0, pork: false, vegan: false }
+        ],
+        "C8": [
+            { ko: "빙수", en: "Shaved Ice Dessert", pron: "Bing-su", emoji: "🍧", desc: "A highly popular summer dessert of finely shaved ice topped with sweet red beans, fruits, or matcha.", spicy: 0, pork: false, vegan: true },
+            { ko: "식혜", en: "Sweet Rice Punch", pron: "Sik-hye", emoji: "🥤", desc: "A traditional sweet Korean drink made from malt water and cooked rice. Often enjoyed after saunas.", spicy: 0, pork: false, vegan: true },
+            { ko: "약과", en: "Honey Pastry", pron: "Yak-gwa", emoji: "🥮", desc: "A traditional, deep-fried sweet pastry made with honey and sesame oil. Slightly chewy and rich.", spicy: 0, pork: false, vegan: true },
+            { ko: "수정과", en: "Cinnamon Punch", pron: "Su-jeong-gwa", emoji: "🍵", desc: "A dark, sweet, and slightly spicy traditional punch made with cinnamon, ginger, and persimmons.", spicy: 0, pork: false, vegan: true }
+        ]
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+    var rouletteBtn = document.getElementById('roulette-btn');
+
+    // 카테고리 렌더링 (ES5)
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Explore " + this.querySelector('.cat-title').innerText;
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ⚠️ 이중 우회 로직 (0.5초 딜레이)
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Curating menu...";
+        triggerAdAndMove(selectedId);
+    });
+
+    rouletteBtn.addEventListener('click', function() {
+        var allKeys = Object.keys(foodDB);
+        var randomCat = allKeys[Math.floor(Math.random() * allKeys.length)];
+        rouletteBtn.innerText = "🎲 Spinning Roulette...";
+        triggerAdAndMove(randomCat);
+    });
+
+    // 결과 렌더링
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var foodList = foodDB[categoryId];
+        if (!foodList) return;
+
+        var fIndex = Math.floor(Math.random() * foodList.length);
+        var food = foodList[fIndex];
+
+        document.getElementById('res-emoji').innerHTML = food.emoji;
+        document.getElementById('res-en-name').innerText = food.en;
+        document.getElementById('res-ko-name').innerText = food.ko;
+        document.getElementById('res-pron').innerText = "[ " + food.pron + " ]";
+        document.getElementById('res-desc').innerText = food.desc;
+        
+        var tagContainer = document.getElementById('tag-container');
+        tagContainer.innerHTML = ""; 
+        
+        if(food.spicy > 0) {
+            var spicyStr = "";
+            for(var i=0; i<food.spicy; i++) spicyStr += "🌶️";
+            var tSpicy = document.createElement('div');
+            tSpicy.className = "info-tag tag-spicy";
+            // 텍스트 강제 변환 방지를 위해 innerHTML 사용
+            tSpicy.innerHTML = spicyStr + " Spicy";
+            tagContainer.appendChild(tSpicy);
+        } else {
+            var tMild = document.createElement('div');
+            tMild.className = "info-tag tag-vegan";
+            tMild.innerHTML = "🧊 Mild / Non-Spicy";
+            tagContainer.appendChild(tMild);
+        }
+
+        if(food.pork) {
+            var tPork = document.createElement('div');
+            tPork.className = "info-tag tag-meat";
+            tPork.innerHTML = "🥓 Likely Contains Pork";
+            tagContainer.appendChild(tPork);
+        } else {
+            var tNoPork = document.createElement('div');
+            tNoPork.className = "info-tag tag-vegan";
+            tNoPork.innerHTML = "🚫 Usually Pork-Free";
+            tagContainer.appendChild(tNoPork);
+        }
+
+        if(food.vegan) {
+            var tVegan = document.createElement('div');
+            tVegan.className = "info-tag tag-vegan";
+            tVegan.innerHTML = "🥬 Vegan Friendly (Ask to be sure)";
+            tagContainer.appendChild(tVegan);
+        }
+
+        document.getElementById('order-text').innerText = food.ko + " 하나 주세요.";
+        document.getElementById('order-pron').innerText = "[ " + food.pron + " ha-na ju-se-yo ]";
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Category to Explore";
+        rouletteBtn.innerHTML = "🎲 Food Roulette (Pick for me!)";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
