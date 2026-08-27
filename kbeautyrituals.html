@@ -1,0 +1,470 @@
+<!--구글 블로거 전용: K-Beauty Rituals (프리미엄 뷰티 컨설팅, 압도적 MAX 데이터, 일일 추천 킥포인트, ES5, 이중 우회)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #141112 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #fcf5f6; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #e2b4bd 0%, rgba(226,180,189,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #1c1819 0%, #141112 100%);
+    }
+
+    .header-section { margin-bottom: 25px; text-align: center; }
+    .main-title { font-size: 32px; font-weight: 700; color: #e2b4bd; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 13.5px; color: #a1989a; font-weight: 300; letter-spacing: 1.5px; border-bottom: 1px solid rgba(226, 180, 189, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: rgba(36, 31, 33, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #4a3f42; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);}
+    .panel-title { font-size: 17px; font-weight: 700; color: #e2b4bd; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #4a3f42; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d6cfcf; line-height: 1.8; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #d6cfcf; line-height: 1.8; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 10px; }
+
+    /* 킥 포인트: 액션 유도 버튼 2개 */
+    .action-btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
+    .roulette-btn, .daily-pick-btn {
+        flex: 1; padding: 18px 10px;
+        border: none; border-radius: 12px;
+        color: #141112; font-size: 14.5px; font-weight: 700;
+        cursor: pointer;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+        box-shadow: 0 4px 15px rgba(226, 180, 189, 0.25);
+        transition: transform 0.2s ease;
+    }
+    .roulette-btn { background: linear-gradient(135deg, #e2b4bd, #b8858e); }
+    .daily-pick-btn { background: linear-gradient(135deg, #f8f0f2, #e2b4bd); }
+    .roulette-btn:active, .daily-pick-btn:active { transform: scale(0.96); }
+    .btn-icon { font-size: 24px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 380px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #4a3f42; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #241f21;
+        border: 1px solid #4a3f42;
+        border-radius: 10px;
+        padding: 18px 20px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16px; font-weight: 500; color: #fcf5f6; }
+    .cat-sub { font-size: 13px; color: #a1989a; margin-top: 4px;}
+    
+    .cat-card.selected { 
+        border-color: #e2b4bd; 
+        background: #33272a;
+    }
+    .cat-card.selected .cat-title { color: #e2b4bd; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #e2b4bd;
+        border: none; border-radius: 10px; 
+        color: #141112; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; 
+    }
+    .submit-btn:disabled { 
+        background: #30292b; color: #877a7d; border: 1px solid #4a3f42;
+    }
+
+    .disclaimer-box { background: rgba(248, 113, 113, 0.05); border: 1px solid rgba(248, 113, 113, 0.3); border-radius: 12px; padding: 22px; margin-top: 40px; }
+    .disclaimer-title { font-size: 14.5px; font-weight: 700; color: #f87171; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 13.5px; color: #a1989a; line-height: 1.7; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(20, 17, 18, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1c1819; border-radius: 16px; padding: 30px 20px; border: 1px solid #e2b4bd; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #4a3f42;}
+    .modal-emoji { font-size: 55px; margin-bottom: 15px; }
+    .modal-title { font-size: 24px; font-weight: 700; color: #e2b4bd; }
+    .modal-desc { font-size: 14.5px; color: #d6cfcf; line-height: 1.6; margin-top: 10px;}
+
+    .accordion-item { margin-bottom: 10px; border: 1px solid #4a3f42; border-radius: 8px; overflow: hidden; background: #141112;}
+    .accordion-header { padding: 20px 15px; background: #241f21; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 500; color: #fcf5f6; font-size: 15.5px; transition: background 0.2s;}
+    .accordion-header:active { background: #30292b; }
+    .accordion-icon { color: #e2b4bd; font-weight: 700; transition: transform 0.3s; font-size: 20px;}
+    .accordion-content { padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #141112; }
+    .accordion-inner { padding: 20px 0; font-size: 14.5px; color: #d6cfcf; line-height: 1.8; text-align: left;}
+    
+    .close-btn { width: 100%; padding: 20px; background: #30292b; border: 1px solid #e2b4bd; border-radius: 12px; color: #e2b4bd; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 25px; transition: all 0.2s;}
+    .close-btn:active { background: #e2b4bd; color: #141112; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Beauty Rituals</div>
+        <div class="sub-title">Your Private Skincare Encyclopedia</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">✨ Welcome to Your Glow Up</div>
+        <div class="panel-desc">
+            Hello, gorgeous! Walking into a Korean cosmetics store like Olive Young with thousands of products can feel incredibly overwhelming. 
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            This ultimate offline guide is your private consultant. Use our extensive ingredient dictionary while shopping, or check your morning/night routines in your hotel room. Need inspiration? Try our daily picks below!
+        </div>
+    </div>
+
+    <!--킥 포인트: 광고 유도를 위한 매일 누르는 듀얼 액션 버튼-->
+    <div class="action-btn-group">
+        <button class="roulette-btn" id="roulette-btn">
+            <span class="btn-icon">🎲</span>
+            <span>Skin Type<br />Roulette</span>
+        </button>
+        <button class="daily-pick-btn" id="daily-pick-btn">
+            <span class="btn-icon">🔮</span>
+            <span>Today's Magic<br />Ingredient</span>
+        </button>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 생성 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Category to Explore
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ A Gentle Note on Skincare (Disclaimer)</div>
+        <div class="disclaimer-text">
+            Skincare is a highly personal journey. What works perfectly for one person might cause a reaction in another. The information lovingly provided here is for educational purposes only and does not replace professional medical advice.<br /><br />
+            We strongly advise performing a patch test on your inner arm before applying any new cosmetic product to your face. If you experience severe redness or irritation, discontinue use and consult a dermatologist immediately. The creators hold no legal liability for any adverse skin reactions or product dissatisfaction. Treat your skin gently!
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🧴</div>
+            <div class="modal-title" id="modal-title">Category Title</div>
+            <div class="modal-desc" id="modal-desc">Category Description</div>
+        </div>
+        
+        <div id="accordion-container">
+            <!--아코디언 내용 생성 영역-->
+        </div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 파티클 생성
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 5 + 3; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 1. 8개로 대폭 확장된 럭셔리 카테고리
+    var catDB = [
+        { id: "C1", emoji: "🧴", title: "The 10-Step Routine", sub: "The ultimate K-Beauty foundation" },
+        { id: "C2", emoji: "🌿", title: "Master Ingredient Dictionary", sub: "10+ Star ingredients explained" },
+        { id: "C3", emoji: "💧", title: "Dry Skin Mastery", sub: "Deep hydration and repair" },
+        { id: "C4", emoji: "🍋", title: "Oily & Acne Solutions", sub: "Pore care and sebum control" },
+        { id: "C5", emoji: "🌸", title: "Sensitive Skin Rescue", sub: "Calming and barrier defense" },
+        { id: "C6", emoji: "✨", title: "Glass Skin & Anti-Aging", sub: "Achieve that translucent glow" },
+        { id: "C7", emoji: "🌦️", title: "Seasonal Skincare Tips", sub: "Summer vs. Winter routines" },
+        { id: "C8", emoji: "❓", title: "K-Beauty Myths Busted", sub: "Truths behind the trends" }
+    ];
+
+    // 💡 2. 방대한 MAX 뷰티 백과사전 데이터 (업데이트 필요 없는 영구 데이터)
+    var beautyDB = {
+        "C1": [
+            { q: "Step 1: Oil Cleanser (PM Only)", a: "Start on dry skin. Oil cleansers gently melt away stubborn makeup, heavy SPF, and hardened sebum without stripping your skin. Massage for 60 seconds, emulsify with water, and rinse." },
+            { q: "Step 2: Water-Based Cleanser", a: "Follow up immediately with a gentle foam or gel cleanser. This double-cleansing method removes any remaining sweat and micro-dirt, ensuring a perfectly clean canvas." },
+            { q: "Step 3: Exfoliant (1-2x a week)", a: "Remove dead skin cells using a gentle chemical exfoliant (AHA/BHA) or a soft physical scrub. This allows your expensive serums to actually absorb into the skin." },
+            { q: "Step 4: Toner", a: "Korean toners are hydrating, not astringent. Apply within 30 seconds of washing your face to balance pH levels and prep your skin like a damp sponge." },
+            { q: "Step 5: Essence", a: "The heart of K-Beauty. Essences are watery liquids packed with fermented ingredients (like Galactomyces) to deeply hydrate and promote cellular turnover." },
+            { q: "Step 6: Serum / Ampoule", a: "Your targeted treatments. Use Vitamin C for brightening, Salicylic Acid for acne, or Peptides for anti-aging. Ampoules are simply highly concentrated serums." },
+            { q: "Step 7: Sheet Mask (Optional)", a: "Use for 15-20 minutes to force-feed your skin with hydration. Never let a sheet mask dry completely on your face, as it will start pulling moisture back out!" },
+            { q: "Step 8: Eye Cream", a: "The skin around your eyes is the thinnest. Gently tap a nourishing eye cream using your ring finger to prevent premature wrinkles." },
+            { q: "Step 9: Moisturizer", a: "Lock in all the previous layers! Use a lightweight gel for oily skin or a thick ceramide cream for dry skin to seal the moisture barrier." },
+            { q: "Step 10: Sunscreen (AM) / Sleeping Mask (PM)", a: "In the morning, broad-spectrum SPF is non-negotiable. At night, swap it for a Sleeping Mask to deeply repair your skin while you rest." }
+        ],
+        "C2": [
+            { q: "Snail Mucin (달팽이 점액)", a: "Hydrates deeply, stimulates collagen production, and is legendary for fading dark acne scars and repairing compromised skin barriers." },
+            { q: "Centella Asiatica / Cica (시카)", a: "Also known as Tiger Grass. The ultimate calming ingredient. Instantly reduces redness and heals inflammation. Perfect for sensitive or acne-prone skin." },
+            { q: "Niacinamide (나이아신아마이드)", a: "Vitamin B3. A true multitasker that brightens dull skin, minimizes the appearance of enlarged pores, and regulates oil production." },
+            { q: "Heartleaf / Houttuynia Cordata (어성초)", a: "A massive trend in Korea. Excellent for detoxifying congested pores, controlling excess sebum, and soothing angry breakouts." },
+            { q: "Ginseng (인삼)", a: "The traditional Korean anti-aging powerhouse. Boosts blood circulation, promotes elasticity, and fights free radicals for youthful skin." },
+            { q: "Propolis (프로폴리스)", a: "Produced by bees. Highly antibacterial and anti-inflammatory. Gives tired, dull skin a beautiful, healthy 'honey glow'." },
+            { q: "Hyaluronic Acid (히알루론산)", a: "Holds up to 1000x its weight in water. Essential for plumping fine lines and treating severe dehydration." },
+            { q: "Mugwort (쑥)", a: "A traditional Korean herb known for its incredible soothing and healing properties, heavily used for extremely sensitive or eczema-prone skin." },
+            { q: "Galactomyces (갈락토미세스)", a: "A fermented yeast extract that dramatically improves skin tone, brightens complexion, and refines rough skin texture." },
+            { q: "Green Tea (녹차)", a: "Rich in antioxidants. It soothes the skin, reduces sebum production, and offers excellent anti-aging benefits." }
+        ],
+        "C3": [
+            { q: "The 7-Skin Method", a: "Instead of one thick cream, pat a hydrating, watery toner onto your face 3 to 7 consecutive times. This forces deep hydration into the skin layers." },
+            { q: "Ceramides are Essential", a: "Dry skin usually means a broken skin barrier. Ceramides act like the 'mortar' between your skin cells, locking moisture inside and keeping irritants out." },
+            { q: "Avoid Foaming Cleansers", a: "High-pH foaming cleansers strip natural oils, leaving skin feeling 'squeaky clean' and tight. Switch to a gentle milk or low-pH gel cleanser." }
+        ],
+        "C4": [
+            { q: "Dehydrated Oily Skin", a: "Oily skin often overproduces sebum because it is secretly dehydrated underneath. NEVER skip moisturizer. Use a lightweight, oil-free gel cream." },
+            { q: "BHA is Your Best Friend", a: "Unlike AHA, BHA (Salicylic Acid) is oil-soluble. It can penetrate deep into your pores to dissolve hardened sebum and clear blackheads." },
+            { q: "Embrace Oil Cleansing", a: "Many fear oil cleansers, but oil dissolves oil. A gentle oil cleanser is scientifically the best way to melt away excess sebum from your pores." }
+        ],
+        "C5": [
+            { q: "The Minimalist Approach", a: "If your skin is red or compromised, skip the 10 steps. Stick to a basic routine: gentle cleanser, soothing toner (Cica/Mugwort), and a simple moisturizer." },
+            { q: "Check the Ingredients", a: "Always avoid artificial fragrances, essential oils (like lavender or citrus), and denatured alcohol, which are primary triggers for flare-ups." },
+            { q: "Temperature Matters", a: "Never wash your face in the shower with hot water. Hot water severely damages the skin barrier. Always use lukewarm water at the sink." }
+        ],
+        "C6": [
+            { q: "What is Glass Skin?", a: "Glass skin refers to a complexion so smooth, clear, and intensely hydrated that it appears translucent and highly reflective, like glass." },
+            { q: "The Secret: Hydration + Exfoliation", a: "You cannot achieve glass skin with dead skin cells on the surface. Gentle, regular exfoliation combined with massive amounts of hydration (essences and ampoules) is the key." },
+            { q: "Vitamin C for Radiance", a: "Incorporate a Vitamin C serum in your morning routine (always followed by SPF). It blocks melanin production, fades dark spots, and provides a brilliant glow." }
+        ],
+        "C7": [
+            { q: "Summer Skincare Routine", a: "Korean summers are extremely hot and humid. Switch heavy creams for lightweight gel moisturizers. Focus on pore-clearing ingredients like Heartleaf and always reapply SPF every 2 hours." },
+            { q: "Winter Skincare Routine", a: "Korean winters are freezing and dry. Incorporate facial oils (like Rosehip or Jojoba) at the end of your routine, use richer Ceramide creams, and utilize Sleeping Masks nightly." }
+        ],
+        "C8": [
+            { q: "Myth: Pores can open and close", a: "Pores are not muscles; they cannot open with warm water or close with cold water. Warm water simply softens the sebum inside, making it easier to clean." },
+            { q: "Myth: Makeup causes acne", a: "Makeup itself rarely causes acne. Failing to properly double-cleanse your face and leaving makeup residue in your pores overnight is what causes breakouts." },
+            { q: "Myth: Natural ingredients are always safer", a: "Not true! Poison ivy is 100% natural. Many natural essential oils are highly irritating. Well-formulated synthetic ingredients (like lab-made Peptides) are often much safer and more effective." }
+        ]
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+    var rouletteBtn = document.getElementById('roulette-btn');
+    var dailyPickBtn = document.getElementById('daily-pick-btn');
+
+    // 카테고리 렌더링
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Explore: " + this.querySelector('.cat-title').innerText;
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ⚠️ 철벽 이중 우회 전면광고 로직
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Curating your routine...";
+        triggerAdAndMove(selectedId);
+    });
+
+    // 킥 포인트 1: 피부타입 룰렛 (C3, C4, C5 중 랜덤 오픈)
+    rouletteBtn.addEventListener('click', function() {
+        var skinTypes = ["C3", "C4", "C5"];
+        var randomId = skinTypes[Math.floor(Math.random() * skinTypes.length)];
+        this.innerHTML = "<span class='btn-icon'>⏳</span><span>Analyzing...</span>";
+        triggerAdAndMove(randomId);
+    });
+
+    // 킥 포인트 2: 데일리 마법 성분 픽 (무조건 성분 사전 C2 오픈하여 광고 유도)
+    dailyPickBtn.addEventListener('click', function() {
+        this.innerHTML = "<span class='btn-icon'>✨</span><span>Revealing...</span>";
+        triggerAdAndMove("C2");
+    });
+
+    // 결과 렌더링 (모달 & 아코디언)
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var items = beautyDB[categoryId];
+        if (!items) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                document.getElementById('modal-desc').innerText = catDB[i].sub;
+                break;
+            }
+        }
+
+        var accContainer = document.getElementById('accordion-container');
+        accContainer.innerHTML = ""; 
+
+        for (var k = 0; k < items.length; k++) {
+            var aItem = document.createElement('div');
+            aItem.className = 'accordion-item';
+
+            var aHeader = document.createElement('div');
+            aHeader.className = 'accordion-header';
+            
+            var aTitle = document.createElement('span');
+            aTitle.innerText = items[k].q;
+            
+            var aIcon = document.createElement('span');
+            aIcon.className = 'accordion-icon';
+            aIcon.innerText = "+";
+            
+            aHeader.appendChild(aTitle);
+            aHeader.appendChild(aIcon);
+
+            var aContent = document.createElement('div');
+            aContent.className = 'accordion-content';
+            
+            var aInner = document.createElement('div');
+            aInner.className = 'accordion-inner';
+            aInner.innerHTML = items[k].a.replace(/\n/g, "<br>");
+            
+            aContent.appendChild(aInner);
+            
+            aItem.appendChild(aHeader);
+            aItem.appendChild(aContent);
+            accContainer.appendChild(aItem);
+
+            // ES5 클로저 (안정성 확보)
+            (function(header, content, icon) {
+                header.addEventListener('click', function() {
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.innerText = "+";
+                        icon.style.transform = "rotate(0deg)";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.innerText = "-";
+                        icon.style.transform = "rotate(180deg)";
+                    }
+                });
+            })(aHeader, aContent, aIcon);
+        }
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Category to Explore";
+        rouletteBtn.innerHTML = "<span class='btn-icon'>🎲</span><span>Skin Type<br>Roulette</span>";
+        dailyPickBtn.innerHTML = "<span class='btn-icon'>🔮</span><span>Today's Magic<br>Ingredient</span>";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
