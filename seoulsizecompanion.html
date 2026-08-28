@@ -1,0 +1,484 @@
+<!--구글 블로거 전용: Seoul Size Companion (글자 깨짐 해결, 파티클 강화, 데이터 MAX 10개 확장, ES5)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0b0d17 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f5f6fa; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* 샴페인 골드 파티클 효과 강화 */
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #e6c27a 0%, rgba(230,194,122,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.35; }
+        80% { opacity: 0.15; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #111424 0%, #0b0d17 100%);
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 32px; font-weight: 700; color: #d4af37; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #8a91a8; font-weight: 300; letter-spacing: 1.5px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: rgba(22, 26, 43, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #2a314d; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #d4af37; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #2a314d; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d1d5e0; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #d1d5e0; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    .action-btn-group { display: flex; gap: 12px; margin-bottom: 25px; }
+    .calc-btn {
+        flex: 1; padding: 20px 10px;
+        border: none; border-radius: 12px;
+        color: #0b0d17; font-size: 15px; font-weight: 700;
+        cursor: pointer;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        transition: transform 0.2s ease;
+        background: linear-gradient(135deg, #d4af37, #f3e5ab);
+    }
+    .calc-btn:active { transform: scale(0.96); }
+    .btn-icon { font-size: 26px; }
+
+    /* 카테고리 리스트 영역 확대 */
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 420px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #2a314d; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #161a2b;
+        border: 1px solid #2a314d;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 30px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16.5px; font-weight: 500; color: #f5f6fa; }
+    .cat-sub { font-size: 13.5px; color: #8a91a8; margin-top: 5px;}
+    
+    .cat-card.selected { 
+        border-color: #d4af37; 
+        background: #23273b;
+    }
+    .cat-card.selected .cat-title { color: #d4af37; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #d4af37;
+        border: none; border-radius: 12px; 
+        color: #0b0d17; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px;
+    }
+    .submit-btn:disabled { 
+        background: #23273b; color: #6a7182; border: 1px solid #2a314d;
+    }
+
+    .disclaimer-box { background: rgba(231, 76, 60, 0.05); border: 1px solid rgba(231, 76, 60, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #e74c3c; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #8a91a8; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 13, 23, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #161a2b; border-radius: 16px; padding: 30px 20px; border: 1px solid #d4af37; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #2a314d;}
+    .modal-emoji { font-size: 55px; margin-bottom: 15px; }
+    .modal-title { font-size: 24px; font-weight: 700; color: #d4af37; }
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #2a314d;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #1a1e2f;}
+    .size-table th { background: #23273b; color: #d4af37; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #2a314d;}
+    .size-table td { padding: 14px 10px; color: #d1d5e0; border-bottom: 1px solid #2a314d;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #1c2033; }
+    
+    .table-tip { color: #d1d5e0; font-size: 14.5px; line-height: 1.7; background: #23273b; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #23273b; border: 1px solid #d4af37; border-radius: 12px; color: #d4af37; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #d4af37; color: #0b0d17; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Size Companion</div>
+        <div class="sub-title">Your Premium Offline Conversion Guide</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">✨ Shop Seamlessly in South Korea</div>
+        <div class="panel-desc">
+            Welcome to your ultimate travel assistant! Shopping in Seoul is an incredible experience, but navigating the local sizing systems can often feel overwhelming. South Korea uses millimeters for shoes, unique numbering for clothing, and Celsius for temperature.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            We designed this offline companion so you never have to guess your size again. Check our reliable charts to find your perfect fit instantly—no internet connection required.
+        </div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">💡 Golden Tips for Korean Shopping</div>
+        <div class="panel-desc">
+            Keep these local secrets in mind to ensure a successful and enjoyable shopping experience:
+        </div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li><strong>The Reality of 'Free Size':</strong> You will frequently see "Free Size" (프리사이즈) in boutiques. This is meant to be a "one size fits most," generally accommodating US sizes 4 to 6. Always ask to try it on!</li>
+            <li><strong>Shoe Sizes are Millimeters:</strong> Don't panic when you see size "240". Korean shoe sizes are simply the exact length of your foot in millimeters.</li>
+            <li><strong>Fitted Silhouettes:</strong> Korean menswear and womenswear tend to have a slimmer, more tailored fit compared to Western brands. When in doubt, it is highly recommended to size up.</li>
+        </ul>
+    </div>
+
+    <div class="action-btn-group">
+        <button class="calc-btn" id="quick-shoe-btn">
+            <span class="btn-icon">👞</span>
+            <span>Quick Find:<br />Footwear Sizes</span>
+        </button>
+        <button class="calc-btn" id="quick-clothes-btn">
+            <span class="btn-icon">👗</span>
+            <span>Quick Find:<br />Apparel Sizes</span>
+        </button>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 10개 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Category to View Chart
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ A Gentle Reminder (Disclaimer)</div>
+        <div class="disclaimer-text">
+            Please be advised that the size conversions provided in this application are based on general international standards. Actual clothing and shoe fits can vary significantly depending on the specific brand, material, and manufacturing design. We highly recommend trying items on in-store whenever possible before finalizing a purchase. The creators of this guide hold no legal responsibility for any sizing discrepancies, non-refundable purchases, or general dissatisfaction. Enjoy your shopping responsibly!
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">📏</div>
+            <div class="modal-title" id="modal-title">Category Title</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 강화된 파티클 (모바일 완벽 대응)
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 1. 10개로 꽉 채운 카테고리 (글자 깨짐 방지 완벽 적용)
+    var catDB = [
+        { id: "T1", emoji: "👠", title: "Women's Footwear", sub: "US / EU / UK to Korea (mm)" },
+        { id: "T2", emoji: "👞", title: "Men's Footwear", sub: "US / EU / UK to Korea (mm)" },
+        { id: "T3", emoji: "👗", title: "Women's Apparel", sub: "US / EU to Korean 44, 55, 66" },
+        { id: "T4", emoji: "👔", title: "Men's Apparel", sub: "US / EU to Korean 95, 100, 105" },
+        { id: "T5", emoji: "👶", title: "Kids & Baby Clothes", sub: "Age / Height to Korean Sizes" },
+        { id: "T6", emoji: "🧢", title: "Hat & Cap Sizes", sub: "Inches / Cm to Hat Size" },
+        { id: "T7", emoji: "💍", title: "Jewelry & Ring Sizes", sub: "International Ring Size Guide" },
+        { id: "T8", emoji: "👙", title: "Intimates & Bra Sizes", sub: "Band and Cup Conversions" },
+        { id: "T9", emoji: "🌡️", title: "Weather & Temp", sub: "Fahrenheit (°F) to Celsius (°C)" },
+        { id: "T10", emoji: "⚖️", title: "Weights & Distances", sub: "Lbs/Kg and Miles/Km guide" }
+    ];
+
+    // 💡 2. ES5 테이블 데이터 10개 (온도 기호 등 깨짐 방지 적용)
+    var tableDB = {
+        "T1": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea (mm)</th><th>US</th><th>EU</th><th>UK</th></tr>" +
+              "<tr><td>220</td><td>5</td><td>35</td><td>2.5</td></tr>" +
+              "<tr><td>225</td><td>5.5</td><td>35.5</td><td>3</td></tr>" +
+              "<tr><td>230</td><td>6</td><td>36</td><td>3.5</td></tr>" +
+              "<tr><td>235</td><td>6.5</td><td>37</td><td>4</td></tr>" +
+              "<tr><td>240</td><td>7</td><td>37.5</td><td>4.5</td></tr>" +
+              "<tr><td>245</td><td>7.5</td><td>38</td><td>5</td></tr>" +
+              "<tr><td>250</td><td>8</td><td>38.5</td><td>5.5</td></tr>" +
+              "<tr><td>255</td><td>8.5</td><td>39</td><td>6</td></tr>" +
+              "<tr><td>260</td><td>9</td><td>40</td><td>6.5</td></tr>" +
+              "<tr><td>265</td><td>9.5</td><td>40.5</td><td>7</td></tr>" +
+              "<tr><td>270</td><td>10</td><td>41</td><td>7.5</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Korean shoe sizes represent the length of the foot in millimeters. If you have a wider foot or high arch, it is always recommended to size up by 5mm.</div>",
+              
+        "T2": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea (mm)</th><th>US</th><th>EU</th><th>UK</th></tr>" +
+              "<tr><td>250</td><td>7</td><td>40</td><td>6</td></tr>" +
+              "<tr><td>255</td><td>7.5</td><td>40.5</td><td>6.5</td></tr>" +
+              "<tr><td>260</td><td>8</td><td>41</td><td>7</td></tr>" +
+              "<tr><td>265</td><td>8.5</td><td>42</td><td>7.5</td></tr>" +
+              "<tr><td>270</td><td>9</td><td>42.5</td><td>8</td></tr>" +
+              "<tr><td>275</td><td>9.5</td><td>43</td><td>8.5</td></tr>" +
+              "<tr><td>280</td><td>10</td><td>44</td><td>9</td></tr>" +
+              "<tr><td>285</td><td>10.5</td><td>44.5</td><td>9.5</td></tr>" +
+              "<tr><td>290</td><td>11</td><td>45</td><td>10</td></tr>" +
+              "<tr><td>295</td><td>11.5</td><td>46</td><td>10.5</td></tr>" +
+              "<tr><td>300</td><td>12</td><td>46.5</td><td>11</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Finding men's shoes larger than 290mm (US 11) in local boutique stores can be quite challenging. We recommend visiting global brand flagship stores for larger sizes.</div>",
+              
+        "T3": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea</th><th>Intl.</th><th>US</th><th>EU</th></tr>" +
+              "<tr><td>44</td><td>XS</td><td>2</td><td>32</td></tr>" +
+              "<tr><td>55</td><td>S</td><td>4</td><td>34</td></tr>" +
+              "<tr><td>66</td><td>M</td><td>6</td><td>36</td></tr>" +
+              "<tr><td>77</td><td>L</td><td>8</td><td>38</td></tr>" +
+              "<tr><td>88</td><td>XL</td><td>10</td><td>40</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Understanding 'Free Size':</strong> A very common size label in Korean boutiques is 'Free' (프리). This is essentially a 'one size fits most' concept, typically designed to fit a standard Korean 55 to a slim 66 (US 4 to 6).</div>",
+              
+        "T4": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea</th><th>Intl.</th><th>US / UK</th><th>EU</th></tr>" +
+              "<tr><td>90</td><td>S</td><td>34</td><td>44</td></tr>" +
+              "<tr><td>95</td><td>M</td><td>36</td><td>46</td></tr>" +
+              "<tr><td>100</td><td>L</td><td>38</td><td>48</td></tr>" +
+              "<tr><td>105</td><td>XL</td><td>40</td><td>50</td></tr>" +
+              "<tr><td>110</td><td>XXL</td><td>42</td><td>52</td></tr>" +
+              "<tr><td>115</td><td>3XL</td><td>44</td><td>54</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Korean menswear is famous for its very fitted, tailored silhouettes. If you prefer a relaxed or regular Western fit, it is highly advisable to choose one size larger than your usual conversion.</div>",
+        
+        "T5": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Age (Est.)</th><th>Korea Size</th><th>Height (cm)</th></tr>" +
+              "<tr><td>1-2 Years</td><td>90</td><td>80-90 cm</td></tr>" +
+              "<tr><td>3-4 Years</td><td>100</td><td>90-100 cm</td></tr>" +
+              "<tr><td>5-6 Years</td><td>110</td><td>100-110 cm</td></tr>" +
+              "<tr><td>7-8 Years</td><td>120</td><td>110-120 cm</td></tr>" +
+              "<tr><td>9-10 Years</td><td>130</td><td>120-130 cm</td></tr>" +
+              "<tr><td>11-12 Years</td><td>140</td><td>130-140 cm</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Korean children's clothing is primarily sized by the child's height in centimeters rather than their age. Always measure your child's height for the most accurate fit!</div>",
+
+        "T6": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Head (cm)</th><th>Head (inches)</th><th>Hat Size</th></tr>" +
+              "<tr><td>54 cm</td><td>21.3 in</td><td>6 3/4 (S)</td></tr>" +
+              "<tr><td>56 cm</td><td>22.0 in</td><td>7 (M)</td></tr>" +
+              "<tr><td>58 cm</td><td>22.8 in</td><td>7 1/4 (L)</td></tr>" +
+              "<tr><td>60 cm</td><td>23.6 in</td><td>7 1/2 (XL)</td></tr>" +
+              "<tr><td>62 cm</td><td>24.4 in</td><td>7 3/4 (XXL)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Most baseball caps in Korea are sold as 'Free Size' with an adjustable strap at the back, generally fitting head circumferences between 56cm and 59cm.</div>",
+
+        "T7": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea</th><th>US / Canada</th><th>UK / AUS</th></tr>" +
+              "<tr><td>9</td><td>5</td><td>J 1/2</td></tr>" +
+              "<tr><td>11</td><td>6</td><td>L 1/2</td></tr>" +
+              "<tr><td>14</td><td>7</td><td>O</td></tr>" +
+              "<tr><td>16</td><td>8</td><td>Q</td></tr>" +
+              "<tr><td>19</td><td>9</td><td>R 1/2</td></tr>" +
+              "<tr><td>21</td><td>10</td><td>T 1/2</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Shopping Tip:</strong> Ring sizing in Korea uses a numeric scale based on the inner circumference in millimeters. Jewelry stores will happily measure your fingers for free!</div>",
+              
+        "T8": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korea Band</th><th>US / UK Band</th></tr>" +
+              "<tr><td>70</td><td>32</td></tr>" +
+              "<tr><td>75</td><td>34</td></tr>" +
+              "<tr><td>80</td><td>36</td></tr>" +
+              "<tr><td>85</td><td>38</td></tr>" +
+              "<tr><td>90</td><td>40</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Cup Size Tip:</strong> Korean cup sizes generally run about one cup size smaller than US/UK sizes. For example, if you wear a 34B in the US, you will likely fit a 75C in South Korea.</div>",
+              
+        "T9": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Fahrenheit (°F)</th><th>Celsius (°C)</th><th>Local Context</th></tr>" +
+              "<tr><td>32°F</td><td>0°C</td><td>Freezing (Winter)</td></tr>" +
+              "<tr><td>50°F</td><td>10°C</td><td>Chilly (Spring/Fall)</td></tr>" +
+              "<tr><td>68°F</td><td>20°C</td><td>Mild (Perfect)</td></tr>" +
+              "<tr><td>86°F</td><td>30°C</td><td>Hot (Summer)</td></tr>" +
+              "<tr><td>95°F</td><td>35°C</td><td>Extreme Heat Wave</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Seasonal Note:</strong> Korean summers (July-August) are notoriously hot and humid. Winters (Dec-Feb) are freezing, driven by cold winds from Siberia.</div>",
+              
+        "T10": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Imperial</th><th>Metric (Korea)</th></tr>" +
+              "<tr><td>1 inch</td><td>2.54 cm</td></tr>" +
+              "<tr><td>1 foot</td><td>30.48 cm</td></tr>" +
+              "<tr><td>1 mile</td><td>1.61 km</td></tr>" +
+              "<tr><td>1 lb (pound)</td><td>0.45 kg</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Travel Tip:</strong> South Korea strictly uses the metric system. Speed limits and distances are always in kilometers, and market produce is sold by grams or kilograms.</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "View Chart: " + this.querySelector('.cat-title').innerText;
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Size Chart securely...";
+        triggerAdAndMove(selectedId);
+    });
+
+    document.getElementById('quick-shoe-btn').addEventListener('click', function() {
+        this.innerHTML = "<span class='btn-icon'>⏳</span><span>Loading...</span>";
+        triggerAdAndMove("T1");
+    });
+
+    document.getElementById('quick-clothes-btn').addEventListener('click', function() {
+        this.innerHTML = "<span class='btn-icon'>⏳</span><span>Loading...</span>";
+        triggerAdAndMove("T3");
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Category to View Chart";
+        
+        document.getElementById('quick-shoe-btn').innerHTML = "<span class='btn-icon'>👞</span><span>Quick Find:<br>Footwear Sizes</span>";
+        document.getElementById('quick-clothes-btn').innerHTML = "<span class='btn-icon'>👗</span><span>Quick Find:<br>Apparel Sizes</span>";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
