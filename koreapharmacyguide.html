@@ -1,0 +1,429 @@
+<!--구글 블로거 전용: Seoul Pharmacy & SOS Guide (메디컬 컨시어지, MAX 10종, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #f4f7f6 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #1e293b; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #004b87 0%, rgba(0,75,135,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 30px; font-weight: 700; color: #004b87; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #64748b; font-weight: 400; letter-spacing: 1px; border-bottom: 2px solid rgba(0, 75, 135, 0.1); padding-bottom: 20px;}
+
+    .text-panel { background: #ffffff; border-radius: 12px; padding: 25px; border: 1px solid #e2e8f0; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #004b87; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #334155; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #334155; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 450px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 5px solid #004b87;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .cat-emoji { font-size: 30px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16.5px; font-weight: 600; color: #0f172a; }
+    .cat-sub { font-size: 13.5px; color: #64748b; margin-top: 5px;}
+    
+    .cat-card.selected { 
+        border-color: #004b87; 
+        background: #f0f7ff;
+    }
+    .cat-card.selected .cat-title { color: #004b87; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: linear-gradient(135deg, #004b87, #0066cc);
+        border: none; border-radius: 12px; 
+        color: #ffffff; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0, 75, 135, 0.25);
+    }
+    .submit-btn:disabled { 
+        background: #e2e8f0; color: #94a3b8; border: 1px solid #cbd5e1; box-shadow: none;
+    }
+
+    .disclaimer-box { background: rgba(231, 76, 60, 0.05); border: 1px solid rgba(231, 76, 60, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #e74c3c; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #64748b; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #ffffff; border-radius: 16px; padding: 30px 20px; border: 1px solid #004b87; box-shadow: 0 10px 40px rgba(0,0,0,0.5);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #004b87; }
+
+    .pharmacist-card { background: #f8f9fa; border-radius: 12px; padding: 25px; margin-bottom: 25px; text-align: center; border: 3px solid #004b87;}
+    .pharmacist-title { color: #004b87; font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .pharmacist-korean { color: #0f172a; font-size: 24px; font-weight: 700; line-height: 1.5; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #e2e8f0;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #ffffff;}
+    .size-table th { background: #f1f5f9; color: #004b87; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #e2e8f0;}
+    .size-table td { padding: 14px 10px; color: #334155; border-bottom: 1px solid #e2e8f0;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #f8fafc; }
+    
+    .table-tip { color: #334155; font-size: 14.5px; line-height: 1.7; background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #004b87; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #ffffff; border: 2px solid #004b87; border-radius: 12px; color: #004b87; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #004b87; color: #ffffff; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Pharmacy SOS</div>
+        <div class="sub-title">Your Premium Health &amp; Medicine Concierge</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🏥 Navigate Korean Pharmacies</div>
+        <div class="panel-desc">
+            Unlike many Western countries, you cannot simply buy medication off the shelf in South Korea. Pharmacies (Yakguk, 약국) require you to explain your symptoms directly to the pharmacist, who will then select the appropriate medicine from behind the counter.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            This language barrier can be terrifying when you feel unwell. We designed this premium medical concierge to instantly translate your exact symptoms into precise Korean terminology. Simply select your condition and show the generated card directly to the pharmacist.
+        </div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">💡 Essential Pharmacy Tips</div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li><strong>Look for the '약' Sign:</strong> Pharmacies in Korea are easily identifiable by a large sign displaying the word "약" (Yak).</li>
+            <li><strong>Convenience Stores for Late Nights:</strong> Most pharmacies close by 7:00 PM or 8:00 PM. If it is an emergency, check our 'Convenience Store' category below to find basic painkillers at CU or GS25.</li>
+            <li><strong>Show the Translation Card:</strong> Do not try to explain complex symptoms in English. The pharmacist will appreciate you showing our clear, accurate Korean cards.</li>
+        </ul>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select Symptom to Generate Card
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Medical &amp; Legal Disclaimer</div>
+        <div class="disclaimer-text">
+            Please read carefully: This application is strictly a translation and communication tool. It does not provide medical advice, diagnosis, or treatment. The translated cards are meant to help you communicate your general symptoms to a licensed Korean pharmacist. Always consult with a healthcare professional or pharmacist before taking any medication. If you are experiencing a severe or life-threatening emergency, call 119 immediately. The creators and developers of this application hold absolutely no legal responsibility for miscommunications, allergic reactions to medication, worsened health conditions, or any medical emergencies resulting from the use of this app. By using this tool, you assume all risks and responsibilities.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">💊</div>
+            <div class="modal-title" id="modal-title">Medical Translation</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 8 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    var catDB = [
+        { id: "T1", emoji: "🍻", title: "Hangover & Nausea", sub: "For heavy drinking (Soju hangover)" },
+        { id: "T2", emoji: "🔥", title: "Indigestion & Stomachache", sub: "Upset stomach, ate spicy food" },
+        { id: "T3", emoji: "🤒", title: "Cold, Fever & Flu", sub: "Coughing, sore throat, fever" },
+        { id: "T4", emoji: "🩹", title: "Blisters & First Aid", sub: "Walked too much, minor cuts" },
+        { id: "T5", emoji: "🦵", title: "Muscle Ache & Pain", sub: "Body ache, need muscle patches" },
+        { id: "T6", emoji: "🩸", title: "Period Pain & Cramps", sub: "Menstrual pain relief" },
+        { id: "T7", emoji: "🚽", title: "Diarrhea & Food Poisoning", sub: "Severe stomach issues" },
+        { id: "T8", emoji: "👁️", title: "Eye Drops & Allergies", sub: "Dry eyes or skin allergy" },
+        { id: "T9", emoji: "🏪", title: "Convenience Store Guide", sub: "Late night emergency drugs" },
+        { id: "T10", emoji: "🚑", title: "119 Emergency SOS", sub: "Call an ambulance (Translation)" }
+    ];
+
+    var tableDB = {
+        "T1": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>어제 술을 많이 마셔서 숙취가 심합니다. 머리가 아프고 토할 것 같습니다. 효과가 빠른 숙취해소제와 약을 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Hangover</td><td>Suk-chwi (숙취)</td></tr>" +
+              "<tr><td>Headache</td><td>Du-tong (두통)</td></tr>" +
+              "<tr><td>Nausea/Vomiting</td><td>Gu-to (구토)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Korean pharmacists usually provide a liquid medicine (drink) along with pills for hangovers. Drink the liquid and swallow the pills together!</div>",
+              
+        "T2": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>음식을 먹고 심하게 체했습니다. 배가 많이 아프고 소화가 전혀 안 됩니다. 소화제를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Indigestion</td><td>So-hwa-bul-ryang (소화불량)</td></tr>" +
+              "<tr><td>Stomachache</td><td>Bok-tong (복통)</td></tr>" +
+              "<tr><td>Heartburn</td><td>Sok-sseu-rim (속쓰림)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> If you ate too much spicy Korean food, the pharmacist might give you a liquid antacid (like Gaviscon) to coat your stomach, along with digestive enzymes.</div>",
+              
+        "T3": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>감기에 걸렸습니다. 열이 나고 목이 붓고 기침이 심하게 납니다. 종합 감기약을 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Fever</td><td>Yeol (열)</td></tr>" +
+              "<tr><td>Sore Throat</td><td>In-hu-tong (인후통)</td></tr>" +
+              "<tr><td>Cough</td><td>Gi-chim (기침)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Korean cold medicines are very effective. If your throat hurts a lot, point to your throat so they can give you a specific anti-inflammatory spray or pill.</div>",
+              
+        "T4": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>많이 걸어서 발에 물집이 생기고 상처가 났습니다. 소독약, 연고, 그리고 방수 밴드(메디폼)를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Blister</td><td>Mul-jib (물집)</td></tr>" +
+              "<tr><td>Ointment</td><td>Yeon-go (연고)</td></tr>" +
+              "<tr><td>Band-aid</td><td>Band (밴드)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> For severe blisters, ask for 'Medifoam' (메디폼). It is a highly popular and effective hydrocolloid dressing used in Korea that acts like a second skin.</div>",
+
+        "T5": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>온몸에 근육통이 심합니다. 바르는 파스나 붙이는 파스, 그리고 진통제를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Muscle Ache</td><td>Geun-yuk-tong (근육통)</td></tr>" +
+              "<tr><td>Pain Relief Patch</td><td>Pas (파스)</td></tr>" +
+              "<tr><td>Painkiller</td><td>Jin-tong-je (진통제)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Korean muscle patches (Pas) are legendary. They come in 'Hot' or 'Cool' versions. Stick them directly onto sore legs after a long day of sightseeing.</div>",
+              
+        "T6": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>생리통이 너무 심합니다. 효과가 빠르고 강한 생리통 진통제를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Period Cramps</td><td>Saeng-ri-tong (생리통)</td></tr>" +
+              "<tr><td>Painkiller</td><td>Jin-tong-je (진통제)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> The pharmacist might ask if your stomach also hurts or if you are bloated. Liquid capsules (like EzN6) are widely recommended for fast relief in Korea.</div>",
+
+        "T7": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>설사가 멈추지 않고 배가 너무 아픕니다. 장염인 것 같습니다. 지사제를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Diarrhea</td><td>Seol-sa (설사)</td></tr>" +
+              "<tr><td>Food Poisoning</td><td>Sik-jung-dok (식중독)</td></tr>" +
+              "<tr><td>Anti-diarrheal</td><td>Ji-sa-je (지사제)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Warning:</strong> If you have severe vomiting along with diarrhea and a fever, you should visit a hospital clinic (내과) instead of just a pharmacy.</div>",
+
+        "T8": "<div class='pharmacist-card'><div class='pharmacist-title'>SHOW TO PHARMACIST</div>" +
+              "<div class='pharmacist-korean'>눈이 너무 건조합니다. 인공눈물을 주세요. / 피부에 알레르기가 올라와서 가렵습니다. 항히스타민제를 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Eye Drops</td><td>In-gong nun-mul (인공눈물)</td></tr>" +
+              "<tr><td>Itchy Skin</td><td>Ga-ryeo-um (가려움)</td></tr>" +
+              "<tr><td>Allergy Pills</td><td>Al-le-reu-gi yak (알레르기 약)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> The air in Seoul can be dry or dusty depending on the season. Single-use artificial tears are highly recommended and easy to carry.</div>",
+
+        "T9": "<div class='pharmacist-card'><div class='pharmacist-title'>24/7 LATE NIGHT GUIDE</div>" +
+              "<div class='pharmacist-korean'>If pharmacies are closed, go to CU, GS25, or 7-Eleven. They sell basic emergency drugs at the counter.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Drug Name</th><th>What it is for</th></tr>" +
+              "<tr><td>Tylenol (타이레놀)</td><td>Headache, Fever (Painkiller)</td></tr>" +
+              "<tr><td>Pancold (판콜)</td><td>Cold & Flu symptoms (Liquid)</td></tr>" +
+              "<tr><td>Festal (훼스탈)</td><td>Indigestion & Upset stomach</td></tr>" +
+              "<tr><td>Brufen (부루펜)</td><td>Fever reducer for children</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> By law, convenience stores can only sell a limited amount of basic over-the-counter medicines. Ask the cashier for 'Tylenol' or 'Festal'.</div>",
+
+        "T10": "<div class='pharmacist-card'><div class='pharmacist-title'>EMERGENCY SOS (SHOW TO ANY KOREAN)</div>" +
+              "<div class='pharmacist-korean'>지금 응급 상황입니다. 119에 전화해서 구급차를 좀 불러주세요. 부탁드립니다!</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Pronunciation</th></tr>" +
+              "<tr><td>Please call 119!</td><td>Il-il-gu bul-leo-ju-se-yo!</td></tr>" +
+              "<tr><td>It is an emergency!</td><td>Eung-geub sang-hwang im-ni-da!</td></tr>" +
+              "<tr><td>Where is the hospital?</td><td>Byeong-won-i eo-di-e-yo?</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Emergency Numbers:</strong> Dial 119 for Ambulance and Fire. Dial 112 for Police. Dial 1330 for the Tourism Police and medical translation services (Available 24/7).</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Generate Translated Card";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Translation...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select Symptom to Generate Card";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
