@@ -1,0 +1,446 @@
+<!--구글 블로거 전용: Seoul Menu Decoder (VIP 다이닝 컨시어지, 오프라인 번역 MAX 10종, ES5 완벽 호환, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    /* 블로거 기본 UI 완벽 제거 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0a100d !important; /* 미드나잇 포레스트 */
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f5f6fa; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* 샴페인 골드 파티클 효과 */
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #d4af37 0%, rgba(212,175,55,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.3; }
+        80% { opacity: 0.1; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #111b15 0%, #0a100d 100%);
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 30px; font-weight: 700; color: #d4af37; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #8c9b93; font-weight: 300; letter-spacing: 1.5px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;}
+
+    /* 친절하고 전문적인 장문 텍스트 패널 */
+    .text-panel { background: rgba(22, 33, 27, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #23362c; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #d4af37; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #23362c; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d1d5e0; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #d1d5e0; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    /* 카테고리 리스트 영역 */
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 450px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #23362c; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #16211b;
+        border: 1px solid #23362c;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 30px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16.5px; font-weight: 500; color: #f5f6fa; }
+    .cat-sub { font-size: 13.5px; color: #8c9b93; margin-top: 5px;}
+    
+    .cat-card.selected { 
+        border-color: #d4af37; 
+        background: #1f3026;
+    }
+    .cat-card.selected .cat-title { color: #d4af37; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: linear-gradient(135deg, #d4af37, #f3e5ab);
+        border: none; border-radius: 12px; 
+        color: #0a100d; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+    .submit-btn:disabled { 
+        background: #1f3026; color: #6a7c72; border: 1px solid #23362c; box-shadow: none;
+    }
+
+    /* 철벽 면책 조항 */
+    .disclaimer-box { background: rgba(231, 76, 60, 0.05); border: 1px solid rgba(231, 76, 60, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #e74c3c; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #8c9b93; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    /* 모달 및 결과 스타일 */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6, 10, 8, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #111b15; border-radius: 16px; padding: 30px 20px; border: 1px solid #d4af37; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #23362c;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #d4af37; }
+
+    /* 종업원에게 보여주기 카드 (킥 포인트) */
+    .waiter-card { background: #ffffff; border-radius: 12px; padding: 25px; margin-bottom: 25px; text-align: center; border: 3px solid #e74c3c;}
+    .waiter-title { color: #e74c3c; font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .waiter-korean { color: #000000; font-size: 24px; font-weight: 700; line-height: 1.5; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #23362c;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #16211b;}
+    .size-table th { background: #1f3026; color: #d4af37; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #23362c;}
+    .size-table td { padding: 14px 10px; color: #d1d5e0; border-bottom: 1px solid #23362c;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #19261e; }
+    
+    .table-tip { color: #d1d5e0; font-size: 14.5px; line-height: 1.7; background: #1f3026; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #1f3026; border: 1px solid #d4af37; border-radius: 12px; color: #d4af37; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #d4af37; color: #0a100d; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Menu Decoder</div>
+        <div class="sub-title">Your Premium Allergy &amp; Diet Guardian</div>
+    </div>
+
+    <!--VIP 가이드 패널-->
+    <div class="text-panel">
+        <div class="panel-title">✨ Dine Safely in South Korea</div>
+        <div class="panel-desc">
+            Welcome to your ultimate dining concierge! Korean cuisine is globally celebrated for its rich flavors, fermented sauces, and unique cooking methods. However, navigating a local Korean menu can be incredibly challenging if you have specific dietary restrictions, severe allergies, or religious food requirements.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            We designed this premium, fully offline guide to help you decode hidden ingredients. Whether you need to avoid meat broths, uncover hidden shellfish in Kimchi, or find Halal-friendly options, this app acts as your personal translator. Simply select your category and show the generated Korean card directly to the restaurant staff.
+        </div>
+    </div>
+
+    <!--로컬 다이닝 꿀팁-->
+    <div class="text-panel">
+        <div class="panel-title">💡 Golden Tips for Ordering</div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li><strong>Show the Translation Card:</strong> Do not rely on English explanations. Select your diet below and show the bright Korean translation card directly to the waiter before ordering.</li>
+            <li><strong>Beware of Hidden Broths:</strong> Many seemingly vegetarian Korean dishes (like stews or cold noodles) use beef or anchovy broth as a base. Always confirm using our cards.</li>
+            <li><strong>Kimchi Caution:</strong> Traditional Korean Kimchi almost always contains fermented shrimp or fish sauce (Jeotgal), which is critical information for vegans and those with seafood allergies.</li>
+        </ul>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 10개 삽입 영역 (ES5)-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Diet to Generate Card
+    </button>
+
+    <!--사장님 보호를 위한 철벽 면책 조항-->
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Legal &amp; Medical Disclaimer</div>
+        <div class="disclaimer-text">
+            Please read carefully: The information provided in this application is based on standard, traditional Korean recipes. However, ingredients, cooking methods, and cross-contamination risks can vary significantly between different restaurants and individual chefs. This app is designed solely as a communication aid and does not guarantee the absolute safety of any food item. Always double-check with the restaurant staff using the provided translation cards before consuming any food. The creators and developers of this guide hold absolutely no legal responsibility for allergic reactions, medical emergencies, illness, or general dissatisfaction resulting from the use of this application. By using this app, you accept full responsibility for your dining choices.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🍽️</div>
+            <div class="modal-title" id="modal-title">Dietary Guide</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 럭셔리 파티클 효과 (모바일 대응 ES5)
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 1. 10개로 꽉 채운 획기적인 알레르기/다이닝 카테고리
+    var catDB = [
+        { id: "T1", emoji: "🥜", title: "Peanut & Nut Allergy", sub: "Avoid nuts and peanut oils" },
+        { id: "T2", emoji: "🦐", title: "Seafood & Shellfish", sub: "Avoid shrimp, crab, fish sauce" },
+        { id: "T3", emoji: "🥩", title: "Vegan & Vegetarian", sub: "Strictly no meat, fish, or egg" },
+        { id: "T4", emoji: "🐷", title: "Pork-Free Diet", sub: "No pork meat, lard, or broth" },
+        { id: "T5", emoji: "🕌", title: "Halal-Friendly Guide", sub: "No pork, no alcohol ingredients" },
+        { id: "T6", emoji: "🌾", title: "Gluten-Free Guide", sub: "Avoid wheat, soy sauce, noodles" },
+        { id: "T7", emoji: "🥛", title: "Dairy-Free Diet", sub: "Avoid milk, cheese, butter" },
+        { id: "T8", emoji: "🌶️", title: "Zero Spice Tolerance", sub: "Strictly no chili or gochugaru" },
+        { id: "T9", emoji: "🧄", title: "Garlic & Onion Allergy", sub: "Avoid all allium ingredients" },
+        { id: "T10", emoji: "🆘", title: "General Emergency Card", sub: "Basic communication for waiters" }
+    ];
+
+    // 💡 2. ES5 테이블 데이터 및 오프라인 번역 카드 10개 (최신 문법 제거, 텍스트 안전 결합)
+    var tableDB = {
+        "T1": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 땅콩 및 견과류 알레르기가 심합니다. 음식에 견과류나 땅콩기름이 들어가면 절대 안 됩니다. 빼주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>High Risk Foods</th><th>Hidden Dangers</th></tr>" +
+              "<tr><td>Kong-guksu (Cold Bean Soup)</td><td>May contain peanut powder</td></tr>" +
+              "<tr><td>Ssamjang (Dipping Sauce)</td><td>Often mixed with crushed nuts</td></tr>" +
+              "<tr><td>Hotteok (Sweet Pancake)</td><td>Filled with seeds and peanuts</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Warning:</strong> Korean cuisine does not use peanuts as heavily as Southeast Asian food, but nuts are often used as garnishes. Always show the card.</div>",
+              
+        "T2": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 해산물, 갑각류(새우, 게) 알레르기가 심합니다. 새우젓이나 해산물 육수가 들어간 음식을 먹으면 위험합니다.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>High Risk Foods</th><th>Hidden Dangers</th></tr>" +
+              "<tr><td>Kimchi</td><td>Contains fermented shrimp/fish sauce</td></tr>" +
+              "<tr><td>Doenjang Jjigae (Stew)</td><td>Often uses anchovy or clam broth</td></tr>" +
+              "<tr><td>Sundubu Jjigae</td><td>Usually contains mixed seafood</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Warning:</strong> Seafood broth (anchovy/kelp) and shrimp paste (Jeotgal) are the absolute foundation of Korean soups and Kimchi. Be extremely cautious.</div>",
+              
+        "T3": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 비건(채식주의자)입니다. 고기, 생선, 해산물, 새우젓, 고기 육수, 계란을 모두 빼주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Safe Options (Verify)</th><th>Avoid (Contains Meat/Broth)</th></tr>" +
+              "<tr><td>Bibimbap (Ask: No Egg/Meat)</td><td>Naengmyeon (Beef broth)</td></tr>" +
+              "<tr><td>Vegetable Kimbap</td><td>Standard Kimchi Jjigae</td></tr>" +
+              "<tr><td>Temple Food (Sachal Eumsik)</td><td>Tteokbokki (Fish cakes included)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Being vegan is challenging in Korea. Look for 'Temple Food' restaurants which are strictly vegan and use no garlic or onions.</div>",
+              
+        "T4": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 돼지고기를 절대 먹지 않습니다. 음식과 육수에 돼지고기나 라드가 들어가면 안 됩니다.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Safe Beef/Chicken</th><th>Strictly Avoid (Pork)</th></tr>" +
+              "<tr><td>Bulgogi (Marinated Beef)</td><td>Samgyeopsal (Pork Belly)</td></tr>" +
+              "<tr><td>Dak-galbi (Spicy Chicken)</td><td>Jajangmyeon (Pork in sauce)</td></tr>" +
+              "<tr><td>Samgyetang (Ginseng Chicken)</td><td>Kimchi Jjigae (Often uses pork)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Many traditional stews use pork fat or pork pieces for flavor. When ordering Jajangmyeon (Black Bean Noodles), assume it contains pork unless stated otherwise.</div>",
+
+        "T5": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 할랄 음식을 먹습니다. 돼지고기나 알코올(술, 맛술)이 전혀 들어가지 않은 음식만 먹을 수 있습니다.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Halal Friendly (Verify)</th><th>Avoid Completely</th></tr>" +
+              "<tr><td>Grilled Fish (Saengseon Gui)</td><td>Any dish with Mirin (Cooking wine)</td></tr>" +
+              "<tr><td>Vegetable Bibimbap</td><td>Pork BBQ & Mandu (Dumplings)</td></tr>" +
+              "<tr><td>Halal Certified Restaurants</td><td>Soy sauce marinades (May contain alcohol)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Itaewon is the best district in Seoul for finding officially certified Halal restaurants. Traditional soy sauce (Ganjang) sometimes contains trace alcohol.</div>",
+              
+        "T6": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 글루텐 알레르기(밀가루)가 있습니다. 밀가루 면이나 일반 간장(밀 함유)이 들어간 음식은 먹을 수 없습니다.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Safer Options (Ask first)</th><th>High Risk (Gluten)</th></tr>" +
+              "<tr><td>Plain White Rice (Bap)</td><td>Ganjang (Most Soy Sauce has wheat)</td></tr>" +
+              "<tr><td>Unmarinated BBQ (Beef/Pork)</td><td>Gochujang (Chili paste often has wheat)</td></tr>" +
+              "<tr><td>Salt-based soups (Gomtang)</td><td>All Noodles (Ramen, Kalguksu) & Jeon</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Warning:</strong> Korean marinades rely heavily on Soy Sauce and Gochujang, both of which typically contain wheat. Stick to unmarinated BBQ with salt.</div>",
+
+        "T7": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 유제품(우유, 버터, 치즈) 알레르기가 있습니다. 유제품을 모두 빼주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>General Korean Diet</th><th>Modern Fusion Traps</th></tr>" +
+              "<tr><td>Traditional Soups (Safe)</td><td>Cheese Tteokbokki</td></tr>" +
+              "<tr><td>BBQ Meats (Safe)</td><td>Rose Sauce (Contains cream/milk)</td></tr>" +
+              "<tr><td>Rice & Banchan (Safe)</td><td>Korean Bakeries (Heavy butter use)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Traditional Korean cuisine is naturally dairy-free! However, modern street food often adds melted cheese or sweet cream to everything.</div>",
+
+        "T8": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 매운 음식을 전혀 못 먹습니다. 고추장, 고춧가루, 청양고추를 아예 빼서 하얗게 만들어 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Non-Spicy Foods</th><th>Hidden Spice Dangers</th></tr>" +
+              "<tr><td>Kalguksu (Noodle Soup)</td><td>'Mild' Kimchi (Still very spicy to some)</td></tr>" +
+              "<tr><td>Gomtang (Beef Bone Soup)</td><td>Ssamjang (Has chili paste inside)</td></tr>" +
+              "<tr><td>Jajangmyeon (Black Bean)</td><td>Clear soups with floating green chilies</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Warning:</strong> A Korean person's standard of 'not spicy' can still burn your mouth. Always emphasize 'ZERO spice' using the card above.</div>",
+
+        "T9": "<div class='waiter-card'><div class='waiter-title'>Show this to the waiter</div>" +
+              "<div class='waiter-korean'>저는 마늘과 양파 알레르기가 있습니다. 마늘, 양파, 파가 들어가지 않은 음식이 있나요?</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Dietary Challenge</th><th>Korean Context</th></tr>" +
+              "<tr><td>Garlic (Maneul)</td><td>Used in 95% of Korean recipes</td></tr>" +
+              "<tr><td>Green Onion (Pa)</td><td>Standard garnish on all soups</td></tr>" +
+              "<tr><td>Onion (Yangpa)</td><td>Base for almost all stews</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Avoiding garlic in Korea is incredibly difficult. Your safest option is to eat Buddhist Temple Food, which strictly forbids the use of garlic and onions.</div>",
+
+        "T10": "<div class='waiter-card'><div class='waiter-title'>General SOS Card</div>" +
+              "<div class='waiter-korean'>고수(Cilantro) 빼주세요.<br>물이랑 냅킨 좀 주세요.<br>계산해 주세요.</div></div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English</th><th>Korean Pronunciation</th></tr>" +
+              "<tr><td>No Cilantro</td><td>Gosu ppae-ju-se-yo</td></tr>" +
+              "<tr><td>Water please</td><td>Mul ju-se-yo</td></tr>" +
+              "<tr><td>Bill please</td><td>Gye-san hae-ju-se-yo</td></tr>" +
+              "<tr><td>It is delicious</td><td>Ma-shi-sseo-yo</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Etiquette:</strong> In many Korean restaurants, you press a call button on the table rather than waving your hand. You also pay at the front counter when leaving.</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    // 카테고리 렌더링 (ES5)
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Generate Translated Card";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ⚠️ 에러 방지 안전장치: 이중 우회 전면광고 로직 (ES5)
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        // 앱인벤터 통신 실패 시 0.5초 뒤 강제로 URL 파라미터 새로고침 발생 (안전장치 떡칠)
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Translation...";
+        triggerAdAndMove(selectedId);
+    });
+
+    // URL 로직 파싱 및 결과 렌더링
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Diet to Generate Card";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
