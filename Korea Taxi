@@ -1,0 +1,391 @@
+<!--구글 블로거 전용: Korea Taxi & Transit Guide (교통 컨시어지, 15종 MAX 데이터, 초대형 폰트, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #121212 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f8f9fa; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #ffc107 0%, rgba(255,193,7,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.2; }
+        80% { opacity: 0.1; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 30px; font-weight: 700; color: #ffc107; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #a1a1aa; font-weight: 400; letter-spacing: 1px; border-bottom: 2px solid rgba(255, 193, 7, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: #1e1e1e; border-radius: 12px; padding: 25px; border: 1px solid #333333; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #ffc107; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #333333; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d4d4d8; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #d4d4d8; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 500px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #1e1e1e;
+        border: 1px solid #333333;
+        border-left: 5px solid #ffc107;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16px; font-weight: 500; color: #ffffff; }
+    .cat-sub { font-size: 13px; color: #a1a1aa; margin-top: 5px;}
+    
+    .cat-card.selected { border-color: #ffc107; background: #2a2a2a; }
+    .cat-card.selected .cat-title { color: #ffc107; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #ffc107;
+        border: none; border-radius: 12px; 
+        color: #121212; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+    }
+    .submit-btn:disabled { background: #333333; color: #71717a; border: 1px solid #3f3f46; box-shadow: none; }
+
+    .disclaimer-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #ef4444; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #a1a1aa; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1e1e1e; border-radius: 16px; padding: 30px 20px; border: 1px solid #ffc107; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #333333;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #ffc107; }
+
+    /* 기사님 맞춤형 초대형 디지털 카드 (시인성 극대화) */
+    .driver-card { background: #ffffff; border-radius: 12px; padding: 35px 20px; margin-bottom: 25px; text-align: center; border: 5px solid #ffc107;}
+    .driver-title { color: #d97706; font-size: 15px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px;}
+    .driver-korean { color: #000000; font-size: 32px; font-weight: 800; line-height: 1.4; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333333;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #1e1e1e;}
+    .size-table th { background: #2a2a2a; color: #ffc107; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #333333;}
+    .size-table td { padding: 14px 10px; color: #d4d4d8; border-bottom: 1px solid #333333;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #242424; }
+    
+    .table-tip { color: #d4d4d8; font-size: 14.5px; line-height: 1.7; background: #2a2a2a; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #1e1e1e; border: 1px solid #ffc107; border-radius: 12px; color: #ffc107; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #ffc107; color: #121212; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Korea Taxi &amp; Transit</div>
+        <div class="sub-title">Your Essential Transportation Companion</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🚕 Ride Safely in South Korea</div>
+        <div class="panel-desc">
+            Korean taxis and public transit are highly efficient, but language barriers can cause serious misunderstandings. Many local taxi drivers may have difficulty reading small English text on your map app, and explaining complex requests can be stressful.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            We created this reliable concierge to act as your digital flashcard. Choose your destination or request, and the app will generate a massive, high-contrast Korean text card. Just show your screen to the driver or staff for a seamless journey!
+        </div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">💡 Essential Transit Tips</div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li><strong>Show the Large Card:</strong> Do not just point at your phone. Tap a request below and show the giant Korean text directly to the driver.</li>
+            <li><strong>Always Use the Meter:</strong> Refuse taxis that try to negotiate a fixed price before starting. Our cards will help you insist on the meter.</li>
+            <li><strong>T-Money is Key:</strong> T-Money cards work for subways, buses, and 99% of taxis. You can recharge them at any convenience store.</li>
+        </ul>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 15종 (MAX) 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Request to View Card
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Disclaimer &amp; Terms of Use</div>
+        <div class="disclaimer-text">
+            Please note: This application provides translated phrases to assist you in communicating with local drivers and transit staff. It is a communication tool only. We do not operate taxi services and cannot guarantee the behavior, routes, or pricing of individual drivers. Always ensure the taxi meter is turned on at the start of your journey. The creators of this application hold no legal responsibility for any fare disputes, lost items, travel delays, or any other issues encountered while using public transportation or taxis in South Korea. By using this application, you agree to assume all responsibilities for your travel choices.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🚕</div>
+            <div class="modal-title" id="modal-title">Show to Driver</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 💡 15종 MAX 데이터 확장 (택시, 버스, KTX, 돌발상황 모두 커버)
+    var catDB = [
+        { id: "T1", emoji: "✈️", title: "Go to Airport", sub: "Incheon / Gimpo drop-off" },
+        { id: "T2", emoji: "🏨", title: "Go to Address", sub: "Take me to this exact location" },
+        { id: "T3", emoji: "📍", title: "Follow the GPS", sub: "Please follow map navigation" },
+        { id: "T4", emoji: "🧳", title: "Open the Trunk", sub: "I have luggage for the back" },
+        { id: "T5", emoji: "🛑", title: "Stop Here Please", sub: "Pull over right here" },
+        { id: "T6", emoji: "💳", title: "Pay by Card / T-Money", sub: "I will pay with credit card" },
+        { id: "T7", emoji: "🚕", title: "Use the Meter", sub: "Turn on the taxi meter please" },
+        { id: "T8", emoji: "🧾", title: "Get a Receipt", sub: "I need a receipt for this ride" },
+        { id: "T9", emoji: "🛣️", title: "Toll Gate Fee", sub: "Include toll in the final fare" },
+        { id: "T10", emoji: "🤢", title: "Drive Slowly / Sick", sub: "I feel sick, please slow down" },
+        { id: "T11", emoji: "❄️", title: "A/C & Heater Control", sub: "Too hot/cold in the car" },
+        { id: "T12", emoji: "🚌", title: "Bus Route Check", sub: "Does this go to my stop?" },
+        { id: "T13", emoji: "🚆", title: "Subway / KTX Help", sub: "Where is the train platform?" },
+        { id: "T14", emoji: "🏪", title: "Recharge T-Money", sub: "Add money to my transit card" },
+        { id: "T15", emoji: "🆘", title: "Lost Bag / Police", sub: "I left my item / Call 112" }
+    ];
+
+    var tableDB = {
+        "T1": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>인천 / 김포 공항으로 가주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Highway toll fees will be added to the final fare when traveling to Incheon Airport. This is standard practice.</div>",
+              
+        "T2": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>제 휴대폰 지도의 이 주소로 가주세요.</div></div>" +
+              "<div class='table-tip'><strong>Action:</strong> Show this card, then immediately show your map app (like Google/Naver Maps) with the destination clearly marked.</div>",
+              
+        "T3": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>내비게이션(GPS) 경로를 따라서 가주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> This politely asks the driver to follow the most efficient GPS route without unnecessary detours.</div>",
+              
+        "T4": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>뒤에 실을 짐이 있습니다.<br>차 트렁크 좀 열어주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Taxi trunks run on an automatic switch from the driver's seat. Show this card before trying to open it yourself.</div>",
+
+        "T5": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>다 왔습니다.<br>여기서 바로 세워주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Show this card as you approach your destination, or gently point to the side of the road.</div>",
+              
+        "T6": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>결제는 신용카드(또는 티머니)로 하겠습니다.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> 99% of taxis accept credit cards and T-Money. Just tap your card on the terminal between the front seats.</div>",
+
+        "T7": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>출발 전 미터기를 꼭 켜주세요.</div></div>" +
+              "<div class='table-tip'><strong>Important:</strong> It is illegal for regular taxis to demand a flat rate. If they refuse to use the meter, find another taxi.</div>",
+
+        "T8": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>결제 영수증을 꼭 출력해 주세요.</div></div>" +
+              "<div class='table-tip'><strong>Crucial Tip:</strong> Always ask for a receipt! It contains the taxi license plate number, which is vital if you leave a bag or phone in the car.</div>",
+
+        "T9": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>고속도로 톨게이트 비용은 마지막 요금에 포함해서 결제할게요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> You do not need to hand cash to the driver at the toll gate. The driver pays first and adds it to your final meter fare.</div>",
+
+        "T10": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>속이 안 좋아서 멀미가 납니다.<br>조금만 천천히 운전해 주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Korean taxi drivers are known for being very fast. Show this if you are feeling carsick.</div>",
+
+        "T11": "<div class='driver-card'><div class='driver-title'>SHOW TO DRIVER</div>" +
+              "<div class='driver-korean'>에어컨(또는 히터) 온도를 조금만 조절해 주시겠어요?</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Use hand gestures (fanning yourself or rubbing your arms) while showing this card to indicate if you are too hot or too cold.</div>",
+
+        "T12": "<div class='driver-card'><div class='driver-title'>SHOW TO BUS DRIVER</div>" +
+              "<div class='driver-korean'>이 버스가 제 휴대폰에 적힌 목적지로 가는 방향이 맞나요?</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Show this card along with your destination on your map to the bus driver before tapping your T-money card.</div>",
+
+        "T13": "<div class='driver-card'><div class='driver-title'>SHOW TO STATION STAFF</div>" +
+              "<div class='driver-korean'>제가 타야 할 기차(지하철) 플랫폼이 어디인지 알려주세요.</div></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Large stations like Seoul Station can be confusing. Show this to the information desk along with your train ticket.</div>",
+
+        "T14": "<div class='driver-card'><div class='driver-title'>SHOW TO CASHIER</div>" +
+              "<div class='driver-korean'>이 티머니(교통카드)에 현금으로 충전해 주세요.</div></div>" +
+              "<div class='table-tip'><strong>Important:</strong> You can recharge T-Money cards at any convenience store (CU, GS25, 7-Eleven), but you MUST pay for the recharge with CASH.</div>",
+
+        "T15": "<div class='driver-card'><div class='driver-title'>EMERGENCY SOS</div>" +
+              "<div class='driver-korean'>도와주세요! 택시/버스에 물건을 두고 내렸습니다. / 지금 경찰이 필요합니다.</div></div>" +
+              "<div class='table-tip'><strong>Emergency info:</strong> Call 112 for Police. Call 1330 for the Tourist Police (they provide translation and help track lost items on transit).</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Generate Translation Card";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ⚠️ 에러 방지 안전장치: 이중 우회 전면광고 로직
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Translation...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Request to View Card";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
