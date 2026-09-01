@@ -1,0 +1,449 @@
+<!--구글 블로거 전용: Korea Room & Airbnb Survival (숙소 컨시어지, 20종 MAX, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #121212 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f3f4f6; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #fbbf24 0%, rgba(251,191,36,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 28px; font-weight: 700; color: #fbbf24; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #9ca3af; font-weight: 400; letter-spacing: 1px; border-bottom: 2px solid rgba(251, 191, 36, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: #1f2937; border-radius: 12px; padding: 25px; border: 1px solid #374151; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #fbbf24; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #374151; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d1d5db; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #d1d5db; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 500px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #1f2937;
+        border: 1px solid #374151;
+        border-left: 5px solid #fbbf24;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16px; font-weight: 500; color: #f9fafb; }
+    .cat-sub { font-size: 13px; color: #9ca3af; margin-top: 5px;}
+    
+    .cat-card.selected { border-color: #fbbf24; background: #374151; }
+    .cat-card.selected .cat-title { color: #fbbf24; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #fbbf24;
+        border: none; border-radius: 12px; 
+        color: #111827; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
+    }
+    .submit-btn:disabled { background: #374151; color: #9ca3af; border: 1px solid #4b5563; box-shadow: none; }
+
+    .disclaimer-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #ef4444; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #d1d5db; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1f2937; border-radius: 16px; padding: 30px 20px; border: 1px solid #fbbf24; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #374151;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #fbbf24; }
+
+    .host-card { background: #111827; border-radius: 12px; padding: 30px 20px; margin-bottom: 25px; text-align: center; border: 3px solid #fbbf24;}
+    .host-title { color: #f59e0b; font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .host-korean { color: #f9fafb; font-size: 22px; font-weight: 600; line-height: 1.5; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #374151;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #1f2937;}
+    .size-table th { background: #374151; color: #fbbf24; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #4b5563;}
+    .size-table td { padding: 14px 10px; color: #e5e7eb; border-bottom: 1px solid #374151;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #111827; }
+    
+    .table-tip { color: #d1d5db; font-size: 14.5px; line-height: 1.7; background: #111827; padding: 15px; border-radius: 8px; border-left: 4px solid #fbbf24; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #1f2937; border: 1px solid #fbbf24; border-radius: 12px; color: #fbbf24; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #fbbf24; color: #111827; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Room &amp; Airbnb Survival</div>
+        <div class="sub-title">Your Ultimate Accommodation Guide</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🛏️ Navigate Korean Rooms</div>
+        <div class="panel-desc">
+            Korean accommodations often feature advanced appliances like floor heating (Ondol), complex washing machines, and strict recycling rules that can be confusing for travelers.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            This guide helps you decode Korean buttons on appliances and provides ready-to-use Korean messages to communicate smoothly with your host or hotel front desk.
+        </div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">💡 Survival Tips</div>
+        <ul class="info-list" style="margin-bottom: 0px;">
+            <li><strong>Match the Words:</strong> Compare the Korean keywords in our guide with the buttons on your remote or appliance.</li>
+            <li><strong>Show or Copy:</strong> If you need help, show the generated Korean text card to the front desk, or copy it and send it to your Airbnb host.</li>
+            <li><strong>Follow House Rules:</strong> Always prioritize your specific host's house manual regarding trash and appliances.</li>
+        </ul>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 20종 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Category
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Disclaimer &amp; Terms of Use</div>
+        <div class="disclaimer-text">
+            This application is a keyword translation and communication tool designed for general guidance. It is not an official manual for any specific brand of appliance. Accommodation rules, trash sorting laws, and appliance functions vary greatly by location. <strong>Always prioritize and strictly follow the specific house manual provided by your host or hotel.</strong> The developers of this application hold absolutely no legal responsibility for any appliance damage, fines from incorrect trash disposal, plumbing issues, or any disputes with hosts resulting from the use of this app. By using this tool, you assume all risks and responsibilities.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🏠</div>
+            <div class="modal-title" id="modal-title">Room Guide</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 20종 방치형 MAX 데이터 (가전제품 해독 + 호스트 소통 만능 도구)
+    var catDB = [
+        { id: "R1", emoji: "🔥", title: "Boiler / Floor Heating", sub: "Decode the Ondol controller" },
+        { id: "R2", emoji: "❄️", title: "Air Conditioner (A/C)", sub: "Translate the A/C remote" },
+        { id: "R3", emoji: "👕", title: "Washing Machine", sub: "How to wash your clothes" },
+        { id: "R4", emoji: "📺", title: "TV & Remote Control", sub: "Turn on the TV & Cable" },
+        { id: "R5", emoji: "🚽", title: "Bidet & Toilet Buttons", sub: "Translate smart toilet buttons" },
+        { id: "R6", emoji: "💡", title: "Lighting & Switches", sub: "Main room & bathroom lights" },
+        { id: "R7", emoji: "🗑️", title: "General Trash Rule", sub: "How to use the white bags" },
+        { id: "R8", emoji: "♻️", title: "Recycling Rules", sub: "Plastics, cans, and glass" },
+        { id: "R9", emoji: "🍗", title: "Food Waste Rules", sub: "Special bags for food scraps" },
+        { id: "R10", emoji: "🛵", title: "Delivery Food Etiquette", sub: "Leave it at the door request" },
+        { id: "R11", emoji: "📶", title: "Wi-Fi Is Not Working", sub: "Message host about internet" },
+        { id: "R12", emoji: "🚿", title: "No Hot Water", sub: "Message host about shower" },
+        { id: "R13", emoji: "🧻", title: "Need More Towels/Paper", sub: "Request supplies from host" },
+        { id: "R14", emoji: "🔊", title: "Too Much Noise", sub: "Complain about noisy neighbors" },
+        { id: "R15", emoji: "🪠", title: "Toilet/Drain is Clogged", sub: "Report plumbing issues" },
+        { id: "R16", emoji: "🚪", title: "Early Check-in", sub: "Ask to enter the room early" },
+        { id: "R17", emoji: "⏳", title: "Late Check-out", sub: "Ask for extra time to leave" },
+        { id: "R18", emoji: "🧳", title: "Luggage Storage", sub: "Ask to leave bags after checkout" },
+        { id: "R19", emoji: "🚕", title: "Call a Taxi", sub: "Ask the front desk for a taxi" },
+        { id: "R20", emoji: "🚑", title: "Medical Emergency", sub: "Ask host for a hospital/pharmacy" }
+    ];
+
+    var tableDB = {
+        "R1": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Power On/Off</td><td>전원 (Jeon-won)</td></tr>" +
+              "<tr><td>Indoor Heating</td><td>실내 (Sil-nae)</td></tr>" +
+              "<tr><td>Hot Water Only</td><td>온수 전용 (On-su jeon-yong)</td></tr>" +
+              "<tr><td>Away/Outing Mode</td><td>외출 (Oe-chul)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Floor heating (Ondol) takes about 30 minutes to warm up. When you leave for the day, do not turn it off completely; press the '외출' (Away) button to save energy.</div>",
+
+        "R2": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Power</td><td>전원 (Jeon-won)</td></tr>" +
+              "<tr><td>Cooling Mode</td><td>냉방 (Naeng-bang)</td></tr>" +
+              "<tr><td>Dehumidifier Mode</td><td>제습 (Je-seup)</td></tr>" +
+              "<tr><td>Temp Up/Down</td><td>온도 올림/내림</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> During the humid Korean summer, the '제습' (Dehumidifier) mode is often more comfortable than standard cooling.</div>",
+
+        "R3": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Power</td><td>전원 (Jeon-won)</td></tr>" +
+              "<tr><td>Standard Wash</td><td>표준 (Pyo-jun)</td></tr>" +
+              "<tr><td>Start / Pause</td><td>동작 / 일시정지</td></tr>" +
+              "<tr><td>Spin Dry</td><td>탈수 (Tal-su)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Put your clothes and detergent in, press '전원' (Power), then just press '동작' (Start). It will automatically measure the weight and start the standard wash.</div>",
+
+        "R4": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>TV Power</td><td>TV 전원</td></tr>" +
+              "<tr><td>Cable Box Power</td><td>셋톱박스 전원</td></tr>" +
+              "<tr><td>Volume Up/Down</td><td>음량 (Eum-ryang)</td></tr>" +
+              "<tr><td>External Input</td><td>외부입력 (HDMI)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> In Korea, you usually need to turn on BOTH the TV monitor and the Cable Box (셋톱박스). Look for a remote with two power buttons.</div>",
+
+        "R5": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Stop</td><td>정지 (Jeong-ji)</td></tr>" +
+              "<tr><td>Wash / Cleansing</td><td>세정 (Se-jeong)</td></tr>" +
+              "<tr><td>Bidet (For Women)</td><td>비데 (Bi-de)</td></tr>" +
+              "<tr><td>Flush</td><td>물내림 (Mul-nae-rim)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> The most important button is '정지' (Stop) which usually has a square icon. Press it anytime to stop the water spray immediately.</div>",
+
+        "R6": "<div class='host-title'>APPLIANCE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English Meaning</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Living Room</td><td>거실 (Geo-sil)</td></tr>" +
+              "<tr><td>Bedroom</td><td>방 (Bang) / 침실</td></tr>" +
+              "<tr><td>Bathroom</td><td>욕실 (Yok-sil) / 화장실</td></tr>" +
+              "<tr><td>Exhaust Fan</td><td>환풍기 (Hwan-pung-gi)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> In modern apartments, lights are often controlled by a digital touch pad on the wall near the entrance.</div>",
+
+        "R7": "<div class='host-title'>CULTURE SURVIVAL</div>" +
+              "<div class='table-tip'><strong>General Trash (일반 쓰레기):</strong> In South Korea, you CANNOT throw trash in plastic shopping bags. You must buy an official government-issued trash bag (usually white or green) from a convenience store. Ask the cashier for 'Il-ban Sseu-re-gi Bong-tu' (일반 쓰레기 봉투).</div>" +
+              "<div class='table-tip'><strong>Warning:</strong> Throwing trash illegally can result in heavy fines for both you and your host.</div>",
+
+        "R8": "<div class='host-title'>CULTURE SURVIVAL</div>" +
+              "<div class='table-tip'><strong>Recycling (분리수거):</strong> Korea has strict recycling rules. You do not need a special bag for this. Just separate items into clear bags or boxes based on material: Plastics (페트/플라스틱), Paper (종이), Cans (캔), and Glass (유리). Please rinse food containers before recycling them!</div>",
+
+        "R9": "<div class='host-title'>CULTURE SURVIVAL</div>" +
+              "<div class='table-tip'><strong>Food Waste (음식물 쓰레기):</strong> Food scraps must be separated from general trash. You must buy a special food waste bag (usually yellow) from a convenience store. Ask for 'Eum-sik-mul Bong-tu' (음식물 봉투). Remove any bones, shells, or tea bags—these go in general trash!</div>",
+
+        "R10": "<div class='host-card'><div class='host-title'>DELIVERY MESSAGE (COPY & PASTE)</div>" +
+              "<div class='host-korean'>문 앞에 두고 가주세요. 초인종은 누르지 마세요. 감사합니다.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Please leave it at the door. Do not ring the doorbell. Thank you.</div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Paste this into the delivery app request box (Coupang Eats, Baemin) for contactless delivery.</div>",
+
+        "R11": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 방에 와이파이(인터넷)가 연결되지 않습니다. 확인 부탁드립니다.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. The Wi-Fi (internet) in the room is not connecting. Please check it.</div>",
+
+        "R12": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 화장실에 따뜻한 물(온수)이 나오지 않습니다. 보일러 확인 부탁드립니다.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. There is no hot water in the bathroom. Please check the boiler.</div>",
+
+        "R13": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 방에 수건과 휴지, 생수가 부족합니다. 더 받을 수 있을까요?</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. We are short on towels, toilet paper, and bottled water. Can we get some more?</div>",
+
+        "R14": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 주변 방(이웃)에서 나는 소음이 너무 심해서 잠을 잘 수가 없습니다. 조치 부탁드립니다.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. The noise from the neighboring room is too loud and I cannot sleep. Please take action.</div>",
+
+        "R15": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 화장실 변기(또는 샤워실 배수구)가 막혀서 물이 내려가지 않습니다. 도와주세요.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. The toilet (or shower drain) is clogged and the water is not going down. Please help.</div>",
+
+        "R16": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 혹시 원래 시간보다 조금 더 일찍 체크인(얼리 체크인)을 할 수 있을까요?</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. Is it possible to check in a little earlier than the original time (Early check-in)?</div>",
+
+        "R17": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 혹시 체크아웃 시간을 조금 더 늦출 수 있을까요? (레이트 체크아웃) 추가 비용이 있다면 알려주세요.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. Is it possible to delay the checkout time a bit? (Late checkout). Let me know if there is an extra fee.</div>",
+
+        "R18": "<div class='host-card'><div class='host-title'>SEND TO HOST (COPY & PASTE)</div>" +
+              "<div class='host-korean'>안녕하세요. 체크아웃 후에 저희 짐(가방)을 몇 시간 정도 숙소에 맡겨둘 수 있을까요?</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. After checkout, can we leave our luggage (bags) at the accommodation for a few hours?</div>",
+
+        "R19": "<div class='host-card'><div class='host-title'>SHOW TO FRONT DESK</div>" +
+              "<div class='host-korean'>안녕하세요. 지금 외출하려고 하는데, 호텔 앞으로 택시를 한 대 불러주실 수 있나요?</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. I am about to head out, could you please call a taxi to the front of the hotel?</div>",
+
+        "R20": "<div class='host-card'><div class='host-title'>SEND TO HOST (URGENT)</div>" +
+              "<div class='host-korean'>안녕하세요. 지금 일행이 많이 아픕니다. 근처에 문을 연 병원이나 약국을 알려주시거나 구급차(119)를 불러주실 수 있나요?</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Hello. My companion is very sick. Can you tell me a nearby open hospital/pharmacy, or call an ambulance (119)?</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "View Survival Card";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Translation...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Category";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
