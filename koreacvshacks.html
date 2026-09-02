@@ -1,0 +1,442 @@
+<!--구글 블로거 전용: Korea Convenience Store Hacks (편의점 컨시어지, 20종 MAX, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0B1120 !important; /* 딥 네이비 */
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f8fafc; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #38bdf8 0%, rgba(56,189,248,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 28px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #94a3b8; font-weight: 400; letter-spacing: 1px; border-bottom: 2px solid rgba(56, 189, 248, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: #1e293b; border-radius: 12px; padding: 25px; border: 1px solid #334155; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #38bdf8; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #334155; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #cbd5e1; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .info-list { margin: 0; padding-left: 20px; font-size: 14.5px; color: #cbd5e1; line-height: 1.85; margin-bottom: 15px;}
+    .info-list li { margin-bottom: 12px; }
+
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 500px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #475569; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-left: 5px solid #38bdf8;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16px; font-weight: 500; color: #f8fafc; }
+    .cat-sub { font-size: 13px; color: #94a3b8; margin-top: 5px;}
+    
+    .cat-card.selected { border-color: #38bdf8; background: #334155; }
+    .cat-card.selected .cat-title { color: #38bdf8; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #38bdf8;
+        border: none; border-radius: 12px; 
+        color: #0f172a; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+    }
+    .submit-btn:disabled { background: #334155; color: #94a3b8; border: 1px solid #475569; box-shadow: none; }
+
+    .disclaimer-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #ef4444; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #cbd5e1; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #1e293b; border-radius: 16px; padding: 30px 20px; border: 1px solid #38bdf8; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #334155;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #38bdf8; }
+
+    .host-card { background: #0f172a; border-radius: 12px; padding: 30px 20px; margin-bottom: 25px; text-align: center; border: 3px solid #38bdf8;}
+    .host-title { color: #0ea5e9; font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .host-korean { color: #f8fafc; font-size: 24px; font-weight: 600; line-height: 1.5; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #334155;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #1e293b;}
+    .size-table th { background: #334155; color: #38bdf8; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #475569;}
+    .size-table td { padding: 14px 10px; color: #e2e8f0; border-bottom: 1px solid #334155;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #0f172a; }
+    
+    .table-tip { color: #cbd5e1; font-size: 14.5px; line-height: 1.7; background: #0f172a; padding: 15px; border-radius: 8px; border-left: 4px solid #38bdf8; text-align: left; margin-bottom: 20px;}
+    .table-warning { color: #fecaca; font-size: 14.5px; line-height: 1.7; background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #1e293b; border: 1px solid #38bdf8; border-radius: 12px; color: #38bdf8; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #38bdf8; color: #0f172a; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Convenience Store Hacks</div>
+        <div class="sub-title">Master Korean CVS Culture</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🏪 The Ultimate CVS Guide</div>
+        <div class="panel-desc">
+            Korean convenience stores (CU, GS25, 7-Eleven, Emart24) are open 24/7 and offer unique services like instant ramen cookers, ice cup drinks, and complex BOGO (Buy One Get One) promotions.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            This guide decodes confusing machine buttons, explains store etiquette, and provides translation cards so you can communicate easily with cashiers.
+        </div>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 20종 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select a Guide
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Disclaimer &amp; Safety Warning</div>
+        <div class="disclaimer-text">
+            This application is a cultural guide and keyword translation tool. It is not an official manual. Machine interfaces (microwaves, hot water dispensers, ramen cookers) and product availability vary significantly by franchise and branch. We do not provide medical advice. For emergency medicines, always read the physical packaging and consult a pharmacist if unsure. Please handle hot liquids and machines with extreme caution. The developers hold absolutely no legal responsibility for any burns, machine malfunctions, medical issues, or misunderstandings resulting from the use of this app.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🏪</div>
+            <div class="modal-title" id="modal-title">CVS Guide</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 20종 방치형 MAX 데이터 (기기 해독, 쇼핑 문화, 소통 카드)
+    var catDB = [
+        { id: "C1", emoji: "🛒", title: "1+1 & 2+1 Deals", sub: "How to get free items" },
+        { id: "C2", emoji: "💳", title: "T-Money Recharge", sub: "Add cash to transit card" },
+        { id: "C3", emoji: "🧊", title: "Ice Cup & Pouches", sub: "Make instant iced coffee" },
+        { id: "C4", emoji: "🍙", title: "Triangle Kimbap", sub: "How to unwrap it perfectly" },
+        { id: "C5", emoji: "🍜", title: "Ramen Cooker", sub: "Decode the cooking machine" },
+        { id: "C6", emoji: "⏱️", title: "Microwave", sub: "How to heat your food" },
+        { id: "C7", emoji: "☕", title: "Hot Water Dispenser", sub: "Get water for cup noodles" },
+        { id: "C8", emoji: "🛍️", title: "Need a Bag", sub: "Ask cashier for a plastic bag" },
+        { id: "C9", emoji: "🥢", title: "Utensils", sub: "Ask for chopsticks/spoons" },
+        { id: "C10", emoji: "🧾", title: "Receipt", sub: "Throw away or keep receipt" },
+        { id: "C11", emoji: "💊", title: "Emergency Medicine", sub: "Painkillers & Digestives" },
+        { id: "C12", emoji: "🍻", title: "Hangover Cures", sub: "Drinks for after a night out" },
+        { id: "C13", emoji: "💰", title: "Payment Methods", sub: "Cash, Cards, Apple Pay" },
+        { id: "C14", emoji: "🏧", title: "ATM Cash Withdrawal", sub: "Finding global ATMs" },
+        { id: "C15", emoji: "🔋", title: "Power Bank Rental", sub: "Rent a portable charger" },
+        { id: "C16", emoji: "☕", title: "Espresso Machine", sub: "Fresh coffee from the machine" },
+        { id: "C17", emoji: "🍠", title: "Winter Snacks", sub: "Sweet potato & steamed buns" },
+        { id: "C18", emoji: "🛂", title: "Age Verification", sub: "Buying alcohol & cigarettes" },
+        { id: "C19", emoji: "🗑️", title: "Trash Sorting", sub: "How to clean up in-store" },
+        { id: "C20", emoji: "🚻", title: "Restroom Request", sub: "Ask if they have a bathroom" }
+    ];
+
+    var tableDB = {
+        "C1": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>1+1 (Buy 1 Get 1 Free):</strong> Bring TWO items to the counter. You will only pay for one.</div>" +
+              "<div class='table-tip'><strong>2+1 (Buy 2 Get 1 Free):</strong> Bring THREE items to the counter. You will only pay for two.</div>" +
+              "<div class='table-tip'><strong>Cross-Promotion:</strong> If you see a 2+1 tag, you can usually mix different flavors of the SAME brand (e.g., 2 Strawberry Milks + 1 Banana Milk).</div>",
+
+        "C2": "<div class='host-card'><div class='host-title'>SHOW TO CASHIER</div>" +
+              "<div class='host-korean'>이 티머니 카드에 충전해 주세요. 결제는 현금으로 할게요.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Please recharge this T-Money card. I will pay in cash.</div>" +
+              "<div class='table-tip'><strong>Important:</strong> You CANNOT recharge T-Money cards with a credit card. You must hand the cashier physical Korean Won (Cash).</div>",
+
+        "C3": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Go to the freezer section and grab a plastic cup filled with ice.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Go to the drink aisle and grab a liquid pouch (coffee, ade, tea).</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> Take BOTH to the counter to pay. After paying, open the pouch and pour it into the ice cup yourself.</div>",
+
+        "C4": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Triangle Kimbap is wrapped so the seaweed doesn't get soggy. Follow the numbers printed on the plastic:</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Pull the center strip labeled '1' straight down and all the way around the back.</div>" +
+              "<div class='table-tip'><strong>Step 2 & 3:</strong> Gently pull the plastic corner labeled '2' off to the side, then repeat for corner '3'.</div>",
+
+        "C5": "<div class='host-title'>MACHINE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Standard Noodles</td><td>일반면 (Il-ban-myeon)</td></tr>" +
+              "<tr><td>Thick Noodles</td><td>굵은면 (Gulg-eun-myeon)</td></tr>" +
+              "<tr><td>Add Water</td><td>물 추가 (Mul-chu-ga)</td></tr>" +
+              "<tr><td>Add Time</td><td>시간 추가 (Si-gan-chu-ga)</td></tr>" +
+              "<tr><td>Start / Stop</td><td>시작 / 정지</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> You must buy a special paper/foil bowl to use this machine. Put the noodles and powder in the bowl first, press the noodle type button, then press Start.</div>",
+
+        "C6": "<div class='host-title'>MACHINE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Start</td><td>시작 (Si-jak)</td></tr>" +
+              "<tr><td>Stop / Cancel</td><td>취소 (Chwi-so)</td></tr>" +
+              "<tr><td>+30 Seconds</td><td>30초</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Look at the food packaging. It usually says '전자레인지 (Microwave)' followed by a time (e.g., '1분 30초' = 1 min 30 sec).</div>",
+
+        "C7": "<div class='host-title'>MACHINE DECODER</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English</th><th>Korean Keyword</th></tr>" +
+              "<tr><td>Hot Water</td><td>온수 (On-su)</td></tr>" +
+              "<tr><td>Push</td><td>누름 (Nu-reum)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-warning'><strong>Caution:</strong> The water for cup noodles is extremely hot. Some machines require you to press and hold an 'Unlock (잠금해제)' button before pressing 'Push'.</div>",
+
+        "C8": "<div class='host-card'><div class='host-title'>SHOW TO CASHIER</div>" +
+              "<div class='host-korean'>담아갈 비닐봉투(또는 종이봉투) 하나만 주세요.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Please give me a plastic bag (or paper bag) to carry this.</div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Bags cost about 50 to 100 KRW. Some stores only offer eco-friendly or paper bags due to environmental laws.</div>",
+
+        "C9": "<div class='host-card'><div class='host-title'>SHOW TO CASHIER</div>" +
+              "<div class='host-korean'>나무젓가락이랑 숟가락 좀 챙겨주세요. 감사합니다.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Please give me wooden chopsticks and a spoon. Thank you.</div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Sometimes cashiers forget to put utensils in your bag when you buy ramen or bento boxes. Show this card to ask for them.</div>",
+
+        "C10": "<div class='host-card'><div class='host-title'>SHOW TO CASHIER</div>" +
+              "<div class='host-korean'>결제 영수증은 그냥 버려주세요. (또는 영수증 주세요)</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Please throw away the receipt. (Or: Please give me the receipt).</div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Point to the screen and cross your arms to signal 'No receipt', or nod to receive it.</div>",
+
+        "C11": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>English</th><th>Look For (Korean)</th></tr>" +
+              "<tr><td>Painkiller</td><td>타이레놀 (Tylenol)</td></tr>" +
+              "<tr><td>Cold Medicine</td><td>판콜 (Pancol)</td></tr>" +
+              "<tr><td>Digestive Pill</td><td>소화제 (So-hwa-je) / 훼스탈</td></tr>" +
+              "<tr><td>Pain Relief Patch</td><td>파스 (Pas)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-warning'><strong>Warning:</strong> By law, you can only buy ONE pack of the same medicine per transaction. We do not provide medical advice. Consult a doctor or pharmacist for serious symptoms.</div>",
+
+        "C12": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Koreans love hangover drinks (숙취해소제). You can find them in small glass bottles near the cash register or in the fridge.</div>" +
+              "<div class='table-tip'><strong>Popular Brands:</strong> Condition (컨디션), Dawn 808 (여명808), Ready Q (레디큐).</div>" +
+              "<div class='table-tip'>Drink one bottle 30 minutes BEFORE drinking alcohol, or immediately after you finish drinking to prevent a headache the next day!</div>",
+
+        "C13": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Credit Cards:</strong> Visa, Mastercard, and Travel Wallet cards are accepted universally.</div>" +
+              "<div class='table-tip'><strong>Apple Pay:</strong> Accepted at CU, GS25, 7-Eleven. Just say 'Apple Pay' and hold your phone to the terminal.</div>" +
+              "<div class='table-tip'><strong>Cash:</strong> Always accepted. You can drop coins in the tray on the counter.</div>",
+
+        "C14": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Many convenience stores have ATMs. However, to withdraw cash using a foreign card, look for machines with a <strong>'Global ATM'</strong> logo (Visa/Mastercard symbols).</div>" +
+              "<div class='table-tip'>If it is not a Global ATM, your transaction may be declined. Fees are usually around 3,600 KRW per withdrawal.</div>",
+
+        "C15": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>If your phone is dying, look for a small kiosk machine near the entrance (Brand: 'Chargebi' or 'Bok-bun-ja').</div>" +
+              "<div class='table-tip'>You can rent a portable battery by scanning the QR code, entering your card details, and returning it to any other kiosk in the city later.</div>",
+
+        "C16": "<div class='host-title'>MACHINE DECODER</div>" +
+              "<div class='table-tip'>Convenience stores sell cheap, decent espresso coffee (around 1,500 KRW).</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Take a paper cup from the counter to the cashier and pay first.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Place the cup under the coffee machine nozzle.</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> Press '아메리카노 (Americano)' or '에스프레소 (Espresso)'.</div>",
+
+        "C17": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>In winter, stores sell hot steamed buns (호빵) and roasted sweet potatoes (군고구마) in display warmers near the counter.</div>" +
+              "<div class='table-tip'>Do not open the machine yourself! Tell the cashier which one you want, and they will take it out and ring it up for you.</div>",
+
+        "C18": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>If you are buying alcohol (Beer, Soju) or cigarettes, the cashier will ask for ID if you look young.</div>" +
+              "<div class='table-warning'><strong>Important:</strong> A foreign driver's license or a photo of your ID on your phone is strictly <strong>NOT accepted</strong> by law. You must show your physical Passport or an Alien Registration Card (ARC).</div>",
+
+        "C19": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>If you eat ramen or snacks inside the store, you MUST clean up after yourself. Look for the trash bins near the exit.</div>" +
+              "<div class='table-tip'><strong>일반 (General):</strong> Plastic wrappers, tissues.</div>" +
+              "<div class='table-tip'><strong>음식물 (Food Waste):</strong> Pour leftover ramen broth into the specific liquid drain bucket.</div>" +
+              "<div class='table-tip'><strong>재활용 (Recycle):</strong> Rinse your plastic ice cups and put them here.</div>",
+
+        "C20": "<div class='host-card'><div class='host-title'>SHOW TO CASHIER</div>" +
+              "<div class='host-korean'>실례지만, 손님이 쓸 수 있는 화장실이 있나요? 비밀번호가 있다면 알려주세요.</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> Excuse me, is there a restroom for customers? If there is a password, please let me know.</div>" +
+              "<div class='table-tip'><strong>Tip:</strong> Most small convenience stores do not have public restrooms. You may have better luck at a nearby subway station or large coffee shop.</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "View Store Guide";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Guide...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Guide";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
