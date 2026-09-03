@@ -1,0 +1,412 @@
+<!--구글 블로거 전용: Korea K-Play & Activity Hacks (놀거리 마스터, 20종 MAX, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #09090b !important; /* 사이버 딥 블랙 */
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f3f4f6; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #a855f7 0%, rgba(168,85,247,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 30px; text-align: center; }
+    .main-title { font-size: 28px; font-weight: 700; color: #a855f7; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .sub-title { font-size: 14px; color: #9ca3af; font-weight: 400; letter-spacing: 1px; border-bottom: 2px solid rgba(168, 85, 247, 0.2); padding-bottom: 20px;}
+
+    .text-panel { background: #18181b; border-radius: 12px; padding: 25px; border: 1px solid #27272a; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 17.5px; font-weight: 700; color: #a855f7; margin-bottom: 15px; text-align: left; border-bottom: 1px solid #27272a; padding-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .panel-desc { font-size: 14.5px; color: #d1d5db; line-height: 1.85; word-break: keep-all; text-align: left; margin-bottom: 15px;}
+    
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 30px; height: 500px; overflow-y: auto; padding-right: 5px;}
+    .category-grid::-webkit-scrollbar { width: 5px; }
+    .category-grid::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 5px; }
+    
+    .cat-card { 
+        background: #18181b;
+        border: 1px solid #27272a;
+        border-left: 5px solid #a855f7;
+        border-radius: 12px;
+        padding: 20px 22px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 28px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16px; font-weight: 500; color: #f9fafb; }
+    .cat-sub { font-size: 13px; color: #9ca3af; margin-top: 5px;}
+    
+    .cat-card.selected { border-color: #a855f7; background: #27272a; }
+    .cat-card.selected .cat-title { color: #a855f7; }
+
+    .submit-btn { 
+        width: 100%; padding: 22px; 
+        background: #a855f7;
+        border: none; border-radius: 12px; 
+        color: #ffffff; font-size: 16.5px; font-weight: 700; 
+        cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+    }
+    .submit-btn:disabled { background: #27272a; color: #71717a; border: 1px solid #3f3f46; box-shadow: none; }
+
+    .disclaimer-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 25px; margin-top: 30px; }
+    .disclaimer-title { font-size: 15px; font-weight: 700; color: #ef4444; margin-bottom: 12px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #d1d5db; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #18181b; border-radius: 16px; padding: 30px 20px; border: 1px solid #a855f7; box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #27272a;}
+    .modal-emoji { font-size: 50px; margin-bottom: 15px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: #a855f7; }
+
+    .host-card { background: #09090b; border-radius: 12px; padding: 30px 20px; margin-bottom: 25px; text-align: center; border: 3px solid #a855f7;}
+    .host-title { color: #c084fc; font-size: 14px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .host-korean { color: #f9fafb; font-size: 24px; font-weight: 600; line-height: 1.5; word-break: keep-all;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #27272a;}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 14.5px; background: #18181b;}
+    .size-table th { background: #27272a; color: #a855f7; padding: 15px 10px; font-weight: 700; border-bottom: 2px solid #3f3f46;}
+    .size-table td { padding: 14px 10px; color: #e4e4e7; border-bottom: 1px solid #27272a;}
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:nth-child(even) { background: #09090b; }
+    
+    .table-tip { color: #d1d5db; font-size: 14.5px; line-height: 1.7; background: #09090b; padding: 15px; border-radius: 8px; border-left: 4px solid #a855f7; text-align: left; margin-bottom: 20px;}
+    .table-warning { color: #fecaca; font-size: 14.5px; line-height: 1.7; background: rgba(239, 68, 68, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 22px; background: #18181b; border: 1px solid #a855f7; border-radius: 12px; color: #a855f7; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: all 0.2s;}
+    .close-btn:active { background: #a855f7; color: #ffffff; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Play &amp; Activity Hacks</div>
+        <div class="sub-title">Master the Local Entertainment</div>
+    </div>
+
+    <div class="text-panel">
+        <div class="panel-title">🎯 Survive the K-Culture</div>
+        <div class="panel-desc">
+            Want to visit a PC Bang, a Jjimjilbang (Sauna), or a Coin Karaoke? Korean entertainment facilities use unique self-service machines, strict unwritten rules, and fully Korean interfaces.
+        </div>
+        <div class="panel-desc" style="margin-bottom: 0px;">
+            This guide breaks down the universal systems behind these places, helping you navigate them like a true local without needing to speak the language.
+        </div>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 20종 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Select an Activity
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Disclaimer &amp; Liability</div>
+        <div class="disclaimer-text">
+            This application is a cultural guide and keyword translator, not a store-specific manual. Machine interfaces, pricing structures, and store rules vary by location and brand. Always follow the instructions of the local staff and respect facility policies. The developer assumes absolutely no legal responsibility for financial disputes, lost or stolen items, refusal of entry, or any misunderstandings resulting from the use of this app. Use the information provided at your own risk.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🎯</div>
+            <div class="modal-title" id="modal-title">Activity Guide</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 15; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 6 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 7 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 20종 방치형 MAX 데이터 (기기 해독, 쇼핑 문화, 소통 카드)
+    var catDB = [
+        { id: "A1", emoji: "🎤", title: "Coin Karaoke (Noraebang)", sub: "How to use the machine & remote" },
+        { id: "A2", emoji: "🖥️", title: "PC Bang (Internet Cafe)", sub: "Non-member login & payment" },
+        { id: "A3", emoji: "🍜", title: "PC Bang Food Order", sub: "Order ramen to your desk" },
+        { id: "A4", emoji: "🧖", title: "Jjimjilbang (Sauna) 1", sub: "Entry & locker key system" },
+        { id: "A5", emoji: "🥚", title: "Jjimjilbang (Sauna) 2", sub: "Buying food & body scrub" },
+        { id: "A6", emoji: "📸", title: "Photo Booths", sub: "How to get the digital video" },
+        { id: "A7", emoji: "⛺", title: "Han River Parks", sub: "Tent rules & Delivery Zones" },
+        { id: "A8", emoji: "⚾", title: "Baseball Games", sub: "Food rules & trash sorting" },
+        { id: "A9", emoji: "⏳", title: "Pop-up Store Waiting", sub: "No Korean phone number? Do this." },
+        { id: "A10", emoji: "🎢", title: "Theme Parks", sub: "School uniform rental culture" },
+        { id: "A11", emoji: "🪪", title: "Clubs & Lounges", sub: "ID rules & guest entry" },
+        { id: "A12", emoji: "🥟", title: "Traditional Markets", sub: "Cash etiquette & finding seats" },
+        { id: "A13", emoji: "🎲", title: "Board Game Cafes", sub: "1 Drink Rule & Returning games" },
+        { id: "A14", emoji: "📚", title: "Comic Book Cafes", sub: "Shoe lockers & Post-payment" },
+        { id: "A15", emoji: "🔓", title: "Escape Rooms", sub: "English support & hint phones" },
+        { id: "A16", emoji: "🔮", title: "Tarot & Fortune Telling", sub: "Saju cafe culture in Hongdae" },
+        { id: "A17", emoji: "🚲", title: "Public Bikes (Ttareungi)", sub: "Foreigner pass & helmet rules" },
+        { id: "A18", emoji: "🎫", title: "Concerts & Festivals", sub: "Ticket pickup & ID matching" },
+        { id: "A19", emoji: "🔋", title: "Power Bank Rental", sub: "Rent chargers at bars/cafes" },
+        { id: "A20", emoji: "🔞", title: "Age Check Culture", sub: "Drinking age & ID scanning" }
+    ];
+
+    var tableDB = {
+        "A1": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Enter an empty booth. Insert cash (1000 KRW = 2 to 4 songs) or use the card terminal.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Use the remote to search. Press <strong>'예약'</strong> (Reserve) to queue the song, or <strong>'시작'</strong> (Start) to play it immediately.</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> Press <strong>'취소'</strong> (Cancel) if you want to skip the current song. Use our 'Remote' button at the top of the app for a full translation!</div>",
+
+        "A2": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Find the payment kiosk near the entrance. Do NOT sit down first.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Press <strong>'비회원'</strong> (Non-member) or '카드 구매' (Card Purchase). Pay for your time and it will print a receipt with a number.</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> Find an empty PC, turn it on, and enter the number from your receipt in the '비회원 (Non-member)' login box on the screen.</div>",
+
+        "A3": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>You do not need to walk to the counter to order food!</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Look for the <strong>'먹거리 주문'</strong> (Order Food) button at the top of your PC screen.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Add items to your cart. Select <strong>'현금'</strong> (Cash) or <strong>'카드'</strong> (Card) as your payment method.</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> The staff will cook it and bring it directly to your desk. You pay them at your desk!</div>",
+
+        "A4": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>The Key is Everything:</strong> When you pay for entry, they give you a key or a receipt with a number.</div>" +
+              "<div class='table-tip'>First, find the <strong>'신발장'</strong> (Shoe Locker) matching your number. Put your shoes in, and pull the key out.</div>" +
+              "<div class='table-tip'>Take this key to the gender-separated locker room (<strong>남</strong> = Men, <strong>여</strong> = Women). Find the matching clothes locker. This key is also your digital wallet inside the sauna!</div>",
+
+        "A5": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Food:</strong> Inside the common area, buy smoked eggs (맥반석 계란) and sweet rice beverage (식혜). Do not use cash! Just tap your locker key on their scanner. You pay the total bill when you leave.</div>" +
+              "<div class='table-warning'><strong>Scrub (세신):</strong> In the naked bathing area, you can pay for a body scrub. This is usually <strong>Cash Only</strong>, paid directly to the scrub staff (not using your key).</div>",
+
+        "A6": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Korean photo booths (Life4Cuts, Photoism) are everywhere.</div>" +
+              "<div class='table-tip'><strong>Crucial Step:</strong> Before you pay, make sure the <strong>'QR Code'</strong> option is checked on the screen!</div>" +
+              "<div class='table-tip'>When your photos print, there will be a QR code in the corner. Scan it with your phone camera within 24 hours to download the digital images and a cute video of you posing!</div>",
+
+        "A7": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Tents:</strong> You can only set up tents in designated zones, and they must have two sides open at all times. They must be taken down by 7 PM (fines apply).</div>" +
+              "<div class='table-tip'><strong>Delivery:</strong> If you order fried chicken via an app, they cannot find you on the grass. You must pick it up at a designated <strong>'배달존' (Delivery Zone)</strong>. Look for large signs with numbers (e.g., Delivery Zone 2).</div>",
+
+        "A8": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Korean baseball games are essentially massive outdoor parties.</div>" +
+              "<div class='table-tip'><strong>Food:</strong> You can bring your own outside food and beer (no glass bottles or hard liquor).</div>" +
+              "<div class='table-warning'><strong>Etiquette:</strong> Do not leave your trash under your seat. After the game, you must carry your trash out and separate it into Plastics, Paper, and General waste at the stadium bins.</div>",
+
+        "A9": "<div class='host-card'><div class='host-title'>SHOW TO STAFF</div>" +
+              "<div class='host-korean'>제가 외국인이라 한국 전화번호가 없습니다. 웨이팅을 어떻게 등록할 수 있나요? (이메일이나 수동 등록이 가능한가요?)</div></div>" +
+              "<div class='table-tip'><strong>Meaning:</strong> I am a foreigner and do not have a Korean phone number. How can I register for the waiting list? (Can you do it manually or via email?)</div>" +
+              "<div class='table-tip'>Many pop-ups use iPad waiting systems (CatchTable) requiring a local number. Show this to the staff so they can manually write you down.</div>",
+
+        "A10": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>If you visit Lotte World or Everland, you will see adults wearing Korean high school uniforms. This is a massive trend!</div>" +
+              "<div class='table-tip'>You can rent these uniforms at shops just outside the parks (like Ehwa Gyobok). You will need to leave your ID (Passport) or a cash deposit while you rent them.</div>",
+
+        "A11": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-warning'><strong>ID is Mandatory:</strong> Clubs in Hongdae, Itaewon, and Gangnam strictly require a PHYSICAL ID. Photos on your phone or foreign driver's licenses will be rejected. Bring your physical Passport or ARC.</div>" +
+              "<div class='table-tip'><strong>Age Limit:</strong> Many clubs in Hongdae have a strict upper age limit (often restricting entry if you are over 29-32 years old). Itaewon is generally more relaxed.</div>",
+
+        "A12": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>At traditional markets like Gwangjang Market, cash is king. While many stalls take cards now, small street food carts often prefer or require cash.</div>" +
+              "<div class='table-tip'><strong>Seating:</strong> If you buy from a specific food cart, you must sit on the benches directly attached to that specific cart. You cannot buy food from cart A and sit at cart B.</div>",
+
+        "A13": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>1 Drink Rule:</strong> Aside from the hourly fee to use the space, nearly all board game cafes require every person to order at least one drink.</div>" +
+              "<div class='table-tip'><strong>Return Rule:</strong> You can only take one game to your table at a time. When you are done, return it to the counter before taking a new one. Do not mix pieces!</div>",
+
+        "A14": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'><strong>Step 1:</strong> Take off your shoes at the entrance, put them in a locker, and put on the provided slippers. Take the locker key.</div>" +
+              "<div class='table-tip'><strong>Step 2:</strong> Give the locker key to the staff. They will give you a 'Cafe Card'.</div>" +
+              "<div class='table-tip'><strong>Step 3:</strong> Use this card to order food and track your time. Pay everything at the end when you return the card to get your shoe key back!</div>",
+
+        "A15": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-warning'><strong>Language Barrier:</strong> Most escape rooms in Korea rely heavily on Korean wordplay and locks. Always message them on Instagram or call ahead to ask if a specific room is 'Foreigner Friendly' (English available).</div>" +
+              "<div class='table-tip'><strong>Hint Phone:</strong> Instead of a walkie-talkie, you are usually given a smartphone. You type a code found on the puzzle into a specific app to get hints.</div>",
+
+        "A16": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>In areas like Hongdae, you will see many small tents or cafes offering 'Saju' (Korean astrology based on birth date/time) or Tarot.</div>" +
+              "<div class='table-tip'>Most readers only speak Korean. If you want to try it, look for signs that specifically say 'English' or '日本語' (Japanese). It usually costs around 20,000 to 30,000 KRW and is cash or bank transfer only.</div>",
+
+        "A17": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>Seoul's public bikes (Ttareungi) are green and white. You do not need a Korean number to use them!</div>" +
+              "<div class='table-tip'>Download the 'Seoul Public Bike' app. You can buy a 'Foreigner Pass' using a foreign credit card (Discover/JCB/Visa/Master).</div>" +
+              "<div class='table-tip'>Tap the button on the bike lock, scan the QR code with the app, and the lock will pop open. Return it to any designated rack.</div>",
+
+        "A18": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-warning'><strong>Ticket Pickup:</strong> To prevent scalping, Korean concerts have notoriously strict ID checks. If you are picking up tickets at the venue, the name on the reservation MUST exactly match your physical Passport. No exceptions!</div>",
+
+        "A19": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-tip'>If your phone is dying at a bar, look for a small kiosk machine (Brand: 'Chargebi' or 'Bok-bun-ja').</div>" +
+              "<div class='table-tip'>Scan the QR code, enter your card details (some accept foreign cards, some only take KakaoPay), and a power bank will pop out. Return it to any other machine in the city when done.</div>",
+
+        "A20": "<div class='host-title'>CULTURE HACK</div>" +
+              "<div class='table-warning'><strong>Age Check (Minors):</strong> The legal drinking/smoking age in Korea is January 1st of the year you turn 19. They do not care about your birth month.</div>" +
+              "<div class='table-tip'>If you are buying alcohol at a convenience store or entering a club, scanning ID is often mandatory. The machines only scan Korean IDs, so the staff will manually check your Passport.</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "View Activity Guide";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    function triggerAdAndMove(targetId) {
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Loading Secure Guide...";
+        triggerAdAndMove(selectedId);
+    });
+
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select an Activity";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
