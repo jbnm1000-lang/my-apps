@@ -1,0 +1,468 @@
+<!--구글 블로거 전용: Seoul Night Owl (배달 및 심야 생존 마스터, 20종 MAX, ES5, 이중 우회 전면광고, 철벽 면책조항)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
+
+    /* 블로거 기본 UI 완벽 제거 및 초기화 */
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #080c16 !important; /* 하이엔드 미드나잇 오션 베이스 */
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #f1f5f9; 
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* 고급스러운 심야 파티클 애니메이션 */
+    #particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, #00f2fe 0%, rgba(0,242,254,0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+        20% { opacity: 0.15; }
+        80% { opacity: 0.05; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* 메인 앱 컨테이너 */
+    #app-container {
+        position: relative; z-index: 1; 
+        width: 100%; max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 40px 20px 90px 20px;
+        box-sizing: border-box;
+    }
+
+    .header-section { margin-bottom: 35px; text-align: center; }
+    .main-title { font-size: 30px; font-weight: 700; color: #00f2fe; margin-bottom: 10px; letter-spacing: 0.5px; text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);}
+    .sub-title { font-size: 15px; color: #94a3b8; font-weight: 400; letter-spacing: 1px; border-bottom: 1px solid rgba(0, 242, 254, 0.2); padding-bottom: 25px;}
+
+    /* 친절하고 상세한 안내 패널 (글래스모피즘 스타일) */
+    .guide-panel { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); border-radius: 16px; padding: 28px; border: 1px solid rgba(0, 242, 254, 0.15); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+    .panel-title { font-size: 18px; font-weight: 700; color: #00f2fe; margin-bottom: 16px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .panel-text { font-size: 15px; color: #cbd5e1; line-height: 1.8; word-break: keep-all; text-align: left; margin-bottom: 18px;}
+    .panel-text:last-child { margin-bottom: 0; }
+    .highlight { color: #eab308; font-weight: 500; }
+
+    /* 카테고리 그리드 레이아웃 */
+    .category-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 35px; height: 520px; overflow-y: auto; padding-right: 8px;}
+    .category-grid::-webkit-scrollbar { width: 6px; }
+    .category-grid::-webkit-scrollbar-thumb { background: rgba(0, 242, 254, 0.3); border-radius: 10px; }
+    
+    .cat-card { 
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 5px solid #00f2fe;
+        border-radius: 14px;
+        padding: 22px 24px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        transition: all 0.3s ease;
+    }
+    .cat-emoji { font-size: 30px; }
+    .cat-info { flex: 1; }
+    .cat-title { font-size: 16.5px; font-weight: 500; color: #f8fafc; margin-bottom: 6px;}
+    .cat-sub { font-size: 13.5px; color: #94a3b8; line-height: 1.4;}
+    
+    .cat-card.selected { border-color: #00f2fe; background: rgba(0, 242, 254, 0.1); box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);}
+    .cat-card.selected .cat-title { color: #00f2fe; font-weight: 700;}
+
+    /* 하이엔드 액션 버튼 */
+    .submit-btn { 
+        width: 100%; padding: 24px; 
+        background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+        border: none; border-radius: 14px; 
+        color: #ffffff; font-size: 17px; font-weight: 700; letter-spacing: 0.5px;
+        cursor: pointer; margin-bottom: 15px; box-shadow: 0 8px 25px rgba(0, 114, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    .submit-btn:disabled { background: #1e293b; color: #64748b; box-shadow: none; border: 1px solid #334155; }
+
+    /* 철벽 면책 조항 패널 */
+    .disclaimer-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 14px; padding: 28px; margin-top: 35px; }
+    .disclaimer-title { font-size: 16px; font-weight: 700; color: #ef4444; margin-bottom: 15px; text-align: left; display: flex; align-items: center; gap: 8px;}
+    .disclaimer-text { font-size: 14px; color: #94a3b8; line-height: 1.8; word-break: keep-all; text-align: left;}
+
+    /* 프리미엄 결과 모달창 */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 6, 11, 0.95); backdrop-filter: blur(5px); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 30px auto; background: #0f172a; border-radius: 20px; padding: 35px 25px; border: 1px solid rgba(0, 242, 254, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.8);}
+    
+    .modal-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);}
+    .modal-emoji { font-size: 55px; margin-bottom: 15px; }
+    .modal-title { font-size: 24px; font-weight: 700; color: #00f2fe; letter-spacing: 0.5px;}
+
+    /* 결과물 디테일 스타일 */
+    .host-card { background: #080c16; border-radius: 14px; padding: 35px 25px; margin-bottom: 25px; text-align: center; border: 2px solid #00f2fe; box-shadow: 0 10px 20px rgba(0, 242, 254, 0.05);}
+    .host-title { color: #38bdf8; font-size: 14.5px; font-weight: 700; margin-bottom: 18px; letter-spacing: 1.5px;}
+    .host-korean { color: #f8fafc; font-size: 26px; font-weight: 600; line-height: 1.6; word-break: keep-all;}
+    
+    .script-box { background: #1e293b; border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #eab308;}
+    .script-title { color: #fde047; font-size: 14px; font-weight: 700; margin-bottom: 12px; letter-spacing: 1px;}
+    .script-text { font-size: 20px; font-weight: 700; color: #ffffff; line-height: 1.6; margin-bottom: 10px;}
+    .script-pronounce { font-size: 15px; color: #94a3b8; font-style: italic; margin-bottom: 15px;}
+
+    .size-table-wrapper { width: 100%; overflow-x: auto; margin-bottom: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);}
+    .size-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 15px; background: #0f172a;}
+    .size-table th { background: rgba(255,255,255,0.03); color: #00f2fe; padding: 18px 12px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1);}
+    .size-table td { padding: 16px 12px; color: #e2e8f0; border-bottom: 1px solid rgba(255,255,255,0.05);}
+    .size-table tr:last-child td { border-bottom: none; }
+    
+    .table-tip { color: #cbd5e1; font-size: 15.5px; line-height: 1.8; background: rgba(0, 242, 254, 0.05); padding: 20px; border-radius: 12px; border-left: 4px solid #00f2fe; text-align: left; margin-bottom: 20px;}
+    .table-warning { color: #fca5a5; font-size: 15.5px; line-height: 1.8; background: rgba(239, 68, 68, 0.08); padding: 20px; border-radius: 12px; border-left: 4px solid #ef4444; text-align: left; margin-bottom: 20px;}
+
+    .close-btn { width: 100%; padding: 24px; background: transparent; border: 2px solid #00f2fe; border-radius: 14px; color: #00f2fe; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: all 0.3s;}
+    .close-btn:active { background: #00f2fe; color: #080c16; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Night Owl</div>
+        <div class="sub-title">Premium Baedal &amp; Midnight Survival Guide</div>
+    </div>
+
+    <!--친절하고 상세한 가이드 패널-->
+    <div class="guide-panel">
+        <div class="panel-title">🌙 Welcome to the Korean Night Life</div>
+        <div class="panel-text">
+            Experiencing late-night food delivery (Baedal) is an absolute must-do during your stay in Korea. However, the reality for many travelers is that popular delivery applications require strict verification using a Korean phone number and an Alien Registration Card (ARC), making them completely inaccessible to tourists.
+        </div>
+        <div class="panel-text">
+            <span class="highlight">How to Use This App:</span> We have carefully prepared 20 essential survival cards and pronunciation scripts. Simply select the situation you are facing from the menu below. You can show the generated Korean translation directly to the hotel front desk staff to request ordering assistance, or confidently read the provided phone scripts to order from local flyer menus yourself. 
+        </div>
+        <div class="panel-text">
+            <span class="highlight">Pro Tips:</span> This guide also covers crucial late-night survival skills, such as decoding apartment intercoms, understanding Korea's strict recycling rules for delivery containers, and handling noise complaints. Navigate the Seoul night like a true local!
+        </div>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+        <!--JS 카테고리 20종 삽입 영역-->
+    </div>
+
+    <button class="submit-btn" disabled="" id="submit-btn">
+        Access Survival Guide
+    </button>
+
+    <!--철벽 면책 조항-->
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚖️ Important Safety &amp; Legal Disclaimer</div>
+        <div class="disclaimer-text">
+            Thank you for using Seoul Night Owl. Please carefully read the following before proceeding. This application is designed exclusively as an offline cultural guide and linguistic translation tool to assist travelers. It is not an official delivery platform or a medical advisory service.
+            <br /><br />
+            Please note that business hours, hotel concierge policies, and delivery zone regulations vary significantly by location. Some accommodations strictly prohibit the delivery of outside food to protect building hygiene and security. Always confirm the rules with your host or hotel management first.
+            <br /><br />
+            By using this application, you fully acknowledge and agree that the developer holds absolutely no legal responsibility or liability for any consequences arising from its use. This includes, but is not limited to, miscommunications with staff, incorrect food orders, delivery delays, financial disputes over payments, denied entry to facilities, or any allergic reactions to food ingredients. Please use the provided translations sensibly and entirely at your own risk.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="modal-header">
+            <div class="modal-emoji" id="modal-emoji">🍗</div>
+            <div class="modal-title" id="modal-title">Survival Guide</div>
+        </div>
+        
+        <div id="table-container"></div>
+
+        <button class="close-btn" id="close-btn">Close &amp; Return to Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+// 구형 스마트폰 호환을 위한 완벽한 ES5 문법 적용
+document.addEventListener("DOMContentLoaded", function() {
+
+    // 파티클 생성 로직
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 20; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 7 + 4; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    // 20종 방치형 프리미엄 데이터
+    var catDB = [
+        { id: "D1", emoji: "🛎️", title: "Concierge: Order Chicken", sub: "Polite request for hotel staff" },
+        { id: "D2", emoji: "🍜", title: "Concierge: Chinese Food", sub: "Order Jajangmyeon via staff" },
+        { id: "D3", emoji: "📞", title: "Phone Script: Start Order", sub: "Reading a script to order by phone" },
+        { id: "D4", emoji: "🍗", title: "Phone Script: Chicken Menu", sub: "Ordering Half-and-Half (Banban)" },
+        { id: "D5", emoji: "💳", title: "Phone Script: Pay at Door", sub: "Inform them about your payment" },
+        { id: "D6", emoji: "📱", title: "Delivery App Alternative", sub: "English-friendly delivery options" },
+        { id: "D7", emoji: "🏢", title: "Intercom Security Decoder", sub: "Opening the common front door" },
+        { id: "D8", emoji: "🚪", title: "SMS: Leave at Door", sub: "Contactless delivery request" },
+        { id: "D9", emoji: "🤫", title: "SMS: Do Not Ring Bell", sub: "Quiet delivery request for late night" },
+        { id: "D10", emoji: "💵", title: "Payment: Cash Change Issue", sub: "Needing exact change at the door" },
+        { id: "D11", emoji: "⛺", title: "Han River: Delivery Zones", sub: "How to receive food at parks" },
+        { id: "D12", emoji: "📜", title: "Han River: Flyer Orders", sub: "Navigating street food flyers" },
+        { id: "D13", emoji: "🏪", title: "Late Night: Convenience Stores", sub: "Finding 24/7 food alternatives" },
+        { id: "D14", emoji: "♻️", title: "Recycling: Plastic Containers", sub: "Strict washing rules for delivery boxes" },
+        { id: "D15", emoji: "🦴", title: "Recycling: Food Waste Rules", sub: "Chicken bones are NOT food waste" },
+        { id: "D16", emoji: "💊", title: "SOS: Late Night Pharmacy", sub: "Finding a 24-hour pharmacy" },
+        { id: "D17", emoji: "🚕", title: "SOS: Late Night Taxis", sub: "Using Kakao T app after midnight" },
+        { id: "D18", emoji: "🔊", title: "SOS: Noise Complaint", sub: "Apology card for angry neighbors" },
+        { id: "D19", emoji: "🍻", title: "Culture: Buying Alcohol", sub: "Age verification & delivery rules" },
+        { id: "D20", emoji: "🚨", title: "SOS: Emergency Contacts", sub: "Police, Fire, and Tourism Helpline" }
+    ];
+
+    var tableDB = {
+        "D1": "<div class='host-card'><div class='host-title'>PLEASE SHOW THIS TO THE RECEPTIONIST</div>" +
+              "<div class='host-korean'>안녕하세요, 제가 외국인이라 한국 번호가 없어서 배달 앱을 사용할 수 없습니다. 혹시 실례가 안 된다면, 근처에 치킨 배달 주문을 대신 전화로 도와주실 수 있으신가요? 결제는 배달 기사님께 직접 카드로 하겠습니다. 부탁드립니다.</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> Hello, I am a foreigner without a Korean phone number, so I cannot use delivery apps. If it is not too much trouble, could you kindly help me order fried chicken by phone? I will pay the delivery driver directly with my credit card. Thank you so much.</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> Many 3 to 5-star hotels offer this as a standard concierge service. Ensure you wait in the lobby to receive the food and pay the driver directly to avoid inconveniencing the staff.</div>",
+
+        "D2": "<div class='host-card'><div class='host-title'>PLEASE SHOW THIS TO THE RECEPTIONIST</div>" +
+              "<div class='host-korean'>안녕하세요, 배달 앱이 없어서 그러는데 혹시 짜장면이랑 탕수육 배달 전화 주문을 도와주실 수 있나요? 결제는 직접 하겠습니다.</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> Hello, I do not have a delivery app. Could you help me order Jajangmyeon (Black Bean Noodles) and Tangsuyuk (Sweet and Sour Pork) by phone? I will handle the payment myself.</div>" +
+              "<div class='table-warning'><strong>Important Etiquette:</strong> Chinese restaurants often deliver in real ceramic bowls. You are required to place the empty, unwashed bowls outside your hotel room or Airbnb door after eating so the restaurant can retrieve them later. Do not throw them away!</div>",
+
+        "D3": "<div class='script-box'><div class='script-title'>Read Slowly on the Phone</div>" +
+              "<div class='script-text'>안녕하세요, 배달 주문하려고요. 주소는 [호텔/숙소 이름] 입니다.</div>" +
+              "<div class='script-pronounce'>(Annyeong-haseyo, baedal jumun haryeogoyo. Juso-neun [Hotel Name] imnida.)</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> Hello, I would like to place a delivery order. The address is [Hotel Name].</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> If you find a promotional flyer in your Airbnb or on the street, dial the number and calmly read this script. The operator is usually very fast-paced, so speak clearly.</div>",
+
+        "D4": "<div class='script-box'><div class='script-title'>Read Slowly on the Phone</div>" +
+              "<div class='script-text'>반반 치킨 (후라이드 반, 양념 반) 하나랑 콜라 큰 거 하나 주세요.</div>" +
+              "<div class='script-pronounce'>(Ban-ban chicken [hu-ra-i-deu ban, yang-nyeom ban] hana-rang, cola keun-geo hana juseyo.)</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> Please give me one Half-and-Half Chicken (Half Original Fried, Half Sweet & Spicy) and one large Coke.</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> 'Ban-ban' is the ultimate Korean fried chicken hack. It allows you to experience two distinct flavors in a single order.</div>",
+
+        "D5": "<div class='script-box'><div class='script-title'>Read Slowly on the Phone</div>" +
+              "<div class='script-text'>결제는 만나서 카드로 할게요. 얼마나 걸리나요?</div>" +
+              "<div class='script-pronounce'>(Gyul-je-neun man-na-seo card-ro hal-ge-yo. Eolmana geol-li-na-yo?)</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> I will pay by credit card in person upon delivery. Approximately how long will it take?</div>" +
+              "<div class='table-warning'><strong>Crucial Notice:</strong> Please ensure your foreign credit card is authorized for overseas transactions. If you prefer to use cash, replace the phrase with '현금으로 할게요' (Hyeon-geum-euro hal-ge-yo).</div>",
+
+        "D6": "<div class='table-tip'>If you prefer not to make a phone call or involve hotel staff, we highly recommend downloading the application <strong>'Shuttle Delivery'</strong>.</div>" +
+              "<div class='table-tip'><strong>Advantages:</strong> The interface is entirely in English, it accepts international credit cards (Visa/Mastercard) directly for in-app payment, and they provide English-speaking customer support.</div>" +
+              "<div class='table-warning'><strong>Limitation:</strong> Their service area is primarily restricted to central Seoul districts (such as Itaewon, Gangnam, and Hongdae) and parts of Busan. It does not offer nationwide coverage.</div>",
+
+        "D7": "<div class='table-tip'><strong>Understanding the Intercom (공동현관):</strong> The majority of Korean apartment buildings and Airbnbs feature a secure main entrance door on the ground floor.</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Korean Keyword</th><th>English Meaning</th></tr>" +
+              "<tr><td>종 모양 아이콘 (Bell)</td><td>Call / Enter</td></tr>" +
+              "<tr><td>경비실</td><td>Security Office</td></tr>" +
+              "<tr><td>호출</td><td>Call Apartment Room</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>How to Open:</strong> Typically, you input your room number (e.g., 501), followed by the 'Bell' or '호출' button to ring the intercom. To enter using a designated passcode, press '*' -> Password -> '*'.</div>",
+
+        "D8": "<div class='host-card'><div class='host-title'>COPY & SEND SMS TO THE RIDER</div>" +
+              "<div class='host-korean'>공동현관 비밀번호는 [1234*] 입니다. 음식은 문 앞에 두고 초인종 눌러주세요. 감사합니다.</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> The common entrance password is [1234*]. Please leave the food at my door and ring the bell. Thank you.</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> Contactless delivery is the standard practice in South Korea. Send this text message to the delivery rider if you have already completed the payment in advance.</div>",
+
+        "D9": "<div class='host-card'><div class='host-title'>COPY & SEND SMS TO THE RIDER</div>" +
+              "<div class='host-korean'>음식은 문 앞에 두고 가주세요. 아기가 자고 있어서 초인종은 절대 누르지 마세요! (노크도 하지 말아주세요)</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> Please leave the food at the door. A baby is sleeping inside, so please DO NOT ring the doorbell! (Please do not knock either).</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> This is highly recommended for late-night orders to avoid waking up your travel companions or sensitive neighbors.</div>",
+
+        "D10": "<div class='host-card'><div class='host-title'>SHOW THIS TO THE RIDER AT THE DOOR</div>" +
+              "<div class='host-korean'>정말 죄송하지만 제가 현재 5만원짜리 큰 지폐밖에 없습니다. 혹시 거스름돈을 가지고 계신가요?</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> I am very sorry, but I only have a large 50,000 KRW bill. Do you happen to have any change?</div>" +
+              "<div class='table-warning'><strong>Caution:</strong> Delivery riders often carry minimal cash. When paying by cash, it is strongly advised to prepare exact change or smaller 10,000 KRW bills to prevent complications.</div>",
+
+        "D11": "<div class='table-tip'>Ordering fried chicken to a Han River park (such as Yeouido or Banpo) is a quintessential Korean experience.</div>" +
+              "<div class='table-tip'><strong>Strict Rule 1:</strong> Delivery motorcycles are strictly prohibited from entering the pedestrian and grass areas. You must collect your food at designated locations known as <strong>'배달존 (Delivery Zones)'</strong>.</div>" +
+              "<div class='table-tip'><strong>Strict Rule 2:</strong> Look for towering signs labeled '배달존 1', '배달존 2', etc. Inform the phone operator of your specific zone number and wait precisely at that sign when the delivery is expected.</div>",
+
+        "D12": "<div class='table-tip'>Upon arriving at the Han River, you will often be approached by individuals distributing numerous flyers for Chicken and Pizza delivery.</div>" +
+              "<div class='table-tip'><strong>How to Utilize:</strong> Select a flyer that appeals to you, dial the phone number provided, and calmly read the script from our 'Phone Script: Chicken Menu' section.</div>" +
+              "<div class='table-warning'><strong>Caution:</strong> The food quality from these random street flyers can occasionally be inconsistent compared to established, famous franchise chains like Kyochon or BHC.</div>",
+
+        "D13": "<div class='table-tip'>If all delivery attempts fail, your ultimate savior is the Korean Convenience Store (CU, GS25, 7-Eleven, Emart24).</div>" +
+              "<div class='table-tip'>They operate 24/7 and offer exceptionally high-quality instant meals (Dosirak), spicy ramen, premium sausages, and desserts.</div>" +
+              "<div class='table-tip'>Late at night, certain smaller stores transition to an <strong>'Unmanned Store (무인점포)'</strong> system. You will need to scan your physical credit card at the terminal outside the entrance door to unlock it and enter!</div>",
+
+        "D14": "<div class='table-tip'><strong>Understanding Delivery Trash Rules:</strong></div>" +
+              "<div class='table-tip'>South Korea enforces exceptionally strict waste separation and recycling laws. You CANNOT dispose of everything in a single garbage bag.</div>" +
+              "<div class='table-warning'><strong>Crucial Requirement:</strong> Plastic delivery containers stained with food or red spicy sauce cannot be recycled in that state. You must thoroughly <strong>Rinse and Wash</strong> them with water in your sink before placing them in the 'Recycling (재활용)' bin.</div>",
+
+        "D15": "<div class='table-tip'><strong>Food Waste (음식물 쓰레기) Guidelines:</strong> The general rule is that only items an animal could theoretically digest belong in the food waste bin.</div>" +
+              "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Waste Item</th><th>Correct Disposal Bin</th></tr>" +
+              "<tr><td>Chicken/Pork/Beef Bones</td><td>General Waste (일반 쓰레기)</td></tr>" +
+              "<tr><td>Seafood Shells / Eggshells</td><td>General Waste (일반 쓰레기)</td></tr>" +
+              "<tr><td>Leftover Rice / Soft Noodles</td><td>Food Waste (음식물 쓰레기)</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'>Placing hard bones into the food waste system can severely damage recycling machinery and result in heavy fines for your accommodation.</div>",
+
+        "D16": "<div class='table-tip'>If you feel unwell late at night and basic convenience store medication is insufficient, you must locate a <strong>심야약국 (Night Pharmacy)</strong>.</div>" +
+              "<div class='host-card' style='padding: 25px;'><div class='host-korean' style='font-size: 20px;'>실례합니다, 혹시 이 근처에 지금 문을 연 심야약국이 어디 있는지 아시나요?</div></div>" +
+              "<div class='table-tip'><strong>Action:</strong> Show this screen to a convenience store employee or hotel staff member. It translates to: 'Excuse me, do you know where a night pharmacy is open right now around here?'</div>",
+
+        "D17": "<div class='table-warning'><strong>Late Night Taxi Advisory:</strong> After midnight, particularly on weekends in bustling districts like Hongdae, Gangnam, or Itaewon, hailing a taxi manually on the street is nearly impossible due to high demand.</div>" +
+              "<div class='table-tip'>You absolutely must download and use the <strong>'Kakao T'</strong> application. You can successfully hail a taxi using the app and select the 'Pay to the Driver' (Meet & Pay) option if you do not have a registered Korean credit card.</div>",
+
+        "D18": "<div class='host-card'><div class='host-title'>POLITE APOLOGY CARD FOR NEIGHBORS</div>" +
+              "<div class='host-korean'>밤늦게 너무 시끄럽게 해서 정말 진심으로 죄송합니다. 저희가 외국인 여행객이라 주거 문화에 대한 주의가 부족했습니다. 지금 당장 조용히 하겠습니다. 죄송합니다.</div></div>" +
+              "<div class='table-tip'><strong>English Translation:</strong> We sincerely apologize for being too loud this late at night. We are foreign tourists and were careless about the residential culture. We will be quiet immediately. We are very sorry.</div>" +
+              "<div class='table-tip'><strong>Pro Tip:</strong> Korean apartment buildings are notoriously sensitive to noise (층간소음). If a neighbor knocks on your door angrily at 2 AM, respectfully show this screen and apologize immediately.</div>",
+
+        "D19": "<div class='table-tip'><strong>Alcohol Delivery Regulations:</strong> By South Korean law, you CANNOT order alcohol (such as Beer or Soju) through delivery applications unless you undergo a rigorous identity and age verification process linked to a Korean mobile phone carrier.</div>" +
+              "<div class='table-tip'>If you wish to enjoy beer with your late-night chicken, you must physically walk to the nearest convenience store to purchase it. <strong>Always bring your physical Passport</strong> as ID checks are mandatory for foreigners.</div>",
+
+        "D20": "<div class='size-table-wrapper'><table class='size-table'>" +
+              "<tr><th>Emergency Situation</th><th>Contact Number</th></tr>" +
+              "<tr><td>Police (Crime / Danger)</td><td>112</td></tr>" +
+              "<tr><td>Fire / Ambulance (Medical)</td><td>119</td></tr>" +
+              "<tr><td>Tourist Translation Helpline</td><td>1330</td></tr>" +
+              "</table></div>" +
+              "<div class='table-tip'><strong>1330 Travel Helpline:</strong> This is a free, 24/7 public service operated by the Korean government. Call them anytime for immediate translation assistance, resolving taxi disputes, or navigating emergencies. Excellent English support is available!</div>"
+    };
+
+    var selectedId = null;
+    var categoryGrid = document.getElementById('category-grid');
+    var submitBtn = document.getElementById('submit-btn');
+
+    // ES5 방식의 반복문 구성
+    for (var j = 0; j < catDB.length; j++) {
+        var card = document.createElement('div');
+        card.className = 'cat-card';
+        card.setAttribute('data-id', catDB[j].id);
+        
+        var emoji = document.createElement('div');
+        emoji.className = 'cat-emoji';
+        emoji.innerHTML = catDB[j].emoji;
+
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'cat-info';
+        
+        var title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerText = catDB[j].title;
+        
+        var sub = document.createElement('div');
+        sub.className = 'cat-sub';
+        sub.innerText = catDB[j].sub;
+        
+        textWrapper.appendChild(title);
+        textWrapper.appendChild(sub);
+        card.appendChild(emoji);
+        card.appendChild(textWrapper);
+        
+        // 카드 클릭 이벤트
+        card.addEventListener('click', function() {
+            var allCards = document.querySelectorAll('.cat-card');
+            for (var k = 0; k < allCards.length; k++) {
+                allCards[k].classList.remove('selected');
+            }
+            this.classList.add('selected');
+            selectedId = this.getAttribute('data-id');
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Access Survival Guide";
+        });
+
+        categoryGrid.appendChild(card);
+    }
+
+    // ★ 모바일 오류 방지를 위한 이중 우회 전면광고 강제 호출 로직 (ES5)
+    function triggerAdAndMove(targetId) {
+        // 1차 시도: 앱인벤터 내부 통신 (setWebViewString)
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {
+            // 통신 실패 시 에러 무시하고 2차 시도로 넘어감
+        }
+
+        // 2차 시도 (안전장치): 0.5초 뒤 강제 URL 파라미터 새로고침
+        setTimeout(function() {
+            var baseUrl = window.location.href.split('?')[0];
+            // 캐시 방지를 위한 타임스탬프(t)와 광고 트리거 파라미터 결합
+            var newUrl = baseUrl + "?m=1&action=spin_ott&show=1&id=" + targetId + "&t=" + new Date().getTime();
+            // location.replace를 사용하여 뒤로가기 히스토리가 꼬이는 현상 방지
+            window.location.replace(newUrl);
+        }, 500);
+    }
+
+    // 결과 확인 버튼 클릭 이벤트
+    submitBtn.addEventListener('click', function() {
+        if (!selectedId) return;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Authenticating Request...";
+        triggerAdAndMove(selectedId);
+    });
+
+    // 앱 로드 시 URL 파라미터를 분석하여 결과창 띄우기
+    function init() {
+        var searchParams = window.location.search;
+        if (searchParams.indexOf('action=spin_ott') !== -1 && searchParams.indexOf('show=1') !== -1) {
+            var idMatch = searchParams.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                showResult(idMatch[1]);
+            }
+        }
+    }
+
+    // 결과 모달창 렌더링
+    function showResult(categoryId) {
+        var tableContent = tableDB[categoryId];
+        if (!tableContent) return;
+
+        for (var i = 0; i < catDB.length; i++) {
+            if (catDB[i].id === categoryId) {
+                document.getElementById('modal-emoji').innerHTML = catDB[i].emoji;
+                document.getElementById('modal-title').innerText = catDB[i].title;
+                break;
+            }
+        }
+
+        document.getElementById('table-container').innerHTML = tableContent;
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    // 닫기 버튼 이벤트 및 초기화
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        
+        var allCards = document.querySelectorAll('.cat-card');
+        for (var k = 0; k < allCards.length; k++) {
+            allCards[k].classList.remove('selected');
+        }
+        selectedId = null;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Select a Survival Guide";
+        
+        // URL에서 파라미터를 깔끔하게 지워 다음 동작 준비
+        try {
+            var baseUrl = window.location.href.split('?')[0];
+            window.history.replaceState({}, document.title, baseUrl);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
