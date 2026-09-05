@@ -1,0 +1,655 @@
+<!--Google Blogger Only: K-Heritage Docent (Master Edition - ES5 Strict & Double Safety)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0f0b0a !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', 'Noto Serif', serif;
+        color: #e5d3b3; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+    .particle { position: absolute; background: radial-gradient(circle, #ffdf73 0%, rgba(212,175,55,0) 70%); border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 20% { opacity: 0.6; } 80% { opacity: 0.4; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; padding: 35px 20px 80px 20px; box-sizing: border-box; background: linear-gradient(180deg, #1a1110 0%, #0a0706 100%); box-shadow: 0 0 40px rgba(212, 175, 55, 0.1); }
+
+    .header-section { margin-bottom: 30px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;}
+    .main-title { font-size: 28px; font-weight: 900; color: #d4af37; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(212,175,55,0.3); letter-spacing: 1px;}
+    .sub-title { font-size: 13px; color: #a89f91; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;}
+
+    .intro-box { background: rgba(25, 17, 16, 0.8); border-radius: 12px; padding: 25px; border: 1px solid #3a2b25; margin-bottom: 35px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
+    .intro-title { font-size: 16px; font-weight: 700; color: #e5d3b3; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #3a2b25; padding-bottom: 12px;}
+    .intro-desc { font-size: 14.5px; color: #b8b0a1; line-height: 1.8; margin-bottom: 20px; word-break: keep-all;}
+    .intro-desc b { color: #d4af37; font-weight: 700; }
+    
+    .guide-wrap { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 8px; font-size: 14px; color: #9a9081; line-height: 1.8; border-left: 3px solid #7c1a22;}
+    .guide-wrap strong { color: #d4af37; display: block; margin-bottom: 10px; font-size: 15px;}
+    .guide-wrap ul { margin: 0; padding-left: 20px; margin-bottom: 0;}
+    .guide-wrap li { margin-bottom: 8px;}
+
+    .tool-box { margin-bottom: 30px; }
+    .box-title { font-size: 17px; font-weight: 700; color: #d4af37; margin-bottom: 20px; text-align: center; letter-spacing: 1px;}
+
+    .tab-container { display: flex; gap: 8px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 5px; }
+    .tab-container::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: 1; min-width: 95px; padding: 14px 10px; background: #1f1614; border: 1px solid #3a2b25; border-radius: 8px; color: #8a7f71; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; white-space: nowrap; text-align: center;}
+    .tab-btn.active { background: linear-gradient(135deg, #7c1a22, #4a0e17); color: #fdfbf7; border-color: #d4af37; box-shadow: 0 4px 15px rgba(124, 26, 34, 0.4);}
+
+    .grid-container { display: none; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-container.active { display: grid; }
+    .item-btn { background: rgba(25, 17, 16, 0.6); border: 1px solid #3a2b25; border-radius: 8px; padding: 22px 12px; display: flex; flex-direction: column; align-items: center; gap: 14px; cursor: pointer; transition: 0.2s; text-align: center; position: relative; overflow: hidden;}
+    .item-icon { font-size: 30px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); z-index: 2;}
+    .item-name { font-size: 14px; color: #e5d3b3; font-weight: 700; word-break: keep-all; line-height: 1.4; z-index: 2;}
+    .item-btn::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0) 70%); opacity: 0; transition: 0.3s; z-index: 1;}
+    .item-btn.selected { border-color: #d4af37; background: #2a1c1a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.6);}
+    .item-btn.selected::before { opacity: 1; }
+
+    .submit-btn { width: 100%; padding: 22px; background: linear-gradient(135deg, #d4af37, #aa8529); border: none; border-radius: 8px; color: #1a1110; font-size: 17px; font-weight: 900; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);}
+    .submit-btn:active { transform: translateY(4px); box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);}
+    .submit-btn:disabled { background: #2a1c1a; color: #5a4b41; box-shadow: none; cursor: not-allowed; border: 1px solid #3a2b25;}
+
+    .disclaimer-box { background: rgba(0,0,0,0.6); border: 1px solid #3a2b25; border-radius: 8px; padding: 20px; margin-top: 40px; }
+    .disclaimer-title { font-size: 13px; font-weight: 700; color: #8a7f71; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;}
+    .disclaimer-text { font-size: 12.5px; color: #6a5b51; line-height: 1.6; word-break: keep-all; text-align: justify;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px);}
+    .result-content { max-width: 540px; margin: 20px auto; background: #16100e; border-radius: 12px; padding: 40px 25px; border: 1px solid #d4af37; box-shadow: 0 20px 60px rgba(0,0,0,0.9); position: relative;}
+    .result-content::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 1px solid rgba(212, 175, 55, 0.2); pointer-events: none; border-radius: 6px;}
+    
+    .res-tag { display: inline-block; padding: 6px 14px; background: #7c1a22; color: #e5d3b3; font-size: 12px; font-weight: 700; border-radius: 4px; margin-bottom: 20px; border: 1px solid #a42832;}
+    .res-title { font-size: 26px; font-weight: 900; color: #d4af37; margin-bottom: 25px; line-height: 1.4; word-break: keep-all; text-align: center;}
+    .section-title { font-size: 16px; font-weight: 700; color: #e5d3b3; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px dashed #3a2b25; padding-bottom: 10px;}
+    .res-desc { font-size: 15.5px; color: #c8bca1; line-height: 1.9; word-break: keep-all; text-align: justify;}
+    
+    .tip-box { background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); padding: 22px; border-radius: 8px; margin-top: 30px; position: relative;}
+    .tip-box strong { display: block; color: #d4af37; margin-bottom: 12px; font-size: 15.5px;}
+    .tip-box p { margin: 0; font-size: 15px; color: #b8b0a1; line-height: 1.8; word-break: keep-all;}
+
+    .warn-box { background: rgba(124, 26, 34, 0.1); border: 1px solid rgba(124, 26, 34, 0.4); padding: 22px; border-radius: 8px; margin-top: 25px; }
+    .warn-box strong { display: block; color: #e56b6b; margin-bottom: 12px; font-size: 15.5px;}
+    .warn-box p { margin: 0; font-size: 15px; color: #d8aaaa; line-height: 1.8; word-break: keep-all;}
+
+    .more-link-btn { width: 100%; padding: 16px; background: transparent; border: 1px dashed #d4af37; border-radius: 8px; color: #d4af37; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 35px; transition: 0.3s; }
+    .more-link-btn:active { background: rgba(212, 175, 55, 0.1); }
+    .close-btn { width: 100%; padding: 18px; background: #2a1c1a; border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 15px; transition: 0.3s; position: relative; z-index: 2;}
+    .close-btn:active { background: #d4af37; color: #1a1110;}
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Heritage Docent</div>
+        <div class="sub-title">Premium History &amp; Culture Guide</div>
+    </div>
+
+    <div class="intro-box">
+        <div class="intro-title">🏛️ Welcome to the Premium Docent Lounge</div>
+        <div class="intro-desc">
+            The past is not merely time that has flowed by, but a perfect mirror reflecting the present and a profound source of wisdom.<br /><br />
+            Stepping away from rigid textbook narratives, this lounge offers a premium storytelling experience. Discover <b>the hidden secrets of the Joseon Royal Court</b>, <b>the mysteries of ancient relics</b>, and <b>the dramatic decisions of heroes</b> that shaped the destiny of the nation.
+        </div>
+        <div class="guide-wrap">
+            <strong>[Docent Guide]</strong>
+            <ul>
+                <li>Please select an era of interest from the 3 main themes below.</li>
+                <li>Tap lightly on a page of detailed history you wish to explore.</li>
+                <li>Click the 'Open the Secret Door' button to begin a private historical commentary.</li>
+                <li>If you seek deeper knowledge after the explanation, please use the 'Wikipedia' button at the bottom.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tool-box">
+        <div class="box-title">Which historical door will you open?</div>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" data-target="royal">👑 Royal Secrets</button>
+            <button class="tab-btn" data-target="relic">🏛️ Ancient Relics</button>
+            <button class="tab-btn" data-target="hero">📜 Heroic Decisions</button>
+        </div>
+
+        <div class="grid-container active" id="royal"></div>
+        <div class="grid-container" id="relic"></div>
+        <div class="grid-container" id="hero"></div>
+    </div>
+
+    <button class="submit-btn" disabled="disabled" id="submit-btn">
+        Please select a historical record
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Legal Notice &amp; Disclaimer</div>
+        <div class="disclaimer-text">
+            All historical content and commentary provided in this app are storytelling materials reconstructed based on various literature and unofficial historical tales to help the public understand Korean history.<br /><br />
+            Therefore, this material is provided solely for personal cultural enrichment and entertainment. It cannot be used as official academic papers, absolute historical evidence, or proof in any legal disputes. Please enjoy it as an engaging guide, noting that historical interpretations may vary depending on academic perspectives.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div id="res-tag-container"></div>
+        <div class="res-title" id="res-title">Situation Title</div>
+        
+        <div class="section-title">📖 The Truth and Hidden Records of History</div>
+        <div class="res-desc" id="res-steps">Detailed Content</div>
+        
+        <div class="tip-box">
+            <strong>💡 Docent Observation Point</strong>
+            <p id="res-tip">Tip Content</p>
+        </div>
+
+        <div class="warn-box">
+            <strong>⚠️ Fatal Warnings Left by History</strong>
+            <p id="res-warning">Warning Content</p>
+        </div>
+
+        <button class="more-link-btn" id="more-link-btn">🔍 Learn more deeply on Wikipedia</button>
+        <button class="close-btn" id="close-btn">End Docent (Return to Lounge)</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+    var particleContainer = document.getElementById('particles-container');
+    var particleCount = 40; 
+    for (var i = 0; i < particleCount; i++) {
+        var particle = document.createElement('div');
+        particle.className = 'particle';
+        var size = Math.random() * 4 + 2; 
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particleContainer.appendChild(particle);
+    }
+
+    var manualDB = [
+        /* Royal Secrets */
+        { id: "R1", cat: "royal", icon: "⚔️", title: "Yi Bang-won & The Strife of Princes", 
+          steps: "Jeong Do-jeon dreamed of a prime minister-centered politics and appointed Yi Seong-gye's youngest son as Crown Prince. Feeling alienated, the fifth son, Yi Bang-won (King Taejong), led private soldiers to eliminate his rivals, instigating the 'First Strife of Princes'.\n\nHe resolutely suppressed further rebellions and seized real power, establishing a strong royal authority and an unshakable foundation for 500 years of Joseon.", 
+          tip: "King Taejong is often known merely as a cold-blooded purger. However, he was a highly pragmatic monarch who installed the 'Sinmungo' (petition drum) to hear the people's voices and reorganized the tax system to strengthen national finances.", 
+          warning: "Taejong's cold blade was directed at his maternal relatives without exception to ensure his brilliant successor, King Sejong, could rule without interference. It highlights the ruthlessness required to maintain absolute power." },
+        
+        { id: "R2", cat: "royal", icon: "🩸", title: "Grand Prince Suyang's Coup", 
+          steps: "When King Danjong ascended the throne at 12, senior ministers seized power. Feeling threatened, Danjong's uncle, Grand Prince Suyang (King Sejo), secretly conspired to draft a terrifying hit list.\n\nIn 1453, he assassinated key ministers and purged opponents in the 'Gyeyujeongnan' (Coup of 1453). He exiled his young nephew Danjong, ordered his death, and personally ascended the blood-stained throne.", 
+          tip: "This incident is a highly fascinating and tragic historical example showing how human ambition for power and meticulously designed political engineering can summon a horrific bloodbath.", 
+          warning: "To cover up the weakness of his usurpation, King Sejo bestowed massive amounts of land upon his retainers. This led to the rise of a corrupt faction, a fatal misstep that plagued Joseon society." },
+
+        { id: "R3", cat: "royal", icon: "🎭", title: "Yeonsangun's Madness and Purges", 
+          steps: "King Yeonsangun, recorded as an unprecedented tyrant, initiated massive purges. Early on, he executed scholars for subtle criticisms (Muo Purge).\n\nUpon learning his mother, Deposed Queen Yoon, was unjustly executed, he was engulfed in uncontrollable rage, launching the 'Gapja Purge' to brutally execute those involved in her death, cementing his path as a tyrant.", 
+          tip: "Yeonsangun wasn't initially a madman. Early in his reign, he made efforts to strengthen national defense and relieve the poor, showing a complex character before his descent into madness.", 
+          warning: "Absolute power with broken brakes ultimately leads to self-destruction. His extreme extravagance and severe tyranny resulted in a coup, making him the first Joseon king deposed by his subjects." },
+
+        { id: "R4", cat: "royal", icon: "👑", title: "Gwanghaegun's Pragmatic Diplomacy", 
+          steps: "Gwanghaegun demonstrated excellent balance amid fierce international politics. Taking charge during the Japanese invasions while his father fled, he worked tirelessly to restore the nation.\n\nHe executed brilliant neutral diplomacy between the declining Ming and rising Qing dynasties. However, for killing his half-brother and abandoning loyalty to Ming, he was deposed in a coup.", 
+          tip: "Modern historians highly evaluate his neutral diplomacy as the most outstanding geopolitical insight for a weak nation surviving among great powers.", 
+          warning: "Despite diplomatic brilliance, he bankrupted national finances with excessive palace reconstructions, showing that ignoring the people's livelihood leads to internal collapse." },
+
+        { id: "R5", cat: "royal", icon: "☠️", title: "Mysterious Death of Crown Prince Sohyeon", 
+          steps: "Taken hostage to Qing after the Manchu invasion, Prince Sohyeon embraced Western science and Catholicism, returning with a progressive vision to modernize Joseon.\n\nHowever, his father, King Injo, treated him coldly out of paranoia. Just two months after returning, the prince died mysteriously, his body turning black and bleeding from all orifices after acupuncture.", 
+          tip: "Historical records heavily suggest poisoning, likely ordered by King Injo. If Sohyeon had ascended the throne, Joseon's modernization might have advanced by 200 years.", 
+          warning: "Injo's paranoia worsened, leading him to execute the prince's wife and exile his young grandsons to their deaths. It shows how the anxiety to protect power can sever even family ties." },
+
+        { id: "R6", cat: "royal", icon: "💄", title: "King Sukjong and Jang Hui-bin", 
+          steps: "Going beyond a simple romantic drama, this era saw fierce power struggles between the Seoin and Namin factions. King Sukjong favored Jang Hui-bin, deposing Queen Inhyeon, only to later reinstate the Queen and execute Jang.\n\nThrough these extreme political flips (Hwanguk), Sukjong maximized mutual checks among ministers, elevating royal authority to an absolute peak.", 
+          tip: "While Jang Hui-bin is often depicted as a wicked temptress, modern views suggest she was a political scapegoat, meticulously used and discarded for Sukjong's royal strengthening scenarios.", 
+          warning: "Sukjong's extreme politics temporarily empowered the king but turned politics into a bloody cycle of revenge, sowing the seeds for fatal factional strife that later crippled Joseon." },
+
+        { id: "R7", cat: "royal", icon: "📦", title: "Tragedy of Crown Prince Sado", 
+          steps: "King Yeongjo, plagued by complexes about his origins, obsessed over having a perfect successor. His harsh rebukes caused his son, Crown Prince Sado, to develop severe mental illness.\n\nWhen Sado's erratic behavior and murders escalated, Yeongjo locked him in a small wooden rice chest (dwiju) without water, letting him starve to death over eight agonizing days.", 
+          tip: "The memoirs written by Sado's wife vividly accuse the tragic circumstances between a maddened husband and a cold father-in-law, considered a masterpiece of Joseon literature.", 
+          warning: "While political strife fueled the fire, it essentially remains a horrific psychological thriller showing how extreme suppression and lack of communication from a father destroys a human soul." },
+
+        { id: "R8", cat: "royal", icon: "📚", title: "King Jeongjo's Royal Library", 
+          steps: "Despite enduring nightly assassination threats from the faction that killed his father (Sado), King Jeongjo led a renaissance in Joseon.\n\nRather than bloody revenge, he chose reform through academics. He established the 'Gyujanggak' library to nurture young scholars regardless of status, and created a formidable royal guard 'Jangyongyeong', leading a brilliant cultural revival.", 
+          tip: "Jeongjo constantly sent secret letters to his political enemies to negotiate and control affairs behind the scenes, proving he was a masterful political strategist, not just a scholar.", 
+          warning: "His sudden death at 49 halted the reforms. Child kings subsequently ascended, leading to the 'Sedo Politics' era, a dark period where royal in-laws monopolized state power." },
+
+        { id: "R9", cat: "royal", icon: "🪨", title: "Heungseon Daewongun's Isolationism", 
+          steps: "Acting for his young son King Gojong, Daewongun eradicated corrupt politics and strengthened royal authority by abolishing tax-exempt academies.\n\nHowever, as Western ships appeared, he erected 'Cheokhwa-bi' monuments nationwide, staunchly refusing foreign relations and maintaining a strict isolationist policy to defend against Western imperialism.", 
+          tip: "While isolationism temporarily defended Joseon from military incursions, it caused the nation to miss the golden time for modernization, ultimately providing an excuse for colonization.", 
+          warning: "To rebuild Gyeongbokgung Palace, he recklessly minted high-denomination coins ('Dangbaekjeon'), causing extreme inflation and economic ruin, which became his fatal political weakness." },
+
+        { id: "R10", cat: "royal", icon: "🗡️", title: "Assassination of Empress Myeongseong", 
+          steps: "As Japanese interference peaked, Empress Myeongseong pushed a policy aligning with Russia to check Japan. Feeling threatened, Japan orchestrated an unspeakable atrocity.\n\nIn October 1895, Japanese thugs and soldiers infiltrated Gyeongbokgung Palace, brutally assassinated the Empress, and burned her body—a barbaric crime committed in the heart of the royal palace.", 
+          tip: "This shocking incident ignited extreme outrage among Koreans, sparking nationwide anti-Japanese militia movements and elevating the spirit of resistance to its peak.", 
+          warning: "The fact that a queen was murdered in her own palace by foreign thugs starkly exposes how helpless and decayed Joseon's national defense and security systems had become." },
+
+        { id: "RY_11", cat: "royal", icon: "🦀", title: "King Gyeongjong's Suspicious Death", 
+          steps: "King Gyeongjong was chronically ill. One day, his half-brother (future King Yeongjo) served him marinated crab and unripe persimmons—foods considered incompatible in traditional medicine.\n\nGyeongjong suffered severe stomach pains and died days later. Whether a medical accident or calculated poisoning, it remains a great mystery.", 
+          tip: "Crab and persimmons are strictly forbidden to be eaten together in Eastern medicine, as they can cause severe indigestion and food poisoning.", 
+          warning: "Yeongjo brutally executed those who spread rumors that he poisoned his brother, but his extreme reactions only fueled the suspicions further." },
+
+        { id: "RY_12", cat: "royal", icon: "🩸", title: "The Six Martyred Ministers", 
+          steps: "Loyal scholars known as the Sayuksin planned a secret revolt to reinstate the young King Danjong, who was usurped by King Sejo.\n\nThe plot was betrayed. Despite brutal torture by Sejo himself, the six ministers refused to acknowledge him as king and were brutally executed, becoming symbols of ultimate loyalty.", 
+          tip: "These six martyrs are contrasted with the 'Saengyuksin' (six living ministers) who abandoned their posts to live in seclusion, demonstrating the essence of unwavering scholar spirit.", 
+          warning: "Sejo completely annihilated their families; men were executed, and women were reduced to slavery, showing the terrifying wrath directed at those who challenge absolute power." },
+
+        { id: "RY_13", cat: "royal", icon: "🍃", title: "Jo Gwang-jo's Reforms and Purge", 
+          steps: "The genius scholar Jo Gwang-jo pushed radical reforms to create a perfect moral state, abolishing corrupt privileges. This provoked massive backlash from the established elite.\n\nHis enemies smeared honey on leaves to form the characters 'Jo will become King,' letting bugs eat it. Fooled by this plot, King Jungjong ordered Jo's death by poison.", 
+          tip: "While his reforms were idealistic and correct in direction, pushing them too radically without considering reality led to failure—a lesson in balancing ideals with pragmatism.", 
+          warning: "King Jungjong used Jo to strengthen his power, but discarded him ruthlessly when Jo's popularity soared, highlighting the danger of relying solely on a monarch's fickle favor." },
+        
+        { id: "RY_14", cat: "royal", icon: "❄️", title: "King Injo & Humiliation at Samjeondo", 
+          steps: "During the Manchu invasion, King Injo fled to Namhansanseong Fortress, resisting for 45 days. Overcome by cold, starvation, and overwhelming forces, he surrendered.\n\nIn the snowy fields of Samjeondo, Injo endured the extreme humiliation of bowing three times and hitting his head on the ground nine times before the Qing Emperor.", 
+          tip: "The fierce debate inside the fortress between fighting to the death (명분) and surrendering for survival (실리) offers profound lessons in diplomatic decision-making.", 
+          warning: "This surrender resulted in hundreds of thousands of Joseon people being dragged to Qing as hostages and slaves, showing the massive human cost of a leader's diplomatic misjudgments." },
+
+        { id: "RY_15", cat: "royal", icon: "👑", title: "Queen Munjeong's Regency", 
+          steps: "Queen Munjeong ruthlessly cleared the path for her young son, King Myeongjong, ruling as regent. She purged opponents (Eulsa Purge) and heavily patronized Buddhism.\n\nWith her brother Yun Won-hyung, she completely monopolized state affairs. Even as an adult, the king lived in his mother's shadow in tears.", 
+          tip: "While often depicted as a power-hungry villain, she is also evaluated as a great patron who revived Buddhism during an era of extreme suppression.", 
+          warning: "The extreme corruption of her family drove the peasants into despair, directly sparking the famous rebellion of the righteous thief Im Kkeok-jeong." },
+
+        { id: "RY_16", cat: "royal", icon: "🔥", title: "King Seonjo's Flight to Uiju", 
+          steps: "When the Japanese invaded (1592), King Seonjo abandoned the capital and fled to Uiju in the rain. Enraged citizens burned the palaces.\n\nHe divided the court (Bunjo), leaving Crown Prince Gwanghaegun to manage the war. Unlike his father, Gwanghaegun led from the front, rallying militias and saving the nation.", 
+          tip: "This crisis highlights the importance of responsible leadership. Seonjo's flight ruined royal authority, but it inadvertently forged a practical leader in Gwanghaegun.", 
+          warning: "After the war, Seonjo, intensely jealous of Gwanghaegun's popularity, tried to replace him with a new legitimate son, showing the ruthlessness of power even among family." },
+
+        { id: "RY_17", cat: "royal", icon: "🏹", title: "King Hyojong's Northern Expedition", 
+          steps: "Returning from hostage life in Qing, King Hyojong pushed a fierce 'Northern Expedition' to avenge his father's humiliation, aggressively expanding military forces.\n\nThough he never attacked Qing, he sent elite musketeers to help Qing fight expanding Russian forces (Naseon Conquest), winning impressive victories and restoring Joseon's battered pride.", 
+          tip: "Modern historians suggest the Northern Expedition was less a practical military strategy and more a brilliant political propaganda tool to unite the nation and strengthen royal power.", 
+          warning: "The ruling faction used this ideology to maintain their political dominance rather than enacting practical reforms, showing the limits of policy driven purely by ideology." },
+
+        { id: "RY_18", cat: "royal", icon: "👗", title: "The Yesong Debates of King Hyeonjong", 
+          steps: "Following Hyojong's death, factions risked their lives debating how long the Queen Dowager should wear mourning clothes. It was a profound clash over whether royal authority was absolute or bound by normal aristocratic rules.\n\nKing Hyeonjong masterfully manipulated these philosophical clashes to shift power and strengthen the throne.", 
+          tip: "While debating mourning clothes seems wasteful today, in a Confucian state where 'Propriety (Li)' was the constitution, this was the ultimate ideological and political battle.", 
+          warning: "Though initially a scholarly debate, this marked the beginning of extreme factional politics that would soon devolve into bloody, deadly purges." },
+
+        { id: "RY_19", cat: "royal", icon: "⚖️", title: "King Yeongjo's Tangpyeong Policy", 
+          steps: "To end terrifying factional wars, King Yeongjo declared the 'Tangpyeong' (Magnificent Harmony) policy, employing moderates from all factions to achieve political balance.\n\nHe abolished cruel punishments and allowed commoners to strike a gong (Gyeokjaeng) to appeal directly to the king, leaving great achievements for the people's welfare.", 
+          tip: "The famous Korean dish 'Tangpyeongchae'—where various ingredients are harmoniously mixed—was named after this very policy of political harmony.", 
+          warning: "This harmony relied entirely on the king's overwhelming charisma rather than structural reform. After his era, the balance shattered into even worse corruption (Sedo Politics)." },
+
+        { id: "RY_20", cat: "royal", icon: "🇰🇷", title: "King Gojong's Flight to Russian Legation", 
+          steps: "Traumatized by the brutal assassination of his wife (Empress Myeongseong), King Gojong fled the palace in secret in a court lady's palanquin to the Russian Legation.\n\nUnder Russian protection, he dismantled the pro-Japanese cabinet and later returned to declare the 'Korean Empire', but the nation's rights had already been torn apart by imperial powers.", 
+          tip: "Historically, this act is fiercely debated: was it a cowardly abandonment of the palace, or a necessary diplomatic maneuver to protect the royal family from Japanese threats?", 
+          warning: "In exchange for protection, Gojong was forced to hand over massive national resources (mining, forestry) to Russia and other powers at bargain prices—a bitter cost of relying on foreign strength." },
+
+        /* Ancient Relics */
+        { id: "R11", cat: "relic", icon: "🗿", title: "Science of Bulguksa & Seokguram", 
+          steps: "These ruins represent the absolute perfection of Unified Silla's architectural aesthetics. Bulguksa's 'Geuraengi' technique, interlocking pillars over natural stones, boasts incredible seismic design.\n\nSeokguram's granite dome features a flawless golden ratio and a marvelous natural ventilation system that regulated humidity through microscopic gaps.", 
+          tip: "The gaze of the main Buddha perfectly aligns with King Munmu's underwater tomb in the East Sea, reflecting a desperate patriotic desire to block invading Japanese pirates.", 
+          warning: "During the colonial era, the Japanese recklessly poured cement over Seokguram, permanently destroying its thousand-year-old natural ventilation system, forcing modern reliance on mechanical air conditioners." },
+          
+        { id: "R12", cat: "relic", icon: "⛰️", title: "Nakhwaam & 3,000 Court Ladies", 
+          steps: "Overlooking the Baekma River, Nakhwaam is a cliff imbued with Baekje's sorrow. When Sabi Fortress fell, legend says court ladies threw themselves off the cliff in red skirts, preferring death over humiliation.\n\nTheir falling figures resembled scattering red petals, earning the cliff the name 'Nakhwaam' (Cliff of Falling Flowers).", 
+          tip: "The number '3,000' is merely a literary exaggeration by later Joseon writers to dramatize Baekje's fall. Historically, the fortress could never support that many court ladies.", 
+          warning: "History is written by the victors. Baekje's last king, Uija, is remembered as a tyrant, but he was actually a brilliant and filial monarch who captured 40 Silla castles early in his reign." },
+          
+        { id: "R13", cat: "relic", icon: "🧱", title: "Miracle of King Muryeong's Tomb", 
+          steps: "In 1971, workers accidentally discovered a perfectly sealed brick tomb in Gongju. It was the tomb of Baekje's King Muryeong, untouched by grave robbers for 1,500 years.\n\nIt yielded over 4,600 national treasures and a stone plaque clearly identifying the owner, making it an unprecedented archaeological miracle.", 
+          tip: "Constructed with baked bricks in the style of China's Liang Dynasty, it serves as a crucial time capsule proving Baekje's highly sophisticated international cultural exchanges.", 
+          warning: "However, due to extreme media frenzy and lack of experience, archaeologists hastily swept up the 1,500-year-old artifacts in a single night—a painful blunder in Korean archaeology." },
+          
+        { id: "R14", cat: "relic", icon: "🏯", title: "Gyeongbokgung and Feng Shui", 
+          steps: "Designed by Jeong Do-jeon, Seoul (Hanyang) and Gyeongbokgung Palace are a perfect fusion of Feng Shui and Confucian ideals.\n\nSurrounded by four guardian mountains with Cheonggyecheon stream flowing through, it embodies the ultimate auspicious layout (Baesan-imsu), with broad avenues designed for clear communication.", 
+          tip: "The names of the palace halls, like 'Geunjeongjeon' (Rule Diligently) and 'Sajeongjeon' (Think Deeply), were chosen from Confucian texts to constantly remind the king of his duties.", 
+          warning: "Burned down during the Japanese invasions, it sat in ruins for 270 years. Later forcibly rebuilt, it suffered again when the Japanese built their massive government building right in its front yard." },
+
+        { id: "R15", cat: "relic", icon: "🏰", title: "Suwon Hwaseong & Filial Piety", 
+          steps: "Built by King Jeongjo to honor his tragic father (Crown Prince Sado), Suwon Hwaseong is a massive, beautiful planned city integrating advanced Joseon technology.\n\nScholar Jeong Yak-yong invented the 'Geujunggi' (crane) using Western pulley principles, drastically reducing construction time and costs to create the orient's finest fortress.", 
+          tip: "It became a UNESCO World Heritage site largely thanks to a meticulous construction manual that recorded every single brick, nail, and worker's wage, allowing perfect restoration after wartime destruction.", 
+          warning: "Hwaseong wasn't just a military fort; it was designed as a prosperous commercial hub where Jeongjo planned to retire with his mother—a grand vision of a reformist king." },
+
+        { id: "R16", cat: "relic", icon: "🏡", title: "Andong Hahoe Village", 
+          steps: "Encircled by the Nakdong River in an 'S' shape, Hahoe Village is a 600-year-old clan village of the Pungsan Ryu family.\n\nWith grand tile-roofed houses in the center surrounded by thatched cottages, it remarkably preserved a harmonious coexistence between aristocrats and commoners during the strict Joseon era.", 
+          tip: "The traditional 'Hahoe Mask Dance' performed here was a clever outlet where commoners wore masks to mock the hypocrisy of aristocrats—a wise communication channel tolerated by the elite.", 
+          warning: "Beyond just looking at old houses, visitors should reflect on the warm community spirit and scholar ethics that kept this village thriving together for centuries." },
+
+        { id: "R17", cat: "relic", icon: "📖", title: "Tripitaka Koreana (Haeinsa)", 
+          steps: "The pinnacle of humanity's woodblock printing, carved over 16 years during the Mongol invasions to invoke Buddha's protection for the nation.\n\nComprising over 80,000 blocks and 52 million characters, the calligraphy is so uniform and flawless it appears written by a single person—an absolute masterpiece.", 
+          tip: "The storage halls use charcoal, salt, and sand floors with varied window sizes for natural ventilation, a perfect scientific design that kept the wood from rotting for 700 years.", 
+          warning: "Creating one block required soaking cherry wood in seawater for years, boiling it in saltwater, and drying it in the shade. It embodies the blood, sweat, and desperate prayers of the Goryeo people." },
+
+        { id: "R18", cat: "relic", icon: "🏛️", title: "Jongmyo Shrine & Royal Rituals", 
+          steps: "Jongmyo is the supreme shrine housing the spirit tablets of Joseon kings and queens. Its main hall (Jeongjeon) is the world's longest wooden building.\n\nWhenever a king died, a new room was added horizontally, creating a uniquely beautiful and solemn architectural aesthetic unmatched in Western history.", 
+          tip: "The 'Jongmyo Jerye' rituals and music are preserved perfectly in their original form from 500 years ago, a rare instance where both architecture and rituals are UNESCO World Heritage sites.", 
+          warning: "The rough stone path in the center (Sinro) is exclusively for spirits. Even the absolute king had to walk on the lower side paths with a bowed head, showcasing the strict etiquette of the space." },
+
+        { id: "R19", cat: "relic", icon: "🗿", title: "Ganghwa Island Dolmens & Resistance", 
+          steps: "Ganghwa Island is home to massive prehistoric dolmens and served as the temporary capital for Goryeo's desperate 39-year resistance against the Mongol Empire.\n\nGoryeo's military regime exploited the Mongol cavalry's weakness in naval warfare, retreating to this island to mount an incredibly stubborn defense.", 
+          tip: "The massive table-style dolmens, weighing tens of tons, prove that a powerful leader capable of mobilizing hundreds of workers existed here as early as the Bronze Age.", 
+          warning: "The coastal fortresses (Dondae) later became bloody battlegrounds where Joseon soldiers fought to the death against overwhelming French and American firepower in the 19th century." },
+
+        { id: "R20", cat: "relic", icon: "⛩️", title: "Baekje Sabi Fortress & Jeongnimsa", 
+          steps: "King Seong moved the capital to the open plains of Sabi (Buyeo) to revive Baekje, building a sophisticated, grid-patterned planned city.\n\nThe 5-story stone pagoda at Jeongnimsa Temple site represents the pinnacle of Baekje aesthetics, carving hard stone to look like the elegant eaves of a soft wooden building.", 
+          tip: "Engraved on the pagoda is a boastful victory message by the Tang Dynasty general Su Dingfang, leaving a painful 1,300-year-old scar of a defeated nation.", 
+          warning: "Baekje's brilliant culture was completely burned down by the allied invasion. The fragments we see today remind us how thoroughly the history of the defeated is erased." },
+
+        { id: "RL_11", cat: "relic", icon: "🧱", title: "Seokchondong Tombs & Hanseong Baekje", 
+          steps: "While Buyeo or Gongju come to mind, Baekje's capital for over 500 years was actually in modern-day Songpa-gu, Seoul.\n\nThe massive stepped stone pyramid tombs here strongly prove that Baekje's founding forces descended from the Goguryeo lineage.", 
+          tip: "Tomb No. 3, the largest, is strongly presumed to belong to King Geunchogo, the great conqueror who led Baekje's golden age. Its scale amidst modern skyscrapers is breathtaking.", 
+          warning: "Reckless development of Gangnam in the 1970s destroyed countless precious tombs forever under asphalt and apartments. What remains is only a fraction that barely survived." },
+
+        { id: "RL_12", cat: "relic", icon: "🗼", title: "Mireuksa Temple Stone Pagoda", 
+          steps: "Standing alone at the largest temple site in East Asia, this is Korea's oldest and largest stone pagoda, built by King Mu of Baekje.\n\nIt carved stone to meticulously mimic wooden architecture, showcasing the peak of Baekje's stone masonry. After 20 years of dismantling and restoration, it has partially regained its majestic form.", 
+          tip: "A golden reliquary found inside revealed that King Mu's queen was the daughter of a Baekje aristocrat, not Princess Seonhwa of Silla, turning historical theories upside down.", 
+          warning: "Modern restorers deliberately left it asymmetrical without fabricating new stones for the collapsed half, embodying the modern philosophy that preserving the scars of time is true conservation." },
+
+        { id: "RL_13", cat: "relic", icon: "🔭", title: "Cheomseongdae Observatory", 
+          steps: "Asia's oldest astronomical observatory, built by Queen Seondeok of Silla, serves as a mysterious structure embedding calendar principles in its stones.\n\nIt uses about 365 stones (days of the year) and has 27 levels (representing the 27th monarch). Its elegant curved design also incorporates flawless seismic resistance.", 
+          tip: "Walking around it at night under illumination, one can imagine ancient Silla people reading the stars to determine farming seasons and national fortunes.", 
+          warning: "Recent earthquakes caused a slight tilt. To prevent further damage, crossing the fence or touching the stones is strictly prohibited." },
+
+        { id: "RL_14", cat: "relic", icon: "🦢", title: "Donggung Palace & Wolji Pond", 
+          steps: "This was the ultimate royal garden where the Silla Crown Prince resided and lavish banquets were held after the unification of the Three Kingdoms.\n\nThe pond's edges were designed with complex curves so that the entire pond could not be seen at once, creating an optical illusion of a vast, endless ocean.", 
+          tip: "A 14-sided wooden die found here features fun drinking game penalties (e.g., 'drinking in one shot', 'enduring tickling'), revealing the lively human culture of Silla aristocrats.", 
+          warning: "During the Joseon era, it was abandoned in ruins and called 'Anapji' (Duck and Goose Pond). It took a thousand years of excavation to reclaim its beautiful original name, 'Wolji' (Pond of the Moon)." },
+
+        { id: "RL_15", cat: "relic", icon: "🏺", title: "Goryeo Celadon & Gangjin Kilns", 
+          steps: "Goryeo celadon reached the pinnacle of global ceramic history with its mystical jade color (Bisaek) and the original 'Sanggam' (inlay) technique.\n\nPraised even by the Song Dynasty as the finest in the world, Gangjin was the capital of pottery, packed with massive kilns thanks to its clean water, abundant firewood, and quality clay.", 
+          tip: "When appreciating celadon, look closely at the microscopic cracks (craquelure) covering the surface. These naturally diffuse light, creating the deep, subtle jade luster.", 
+          warning: "The technology was lost during the Mongol invasions and the fall of Goryeo. With artisans scattered, the exact glaze recipe remains an eternal mystery impossible to perfectly replicate." },
+
+        { id: "RL_16", cat: "relic", icon: "🏯", title: "Namhansanseong & the Manchu Invasion", 
+          steps: "A seemingly impregnable mountain fortress that became the site of King Injo's painful surrender during the 1636 Manchu Invasion.\n\nDespite strong walls, unpreparedness meant food and firewood ran out quickly. After 45 days of freezing starvation, Joseon surrendered, proving that the best fortress is useless without prepared leadership.", 
+          tip: "Walking the fortress walls reveals the magnificent scale of its defensive structures and offers a breathtaking panoramic view of modern Seoul.", 
+          warning: "The 'Sueojangdae' command post holds a chilling legend of a wrongly executed commander who claimed a hawk would fly if he were innocent—and it did, leaving a shrine for his vindication." },
+
+        { id: "RL_17", cat: "relic", icon: "⛩️", title: "Seoul City Wall & Four Gates", 
+          steps: "The massive 18km stone wall that protected Hanyang (Seoul) for 500 years, connecting the ridges of its four guardian mountains.\n\nIts Four Great Gates represent the Confucian virtues: Benevolence, Righteousness, Propriety, and Wisdom. It served as both military defense and strict administrative boundary for curfews.", 
+          tip: "Looking closely at the stones reveals different masonry techniques from different king's eras—a fascinating visual timeline of advancing construction technology.", 
+          warning: "During modernization and colonial rule, the walls were brutally torn down for roads and tramlines. The West Gate completely vanished, and the South Gate suffered a tragic arson attack before being restored." },
+
+        { id: "RL_18", cat: "relic", icon: "🌳", title: "Secret Garden of Changdeokgung", 
+          steps: "The most private and mysterious space of the Joseon royal family, where the forest was left untouched to serve as the palace garden.\n\nUnlike the artificially sculpted gardens of China or Japan, it embodies the aesthetics of harmony with nature, placing minimal pavilions only where absolutely necessary along natural streams and hills.", 
+          tip: "The Ongnyucheon area deep inside is a masterpiece where kings floated wine cups down a carved rock channel to compose poetry—a favorite retreat of King Jeongjo.", 
+          warning: "To preserve its fragile ecosystem, free roaming is strictly prohibited. It can only be accessed through guided tours with limited numbers, requiring advance reservations." },
+
+        { id: "RL_19", cat: "relic", icon: "🏹", title: "Jinjuseong Fortress & Nongae", 
+          steps: "A sacred site of defense holding both the glory of a great victory and the tragedy of a horrific massacre during the Japanese invasions.\n\nGeneral Kim Si-min initially achieved a miraculous victory here. However, a year later, a massive Japanese army returned, slaughtering all 60,000 soldiers and civilians who fought to the bitter end.\n\nThe legendary gisaeng Nongae embraced a Japanese general and threw herself into the Namgang River, becoming a symbol of the people's ultimate loyalty.", 
+          tip: "Every autumn, the 'Jinju Namgang Yudeung Festival' floats thousands of colorful lanterns on the river to honor these souls, creating a spectacular night view.", 
+          warning: "Jinjuseong is not just a tourist spot; it is a sacred graveyard where 60,000 people bled and died. Visitors should maintain a respectful and solemn attitude." },
+
+        { id: "RL_20", cat: "relic", icon: "🧱", title: "Gochang Eupseong Fortress", 
+          steps: "Built by commoners to block Japanese pirates, this fortress perfectly preserves the original form of a natural stone wall.\n\nBuilt following the natural curves of the mountain, it boasts elegant aesthetics. The unique folk tradition of 'Dapseong-nori', where women walk the walls carrying stones on their heads, is still vividly alive today.", 
+          tip: "Legend says walking the wall once cures leg pain, twice brings long life, and three times grants passage to paradise. Walking the wall is a highly recommended experience.", 
+          warning: "The stones were stacked without being cut, tightly interlocked in an 'irregular' pattern. Though rough-looking, this brilliant engineering has withstood typhoons and earthquakes for 500 years." },
+
+        /* Heroic Decisions */
+        { id: "R21", cat: "hero", icon: "🚢", title: "Yi Sun-sin's Battle of Myeongnyang", 
+          steps: "With only 12 ships remaining, Admiral Yi Sun-sin refused to surrender the sea. 'Your Majesty, I still have 12 ships,' he reported.\n\nUtilizing the terrifying currents of Uldolmok and instilling a 'die to live' spirit in his men, he miraculously destroyed a 133-ship Japanese fleet in an unprecedented naval victory.", 
+          tip: "His victory relied heavily on psychological warfare, such as standing at the vanguard to absorb fire and beheading the enemy commander to shatter Japanese morale.", 
+          warning: "In retaliation, the Japanese brutally murdered Yi's beloved third son. Behind the glorious victory lay the heartbreaking sacrifice of a father." },
+
+        { id: "R22", cat: "hero", icon: "🔫", title: "Ahn Jung-geun's Harbin Assassination", 
+          steps: "In 1909, 31-year-old Ahn Jung-geun shot Ito Hirobumi, the mastermind of Japanese imperialism, at Harbin Station.\n\nInstead of fleeing, he proudly shouted 'Corea Ura!' (Long Live Korea) in Russian. He sacrificed his youth and family for the independence of his homeland and peace in East Asia.", 
+          tip: "Ahn was a visionary thinker. In prison, he wrote 'On Peace in East Asia,' proposing a cooperative union between Korea, China, and Japan—a concept similar to the modern EU.", 
+          warning: "His mother sent him a burial shroud, telling him not to beg for his life but to die proudly. Her unimaginable strength supported his unwavering heroic end." },
+
+        { id: "R23", cat: "hero", icon: "📝", title: "King Sejong's Creation of Hangul", 
+          steps: "Grieved that commoners couldn't read complex Chinese characters, King Sejong secretly developed a new, highly scientific alphabet despite fierce opposition from elite scholars.\n\nIn 1443, he promulgated 'Hunminjeongeum' (Hangul), a phonetic alphabet mirroring human vocal organs, praised globally as one of humanity's greatest intellectual achievements.", 
+          tip: "Sejong overwhelmed his opposing scholars with profound linguistic knowledge, proving he was not just forcing his power, but debating as a genius scholar.", 
+          warning: "The agonizing research process nearly cost Sejong his eyesight and exacerbated severe health issues. Hangul is a noble legacy built on a king's profound sacrifice for his people." },
+
+        { id: "R24", cat: "hero", icon: "🌊", title: "Eulji Mundeok's Battle of Salsu", 
+          steps: "When the massive Sui Dynasty invaded Goguryeo with 300,000 troops, General Eulji Mundeok used fake retreats to lure them deep and exhaust them.\n\nAfter mocking the enemy general with a poem, he unleashed a dammed river (Salsu) upon their retreat, annihilating the army so completely that only 2,700 survived.", 
+          tip: "The victory was fueled by the 'scorched earth' tactic—burning crops and poisoning wells to starve the enemy, showcasing cold and calculating strategic brilliance.", 
+          warning: "This devastating defeat completely exhausted the Sui Dynasty, leading to its rapid collapse within 30 years—a victory that altered the history of China itself." },
+
+        { id: "R25", cat: "hero", icon: "⚔️", title: "Gang Gam-chan's Battle of Gwiju", 
+          steps: "When 100,000 Khitan troops invaded, the 70-year-old General Gang Gam-chan took command. As the Khitans hastily retreated through Gwiju, Gang waited for the perfect moment.\n\nUtilizing a sudden, fierce change in wind direction blowing towards the enemy, he launched an all-out attack, annihilating the Khitan forces in a monumental victory.", 
+          tip: "Gang was actually an elite civil servant who scored first place in the state exams, proving he was a brilliant tactician and administrator, not just a warrior.", 
+          warning: "This victory established a century of tense peace and balance of power in East Asia among Goryeo, Song, and the Khitan Empire." },
+
+        { id: "R26", cat: "hero", icon: "🗣️", title: "Seo Hui's Diplomatic Masterpiece", 
+          steps: "When an 800,000-strong Khitan army invaded demanding surrender, Seo Hui realized their true goal was to secure their rear before attacking Song China.\n\nHe boldly walked into the enemy camp and debated their general, convincing them that Goryeo was the true successor to Goguryeo and securing vast new territories (Six Garrisons) without spilling a drop of blood.", 
+          tip: "This wasn't just smooth talking. Seo Hui first proved Goryeo's military strength in a prior battle, showing that diplomacy only works when backed by tangible power.", 
+          warning: "His brilliant negotiation is hailed as the greatest diplomatic victory in Korean history, proving that accurate intelligence and bold rhetoric can defeat massive armies." },
+
+        { id: "R27", cat: "hero", icon: "💣", title: "Yun Bong-gil's Hongkou Bombing", 
+          steps: "In 1932, 25-year-old Yun Bong-gil infiltrated a massive Japanese victory celebration in Shanghai carrying bombs disguised as a water canteen and a lunchbox.\n\nHe threw the canteen bomb directly at the podium, wiping out top Japanese military commanders and instantly broadcasting Korea's fierce independence will to the world.", 
+          tip: "That morning, Yun swapped his new, expensive watch for Kim Gu's old one, stating, 'My watch only has one hour of use left.' A heartbreaking testament to his resolve.", 
+          warning: "This single explosion moved Chinese leader Chiang Kai-shek to declare that one Korean youth had done what a million Chinese soldiers could not, leading to massive support for the Korean Provisional Government." },
+
+        { id: "R28", cat: "hero", icon: "🇰🇷", title: "Yu Gwan-sun & the March 1st Movement", 
+          steps: "17-year-old student Yu Gwan-sun organized a massive independence rally in her hometown (Aunae Market), distributing hidden Taegeukgi flags to 3,000 people.\n\nEven after witnessing Japanese police brutally murder her parents on the spot, she stood at the forefront without flinching, embodying the unbreakable spirit of Korea.", 
+          tip: "Imprisoned and tortured, she never broke. On the first anniversary of the movement, she organized another massive rally inside the prison, terrifying the Japanese guards.", 
+          warning: "She died in a dark, cold cell from torture complications. Her grave was later destroyed by the Japanese to build a military base, erasing her physical remains from history." },
+
+        { id: "R29", cat: "hero", icon: "📜", title: "Kim Gu & the Provisional Government", 
+          steps: "Kim Gu kept the struggling Korean Provisional Government in Shanghai alive through relentless Japanese assassination attempts and extreme poverty.\n\nHe orchestrated the bombings by Lee Bong-chang and Yun Bong-gil, revived the independence movement, officially declared war on Japan, and formed the Korean Liberation Army to fight alongside the Allies.", 
+          tip: "In his essay 'My Desire,' he explicitly stated he did not want Korea to be a military superpower, but rather a nation of high cultural influence—perfectly predicting today's K-Culture wave.", 
+          warning: "Despite surviving decades of independence struggles, he was tragically assassinated by a fellow Korean right after liberation while trying to prevent the division of North and South Korea." },
+
+        { id: "R30", cat: "hero", icon: "⚓", title: "Jang Bogo, Emperor of the Sea", 
+          steps: "Fleeing Silla's strict class system, commoner Jang Bogo rose to become a high-ranking general in Tang China. Horrified by Korean slaves there, he gave up everything to return.\n\nEstablishing 'Cheonghaejin' (Wando), he eradicated pirates with a 10,000-strong army and monopolized maritime trade across East Asia, becoming the first global maritime CEO.", 
+          tip: "He wasn't just a general; he operated a massive merchant fleet trading even with Middle Eastern Islamic merchants, making Silla a hub of global commerce.", 
+          warning: "Involved in royal succession struggles, his immense power frightened the aristocrats, who ultimately sent an assassin to murder him, causing his maritime empire to collapse overnight." },
+
+        { id: "HR_11", cat: "hero", icon: "🐎", title: "Gwanggaeto the Great's Expansion", 
+          steps: "Ascending the throne at 18, he ruthlessly expanded Goguryeo's territory, seizing key fortresses from Baekje in the south and conquering powerful nomadic tribes across the vast Manchurian plains in the north.\n\nHe even sent 50,000 cavalry to rescue Silla from Japanese pirates, establishing Goguryeo as a massive, unparalleled empire in East Asia.", 
+          tip: "The massive Gwanggaeto Stele in China records his conquest of 64 fortresses and 1,400 villages, serving as the ultimate evidence of Goguryeo's majestic supremacy.", 
+          warning: "Japan later allegedly altered parts of this stele's text to justify their baseless historical claim that they once ruled southern Korea, making it a center of fierce historical dispute." },
+
+        { id: "HR_12", cat: "hero", icon: "⚔️", title: "Gyebaek and the Battle of Hwangsanbeol", 
+          steps: "As 180,000 Silla-Tang allied troops marched on Baekje, General Gyebaek led a suicide squad of 5,000 men to block them at Hwangsanbeol.\n\nBefore leaving, he tragically killed his own family to prevent them from becoming slaves. His troops fought miraculously, repelling the massive enemy four times before finally fighting to the death.", 
+          tip: "Silla's General Kim Yu-sin deliberately sent a young Hwarang (Gwanchang) to die in the Baekje camp to enrage his own troops, revealing the brutal psychological tactics of war.", 
+          warning: "Though a defeated general, Gyebaek's unwavering loyalty is respected as much as the victors. It imparts a profound lesson on the value of loyalty over mere survival." },
+
+        { id: "HR_13", cat: "hero", icon: "🔥", title: "Choe Museon's Gunpowder Innovation", 
+          steps: "To defeat relentless Japanese pirates, Choe Museon became obsessed with localizing gunpowder technology, which was a top-secret of the Yuan Dynasty.\n\nBy persistently bribing a Chinese merchant, he unlocked the formula. He established a government office to mass-produce cannons and mounted them on ships, annihilating 500 pirate vessels in the Battle of Jinpo.", 
+          tip: "The Battle of Jinpo revolutionized naval warfare from hand-to-hand combat into long-range artillery battles—a technology that directly paved the way for Yi Sun-sin's turtle ships.", 
+          warning: "Gunpowder was the nuclear technology of its day. Had Choe not risked everything to localize it, Goryeo might have been destroyed by pirates much earlier." },
+
+        { id: "HR_14", cat: "hero", icon: "🌪️", title: "Gwon Yul's Battle of Haengju", 
+          steps: "Retreating to Haengjusanseong with only 3,000 men, General Gwon Yul faced 30,000 elite Japanese troops. Utilizing advanced secret weapons like the Hwacha (rocket launcher).\n\nThe combined forces of soldiers, monks, militias, and women successfully repelled nine massive attacks, inflicting catastrophic casualties on the enemy.", 
+          tip: "Legend says women carried heavy stones in their short skirts to throw at the enemy, giving rise to the term 'Haengju skirt.' It symbolizes a total, unified national resistance.", 
+          warning: "This devastating defeat broke the Japanese will to occupy Seoul, forcing them to retreat south and completely turning the tide of the Imjin War." },
+
+        { id: "HR_15", cat: "hero", icon: "🛡️", title: "Kim Si-min's Siege of Jinju", 
+          steps: "Defending the breadbasket of Joseon, General Kim Si-min's 3,800 troops faced 20,000 Japanese soldiers. Using boiling water, rocks, and explosives, they fought a bloody battle for six days.\n\nThey repelled the enemy, completely cutting off Japanese supply lines and saving the Jeolla province, a victory that saved the nation.", 
+          tip: "Struck in the forehead by a bullet, Kim hid his injury to maintain troop morale, fighting until the end before dying from the wound shortly after the victory.", 
+          warning: "Enraged by this defeat, Toyotomi Hideyoshi later sent 100,000 troops for brutal revenge, resulting in the massacre of 60,000 Koreans in the Second Battle of Jinju." },
+
+        { id: "HR_16", cat: "hero", icon: "🛶", title: "An Yong-bok's Defense of Dokdo", 
+          steps: "A lowly fisherman, An Yong-bok was kidnapped to Japan for fishing near Dokdo. Instead of cowering, he fiercely reprimanded Japanese officials for entering Joseon territory.\n\nOverwhelmed by his boldness, the Edo Shogunate issued an official document acknowledging that Ulleungdo and Dokdo were not Japanese territory—a diplomatic miracle by a commoner.", 
+          tip: "Shockingly, the Joseon government punished him severely upon his return for traveling abroad without permission, showing the tragic disconnect of the ruling class.", 
+          warning: "The document An secured remains one of the most powerful and definitive historical proofs today that Dokdo is the inherent territory of South Korea." },
+
+        { id: "HR_17", cat: "hero", icon: "🚩", title: "Hong Beom-do's Battle of Bongo-dong", 
+          steps: "General Hong Beom-do lured a massive Japanese pursuit battalion into the narrow, mountainous Bongo-dong valley for a meticulously planned ambush.\n\nFiring from the ridges, the independence forces decimated the trapped Japanese troops, proving for the first time that regular Japanese forces could be defeated by organized guerrilla tactics.", 
+          tip: "A former tiger hunter, Hong was a legendary sharpshooter. He fought on the front lines, boosting his troops' morale with deadly accuracy.", 
+          warning: "Infuriated by this and subsequent defeats, the Japanese military retaliated by burning Korean villages in Manchuria and massacring tens of thousands of innocent civilians." },
+
+        { id: "HR_18", cat: "hero", icon: "⚔️", title: "Kim Jwa-jin's Battle of Cheongsan-ri", 
+          steps: "Facing a 20,000-strong Japanese brigade sent to eradicate them, Kim Jwa-jin led his forces into the rugged Cheongsan-ri mountains, executing brilliant hit-and-run tactics.\n\nOver six days of fierce combat in freezing conditions, they killed over 1,200 Japanese soldiers, achieving the greatest military victory in the history of the Korean independence movement.", 
+          tip: "This victory was heavily supported by local Korean civilians who risked their lives to secretly deliver rice balls and enemy intelligence to the independence fighters.", 
+          warning: "Following this, independence forces were forced to retreat to Russia, where a betrayal and internal conflict (Free City Incident) resulted in the tragic massacre of many fighters." },
+
+        { id: "HR_19", cat: "hero", icon: "🏫", title: "Yi Hoe-yeong & Shinheung Military Academy", 
+          steps: "As Korea's wealthiest aristocratic family, Yi Hoe-yeong and his five brothers sold their entire fortune (worth billions today) and exiled themselves to Manchuria.\n\nThey used the funds to establish the Shinheung Military Academy, producing thousands of elite officers who became the backbone of all major armed independence struggles.", 
+          tip: "Of the six brothers, only one survived to see a liberated Korea. The rest died of starvation, disease, or torture—the ultimate display of 'Noblesse Oblige'.", 
+          warning: "Despite his noble birth, Yi endured extreme poverty and torture, ultimately dying in a Japanese prison while planning a bombing mission in his 60s." },
+
+        { id: "HR_20", cat: "hero", icon: "🦅", title: "Park Sang-jin's Korea Liberation Corps", 
+          steps: "Refusing a prestigious judgeship, Park Sang-jin formed a secret military organization that terrified the Japanese. They smuggled weapons and ruthlessly assassinated high-ranking officials and corrupt pro-Japanese tycoons.\n\nThey forcefully collected independence funds and operated as a deadly shadow organization, instilling fear in traitors.", 
+          tip: "General Kim Jwa-jin, the hero of Cheongsan-ri, initially served as the vice-commander of this very organization, leading assassinations and fund-raising.", 
+          warning: "The organization was eventually exposed, and Park was executed. However, their fierce armed struggle spirit directly inspired the creation of the legendary Heroic Corps (Uiyeoldan)." }
+    ];
+
+    var selectedId = null;
+
+    function init() {
+        var searchParams = window.location.search;
+        var mParam = "";
+        if (searchParams.indexOf("m=1") !== -1) { mParam = "m=1&"; }
+        var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+        var idMatch = searchParams.match(/[?&]id=([^&]+)/);
+        
+        var action = actionMatch ? actionMatch[1] : null;
+        var paramId = idMatch ? idMatch[1] : null;
+
+        if (action === 'spin_ott' && paramId) {
+            showResultModal(paramId);
+        }
+
+        renderGrid('royal');
+        renderGrid('relic');
+        renderGrid('hero');
+    }
+
+    function renderGrid(category) {
+        var container = document.getElementById(category);
+        container.innerHTML = '';
+        
+        var items = [];
+        for (var i = 0; i < manualDB.length; i++) {
+            if (manualDB[i].cat === category) {
+                items.push(manualDB[i]);
+            }
+        }
+
+        for (var j = 0; j < items.length; j++) {
+            (function(item) {
+                var div = document.createElement('div');
+                div.className = 'item-btn';
+                div.setAttribute('data-id', item.id);
+                div.innerHTML = '<span class="item-icon">' + item.icon + '</span><span class="item-name">' + item.title + '</span>';
+                
+                div.addEventListener('click', function() {
+                    var allBtns = document.querySelectorAll('.item-btn');
+                    for (var k = 0; k < allBtns.length; k++) {
+                        allBtns[k].classList.remove('selected');
+                    }
+                    div.classList.add('selected');
+                    selectedId = item.id;
+                    
+                    var sBtn = document.getElementById('submit-btn');
+                    sBtn.disabled = false;
+                    sBtn.innerHTML = "📜 Open the Secret Door (Start Docent)";
+                });
+
+                container.appendChild(div);
+            })(items[j]);
+        }
+    }
+
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].addEventListener('click', function(e) {
+            var targetBtn = e.target;
+            for (var j = 0; j < tabBtns.length; j++) {
+                tabBtns[j].classList.remove('active');
+            }
+            targetBtn.classList.add('active');
+
+            var target = targetBtn.getAttribute('data-target');
+            var grids = document.querySelectorAll('.grid-container');
+            for (var k = 0; k < grids.length; k++) {
+                grids[k].classList.remove('active');
+            }
+            document.getElementById(target).classList.add('active');
+
+            var itemBtns = document.querySelectorAll('.item-btn');
+            for (var m = 0; m < itemBtns.length; m++) {
+                itemBtns[m].classList.remove('selected');
+            }
+            selectedId = null;
+            var sBtn = document.getElementById('submit-btn');
+            sBtn.disabled = true;
+            sBtn.innerHTML = "Please select a historical record";
+        });
+    }
+
+    // ★ 모바일 에러 방지 이중 우회 로직 (ES5 최적화) ★
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        if (!selectedId) return;
+        
+        var btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.innerText = "Carefully retrieving historical records...";
+
+        // 1차: 앱인벤터 WebViewString 통신
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        // 2차: 0.5초 뒤 파라미터를 붙여 강제 새로고침 (이중 우회)
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var searchString = window.location.search;
+        var mParam = "";
+        if (searchString.indexOf("m=1") !== -1) { 
+            mParam = "m=1&"; 
+        }
+        
+        setTimeout(function() {
+            window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&id=" + selectedId);
+        }, 500);
+    });
+
+    function showResultModal(id) {
+        var selectedData = null;
+        for (var i = 0; i < manualDB.length; i++) {
+            if (manualDB[i].id === id) {
+                selectedData = manualDB[i];
+                break;
+            }
+        }
+        if (!selectedData) return;
+
+        var tagHtml = "";
+        if (selectedData.cat === 'royal') tagHtml = '<span class="res-tag">👑 Blood-stained Secrets of the Royal Court</span>';
+        if (selectedData.cat === 'relic') tagHtml = '<span class="res-tag">🏛️ Thousand-year Mysteries of Ancient Relics</span>';
+        if (selectedData.cat === 'hero') tagHtml = '<span class="res-tag">📜 Great Decisions of Heroes that Changed History</span>';
+
+        document.getElementById('res-tag-container').innerHTML = tagHtml;
+        document.getElementById('res-title').innerText = selectedData.title;
+        
+        document.getElementById('res-steps').innerHTML = selectedData.steps.replace(/\n/g, '<br>');
+        document.getElementById('res-tip').innerHTML = selectedData.tip.replace(/\n/g, '<br>');
+        document.getElementById('res-warning').innerHTML = selectedData.warning.replace(/\n/g, '<br>');
+
+        var searchQuery = encodeURIComponent(selectedData.title);
+        var searchUrl = "https://en.wikipedia.org/wiki/Special:Search?search=" + searchQuery;
+        
+        document.getElementById('more-link-btn').onclick = function() {
+            window.open(searchUrl, '_blank'); 
+        };
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        var itemBtns = document.querySelectorAll('.item-btn');
+        for (var i = 0; i < itemBtns.length; i++) {
+            itemBtns[i].classList.remove('selected');
+        }
+        selectedId = null;
+        var sBtn = document.getElementById('submit-btn');
+        sBtn.disabled = true;
+        sBtn.innerHTML = "Please select a historical record";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0].split('#')[0];
+            var mParam = "";
+            if (window.location.search.indexOf("m=1") !== -1) { 
+                mParam = "?m=1"; 
+            }
+            window.history.replaceState({}, document.title, baseUrl + mParam);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
