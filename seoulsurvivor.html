@@ -1,0 +1,416 @@
+<!--구글 블로거 전용: Seoul Survivor (75종 방치형, 영구 보존, 방패막/가이드 복구 완벽본)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+    .return_link, .sidebar-back, .Header, #header, .footer-outer, #navbar-iframe { display: none !important; visibility: hidden !important; }
+
+    body, html {
+        margin: 0; padding: 0; background-color: #05070a; color: #f1f5f9;
+        font-family: 'Outfit', sans-serif; min-height: 100vh; overflow-x: hidden; user-select: none; -webkit-user-select: none;
+    }
+
+    #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .particle { position: absolute; background: radial-gradient(circle, #00d2ff 0%, rgba(0,210,255,0) 70%); border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(110vh) scale(0.5); opacity: 0; } 20% { opacity: 0.2; } 80% { opacity: 0.1; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+
+    #app-wrapper { position: relative; z-index: 1; max-width: 500px; margin: 0 auto; padding: 30px 20px 80px 20px; }
+    .header-area { text-align: center; margin-bottom: 25px; }
+    .main-title { font-size: 28px; font-weight: 700; color: #00d2ff; letter-spacing: -0.5px; margin-bottom: 5px; }
+    .sub-info { font-size: 14px; color: #94a3b8; line-height: 1.5; }
+
+    /* 가이드 및 꿀팁 패널 */
+    .premium-panel { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 16px; padding: 20px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .panel-h { font-size: 16px; font-weight: 700; color: #00d2ff; margin-bottom: 12px; }
+    .panel-p { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 12px; }
+    .point-txt { color: #fbbf24; font-weight: 600; }
+
+    /* 실시간 생존 게이지 */
+    .progress-box { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+    .progress-top { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .progress-title { color: #cbd5e1; }
+    .val-wrap { display: flex; align-items: center; gap: 10px; }
+    .reset-btn { font-size: 10px; color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; padding: 3px 6px; cursor: pointer; letter-spacing: 0.5px; }
+    .progress-val { color: #fbbf24; font-family: 'Space Mono', monospace; font-size: 15px;}
+    
+    .progress-bar-bg { width: 100%; height: 12px; background: #1e293b; border-radius: 6px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #00d2ff, #3a7bd5); transition: width 0.4s ease; }
+    .current-rank { text-align: center; font-size: 13px; color: #00d2ff; margin-top: 10px; font-weight: 700; letter-spacing: 1px; }
+
+    /* 카테고리 탭 */
+    .tab-container { display: flex; gap: 8px; margin-bottom: 15px; }
+    .tab-btn { flex: 1; padding: 14px 5px; background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; color: #64748b; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; text-align: center; }
+    .tab-btn.active { background: rgba(0, 210, 255, 0.1); color: #00d2ff; border-color: #00d2ff; }
+
+    .check-container { background: #0f172a; border-radius: 16px; border: 1px solid #1e293b; padding: 5px 10px; margin-bottom: 25px; height: 350px; overflow-y: auto; }
+    .check-container::-webkit-scrollbar { width: 6px; }
+    .check-container::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.3); border-radius: 10px; }
+    
+    .check-item { display: flex; align-items: center; padding: 15px 10px; border-bottom: 1px solid #1e293b; cursor: pointer; transition: 0.2s; }
+    .check-item:last-child { border-bottom: none; }
+    .box-ui { width: 22px; height: 22px; border: 2px solid #00d2ff; border-radius: 6px; margin-right: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+    .check-item.active .box-ui { background: #00d2ff; }
+    .check-item.active .box-ui::after { content: 'L'; transform: scaleX(-1) rotate(-35deg); color: #05070a; font-weight: 900; margin-bottom: 3px; font-size: 14px; }
+    .item-txt { flex: 1; font-size: 14px; color: #e2e8f0; padding-right: 10px; line-height: 1.4;}
+    .item-val { font-family: 'Space Mono', monospace; font-size: 12px; color: #00d2ff; font-weight: 700; white-space: nowrap;}
+
+    .btn-master { width: 100%; padding: 22px; border: none; border-radius: 14px; background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); color: #fff; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3); transition: 0.3s; }
+
+    /* 면책 조항 패널 */
+    .disclaimer-panel { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 16px; padding: 20px; margin-top: 25px; }
+    .disclaimer-h { font-size: 14px; font-weight: 700; color: #ef4444; margin-bottom: 10px; }
+    .disclaimer-p { font-size: 12.5px; color: #94a3b8; line-height: 1.6; }
+
+    /* 영수증 결과물 */
+    #result-view { display: none; text-align: center; padding-bottom: 40px;}
+    .receipt-canvas { background: #ffffff; color: #1a1a1a; padding: 35px 25px; width: 330px; margin: 0 auto 25px auto; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); font-family: 'Space Mono', monospace; text-align: left; position: relative; border-top: 6px dashed #eee; border-bottom: 6px dashed #eee; }
+    .receipt-canvas::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); opacity: 0.4; pointer-events: none; }
+    .r-header { text-align: center; margin-bottom: 20px; border-bottom: 1.5px dashed #333; padding-bottom: 15px; }
+    .r-title { font-size: 22px; font-weight: 700; letter-spacing: -1px; }
+    .r-sub { font-size: 11px; color: #666; margin-top: 5px; }
+    .r-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 10px; line-height: 1.4; }
+    .r-name { flex: 1; padding-right: 15px; }
+    .r-price { font-weight: 700; }
+    .r-total { margin-top: 20px; padding-top: 15px; border-top: 2px solid #333; display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; }
+    
+    .stamp-ui { position: absolute; top: 140px; right: 15px; border: 4px solid #ef4444; color: #ef4444; padding: 8px 15px; font-size: 20px; font-weight: 900; border-radius: 12px; transform: rotate(-15deg); opacity: 0.8; font-family: 'Outfit', sans-serif; pointer-events: none; }
+    
+    .status-box { margin-top: 25px; border: 2px solid #1a1a1a; padding: 15px; text-align: center; border-radius: 5px; }
+    .status-h { font-size: 10px; text-transform: uppercase; margin-bottom: 5px; }
+    .status-v { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+
+    .action-group { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .btn-sub { background: transparent; border: 1px solid #1e293b; color: #94a3b8; padding: 18px; border-radius: 14px; font-weight: 600; cursor: pointer; }
+</style>
+
+<div id="particles-container"></div>
+
+<div id="app-wrapper">
+    <div class="header-area">
+        <div class="main-title">Seoul Survivor Check</div>
+        <div class="sub-info">Check your struggles. Verify your status.</div>
+    </div>
+
+    <div id="setup-view">
+        <!--꿀팁 및 설명 가이드 추가-->
+        <div class="premium-panel">
+            <div class="panel-h">📋 Consulting Guide &amp; Tips</div>
+            <div class="panel-p">
+                This application is a specialized <span class="point-txt">cultural achievement engine</span>. Select the tasks you've successfully survived in Seoul. Our engine will calculate your cultural adaptation value and issue a certified "Survival Receipt".
+            </div>
+            <div class="panel-p" style="margin-bottom: 0px;">
+                <span class="point-txt">Pro Tip:</span> Generate your receipt and save it to your gallery. Share your status on Instagram or TikTok to flex your true local tier!
+            </div>
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-top">
+                <span class="progress-title">Current Survival Value</span>
+                <div class="val-wrap">
+                    <span class="reset-btn" id="btn-reset">RESET</span>
+                    <span class="progress-val" id="score-display">KRW 0</span>
+                </div>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="score-bar"></div>
+            </div>
+            <div class="current-rank" id="rank-display">STATUS: TOURIST</div>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-btn active" onclick="changeTab('food')">🌶️ K-Food</div>
+            <div class="tab-btn" onclick="changeTab('transport')">🚇 Transport</div>
+            <div class="tab-btn" onclick="changeTab('culture')">🌃 Culture</div>
+        </div>
+
+        <div class="check-container" id="list-target"></div>
+
+        <button class="btn-master" onclick="engineTrigger()">Generate Survival Receipt</button>
+
+        <!--사행성 방패막(면책 조항) 추가-->
+        <div class="disclaimer-panel">
+            <div class="disclaimer-h">⚖️ Professional Legal Shield</div>
+            <div class="disclaimer-p">
+                This application is provided for entertainment purposes only. The "Value" and "Status" are symbolic and carry no real-world monetary or legal standing. The developer is not responsible for any personal decisions, financial costs, or actions taken based on these items. Please use this service responsibly and prioritize your safety.
+            </div>
+        </div>
+    </div>
+
+    <div id="result-view">
+        <div class="receipt-canvas" id="capture-area">
+            <div class="stamp-ui">APPROVED</div>
+            <div class="r-header">
+                <div class="r-title">SEOUL SURVIVOR</div>
+                <div class="r-sub">Cultural Adaptation Center<br />Verification ID: <span id="r-order"></span></div>
+            </div>
+            
+            <div style="color: #555555; font-size: 10px; margin-bottom: 15px;">QTY ITEM <span style="float: right;">VALUE</span></div>
+            <div id="r-items"></div>
+            
+            <div class="r-total">
+                <span>TOTAL VALUE</span>
+                <span id="r-total-val">0</span>
+            </div>
+            <div class="status-box">
+                <div class="status-h">Official Status</div>
+                <div class="status-v" id="r-grade">TOURIST</div>
+            </div>
+            <div style="font-size: 10px; letter-spacing: 3px; margin-top: 25px; text-align: center;">
+                |||| ||| || |||| ||| ||<br />
+                CHECKED AT: <span id="r-date"></span><br />
+                @seoulsurvivor
+            </div>
+        </div>
+        <div class="action-group">
+            <button class="btn-master" onclick="saveToDevice()">💾 Save Receipt to Gallery</button>
+            <button class="btn-sub" onclick="restartApp()">← Back to Checklist (Keep Score)</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var dataMAX = [
+        // K-Food (25종)
+        { id: 1, cat: 'food', text: "Ordered delivery via phone", val: 100000 },
+        { id: 2, cat: 'food', text: "Ate live octopus (Sannakji)", val: 120000 },
+        { id: 3, cat: 'food', text: "Ate spicy Dakbal (Chicken feet)", val: 90000 },
+        { id: 4, cat: 'food', text: "Ordered Ban-ban chicken", val: 50000 },
+        { id: 5, cat: 'food', text: "Grilled own K-BBQ meat", val: 60000 },
+        { id: 6, cat: 'food', text: "Cut noodles with scissors", val: 30000 },
+        { id: 7, cat: 'food', text: "Used a restaurant call bell", val: 20000 },
+        { id: 8, cat: 'food', text: "Paid at the counter, not table", val: 15000 },
+        { id: 9, cat: 'food', text: "Drank Somaek (Soju + Beer)", val: 70000 },
+        { id: 10, cat: 'food', text: "Ate convenience store Dosirak", val: 25000 },
+        { id: 11, cat: 'food', text: "Drank Banana Flavored Milk", val: 10000 },
+        { id: 12, cat: 'food', text: "Survived extreme spicy Ramyeon", val: 80000 },
+        { id: 13, cat: 'food', text: "Tried Beondegi (Silkworm pupae)", val: 150000 },
+        { id: 14, cat: 'food', text: "Ate Haejangguk after drinking", val: 65000 },
+        { id: 15, cat: 'food', text: "Had Chimaek at Han River", val: 75000 },
+        { id: 16, cat: 'food', text: "Bought Iced Americano in winter", val: 40000 },
+        { id: 17, cat: 'food', text: "Tried Tanghulu on the street", val: 35000 },
+        { id: 18, cat: 'food', text: "Ate at a traditional market stand", val: 45000 },
+        { id: 19, cat: 'food', text: "Got free service (Seobiseu)", val: 100000 },
+        { id: 20, cat: 'food', text: "Poured drinks with two hands", val: 55000 },
+        { id: 21, cat: 'food', text: "Tried raw beef (Yukhoe)", val: 85000 },
+        { id: 22, cat: 'food', text: "Ate Bingsu in the summer", val: 40000 },
+        { id: 23, cat: 'food', text: "Refilled side dishes (Banchan)", val: 25000 },
+        { id: 24, cat: 'food', text: "Mixed Bibimbap with chopsticks", val: 30000 },
+        { id: 25, cat: 'food', text: "Used a self-ramyeon machine", val: 50000 },
+
+        // Transport (25종)
+        { id: 26, cat: 'transport', text: "Survived morning rush hour subway", val: 100000 },
+        { id: 27, cat: 'transport', text: "Hailed a Kakao Taxi at 1 AM", val: 90000 },
+        { id: 28, cat: 'transport', text: "Transferred subway in 3 minutes", val: 70000 },
+        { id: 29, cat: 'transport', text: "Found the right Gangnam exit", val: 80000 },
+        { id: 30, cat: 'transport', text: "Did NOT sit in pregnant/elder seats", val: 100000 },
+        { id: 31, cat: 'transport', text: "Loaded T-Money at convenience store", val: 20000 },
+        { id: 32, cat: 'transport', text: "Rode the KTX train", val: 85000 },
+        { id: 33, cat: 'transport', text: "Survived wild Seoul bus driving", val: 60000 },
+        { id: 34, cat: 'transport', text: "Walked 20,000+ steps in one day", val: 50000 },
+        { id: 35, cat: 'transport', text: "Climbed Namsan stairs", val: 65000 },
+        { id: 36, cat: 'transport', text: "Rented a Seoul Bike (Ttareungi)", val: 55000 },
+        { id: 37, cat: 'transport', text: "Navigated Seoul Station successfully", val: 45000 },
+        { id: 38, cat: 'transport', text: "Tagged T-Money off when leaving bus", val: 30000 },
+        { id: 39, cat: 'transport', text: "Waited in single file for the bus", val: 25000 },
+        { id: 40, cat: 'transport', text: "Walked up a steep mountain-like street", val: 75000 },
+        { id: 41, cat: 'transport', text: "Used Naver Map / Kakao Map", val: 40000 },
+        { id: 42, cat: 'transport', text: "Took an express (Geuphaeng) subway", val: 60000 },
+        { id: 43, cat: 'transport', text: "Survived Sindorim station transfer", val: 95000 },
+        { id: 44, cat: 'transport', text: "Ran and caught a departing train", val: 50000 },
+        { id: 45, cat: 'transport', text: "Gave seat to an elderly person", val: 100000 },
+        { id: 46, cat: 'transport', text: "Used an underground shopping mall", val: 35000 },
+        { id: 47, cat: 'transport', text: "Heard the subway arrival song", val: 15000 },
+        { id: 48, cat: 'transport', text: "Stood on the right side of escalator", val: 40000 },
+        { id: 49, cat: 'transport', text: "Found a clean public restroom", val: 20000 },
+        { id: 50, cat: 'transport', text: "Walked across a Han River bridge", val: 80000 },
+
+        // Culture (25종)
+        { id: 51, cat: 'culture', text: "Washed & recycled delivery trash", val: 70000 },
+        { id: 52, cat: 'culture', text: "Ignored 'Do you know Korea' cult", val: 150000 },
+        { id: 53, cat: 'culture', text: "Bowed back to convenience staff", val: 30000 },
+        { id: 54, cat: 'culture', text: "Stayed conscious after company dinner", val: 90000 },
+        { id: 55, cat: 'culture', text: "Survived Friday night in Hongdae", val: 85000 },
+        { id: 56, cat: 'culture', text: "Used a squatter toilet", val: 120000 },
+        { id: 57, cat: 'culture', text: "Figured out Airbnb trash sorting", val: 60000 },
+        { id: 58, cat: 'culture', text: "Visited a local pharmacy for SOS", val: 50000 },
+        { id: 59, cat: 'culture', text: "Successfully used PC Bang kiosk", val: 55000 },
+        { id: 60, cat: 'culture', text: "Opened apartment intercom door", val: 45000 },
+        { id: 61, cat: 'culture', text: "Survived an aggressive Ajumma push", val: 80000 },
+        { id: 62, cat: 'culture', text: "Visited Jjimjilbang and wore towel", val: 65000 },
+        { id: 63, cat: 'culture', text: "Bought survival items at Daiso", val: 25000 },
+        { id: 64, cat: 'culture', text: "Survived Myeongdong cosmetics street", val: 40000 },
+        { id: 65, cat: 'culture', text: "Slept on a traditional Ondol floor", val: 75000 },
+        { id: 66, cat: 'culture', text: "Used KakaoTalk to text a local", val: 50000 },
+        { id: 67, cat: 'culture', text: "Took 4-cut photos (Life Four Cuts)", val: 35000 },
+        { id: 68, cat: 'culture', text: "Did not leave a tip at restaurant", val: 100000 },
+        { id: 69, cat: 'culture', text: "Saw an Ahjussi hiking in full gear", val: 20000 },
+        { id: 70, cat: 'culture', text: "Sang at a Coin Noraebang", val: 45000 },
+        { id: 71, cat: 'culture', text: "Wore a Hanbok at a palace", val: 60000 },
+        { id: 72, cat: 'culture', text: "Left personal item on cafe table", val: 95000 },
+        { id: 73, cat: 'culture', text: "Watched a street performance (Busking)", val: 30000 },
+        { id: 74, cat: 'culture', text: "Used a smart digital door lock", val: 40000 },
+        { id: 75, cat: 'culture', text: "Completed the Seoul trip safely", val: 200000 }
+    ];
+
+    var activeItems = [];
+    var currentTab = 'food';
+
+    function loadSavedData() {
+        var saved = localStorage.getItem('seoul_survivor_data');
+        if (saved) {
+            try { 
+                activeItems = JSON.parse(saved); 
+                if (Object.prototype.toString.call(activeItems) !== '[object Array]') { activeItems = []; }
+            } catch(e) { activeItems = []; }
+        }
+    }
+
+    function createParticles() {
+        var pContainer = document.getElementById('particles-container');
+        for (var i = 0; i < 15; i++) {
+            var p = document.createElement('div');
+            p.className = 'particle';
+            var size = Math.random() * 6 + 3;
+            p.style.width = size + 'px'; p.style.height = size + 'px'; p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = Math.random() * 7 + 5 + 's'; p.style.animationDelay = Math.random() * 5 + 's';
+            pContainer.appendChild(p);
+        }
+    }
+
+    function changeTab(tabName) {
+        currentTab = tabName;
+        var tabs = document.getElementsByClassName('tab-btn');
+        for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+        event.target.classList.add('active');
+        renderList();
+    }
+
+    function renderList() {
+        var listArea = document.getElementById('list-target');
+        listArea.innerHTML = '';
+        for (var i = 0; i < dataMAX.length; i++) {
+            var item = dataMAX[i];
+            if (item.cat !== currentTab) continue;
+            
+            var div = document.createElement('div');
+            div.className = activeItems.indexOf(item.id) !== -1 ? 'check-item active' : 'check-item';
+            div.setAttribute('data-id', item.id);
+            div.innerHTML = '<div class="box-ui"></div><div class="item-txt">' + item.text + '</div><div class="item-val">KRW ' + item.val.toLocaleString() + '</div>';
+            
+            div.onclick = function() {
+                var id = parseInt(this.getAttribute('data-id'));
+                var idx = activeItems.indexOf(id);
+                if (idx === -1) { activeItems.push(id); this.className = 'check-item active'; } 
+                else { activeItems.splice(idx, 1); this.className = 'check-item'; }
+                
+                localStorage.setItem('seoul_survivor_data', JSON.stringify(activeItems));
+                updateProgress();
+            };
+            listArea.appendChild(div);
+        }
+    }
+
+    function updateProgress() {
+        var total = 0;
+        for (var i = 0; i < activeItems.length; i++) {
+            for (var j = 0; j < dataMAX.length; j++) {
+                if (dataMAX[j].id === activeItems[i]) { total += dataMAX[j].val; break; }
+            }
+        }
+        document.getElementById('score-display').innerText = 'KRW ' + total.toLocaleString();
+        
+        var maxScore = 4500000;
+        var percentage = Math.min((total / maxScore) * 100, 100);
+        document.getElementById('score-bar').style.width = percentage + '%';
+
+        var grade = "STATUS: TOURIST";
+        if (total >= 3500000) grade = "STATUS: TRUE KOREAN SOUL";
+        else if (total >= 2000000) grade = "STATUS: LOCAL VETERAN (PRO)";
+        else if (total >= 1000000) grade = "STATUS: SEOUL SURVIVOR";
+        else if (total >= 500000) grade = "STATUS: HONORARY KOREAN";
+        
+        document.getElementById('rank-display').innerText = grade;
+    }
+
+    function engineTrigger() {
+        if (activeItems.length === 0) { alert("Please select at least one task you completed today."); return; }
+        
+        try { window.AppInventor.setWebViewString("action=spin_ott"); } catch(e) {}
+        setTimeout(function() {
+            var ids = activeItems.join(',');
+            var targetUrl = window.location.href.split('?')[0] + "?action=spin_ott&receipt=1&ids=" + ids + "&t=" + new Date().getTime();
+            window.location.replace(targetUrl);
+        }, 500);
+    }
+
+    function processResult() {
+        var query = window.location.search;
+        if (query.indexOf('receipt=1') !== -1) {
+            document.getElementById('setup-view').style.display = 'none';
+            document.getElementById('result-view').style.display = 'block';
+
+            var idMatch = query.match(/ids=([^&]+)/);
+            if (idMatch) {
+                var ids = idMatch[1].split(',');
+                var total = 0; var html = "";
+                for (var i = 0; i < ids.length; i++) {
+                    var currentId = parseInt(ids[i]);
+                    for (var j = 0; j < dataMAX.length; j++) {
+                        if (dataMAX[j].id === currentId) {
+                            html += '<div class="r-row"><div class="r-name">1 x ' + dataMAX[j].text + '</div><div class="r-price">' + dataMAX[j].val.toLocaleString() + '</div></div>';
+                            total += dataMAX[j].val; break;
+                        }
+                    }
+                }
+                document.getElementById('r-items').innerHTML = html;
+                document.getElementById('r-total-val').innerText = 'KRW ' + total.toLocaleString();
+                
+                var grade = "TOURIST";
+                if (total >= 3500000) grade = "TRUE KOREAN SOUL";
+                else if (total >= 2000000) grade = "LOCAL VETERAN (PRO)";
+                else if (total >= 1000000) grade = "SEOUL SURVIVOR";
+                else if (total >= 500000) grade = "HONORARY KOREAN";
+
+                document.getElementById('r-grade').innerText = grade;
+                
+                document.getElementById('r-order').innerText = Math.floor(Math.random() * 90000) + 10000;
+                var now = new Date();
+                document.getElementById('r-date').innerText = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate() + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2);
+            }
+        }
+    }
+
+    function saveToDevice() {
+        var btn = event.target; btn.innerText = "Capturing...";
+        html2canvas(document.getElementById('capture-area'), { scale: 2, backgroundColor: "#05070a" }).then(function(canvas) {
+            var link = document.createElement('a'); link.download = 'Seoul_Survivor_Receipt.png'; link.href = canvas.toDataURL("image/png"); link.click();
+            btn.innerText = "💾 Save Receipt to Gallery";
+        });
+    }
+
+    function restartApp() {
+        var cleanUrl = window.location.href.split('?')[0];
+        window.location.replace(cleanUrl);
+    }
+
+    window.onload = function() {
+        loadSavedData();
+        createParticles(); 
+        renderList(); 
+        updateProgress();
+        processResult();
+        
+        document.getElementById('btn-reset').onclick = function() {
+            if(confirm("Are you sure you want to reset your score?")) {
+                activeItems = [];
+                localStorage.removeItem('seoul_survivor_data');
+                renderList();
+                updateProgress();
+            }
+        };
+    };
+//]]>
+</script>
