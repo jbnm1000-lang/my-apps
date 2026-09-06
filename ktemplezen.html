@@ -1,0 +1,487 @@
+<!--Google Blogger Only: K-Temple Zen & Tea (Premium Ambient Master - ES5 Strict & Double Safety)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0b0d0c !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', 'Noto Serif', serif;
+        color: #d1ccbd; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Premium Ambient Smoke Particles */
+    #smoke-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: linear-gradient(180deg, #111412 0%, #060706 100%); }
+    .smoke { position: absolute; background: radial-gradient(circle, rgba(200, 205, 195, 0.05) 0%, rgba(0,0,0,0) 60%); border-radius: 50%; opacity: 0; animation: smokeRise linear infinite; filter: blur(8px); }
+    @keyframes smokeRise { 0% { transform: translateY(110vh) scale(1); opacity: 0; } 30% { opacity: 0.5; } 70% { opacity: 0.3; transform: translateY(40vh) scale(2.5); } 100% { transform: translateY(-10vh) scale(4); opacity: 0; } }
+
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; padding: 35px 20px 80px 20px; box-sizing: border-box; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
+
+    .header-section { margin-bottom: 30px; text-align: center; border-bottom: 1px solid rgba(74, 87, 66, 0.3); padding-bottom: 20px;}
+    .main-title { font-size: 26px; font-weight: 600; color: #b5c2a3; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(181,194,163,0.2);}
+    .sub-title { font-size: 13px; color: #7a856e; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;}
+
+    /* Premium Intro Box */
+    .intro-box { background: rgba(18, 22, 19, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #2a332d; margin-bottom: 35px; box-shadow: inset 0 0 20px rgba(0,0,0,0.6);}
+    .intro-title { font-size: 16px; font-weight: 600; color: #d1ccbd; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #2a332d; padding-bottom: 12px;}
+    .intro-desc { font-size: 14.5px; color: #9a9e91; line-height: 1.8; margin-bottom: 20px; word-break: normal; text-align: left;}
+    
+    .guide-wrap { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 8px; font-size: 14px; color: #858f7a; line-height: 1.8; border-left: 3px solid #4a5742;}
+    .guide-wrap strong { color: #b5c2a3; display: block; margin-bottom: 10px; font-size: 15px;}
+    .guide-wrap ul { margin: 0; padding-left: 20px; margin-bottom: 0;}
+    .guide-wrap li { margin-bottom: 8px;}
+
+    /* Ambient Zen Display (Auto-rotating Idle Box) */
+    .zen-idle-box { background: rgba(18, 22, 19, 0.7); border: 1px solid #2a332d; border-radius: 12px; padding: 35px 25px; margin-bottom: 35px; text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.5); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;}
+    .zen-icon { font-size: 22px; margin-bottom: 15px; opacity: 0.7; }
+    .zen-quote-text { font-family: 'Noto Serif', serif; font-style: italic; font-size: 17.5px; color: #d1ccbd; line-height: 1.8; word-break: normal; transition: opacity 1.5s ease-in-out; opacity: 1; }
+    .zen-quote-text.fade-out { opacity: 0; }
+    .zen-author { font-size: 12px; color: #6b7561; margin-top: 15px; letter-spacing: 1px; }
+
+    .tool-box { margin-bottom: 30px; }
+    .box-title { font-size: 16px; font-weight: 600; color: #b5c2a3; margin-bottom: 20px; text-align: center; letter-spacing: 1px;}
+
+    .tab-container { display: flex; gap: 8px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 5px; }
+    .tab-container::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: 1; min-width: 120px; padding: 15px 10px; background: #131715; border: 1px solid #2a332d; border-radius: 8px; color: #7a856e; font-size: 14.5px; font-weight: 600; cursor: pointer; transition: 0.3s; text-align: center;}
+    .tab-btn.active { background: #2a332d; color: #d1ccbd; border-color: #4a5742; box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+
+    .grid-container { display: none; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-container.active { display: grid; }
+    .item-btn { background: rgba(18, 22, 19, 0.6); border: 1px solid #2a332d; border-radius: 8px; padding: 22px 12px; display: flex; flex-direction: column; align-items: center; gap: 14px; cursor: pointer; transition: 0.2s; text-align: center; position: relative;}
+    .item-icon { font-size: 28px; z-index: 2;}
+    .item-name { font-size: 14px; color: #d1ccbd; font-weight: 400; word-break: keep-all; line-height: 1.4; z-index: 2;}
+    .item-btn.selected { border-color: #b5c2a3; background: #222b26; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.6);}
+
+    .submit-btn { width: 100%; padding: 22px; background: linear-gradient(135deg, #3a453b, #2a332d); border: 1px solid #4a5742; border-radius: 8px; color: #d1ccbd; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-bottom: 35px; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);}
+    .submit-btn:disabled { background: #181d1a; color: #4a5742; cursor: not-allowed; border-color: #2a332d; box-shadow: none;}
+
+    .disclaimer-box { background: rgba(0,0,0,0.6); border: 1px solid #2a332d; border-radius: 8px; padding: 22px; }
+    .disclaimer-title { font-size: 13px; font-weight: 600; color: #7a856e; margin-bottom: 10px; }
+    .disclaimer-text { font-size: 12.5px; color: #6a735f; line-height: 1.6; word-break: normal; text-align: justify;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 6, 5, 0.92); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px);}
+    .result-content { max-width: 540px; margin: 20px auto; background: #131715; border-radius: 12px; padding: 40px 25px; border: 1px solid #4a5742; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.9);}
+    
+    .res-tag { display: inline-block; padding: 7px 14px; background: #2a332d; color: #b5c2a3; font-size: 12px; font-weight: 600; border-radius: 4px; margin-bottom: 22px; border: 1px solid #3a453b; letter-spacing: 1px;}
+    .res-title { font-size: 24px; font-weight: 600; color: #d1ccbd; margin-bottom: 25px; line-height: 1.4; word-break: normal; text-align: left; font-family: 'Noto Serif', serif;}
+    .section-title { font-size: 15px; font-weight: 600; color: #b5c2a3; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px dashed #2a332d; padding-bottom: 10px;}
+    .res-desc { font-size: 15.5px; color: #a4ad96; line-height: 1.9; word-break: normal; text-align: left;}
+    
+    .tip-box { background: rgba(74, 87, 66, 0.1); border: 1px solid rgba(74, 87, 66, 0.4); padding: 22px; border-radius: 8px; margin-top: 35px;}
+    .tip-box strong { display: block; color: #b5c2a3; margin-bottom: 12px; font-size: 15px;}
+    .tip-box p { margin: 0; font-size: 15px; color: #858f7a; line-height: 1.8; word-break: normal; text-align: left;}
+
+    .close-btn { width: 100%; padding: 20px; background: #181d1a; border: 1px solid #4a5742; border-radius: 8px; color: #b5c2a3; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 35px; transition: 0.3s;}
+</style>
+
+<div id="smoke-container"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Temple: Zen &amp; Tea</div>
+        <div class="sub-title">Premium Healing &amp; Meditation Guide</div>
+    </div>
+
+    <div class="intro-box">
+        <div class="intro-title">🎐 Welcome to Your Peaceful Sanctuary</div>
+        <div class="intro-desc">
+            In the midst of a busy and noisy world, everyone needs a moment to breathe. This premium guide is designed to be your personal digital detox lounge. <br /><br />
+            You can simply leave this app open on your desk to enjoy the ambient Zen quotes that slowly fade in and out, or you can actively explore the profound wisdom of traditional Korean mountain temples and the mindful art of the tea ceremony.
+        </div>
+        <div class="guide-wrap">
+            <strong>[How to Enjoy This Guide]</strong>
+            <ul>
+                <li><b>Ambient Mode:</b> Lean your phone against your desk. The quotes above will change automatically, helping you focus and relax without distracting sounds.</li>
+                <li><b>Deep Exploration:</b> Select a Temple or Tea topic below and tap 'Enter the Guide' for a private docent experience.</li>
+                <li><b>Mindful Reading:</b> Read the insights slowly, taking a deep breath between paragraphs.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="zen-idle-box">
+        <div class="zen-icon">🌿</div>
+        <div class="zen-quote-text" id="zen-quote-display">"Mind is like water. When it is turbulent, it is difficult to see. When it is calm, everything becomes clear."</div>
+        <div class="zen-author">- Today's Zen Wisdom -</div>
+    </div>
+
+    <div class="tool-box">
+        <div class="box-title">Begin Your Journey</div>
+        <div class="tab-container">
+            <button class="tab-btn active" data-target="temple">🏛️ Temple Guide</button>
+            <button class="tab-btn" data-target="tea">🍵 Tea Ceremony</button>
+        </div>
+
+        <div class="grid-container active" id="temple"></div>
+        <div class="grid-container" id="tea"></div>
+    </div>
+
+    <button class="submit-btn" disabled="disabled" id="submit-btn">
+        Please select a guide to explore
+    </button>
+
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">⚠️ Important Notice &amp; Disclaimer</div>
+        <div class="disclaimer-text">
+            This application is strictly designed to provide cultural education, storytelling, and a relaxing ambient experience based on traditional Korean Buddhist philosophy and tea culture. It is completely independent and does not promote any specific religious affiliation, financial contributions, or superstitions. Furthermore, the meditation practices and herbal tea information described are for general cultural understanding only and must not be interpreted as professional medical, psychological, or health advice. Please enjoy this content purely as a beautiful, engaging docent to enrich your cultural knowledge and find a moment of peace.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div id="res-tag-container"></div>
+        <div class="res-title" id="res-title">Title</div>
+        
+        <div class="section-title">📖 Insight &amp; Guide</div>
+        <div class="res-desc" id="res-steps">Content</div>
+        
+        <div class="tip-box">
+            <strong>💡 Zen Docent's Tip</strong>
+            <p id="res-tip">Tip Content</p>
+        </div>
+
+        <button class="close-btn" id="close-btn">Return to Ambient Lounge</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Ambient Particle Effects (Smoke) - ES5 Compatible
+    var smokeContainer = document.getElementById('smoke-container');
+    for (var i = 0; i < 30; i++) {
+        var smoke = document.createElement('div');
+        smoke.className = 'smoke';
+        var size = Math.random() * 80 + 50; 
+        smoke.style.width = size + 'px';
+        smoke.style.height = size + 'px';
+        smoke.style.left = Math.random() * 100 + 'vw';
+        smoke.style.animationDuration = Math.random() * 15 + 10 + 's';
+        smoke.style.animationDelay = Math.random() * 10 + 's';
+        smokeContainer.appendChild(smoke);
+    }
+
+    // 2. 50 Zen Quotes Array (MAX Data) - For Ambient Idle Display
+    var zenQuotes = [
+        "A single flower blooms, and the whole world is spring.",
+        "Water flows, but the moon in the water does not move.",
+        "To empty your cup is to make room for fresh tea.",
+        "The mind is like a mirror, reflecting all but holding onto nothing.",
+        "In the silence of the morning, even a dewdrop holds the universe.",
+        "Do not seek the truth; only cease to cherish opinions.",
+        "When you walk, just walk. When you eat, just eat.",
+        "The obstacle is the path.",
+        "A falling leaf returns to its roots.",
+        "Before enlightenment: chop wood, carry water. After enlightenment: chop wood, carry water.",
+        "Tension is who you think you should be. Relaxation is who you are.",
+        "If you miss the present moment, you miss your appointment with life.",
+        "The journey of a thousand miles begins with a single mindful breath.",
+        "Let your mind flow like water, yielding to obstacles yet carving through stone.",
+        "True silence is not the absence of sound, but the absence of ego.",
+        "The bamboo shadow sweeps the stairs, but raises no dust.",
+        "A mountain does not bow to the wind.",
+        "Empty your mind of all thoughts. Let your heart be at peace.",
+        "What is the sound of one hand clapping?",
+        "When the shoe fits, the foot is forgotten.",
+        "The snow falls, each flake in its proper place.",
+        "Look deeply into the nature of things, and you will find peace.",
+        "Patience is the calm acceptance that things can happen in a different order.",
+        "The clear stream reveals its bottom; the quiet mind reveals its truth.",
+        "Do not dwell in the past, do not dream of the future, concentrate on the present.",
+        "A quiet mind cures all.",
+        "If you realize you have enough, you are truly rich.",
+        "He who knows that enough is enough will always have enough.",
+        "The wise adapt themselves to circumstances, as water molds itself to the pitcher.",
+        "Do not seek to follow in the footsteps of the wise. Seek what they sought.",
+        "The quieter you become, the more you can hear.",
+        "Nature does not hurry, yet everything is accomplished.",
+        "When the mind is quiet, the universe surrenders.",
+        "Let go, or be dragged.",
+        "You cannot travel the path until you have become the path itself.",
+        "The lotus flower blooms most beautifully from the deepest and thickest mud.",
+        "Worrying does not take away tomorrow's troubles, it takes away today's peace.",
+        "Nothing ever goes away until it teaches us what we need to know.",
+        "Every day is a good day.",
+        "If you want to know your past life, look into your present condition.",
+        "Peace comes from within. Do not seek it without.",
+        "To understand everything is to forgive everything.",
+        "Your suffering is your greatest teacher.",
+        "The mind that is not attached to anything is the true Buddha.",
+        "In the beginner's mind there are many possibilities, in the expert's mind there are few.",
+        "Just as a snake sheds its skin, we must shed our past over and over again.",
+        "A gentle word, a kind look, a good-natured smile can work miracles.",
+        "Meditate. Live purely. Be quiet. Do your work with mastery.",
+        "The sky does not care whether it is filled with clouds or clear blue.",
+        "Breathe in the calm, breathe out the storm."
+    ];
+
+    var quoteElement = document.getElementById('zen-quote-display');
+    var quoteIndex = 0;
+    
+    // Auto-rotate quotes every 12 seconds for Idle Mode
+    setInterval(function() {
+        quoteElement.classList.add('fade-out');
+        setTimeout(function() {
+            quoteIndex = (quoteIndex + 1) % zenQuotes.length;
+            quoteElement.innerText = '"' + zenQuotes[quoteIndex] + '"';
+            quoteElement.classList.remove('fade-out');
+        }, 1500); 
+    }, 12000);
+
+    // 3. Database (MAX Data) - Detailed, Friendly, and Educational
+    var manualDB = [
+        /* Temple Guide (12 High-Quality Entries) */
+        { id: "T1", cat: "temple", icon: "⛰️", title: "Haeinsa & The Tripitaka", 
+          steps: "Located deep within the beautiful Mount Gaya, Haeinsa is one of the Three Jewel Temples of Korea. It represents the 'Dharma', which means the teachings of the Buddha.\n\nFounded in 802, this magnificent temple is globally renowned for housing the Tripitaka Koreana. This is the world's most complete collection of Buddhist texts, meticulously engraved on over 80,000 wooden printing blocks during the 13th century to seek spiritual protection against invasions.", 
+          tip: "The storage halls (Janggyeong Panjeon) are a breathtaking marvel of ancient natural science. The buildings were perfectly designed with specific window placements and charcoal floors to naturally regulate humidity and airflow. Thanks to this brilliant architecture, the woodblocks have been perfectly preserved for over 700 years without any modern electricity." },
+          
+        { id: "T2", cat: "temple", icon: "🏯", title: "Bulguksa, The Land of Buddha", 
+          steps: "Constructed during the golden age of the Unified Silla Dynasty, Bulguksa is an absolute architectural masterpiece. It was designed to represent the beautiful Buddhist utopia right here on earth.\n\nThe entire temple complex is meticulously laid out according to Buddhist cosmology. It features stunning stone terraces and two incredibly iconic pagodas: Seokgatap, which represents elegant simplicity, and Dabotap, which represents complex, ornate beauty.", 
+          tip: "When you visit, take a close look at the stone foundations. The builders used an advanced technique called 'Geuraengi', where the bottom of the wooden pillars was carefully carved to perfectly interlock with the natural, uneven shapes of the foundation stones. This provided incredible earthquake resistance that still holds strong today." },
+
+        { id: "T3", cat: "temple", icon: "🍁", title: "Baekyangsa & The White Sheep", 
+          steps: "Nestled quietly in the lush valleys of Naejangsan National Park, Baekyangsa offers some of the most breathtaking autumn sceneries in Korea, completely surrounded by brilliant crimson maple trees.\n\nThe beautiful name translates to 'White Sheep Temple.' According to an ancient legend, during the Goryeo Dynasty, a wild white sheep came down from the mountain to listen to a monk peacefully recite sutras, and it eventually achieved enlightenment.", 
+          tip: "The Ssanggyeru Pavilion, standing gracefully over a tranquil stream at the temple's entrance, beautifully reflects upon the water. It is widely considered one of the absolute finest spots for quiet meditation and breathtaking photography in the country." },
+
+        { id: "T4", cat: "temple", icon: "💎", title: "Tongdosa, The Buddha's Relics", 
+          steps: "Tongdosa is another of the prestigious Three Jewel Temples, representing the 'Buddha' himself. Uniquely, its main hall does not have any Buddha statue inside.\n\nInstead, there is a large, quiet window looking out to a stone stupa known as the Diamond Altar. This sacred altar enshrines the authentic physical relics of the historical Buddha, which were brought all the way from China by Master Jajang in the 7th century.", 
+          tip: "Because the actual physical relics of the Buddha are present, devotees respectfully bow facing the outdoor stupa. The temple's unique layout without a central statue profoundly emphasizes the invisible, spiritual presence of enlightenment over mere material figures." },
+
+        { id: "T5", cat: "temple", icon: "🧘‍♂️", title: "Songgwangsa & The Monks", 
+          steps: "Completing the Three Jewel Temples, Songgwangsa beautifully represents the 'Sangha', which is the community of monks. Located on the peaceful Mount Jogyesan, it has produced an incredible 16 National Preceptors in Korean history.\n\nToday, it serves as a highly respected central training hub for Zen monks. Its calm, austere, and deeply spiritual atmosphere makes it an ideal place to observe the strict and dedicated daily lives of practicing monks.", 
+          tip: "The temple requires absolute silence and respect in its inner courtyards. Walking the dirt path leading up to the temple, beautifully lined with tall cedar trees and crossing an arched wooden bridge, naturally purifies your mind before you even enter." },
+
+        { id: "T6", cat: "temple", icon: "🏙️", title: "Jogyesa, Serenity in the City", 
+          steps: "Jogyesa is the honorable chief temple of the Jogye Order, the largest sect of Korean Buddhism. Unlike traditional mountain temples, it is uniquely located right in the bustling heart of downtown Seoul.\n\nDespite the surrounding tall skyscrapers and busy city traffic, stepping into the temple grounds offers an immediate and profound sense of peace. Its massive main hall and the ancient lacebark pine tree standing proudly in the courtyard provide a true spiritual sanctuary for tired urban dwellers.", 
+          tip: "If you visit during Buddha's Birthday in May, you will see the entire temple courtyard and the sky above it covered in thousands of vibrant, colorful lotus lanterns. It creates a truly unforgettable, spectacular night view that will warm your heart." },
+
+        { id: "T7", cat: "temple", icon: "🌲", title: "Woljeongsa Fir Tree Path", 
+          steps: "Situated deep within the magnificent forests of Odaesan, Woljeongsa is famous for its majestic 9-story octagonal stone pagoda from the historic Goryeo Dynasty.\n\nHowever, it is most deeply beloved for the 'Fir Tree Forest Path' leading up to the temple. Lined with massive fir trees that are over 500 years old, walking this 1-kilometer unpaved dirt path barefoot is considered one of Korea's most healing walking meditations.", 
+          tip: "The fresh phytoncide released by these ancient trees naturally calms your nervous system. The temple actively promotes a 'digital detox' temple stay, gently encouraging visitors to leave their phones behind and truly reconnect with nature." },
+
+        { id: "T8", cat: "temple", icon: "🌊", title: "Naksansa, The Coastal Shrine", 
+          steps: "Perched dramatically on the beautiful coastal cliffs of the East Sea, Naksansa was built in the year 671. It is lovingly dedicated to the Bodhisattva of Compassion.\n\nThe temple grounds feature a massive stone statue overlooking the vast, endless blue ocean. It provides deep spiritual comfort to local fishermen and offers one of the most magnificent, soul-stirring sunrise views you will ever see in Korea.", 
+          tip: "Tragically, a massive forest fire burned down much of this beautiful temple in 2005. However, the bronze bell that melted in the fierce fire is now displayed as a powerful, humbling reminder of impermanence, which is a core Buddhist teaching." },
+
+        { id: "T9", cat: "temple", icon: "🐉", title: "Beomeosa, The Golden Fish", 
+          steps: "Located gracefully on the slopes of a beautiful mountain in Busan, Beomeosa translates to the 'Temple of the Nirvana Fish.'\n\nA beautiful legend says a golden fish descended from the heavens on a colorful cloud and played in a well at the mountain's peak, never letting the well run dry. Established in 678, it also served as a formidable defensive base where brave warrior monks trained to protect the people during invasions.", 
+          tip: "The One-Pillar Gate at the entrance is a true architectural masterpiece. Although it appears to have four pillars, they perfectly align in a single row when viewed from the side, deeply symbolizing the singular, unified path to spiritual enlightenment." },
+
+        { id: "T10", cat: "temple", icon: "🏯", title: "Guinsa, The Mega Temple", 
+          steps: "Guinsa is the impressive headquarters of the Cheontae Order. Unlike traditional sprawling layouts, this massive temple is built vertically right into a steep, narrow mountain valley.\n\nIts incredibly massive, multi-story modern concrete and wooden structures can house up to 10,000 monks and followers at once. It has a completely different, grand, and almost labyrinth-like atmosphere compared to the quiet, traditional Zen temples.", 
+          tip: "This temple strongly emphasizes community self-sufficiency. If you visit, you will often see hundreds of monks and followers happily working together in massive fields or preparing giant vats of healthy kimchi, beautifully practicing 'labor as meditation'." },
+
+        { id: "T11", cat: "temple", icon: "🍃", title: "Magoksa, The Healing Forest", 
+          steps: "Surrounded by a gentle river that flows in a complete circle resembling the traditional yin-yang symbol, Magoksa is famously known for its absolute geomantic perfection.\n\nIt gracefully managed to escape destruction during multiple historical wars due to its deeply hidden, peaceful location. It even served as a quiet refuge for famous historical independence leaders during times of great national hardship.", 
+          tip: "The wooden pillars in the main hall are left entirely unpainted, proudly showing the natural, raw grain and beautiful curves of the massive wooden logs. It perfectly embodies the warm Korean aesthetic of unadorned, natural beauty." },
+
+        { id: "T12", cat: "temple", icon: "🛏️", title: "Templestay: The Daily Routine", 
+          steps: "A Templestay is a wonderfully unique cultural program that allows visitors to peacefully experience the daily, mindful life of monks. \n\nThe rigorous but healing schedule usually begins very early at 3:00 AM with the beautiful striking of the temple bell, followed by dawn chanting, 108 prostrations to shed daily stress, quiet Zen meditation, and mindful communal work.", 
+          tip: "During the 108 prostrations, participants often string one wooden bead for every bow to make their own personal prayer beads. It can be physically demanding, but it serves as an incredibly intense and rewarding practice to let go of your ego and worldly stress." },
+
+        /* Tea Ceremony Guide (12 High-Quality Entries) */
+        { id: "C1", cat: "tea", icon: "🍵", title: "Darye: The Korean Tea Etiquette", 
+          steps: "Unlike the highly ritualized and strict Japanese tea ceremony, the beautiful Korean approach is called 'Darye' (Etiquette for Tea). It focuses deeply on naturalness, comfort, and warm hospitality.\n\nIt is much less about strict, rigid rules and much more about cultivating a peaceful mind, harmonizing beautifully with nature, and showing sincere, heartfelt respect to your guests without any artificiality.", 
+          tip: "The most important mindset you should remember in Darye is 'Harmony, Respect, Purity, and Tranquility'. The kind host aims to brew not just tea leaves, but a beautiful moment of true peace for everyone in the room." },
+
+        { id: "C2", cat: "tea", icon: "🌱", title: "Nokcha (Green Tea) Basics", 
+          steps: "Premium Korean green tea is predominantly grown in the beautiful southern regions like Boseong, Hadong, and the pristine Jeju Island.\n\nKorean tea is wonderfully unique because it often utilizes a traditional pan-firing method rather than steaming. The fresh, tender leaves are carefully roasted in a hot iron cauldron multiple times. This traditional method results in a savory, nutty, and slightly sweet flavor that is distinctly Korean.", 
+          tip: "The quality of the green tea is heavily determined by exactly when it is harvested. Tea plucked just before the first gentle spring rain is considered the absolute highest grade, deeply loved for its incredibly delicate and soft flavor." },
+
+        { id: "C3", cat: "tea", icon: "🫖", title: "Dawon: The Teaware", 
+          steps: "Traditional Korean teaware typically consists of a beautiful tea bowl or a small teapot, a cooling bowl, and several small, elegant tea cups.\n\nKorean ceramics embrace simple, natural porcelain styles. They are celebrated globally for their slightly imperfect, unadorned, and incredibly warm aesthetic, which perfectly matches the humble and peaceful spirit of the Korean tea ceremony.", 
+          tip: "When holding a traditional Korean tea cup, always use your right hand to hold the cup and gently, respectfully support the bottom with your left hand. This beautiful gesture shows deep respect and mindfulness." },
+
+        { id: "C4", cat: "tea", icon: "🌡️", title: "The Art of Water & Temperature", 
+          steps: "In the Korean tea ceremony, boiling water is absolutely never poured directly onto delicate green tea leaves, as it will unfortunately burn them and release excessive bitterness.\n\nInstead, the boiling water is first poured into a beautiful cooling bowl to gently bring the temperature down to about 70-80°C. This important step requires deep patience and mindfulness, beautifully preparing your mind before you prepare the tea.", 
+          tip: "Simply listening to the gentle sound of the boiling water is considered a beautiful part of the meditation. Enjoying the rushing sound of the water helps wash away the complicated thoughts of your busy day." },
+
+        { id: "C5", cat: "tea", icon: "🌸", title: "Yeonipcha (Lotus Leaf Tea)", 
+          steps: "Peaceful Buddhist temples frequently serve beautiful Lotus tea. The lotus flower is deeply symbolic, representing pure enlightenment, as it blooms immaculately and beautifully from muddy waters.\n\nThis special tea is carefully made by steaming and roasting the massive, beautiful green leaves of the lotus plant. It has a deeply calming, earthy, and slightly floral aroma that instantly relaxes the body.", 
+          tip: "Lotus tea naturally contains zero caffeine and greatly helps to calm an anxious mind. It is very often consumed by dedicated monks before long hours of seated meditation to maintain peaceful, clear focus." },
+
+        { id: "C6", cat: "tea", icon: "🥣", title: "Barugongyang: Temple Meal & Tea", 
+          steps: "Barugongyang is the highly formal, deeply meditative eating practice of monks using traditional wooden bowls. It is a beautiful process of consuming exactly and only what is necessary.\n\nAt the very end of the healthy meal, hot water or warm tea is poured into the bowls to clean them. The monk respectfully drinks this cleaning water to practice absolute zero waste and deep gratitude for the food.", 
+          tip: "While the idea of drinking water used to wash a bowl might seem strange at first, it is a profoundly beautiful ecological practice that teaches deep humility and absolute non-wastefulness for our planet." },
+
+        { id: "C7", cat: "tea", icon: "🍂", title: "Bori-cha (Roasted Barley Tea)", 
+          steps: "While it is not a 'ceremonial' tea, Bori-cha is the absolute heart and soul of everyday Korean hydration. Made by boiling roasted barley, it is lovingly served year-round in homes.\n\nIt is completely caffeine-free, beautifully aids digestion, and has a deeply comforting, warm, nutty flavor. For all Koreans, it represents the wonderful warmth of home and a loving mother's care.", 
+          tip: "In the past, Koreans rarely drank plain, cold water. Boiling the water with healthy roasted barley was a very natural, wise way to purify the water while adding excellent, comforting nutrients." },
+
+        { id: "C8", cat: "tea", icon: "🪑", title: "Posture and Breathing in Tea", 
+          steps: "Serving tea to a guest is a beautiful exercise in mindfulness. The host must maintain a comfortably straight spine, keeping the shoulders completely relaxed and free of tension.\n\nEvery movement should flow naturally with your breath. You gently inhale when lifting the teapot and exhale slowly when pouring. This synchronization brings a beautiful meditative rhythm to the room.", 
+          tip: "Never, ever pour tea in a rush. The tea is poured gently back and forth among the cups to ensure the delicate flavor, color, and temperature are perfectly equal and fair for every single guest." },
+
+        { id: "C9", cat: "tea", icon: "🌿", title: "Ssukcha (Mugwort Tea)", 
+          steps: "Mugwort is one of the most sacred, historically important, and widely used healing herbs in Korea, deeply tied to the ancient, beautiful foundation myth of the country.\n\nThis tea has a distinctly herbal, slightly bitter, and deeply warming flavor. It is highly regarded in traditional wellness for greatly improving blood circulation and comfortably warming the core of the body.", 
+          tip: "Mugwort harvested in the gentle spring is considered soft and sweet, perfect for a relaxing tea, while late autumn mugwort is very potent and mostly used for traditional healing treatments." },
+
+        { id: "C10", cat: "tea", icon: "🍯", title: "Yujacha (Citron Tea)", 
+          steps: "An absolute staple for harsh, cold Korean winters, Yujacha is uniquely not made from dried leaves, but from a delicious marmalade of finely sliced citron fruit beautifully cured in sweet honey.\n\nIt is incredibly rich in vitamin C and provides a vibrant, sweet, and wonderfully tangy flavor. It has been lovingly used for centuries as a delicious remedy to cure colds and soothe sore throats.", 
+          tip: "The thick, sweet syrupy fruit bits will naturally sink to the bottom. It is proper, polite etiquette to stir it gently with a small spoon and happily eat the candied peels after drinking the tea." },
+
+        { id: "C11", cat: "tea", icon: "🧘‍♀️", title: "Daseon Ilmi (Tea and Zen are One)", 
+          steps: "The ultimate, beautiful philosophy of Korean tea culture is the concept that the peaceful taste of tea and the deep state of Zen meditation are exactly the same.\n\nBrewing and drinking tea requires the exact same absolute presence, quiet stillness, and letting go of ego as seated meditation. You do not drink tea just to wake up; you drink tea to wake up to the present moment.", 
+          tip: "When you hold the warm, comforting cup, focus solely on the gentle warmth in your palms, the beautiful aroma, and the liquid passing down your throat. That simple, beautiful act is complete meditation." },
+
+        { id: "C12", cat: "tea", icon: "🍵", title: "Malcha (Powdered Green Tea)", 
+          steps: "While powdered tea is very famous globally, Korea also has a very deep, beautiful history of Malcha, particularly during the historic Goryeo Dynasty where it was deeply favored by the royal court.\n\nInstead of steeping leaves, the finely ground, premium tea powder is gently whisked into hot water with a traditional bamboo brush until a thick, beautiful, vibrant green foam forms on the top.", 
+          tip: "Because you are consuming the entire, healthy tea leaf rather than just an infusion, this tea provides a powerful, wonderful dose of antioxidants and a calm, sustained energy boost for your day." }
+    ];
+
+    var selectedId = null;
+
+    function init() {
+        var searchParams = window.location.search;
+        var mParam = searchParams.indexOf("m=1") !== -1 ? "m=1&" : "";
+        var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+        var idMatch = searchParams.match(/[?&]id=([^&]+)/);
+        
+        var action = actionMatch ? actionMatch[1] : null;
+        var paramId = idMatch ? idMatch[1] : null;
+
+        if (action === 'spin_ott' && paramId) {
+            showResultModal(paramId);
+        }
+
+        renderGrid('temple');
+        renderGrid('tea');
+    }
+
+    function renderGrid(category) {
+        var container = document.getElementById(category);
+        container.innerHTML = '';
+        
+        var items = [];
+        for (var i = 0; i < manualDB.length; i++) {
+            if (manualDB[i].cat === category) items.push(manualDB[i]);
+        }
+
+        for (var j = 0; j < items.length; j++) {
+            (function(item) {
+                var div = document.createElement('div');
+                div.className = 'item-btn';
+                div.setAttribute('data-id', item.id);
+                div.innerHTML = '<span class="item-icon">' + item.icon + '</span><span class="item-name">' + item.title + '</span>';
+                
+                div.addEventListener('click', function() {
+                    var allBtns = document.querySelectorAll('.item-btn');
+                    for (var k = 0; k < allBtns.length; k++) allBtns[k].classList.remove('selected');
+                    
+                    div.classList.add('selected');
+                    selectedId = item.id;
+                    
+                    var sBtn = document.getElementById('submit-btn');
+                    sBtn.disabled = false;
+                    sBtn.innerHTML = "📜 Enter the Guide (Open Docent)";
+                });
+
+                container.appendChild(div);
+            })(items[j]);
+        }
+    }
+
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].addEventListener('click', function(e) {
+            var targetBtn = e.target;
+            for (var j = 0; j < tabBtns.length; j++) tabBtns[j].classList.remove('active');
+            targetBtn.classList.add('active');
+
+            var target = targetBtn.getAttribute('data-target');
+            var grids = document.querySelectorAll('.grid-container');
+            for (var k = 0; k < grids.length; k++) grids[k].classList.remove('active');
+            document.getElementById(target).classList.add('active');
+
+            var itemBtns = document.querySelectorAll('.item-btn');
+            for (var m = 0; m < itemBtns.length; m++) itemBtns[m].classList.remove('selected');
+            
+            selectedId = null;
+            var sBtn = document.getElementById('submit-btn');
+            sBtn.disabled = true;
+            sBtn.innerHTML = "Please select a guide to explore";
+        });
+    }
+
+    // 🚨 100% 철통 방어 이중 우회 로직 (ES5 최적화) 🚨
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        if (!selectedId) return;
+        
+        var btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.innerText = "Carefully preparing your guide...";
+
+        // 1차 안전장치: 앱인벤터 내부 통신 시도
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        // 2차 안전장치: 앱인벤터 통신이 막혀도 0.5초 뒤 무조건 파라미터 강제 주입 및 새로고침
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var searchString = window.location.search;
+        var mParam = "";
+        if (searchString.indexOf("m=1") !== -1) { 
+            mParam = "m=1&"; 
+        }
+        
+        setTimeout(function() {
+            window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&id=" + selectedId);
+        }, 500);
+    });
+
+    function showResultModal(id) {
+        var selectedData = null;
+        for (var i = 0; i < manualDB.length; i++) {
+            if (manualDB[i].id === id) {
+                selectedData = manualDB[i];
+                break;
+            }
+        }
+        if (!selectedData) return;
+
+        var tagHtml = selectedData.cat === 'temple' ? '<span class="res-tag">🏛️ Temple Meditation Guide</span>' : '<span class="res-tag">🍵 Traditional Tea Culture</span>';
+
+        document.getElementById('res-tag-container').innerHTML = tagHtml;
+        document.getElementById('res-title').innerText = selectedData.title;
+        document.getElementById('res-steps').innerHTML = selectedData.steps.replace(/\n/g, '<br><br>');
+        document.getElementById('res-tip').innerHTML = selectedData.tip.replace(/\n/g, '<br>');
+
+        document.getElementById('result-modal').style.display = 'block';
+    }
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('result-modal').style.display = 'none';
+        var itemBtns = document.querySelectorAll('.item-btn');
+        for (var i = 0; i < itemBtns.length; i++) itemBtns[i].classList.remove('selected');
+        
+        selectedId = null;
+        var sBtn = document.getElementById('submit-btn');
+        sBtn.disabled = true;
+        sBtn.innerHTML = "Please select a guide to explore";
+        
+        try {
+            var baseUrl = window.location.href.split('?')[0].split('#')[0];
+            var mParam = "";
+            if (window.location.search.indexOf("m=1") !== -1) { 
+                mParam = "?m=1"; 
+            }
+            window.history.replaceState({}, document.title, baseUrl + mParam);
+        } catch(e) {}
+    });
+
+    init();
+});
+//]]>
+</script>
