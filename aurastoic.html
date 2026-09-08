@@ -1,4 +1,4 @@
-<!--Google Blogger Only: Aura Daily Stoic (Premium ES5 Master & Bug Fixes)-->
+<!--Google Blogger Only: Aura Daily Stoic (Premium ES5 Master & Bug Fixes & Ad Signal Fix)-->
 <meta charset="UTF-8"></meta>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
@@ -40,7 +40,6 @@
     .main-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: #cbd5e1; letter-spacing: 3px; margin-bottom: 8px; text-transform: uppercase;}
     .sub-title { font-size: 11px; color: #64748b; font-weight: 400; letter-spacing: 4px; text-transform: uppercase;}
 
-    /* Information & Guide Box (Text formatting fixed) */
     .info-box { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 16px; padding: 30px 25px; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
     .info-title { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding-bottom: 12px;}
     .info-desc { font-size: 14px; color: #94a3b8; line-height: 1.8; font-weight: 300; margin-bottom: 20px; text-align: left; word-break: keep-all; overflow-wrap: break-word;}
@@ -50,13 +49,11 @@
     .guide-wrap ul { margin: 0; padding-left: 20px; font-size: 13.5px; color: #94a3b8; line-height: 1.8; font-weight: 300;}
     .guide-wrap li { margin-bottom: 10px; text-align: left;}
 
-    /* Ambient Idle Box */
     .ambient-idle-box { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 16px; padding: 40px 25px; margin-bottom: 40px; text-align: center; min-height: 160px; display: flex; flex-direction: column; justify-content: center;}
     .ambient-quote { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: #e2e8f0; line-height: 1.6; transition: opacity 1.5s ease; opacity: 1;}
     .ambient-quote.fade-out { opacity: 0; }
     .ambient-indicator { font-size: 10px; color: #475569; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase;}
 
-    /* Menu Grid */
     .menu-title { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; text-align: center;}
     .menu-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px;}
     
@@ -67,12 +64,10 @@
     .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #f8fafc;}
     .menu-desc { font-size: 12.5px; color: #64748b; font-weight: 300; line-height: 1.5;}
     
-    /* Disclaimer (Text spacing fixed) */
     .disclaimer-box { background: rgba(7, 8, 10, 0.8); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;}
     .disclaimer-title { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: center;}
     .disclaimer-text { font-size: 11.5px; color: #475569; line-height: 1.6; text-align: left; font-weight: 300; word-break: keep-all; overflow-wrap: break-word;}
 
-    /* Result Modal (Text spacing fixed) */
     .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 8, 10, 0.98); z-index: 9999; overflow-y: auto; padding: 25px; box-sizing: border-box; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden;}
     .result-content { max-width: 540px; margin: 40px auto; background: transparent; position: relative;}
     
@@ -95,7 +90,6 @@
         <div class="sub-title">Daily Stoic Rituals</div>
     </div>
 
-    <!-- 1. Detailed App Guide & Explanations -->
     <div class="info-box">
         <div class="info-title">✧ Welcome to Your Mental Sanctuary</div>
         <div class="info-desc">
@@ -111,13 +105,11 @@
         </div>
     </div>
 
-    <!-- 2. True Idle Mode (Auto-playing Ambient Quotes) -->
     <div class="ambient-idle-box">
         <div class="ambient-quote" id="ambient-quote-text">"You have power over your mind - not outside events. Realize this, and you will find strength."</div>
         <div class="ambient-indicator">Ambient Wisdom • Auto-Playing</div>
     </div>
 
-    <!-- 3. Ritual Selection Menu (ontouchstart added for instant mobile tap response) -->
     <div class="menu-title">Daily Practices</div>
     <div class="menu-grid">
         <div class="menu-btn" onclick="handleAction('morning')" ontouchstart="">
@@ -150,7 +142,6 @@
         </div>
     </div>
 
-    <!-- 4. Expanded Legal Disclaimer -->
     <div class="disclaimer-box">
         <div class="disclaimer-title">Legal Disclaimer & Terms of Use</div>
         <div class="disclaimer-text">
@@ -262,8 +253,8 @@ var auraDB = {
     ]
 };
 
-var CLICK_KEY = 'aura_clicks_v3';
-var TIME_KEY = 'aura_time_v3';
+var CLICK_KEY = 'aura_clicks_v4';
+var TIME_KEY = 'aura_time_v4';
 var MIN_GAP_MS = 180000; 
 var AD_FREQ = 3;         
 
@@ -272,7 +263,6 @@ function handleAction(categoryId) {
     var count = 0;
     var lastTime = 0;
     
-    // JS Crash Prevention Block
     try {
         count = parseInt(localStorage.getItem(CLICK_KEY)) || 0;
         lastTime = parseInt(localStorage.getItem(TIME_KEY)) || 0;
@@ -292,7 +282,7 @@ function handleAction(categoryId) {
 
         try {
             if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
-                window.AppInventor.setWebViewString("action=spin_ott");
+                window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
             }
         } catch(e) {}
 
