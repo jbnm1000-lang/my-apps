@@ -1,4 +1,4 @@
-<!--Google Blogger Only: Aura Daily Stoic (Premium ES5 Master & MAX Data & True Idle)-->
+<!--Google Blogger Only: Aura Daily Stoic (Premium ES5 Master & Bug Fixes)-->
 <meta charset="UTF-8"></meta>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
@@ -40,15 +40,15 @@
     .main-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: #cbd5e1; letter-spacing: 3px; margin-bottom: 8px; text-transform: uppercase;}
     .sub-title { font-size: 11px; color: #64748b; font-weight: 400; letter-spacing: 4px; text-transform: uppercase;}
 
-    /* Information & Guide Box */
+    /* Information & Guide Box (Text formatting fixed) */
     .info-box { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 16px; padding: 30px 25px; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
     .info-title { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding-bottom: 12px;}
-    .info-desc { font-size: 14px; color: #94a3b8; line-height: 1.8; font-weight: 300; margin-bottom: 20px;}
+    .info-desc { font-size: 14px; color: #94a3b8; line-height: 1.8; font-weight: 300; margin-bottom: 20px; text-align: left; word-break: keep-all; overflow-wrap: break-word;}
     
     .guide-wrap { background: rgba(7, 8, 10, 0.4); padding: 20px; border-radius: 12px; border-left: 3px solid #475569;}
     .guide-wrap strong { color: #cbd5e1; display: block; margin-bottom: 12px; font-size: 13.5px; letter-spacing: 1px; text-transform: uppercase;}
     .guide-wrap ul { margin: 0; padding-left: 20px; font-size: 13.5px; color: #94a3b8; line-height: 1.8; font-weight: 300;}
-    .guide-wrap li { margin-bottom: 10px;}
+    .guide-wrap li { margin-bottom: 10px; text-align: left;}
 
     /* Ambient Idle Box */
     .ambient-idle-box { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 16px; padding: 40px 25px; margin-bottom: 40px; text-align: center; min-height: 160px; display: flex; flex-direction: column; justify-content: center;}
@@ -67,12 +67,12 @@
     .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #f8fafc;}
     .menu-desc { font-size: 12.5px; color: #64748b; font-weight: 300; line-height: 1.5;}
     
-    /* Disclaimer */
+    /* Disclaimer (Text spacing fixed) */
     .disclaimer-box { background: rgba(7, 8, 10, 0.8); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;}
     .disclaimer-title { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: center;}
-    .disclaimer-text { font-size: 11.5px; color: #475569; line-height: 1.6; text-align: justify; font-weight: 300;}
+    .disclaimer-text { font-size: 11.5px; color: #475569; line-height: 1.6; text-align: left; font-weight: 300; word-break: keep-all; overflow-wrap: break-word;}
 
-    /* Result Modal */
+    /* Result Modal (Text spacing fixed) */
     .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 8, 10, 0.98); z-index: 9999; overflow-y: auto; padding: 25px; box-sizing: border-box; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden;}
     .result-content { max-width: 540px; margin: 40px auto; background: transparent; position: relative;}
     
@@ -82,7 +82,7 @@
     
     .res-body-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.4); border-radius: 16px; padding: 30px 25px;}
     .res-body-title { font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
-    .res-body-text { font-size: 14.5px; color: #94a3b8; line-height: 1.8; font-weight: 300;}
+    .res-body-text { font-size: 14.5px; color: #94a3b8; line-height: 1.8; font-weight: 300; text-align: left; word-break: keep-all; overflow-wrap: break-word;}
 
     .close-btn { width: 100%; padding: 22px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(51, 65, 85, 0.8); border-radius: 12px; color: #cbd5e1; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 30px; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase;}
 </style>
@@ -117,31 +117,31 @@
         <div class="ambient-indicator">Ambient Wisdom • Auto-Playing</div>
     </div>
 
-    <!-- 3. Ritual Selection Menu -->
+    <!-- 3. Ritual Selection Menu (ontouchstart added for instant mobile tap response) -->
     <div class="menu-title">Daily Practices</div>
     <div class="menu-grid">
-        <div class="menu-btn" onclick="handleAction('morning')">
+        <div class="menu-btn" onclick="handleAction('morning')" ontouchstart="">
             <div class="menu-icon">🌅</div>
             <div class="menu-info">
                 <div class="menu-name">Morning Preparation</div>
                 <div class="menu-desc">Set your intentions and prepare your mind for the day ahead.</div>
             </div>
         </div>
-        <div class="menu-btn" onclick="handleAction('evening')">
+        <div class="menu-btn" onclick="handleAction('evening')" ontouchstart="">
             <div class="menu-icon">🌌</div>
             <div class="menu-info">
                 <div class="menu-name">Evening Reflection</div>
                 <div class="menu-desc">Review your actions, clear your thoughts, and find closure.</div>
             </div>
         </div>
-        <div class="menu-btn" onclick="handleAction('anxiety')">
+        <div class="menu-btn" onclick="handleAction('anxiety')" ontouchstart="">
             <div class="menu-icon">🌊</div>
             <div class="menu-info">
                 <div class="menu-name">Overcome Anxiety</div>
                 <div class="menu-desc">Stoic principles to regain control when feeling overwhelmed.</div>
             </div>
         </div>
-        <div class="menu-btn" onclick="handleAction('courage')">
+        <div class="menu-btn" onclick="handleAction('courage')" ontouchstart="">
             <div class="menu-icon">⛰️</div>
             <div class="menu-info">
                 <div class="menu-name">Build Courage</div>
@@ -150,7 +150,7 @@
         </div>
     </div>
 
-    <!-- 4. Expanded Legal Disclaimer (Shield) -->
+    <!-- 4. Expanded Legal Disclaimer -->
     <div class="disclaimer-box">
         <div class="disclaimer-title">Legal Disclaimer & Terms of Use</div>
         <div class="disclaimer-text">
@@ -170,14 +170,13 @@
             <div class="res-body-text" id="res-desc-text">Practical advice will be displayed here.</div>
         </div>
 
-        <button class="close-btn" id="close-btn" onclick="closeModal()">Complete Ritual</button>
+        <button class="close-btn" id="close-btn" onclick="closeModal()" ontouchstart="">Complete Ritual</button>
     </div>
 </div>
 
 <script type="text/javascript">
 //<![CDATA[
 
-// 1. Ambient Mode Quotes (30+ items for true idle experience)
 var ambientQuotes = [
     "Waste no more time arguing what a good man should be. Be one.",
     "The best revenge is not to be like your enemy.",
@@ -210,9 +209,8 @@ setInterval(function() {
         ambientEl.innerText = '"' + ambientQuotes[ambientIndex] + '"';
         ambientEl.classList.remove('fade-out');
     }, 1500);
-}, 15000); // Rotates every 15 seconds
+}, 15000); 
 
-// 2. MAX Capacity Ritual Database (60+ High Quality Entries)
 var auraDB = {
     'morning': [
         { quote: "When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.", author: "Marcus Aurelius", desc: "Before checking your messages or emails, take a moment to appreciate the simple fact that you have another day. Set an intention to respond to today's challenges with patience rather than frustration." },
@@ -264,23 +262,33 @@ var auraDB = {
     ]
 };
 
-// 3. Strict AdMob Double Bypass Logic (ES5 - High Reliability)
-var CLICK_KEY = 'aura_clicks_v2';
-var TIME_KEY = 'aura_time_v2';
+var CLICK_KEY = 'aura_clicks_v3';
+var TIME_KEY = 'aura_time_v3';
 var MIN_GAP_MS = 180000; 
 var AD_FREQ = 3;         
 
 function handleAction(categoryId) {
     var now = new Date().getTime();
-    var count = parseInt(localStorage.getItem(CLICK_KEY)) || 0;
-    var lastTime = parseInt(localStorage.getItem(TIME_KEY)) || 0;
+    var count = 0;
+    var lastTime = 0;
     
+    // JS Crash Prevention Block
+    try {
+        count = parseInt(localStorage.getItem(CLICK_KEY)) || 0;
+        lastTime = parseInt(localStorage.getItem(TIME_KEY)) || 0;
+    } catch(e) {}
+
     count++;
-    localStorage.setItem(CLICK_KEY, count);
+
+    try {
+        localStorage.setItem(CLICK_KEY, count);
+    } catch(e) {}
 
     if (count >= AD_FREQ && (now - lastTime) >= MIN_GAP_MS) {
-        localStorage.setItem(CLICK_KEY, 0);
-        localStorage.setItem(TIME_KEY, now);
+        try {
+            localStorage.setItem(CLICK_KEY, 0);
+            localStorage.setItem(TIME_KEY, now);
+        } catch(e) {}
 
         try {
             if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
