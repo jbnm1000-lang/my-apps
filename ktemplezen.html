@@ -1,4 +1,4 @@
-<!--Google Blogger Only: K-Temple Zen & Tea (Premium Ambient Master - ES5 Strict & Double Safety)-->
+<!--Google Blogger Only: K-Temple Zen & Tea (Premium Ambient Master - Rendering Bug Fix)-->
 <meta charset="UTF-8"></meta>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
@@ -19,18 +19,18 @@
         overflow-x: hidden;
     }
 
-    /* Premium Ambient Smoke Particles */
+    /* Fixed Rendering Bug: Removed heavy filter: blur() and optimized background layer */
     #smoke-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: linear-gradient(180deg, #111412 0%, #060706 100%); }
-    .smoke { position: absolute; background: radial-gradient(circle, rgba(200, 205, 195, 0.05) 0%, rgba(0,0,0,0) 60%); border-radius: 50%; opacity: 0; animation: smokeRise linear infinite; filter: blur(8px); }
+    .smoke { position: absolute; background: radial-gradient(circle, rgba(200, 205, 195, 0.08) 0%, rgba(0,0,0,0) 60%); border-radius: 50%; opacity: 0; animation: smokeRise linear infinite; }
     @keyframes smokeRise { 0% { transform: translateY(110vh) scale(1); opacity: 0; } 30% { opacity: 0.5; } 70% { opacity: 0.3; transform: translateY(40vh) scale(2.5); } 100% { transform: translateY(-10vh) scale(4); opacity: 0; } }
 
-    #app-container { position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; padding: 35px 20px 80px 20px; box-sizing: border-box; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
+    /* Fixed Rendering Bug: Added transform translateZ to force hardware acceleration on the scrolling container */
+    #app-container { position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; padding: 35px 20px 80px 20px; box-sizing: border-box; -webkit-transform: translateZ(0); transform: translateZ(0); }
 
     .header-section { margin-bottom: 30px; text-align: center; border-bottom: 1px solid rgba(74, 87, 66, 0.3); padding-bottom: 20px;}
     .main-title { font-size: 26px; font-weight: 600; color: #b5c2a3; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(181,194,163,0.2);}
     .sub-title { font-size: 13px; color: #7a856e; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;}
 
-    /* Premium Intro Box */
     .intro-box { background: rgba(18, 22, 19, 0.85); border-radius: 12px; padding: 25px; border: 1px solid #2a332d; margin-bottom: 35px; box-shadow: inset 0 0 20px rgba(0,0,0,0.6);}
     .intro-title { font-size: 16px; font-weight: 600; color: #d1ccbd; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #2a332d; padding-bottom: 12px;}
     .intro-desc { font-size: 14.5px; color: #9a9e91; line-height: 1.8; margin-bottom: 20px; word-break: normal; text-align: left;}
@@ -40,7 +40,6 @@
     .guide-wrap ul { margin: 0; padding-left: 20px; margin-bottom: 0;}
     .guide-wrap li { margin-bottom: 8px;}
 
-    /* Ambient Zen Display (Auto-rotating Idle Box) */
     .zen-idle-box { background: rgba(18, 22, 19, 0.7); border: 1px solid #2a332d; border-radius: 12px; padding: 35px 25px; margin-bottom: 35px; text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.5); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;}
     .zen-icon { font-size: 22px; margin-bottom: 15px; opacity: 0.7; }
     .zen-quote-text { font-family: 'Noto Serif', serif; font-style: italic; font-size: 17.5px; color: #d1ccbd; line-height: 1.8; word-break: normal; transition: opacity 1.5s ease-in-out; opacity: 1; }
@@ -157,7 +156,6 @@
 <script type="text/javascript">
 //<![CDATA[
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Ambient Particle Effects (Smoke) - ES5 Compatible
     var smokeContainer = document.getElementById('smoke-container');
     for (var i = 0; i < 30; i++) {
         var smoke = document.createElement('div');
@@ -171,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function() {
         smokeContainer.appendChild(smoke);
     }
 
-    // 2. 50 Zen Quotes Array (MAX Data) - For Ambient Idle Display
     var zenQuotes = [
         "A single flower blooms, and the whole world is spring.",
         "Water flows, but the moon in the water does not move.",
@@ -228,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var quoteElement = document.getElementById('zen-quote-display');
     var quoteIndex = 0;
     
-    // Auto-rotate quotes every 12 seconds for Idle Mode
     setInterval(function() {
         quoteElement.classList.add('fade-out');
         setTimeout(function() {
@@ -238,9 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 1500); 
     }, 12000);
 
-    // 3. Database (MAX Data) - Detailed, Friendly, and Educational
     var manualDB = [
-        /* Temple Guide (12 High-Quality Entries) */
         { id: "T1", cat: "temple", icon: "⛰️", title: "Haeinsa & The Tripitaka", 
           steps: "Located deep within the beautiful Mount Gaya, Haeinsa is one of the Three Jewel Temples of Korea. It represents the 'Dharma', which means the teachings of the Buddha.\n\nFounded in 802, this magnificent temple is globally renowned for housing the Tripitaka Koreana. This is the world's most complete collection of Buddhist texts, meticulously engraved on over 80,000 wooden printing blocks during the 13th century to seek spiritual protection against invasions.", 
           tip: "The storage halls (Janggyeong Panjeon) are a breathtaking marvel of ancient natural science. The buildings were perfectly designed with specific window placements and charcoal floors to naturally regulate humidity and airflow. Thanks to this brilliant architecture, the woodblocks have been perfectly preserved for over 700 years without any modern electricity." },
@@ -289,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function() {
           steps: "A Templestay is a wonderfully unique cultural program that allows visitors to peacefully experience the daily, mindful life of monks. \n\nThe rigorous but healing schedule usually begins very early at 3:00 AM with the beautiful striking of the temple bell, followed by dawn chanting, 108 prostrations to shed daily stress, quiet Zen meditation, and mindful communal work.", 
           tip: "During the 108 prostrations, participants often string one wooden bead for every bow to make their own personal prayer beads. It can be physically demanding, but it serves as an incredibly intense and rewarding practice to let go of your ego and worldly stress." },
 
-        /* Tea Ceremony Guide (12 High-Quality Entries) */
         { id: "C1", cat: "tea", icon: "🍵", title: "Darye: The Korean Tea Etiquette", 
           steps: "Unlike the highly ritualized and strict Japanese tea ceremony, the beautiful Korean approach is called 'Darye' (Etiquette for Tea). It focuses deeply on naturalness, comfort, and warm hospitality.\n\nIt is much less about strict, rigid rules and much more about cultivating a peaceful mind, harmonizing beautifully with nature, and showing sincere, heartfelt respect to your guests without any artificiality.", 
           tip: "The most important mindset you should remember in Darye is 'Harmony, Respect, Purity, and Tranquility'. The kind host aims to brew not just tea leaves, but a beautiful moment of true peace for everyone in the room." },
@@ -413,7 +406,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 🚨 100% 철통 방어 이중 우회 로직 (ES5 최적화) 🚨
     document.getElementById('submit-btn').addEventListener('click', function() {
         if (!selectedId) return;
         
@@ -421,14 +413,12 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.disabled = true;
         btn.innerText = "Carefully preparing your guide...";
 
-        // 1차 안전장치: 앱인벤터 내부 통신 시도
         try {
             if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
                 window.AppInventor.setWebViewString("action=spin_ott");
             }
         } catch(e) {}
 
-        // 2차 안전장치: 앱인벤터 통신이 막혀도 0.5초 뒤 무조건 파라미터 강제 주입 및 새로고침
         var baseUrl = window.location.href.split('?')[0].split('#')[0];
         var searchString = window.location.search;
         var mParam = "";
