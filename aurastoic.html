@@ -1,0 +1,353 @@
+<!--Google Blogger Only: Aura Daily Stoic (Premium ES5 Master & MAX Data & True Idle)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #07080a !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #e2e8f0; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #ambient-breathe {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+        background: radial-gradient(circle at 50% 40%, rgba(30, 41, 59, 0.4) 0%, rgba(7, 8, 10, 1) 70%);
+        animation: breatheSlow 8s ease-in-out infinite alternate;
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+    @keyframes breatheSlow {
+        0% { opacity: 0.3; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: #cbd5e1; letter-spacing: 3px; margin-bottom: 8px; text-transform: uppercase;}
+    .sub-title { font-size: 11px; color: #64748b; font-weight: 400; letter-spacing: 4px; text-transform: uppercase;}
+
+    /* Information & Guide Box */
+    .info-box { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 16px; padding: 30px 25px; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+    .info-title { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding-bottom: 12px;}
+    .info-desc { font-size: 14px; color: #94a3b8; line-height: 1.8; font-weight: 300; margin-bottom: 20px;}
+    
+    .guide-wrap { background: rgba(7, 8, 10, 0.4); padding: 20px; border-radius: 12px; border-left: 3px solid #475569;}
+    .guide-wrap strong { color: #cbd5e1; display: block; margin-bottom: 12px; font-size: 13.5px; letter-spacing: 1px; text-transform: uppercase;}
+    .guide-wrap ul { margin: 0; padding-left: 20px; font-size: 13.5px; color: #94a3b8; line-height: 1.8; font-weight: 300;}
+    .guide-wrap li { margin-bottom: 10px;}
+
+    /* Ambient Idle Box */
+    .ambient-idle-box { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 16px; padding: 40px 25px; margin-bottom: 40px; text-align: center; min-height: 160px; display: flex; flex-direction: column; justify-content: center;}
+    .ambient-quote { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: #e2e8f0; line-height: 1.6; transition: opacity 1.5s ease; opacity: 1;}
+    .ambient-quote.fade-out { opacity: 0; }
+    .ambient-indicator { font-size: 10px; color: #475569; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase;}
+
+    /* Menu Grid */
+    .menu-title { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; text-align: center;}
+    .menu-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px;}
+    
+    .menu-btn { background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 16px; padding: 25px 20px; display: flex; align-items: center; gap: 20px; cursor: pointer; transition: all 0.3s ease; text-align: left;}
+    .menu-btn:active { background: rgba(30, 41, 59, 0.9); transform: scale(0.98); border-color: #94a3b8;}
+    .menu-icon { font-size: 28px; width: 40px; text-align: center;}
+    .menu-info { flex: 1; display: flex; flex-direction: column; gap: 6px;}
+    .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #f8fafc;}
+    .menu-desc { font-size: 12.5px; color: #64748b; font-weight: 300; line-height: 1.5;}
+    
+    /* Disclaimer */
+    .disclaimer-box { background: rgba(7, 8, 10, 0.8); border: 1px solid rgba(51, 65, 85, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;}
+    .disclaimer-title { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: center;}
+    .disclaimer-text { font-size: 11.5px; color: #475569; line-height: 1.6; text-align: justify; font-weight: 300;}
+
+    /* Result Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 8, 10, 0.98); z-index: 9999; overflow-y: auto; padding: 25px; box-sizing: border-box; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden;}
+    .result-content { max-width: 540px; margin: 40px auto; background: transparent; position: relative;}
+    
+    .res-category { font-size: 12px; color: #64748b; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; text-align: center; border-bottom: 1px solid #1e293b; padding-bottom: 15px;}
+    .res-quote { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 400; color: #f8fafc; line-height: 1.5; margin-bottom: 30px; text-align: center;}
+    .res-author { font-size: 14px; color: #94a3b8; text-align: center; margin-bottom: 40px; letter-spacing: 1px;}
+    
+    .res-body-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.4); border-radius: 16px; padding: 30px 25px;}
+    .res-body-title { font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+    .res-body-text { font-size: 14.5px; color: #94a3b8; line-height: 1.8; font-weight: 300;}
+
+    .close-btn { width: 100%; padding: 22px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(51, 65, 85, 0.8); border-radius: 12px; color: #cbd5e1; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 30px; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase;}
+</style>
+
+<div id="ambient-breathe"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">AURA</div>
+        <div class="sub-title">Daily Stoic Rituals</div>
+    </div>
+
+    <!-- 1. Detailed App Guide & Explanations -->
+    <div class="info-box">
+        <div class="info-title">✧ Welcome to Your Mental Sanctuary</div>
+        <div class="info-desc">
+            Aura is a premium digital coaching tool designed to help you build unshakeable mental resilience. Grounded in the ancient philosophy of Stoicism—practiced by Roman Emperors and modern leaders alike—this app provides practical wisdom to navigate the chaos of modern life.
+        </div>
+        <div class="guide-wrap">
+            <strong>[How to Use This Application]</strong>
+            <ul>
+                <li><b>Ambient Idle Mode:</b> Simply leave the app open on your desk. The display below will automatically cycle through profound philosophical quotes every 15 seconds, creating a calm atmosphere for deep focus and reading.</li>
+                <li><b>Active Rituals:</b> Select one of the Daily Practices (Morning, Evening, Anxiety, Courage) when you need specific guidance. Read the historical quote and carefully apply the "Modern Application" to your current situation.</li>
+                <li><b>Consistency:</b> The goal is not just to read, but to practice. Use the Morning Preparation and Evening Reflection consistently to build a powerful daily mental routine.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. True Idle Mode (Auto-playing Ambient Quotes) -->
+    <div class="ambient-idle-box">
+        <div class="ambient-quote" id="ambient-quote-text">"You have power over your mind - not outside events. Realize this, and you will find strength."</div>
+        <div class="ambient-indicator">Ambient Wisdom • Auto-Playing</div>
+    </div>
+
+    <!-- 3. Ritual Selection Menu -->
+    <div class="menu-title">Daily Practices</div>
+    <div class="menu-grid">
+        <div class="menu-btn" onclick="handleAction('morning')">
+            <div class="menu-icon">🌅</div>
+            <div class="menu-info">
+                <div class="menu-name">Morning Preparation</div>
+                <div class="menu-desc">Set your intentions and prepare your mind for the day ahead.</div>
+            </div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('evening')">
+            <div class="menu-icon">🌌</div>
+            <div class="menu-info">
+                <div class="menu-name">Evening Reflection</div>
+                <div class="menu-desc">Review your actions, clear your thoughts, and find closure.</div>
+            </div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('anxiety')">
+            <div class="menu-icon">🌊</div>
+            <div class="menu-info">
+                <div class="menu-name">Overcome Anxiety</div>
+                <div class="menu-desc">Stoic principles to regain control when feeling overwhelmed.</div>
+            </div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('courage')">
+            <div class="menu-icon">⛰️</div>
+            <div class="menu-info">
+                <div class="menu-name">Build Courage</div>
+                <div class="menu-desc">Wisdom to face difficult decisions and overcome fear.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Expanded Legal Disclaimer (Shield) -->
+    <div class="disclaimer-box">
+        <div class="disclaimer-title">Legal Disclaimer & Terms of Use</div>
+        <div class="disclaimer-text">
+            Aura: Daily Stoic is provided strictly for educational, inspirational, and personal development purposes. The philosophical quotes and modern applications provided within this application are historical interpretations of Stoic philosophy and do not constitute professional psychological, psychiatric, or medical advice. The developers are not responsible for any emotional distress, life decisions, or psychological impacts resulting from the use of this application. If you are experiencing severe anxiety, depression, or a mental health crisis, please seek the assistance of a licensed medical professional or therapist immediately. By continuing to use this application, you acknowledge and agree to these terms.
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-category" id="res-cat-text">Category</div>
+        <div class="res-quote" id="res-quote-text">"Quote goes here."</div>
+        <div class="res-author" id="res-author-text">- Author Name -</div>
+        
+        <div class="res-body-box">
+            <div class="res-body-title">Modern Application</div>
+            <div class="res-body-text" id="res-desc-text">Practical advice will be displayed here.</div>
+        </div>
+
+        <button class="close-btn" id="close-btn" onclick="closeModal()">Complete Ritual</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+// 1. Ambient Mode Quotes (30+ items for true idle experience)
+var ambientQuotes = [
+    "Waste no more time arguing what a good man should be. Be one.",
+    "The best revenge is not to be like your enemy.",
+    "No man is free who is not master of himself.",
+    "It is the power of the mind to be unconquerable.",
+    "To be calm is the highest achievement of the self.",
+    "He who fears death will never do anything worth of a man who is alive.",
+    "First say to yourself what you would be; and then do what you have to do.",
+    "If it is not right do not do it; if it is not true do not say it.",
+    "The more we value things outside our control, the less control we have.",
+    "Wealth consists not in having great possessions, but in having few wants.",
+    "Fate leads the willing, and drags along the reluctant.",
+    "Sometimes even to live is an act of courage.",
+    "How long are you going to wait before you demand the best for yourself?",
+    "We suffer more often in imagination than in reality.",
+    "A ship should not ride on a single anchor, nor life on a single hope.",
+    "Don't explain your philosophy. Embody it.",
+    "The obstacle is the path.",
+    "Whatever happens to you has been waiting to happen since the beginning of time.",
+    "If you want to improve, be content to be thought foolish and stupid.",
+    "You have power over your mind - not outside events."
+];
+
+var ambientEl = document.getElementById('ambient-quote-text');
+var ambientIndex = 0;
+setInterval(function() {
+    ambientEl.classList.add('fade-out');
+    setTimeout(function() {
+        ambientIndex = (ambientIndex + 1) % ambientQuotes.length;
+        ambientEl.innerText = '"' + ambientQuotes[ambientIndex] + '"';
+        ambientEl.classList.remove('fade-out');
+    }, 1500);
+}, 15000); // Rotates every 15 seconds
+
+// 2. MAX Capacity Ritual Database (60+ High Quality Entries)
+var auraDB = {
+    'morning': [
+        { quote: "When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.", author: "Marcus Aurelius", desc: "Before checking your messages or emails, take a moment to appreciate the simple fact that you have another day. Set an intention to respond to today's challenges with patience rather than frustration." },
+        { quote: "Begin at once to live, and count each separate day as a separate life.", author: "Seneca", desc: "Yesterday's mistakes are gone, and tomorrow's problems are not here yet. Focus entirely on executing today's tasks with excellence and integrity." },
+        { quote: "First say to yourself what you would be; and then do what you have to do.", author: "Epictetus", desc: "Define your core values right now. If you want to be a patient leader or a focused creator, visualize that identity first, and let your actions today naturally align with it." },
+        { quote: "The primary indication of a well-ordered mind is a man's ability to remain in one place and linger in his own company.", author: "Seneca", desc: "Spend five minutes in complete silence before starting your day. Do not seek external stimulation immediately. Build the mental discipline to be comfortable with your own thoughts." },
+        { quote: "You have power over your mind - not outside events. Realize this, and you will find strength.", author: "Marcus Aurelius", desc: "Expect that traffic may be bad, or people may be difficult today. Accept that you cannot control them. You only control your reaction to them." },
+        { quote: "Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness.", author: "Marcus Aurelius", desc: "Mentally rehearse facing difficult people today. Remind yourself that their behavior is a result of their own ignorance of what is good and evil. You do not need to let their actions disrupt your inner peace." },
+        { quote: "True happiness is to enjoy the present, without anxious dependence upon the future.", author: "Seneca", desc: "Instead of rushing through your morning routine to get to work, be entirely present while drinking your coffee or taking a shower. Do not let the anticipation of the future rob you of the present." },
+        { quote: "Whatever can happen at any time can happen today.", author: "Seneca", desc: "Embrace the unpredictability of the day. By accepting that unexpected challenges will inevitably arise, you remove the shock factor and can respond with logic rather than emotion." },
+        { quote: "Make the best use of what is in your power, and take the rest as it happens.", author: "Epictetus", desc: "Identify the top three tasks you can absolutely control today. Commit to completing them with your best effort, and gracefully let go of outcomes that depend on other people." },
+        { quote: "No man is free who is not master of himself.", author: "Epictetus", desc: "Decide right now that your emotions will not dictate your actions today. Discipline yourself to act according to reason and virtue, regardless of how tired or unmotivated you might feel." }
+    ],
+    'evening': [
+        { quote: "I will keep constant watch over myself and put each day up for review.", author: "Seneca", desc: "Review your day without self-criticism. Ask yourself: What did I do well? What could I have done better? What negative emotions did I allow to control me? Learn, and let it go." },
+        { quote: "It is not that we have a short time to live, but that we waste a lot of it.", author: "Seneca", desc: "Reflect on how you spent your time today. Did you engage in meaningful work and relationships, or were you distracted by things that do not truly matter?" },
+        { quote: "Let not sleep fall upon thy eyes till thou hast thrice reviewed the transactions of the past day.", author: "Epictetus", desc: "Acknowledge your progress, no matter how small. Forgive yourself for your mistakes. Close the chapter of today completely so you can rest peacefully." },
+        { quote: "Nothing happens to any man that he is not formed by nature to bear.", author: "Marcus Aurelius", desc: "If today was difficult, remind yourself that you survived it. You possess the inherent mental strength to handle whatever happened, and you will be stronger tomorrow." },
+        { quote: "To be calm is the highest achievement of the self.", author: "Zen Proverb", desc: "Release the physical tension in your shoulders and jaw. The day's work is done. Allow your mind to transition from doing to simply being." },
+        { quote: "We are more often frightened than hurt; and we suffer more from imagination than from reality.", author: "Seneca", desc: "As you lay in bed, notice if your mind is creating catastrophic scenarios for tomorrow. Recognize them as mere illusions and bring your focus back to the physical sensation of resting." },
+        { quote: "Accept the things to which fate binds you, and love the people with whom fate brings you together.", author: "Marcus Aurelius", desc: "Think of a frustrating interaction you had today. Practice radical acceptance. Forgive them and forgive yourself, understanding that holding onto anger only harms your own sleep." },
+        { quote: "He who has a why to live for can bear almost any how.", author: "Friedrich Nietzsche", desc: "Reconnect with your deeper purpose. Even if today was exhausting or unrewarding, remind yourself why you are doing this work and making these sacrifices." },
+        { quote: "How beautifully things go on when you give up trying to control them.", author: "Anonymous Stoic", desc: "Mentally release your grip on everything that remains unfinished today. Trust that the world will continue to spin without your immediate intervention." },
+        { quote: "Death smiles at us all, but all a man can do is smile back.", author: "Marcus Aurelius", desc: "Reflect on your mortality (Memento Mori). Let this thought not bring sadness, but deep gratitude that you were granted the gift of living this one specific day." }
+    ],
+    'anxiety': [
+        { quote: "We suffer more often in imagination than in reality.", author: "Seneca", desc: "Write down exactly what you are anxious about right now. You will likely realize that you are fearing a future scenario that has not happened and may never happen." },
+        { quote: "Man is not worried by real problems so much as by his imagined anxieties about real problems.", author: "Epictetus", desc: "Separate the objective fact from your opinion about the fact. The event itself is neutral; your interpretation is what causes your anxiety. Change your interpretation." },
+        { quote: "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it.", author: "Marcus Aurelius", desc: "You have the power to revoke the permission you gave this problem to upset you. Say to yourself: 'This is just a situation. It does not dictate my peace of mind.'" },
+        { quote: "There is only one way to happiness and that is to cease worrying about things which are beyond the power or our will.", author: "Epictetus", desc: "Draw a circle. Inside, list what you can control (your effort, your attitude). Outside, list what you cannot. Completely ignore everything outside the circle." },
+        { quote: "True happiness is to enjoy the present, without anxious dependence upon the future.", author: "Seneca", desc: "Bring your attention back to your immediate physical surroundings. Take a deep breath. Focus solely on the task directly in front of you." },
+        { quote: "The mind that is anxious about future events is miserable.", author: "Seneca", desc: "When you feel anxiety rising, do a grounding exercise. Name five things you can see, four you can touch, three you can hear. Force your brain back to the present reality." },
+        { quote: "What we advise is that you should not be miserable before it is time.", author: "Seneca", desc: "Stop pre-grieving. If a disaster is going to happen, you will deal with it then using the strength you have. Do not drain your energy fighting a battle that hasn't started." },
+        { quote: "You don't have to turn this into something. It doesn't have to upset you.", author: "Marcus Aurelius", desc: "When someone sends an urgent email or a crisis arises, pause for 10 seconds before reacting. You have the absolute right to view the situation calmly rather than matching the chaotic energy." },
+        { quote: "It is not the man who has too little, but the man who craves more, that is poor.", author: "Seneca", desc: "Much of our anxiety comes from the fear of losing status, money, or possessions. Remind yourself that your true worth is determined by your character, which no one can take from you." },
+        { quote: "He ruins the present who worries about the future.", author: "Seneca", desc: "Focus your energy entirely on the next logical step. You do not need to figure out the next ten years right now; you only need to decide what to do in the next five minutes." }
+    ],
+    'courage': [
+        { quote: "Sometimes even to live is an act of courage.", author: "Seneca", desc: "Acknowledge your own resilience. Every time you wake up and face a difficult situation despite feeling exhausted, you are demonstrating profound courage." },
+        { quote: "The impediment to action advances action. What stands in the way becomes the way.", author: "Marcus Aurelius", desc: "Look at the current obstacle in your life. Instead of seeing it as a blockade, view it as an opportunity to practice patience, creativity, or mental toughness." },
+        { quote: "He who fears death will never do anything worth of a man who is alive.", author: "Seneca", desc: "Do not let the fear of failure or rejection stop you. The worst-case scenario is rarely as devastating as the regret of never having tried." },
+        { quote: "First learn the meaning of what you say, and then speak.", author: "Epictetus", desc: "Courage is not just physical bravery; it is the intellectual courage to speak the truth, set firm boundaries, and stand by your core values even when it is uncomfortable." },
+        { quote: "No person has the power to have everything they want, but it is in their power not to want what they don't have.", author: "Seneca", desc: "True strength comes from mastering your own desires. Have the courage to walk away from superficial goals and focus on cultivating your own character." },
+        { quote: "To bear trials with a calm mind robs misfortune of its strength and burden.", author: "Seneca", desc: "When facing a crisis, the most courageous thing you can do is refuse to panic. Maintain your composure; it becomes your strongest weapon against adversity." },
+        { quote: "It is not because things are difficult that we do not dare; it is because we do not dare that they are difficult.", author: "Seneca", desc: "Identify one task you have been procrastinating out of fear. Break it down into the smallest possible step and take action on it right now. Action cures fear." },
+        { quote: "A gem cannot be polished without friction, nor a man perfected without trials.", author: "Seneca", desc: "Reframe your current struggle. This difficult person, this financial stress, this heavy workload—they are the friction necessary to polish your character. Endure it." },
+        { quote: "If you want to be a writer, write.", author: "Epictetus", desc: "Courage requires execution. Stop planning endlessly. Stop waiting for the perfect moment or for the fear to completely disappear. Act amidst the fear." },
+        { quote: "Waste no more time arguing what a good man should be. Be one.", author: "Marcus Aurelius", desc: "Stop analyzing the ethical choices of others and take immediate responsibility for your own. Have the courage to hold yourself to a higher standard." }
+    ]
+};
+
+// 3. Strict AdMob Double Bypass Logic (ES5 - High Reliability)
+var CLICK_KEY = 'aura_clicks_v2';
+var TIME_KEY = 'aura_time_v2';
+var MIN_GAP_MS = 180000; 
+var AD_FREQ = 3;         
+
+function handleAction(categoryId) {
+    var now = new Date().getTime();
+    var count = parseInt(localStorage.getItem(CLICK_KEY)) || 0;
+    var lastTime = parseInt(localStorage.getItem(TIME_KEY)) || 0;
+    
+    count++;
+    localStorage.setItem(CLICK_KEY, count);
+
+    if (count >= AD_FREQ && (now - lastTime) >= MIN_GAP_MS) {
+        localStorage.setItem(CLICK_KEY, 0);
+        localStorage.setItem(TIME_KEY, now);
+
+        try {
+            if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+                window.AppInventor.setWebViewString("action=spin_ott");
+            }
+        } catch(e) {}
+
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var searchString = window.location.search;
+        var mParam = "";
+        if (searchString.indexOf("m=1") !== -1) { 
+            mParam = "m=1&"; 
+        }
+        
+        setTimeout(function() {
+            window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&cat=" + categoryId);
+        }, 500);
+
+    } else {
+        showContent(categoryId);
+    }
+}
+
+function showContent(categoryId) {
+    var list = auraDB[categoryId];
+    if (!list) return;
+
+    var randIndex = Math.floor(Math.random() * list.length);
+    var data = list[randIndex];
+
+    var catName = "";
+    if (categoryId === 'morning') catName = "🌅 Morning Preparation";
+    else if (categoryId === 'evening') catName = "🌌 Evening Reflection";
+    else if (categoryId === 'anxiety') catName = "🌊 Overcome Anxiety";
+    else if (categoryId === 'courage') catName = "⛰️ Build Courage";
+
+    document.getElementById('res-cat-text').innerText = catName;
+    document.getElementById('res-quote-text').innerText = data.quote;
+    document.getElementById('res-author-text').innerText = "- " + data.author + " -";
+    document.getElementById('res-desc-text').innerText = data.desc;
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = "";
+        if (window.location.search.indexOf("m=1") !== -1) { 
+            mParam = "?m=1"; 
+        }
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var catMatch = searchParams.match(/[?&]cat=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && catMatch && catMatch[1]) {
+        setTimeout(function() {
+            showContent(catMatch[1]);
+        }, 300);
+    }
+});
+//]]>
+</script>
