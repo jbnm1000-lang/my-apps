@@ -1,0 +1,420 @@
+<!--Google Blogger Only: Seoul Night Bites (Premium Hub & 80 MAX Data & Bug-Free)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #050608 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #e2e8f0; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #ambient-bg {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+        background: radial-gradient(circle at 50% 30%, rgba(250, 0, 80, 0.1) 0%, rgba(42, 193, 188, 0.05) 50%, rgba(5, 6, 8, 1) 100%);
+        animation: neonBreathe 6s ease-in-out infinite alternate;
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+    @keyframes neonBreathe { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-size: 32px; font-weight: 700; color: #fff; text-shadow: 0 0 10px rgba(250,0,80,0.8), 0 0 20px rgba(250,0,80,0.4); letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase;}
+    .sub-title { font-size: 11px; color: #2ac1bc; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 0 8px rgba(42,193,188,0.5);}
+
+    .guide-box { background: rgba(10, 12, 16, 0.85); border: 1px solid rgba(42, 193, 188, 0.4); border-radius: 16px; padding: 25px; margin-bottom: 35px; box-shadow: inset 0 0 20px rgba(42,193,188,0.05);}
+    .guide-title { font-size: 16px; font-weight: 700; color: #2ac1bc; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;}
+    .guide-text { font-size: 13.5px; color: #cbd5e1; line-height: 1.7; font-weight: 300; margin-bottom: 15px; word-break: keep-all; text-align: left;}
+    .guide-text strong { color: #fa0050; font-weight: 600;}
+    .guide-list { margin: 0; padding-left: 20px; font-size: 13px; color: #94a3b8; line-height: 1.7; font-weight: 300;}
+    .guide-list li { margin-bottom: 8px; text-align: left;}
+
+    .ambient-idle-box { background: rgba(10, 12, 16, 0.8); border: 1px solid rgba(250, 0, 80, 0.3); border-radius: 16px; padding: 30px 20px; margin-bottom: 35px; text-align: center; box-shadow: inset 0 0 20px rgba(250,0,80,0.05); min-height: 140px; display: flex; flex-direction: column; justify-content: center;}
+    .ambient-quote { font-size: 14.5px; color: #e2e8f0; line-height: 1.6; font-weight: 300; transition: opacity 1.5s ease; opacity: 1;}
+    .ambient-quote.fade-out { opacity: 0; }
+    .ambient-indicator { font-size: 10px; color: #ff9900; margin-top: 15px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;}
+
+    .menu-title { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; text-align: center;}
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 40px;}
+    
+    .menu-btn { background: rgba(15, 20, 28, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 22px 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s ease; text-align: center;}
+    .menu-btn:active { background: rgba(250, 0, 80, 0.15); border-color: #fa0050; transform: scale(0.97);}
+    .menu-icon { font-size: 28px;}
+    .menu-name { font-size: 13.5px; font-weight: 600; color: #f8fafc;}
+    
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 6, 8, 0.98); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden;}
+    .result-content { max-width: 540px; margin: 15px auto; background: #0a0c10; border-radius: 16px; padding: 30px 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.8);}
+    
+    .res-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;}
+    .res-tag { padding: 5px 10px; background: rgba(42, 193, 188, 0.1); color: #2ac1bc; font-size: 11px; font-weight: 600; border-radius: 6px; border: 1px solid rgba(42, 193, 188, 0.3); text-transform: uppercase;}
+    .res-tag.spicy { background: rgba(250, 0, 80, 0.1); color: #fa0050; border-color: rgba(250, 0, 80, 0.3);}
+    
+    .res-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 5px;}
+    .res-kr-title { font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #94a3b8; margin-bottom: 20px;}
+    
+    .info-strip { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;}
+    .info-row { font-size: 13px; color: #cbd5e1; display: flex; justify-content: space-between; align-items: flex-start;}
+    .info-label { font-weight: 600; color: #2ac1bc; min-width: 80px;}
+    .info-val { text-align: right; font-weight: 300;}
+
+    .res-desc { font-size: 14px; color: #cbd5e1; line-height: 1.7; font-weight: 300; margin-bottom: 25px; text-align: left; word-break: keep-all;}
+
+    .cheat-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 25px;}
+    .cheat-title { font-size: 12px; font-weight: 600; color: #ffc300; margin-bottom: 8px; text-transform: uppercase;}
+    .cheat-text { font-size: 13px; color: #94a3b8; line-height: 1.6; text-align: left;}
+
+    .sos-box { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 25px; text-align: center; border: 2px solid #fa0050;}
+    .sos-header { font-size: 12px; font-weight: 700; color: #fa0050; text-transform: uppercase; margin-bottom: 10px;}
+    .sos-korean { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; color: #000; line-height: 1.4; word-break: keep-all;}
+
+    .delivery-links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;}
+    .del-btn { padding: 14px; border-radius: 8px; text-align: center; font-size: 13.5px; font-weight: 700; text-decoration: none; transition: 0.2s;}
+    .del-shuttle { background: #ff9900; border: 1px solid #ff9900; color: #000;}
+    .del-shuttle:active { background: #e68a00; }
+    .del-yogiyo { background: #fa0050; border: 1px solid #fa0050; color: #fff;}
+    .del-yogiyo:active { background: #d00040; }
+    .del-baemin { background: #2ac1bc; border: 1px solid #2ac1bc; color: #000;}
+    .del-baemin:active { background: #23a09c; }
+    
+    .close-btn { width: 100%; padding: 18px; background: transparent; border: 1px solid #64748b; border-radius: 12px; color: #94a3b8; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; text-transform: uppercase;}
+</style>
+
+<div id="ambient-bg"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Night Bites</div>
+        <div class="sub-title">Ultimate Delivery Hub</div>
+    </div>
+
+    <div class="guide-box">
+        <div class="guide-title">👋 Welcome to Korean Delivery Culture!</div>
+        <div class="guide-text">
+            Korea truly never sleeps, and neither does our food. You can get a hot, fresh meal delivered to your hotel room, or even a park bench along the Han River, at 2 AM. However, navigating the local apps and knowing exactly <strong>what</strong> to order can be tricky for travelers.
+        </div>
+        <ul class="guide-list">
+            <li><b>The Apps:</b> Baemin and Yogiyo are the biggest apps, but usually require a Korean phone number and local credit card for verification.</li>
+            <li><b>The Solution:</b> Use our <b>SOS Card</b> inside to ask your hotel front desk to order for you with cash, OR use <b>Shuttle</b> which accepts foreign credit cards, PayPal, and Apple Pay.</li>
+            <li><b>Disclaimer:</b> Food prices and side dishes may vary slightly by restaurant. If you have severe allergies, always double-check using a translation app, as Korean kitchens often share equipment. This app is for informational purposes.</li>
+        </ul>
+    </div>
+
+    <!-- Ambient Idle Guide (Expanded to 30 items) -->
+    <div class="ambient-idle-box">
+        <div class="ambient-quote" id="ambient-quote-text">"Did you know? Korea has the fastest late-night delivery culture. You can order hot food to a park at 2 AM."</div>
+        <div class="ambient-indicator">💡 Survival Tips Auto-Playing</div>
+    </div>
+
+    <div class="menu-title">Select Your Cravings</div>
+    <!-- 10 Categories Grid -->
+    <div class="menu-grid">
+        <div class="menu-btn" onclick="handleAction('chicken')" ontouchstart="">
+            <div class="menu-icon">🍗</div>
+            <div class="menu-name">Chimaek (Chicken)</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('spicy')" ontouchstart="">
+            <div class="menu-icon">🌶️</div>
+            <div class="menu-name">Fire Challenge</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('noodles')" ontouchstart="">
+            <div class="menu-icon">🍜</div>
+            <div class="menu-name">Noodle Lovers</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('meat')" ontouchstart="">
+            <div class="menu-icon">🥬</div>
+            <div class="menu-name">K-BBQ & Meat</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('bunsik')" ontouchstart="">
+            <div class="menu-icon">🥟</div>
+            <div class="menu-name">Street Snacks</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('dessert')" ontouchstart="">
+            <div class="menu-icon">🍧</div>
+            <div class="menu-name">Midnight Sweets</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('gukbap')" ontouchstart="">
+            <div class="menu-icon">🍲</div>
+            <div class="menu-name">K-Soups (Gukbap)</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('raw')" ontouchstart="">
+            <div class="menu-icon">🍣</div>
+            <div class="menu-name">Raw & Seafood</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('diet')" ontouchstart="">
+            <div class="menu-icon">🥗</div>
+            <div class="menu-name">Guilt-Free (Diet)</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('cstore')" ontouchstart="">
+            <div class="menu-icon">🏪</div>
+            <div class="menu-name">C-Store Hacks</div>
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-tags" id="res-tags-container"></div>
+        
+        <div class="res-title" id="res-title">Food Name</div>
+        <div class="res-kr-title" id="res-kr-title">Korean Name</div>
+        
+        <div class="info-strip">
+            <div class="info-row">
+                <span class="info-label">Est. Price:</span>
+                <span class="info-val" id="res-price">KRW 00,000</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Includes:</span>
+                <span class="info-val" id="res-includes">Items</span>
+            </div>
+        </div>
+
+        <div class="res-desc" id="res-desc-text">Description goes here.</div>
+
+        <div class="cheat-box">
+            <div class="cheat-title">🔑 Local Cheat Code</div>
+            <div class="cheat-text" id="res-cheat-text">Cheat code info.</div>
+        </div>
+
+        <div class="sos-box">
+            <div class="sos-header">Hotel Front SOS Card</div>
+            <div class="sos-korean" id="res-sos-text">배달 부탁드립니다.</div>
+        </div>
+
+        <div class="delivery-links">
+            <a href="https://www.shuttledelivery.co.kr/en" target="_blank" class="del-btn del-shuttle">🛵 Shuttle (Foreign Cards OK)</a>
+            <a href="https://www.yogiyo.co.kr/" target="_blank" class="del-btn del-yogiyo">🛵 Yogiyo (요기요)</a>
+            <a href="https://www.baemin.com/" target="_blank" class="del-btn del-baemin">🛵 Baemin (배달의민족)</a>
+        </div>
+
+        <button class="close-btn" id="close-btn" onclick="closeModal()" ontouchstart="">Close Guide</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var ambientTips = [
+    "Most local delivery apps require a Korean phone number. Use the SOS card to ask your hotel concierge!",
+    "Chimaek is a combination of Chicken and Maekju (Beer). It's basically a religion in Korea.",
+    "If you see the word 'Buldak' (Fire Chicken), prepare your stomach. It is brutally spicy.",
+    "Jokbal (Braised Pig's Trotters) is rich in collagen and surprisingly non-greasy. A perfect midnight snack.",
+    "Use the 'Shuttle Delivery' app if you only have a foreign credit card and need English support.",
+    "When ordering chicken, ask for 'Ban-Ban' (Half Original, Half Sweet & Spicy).",
+    "Korean delivery riders are incredibly fast. Food usually arrives piping hot within 30-40 minutes.",
+    "Tteokbokki is the soul food of Koreans. It pairs perfectly with fried vegetable tempura.",
+    "Bossam (Boiled Pork Wrap) comes with fresh lettuce and kimchi. It's the healthiest late-night option.",
+    "Tipping delivery drivers is NOT customary in Korea. The delivery fee is already included in the app.",
+    "You can actually order delivery to specific zones in public parks, like the Han River Park!",
+    "Most fried chicken places send a small box of pickled radish (Mu). It perfectly cuts the grease.",
+    "Don't be surprised if your Chinese food delivery comes in real ceramic bowls. You must leave them outside your door later!",
+    "Pork Belly (Samgyeopsal) can be delivered fully grilled and ready to eat, complete with garlic and lettuce.",
+    "If you want boneless chicken, always look for the word 'Sunsal' (순살).",
+    "Many Korean soups (like Gamjatang) come with a bowl of rice included by default.",
+    "Spicy food is often paired with 'Coolpis', a sweet peach-flavored yogurt drink that puts out the fire.",
+    "In Korea, it is common to eat sweet shaved ice (Bingsu) even in the middle of winter.",
+    "A 'Service' (서비스) item means the restaurant gave you a free side dish, usually for leaving a good review.",
+    "Gopchang (Beef Intestines) is a beloved late-night drinking food, but it has a very chewy texture.",
+    "Most deliveries are left at your door (Contactless). The rider will just ring the bell and leave.",
+    "If ordering from a convenience store app, you can even get hangover pills delivered at 3 AM.",
+    "When eating Jjamppong (Spicy Noodle Soup), wear a dark shirt. The red broth splashes easily!",
+    "Kimbap and Tteokbokki are best friends. Dip the Kimbap into the thick red sauce.",
+    "Korean pizza often has incredibly unique toppings like sweet potato mousse, bulgogi, and corn.",
+    "If a dish says 'Mala' (마라), it contains Sichuan peppercorns that create a numbing, spicy sensation.",
+    "Fried chicken is often double-fried in Korea, which makes the crust stay crunchy even when covered in sauce.",
+    "Soju is the standard drink for Jokbal, while Beer is the absolute standard for Fried Chicken.",
+    "A 'Set Menu' (세트) usually offers better value and includes a main dish, side, and a drink.",
+    "Eating late-night ramen is a cultural cliché in Korea. It tastes 10 times better at 1 AM."
+];
+
+var ambientEl = document.getElementById('ambient-quote-text');
+var ambientIndex = 0;
+setInterval(function() {
+    ambientEl.classList.add('fade-out');
+    setTimeout(function() {
+        ambientIndex = (ambientIndex + 1) % ambientTips.length;
+        ambientEl.innerText = '"' + ambientTips[ambientIndex] + '"';
+        ambientEl.classList.remove('fade-out');
+    }, 1500);
+}, 10000); 
+
+// MAX DATA: 80 Items across 10 Categories
+var yasikDB = {
+    'chicken': [
+        { title: "Half & Half Chicken", kr: "반반 치킨 (Ban-ban Chicken)", tags: ["Poultry", "Nut Allergy Warning"], price: "KRW 19,000 ~ KRW 23,000", includes: "1 Whole Chicken + Pickled Radish (Mu) + Cola", desc: "The ultimate dilemma solver. You get half crispy fried chicken and half coated in sweet, sticky, and slightly spicy garlic sauce (Yangnyeom).", cheat: "Always order 'Sun-sal' (Boneless) if you hate messy hands. Say: 'Sunsal Ban-ban juseyo'.", sos: "안녕하세요, 순살 반반 치킨 한 마리 배달 주문 부탁드려도 될까요? 결제는 현금/카드로 직접 하겠습니다." },
+        { title: "Soy Garlic Chicken", kr: "간장 치킨 (Ganjang Chicken)", tags: ["Poultry", "Non-Spicy"], price: "KRW 19,000 ~ KRW 22,000", includes: "1 Whole Chicken + Pickled Radish (Mu)", desc: "Fried to a crackling crisp and brushed with a savory, sweet soy sauce and garlic glaze. It is incredibly addictive and not spicy at all.", cheat: "Pairs beautifully with draft beer. The crispy skin is the best part, so eat it while it's hot!", sos: "안녕하세요, 간장 치킨 한 마리 배달 주문 부탁드려도 될까요?" },
+        { title: "Snowing Cheese Chicken", kr: "스노윙 치즈 치킨 (Snowing Cheese)", tags: ["Poultry", "Dairy", "Sweet & Savory"], price: "KRW 20,000 ~ KRW 23,000", includes: "1 Whole Chicken + Pickled Radish (Mu)", desc: "Crispy chicken generously dusted with sweet and savory cheese powder. It tastes like high-end cheese puffs combined with juicy chicken.", cheat: "This can be very rich, so ordering a side of spicy tteokbokki balances the flavor perfectly.", sos: "안녕하세요, 치즈가루 뿌려진 스노윙 치킨 한 마리 배달 주문 부탁드립니다." },
+        { title: "Green Onion Chicken", kr: "파닭 (Padak)", tags: ["Poultry", "Fresh Veggies"], price: "KRW 20,000 ~ KRW 23,000", includes: "Boneless Chicken + Shredded Green Onions + Mustard Sauce", desc: "A mountain of thinly sliced fresh green onions piled on top of boneless fried chicken, served with a tangy mustard soy dressing.", cheat: "Pour the sauce right before eating to keep the chicken perfectly crispy.", sos: "안녕하세요, 파닭 (순살) 한 마리 배달 주문 부탁드려도 될까요?" },
+        { title: "Dakgangjeong", kr: "닭강정 (Sweet Crispy Chicken)", tags: ["Poultry", "Nut Allergy Warning"], price: "KRW 18,000 ~ KRW 22,000", includes: "Bite-sized Chicken + Rice Cakes + Peanuts", desc: "Bite-sized boneless chicken fried twice for extra crunch, then coated in a thick, sticky, sweet syrup. Often topped with crushed peanuts.", cheat: "Unlike regular chicken, this stays delicious even when it gets cold the next morning!", sos: "안녕하세요, 닭강정 배달 주문 부탁드립니다. (땅콩 알러지가 있다면: 땅콩가루는 꼭 빼주세요.)" },
+        { title: "Oven Roasted Chicken", kr: "구운 치킨 (Oven Chicken)", tags: ["Poultry", "Healthy-ish"], price: "KRW 18,000 ~ KRW 21,000", includes: "1 Roasted Chicken + Sweet Chili Dip", desc: "If you want to avoid heavy frying oil, oven-roasted chicken is juicy on the inside with a perfectly rendered, crispy skin.", cheat: "Brand 'Goobne' is the most famous for this style. Try it with their spicy 'Volcano' sauce.", sos: "안녕하세요, 기름기 뺀 오븐 구이 치킨 한 마리 배달 부탁드립니다." },
+        { title: "Garlic Flake Chicken", kr: "마늘 후레이크 치킨 (Garlic Chicken)", tags: ["Poultry", "Strong Flavor"], price: "KRW 20,000 ~ KRW 23,000", includes: "1 Whole Chicken + Crispy Garlic Chips", desc: "Smothered in a sweet minced garlic sauce and topped with crispy fried garlic flakes. A true garlic lover's dream.", cheat: "Do not eat this if you have an important meeting early the next morning!", sos: "안녕하세요, 마늘 치킨 한 마리 배달 주문 부탁드립니다." },
+        { title: "Spicy Charcoal Chicken", kr: "숯불 바베큐 치킨 (Charcoal BBQ)", tags: ["Poultry", "Spicy 🔥"], price: "KRW 20,000 ~ KRW 24,000", includes: "Charcoal Grilled Chicken + Rice Cakes", desc: "Chicken grilled over real charcoal, slathered in a deeply smoky, spicy barbecue sauce. A completely different vibe from fried chicken.", cheat: "It is standard to order a bowl of rice and mix it into the leftover smoky sauce (called 'Chi-bap').", sos: "안녕하세요, 숯불 바베큐 양념 치킨 배달 주문 부탁드립니다." }
+    ],
+    'spicy': [
+        { title: "Cheese Buldak", kr: "치즈 불닭 (Cheese Fire Chicken)", tags: ["Spicy 🔥🔥🔥", "Dairy"], price: "KRW 20,000 ~ KRW 24,000", includes: "Fire Chicken + Melted Cheese + Steamed Egg (Gyeran-jjim)", desc: "Heavily spiced, barbecued chicken covered in a blisteringly hot sauce, smothered in melted mozzarella to ease the pain.", cheat: "Do not attempt without a carton of 'Coolpis' (sweet peach juice) or milk to extinguish the fire.", sos: "안녕하세요, 치즈 불닭 세트 배달 주문 부탁드립니다. 쿨피스도 하나 추가해주세요." },
+        { title: "Spicy Chicken Feet", kr: "닭발 (Dakbal)", tags: ["Spicy 🔥🔥🔥", "Hardcore Local"], price: "KRW 17,000 ~ KRW 22,000", includes: "Chicken Feet + Rice Ball Kit + Bean Sprout Soup", desc: "Chewy, gelatinous chicken feet smothered in a shockingly spicy sauce and grilled over charcoal. A true local late-night staple.", cheat: "Order the 'Moo-ppyeo' (Boneless) version and mix the rice balls (Jumeok-bap) with your hands.", sos: "안녕하세요, 무뼈 닭발 세트(주먹밥 포함) 배달 주문 부탁드립니다." },
+        { title: "Spicy Stir-fried Octopus", kr: "낙지볶음 (Nakji-bokkeum)", tags: ["Spicy 🔥🔥🔥", "Seafood"], price: "KRW 25,000 ~ KRW 35,000", includes: "Spicy Octopus + White Rice + Bean Sprouts", desc: "Fresh chopped octopus violently stir-fried with garlic, cabbage, and a very spicy chili sauce. Extremely flavorful and chewy.", cheat: "Mix the leftover spicy sauce with a bowl of white rice, bean sprouts, and sesame oil.", sos: "안녕하세요, 낙지볶음 배달 주문 부탁드립니다. 덜 맵게 해주세요." },
+        { title: "Mala-tang", kr: "마라탕 (Mala Spicy Soup)", tags: ["Spicy 🔥🔥", "Numbing", "Customizable"], price: "KRW 15,000 ~ KRW 25,000", includes: "Spicy Broth + Beef/Lamb + Glass Noodles + Veggies", desc: "A Chinese-originated dish wildly popular in Korea. A customizable soup with a spicy, numbing broth made from Sichuan peppercorns.", cheat: "Level 1 is mild, Level 2 is standard spicy, Level 3 is extreme. Stick to Level 1 or 2!", sos: "안녕하세요, 마라탕 2단계 맵기로 소고기 추가해서 배달 부탁드립니다." },
+        { title: "Spicy Braised Short Ribs", kr: "매운 갈비찜 (Maeun Galbijjim)", tags: ["Spicy 🔥🔥", "Beef/Pork", "Premium"], price: "KRW 35,000 ~ KRW 45,000", includes: "Braised Ribs + Glass Noodles + Rice", desc: "Tender beef or pork ribs slow-cooked in a fiery, sweet, and savory red sauce with potatoes and carrots.", cheat: "The glass noodles soak up all the spicy sauce, making them the most delicious (and spiciest) part of the dish.", sos: "안녕하세요, 매운 갈비찜 소(小)자 덜 맵게 배달 부탁드립니다." },
+        { title: "Fire Jokbal", kr: "불족발 (Bul-Jokbal)", tags: ["Spicy 🔥🔥🔥", "Pork"], price: "KRW 32,000 ~ KRW 40,000", includes: "Spicy Pig Trotters + Lettuce + Cold Soup", desc: "The already delicious Jokbal (pig trotters) gets chopped up and wok-tossed in a blazing hot chili sauce with a deep smoky flavor.", cheat: "Order 'Ban-ban Jokbal' to get half regular (mild) and half spicy.", sos: "안녕하세요, 불족발 반반 세트 배달 주문 부탁드립니다." },
+        { title: "Spicy Webfoot Octopus", kr: "쭈꾸미 볶음 (Jjukkumi)", tags: ["Spicy 🔥🔥🔥", "Seafood"], price: "KRW 28,000 ~ KRW 35,000", includes: "Spicy Jjukkumi + Perilla Leaves + Fish Roe (Tobiko)", desc: "Similar to Nakji-bokkeum, but uses smaller, highly tender webfoot octopuses. Packed with intense umami and heat.", cheat: "Wrap the octopus in a perilla leaf and add a dab of mayonnaise to cut the heat.", sos: "안녕하세요, 쭈꾸미 볶음 2인분 배달 주문 부탁드립니다." },
+        { title: "Spicy Braised Monkfish", kr: "아구찜 (Agujjim)", tags: ["Spicy 🔥🔥", "Seafood"], price: "KRW 35,000 ~ KRW 45,000", includes: "Braised Monkfish + Huge Mound of Bean Sprouts", desc: "A spicy, starchy, and fiery seafood dish made with monkfish and an absolute mountain of crunchy bean sprouts.", cheat: "The texture of monkfish is very meaty and gelatinous. It goes incredibly well with cold Soju.", sos: "안녕하세요, 아구찜 소(小)자 덜 맵게 배달 부탁드립니다." }
+    ],
+    'noodles': [
+        { title: "Jjamppong", kr: "짬뽕 (Spicy Seafood Noodle)", tags: ["Spicy 🔥", "Seafood"], price: "KRW 9,000 ~ KRW 12,000", includes: "1 Noodle Bowl + Raw Onion & Sweet Yellow Radish", desc: "A fiery red noodle soup loaded with mussels, squid, pork, and vegetables. The absolute best hangover cure.", cheat: "Unlike traditional delivery that reclaims ceramic bowls, modern apps usually deliver in disposable plastic bowls now.", sos: "안녕하세요, 짬뽕 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Naengmyeon", kr: "냉면 (Cold Buckwheat Noodles)", tags: ["Beef Broth", "Refreshing"], price: "KRW 9,000 ~ KRW 12,000", includes: "Cold Noodles + Mustard/Vinegar Packets", desc: "Chewy buckwheat noodles served in a literal slush of icy, tangy beef broth. Perfect for hot summer nights.", cheat: "Add a splash of vinegar and spicy mustard (provided in small packets) to elevate the flavor.", sos: "안녕하세요, 시원한 물냉면 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Jajangmyeon", kr: "자장면 (Black Bean Noodles)", tags: ["Pork", "Non-Spicy", "Sweet & Savory"], price: "KRW 7,000 ~ KRW 9,000", includes: "1 Noodle Bowl + Sweet Yellow Radish", desc: "Thick noodles smothered in a rich, sweet, and savory roasted black bean sauce with diced pork and onions.", cheat: "Always order a side of 'Tangsuyuk' (Sweet & Sour Pork) to share. They are the perfect combo.", sos: "안녕하세요, 자장면 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Budae Jjigae", kr: "부대찌개 (Army Stew)", tags: ["Spicy 🔥", "Processed Meats"], price: "KRW 20,000 ~ KRW 28,000", includes: "Stew Pot + Spam/Sausage + Ramen Noodle Block", desc: "A fascinating fusion stew created after the Korean War, combining SPAM, hot dogs, baked beans, kimchi, and ramen noodles in a spicy broth.", cheat: "You must boil this on a portable stove while eating for the authentic experience.", sos: "안녕하세요, 조리된 부대찌개 소(小)자 배달 부탁드립니다." },
+        { title: "Udon", kr: "우동 (Udon Noodle Soup)", tags: ["Mild", "Seafood Broth"], price: "KRW 7,000 ~ KRW 10,000", includes: "Udon Bowl + Pickled Radish", desc: "A simple, comforting bowl of thick, chewy noodles in a hot, savory soy and kelp broth.", cheat: "This is the safest, non-spicy, most comforting late-night meal if your stomach is feeling sensitive.", sos: "안녕하세요, 따뜻한 우동 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Kalguksu", kr: "칼국수 (Knife-cut Noodles)", tags: ["Mild", "Clam Broth Option"], price: "KRW 9,000 ~ KRW 12,000", includes: "Noodle Bowl + Fresh Garlic Kimchi", desc: "Hand-cut wheat noodles in a deeply flavorful broth, often made from clams or chicken.", cheat: "The garlic kimchi served with Kalguksu is famously strong and spicy. Eat them together!", sos: "안녕하세요, 바지락 칼국수 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Bibim Guksu", kr: "비빔국수 (Spicy Cold Noodles)", tags: ["Spicy 🔥", "Refreshing"], price: "KRW 7,000 ~ KRW 9,000", includes: "Cold Noodles + Spicy Gochujang Sauce", desc: "Thin wheat noodles tossed in a sweet, sour, and spicy red chili paste sauce, often topped with cucumber and a boiled egg.", cheat: "Perfect to order as a side dish when you are eating grilled pork belly (Samgyeopsal).", sos: "안녕하세요, 비빔국수 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Jjolmyeon", kr: "쫄면 (Chewy Spicy Noodles)", tags: ["Spicy 🔥", "Very Chewy"], price: "KRW 7,000 ~ KRW 9,000", includes: "Chewy Noodles + Bean Sprouts + Spicy Sauce", desc: "Similar to Bibim Guksu, but the noodles are exceptionally thick and chewy. Loaded with crunchy fresh vegetables.", cheat: "If you have a weak jaw or hate chewing a lot, avoid this. Otherwise, the texture is amazing.", sos: "안녕하세요, 쫄면 한 그릇 배달 주문 부탁드립니다." }
+    ],
+    'meat': [
+        { title: "Bossam (Boiled Pork)", kr: "보쌈 (Bossam)", tags: ["Pork", "Healthy-ish"], price: "KRW 30,000 ~ KRW 40,000", includes: "Pork Slices + Fresh Lettuce + Spicy Radish Kimchi + Sauces", desc: "Tender, thinly sliced boiled pork belly served with fresh lettuce, garlic, and incredibly crisp spicy radish kimchi.", cheat: "Put a slice of meat, garlic, and kimchi inside a lettuce leaf, wrap it up, and eat it in one bite.", sos: "안녕하세요, 보쌈 소(小)자 배달 주문 부탁드립니다." },
+        { title: "Delivery Samgyeopsal", kr: "배달 삼겹살 (Grilled Pork Belly)", tags: ["Pork", "K-BBQ"], price: "KRW 20,000 ~ KRW 28,000", includes: "Grilled Pork + Rice + Kimchi Stew + Lettuce & Sauces", desc: "Koreans deliver fully grilled K-BBQ directly to your door in thermal boxes, complete with everything you get at a restaurant.", cheat: "Your clothes won't smell like BBQ smoke! A perfect way to enjoy K-BBQ safely in a hotel room.", sos: "안녕하세요, 삼겹살 구이 세트(2인분) 배달 주문 부탁드립니다." },
+        { title: "Jokbal (Pig's Trotters)", kr: "족발 (Jokbal)", tags: ["Pork", "Collagen"], price: "KRW 32,000 ~ KRW 42,000", includes: "Sliced Trotters + Lettuce + Chives + Sauces", desc: "Pig's trotters braised for hours in soy sauce, ginger, and spices until the skin becomes dark, sweet, and wonderfully gelatinous.", cheat: "The large bones are at the bottom of the container. Grab them and gnaw the remaining meat off!", sos: "안녕하세요, 족발 소(小)자 배달 주문 부탁드립니다." },
+        { title: "Gopchang (Beef Intestines)", kr: "소곱창 (Gopchang)", tags: ["Beef", "Acquired Taste"], price: "KRW 40,000 ~ KRW 50,000", includes: "Grilled Intestines + Chives + Dipping Sauce", desc: "Chewy, rich, and fatty grilled intestines. It is a highly beloved delicacy in Korea, usually washed down with a cold shot of Soju.", cheat: "It is very greasy and chewy. If you are adventurous, it is an amazing local experience.", sos: "안녕하세요, 소곱창 구이 2인분 배달 주문 부탁드립니다." },
+        { title: "Suyuk (Beef Slices)", kr: "수육 (Suyuk)", tags: ["Beef/Pork", "Mild & Clean"], price: "KRW 30,000 ~ KRW 40,000", includes: "Thinly Sliced Boiled Meat + Soy Mustard Sauce", desc: "Very lightly seasoned, boiled slices of premium beef or pork. Extremely clean tasting and easy on the stomach.", cheat: "Often enjoyed as a warm, comforting side dish while drinking traditional rice wine (Makgeolli).", sos: "안녕하세요, 소고기 수육 배달 주문 부탁드립니다." },
+        { title: "Makchang (Pork Rectum)", kr: "돼지 막창 (Makchang)", tags: ["Pork", "Super Chewy"], price: "KRW 25,000 ~ KRW 35,000", includes: "Grilled Makchang + Soybean Paste Sauce (Makjang)", desc: "Grilled pork rectum. It sounds intimidating, but it is incredibly savory, slightly crispy on the outside, and very chewy.", cheat: "The special dipping sauce 'Makjang' (made of soybean paste and chives) is what makes this dish legendary.", sos: "안녕하세요, 돼지 막창 구이 2인분 배달 주문 부탁드립니다." },
+        { title: "Daechang (Large Intestine)", kr: "대창 (Daechang)", tags: ["Beef", "Extremely Fatty"], price: "KRW 45,000 ~ KRW 55,000", includes: "Grilled Daechang + Grilled Onions", desc: "Beef large intestines turned inside out so the soft, rich fat is on the inside. It bursts with flavor when you bite it.", cheat: "It is the fattiest cut of meat you will probably ever eat. Delicious, but eat in moderation!", sos: "안녕하세요, 소대창 구이 2인분 배달 주문 부탁드립니다." },
+        { title: "Dwaeji Galbi (Marinated Ribs)", kr: "돼지갈비 (Pork Ribs)", tags: ["Pork", "Sweet Soy Marinade"], price: "KRW 25,000 ~ KRW 35,000", includes: "Grilled Marinated Pork + Rice + Garlic", desc: "Pork ribs marinated in a sweet and savory soy sauce mixture, then grilled over charcoal. A guaranteed crowd-pleaser.", cheat: "This is the safest bet for children or anyone who dislikes spicy or adventurous foods.", sos: "안녕하세요, 숯불 돼지갈비 구이 2인분 배달 주문 부탁드립니다." }
+    ],
+    'bunsik': [
+        { title: "Tteokbokki Set", kr: "떡튀순 세트 (Tteok-Twi-Sun)", tags: ["Spicy 🔥", "Pescatarian Options"], price: "KRW 14,000 ~ KRW 18,000", includes: "Tteokbokki + Fried Tempura + Sundae (Blood Sausage)", desc: "The holy trinity of Korean street food. Chewy rice cakes in a fiery red sauce, mixed crispy tempura, and steamed glass-noodle sausage.", cheat: "Dip the fried tempura and the sausage directly into the thick, spicy Tteokbokki sauce instead of soy sauce.", sos: "안녕하세요, 떡튀순(떡볶이, 튀김, 순대) 세트 배달 주문 부탁드립니다. 떡볶이는 덜 맵게 해주세요." },
+        { title: "Premium Gimbap", kr: "프리미엄 김밥 (Gimbap)", tags: ["Mild", "Healthy Options"], price: "KRW 4,500 ~ KRW 7,000", includes: "1 Roll (Pre-sliced)", desc: "Korean seaweed rice rolls packed tightly with spinach, pickled radish, carrots, egg, and fillings like bulgogi or tuna mayo.", cheat: "Unlike sushi, Gimbap uses sesame oil instead of vinegar. Do not dip it in soy sauce!", sos: "안녕하세요, 참치마요 김밥 한 줄, 불고기 김밥 한 줄 배달 부탁드립니다." },
+        { title: "Rabokki", kr: "라볶이 (Ramen Tteokbokki)", tags: ["Spicy 🔥", "Carb Overload"], price: "KRW 8,000 ~ KRW 12,000", includes: "Tteokbokki + Ramen Noodles + Boiled Egg", desc: "Tteokbokki cooked with instant ramen noodles mixed right into the spicy, sweet sauce.", cheat: "Eat the ramen noodles first before they soak up all the delicious sauce and get soggy!", sos: "안녕하세요, 라볶이 하나 배달 주문 부탁드립니다." },
+        { title: "Korean Corndog", kr: "명랑 핫도그 (Corn Dog)", tags: ["Sweet & Savory", "Dairy Option"], price: "KRW 2,500 ~ KRW 4,000", includes: "1 Skewer (Sugar Coated Option)", desc: "A street food legend. A hotdog or mozzarella block coated in batter, deep-fried, and rolled in sugar, topped with ketchup and mustard.", cheat: "Order the 'Half & Half' (Sausage and Mozzarella) and ALWAYS say yes to the sugar coating.", sos: "안녕하세요, 모짜렐라 치즈 핫도그 설탕 묻혀서 배달 부탁드립니다." },
+        { title: "Eomuk Tang", kr: "어묵탕 (Fish Cake Soup)", tags: ["Pescatarian", "Mild", "Warm Broth"], price: "KRW 6,000 ~ KRW 10,000", includes: "Fish Cake Skewers + Anchovy/Radish Broth", desc: "Folded fish cakes boiled on skewers in a deeply savory, slightly peppery anchovy and radish broth.", cheat: "This is the ultimate winter street food. Drink the broth straight from the cup.", sos: "안녕하세요, 따뜻한 어묵탕 배달 주문 부탁드립니다." },
+        { title: "Gilgeori Toast", kr: "길거리 토스트 (Street Toast)", tags: ["Sweet & Savory", "Quick Snack"], price: "KRW 4,000 ~ KRW 6,000", includes: "1 Grilled Sandwich", desc: "A Korean street-style sandwich featuring a butter-grilled omelet (with cabbage/carrots), cheese, ham, and a generous dusting of sugar and ketchup.", cheat: "The combination of sugar and ketchup sounds weird, but it is absolute perfection.", sos: "안녕하세요, 햄치즈 길거리 토스트 배달 주문 부탁드립니다." },
+        { title: "So-Tteok So-Tteok", kr: "소떡소떡 (Sausage & Rice Cake)", tags: ["Sweet & Spicy", "Snack"], price: "KRW 3,500 ~ KRW 5,000", includes: "1 Skewer (Alternating Sausage/Rice Cake)", desc: "A popular rest-stop snack made of alternating mini sausages and rice cakes on a skewer, fried and brushed with sweet chili sauce.", cheat: "You must bite both the sausage and the rice cake at the exact same time to get the true flavor.", sos: "안녕하세요, 소떡소떡 꼬치 두 개 배달 주문 부탁드립니다." },
+        { title: "Cupbap (Rice in a Cup)", kr: "컵밥 (Cupbap)", tags: ["Quick Meal", "Cheap Eats"], price: "KRW 4,000 ~ KRW 6,000", includes: "Rice + Toppings (Spam, Tuna, Egg) in a Bowl", desc: "A quick, cheap, and filling meal originally made for studying students. Rice topped with various savory ingredients and mayo.", cheat: "Mix everything together vigorously like Bibimbap before taking your first bite.", sos: "안녕하세요, 참치마요 컵밥 하나 배달 주문 부탁드립니다." }
+    ],
+    'dessert': [
+        { title: "Sulbing Bingsu", kr: "설빙 빙수 (Shaved Ice)", tags: ["Sweet", "Dairy / Nut Allergy"], price: "KRW 12,000 ~ KRW 15,000", includes: "Insulated Bingsu Bowl + Small Condensed Milk Pack", desc: "Milk-based shaved ice that literally melts in your mouth like snow. Topped with fresh fruits, matcha, or traditional sweet red beans and roasted soybean powder (Injeolmi).", cheat: "It comes in a silver insulated bag with a tiny ice pack. Pour the sweet condensed milk halfway through eating!", sos: "안녕하세요, 인절미 설빙(빙수) 배달 주문 부탁드립니다." },
+        { title: "Croffle", kr: "크로플 (Croffle)", tags: ["Sweet", "Pastry"], price: "KRW 5,000 ~ KRW 8,000", includes: "1 Pressed Croissant + Syrup/Cream", desc: "A croissant baked in a waffle iron, resulting in a buttery, flaky, and crispy dessert. A massive café trend in Korea.", cheat: "Order it topped with brown cheese and vanilla ice cream for a mind-blowing sugar rush.", sos: "안녕하세요, 아이스크림 크로플 배달 주문 부탁드립니다." },
+        { title: "Tanghulu", kr: "탕후루 (Tanghulu)", tags: ["Super Sweet", "Fruit"], price: "KRW 3,000 ~ KRW 5,000", includes: "1 Fruit Skewer (Hard Sugar Coated)", desc: "Fresh fruits (strawberries, grapes, mandarins) coated in a cracking, glass-like hard sugar shell.", cheat: "Be careful with your teeth! The sugar shell is very hard and sharp.", sos: "안녕하세요, 딸기 탕후루, 귤 탕후루 배달 주문 부탁드립니다." },
+        { title: "Delivery Ice Cream", kr: "배스킨라빈스 (Baskin Robbins)", tags: ["Sweet", "Dairy"], price: "KRW 10,000 ~ KRW 20,000", includes: "Insulated Tub (Pint/Quart) + Dry Ice", desc: "In Korea, you can get multi-flavor tubs of Baskin Robbins delivered in heavy insulation with dry ice. It arrives rock solid.", cheat: "Try 'Almond Bonbon' or 'My Mom is an Alien' (Puss in Boots)—they are Korea-exclusive bestsellers.", sos: "안녕하세요, 배스킨라빈스 파인트(3가지 맛) 배달 주문 부탁드립니다." },
+        { title: "Yakgwa", kr: "약과 (Honey Pastry)", tags: ["Traditional Sweet", "Sticky"], price: "KRW 5,000 ~ KRW 10,000", includes: "Pack of 5-10 Traditional Pastries", desc: "A traditional Korean sweet pastry made of wheat, honey, and ginger, deep-fried and soaked in syrup.", cheat: "Recently popularized by MZ generation. Eat it with a hot cup of Americano or vanilla ice cream.", sos: "안녕하세요, 수제 약과 세트 배달 주문 부탁드립니다." },
+        { title: "Delivery Coffee & Cake", kr: "배달 카페 (Café Delivery)", tags: ["Beverage", "Caffeine"], price: "KRW 10,000 ~ KRW 15,000", includes: "Iced Americano in Sealed Can + Slice of Cake", desc: "Korean cafés deliver perfectly un-spilled coffee by sealing the iced drinks inside aluminum cans. Yes, even at 1 AM.", cheat: "Koreans love 'Ah-Ah' (Iced Americano) regardless of freezing weather.", sos: "안녕하세요, 아이스 아메리카노 두 잔과 치즈케이크 한 조각 배달 부탁드립니다." },
+        { title: "Bubble Tea", kr: "공차 (Gong Cha)", tags: ["Sweet Beverage", "Tapioca"], price: "KRW 5,000 ~ KRW 7,000", includes: "1 Sealed Cup + Thick Straw", desc: "Milk tea loaded with chewy tapioca pearls. Very popular to order via delivery apps while studying or working late.", cheat: "You can customize sugar and ice levels on the app. 50% sugar is usually the sweet spot.", sos: "안녕하세요, 블랙 밀크티 펄 추가, 당도 50% 배달 주문 부탁드립니다." },
+        { title: "Fat Macarons", kr: "뚱카롱 (Ttung-caron)", tags: ["Sweet", "Trendy"], price: "KRW 3,000 ~ KRW 4,000 (per piece)", includes: "Overstuffed Macaron", desc: "Korean-style macarons that are aggressively overstuffed with thick, flavored buttercream, often towering an inch high.", cheat: "Flavors like 'Injeolmi' (roasted soybean) or 'Hwangjeezu' (cheddar cheese) offer a unique Korean twist.", sos: "안녕하세요, 인절미 뚱카롱, 황치즈 뚱카롱 배달 주문 부탁드립니다." }
+    ],
+    'gukbap': [
+        { title: "Sundae Gukbap", kr: "순대국밥 (Blood Sausage Soup)", tags: ["Pork Broth", "Comfort Food"], price: "KRW 9,000 ~ KRW 12,000", includes: "Boiling Stew + Rice + Kkakdugi (Radish Kimchi)", desc: "A milky pork bone broth filled with slices of pork and Korean blood sausage (Sundae). A working-class hero dish.", cheat: "Add a spoonful of 'Dadaegi' (spicy red paste) and salted shrimp (Saeujeot) to season the broth to your liking.", sos: "안녕하세요, 순대국밥 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Dwaeji Gukbap", kr: "돼지국밥 (Pork Soup)", tags: ["Pork Broth", "Busan Style"], price: "KRW 9,000 ~ KRW 11,000", includes: "Pork Stew + Rice + Chives", desc: "Famous in Busan, this is a deeply savory, cloudy pork soup loaded with tender slices of pork meat.", cheat: "Dump the entire small dish of fresh seasoned chives (Buchu) directly into the hot soup before eating.", sos: "안녕하세요, 돼지국밥 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Kongnamul Gukbap", kr: "콩나물국밥 (Bean Sprout Soup)", tags: ["Mild / Spicy Options", "Vegan Possible"], price: "KRW 7,000 ~ KRW 9,000", includes: "Bean Sprout Soup + Rice + Raw Egg", desc: "A shockingly refreshing and light soup made entirely of crunchy bean sprouts in an anchovy or kelp broth. The #1 morning hangover cure.", cheat: "Crack the raw egg directly into the boiling soup as soon as you open the lid.", sos: "안녕하세요, 콩나물국밥 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Seolleongtang", kr: "설렁탕 (Ox Bone Soup)", tags: ["Beef Broth", "Non-Spicy", "Clean"], price: "KRW 10,000 ~ KRW 14,000", includes: "Milky Beef Soup + Sliced Beef + Rice + Kimchi", desc: "An intensely milky-white broth made by boiling ox bones for an entire day. It comes unseasoned.", cheat: "You MUST add salt and a handful of chopped green onions to the broth. Eat it with the provided ripe radish kimchi.", sos: "안녕하세요, 설렁탕 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Haejangguk", kr: "뼈해장국 (Hangover Bone Stew)", tags: ["Spicy 🔥", "Pork"], price: "KRW 9,000 ~ KRW 12,000", includes: "Spicy Stew with Pork Spine + Rice", desc: "Basically a single-serving version of Gamjatang. A spicy, hearty stew with a massive chunk of pork spine.", cheat: "Use chopsticks to pick the tender meat out of the complex spine bones. It requires patience but is highly rewarding.", sos: "안녕하세요, 뼈해장국 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Galbitang", kr: "갈비탕 (Beef Short Rib Soup)", tags: ["Beef Broth", "Premium"], price: "KRW 15,000 ~ KRW 20,000", includes: "Clear Beef Broth + Short Ribs + Glass Noodles + Rice", desc: "A clear, rich, and slightly sweet beef broth containing large, tender beef short ribs. A premium and nourishing soup.", cheat: "Use scissors to cut the meat off the bone before you start eating the rice.", sos: "안녕하세요, 갈비탕 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Yukgaejang", kr: "육개장 (Spicy Beef Soup)", tags: ["Spicy 🔥", "Beef"], price: "KRW 10,000 ~ KRW 13,000", includes: "Spicy Red Beef Soup + Shredded Beef + Fernbrake + Rice", desc: "A fiery red, hearty soup made with shredded beef, scallions, and gosari (fernbrake). Deeply flavorful and spicy.", cheat: "If you have a cold or sinus congestion, this spicy soup will clear you right up.", sos: "안녕하세요, 육개장 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Samgyetang", kr: "삼계탕 (Ginseng Chicken Soup)", tags: ["Poultry", "Healthy / Restorative"], price: "KRW 16,000 ~ KRW 22,000", includes: "Whole Small Chicken + Stuffed Rice + Ginseng Broth", desc: "A whole young chicken stuffed with sticky rice, ginseng, jujubes, and garlic, boiled until incredibly tender.", cheat: "Koreans traditionally eat this boiling hot soup on the hottest days of summer to restore their energy.", sos: "안녕하세요, 삼계탕 한 그릇 배달 주문 부탁드립니다." }
+    ],
+    'raw': [
+        { title: "Gwang-eo Sashimi", kr: "광어회 (Flatfish/Halibut)", tags: ["Raw Seafood", "Clean & Chewy"], price: "KRW 30,000 ~ KRW 45,000", includes: "Sliced Raw Fish + Lettuce + Garlic + Chogochujang", desc: "The most universally beloved sashimi in Korea. The white flesh is incredibly clean, mild, and has a satisfying chewy texture.", cheat: "Instead of soy sauce, dip it in 'Chogochujang' (sweet and sour chili paste) or wrap it in lettuce with garlic and ssamjang.", sos: "안녕하세요, 광어회 소(小)자 배달 주문 부탁드립니다." },
+        { title: "Yeon-eo Sashimi", kr: "연어회 (Salmon)", tags: ["Raw Seafood", "Fatty & Soft"], price: "KRW 30,000 ~ KRW 45,000", includes: "Thick Sliced Salmon + Onion + Tartar Sauce", desc: "Thick, buttery, and rich slices of fresh raw salmon. Korean delivery salmon is famous for its high quality and generous portions.", cheat: "Eat it with the provided thinly sliced raw onions and white creamy sauce to cut through the fat.", sos: "안녕하세요, 연어회 소(小)자 배달 주문 부탁드립니다." },
+        { title: "Mulhoe", kr: "물회 (Spicy Cold Raw Fish Soup)", tags: ["Raw Seafood", "Spicy 🔥", "Cold"], price: "KRW 18,000 ~ KRW 25,000", includes: "Raw Fish + Icy Spicy Broth + Veggies + Noodles", desc: "A bowl of fresh raw fish and crunchy vegetables swimming in an icy, sweet, sour, and spicy red broth.", cheat: "After eating some of the fish, mix the provided cold noodles or rice directly into the icy broth.", sos: "안녕하세요, 시원한 물회 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Ganjang Gejang", kr: "간장게장 (Raw Soy Marinated Crab)", tags: ["Raw Seafood", "Salty & Rich"], price: "KRW 35,000 ~ KRW 50,000", includes: "Marinated Raw Crab + Rice + Side Dishes", desc: "Fresh raw crab marinated for days in a rich soy sauce brine. The meat is sweet, jelly-like, and melts in your mouth.", cheat: "Known as the 'Rice Thief'. Put a scoop of white rice into the empty crab shell and mix it with the tomalley (crab innards).", sos: "안녕하세요, 간장게장 1인분 배달 주문 부탁드립니다." },
+        { title: "Sannakji", kr: "산낙지 (Live Octopus)", tags: ["Raw Seafood", "Extreme Local"], price: "KRW 20,000 ~ KRW 30,000", includes: "Chopped Live Octopus + Sesame Oil Dip", desc: "Fresh octopus chopped immediately before delivery. The tentacles will still be wriggling on the plate when it arrives.", cheat: "Chew very thoroughly! Dip it in the salted sesame oil to prevent the suction cups from sticking inside your mouth.", sos: "안녕하세요, 산낙지 한 접시 배달 주문 부탁드립니다." },
+        { title: "Yukhoe Bibimbap", kr: "육회 비빔밥 (Raw Beef Rice Bowl)", tags: ["Raw Beef", "Healthy-ish"], price: "KRW 12,000 ~ KRW 15,000", includes: "Rice Bowl with Veggies and Raw Beef + Gochujang", desc: "A variation of the famous Bibimbap, but topped with a generous mound of fresh, marinated raw beef (Yukhoe).", cheat: "Add the red chili paste and mix everything aggressively until the rice turns slightly pink.", sos: "안녕하세요, 육회 비빔밥 한 그릇 배달 주문 부탁드립니다." },
+        { title: "Tuna Sashimi", kr: "참치회 (Chamchi Hoe)", tags: ["Raw Seafood", "Premium"], price: "KRW 40,000 ~ KRW 60,000", includes: "Various Cuts of Raw Tuna + Seaweed Packs + Oil Dip", desc: "Premium frozen-and-thawed raw tuna slices, ranging from lean red meat to highly marbled, fatty belly cuts.", cheat: "Do not use lettuce. Place a piece of tuna on a small sheet of roasted seaweed, add a dab of wasabi, and dip in sesame oil.", sos: "안녕하세요, 참치회 2인 세트 배달 주문 부탁드립니다." },
+        { title: "Ojing-eo Hoe", kr: "오징어회 (Raw Squid)", tags: ["Raw Seafood", "Chewy"], price: "KRW 25,000 ~ KRW 35,000", includes: "Julienned Raw Squid + Veggies", desc: "Fresh raw squid cut into incredibly thin, noodle-like strips. It has a slightly sweet flavor and a dense, chewy texture.", cheat: "Grab a large pinch of the squid strands like noodles and dip heavily into the red Chogochujang.", sos: "안녕하세요, 오징어회 한 접시 배달 주문 부탁드립니다." }
+    ],
+    'diet': [
+        { title: "Poke Bowl", kr: "포케 (Poke)", tags: ["Healthy", "Raw Seafood/Chicken"], price: "KRW 10,000 ~ KRW 15,000", includes: "Brown Rice + Greens + Protein + Dressing", desc: "Hawaiian-style poke bowls are incredibly popular for diet-conscious Koreans. Usually features salmon, tuna, or grilled chicken breast.", cheat: "Swap the white rice for brown rice (Hyeonmi-bap) or buckwheat noodles (Memil-myeon) for a lower glycemic index.", sos: "안녕하세요, 연어 포케 (현미밥) 배달 주문 부탁드립니다." },
+        { title: "Diet Kimbap (Keto)", kr: "키토 김밥 (Keto Gimbap)", tags: ["Low Carb", "High Protein"], price: "KRW 6,000 ~ KRW 8,000", includes: "1 Roll (No Rice, Egg Shreds Instead)", desc: "A brilliant diet invention. The rice in the seaweed roll is completely replaced with hundreds of thin shreds of fried egg.", cheat: "It is much lighter than regular Gimbap, so you might need to order two rolls if you are very hungry!", sos: "안녕하세요, 밥 없는 키토(계란) 김밥 한 줄 배달 주문 부탁드립니다." },
+        { title: "Chicken Breast Salad", kr: "닭가슴살 샐러드 (Chicken Salad)", tags: ["Low Calorie", "Protein"], price: "KRW 8,000 ~ KRW 12,000", includes: "Mixed Greens + Sous-vide Chicken Breast", desc: "A staple for Korean gym-goers. Korean delivery salads are massive and use highly tender, sous-vide cooked chicken breast.", cheat: "Ask for the dressing 'on the side' (Ttaro juseyo) to control your calorie intake.", sos: "안녕하세요, 수비드 닭가슴살 샐러드 (드레싱은 따로) 배달 부탁드립니다." },
+        { title: "Acorn Jelly Salad", kr: "도토리묵 무침 (Dotorimuk)", tags: ["Vegan Possible", "Traditional Low Cal"], price: "KRW 15,000 ~ KRW 20,000", includes: "Acorn Jelly Cubes + Veggies + Soy Chili Dressing", desc: "A traditional Korean side dish made of jelly extracted from acorns. Tossed with fresh vegetables in a light soy and chili dressing.", cheat: "The jelly itself has almost no calories and a slightly bitter, earthy taste that pairs perfectly with the savory dressing.", sos: "안녕하세요, 도토리묵 무침 배달 주문 부탁드립니다." },
+        { title: "Konjac Noodles", kr: "곤약면 (Gonyak Myeon)", tags: ["Zero Carb", "Spicy Option"], price: "KRW 7,000 ~ KRW 10,000", includes: "Konjac Noodles + Broth or Spicy Sauce", desc: "Noodles made from the Konjac plant, containing near-zero calories and carbs. Often served in a cold broth or spicy sauce.", cheat: "The texture is extremely rubbery and bouncy. Make sure to chew thoroughly to aid digestion.", sos: "안녕하세요, 곤약 비빔면 배달 주문 부탁드립니다." },
+        { title: "Steamed Sweet Potato & Milk", kr: "고구마와 우유 (Goguma)", tags: ["Complex Carbs", "Vegetarian"], price: "KRW 5,000 ~ KRW 8,000", includes: "Roasted/Steamed Sweet Potatoes + Milk", desc: "Koreans love eating naturally sweet, roasted sweet potatoes (Gun-goguma) with a glass of cold milk as a healthy winter snack.", cheat: "If you see 'Hobak Goguma' (Pumpkin Sweet Potato), order it. It is incredibly sweet and soft.", sos: "안녕하세요, 군고구마 배달 주문 부탁드립니다." },
+        { title: "Tofu Salad", kr: "두부 샐러드 (Dubu Salad)", tags: ["Vegan", "Protein"], price: "KRW 8,000 ~ KRW 11,000", includes: "Fresh/Fried Tofu + Greens + Oriental Dressing", desc: "A light, plant-based meal featuring soft or lightly pan-fried tofu on a bed of fresh greens with a sesame soy dressing.", cheat: "A great option if you want to give your stomach a rest from heavy, spicy Korean food.", sos: "안녕하세요, 두부 샐러드 배달 주문 부탁드립니다." },
+        { title: "Diet Dosirak", kr: "다이어트 도시락 (Diet Bento)", tags: ["Balanced Meal", "Portion Control"], price: "KRW 8,000 ~ KRW 12,000", includes: "Brown Rice + Chicken/Beef + Steamed Veggies", desc: "Pre-portioned bento boxes specifically designed for calorie control, usually hovering around 300-400 calories total.", cheat: "These are often sold in convenience stores or through specialized health-food delivery restaurants.", sos: "안녕하세요, 다이어트 도시락 하나 배달 주문 부탁드립니다." }
+    ],
+    'cstore': [
+        { title: "Mark Meal (마크정식)", kr: "마크정식 (Mark Meal)", tags: ["C-Store Hack", "Spicy & Cheesy"], price: "KRW 6,000 ~ KRW 8,000", includes: "Spaghetti Ramen + Tteokbokki + Sausage + Cheese", desc: "A legendary convenience store recipe created by fans of K-Pop star Mark (GOT7). Mix instant spaghetti ramen, instant tteokbokki, a sausage, and string cheese in the microwave.", cheat: "Buy all ingredients at CU or GS25. Mix the cooked ramen into the cooked tteokbokki, top with sliced sausage and cheese, microwave for 1 min.", sos: "(편의점 직원에게) 스파게티 컵라면, 자이언트 떡볶이, 의성마늘 후랑크 소시지, 스트링 치즈 찾아주세요." },
+        { title: "Fire Noodle & Cheese", kr: "불닭볶음면 + 치즈 (Buldak + Cheese)", tags: ["C-Store Hack", "Spicy 🔥🔥🔥"], price: "KRW 3,000 ~ KRW 4,000", includes: "Buldak Ramen Cup + String Cheese", desc: "The famous spicy ramen challenge made tolerable. The string cheese melts into the spicy noodles, creating a creamy, fiery masterpiece.", cheat: "Tear the string cheese into thin strips and place them on top of the hot noodles. Microwave for 30 seconds to melt.", sos: "(편의점 직원에게) 컵 불닭볶음면이랑 스트링 치즈 하나 찾아주세요." },
+        { title: "Banana Milk Espresso", kr: "바나나우유 라떼 (Banana Milk Latte)", tags: ["C-Store Hack", "Sweet Caffeine"], price: "KRW 3,500", includes: "Binggrae Banana Milk + Ice Cup + Espresso Pouch", desc: "Pour Korea's iconic yellow Binggrae Banana Milk over ice, then top it with a black coffee/espresso pouch sold in the store.", cheat: "The bitterness of the cheap espresso perfectly balances the heavy sweetness of the banana milk.", sos: "(편의점 직원에게) 빙그레 바나나우유랑 얼음컵, 블랙 커피 파우치 찾아주세요." },
+        { title: "Triangle Gimbap + Ramen", kr: "삼각김밥 + 컵라면 (Samgak Gimbap + Ramen)", tags: ["C-Store Hack", "Classic Combo"], price: "KRW 3,000 ~ KRW 4,500", includes: "Any Cup Ramen + Triangle Rice Ball", desc: "The undisputed king of cheap, quick convenience store meals. Eat the ramen, then dump the triangle rice ball into the leftover broth.", cheat: 'Jeonju Bibim (전주비빔) or Tuna Mayo (참치마요) are the safest, most delicious triangle gimbap flavors.', sos: "(편의점 직원에게) 참치마요 삼각김밥이랑 육개장 사발면 찾아주세요." },
+        { title: "Hangover Cure Drink", kr: "숙취해소제 (Hangover Drink)", tags: ["C-Store Hack", "Survival"], price: "KRW 5,000 ~ KRW 10,000", includes: "1 Small Bottle (Condition or Dawn 808)", desc: "If you drank too much Soju, head to a convenience store immediately. These herbal drinks magically prevent hangovers.", cheat: "Drink one bottle BEFORE you start drinking alcohol, and another bottle right before you go to sleep.", sos: "(편의점 직원에게) 숙취해소제 (컨디션이나 여명808) 어디 있나요?" },
+        { title: "Ice Cup Ade", kr: "얼음컵 에이드 (Ice Cup Drinks)", tags: ["C-Store Hack", "Refreshing"], price: "KRW 1,500 ~ KRW 2,500", includes: "Plastic Ice Cup + Flavor Pouch", desc: "Convenience stores have freezers full of cups with ice. You buy a separate liquid pouch (Blue Lemonade, Peach Ice Tea) to pour over it.", cheat: "If you buy a bottle of Soju, you can mix it into the Blue Lemonade for a cheap, dangerous, and delicious cocktail.", sos: "(편의점 직원에게) 얼음컵이랑 블루 레몬에이드 파우치 찾아주세요." },
+        { title: "Maxbon & Beer", kr: "맥스봉 + 캔맥주 (Maxbon Sausage)", tags: ["C-Store Hack", "Late Night Snack"], price: "KRW 5,000", includes: "Fish/Pork Sausage Snack + Korean Beer", desc: "A shelf-stable snack sausage with little bits of cheese inside. A classic, cheap pairing for a can of Cass or Terra beer.", cheat: "Peel the red tape at the top of the sausage to open the plastic wrapping easily.", sos: "(편의점 직원에게) 맥스봉 소시지랑 테라 캔맥주 찾아주세요." },
+        { title: "Microwave Mandu", kr: "전자레인지 만두 (Microwave Dumplings)", tags: ["C-Store Hack", "Quick & Hot"], price: "KRW 3,500 ~ KRW 5,000", includes: "Frozen Dumpling Pack", desc: "High-quality frozen dumplings that cook perfectly in the convenience store microwave in just 3 minutes.", cheat: "Look for the 'Bibigo' (비비고) brand in the freezer section. Do not forget to slightly tear the packaging before microwaving!", sos: "(편의점 직원에게) 냉동 비비고 만두(전자레인지용) 찾아주세요." }
+    ]
+};
+
+function handleAction(categoryId) {
+    var now = new Date().getTime();
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
+        }
+    } catch(e) {}
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    
+    setTimeout(function() {
+        window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&cat=" + categoryId);
+    }, 500);
+}
+
+function showContent(categoryId) {
+    var list = yasikDB[categoryId];
+    if (!list) return;
+
+    var randIndex = Math.floor(Math.random() * list.length);
+    var data = list[randIndex];
+
+    document.getElementById('res-title').innerHTML = data.title;
+    document.getElementById('res-kr-title').innerHTML = data.kr;
+    document.getElementById('res-price').innerHTML = data.price;
+    document.getElementById('res-includes').innerHTML = data.includes;
+    document.getElementById('res-desc-text').innerHTML = data.desc;
+    document.getElementById('res-cheat-text').innerHTML = data.cheat;
+    document.getElementById('res-sos-text').innerHTML = data.sos;
+
+    var tagsHtml = "";
+    for(var i=0; i<data.tags.length; i++) {
+        var isSpicy = data.tags[i].indexOf("Spicy") !== -1 ? " spicy" : "";
+        tagsHtml += "<span class='res-tag" + isSpicy + "'>" + data.tags[i] + "</span>";
+    }
+    document.getElementById('res-tags-container').innerHTML = tagsHtml;
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var catMatch = searchParams.match(/[?&]cat=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && catMatch && catMatch[1]) {
+        setTimeout(function() { showContent(catMatch[1]); }, 300);
+    }
+});
+//]]>
+</script>
