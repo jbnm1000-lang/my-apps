@@ -1,0 +1,445 @@
+<!--Google Blogger Only: K-Cafe Order Master (Premium Hub & MAX 80 Data & 50 Tips & Strict ES5)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #F9F6F0 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #3E2723; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #ambient-bg {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+        background: radial-gradient(circle at 50% 30%, rgba(215, 204, 200, 0.4) 0%, rgba(249, 246, 240, 1) 70%);
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+        -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-size: 30px; font-weight: 700; color: #3E2723; letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;}
+    .sub-title { font-size: 11px; color: #8D6E63; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;}
+
+    .guide-box { background: #FFFFFF; border: 1px solid rgba(141, 110, 99, 0.2); border-radius: 16px; padding: 25px; margin-bottom: 35px; box-shadow: 0 10px 30px rgba(62, 39, 35, 0.05);}
+    .guide-title { font-size: 16px; font-weight: 700; color: #5D4037; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;}
+    .guide-text { font-size: 13.5px; color: #6D4C41; line-height: 1.7; font-weight: 400; margin-bottom: 15px; word-break: keep-all; text-align: left;}
+    .guide-text strong { color: #D84315; font-weight: 600;}
+    .guide-list { margin: 0; padding-left: 20px; font-size: 13px; color: #8D6E63; line-height: 1.7; font-weight: 400;}
+    .guide-list li { margin-bottom: 8px; text-align: left;}
+
+    .ambient-idle-box { background: #EFEBE9; border: 1px solid rgba(141, 110, 99, 0.2); border-radius: 16px; padding: 30px 20px; margin-bottom: 35px; text-align: center; box-shadow: inset 0 0 15px rgba(255,255,255,0.5); min-height: 140px; display: flex; flex-direction: column; justify-content: center;}
+    .ambient-quote { font-size: 14.5px; color: #4E342E; line-height: 1.6; font-weight: 400; transition: opacity 1.0s ease; opacity: 1;}
+    .ambient-quote.fade-out { opacity: 0; }
+    .ambient-indicator { font-size: 10px; color: #D84315; margin-top: 15px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;}
+
+    .menu-title { font-size: 13px; font-weight: 700; color: #8D6E63; margin-bottom: 15px; letter-spacing: 1.5px; text-transform: uppercase; text-align: center;}
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 40px;}
+    
+    .menu-btn { background: #FFFFFF; border: 1px solid rgba(141, 110, 99, 0.15); border-radius: 16px; padding: 22px 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s ease; text-align: center; box-shadow: 0 4px 15px rgba(62, 39, 35, 0.03);}
+    .menu-btn:active { background: #F5F5F5; border-color: #A1887F; transform: scale(0.97);}
+    .menu-icon { font-size: 28px;}
+    .menu-name { font-size: 13.5px; font-weight: 700; color: #4E342E;}
+    
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 20, 15, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);}
+    .result-content { max-width: 540px; margin: 15px auto; background: #FFFFFF; border-radius: 20px; padding: 30px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
+    
+    .res-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;}
+    .res-tag { padding: 5px 10px; background: #EFEBE9; color: #5D4037; font-size: 11px; font-weight: 700; border-radius: 6px; text-transform: uppercase;}
+    .res-tag.highlight { background: rgba(216, 67, 21, 0.1); color: #D84315;}
+    
+    .res-title { font-size: 24px; font-weight: 700; color: #3E2723; margin-bottom: 5px;}
+    .res-kr-title { font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #8D6E63; margin-bottom: 20px;}
+    
+    .info-strip { background: #FAFAFA; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #EEEEEE;}
+    .info-row { font-size: 13.5px; color: #5D4037; display: flex; justify-content: space-between; align-items: flex-start;}
+    .info-label { font-weight: 700; color: #8D6E63; min-width: 90px;}
+    .info-val { text-align: right; font-weight: 400;}
+
+    .res-desc { font-size: 14.5px; color: #4E342E; line-height: 1.7; font-weight: 400; margin-bottom: 25px; text-align: left; word-break: keep-all;}
+
+    .cheat-box { background: #FFF3E0; border-radius: 12px; padding: 18px; margin-bottom: 25px; border: 1px dashed #FFB74D;}
+    .cheat-title { font-size: 12px; font-weight: 700; color: #E65100; margin-bottom: 8px; text-transform: uppercase;}
+    .cheat-text { font-size: 13.5px; color: #E65100; line-height: 1.6; text-align: left; font-weight: 600;}
+
+    .sos-box { background: #FFFFFF; border-radius: 12px; padding: 22px; margin-bottom: 25px; text-align: center; border: 2px solid #3E2723; box-shadow: 0 4px 15px rgba(0,0,0,0.05);}
+    .sos-header { font-size: 12px; font-weight: 700; color: #8D6E63; text-transform: uppercase; margin-bottom: 12px;}
+    .sos-korean { font-family: 'Noto Sans KR', sans-serif; font-size: 19px; font-weight: 700; color: #212121; line-height: 1.5; word-break: keep-all;}
+
+    .delivery-links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;}
+    .del-btn { padding: 15px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 700; text-decoration: none; transition: 0.2s;}
+    .del-naver { background: #03C75A; border: 1px solid #03C75A; color: #FFFFFF;}
+    .del-naver:active { background: #02a349; }
+    .del-kakao { background: #FEE500; border: 1px solid #FEE500; color: #191919;}
+    .del-kakao:active { background: #e0ca00; }
+    
+    .close-btn { width: 100%; padding: 18px; background: transparent; border: 1px solid #8D6E63; border-radius: 12px; color: #5D4037; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase;}
+    .close-btn:active { background: #EFEBE9;}
+</style>
+
+<div id="ambient-bg"></div>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Cafe Order Master</div>
+        <div class="sub-title">Premium Custom Guide</div>
+    </div>
+
+    <div class="guide-box">
+        <div class="guide-title">☕ Survive the Korean Cafe Scene</div>
+        <div class="guide-text">
+            Korea has arguably the best and most intense cafe culture in the world. However, menus rarely explain the highly specific custom options locals use daily.
+        </div>
+        <ul class="guide-list">
+            <li><b>Customization:</b> Koreans love modifying drinks (less ice, extra shots, oat milk). Use our <strong>SOS Card</strong> to get exactly what you want.</li>
+            <li><b>For Here or To Go:</b> By law, cafes cannot give you disposable plastic cups if you stay inside. You must specify your choice.</li>
+            <li><b>Find a Cafe:</b> Use the Map links inside to find the most aesthetic cafes near you!</li>
+        </ul>
+    </div>
+
+    <!--Ambient Idle Guide (50 MAX Tips)-->
+    <div class="ambient-idle-box">
+        <div class="ambient-quote" id="ambient-quote-text">"Loading local cafe secrets..."</div>
+        <div class="ambient-indicator">💡 Culture Tips Auto-Playing</div>
+    </div>
+
+    <div class="menu-title">Select Your Drink / Dessert</div>
+    <!--10 Categories Grid-->
+    <div class="menu-grid">
+        <div class="menu-btn" onclick="handleAction('americano')" ontouchstart="">
+            <div class="menu-icon">☕</div>
+            <div class="menu-name">Americano Hacks</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('latte')" ontouchstart="">
+            <div class="menu-icon">🥛</div>
+            <div class="menu-name">Latte &amp; Milk Custom</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('tea')" ontouchstart="">
+            <div class="menu-icon">🫖</div>
+            <div class="menu-name">Tea &amp; Blended</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('traditional')" ontouchstart="">
+            <div class="menu-icon">🍵</div>
+            <div class="menu-name">K-Traditional Drinks</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('ade')" ontouchstart="">
+            <div class="menu-icon">🍹</div>
+            <div class="menu-name">Sparkling Ades</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('mega')" ontouchstart="">
+            <div class="menu-icon">🥤</div>
+            <div class="menu-name">Budget Franchise</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('bakery')" ontouchstart="">
+            <div class="menu-icon">🥐</div>
+            <div class="menu-name">Cafe Bakery</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('dessert')" ontouchstart="">
+            <div class="menu-icon">🍰</div>
+            <div class="menu-name">Trendy K-Desserts</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('bingsu')" ontouchstart="">
+            <div class="menu-icon">🍧</div>
+            <div class="menu-name">Bingsu (Shaved Ice)</div>
+        </div>
+        <div class="menu-btn" onclick="handleAction('starbucks')" ontouchstart="">
+            <div class="menu-icon">🧜‍♀️</div>
+            <div class="menu-name">Starbucks Secret</div>
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-tags" id="res-tags-container"></div>
+        
+        <div class="res-title" id="res-title">Menu Name</div>
+        <div class="res-kr-title" id="res-kr-title">Korean Name</div>
+        
+        <div class="info-strip">
+            <div class="info-row">
+                <span class="info-label">Est. Price:</span>
+                <span class="info-val" id="res-price">KRW 0,000</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Options:</span>
+                <span class="info-val" id="res-includes">Details</span>
+            </div>
+        </div>
+
+        <div class="res-desc" id="res-desc-text">Description goes here.</div>
+
+        <div class="cheat-box">
+            <div class="cheat-title">🔑 Order Cheat Code</div>
+            <div class="cheat-text" id="res-cheat-text">Cheat code info.</div>
+        </div>
+
+        <div class="sos-box">
+            <div class="sos-header">Show to the Barista</div>
+            <div class="sos-korean" id="res-sos-text">주문서입니다.</div>
+        </div>
+
+        <div class="delivery-links">
+            <a class="del-btn del-naver" href="https://map.naver.com/v5/search/Cafe?lang=en" target="_blank">📍 Find Cafes on Naver Map (EN)</a>
+            <a class="del-btn del-kakao" href="https://map.kakao.com/link/search/Cafe" target="_blank">📍 Find Cafes on Kakao Map (EN)</a>
+        </div>
+
+        <button class="close-btn" id="close-btn" onclick="closeModal()" ontouchstart="">Close Menu</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 - No let, const, or arrow functions */
+
+// Ambient Data: 50 MAX Tips for Cafes
+var ambientTips = [
+    "Koreans drink Iced Americano (Ah-Ah) even in freezing winter. It is called 'Eol-juk-ah'.",
+    "You can safely leave your laptop and wallet on the table to go to the restroom. Nobody will steal it.",
+    "Most cafes offer free, incredibly fast Wi-Fi. The password is usually on the receipt or counter.",
+    "By law, if you stay inside the cafe, you must use a mug or glass, not a disposable plastic cup.",
+    "If you want to take your leftover drink with you, ask to 'Take-out' (포장해주세요).",
+    "In Korea, you generally have to return your empty tray and cups to the counter or a designated return shelf.",
+    "Decaf coffee is not available everywhere. Always ask 'Decaf isseoyo?' (Do you have decaf?).",
+    "A 'Shot' (샷) means one espresso shot. Koreans often add an 'Extra Shot' (샷 추가) for a stronger kick.",
+    "If a drink is too sweet, you can ask for 'Deol dalge' (덜 달게), meaning less sweet.",
+    "Oat milk (오트 밀크) is becoming popular, but soy milk (두유) is the standard dairy alternative in most places.",
+    "Cafe hopping is a major weekend activity. Look for 'Insta-worthy' (인스타 감성) cafes.",
+    "Large franchise cafes like Mega Coffee or Compose offer massive 24oz drinks for just 2,000 KRW.",
+    "Starbucks in Korea has unique seasonal menus that you will not find anywhere else in the world.",
+    "If you want less ice so your drink is not watered down, ask for 'Eoreum jeokge' (얼음 적게).",
+    "Many modern aesthetic cafes do not have comfortable chairs. They are designed for quick chats and photos.",
+    "If you see a sign saying 'No Kids Zone', children under 12 are not allowed inside.",
+    "A 'Kiosk' (키오스크) is a self-order machine. Most of them have an English language button at the top right.",
+    "Croffles (Croissant Waffles) are still one of the most popular cafe desserts in Korea.",
+    "Yakgwa (traditional honey pastry) cookies are currently the hottest dessert trend.",
+    "Koreans love pairing sweet desserts exclusively with bitter Iced Americanos to balance the flavor.",
+    "If you order an 'Ade' (에이드), it means a fruit syrup mixed with sparkling water.",
+    "Green Grape Ade (청포도 에이드) is a uniquely popular and refreshing Korean cafe staple.",
+    "Tipping is absolutely NOT required or expected in any Korean cafe.",
+    "If you want your bread or pastry warmed up, ask 'Deweojuseyo' (데워주세요).",
+    "Some cafes offer a free 'Service' (서비스) cookie or chocolate with your coffee.",
+    "A 'Roastery' cafe roasts its own beans and usually offers pour-over (Hand-drip) options.",
+    "If you want room temperature water, there is usually a self-service water station near the counter.",
+    "In traditional teahouses (Da-bang), you might get complimentary roasted rice cakes with your tea.",
+    "Einspanner (아인슈페너) is incredibly popular here: iced black coffee topped with thick, sweet cream.",
+    "Do not stir an Einspanner! Drink the coffee directly through the thick cream layer.",
+    "Milk Tea usually comes with boba (pearls), but always double-check if they are included.",
+    "If a cafe has 'Bake Shop' in the name, they bake their pastries fresh in-house every morning.",
+    "Salt Bread (소금빵) is a massively popular buttery roll with sea salt on top.",
+    "If a place is called a 'Dessert Cafe', they might require each person to order at least one drink.",
+    "The term '1 In 1 Eumryo' (1인 1음료) means every person in the group MUST order a drink.",
+    "Many cafes provide small blankets (Mureup-damnyo) because the air conditioning can be very strong.",
+    "If you need an outlet, look for cafes with large communal tables; they usually have built-in plugs.",
+    "Study cafes (스터디카페) are quiet zones meant strictly for studying, not for chatting.",
+    "If you want a hot drink, specifically say 'Ttat-teut-han' (따뜻한). 'Hot' sounds similar to 'Hat'.",
+    "Grapefruit Honey Black Tea (자몽허니블랙티) is legendary in Korea, often abbreviated as 'Ja-heo-beul'.",
+    "If a cafe menu has a 'Signature' section, always order from there. It is their pride and joy.",
+    "Injeolmi (인절미) means it is flavored with roasted soybean powder. Nutty, sweet, and traditional.",
+    "Mugwort (쑥 - Ssuk) is a traditional herb used in lattes. It tastes earthy and slightly bitter, like matcha.",
+    "Black Sesame (흑임자) lattes are thick, savory, and sweet. Highly recommended for a unique taste.",
+    "If you need to use the restroom, ask 'Hwajang-shil eodi-eyo?' (Where is the restroom?).",
+    "Some cafe restrooms require a key or a passcode attached to a large keychain at the counter.",
+    "A 'Dutch Coffee' (더치커피) refers to Cold Brew coffee in Korea.",
+    "If you want syrup in your Americano, ask for a 'Hazelnut Americano' (헤이즐넛 아메리카노).",
+    "Koreans rarely drink plain drip coffee; espresso-based Americano is the absolute standard.",
+    "When they hand you a vibrating buzzer (Jin-dong-bell), wait at your table until it rings and flashes!"
+];
+
+var ambientEl = document.getElementById('ambient-quote-text');
+var ambientIndex = 0;
+setInterval(function() {
+    ambientEl.classList.add('fade-out');
+    setTimeout(function() {
+        ambientIndex = (ambientIndex + 1) % ambientTips.length;
+        ambientEl.innerText = '"' + ambientTips[ambientIndex] + '"';
+        ambientEl.classList.remove('fade-out');
+    }, 1000);
+}, 8000); 
+
+// Food Database: MAX Capacity (80 Items Total across 10 categories)
+var cafeDB = {
+    'americano': [
+        { title: "Mild Iced Americano", kr: "연한 아이스 아메리카노 (Ah-Ah)", tags: ["Coffee", "Custom Option"], price: "KRW 4,000 ~ 5,500", includes: "Espresso + Water + Ice (Less Espresso)", desc: "The legendary Ah-Ah. For those who find Korean espresso too strong, you can ask them to make it 'mild' by reducing the number of espresso shots.", cheat: "Always specify if you are staying or leaving. 'Deu-si-go ga-se-yo?' means 'For here?'.", sos: "아이스 아메리카노 한 잔, 샷 하나 빼고 연하게 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Decaf Iced Americano", kr: "디카페인 아이스 아메리카노", tags: ["Coffee", "Caffeine-Free"], price: "KRW 4,500 ~ 6,000", includes: "Decaf Espresso + Water + Ice", desc: "If you want the refreshing taste of an Ah-Ah at night without the insomnia. Note that not all independent cafes carry decaf beans.", cheat: "Franchises like Starbucks, Coffee Bean, and Mega Coffee always have decaf options.", sos: "디카페인 아이스 아메리카노 한 잔 부탁드립니다. 테이크아웃(포장) 할게요." },
+        { title: "Hazelnut Americano", kr: "헤이즐넛 아메리카노", tags: ["Coffee", "Sweet", "Highlight"], price: "KRW 4,500 ~ 5,500", includes: "Espresso + Water + Hazelnut Syrup", desc: "A massive local favorite. It looks like a regular black coffee but is injected with sweet, fragrant hazelnut syrup.", cheat: "If the menu does not have it, order an Americano and ask to 'Add Hazelnut Syrup' (헤이즐넛 시럽 추가).", sos: "아이스 헤이즐넛 아메리카노 한 잔 부탁드립니다. 매장에서 마실게요." },
+        { title: "Less Ice Americano", kr: "얼음 적게 아이스 아메리카노", tags: ["Coffee", "Pro Tip"], price: "KRW 4,000 ~ 5,500", includes: "Espresso + More Water + Less Ice", desc: "Tired of your iced coffee being 90% ice? You can customize the ice level. The barista will usually fill the rest with water.", cheat: "Saying 'Eoreum jeokge' ensures you actually get more liquid and less dilution over time.", sos: "아이스 아메리카노 한 잔 주시는데, 얼음은 조금만(적게) 넣어주세요." },
+        { title: "Hot Americano (Extra Shot)", kr: "따뜻한 아메리카노 (샷 추가)", tags: ["Coffee", "Strong"], price: "KRW 4,000 ~ 5,500", includes: "Espresso (Extra) + Hot Water", desc: "For those freezing winter days when you need an intense caffeine kick. Adding an extra shot makes it robust and dark.", cheat: "Careful, hot drinks in Korea are served dangerously hot. Always use a sleeve.", sos: "따뜻한 아메리카노 한 잔, 샷 하나 추가해 주세요. 매장에서 먹을게요." },
+        { title: "Cold Brew / Dutch Coffee", kr: "콜드브루 (더치커피)", tags: ["Coffee", "Smooth"], price: "KRW 5,000 ~ 6,500", includes: "Cold Brew Extract + Water + Ice", desc: "Cold brew is often called 'Dutch Coffee' in Korea. It is less bitter, highly caffeinated, and has a very smooth finish.", cheat: "Cold brew cannot usually be ordered decaf in Korea unless specifically advertised.", sos: "아이스 콜드브루 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Einspanner (Viennese)", kr: "아인슈페너", tags: ["Coffee", "Sweet Cream", "Highlight"], price: "KRW 6,000 ~ 7,500", includes: "Iced Black Coffee + Thick Sweet Cream Layer", desc: "An absolute trendy staple in aesthetic cafes. Iced black coffee topped with a massive, dense layer of sweet vanilla cream.", cheat: "NEVER mix it with a straw. You must tilt the glass and drink the coffee through the cream layer.", sos: "아인슈페너 아이스로 한 잔 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Affogato", kr: "아포가토", tags: ["Coffee", "Dessert"], price: "KRW 6,000 ~ 7,500", includes: "Vanilla Ice Cream + Hot Espresso Shot", desc: "A classic Italian dessert widely available in Korean cafes. A scoop of rich vanilla ice cream drowned in hot espresso.", cheat: "Pour the espresso slowly over the ice cream yourself. Eat it quickly before it fully melts!", sos: "아포가토 하나 부탁드립니다. 매장에서 먹고 갈게요." }
+    ],
+    'latte': [
+        { title: "Oat Milk Vanilla Latte", kr: "오트 밀크 바닐라 라떼 (덜 달게)", tags: ["Milk", "Custom Option", "Highlight"], price: "KRW 5,500 ~ 7,000", includes: "Espresso + Oat Milk + Half Vanilla Syrup", desc: "A highly customized, perfectly balanced latte. Swapping regular milk for oat milk adds a savory depth, and asking for 'less sweet' makes it perfect.", cheat: "Oat milk upgrades usually cost an extra 500 KRW.", sos: "아이스 바닐라 라떼 한 잔 주시는데, 우유는 오트 밀크로 변경해 주시고 시럽은 반만(덜 달게) 넣어주세요. 포장할게요." },
+        { title: "Soy Milk Cafe Latte", kr: "두유 카페 라떼", tags: ["Milk", "Dairy-Free"], price: "KRW 5,000 ~ 6,500", includes: "Espresso + Soy Milk", desc: "If you are lactose intolerant, soy milk is the most widely available alternative in Korea. It gives the latte a slightly nutty, bean-like flavor.", cheat: "Some cafes use sweetened soy milk, so ask if it is 'sweet' (Dal-a-yo?).", sos: "따뜻한 카페 라떼 한 잔, 우유 대신 두유로 변경해 주세요. 매장에서 마실게요." },
+        { title: "Dolce Latte (Condensed Milk)", kr: "돌체 라떼 (연유 라떼)", tags: ["Milk", "Very Sweet"], price: "KRW 5,500 ~ 7,000", includes: "Espresso + Milk + Condensed Milk", desc: "Also known as a Spanish Latte or Condensed Milk Latte. It is incredibly sweet and milky, often layered beautifully in the glass.", cheat: "Locals jokingly call this the 'toilet latte' because it cures constipation very quickly due to the rich dairy and caffeine.", sos: "아이스 돌체 라떼 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Caramel Macchiato (Extra Drizzle)", kr: "카라멜 마끼아또 (카라멜 많이)", tags: ["Milk", "Sweet"], price: "KRW 5,500 ~ 7,000", includes: "Espresso + Steamed Milk + Caramel Syrup + Extra Drizzle", desc: "A comforting classic. You can customize it by asking for extra caramel drizzle on top of the foam.", cheat: "Always mix the bottom well, as the caramel syrup tends to sink.", sos: "따뜻한 카라멜 마끼아또 한 잔, 위에 카라멜 드리즐 듬뿍 올려주세요. 매장에서 먹을게요." },
+        { title: "Cream Mocha", kr: "크림 모카", tags: ["Milk", "Chocolate"], price: "KRW 6,000 ~ 7,500", includes: "Espresso + Chocolate Milk + Whipped Cream", desc: "A Cafe Mocha topped with a thick layer of fresh whipped cream and cocoa powder. A rich, heavy dessert drink.", cheat: "Whipped cream is 'Hwipping Cream' (휘핑크림) in Korean.", sos: "아이스 크림 모카 한 잔, 휘핑크림 많이 올려주세요. 포장할게요." },
+        { title: "Green Tea Latte (Extra Shot)", kr: "녹차 라떼 (에스프레소 샷 추가)", tags: ["Milk", "Bitter-Sweet", "Highlight"], price: "KRW 6,000 ~ 7,500", includes: "Matcha Powder + Milk + 1 Espresso Shot", desc: "A genius local hack. Ordering a sweet Matcha Latte and adding a shot of dark espresso balances the sweetness and adds incredible depth.", cheat: "Visually stunning with green, white, and brown layers. Mix thoroughly before drinking.", sos: "아이스 녹차 라떼 한 잔에 에스프레소 샷 하나 추가해 주세요. 매장에서 먹고 갈게요." },
+        { title: "Strawberry Latte", kr: "딸기 라떼", tags: ["Milk", "Non-Coffee", "Seasonal"], price: "KRW 6,000 ~ 7,500", includes: "Fresh Strawberry Puree + Milk", desc: "A hugely popular non-coffee option, especially in spring. Made with real strawberry chunks and sweet milk.", cheat: "Use a thick straw and stir vigorously to mix the heavy puree at the bottom.", sos: "아이스 딸기 라떼 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Sweet Potato Latte", kr: "고구마 라떼", tags: ["Milk", "Non-Coffee", "Warm"], price: "KRW 5,000 ~ 6,500", includes: "Sweet Potato Paste + Steamed Milk", desc: "A uniquely Korean winter comfort drink. It tastes exactly like a creamy, drinkable roasted sweet potato. Very filling.", cheat: "Best enjoyed hot. It is quite heavy, almost like a light meal.", sos: "따뜻한 고구마 라떼 한 잔 부탁드립니다. 매장에서 마실게요." }
+    ],
+    'tea': [
+        { title: "Grapefruit Honey Black Tea", kr: "자몽 허니 블랙티 (자허블)", tags: ["Tea", "Sweet", "Highlight"], price: "KRW 5,500 ~ 7,000", includes: "Black Tea + Grapefruit Syrup + Honey", desc: "A legendary drink in Korea, popularized by Starbucks but now everywhere. A perfectly refreshing blend of bitter tea and sweet citrus.", cheat: "If it's too sweet, ask for 'Syrup han-beon ppae-juseyo' (Remove one pump of syrup).", sos: "아이스 자몽 허니 블랙티 한 잔 덜 달게 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Earl Grey Milk Tea", kr: "얼그레이 밀크티", tags: ["Tea", "Milk"], price: "KRW 5,500 ~ 7,000", includes: "Earl Grey Tea + Hot Milk + Sugar", desc: "A fragrant, deeply brewed Earl Grey tea mixed with steamed milk. Popular for cozy, rainy days.", cheat: "Boba pearls are NOT automatically included in regular cafes unless it is a specific Boba shop like Gong Cha.", sos: "따뜻한 얼그레이 밀크티 한 잔 부탁드립니다. 매장에서 마실게요." },
+        { title: "Yuza Tea (Citron)", kr: "유자차", tags: ["Tea", "Traditional/Fruity"], price: "KRW 4,500 ~ 6,000", includes: "Yuzu Marmalade + Hot Water", desc: "A traditional citrus tea made by dissolving sweet yuza marmalade in hot water. Excellent for soothing a sore throat.", cheat: "You can eat the small pieces of yuza peel at the bottom of the cup.", sos: "따뜻한 유자차 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Chamomile Blend", kr: "캐모마일 블렌딩 티", tags: ["Tea", "Caffeine-Free"], price: "KRW 5,000 ~ 6,500", includes: "Chamomile Tea Bag + Hot Water", desc: "A standard, soothing, caffeine-free herbal tea. Perfect if you are cafe-hopping late at night.", cheat: "Most cafes will refill the hot water (Tteugeoun mul 리필) for your tea bag for free if you ask politely.", sos: "따뜻한 캐모마일 티 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Peach Iced Tea", kr: "복숭아 아이스티", tags: ["Tea", "Very Sweet"], price: "KRW 3,500 ~ 5,000", includes: "Lipton-style Peach Powder + Water + Ice", desc: "An intensely sweet and cheap staple in budget cafes. It is essentially powdered peach tea.", cheat: "Local hack: Add a shot of espresso to it! It is called 'A-Shot-Chu' (아샷추), a bizarrely addictive sweet and bitter combo.", sos: "복숭아 아이스티 아이스로 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "A-Shot-Chu (Peach Tea + Espresso)", kr: "아샷추 (아이스티 샷 추가)", tags: ["Tea", "Unique Hack", "Highlight"], price: "KRW 4,000 ~ 5,500", includes: "Peach Iced Tea + 1 Espresso Shot", desc: "A viral Korean cafe hack. The intense sweetness of the peach tea is perfectly balanced by the bitter espresso shot.", cheat: "Sounds disgusting, tastes like heaven. Just trust the locals and try it once.", sos: "아샷추(복숭아 아이스티에 에스프레소 샷 추가) 한 잔 부탁드립니다. 매장에서 마실게요." },
+        { title: "Matcha Frappe", kr: "말차 프라페", tags: ["Blended", "Cold & Sweet"], price: "KRW 6,500 ~ 8,000", includes: "Matcha + Milk + Ice Blended + Whipped Cream", desc: "A frosty, thick blended ice drink with intense green tea flavor, topped with a mountain of whipped cream.", cheat: "Blended drinks are called 'Frappe' (프라페) or 'Frapuccino' (프라푸치노) in Korea.", sos: "아이스 말차 프라페 한 잔, 휘핑크림 듬뿍 올려주세요. 포장할게요." },
+        { title: "Mint Chocolate Frappe", kr: "민트초코 프라페", tags: ["Blended", "Controversial"], price: "KRW 6,500 ~ 8,000", includes: "Mint Choco Powder + Milk + Ice Blended", desc: "Korea is deeply divided into 'Min-Cho' lovers and haters. A refreshing mint and rich chocolate blended ice drink.", cheat: "If you love mint chocolate, Korea is a paradise. You will find this flavor everywhere.", sos: "민트초코 프라페 한 잔 부탁드립니다. 매장에서 먹고 갈게요." }
+    ],
+    'traditional': [
+        { title: "Ssanghwa-tang", kr: "쌍화탕", tags: ["Traditional", "Herbal / Healthy"], price: "KRW 6,000 ~ 8,000", includes: "Boiled Medicinal Herbs + Nuts + Egg Yolk (Optional)", desc: "A dark, intense traditional herbal medicine tea. Often served with pine nuts, walnuts, and jujubes floating on top.", cheat: "In old-school teahouses (Dabang), you can ask them to crack a raw egg yolk into the hot tea!", sos: "따뜻한 쌍화탕 한 잔 부탁드립니다. (계란 노른자 띄워주세요). 매장에서 마실게요." },
+        { title: "Omija Tea", kr: "오미자차", tags: ["Traditional", "Sweet & Sour"], price: "KRW 5,000 ~ 7,000", includes: "Magnolia Berry Extract + Water (Hot/Cold)", desc: "Omija means 'five flavors' (sweet, sour, bitter, salty, pungent). It is a bright red, incredibly refreshing berry tea.", cheat: "Best enjoyed iced during the hot summer. It is beautiful, healthy, and highly photogenic.", sos: "아이스 오미자차 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Sikhye", kr: "식혜", tags: ["Traditional", "Sweet Rice Drink"], price: "KRW 4,000 ~ 6,000", includes: "Sweet Malt Water + Fermented Rice Grains", desc: "A classic Korean sweet rice beverage, traditionally served after meals to aid digestion. It has soft grains of rice at the bottom.", cheat: "Stir before drinking so the rice grains do not all sit at the bottom.", sos: "시원한 식혜 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Sujeonggwa", kr: "수정과", tags: ["Traditional", "Cinnamon & Ginger"], price: "KRW 4,000 ~ 6,000", includes: "Cinnamon Ginger Punch + Dried Persimmon", desc: "A dark reddish-brown traditional punch with a very strong cinnamon and ginger kick. Served cold, often with pine nuts.", cheat: "It is quite spicy from the ginger! Great for clearing your sinuses.", sos: "시원한 수정과 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Misutgaru (Multi-grain Milk)", kr: "미숫가루", tags: ["Traditional", "Savory & Sweet", "Highlight"], price: "KRW 5,000 ~ 6,500", includes: "Roasted Multi-grain Powder + Milk + Sugar/Honey", desc: "A thick, shake-like drink made from roasted grains (barley, brown rice, etc.). Deeply nutty, savory, and sweet.", cheat: "It is basically a Korean breakfast smoothie. Extremely filling.", sos: "아이스 미숫가루 한 잔, 우유로 타주세요. 매장에서 먹을게요." },
+        { title: "Daechu Tea (Jujube)", kr: "대추차", tags: ["Traditional", "Thick & Sweet"], price: "KRW 5,500 ~ 7,500", includes: "Boiled Jujube Paste + Hot Water", desc: "A very thick, naturally sweet tea made from dried Korean dates (jujubes). Almost like a thin fruit puree.", cheat: "Excellent for cold weather or if you are feeling a bit sick. No caffeine.", sos: "따뜻하고 진한 대추차 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Mugwort Latte (Ssuk Latte)", kr: "쑥 라떼", tags: ["Traditional Fusion", "Earthy"], price: "KRW 5,500 ~ 7,000", includes: "Mugwort Powder + Steamed Milk", desc: "A modern fusion cafe drink. Mugwort has a deep, earthy, herbaceous flavor similar to matcha but uniquely Korean.", cheat: "Usually beautifully presented with a green base and white milk foam.", sos: "따뜻한 쑥 라떼 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Black Sesame Latte", kr: "흑임자 라떼", tags: ["Traditional Fusion", "Nutty", "Highlight"], price: "KRW 6,000 ~ 7,500", includes: "Black Sesame Paste + Milk + Espresso (Optional)", desc: "Thick, gray-colored, and intensely nutty. Often served with a layer of thick black sesame cream on top of an iced latte.", cheat: "Do not smile with your teeth right after drinking this—the black sesame powder sticks everywhere!", sos: "아이스 흑임자 라떼 (커피 샷 들어간 것) 한 잔 부탁드립니다. 매장에서 마실게요." }
+    ],
+    'ade': [
+        { title: "Green Grape Ade", kr: "청포도 에이드", tags: ["Ade", "Sweet & Sour", "Highlight"], price: "KRW 5,000 ~ 6,500", includes: "Green Grape Syrup + Sprite/Sparkling Water + Ice", desc: "The undisputed king of Korean Ades. A bright green, fizzy, incredibly refreshing sweet and sour soda.", cheat: "Most cafes use Sprite as the base. If you want it less sweet, ask them to use plain sparkling water (Tansan-su).", sos: "청포도 에이드 한 잔, 사이다 대신 탄산수로 만들어주세요. 테이크아웃 할게요." },
+        { title: "Grapefruit Ade", kr: "자몽 에이드", tags: ["Ade", "Bitter-Sweet"], price: "KRW 5,000 ~ 6,500", includes: "Grapefruit Pulp/Syrup + Sparkling Water", desc: "A beautiful pink, bubbly drink that balances the natural bitterness of grapefruit with sweet syrup.", cheat: "Stir vigorously! The heavy fruit pulp always sinks to the bottom.", sos: "시원한 자몽 에이드 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Lemon Ade", kr: "레몬 에이드", tags: ["Ade", "Sour"], price: "KRW 5,000 ~ 6,500", includes: "Lemon Juice/Syrup + Sparkling Water + Lemon Slice", desc: "Classic, zesty, and highly carbonated. Perfect for washing down a heavy, greasy Korean BBQ meal.", cheat: "Some cafes use a blue syrup to make it a 'Blue Lemonade'. It tastes exactly the same.", sos: "레몬 에이드 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Yuza Ade (Citron)", kr: "유자 에이드", tags: ["Ade", "Traditional Fusion"], price: "KRW 5,000 ~ 6,500", includes: "Yuza Marmalade + Sparkling Water", desc: "Taking the traditional Yuza tea and turning it into a cold, fizzy soda. Sweet, citrusy, and uniquely Korean.", cheat: "Be careful sucking up the thick yuza peels through the straw.", sos: "유자 에이드 한 잔 부탁드립니다. 매장에서 마실게요." },
+        { title: "Passionfruit Ade", kr: "패션후르츠 에이드", tags: ["Ade", "Tropical & Crunchy"], price: "KRW 5,500 ~ 7,000", includes: "Passionfruit Pulp (with seeds) + Sparkling Water", desc: "A highly aesthetic, bright yellow drink loaded with crunchy black passionfruit seeds. Very tart and sweet.", cheat: "Crunching on the black seeds is part of the experience!", sos: "패션후르츠 에이드 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Cherry Ade", kr: "체리 에이드", tags: ["Ade", "Sweet"], price: "KRW 4,500 ~ 6,000", includes: "Cherry Syrup + Sprite", desc: "A deep red, ultra-sweet fizzy drink that tastes very nostalgic, similar to cherry candies.", cheat: "Often found in budget cafes or PC Bangs (Internet cafes) rather than high-end aesthetic cafes.", sos: "체리 에이드 한 잔 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Plum Ade", kr: "자두 에이드", tags: ["Ade", "Summer Seasonal"], price: "KRW 5,500 ~ 7,000", includes: "Plum Syrup/Pulp + Sparkling Water", desc: "A summer exclusive in many cafes. The sweet, slightly tart flavor of Korean plums makes a perfect refreshing soda.", cheat: "Highly recommended if you see it on the menu during July or August.", sos: "자두 에이드 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Strawberry Ade", kr: "딸기 에이드", tags: ["Ade", "Fruity"], price: "KRW 5,500 ~ 7,000", includes: "Strawberry Puree + Sparkling Water", desc: "A fizzy, vibrant red drink filled with chunks of crushed strawberries. Sweeter than most other ades.", cheat: "Always use a thick boba straw to get the fruit chunks.", sos: "딸기 에이드 한 잔 부탁드립니다. 매장에서 먹고 갈게요." }
+    ],
+    'mega': [
+        { title: "Mega Iced Americano", kr: "메가리카노 (메가커피)", tags: ["Budget", "Massive Size", "Highlight"], price: "KRW 3,000", includes: "1 Liter (32oz) Iced Americano", desc: "Budget cafes like Mega Coffee or Compose Coffee dominate the streets. The 'Megaricano' is a monstrous 1-liter iced coffee.", cheat: "It contains an insane amount of caffeine (usually 3+ shots). Do not drink this right before bed.", sos: "아이스 메가리카노 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Jolly Pong Crush", kr: "죠리퐁 크러쉬", tags: ["Budget", "Cereal Shake"], price: "KRW 3,900", includes: "Milk Shake + Caramel + Jolly Pong Cereal", desc: "A legendary budget cafe invention. A sweet milkshake blended and topped with a massive scoop of 'Jolly Pong' (Korean puffed wheat cereal).", cheat: "Eat the cereal on top with a spoon before it gets completely soggy.", sos: "퐁크러쉬(죠리퐁 라떼) 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Iced Mix Coffee", kr: "아이스 믹스커피 (다방커피)", tags: ["Budget", "Sweet & Nostalgic"], price: "KRW 2,500", includes: "Korean Instant Mix Coffee + Ice", desc: "The classic, cheap, intensely sweet, and creamy Korean instant coffee, upgraded to a massive iced cafe version.", cheat: "Often called 'Dabang Coffee' (다방커피). It is the ultimate quick sugar and caffeine fix.", sos: "아이스 다방커피(믹스커피) 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Watermelon Juice", kr: "수박 주스 (생과일)", tags: ["Budget", "Summer Must-Have", "Highlight"], price: "KRW 4,000", includes: "Real Watermelon + Ice Blended", desc: "During summer, budget cafes blend massive cups of real watermelon with ice. It is the cheapest and most refreshing heat-beater.", cheat: "The quality is shockingly good for the price. Always order it in July/August.", sos: "수박 주스 한 잔 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Cookies & Cream Frappe", kr: "쿠키앤크림 프라페", tags: ["Budget", "Sugar Bomb"], price: "KRW 3,900", includes: "Oreo Blend + Milk + Whipped Cream + Oreo Cookie", desc: "A gigantic, high-calorie, ultra-sweet Oreo milkshake. The budget franchises make these ridiculously large.", cheat: "Ask for extra whipped cream (Hwipping mani) if you want a true sugar coma.", sos: "쿠키앤크림 프라페 한 잔, 휘핑크림 많이 올려주세요. 테이크아웃 할게요." },
+        { title: "Mint Choco Frappe", kr: "민트초코 프라페", tags: ["Budget", "Refreshing Sweet"], price: "KRW 3,900", includes: "Mint Syrup + Choco Chips + Milk Blend", desc: "Massive and cheap mint chocolate shake. The budget places are generous with the chocolate chips.", cheat: "Perfect for sharing, as finishing a 24oz rich shake alone is a challenge.", sos: "민트초코 프라페 한 잔 부탁드립니다. 매장에서 마실게요." },
+        { title: "Strawberry Banana Juice", kr: "딸바 주스 (딸기바나나)", tags: ["Budget", "Fruit Smoothies"], price: "KRW 3,500", includes: "Strawberry + Banana + Ice + Syrup", desc: "Known affectionately as 'Ttal-Ba'. The most classic fruit juice combo in Korea. Thick, filling, and sweet.", cheat: "Often serves as a quick meal replacement for busy students.", sos: "딸바(딸기 바나나) 주스 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Toffee Nut Latte", kr: "토피넛 라떼", tags: ["Budget", "Nutty & Sweet"], price: "KRW 3,800", includes: "Toffee Nut Powder + Steamed Milk + Espresso (Optional)", desc: "A rich, buttery, and nutty latte that tastes like liquid toffee candy. A winter favorite across all budget franchises.", cheat: "Add a shot of espresso to make it a 'Toffee Nut Cafe Latte'. Highly recommended.", sos: "토피넛 라떼에 에스프레소 샷 하나 추가해 주세요. 매장에서 먹고 갈게요." }
+    ],
+    'bakery': [
+        { title: "Salt Bread", kr: "소금빵 (Sogeum-ppang)", tags: ["Bakery", "Savory & Buttery", "Highlight"], price: "KRW 2,500 ~ 4,000", includes: "1 Butter Crescent Roll + Sea Salt Flakes", desc: "The current undisputed king of Korean cafe bakery. A hard, crusty crescent roll with a hollow, intensely buttery center and coarse sea salt on top.", cheat: "Always ask them to warm it up (Deweojuseyo). It transforms into a melted butter heaven.", sos: "소금빵 하나 데워주세요. 따뜻한 아메리카노와 함께 먹고 갈게요." },
+        { title: "Croque Monsieur", kr: "크로크무슈", tags: ["Bakery", "Savory Meal"], price: "KRW 4,000 ~ 6,000", includes: "Bread + Ham + Melted Cheese", desc: "A popular, quick savory bite available in almost every franchise cafe. Baked with cheese and ham.", cheat: "If you are hungry in a cafe and do not want sweets, this is the safest and most satisfying choice.", sos: "크로크무슈 하나 데워서 아이스 아메리카노랑 같이 포장해 주세요." },
+        { title: "Onion Bagel & Cream Cheese", kr: "어니언 베이글과 크림치즈", tags: ["Bakery", "Classic"], price: "KRW 4,500 ~ 6,000", includes: "Toasted Bagel + Packet of Cream Cheese", desc: "A staple in places like Starbucks or Twosome Place. The bagel is served warm with a side of thick cream cheese.", cheat: "Usually, you have to spread the cream cheese yourself with a provided wooden stick.", sos: "어니언 베이글 하나 따뜻하게 데워주시고, 크림치즈 하나 추가해 주세요. 매장에서 먹을게요." },
+        { title: "Honey Butter Bread", kr: "허니버터브레드", tags: ["Bakery", "Massive Dessert"], price: "KRW 6,000 ~ 8,000", includes: "Huge Thick Toast + Butter/Honey + Mountain of Whipped Cream", desc: "A retro legend from the 2010s but still loved. A massive block of thick white toast scored, baked with honey butter, and buried under whipped cream.", cheat: "You MUST share this. It is impossible to eat a whole block of bread and cream alone.", sos: "허니버터브레드 하나랑 아이스 아메리카노 두 잔 부탁드립니다. 먹고 갈게요." },
+        { title: "Scone (Jam & Butter)", kr: "스콘 (잼, 버터 포함)", tags: ["Bakery", "Crumbly"], price: "KRW 3,500 ~ 5,000", includes: "1 Scone + Small Jam/Butter Packet", desc: "Korean cafes bake incredible, buttery scones. Earl Grey, Matcha, and Chocolate Chip are popular flavors.", cheat: "Korean scones are often quite dry and dense on purpose, meant to be eaten with hot tea or lattes.", sos: "얼그레이 스콘 하나랑 따뜻한 라떼 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Financier", kr: "휘낭시에", tags: ["Bakery", "Trendy Bite-size"], price: "KRW 2,500 ~ 3,500", includes: "1 Small Rectangular Almond Cake", desc: "A massive trend in aesthetic cafes. A tiny, buttery, dense, and slightly chewy almond cake. Often topped with fig, chocolate, or cheese.", cheat: "They are very small, so people usually order 2 or 3 to share.", sos: "무화과 휘낭시에 하나, 플레인 휘낭시에 하나 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Canelé", kr: "까눌레", tags: ["Bakery", "Crunchy & Soft"], price: "KRW 3,000 ~ 4,000", includes: "1 Small French Pastry", desc: "Another trendy French pastry mastered by Koreans. Extremely crunchy, caramelized dark exterior with a soft, custard-like rum and vanilla interior.", cheat: "Pairs perfectly with a strong, hot Espresso or Americano.", sos: "까눌레 두 개랑 따뜻한 아메리카노 한 잔 부탁드립니다. 테이크아웃 할게요." },
+        { title: "Ang-Butter Baguette", kr: "앙버터 (바게트)", tags: ["Bakery", "Sweet & Savory", "Highlight"], price: "KRW 4,500 ~ 6,500", includes: "Crispy Baguette + Thick Butter Slab + Sweet Red Bean Paste", desc: "A brilliant Korean-Japanese fusion. Extremely hard and crusty baguette sandwiching a thick slice of cold butter and sweet red bean paste (Ang-ko).", cheat: "Do NOT ask to warm this up! The butter must stay solid and cold for the right texture.", sos: "앙버터 바게트 하나 잘라서 포장해 주세요." }
+    ],
+    'dessert': [
+        { title: "Croffle (Ice Cream)", kr: "아이스크림 크로플", tags: ["Dessert", "Crispy & Sweet", "Highlight"], price: "KRW 5,000 ~ 8,000", includes: "Pressed Croissant Waffle + Vanilla Ice Cream + Cinnamon", desc: "The ultimate modern Korean cafe dessert. A buttery croissant baked in a waffle iron, resulting in a crispy, flaky masterpiece topped with ice cream.", cheat: "If you see 'Brown Cheese' (브라운 치즈) Croffle, order it immediately. The salty cheese shavings over ice cream are mind-blowing.", sos: "브라운 치즈 아이스크림 크로플 하나랑 아이스 아메리카노 한 잔 먹고 갈게요." },
+        { title: "Fat Macaron (Ttung-caron)", kr: "뚱카롱", tags: ["Dessert", "Overstuffed"], price: "KRW 3,000 ~ 4,500 (Each)", includes: "1 Oversized Macaron", desc: "Korean-style macarons are aggressively overstuffed with thick, flavored buttercream, often towering an inch high.", cheat: "Flavors like 'Injeolmi' (roasted soybean) or 'Hwangjeezu' (cheddar cheese) offer a unique Korean twist.", sos: "인절미 뚱카롱 하나랑 황치즈 뚱카롱 하나 포장해 주세요." },
+        { title: "Yakgwa Cookie", kr: "약과 쿠키", tags: ["Dessert", "Traditional Fusion", "Highlight"], price: "KRW 4,000 ~ 5,500", includes: "Thick Cream Cheese Cookie + Sticky Honey Pastry (Yakgwa)", desc: "The current ruling king of K-Desserts. A massive, thick cookie (often stuffed with cream cheese) topped with a traditional sticky, deep-fried honey pastry.", cheat: "Extremely heavy, sweet, and sticky. One cookie is easily enough for two people to share.", sos: "약과 크림치즈 쿠키 하나랑 아이스 아메리카노 덜 연하게 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Basque Cheesecake", kr: "바스크 치즈케이크", tags: ["Dessert", "Burnt & Creamy"], price: "KRW 6,000 ~ 8,000", includes: "1 Slice Burnt Cheesecake", desc: "A crustless cheesecake baked at a high temperature to create a burnt, caramelized top and an incredibly gooey, creamy center.", cheat: "Much lighter and softer than a traditional New York cheesecake.", sos: "바스크 치즈케이크 한 조각이랑 따뜻한 라떼 한 잔 부탁드립니다. 먹고 갈게요." },
+        { title: "Mugwort (Ssuk) Cake", kr: "쑥 인절미 갸또", tags: ["Dessert", "Earthy & Sweet"], price: "KRW 6,500 ~ 8,500", includes: "1 Slice Mugwort Cake + Soybean Cream", desc: "A beautiful, dark green cake made from traditional mugwort, offering a deep earthy flavor, topped with sweet, nutty soybean (Injeolmi) cream.", cheat: "A sophisticated, 'not too sweet' dessert that older Koreans and dessert connoisseurs adore.", sos: "쑥 갸또 케이크 한 조각 포장 부탁드립니다." },
+        { title: "Tiramisu", kr: "티라미수", tags: ["Dessert", "Classic"], price: "KRW 6,000 ~ 8,000", includes: "1 Portion Espresso Soaked Cake + Mascarpone", desc: "Korean cafes take their Tiramisu very seriously. It is often served scooped out of a large tray or perfectly layered in a small square box.", cheat: "Do not inhale while taking your first bite, or the thick cocoa powder will make you choke!", sos: "티라미수 하나랑 아이스 아메리카노 두 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Dacquoise", kr: "다쿠아즈", tags: ["Dessert", "Nutty & Soft"], price: "KRW 3,500 ~ 5,000", includes: "1 Pastry Sandwich", desc: "Similar to a macaron, but the shells are made with almond and hazelnut meringue, making them softer, chewier, and cake-like.", cheat: "A great alternative if you find macarons too sweet or too hard.", sos: "말차 다쿠아즈 하나, 초코 다쿠아즈 하나 포장해 주세요." },
+        { title: "Fruit Sandwich", kr: "과일 산도", tags: ["Dessert", "Fresh & Photogenic"], price: "KRW 5,000 ~ 7,500", includes: "Soft White Bread + Whipped Cream + Fresh Fruits", desc: "Japanese-style fruit sandwiches are very popular in aesthetic cafes. Pillow-soft white bread filled with light cream and massive strawberries or muscat grapes.", cheat: "Highly photogenic but can be messy to eat. Ask for a fork and knife (Pokeu-rang nai-peu juseyo).", sos: "딸기 과일 산도 하나랑 아이스 라떼 한 잔 부탁드립니다. 매장에서 먹을게요." }
+    ],
+    'bingsu': [
+        { title: "Injeolmi Bingsu", kr: "인절미 설빙", tags: ["Shaved Ice", "Nutty & Traditional", "Highlight"], price: "KRW 9,000 ~ 11,000", includes: "Milk Snow Ice + Soybean Powder + Rice Cakes + Almonds", desc: "The signature menu of 'Sulbing' (the biggest Bingsu franchise). Milk shaved as fine as snow, buried under nutty roasted soybean powder and chewy rice cakes.", cheat: "Pour the small cup of sweet condensed milk (Yeon-yu) halfway through eating to keep it sweet to the bottom.", sos: "인절미 설빙 하나 부탁드립니다. 연유 하나 더 추가해 주세요. 먹고 갈게요." },
+        { title: "Fresh Mango Bingsu", kr: "애플망고 치즈 설빙", tags: ["Shaved Ice", "Fruity & Rich"], price: "KRW 12,000 ~ 14,000", includes: "Milk Ice + Mango Chunks + Cheesecake Cubes", desc: "A tropical explosion. Piled high with sweet mango chunks, a scoop of yogurt ice cream, and cubes of rich cheesecake.", cheat: "Luxury hotels in Seoul sell premium versions of Mango Bingsu for over 100,000 KRW, but the franchise versions are still amazing.", sos: "애플망고 치즈 설빙 하나 부탁드립니다. 매장에서 먹을게요." },
+        { title: "Classic Pat-bingsu", kr: "옛날 팥빙수", tags: ["Shaved Ice", "Traditional"], price: "KRW 8,000 ~ 10,000", includes: "Coarse Ice + Sweet Red Beans + Sticky Rice Cake", desc: "The original, old-school Korean shaved ice. A mountain of crunchy ice topped simply with a generous ladle of sweet red bean paste and a few rice cakes.", cheat: "Traditionalists love mixing the entire bowl aggressively before eating, turning it into a sweet, icy soup.", sos: "옛날 팥빙수 하나 부탁드립니다. 팥 많이 올려주세요. 먹고 갈게요." },
+        { title: "Melon Bingsu", kr: "메론 설빙", tags: ["Shaved Ice", "Summer Exclusive", "Highlight"], price: "KRW 15,000 ~ 17,000", includes: "Half a Melon + Milk Ice + Ice Cream Inside", desc: "A massive summer exclusive. It is literally half a hollowed-out melon acting as the bowl, topped with a perfect dome of fresh melon flesh.", cheat: "You have to slice the melon dome yourself with the provided plastic knife. Highly Instagrammable.", sos: "요거통통 메론 설빙 하나 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Green Tea Bingsu", kr: "그린티 설빙", tags: ["Shaved Ice", "Bitter-Sweet"], price: "KRW 10,000 ~ 12,000", includes: "Milk Ice + Matcha Powder + Green Tea Ice Cream + Red Beans", desc: "A perfect balance of sweet milk ice, bitter matcha powder, and sweet red beans. Very popular among adults.", cheat: "Be careful not to inhale the dry matcha powder on your first bite!", sos: "그린티 초코 설빙 하나 부탁드립니다. 포장해 주세요." },
+        { title: "Strawberry Bingsu", kr: "생딸기 설빙", tags: ["Shaved Ice", "Winter/Spring Exclusive"], price: "KRW 12,000 ~ 15,000", includes: "Milk Ice + Fresh Strawberries + Sticky Rice Cake", desc: "Available only during the strawberry season (Winter to Spring). Covered entirely in fresh sliced strawberries and topped with a whole strawberry.", cheat: "The strawberries are slightly tart, which balances perfectly with the sweet condensed milk.", sos: "생딸기 설빙 하나 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Choco Monster Bingsu", kr: "초코 브라우니 설빙", tags: ["Shaved Ice", "Sugar Coma"], price: "KRW 11,000 ~ 13,000", includes: "Milk Ice + Cocoa Powder + Brownie Cubes + Whipped Cream", desc: "A ridiculous mountain of chocolate. Topped with cocoa powder, heavy brownie cubes, and chocolate syrup.", cheat: "Eat this only if you are having an extreme sugar craving. It is intensely sweet.", sos: "초코 브라우니 설빙 하나 부탁드립니다. 포장할게요." },
+        { title: "Oreo Bingsu", kr: "오레오 초코 몬스터 설빙", tags: ["Shaved Ice", "Crunchy"], price: "KRW 11,000 ~ 13,000", includes: "Milk Ice + Crushed Oreos + Vanilla Ice Cream", desc: "A fan favorite among teenagers. The milk ice is completely buried under a thick layer of crushed Oreo cookies.", cheat: "Mix it thoroughly to create an icy cookies-and-cream texture.", sos: "오레오 초코 몬스터 설빙 하나 부탁드립니다. 먹고 갈게요." }
+    ],
+    'starbucks': [
+        { title: "Jeju Malcha Frappuccino", kr: "제주 말차 크림 프라푸치노", tags: ["Starbucks", "Korea Exclusive", "Highlight"], price: "KRW 6,300 (Tall)", includes: "Jeju Matcha + Milk + Ice + Whipped Cream", desc: "A Korea-exclusive Starbucks drink. Made with premium matcha powder sourced directly from Jeju Island.", cheat: "Custom hack: Ask to change the syrup to Vanilla, add an extra scoop of matcha powder, and switch to Oat Milk.", sos: "제주 말차 크림 프라푸치노 톨 사이즈, 우유는 오트밀크로 변경, 말차 파우더 하나 추가해 주세요. 매장에서 먹을게요." },
+        { title: "Grapefruit Honey Black Tea", kr: "자몽 허니 블랙 티 (자허블)", tags: ["Starbucks", "Legendary Menu"], price: "KRW 5,700 (Tall)", includes: "Black Tea + Grapefruit Syrup + Honey", desc: "The drink that started the 'Ja-heo-beul' craze across Korea. It is consistently one of the top-selling non-coffee drinks at Starbucks Korea.", cheat: "Custom hack: Add extra grapefruit syrup (자몽 시럽 추가) for a stronger, fruitier punch.", sos: "아이스 자몽 허니 블랙티 그란데 사이즈, 자몽 시럽 한 번 더 추가해 주세요. 포장할게요." },
+        { title: "Dolce Latte", kr: "스타벅스 돌체 라떼", tags: ["Starbucks", "Sweet & Smooth"], price: "KRW 5,900 (Tall)", includes: "Espresso + Milk + Dolce Syrup (Condensed Milk)", desc: "A deeply sweet, smooth, layered latte. Very popular for morning energy boosts or curing hangovers.", cheat: "Custom hack: Switch to non-fat milk (무지방 우유) if you want the sweetness without the heavy dairy feel.", sos: "아이스 돌체 라떼 톨 사이즈, 무지방 우유로 변경해 주세요. 매장에서 마실게요." },
+        { title: "Brown Sugar Oat Shaken Espresso", kr: "브라운 슈가 오트 쉐이큰 에스프레소", tags: ["Starbucks", "Trendy"], price: "KRW 5,900 (Tall)", includes: "Blonde Espresso + Brown Sugar + Cinnamon + Oat Milk", desc: "A lighter, slightly sweet, and icy espresso drink violently shaken with brown sugar and topped with creamy oat milk.", cheat: "You cannot change the milk type for this specific drink, as oat milk is the core ingredient.", sos: "브라운 슈가 오트 쉐이큰 에스프레소 톨 사이즈 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Double Shot (Secret Menu)", kr: "바닐라 스타벅스 더블 샷", tags: ["Starbucks", "Secret Menu", "Highlight"], price: "KRW 5,100 (One Size)", includes: "2 Shots Espresso + Vanilla Syrup + Half & Half (Shaken)", desc: "A semi-secret menu item! It is a tiny (7oz) but incredibly potent and creamy iced coffee served without actual ice cubes.", cheat: "It only comes in one very small size. It is intense, sweet, and highly addictive.", sos: "바닐라 스타벅스 더블 샷 한 잔 부탁드립니다. (얼음 뺀 작은 컵). 매장에서 먹을게요." },
+        { title: "Yuza Mint Tea", kr: "유자 민트 티", tags: ["Starbucks", "Korea Exclusive"], price: "KRW 5,900 (Tall)", includes: "Yuza Citrus + Mint Tea + Hot/Cold Water", desc: "A uniquely Korean combination of sweet citron (Yuza) marmalade and refreshing mint tea. Very soothing.", cheat: "Excellent choice if you have a slight sore throat from traveling or singing in a Noraebang.", sos: "따뜻한 유자 민트 티 톨 사이즈 한 잔 부탁드립니다. 매장에서 먹고 갈게요." },
+        { title: "Shooting Star Frappuccino", kr: "슈팅스타 프라푸치노 (예시)", tags: ["Starbucks", "Seasonal Custom"], price: "KRW 6,500+", includes: "Seasonal Base + Popping Candy", desc: "Starbucks Korea frequently releases wild seasonal drinks (Cherry Blossom, Summer Beach, etc.) featuring popping candy, jellies, or unique foams.", cheat: "Always look at the promotional poster on the counter. These drinks disappear after a month!", sos: "지금 시즌 한정 프라푸치노(새로 나온 음료) 톨 사이즈로 한 잔 부탁드립니다. 포장할게요." },
+        { title: "Java Chip Frappuccino", kr: "자바 칩 프라푸치노 (통자바칩)", tags: ["Starbucks", "Choco Bomb"], price: "KRW 6,300 (Tall)", includes: "Mocha + Choco Chips Blended + Whipped Cream", desc: "A global classic, but Koreans love to customize it by asking for 'Tong Java Chip' (whole chocolate chips) sprinkled on top of the cream.", cheat: "Custom hack: Say 'Java chip ban-eun gal-a-jushigo, ban-eun tong-euro ol-lyeo-juseyo' (Blend half the chips, put the other half whole on top).", sos: "자바 칩 프라푸치노 톨 사이즈, 자바칩 반은 갈고 반은 통으로 크림 위에 올려주세요." }
+    ]
+};
+
+function handleAction(categoryId) {
+    var now = new Date().getTime();
+    
+    // 1st Logic: AppInventor string communication
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
+        }
+    } catch(e) {}
+
+    // 2nd Logic: Safe URL reload (Double Safety for older Android)
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    
+    setTimeout(function() {
+        window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&cat=" + categoryId);
+    }, 500);
+}
+
+function showContent(categoryId) {
+    var list = cafeDB[categoryId];
+    if (!list) return;
+
+    var randIndex = Math.floor(Math.random() * list.length);
+    var data = list[randIndex];
+
+    document.getElementById('res-title').innerHTML = data.title;
+    document.getElementById('res-kr-title').innerHTML = data.kr;
+    document.getElementById('res-price').innerHTML = data.price;
+    document.getElementById('res-includes').innerHTML = data.includes;
+    document.getElementById('res-desc-text').innerHTML = data.desc;
+    document.getElementById('res-cheat-text').innerHTML = data.cheat;
+    document.getElementById('res-sos-text').innerHTML = data.sos;
+
+    var tagsHtml = "";
+    for(var i=0; i<data.tags.length; i++) {
+        var isHighlight = data.tags[i].indexOf("Highlight") !== -1 ? " highlight" : "";
+        var tagText = data.tags[i].replace("Highlight", "").trim();
+        if(tagText !== "") {
+            tagsHtml += "<span class='res-tag" + isHighlight + "'>" + tagText + "</span>";
+        }
+    }
+    document.getElementById('res-tags-container').innerHTML = tagsHtml;
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var catMatch = searchParams.match(/[?&]cat=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && catMatch && catMatch[1]) {
+        setTimeout(function() { showContent(catMatch[1]); }, 300);
+    }
+});
+//]]>
+</script>
