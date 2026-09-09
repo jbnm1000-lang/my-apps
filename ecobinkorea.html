@@ -1,0 +1,391 @@
+<!--Google Blogger Only: EcoBin Korea (Premium Survival Guide & MAX Data & Strict ES5)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #F4F7F6 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Outfit', sans-serif;
+        color: #263238; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #1B5E20; letter-spacing: -0.5px; margin-bottom: 8px; text-transform: uppercase;}
+    .sub-title { font-size: 12px; color: #4CAF50; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+
+    .info-card { background: #FFFFFF; border-radius: 16px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(27, 94, 32, 0.06); border-left: 5px solid #4CAF50;}
+    .info-card.warning { border-left: 5px solid #D32F2F;}
+    
+    .card-title { font-size: 16px; font-weight: 700; color: #2E7D32; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+    .card-title.red { color: #D32F2F; }
+    .card-text { font-size: 13.5px; color: #546E7A; line-height: 1.7; font-weight: 400; margin-bottom: 12px; word-break: keep-all; text-align: left;}
+    .card-text strong { color: #1B5E20; font-weight: 700;}
+    .card-text.red-text strong { color: #D32F2F; }
+    
+    .bag-visuals { display: flex; gap: 10px; margin-top: 15px;}
+    .bag-badge { flex: 1; padding: 10px; border-radius: 8px; font-size: 11px; font-weight: 700; text-align: center; color: white;}
+    .bag-general { background: #E0E0E0; color: #424242; border: 1px solid #BDBDBD;}
+    .bag-food { background: #FBC02D; color: #3E2723;}
+    .bag-recycle { background: #4FC3F7; color: #01579B;}
+
+    .menu-title { font-size: 14px; font-weight: 700; color: #37474F; margin: 35px 0 15px 0; letter-spacing: 1px; text-transform: uppercase; text-align: center;}
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 40px;}
+    
+    .menu-btn { background: #FFFFFF; border: 1px solid rgba(76, 175, 80, 0.15); border-radius: 14px; padding: 20px 5px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: all 0.2s ease; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02);}
+    .menu-btn:active { background: #E8F5E9; border-color: #81C784; transform: scale(0.96);}
+    .menu-icon { font-size: 32px;}
+    .menu-name { font-size: 12px; font-weight: 700; color: #37474F;}
+
+    /* Subcategory List */
+    #sub-category-view { display: none; background: #FFFFFF; border-radius: 16px; padding: 20px; box-shadow: 0 8px 25px rgba(27, 94, 32, 0.06); margin-bottom: 30px;}
+    .back-btn { background: #F5F5F5; border: none; padding: 8px 15px; border-radius: 8px; font-size: 12px; font-weight: 700; color: #546E7A; cursor: pointer; margin-bottom: 15px;}
+    .sub-title-bar { font-size: 16px; font-weight: 700; color: #1B5E20; margin-bottom: 15px; border-bottom: 2px solid #E8F5E9; padding-bottom: 10px;}
+    .item-list { display: flex; flex-direction: column; gap: 8px;}
+    .item-row { padding: 14px; background: #FAFAFA; border-radius: 10px; border: 1px solid #EEEEEE; font-size: 14px; font-weight: 600; color: #263238; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s;}
+    .item-row:active { background: #E8F5E9; border-color: #4CAF50;}
+    .item-row::after { content: '\2192'; color: #4CAF50; font-size: 16px; font-weight: bold;}
+
+    /* Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(38, 50, 56, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 30px auto; background: #FFFFFF; border-radius: 20px; padding: 35px 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
+    
+    .res-kr-title { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 700; color: #78909C; margin-bottom: 5px; text-transform: uppercase;}
+    .res-title { font-size: 26px; font-weight: 800; color: #263238; margin-bottom: 20px;}
+    
+    .status-badge { display: inline-block; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 800; text-transform: uppercase; margin-bottom: 25px;}
+    .status-general { background: #EEEEEE; color: #424242; border: 1px solid #BDBDBD;}
+    .status-food { background: #FFF9C4; color: #F57F17; border: 1px solid #FBC02D;}
+    .status-recycle { background: #E1F5FE; color: #0277BD; border: 1px solid #29B6F6;}
+    .status-special { background: #FFEBEE; color: #C62828; border: 1px solid #EF5350;}
+
+    .instruction-box { background: #FAFAFA; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #ECEFF1;}
+    .inst-label { font-size: 11px; font-weight: 700; color: #90A4AE; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;}
+    .inst-text { font-size: 15px; color: #37474F; line-height: 1.6; font-weight: 600; text-align: left;}
+
+    .fine-box { background: #FFEBEE; border-radius: 12px; padding: 15px; margin-bottom: 25px; display: flex; align-items: flex-start; gap: 10px; border: 1px dashed #EF5350;}
+    .fine-icon { font-size: 20px;}
+    .fine-desc { font-size: 13px; color: #C62828; font-weight: 700; line-height: 1.5; text-align: left;}
+
+    .close-btn { width: 100%; padding: 18px; background: #1B5E20; border: none; border-radius: 12px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;}
+    .close-btn:active { background: #2E7D32;}
+</style>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">EcoBin Korea</div>
+        <div class="sub-title">Smart Trash & Recycle Guide</div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-title">📗 How to Use & Disclaimer</div>
+        <div class="card-text">
+            Korea has one of the strictest waste management systems in the world. Sorting trash incorrectly is not just frowned upon—it is illegal.
+        </div>
+        <div class="card-text">
+            <strong>1. Buy the Official Bags:</strong> You MUST buy specific garbage bags (Jongnyangje) from local convenience stores. Regular plastic bags are illegal for disposal.
+        </div>
+        <div class="card-text">
+            <strong>2. Choose Category:</strong> Tap an icon below to find out exactly how to dispose of everyday items. 
+        </div>
+        <div class="bag-visuals">
+            <div class="bag-badge bag-general">White/Green<br>General</div>
+            <div class="bag-badge bag-food">Yellow<br>Food Waste</div>
+            <div class="bag-badge bag-recycle">Clear/Vinyl<br>Recyclables</div>
+        </div>
+    </div>
+
+    <div class="info-card warning">
+        <div class="card-title red">🚨 Fine Warning (과태료 주의)</div>
+        <div class="card-text red-text">
+            Throwing food waste into a general bag, or throwing general trash into a recycling bin will result in a <strong>minimum fine of 100,000 KRW (approx. $80 USD)</strong>. CCTV cameras and local authorities actively monitor waste disposal areas.
+        </div>
+    </div>
+
+    <div id="main-grid">
+        <div class="menu-title">Select Waste Category</div>
+        <div class="menu-grid">
+            <div class="menu-btn" onclick="showSubCategory('meat')" ontouchstart="">
+                <div class="menu-icon">🍗</div>
+                <div class="menu-name">Meat & Seafood</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('fruit')" ontouchstart="">
+                <div class="menu-icon">🍎</div>
+                <div class="menu-name">Fruits & Veggies</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('delivery')" ontouchstart="">
+                <div class="menu-icon">🥡</div>
+                <div class="menu-name">Delivery Containers</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('cafe')" ontouchstart="">
+                <div class="menu-icon">☕</div>
+                <div class="menu-name">Cafe & Drinks</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('paper')" ontouchstart="">
+                <div class="menu-icon">📦</div>
+                <div class="menu-name">Boxes & Paper</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('bathroom')" ontouchstart="">
+                <div class="menu-icon">🧴</div>
+                <div class="menu-name">Bathroom Hygiene</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('glass')" ontouchstart="">
+                <div class="menu-icon">🍾</div>
+                <div class="menu-name">Glass & Cans</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('clothes')" ontouchstart="">
+                <div class="menu-icon">👕</div>
+                <div class="menu-name">Clothes & Shoes</div>
+            </div>
+            <div class="menu-btn" onclick="showSubCategory('electronic')" ontouchstart="">
+                <div class="menu-icon">🔋</div>
+                <div class="menu-name">Electronics / Misc</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sub-category-view">
+        <button class="back-btn" onclick="hideSubCategory()" ontouchstart="">← Back to Categories</button>
+        <div class="sub-title-bar" id="sub-title-text">Category</div>
+        <div class="item-list" id="item-list-container">
+            <!-- Items injected via JS -->
+        </div>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-kr-title" id="res-kr">Korean Name</div>
+        <div class="res-title" id="res-en">English Name</div>
+        
+        <div class="status-badge" id="res-badge">Status</div>
+
+        <div class="instruction-box">
+            <div class="inst-label">How to Dispose</div>
+            <div class="inst-text" id="res-action">Action goes here.</div>
+        </div>
+
+        <div class="fine-box">
+            <div class="fine-icon">⚠️</div>
+            <div class="fine-desc" id="res-warning">Warning goes here.</div>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Got It, Thanks!</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var trashDB = {
+    'meat': {
+        title: "Meat, Bones & Seafood",
+        items: [
+            { id: "m1", en: "Chicken Bones (KFC/BBQ)", kr: "치킨 뼈 / 조류 뼈", type: "general", action: "Must be completely separated from meat and thrown into the GENERAL waste bag (White/Green).", warn: "TRAP: Animals cannot digest hard bones. Putting bones in the Food Waste bag will result in a 100,000 KRW fine." },
+            { id: "m2", en: "Pork / Beef Bones", kr: "돼지, 소 뼈 (감자탕 등)", type: "general", action: "Large hard bones must go into the GENERAL waste bag.", warn: "Do not put hard bones in the yellow food waste bag." },
+            { id: "m3", en: "Seafood Shells (Crab, Shrimp, Clam)", kr: "갑각류 껍데기, 조개 껍데기", type: "general", action: "Oyster shells, clam shells, crab, and shrimp shells are hard and must go into the GENERAL waste bag.", warn: "TRAP: Shells are not food waste. Heavy fines apply if mixed." },
+            { id: "m4", en: "Fish Bones & Spines", kr: "생선 뼈", type: "general", action: "Thick, hard fish bones go into the GENERAL waste bag. (Very soft, tiny bones can technically go to food waste, but general is safer).", warn: "Animals cannot process sharp, hard fish spines." },
+            { id: "m5", en: "Leftover Meat / Fat", kr: "남은 살코기, 비계", type: "food", action: "Pure meat, fat, and skin without bones must go into the FOOD waste bag (Yellow).", warn: "Make sure no bones are hidden inside the meat chunks." },
+            { id: "m6", en: "Raw Eggs / Egg Whites", kr: "날계란, 삶은 계란 내용물", type: "food", action: "The inside of the egg goes into the FOOD waste bag.", warn: "Separate the shell before disposing." },
+            { id: "m7", en: "Eggshells", kr: "계란 껍데기", type: "general", action: "Eggshells contain no nutrients for animal feed. Throw them in the GENERAL waste bag.", warn: "TRAP: Extremely common mistake by foreigners. Eggshells are NOT food waste." }
+        ]
+    },
+    'fruit': {
+        title: "Fruits, Veggies & Nuts",
+        items: [
+            { id: "f1", en: "Soft Fruit Peels (Banana, Apple, Orange)", kr: "부드러운 과일 껍질 (바나나, 귤, 사과)", type: "food", action: "Soft, easily digestible peels must go into the FOOD waste bag.", warn: "Do not throw these in the general waste. Cut them into smaller pieces if they are too large." },
+            { id: "f2", en: "Hard Fruit Skins (Pineapple, Coconut)", kr: "딱딱한 과일 껍질 (파인애플, 코코넛)", type: "general", action: "Extremely hard, thick skins cannot be processed into animal feed. Put them in the GENERAL waste bag.", warn: "If a pig can't bite through it easily, it is not food waste." },
+            { id: "f3", en: "Hard Seeds / Pits (Peach, Mango, Cherry)", kr: "딱딱한 씨앗 (복숭아, 망고, 체리)", type: "general", action: "Hard fruit pits must be separated from the flesh and thrown into the GENERAL waste bag.", warn: "TRAP: Do not throw peach or mango pits into food waste. It breaks the recycling machines." },
+            { id: "f4", en: "Onion / Garlic / Corn Skins", kr: "양파, 마늘, 옥수수 껍질", type: "general", action: "These dry, fibrous skins offer no nutritional value to animals. Throw them in the GENERAL waste bag.", warn: "TRAP: One of the most strictly enforced rules. Onion skins are GENERAL waste." },
+            { id: "f5", en: "Nut Shells (Walnut, Peanut, Chestnut)", kr: "견과류 껍데기 (호두, 땅콩)", type: "general", action: "Hard nut shells must go into the GENERAL waste bag.", warn: "Do not mix with food waste." },
+            { id: "f6", en: "Green Onion Roots", kr: "파 뿌리", type: "general", action: "Roots covered in dirt are classified as GENERAL waste.", warn: "Shake off the dirt, but still throw in the general bag." },
+            { id: "f7", en: "Watermelon Rinds", kr: "수박 껍질", type: "food", action: "Watermelon rinds are surprisingly soft enough to be processed. Chop them into smaller chunks and put in the FOOD waste bag.", warn: "If left whole, they take up too much space. Cut them first." },
+            { id: "f8", en: "Chili Pepper Stems", kr: "고추 꼭지", type: "general", action: "The stems of peppers are fibrous and should go into the GENERAL waste bag.", warn: "Only the fleshy part of the pepper is food waste." }
+        ]
+    },
+    'delivery': {
+        title: "Delivery & Takeout",
+        items: [
+            { id: "d1", en: "Red Stained Plastic (Tteokbokki/Jjamppong)", kr: "빨간 국물 묻은 플라스틱 용기", type: "general", action: "If the red stain does NOT wash off completely with soap, it cannot be recycled. Throw it in the GENERAL waste bag.", warn: "TRAP: Recycling stained plastic contaminates the entire batch. When in doubt, throw it in general." },
+            { id: "d2", en: "Clean Plastic Containers", kr: "깨끗하게 씻은 배달 용기", type: "recycle", action: "Wash thoroughly with dish soap, remove the sealing film completely, and put in the PLASTIC recycling bin.", warn: "If the plastic sealing film is stuck to the edges, cut it out." },
+            { id: "d3", en: "Plastic Sealing Film / Saran Wrap", kr: "포장용 비닐, 랩", type: "recycle", action: "If clean, put it in the VINYL (비닐) recycling bag. If stained with food, throw in GENERAL waste.", warn: "Vinyl is recycled separately from hard plastics in Korea." },
+            { id: "d4", en: "Wooden Chopsticks / Skewers", kr: "나무젓가락, 꼬치", type: "general", action: "Wood cannot be recycled. Break them in half so they don't tear the bag, and throw in the GENERAL waste bag.", warn: "Do not put wooden items in paper recycling." },
+            { id: "d5", en: "Delivery Ice Packs (Gel Type)", kr: "고흡수성수지 아이스팩", type: "general", action: "If it contains squishy gel (SAP), DO NOT cut it open. Throw the whole pack in the GENERAL waste bag.", warn: "Pouring the gel down the sink will severely clog the pipes and cause massive damage." },
+            { id: "d6", en: "Delivery Ice Packs (100% Water Type)", kr: "100% 물 아이스팩", type: "recycle", action: "Cut the corner, pour the water down the sink, and recycle the plastic pouch in VINYL.", warn: "Only do this if the package explicitly says '100% Water'." },
+            { id: "d7", en: "Leftover Broth / Soup", kr: "남은 국물", type: "food", action: "Pour the liquid down the sink drain, but catch any solid chunks in the sink strainer. Throw the solid chunks into the FOOD waste bag.", warn: "Do not pour large chunks of food down the drain. Korean pipes clog easily." },
+            { id: "d8", en: "Greasy Pizza Boxes", kr: "기름 묻은 피자 박스", type: "general", action: "Cardboard soaked in oil or cheese cannot be recycled. Tear it up and put it in the GENERAL waste bag.", warn: "Only perfectly clean cardboard can go to paper recycling." }
+        ]
+    },
+    'cafe': {
+        title: "Cafe & Drinks",
+        items: [
+            { id: "c1", en: "Clear Iced Coffee Cups", kr: "투명 플라스틱 커피 컵", type: "recycle", action: "Empty the ice, rinse briefly, and put in the PLASTIC recycling bin.", warn: "Remove the straw and the sleeve first!" },
+            { id: "c2", en: "Paper Coffee Cups", kr: "종이 커피 컵", type: "general", action: "Most takeout paper cups are coated with plastic inside. Unless your building has a specific 'Paper Cup' bin, throw them in the GENERAL waste bag.", warn: "Do not mix them with regular cardboard recycling." },
+            { id: "c3", en: "Plastic Straws", kr: "플라스틱 빨대", type: "general", action: "Too small to be properly recycled. Throw them in the GENERAL waste bag.", warn: "Even though they are plastic, recycling centers cannot sort them." },
+            { id: "c4", en: "Cardboard Cup Sleeves", kr: "컵 홀더", type: "recycle", action: "Put in the PAPER recycling bin.", warn: "Make sure they are not severely stained." },
+            { id: "c5", en: "Tea Bags & Coffee Grounds", kr: "티백, 커피 찌꺼기", type: "general", action: "Coffee grounds and tea bags offer no nutrition. Throw them in the GENERAL waste bag.", warn: "TRAP: Do not put coffee grounds in the food waste. Squeeze the water out first to reduce weight." },
+            { id: "c6", en: "Macaron/Dessert Plastic Shells", kr: "디저트 플라스틱 캡", type: "recycle", action: "If it is hard PET plastic and clean, it goes to PLASTIC recycling.", warn: "Wipe off any sticky cream or frosting first." }
+        ]
+    },
+    'paper': {
+        title: "Boxes, Paper & Mail",
+        items: [
+            { id: "p1", en: "Coupang / Delivery Boxes", kr: "택배 박스", type: "recycle", action: "Remove ALL tape, shipping labels, and staples. Flatten the box and place in PAPER recycling.", warn: "Leaving tape on the box is a strict violation and may lead to fines." },
+            { id: "p2", en: "Receipts", kr: "영수증", type: "general", action: "Receipts are made of thermal-coated paper and CANNOT be recycled. Throw in the GENERAL waste bag.", warn: "TRAP: Never put receipts in the paper recycling bin." },
+            { id: "p3", en: "Used Tissues / Wet Wipes", kr: "사용한 휴지, 물티슈", type: "general", action: "Contaminated paper and non-woven fabrics (wipes) go into the GENERAL waste bag.", warn: "Do not flush wet wipes down the toilet. It will clog." },
+            { id: "p4", en: "Coated Flyers / Brochures", kr: "코팅된 전단지", type: "general", action: "If the paper is glossy and does not tear easily (plastic coating), it must go to GENERAL waste.", warn: "Only easily tearable, uncoated paper can be recycled." },
+            { id: "p5", en: "Notebooks with Spiral Bindings", kr: "스프링 노트", type: "recycle", action: "You MUST remove the metal/plastic spiral binding first. Put the paper in PAPER recycling, and the spiral in METAL or GENERAL.", warn: "Do not throw the whole notebook into recycling." }
+        ]
+    },
+    'bathroom': {
+        title: "Bathroom & Hygiene",
+        items: [
+            { id: "b1", en: "Toothbrushes", kr: "칫솔", type: "general", action: "Made of mixed plastics and bristles. Throw in the GENERAL waste bag.", warn: "Cannot be recycled." },
+            { id: "b2", en: "Toothpaste Tubes", kr: "치약 튜브", type: "general", action: "Mixed materials and impossible to clean perfectly inside. Throw in the GENERAL waste bag.", warn: "Only the outer cardboard box can be recycled." },
+            { id: "b3", en: "Shampoo / Body Wash Bottles", kr: "샴푸, 바디워시 통", type: "recycle", action: "Rinse thoroughly with water. The pump mechanism usually goes to GENERAL waste (contains metal springs), while the bottle goes to PLASTIC recycling.", warn: "If the pump is entirely plastic (rare), it can be recycled. Usually, just throw the pump away." },
+            { id: "b4", en: "Hair / Nail Clippings", kr: "머리카락, 손톱", type: "general", action: "Throw in the GENERAL waste bag.", warn: "Do not flush massive clumps of hair down the toilet." },
+            { id: "b5", en: "Used Cotton Pads & Swabs", kr: "화장솜, 면봉", type: "general", action: "Throw in the GENERAL waste bag.", warn: "Cannot be recycled." },
+            { id: "b6", en: "Feminine Hygiene Products", kr: "생리대, 탐폰", type: "general", action: "Wrap tightly and throw in the GENERAL waste bag.", warn: "NEVER flush down the toilet." },
+            { id: "b7", en: "Disposable Razors", kr: "일회용 면도기", type: "general", action: "Mixed plastic and metal. Throw in the GENERAL waste bag.", warn: "Wrap the blade in a little tissue so it doesn't cut the trash bag." }
+        ]
+    },
+    'glass': {
+        title: "Glass, Cans & Bottles",
+        items: [
+            { id: "g1", en: "Soju & Beer Bottles", kr: "소주병, 맥주병", type: "recycle", action: "Empty the contents and place carefully in the GLASS recycling bin.", warn: "You can actually return clean Soju/Beer bottles to supermarkets for a 100~130 KRW deposit refund!" },
+            { id: "g2", en: "Broken Glass", kr: "깨진 유리", type: "general", action: "Wrap the broken pieces heavily in newspaper, tape it securely so it doesn't poke out, and throw it in the GENERAL waste bag.", warn: "TRAP: Broken glass CANNOT be recycled. Protect the sanitation workers." },
+            { id: "g3", en: "Beer Cans / Soda Cans", kr: "맥주 캔, 음료수 캔", type: "recycle", action: "Empty, rinse, crush flat, and place in the CAN (Metal) recycling bin.", warn: "Do not put cigarette butts inside the cans." },
+            { id: "g4", en: "Tuna / Spam Cans", kr: "참치 캔, 스팸 캔", type: "recycle", action: "Wash the oil out completely with dish soap. Place in the CAN recycling bin.", warn: "Be careful of the sharp edges. Dirty cans cannot be recycled." },
+            { id: "g5", en: "Cosmetics Glass Bottles", kr: "유리 화장품 병", type: "recycle", action: "Wash out the residue completely. Place in GLASS recycling.", warn: "If it cannot be washed (e.g., nail polish), throw it in the GENERAL waste bag." },
+            { id: "g6", en: "Mirrors & Ceramics (Mugs)", kr: "거울, 도자기 (머그컵, 접시)", type: "special", action: "Mirrors, ceramics, and pottery CANNOT be recycled. They require a special non-combustible sack (Bul-yeon-seong), or wrap them safely and put in GENERAL waste for small amounts.", warn: "Throwing ceramics into glass recycling will ruin the melting process." }
+        ]
+    },
+    'clothes': {
+        title: "Clothes, Shoes & Fabric",
+        items: [
+            { id: "cl1", en: "Good Condition Clothes / Shoes", kr: "입을 수 있는 옷, 신발", type: "special", action: "Look for the large green 'Clothing Donation Bin' (의류수거함) usually located on street corners in residential areas.", warn: "Tie shoes together in pairs so they don't get separated." },
+            { id: "cl2", en: "Torn, Stained, or Wet Clothes", kr: "찢어지거나 오염된 옷", type: "general", action: "If it cannot be worn again, throw it in the GENERAL waste bag.", warn: "Do not put wet or moldy clothes in the donation bins." },
+            { id: "cl3", en: "Underwear & Socks", kr: "속옷, 양말", type: "general", action: "Throw in the GENERAL waste bag.", warn: "Donation bins generally do not accept used undergarments." },
+            { id: "cl4", en: "Towels & Blankets", kr: "수건, 이불", type: "general", action: "Towels and thick blankets (cotton) usually go into the GENERAL waste bag. For massive winter blankets, you need a large general bag.", warn: "Some districts allow thin blankets in donation bins, but general waste is safer." },
+            { id: "cl5", en: "Suitcases / Carrier Bags", kr: "캐리어 (여행가방)", type: "special", action: "Too large for bags. You must purchase a 'Large Waste Sticker' (Dae-hyeong pyegi-mul) from a convenience store or local district website and stick it on before leaving it outside.", warn: "Illegal dumping of large items results in massive fines." }
+        ]
+    },
+    'electronic': {
+        title: "Electronics, Batteries & Misc",
+        items: [
+            { id: "e1", en: "Batteries (AA, AAA, Li-ion)", kr: "건전지, 배터리", type: "special", action: "Must be dropped into designated 'Waste Battery Boxes' (폐건전지 수거함) found at community centers, subway stations, or apartment lobbies.", warn: "TRAP: Throwing batteries in general waste can cause FIRE EXPLOSIONS in garbage trucks. Extremely dangerous." },
+            { id: "e2", en: "Small USB Cables / Earphones", kr: "케이블, 이어폰", type: "general", action: "Small tangled cords can go into the GENERAL waste bag.", warn: "Or drop them in small electronics recycling bins if your building has one." },
+            { id: "e3", en: "Broken Umbrellas", kr: "고장난 우산", type: "general", action: "Tear the fabric off (General Waste), and throw the metal skeleton into the CAN/METAL recycling bin. If too difficult, wrap safely and throw in GENERAL.", warn: "Make sure sharp metal parts don't pierce the trash bag." },
+            { id: "e4", en: "Lighters", kr: "라이터", type: "general", action: "Empty the gas completely in a well-ventilated outside area, then throw in the GENERAL waste bag.", warn: "Never throw a pressurized lighter into the trash. It will explode in the incinerator." },
+            { id: "e5", en: "Medicines / Pills", kr: "폐의약품", type: "special", action: "Take expired pills to any local Pharmacy (Yakguk) or Community Center (Dong Sa-mu-so). They have specific safe disposal boxes.", warn: "TRAP: Flushing medicines down the toilet severely contaminates the water supply." },
+            { id: "e6", en: "Pens & Stationery", kr: "볼펜, 문구류", type: "general", action: "Made of mixed plastics and ink. Throw in the GENERAL waste bag.", warn: "Cannot be recycled." }
+        ]
+    }
+};
+
+var currentItemData = null;
+
+function showSubCategory(catId) {
+    var catData = trashDB[catId];
+    if (!catData) return;
+
+    document.getElementById('main-grid').style.display = 'none';
+    document.getElementById('sub-category-view').style.display = 'block';
+    document.getElementById('sub-title-text').innerText = catData.title;
+
+    var html = "";
+    for(var i = 0; i < catData.items.length; i++) {
+        var item = catData.items[i];
+        html += "<div class='item-row' onclick='triggerAdAndShow(\"" + catId + "\", " + i + ")' ontouchstart=''>" + item.en + "</div>";
+    }
+    document.getElementById('item-list-container').innerHTML = html;
+}
+
+function hideSubCategory() {
+    document.getElementById('sub-category-view').style.display = 'none';
+    document.getElementById('main-grid').style.display = 'block';
+}
+
+function triggerAdAndShow(catId, itemIndex) {
+    currentItemData = trashDB[catId].items[itemIndex];
+    
+    var now = new Date().getTime();
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
+        }
+    } catch(e) {}
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    
+    setTimeout(function() {
+        window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&cat=" + catId + "&idx=" + itemIndex);
+    }, 500);
+}
+
+function renderModalContent(catId, itemIndex) {
+    var item = trashDB[catId].items[itemIndex];
+    if (!item) return;
+
+    document.getElementById('res-en').innerText = item.en;
+    document.getElementById('res-kr').innerText = item.kr;
+    document.getElementById('res-action').innerText = item.action;
+    document.getElementById('res-warning').innerText = item.warn;
+
+    var badge = document.getElementById('res-badge');
+    if (item.type === 'general') {
+        badge.className = 'status-badge status-general';
+        badge.innerText = 'General Waste (White/Green Bag)';
+    } else if (item.type === 'food') {
+        badge.className = 'status-badge status-food';
+        badge.innerText = 'Food Waste (Yellow Bag)';
+    } else if (item.type === 'recycle') {
+        badge.className = 'status-badge status-recycle';
+        badge.innerText = 'Recyclable (Sort by Material)';
+    } else if (item.type === 'special') {
+        badge.className = 'status-badge status-special';
+        badge.innerText = 'Special Disposal Needed';
+    }
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var catMatch = searchParams.match(/[?&]cat=([^&]+)/);
+    var idxMatch = searchParams.match(/[?&]idx=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && catMatch && catMatch[1] && idxMatch && idxMatch[1]) {
+        setTimeout(function() { 
+            showSubCategory(catMatch[1]);
+            renderModalContent(catMatch[1], parseInt(idxMatch[1])); 
+        }, 300);
+    }
+});
+//]]>
+</script>
