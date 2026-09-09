@@ -81,7 +81,7 @@
     .sos-korean { font-family: 'Noto Sans KR', sans-serif; font-size: 19px; font-weight: 700; color: #212121; line-height: 1.5; word-break: keep-all;}
 
     .delivery-links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;}
-    .del-btn { padding: 15px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 700; text-decoration: none; transition: 0.2s;}
+    .del-btn { display: block; width: 100%; padding: 15px; border-radius: 12px; text-align: center; font-size: 14px; font-weight: 700; text-decoration: none; transition: 0.2s; cursor: pointer; border: none; font-family: inherit; }
     .del-naver { background: #03C75A; border: 1px solid #03C75A; color: #FFFFFF;}
     .del-naver:active { background: #02a349; }
     .del-kakao { background: #FEE500; border: 1px solid #FEE500; color: #191919;}
@@ -111,14 +111,14 @@
         </ul>
     </div>
 
-    <!--Ambient Idle Guide (50 MAX Tips)-->
+    <!-- Ambient Idle Guide -->
     <div class="ambient-idle-box">
         <div class="ambient-quote" id="ambient-quote-text">"Loading local cafe secrets..."</div>
         <div class="ambient-indicator">💡 Culture Tips Auto-Playing</div>
     </div>
 
     <div class="menu-title">Select Your Drink / Dessert</div>
-    <!--10 Categories Grid-->
+    
     <div class="menu-grid">
         <div class="menu-btn" onclick="handleAction('americano')" ontouchstart="">
             <div class="menu-icon">☕</div>
@@ -194,8 +194,8 @@
         </div>
 
         <div class="delivery-links">
-            <a class="del-btn del-naver" href="https://map.naver.com/v5/search/Cafe?lang=en" target="_blank">📍 Find Cafes on Naver Map (EN)</a>
-            <a class="del-btn del-kakao" href="https://map.kakao.com/link/search/Cafe" target="_blank">📍 Find Cafes on Kakao Map (EN)</a>
+            <button class="del-btn del-naver" onclick="openMap('naver')" ontouchstart="">📍 Find Cafes on Naver Map (EN)</button>
+            <button class="del-btn del-kakao" onclick="openMap('kakao')" ontouchstart="">📍 Find Cafes on Kakao Map (EN)</button>
         </div>
 
         <button class="close-btn" id="close-btn" onclick="closeModal()" ontouchstart="">Close Menu</button>
@@ -204,9 +204,6 @@
 
 <script type="text/javascript">
 //<![CDATA[
-/* Strict ES5 - No let, const, or arrow functions */
-
-// Ambient Data: 50 MAX Tips for Cafes
 var ambientTips = [
     "Koreans drink Iced Americano (Ah-Ah) even in freezing winter. It is called 'Eol-juk-ah'.",
     "You can safely leave your laptop and wallet on the table to go to the restroom. Nobody will steal it.",
@@ -271,7 +268,6 @@ setInterval(function() {
     }, 1000);
 }, 8000); 
 
-// Food Database: MAX Capacity (80 Items Total across 10 categories)
 var cafeDB = {
     'americano': [
         { title: "Mild Iced Americano", kr: "연한 아이스 아메리카노 (Ah-Ah)", tags: ["Coffee", "Custom Option"], price: "KRW 4,000 ~ 5,500", includes: "Espresso + Water + Ice (Less Espresso)", desc: "The legendary Ah-Ah. For those who find Korean espresso too strong, you can ask them to make it 'mild' by reducing the number of espresso shots.", cheat: "Always specify if you are staying or leaving. 'Deu-si-go ga-se-yo?' means 'For here?'.", sos: "아이스 아메리카노 한 잔, 샷 하나 빼고 연하게 부탁드립니다. 매장에서 먹고 갈게요." },
@@ -377,19 +373,14 @@ var cafeDB = {
 
 function handleAction(categoryId) {
     var now = new Date().getTime();
-    
-    // 1st Logic: AppInventor string communication
     try {
         if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
             window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
         }
     } catch(e) {}
-
-    // 2nd Logic: Safe URL reload (Double Safety for older Android)
     var baseUrl = window.location.href.split('?')[0].split('#')[0];
     var searchString = window.location.search;
     var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
-    
     setTimeout(function() {
         window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&cat=" + categoryId);
     }, 500);
@@ -419,7 +410,6 @@ function showContent(categoryId) {
         }
     }
     document.getElementById('res-tags-container').innerHTML = tagsHtml;
-
     document.getElementById('result-modal').style.display = 'block';
 }
 
@@ -429,6 +419,15 @@ function closeModal() {
         var baseUrl = window.location.href.split('?')[0].split('#')[0];
         var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
         window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+
+function openMap(target) {
+    var url = target === 'naver' ? "https://map.naver.com/v5/search/Cafe?lang=en" : "https://map.kakao.com/link/search/Cafe";
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("MAPURL:" + url);
+        }
     } catch(e) {}
 }
 
