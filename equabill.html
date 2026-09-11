@@ -1,0 +1,340 @@
+<!--Google Blogger Only: EquaBill Premium Master (Strict ES5, Dual-Safety AdMob Trigger, Text Embedded)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0B0F19 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Montserrat', sans-serif;
+        color: #FFFFFF; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particle-canvas {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #D4AF37; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);}
+    .sub-title { font-size: 12px; color: #8A9BB4; font-weight: 500; text-transform: uppercase; letter-spacing: 3px;}
+
+    .input-card { 
+        background: rgba(20, 26, 40, 0.6); 
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); margin-bottom: 25px;
+    }
+    
+    .section-title { font-size: 11px; font-weight: 700; color: #D4AF37; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px;}
+
+    .input-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
+    .input-row:last-child { margin-bottom: 0;}
+    
+    .input-label { font-size: 14px; font-weight: 500; color: #E2E8F0; display: flex; flex-direction: column;}
+    .input-sub { font-size: 11px; font-weight: 300; color: #64748B; margin-top: 4px;}
+    
+    .custom-input { width: 45%; padding: 12px 15px; font-size: 16px; font-weight: 700; color: #FFFFFF; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; outline: none; text-align: right; font-family: 'Montserrat', sans-serif; transition: 0.3s; box-sizing: border-box;}
+    .custom-input:focus { border-color: #D4AF37; background: rgba(212, 175, 55, 0.05); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);}
+    .custom-input::placeholder { color: #475569; font-weight: 300; }
+
+    .submit-btn { width: 100%; padding: 20px; font-size: 15px; font-weight: 800; color: #0B0F19; background: linear-gradient(135deg, #D4AF37 0%, #AA8222 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25); text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; margin-bottom: 40px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);}
+
+    /* Text Guide Sections */
+    .guide-card { background: rgba(11, 15, 25, 0.8); border-left: 4px solid #D4AF37; border-radius: 0 12px 12px 0; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+    .guide-title { font-size: 15px; font-weight: 800; color: #D4AF37; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; text-transform: uppercase;}
+    .guide-text { font-size: 13px; color: #94A3B8; line-height: 1.7; font-weight: 400; margin-bottom: 15px;}
+    .guide-text:last-child { margin-bottom: 0;}
+    .guide-text strong { color: #E2E8F0; font-weight: 700;}
+
+    /* Loading Overlay */
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(5px);}
+    .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #D4AF37; border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 700; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase;}
+    .loading-sub { font-size: 12px; color: #8A9BB4; margin-top: 8px; font-weight: 300;}
+
+    /* Result Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px);}
+    .result-content { max-width: 540px; margin: 40px auto; background: linear-gradient(180deg, #1A2235 0%, #0B0F19 100%); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 24px; padding: 35px 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    .receipt-header { text-align: center; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 25px; margin-bottom: 25px;}
+    .receipt-title { font-size: 20px; font-weight: 800; color: #FFFFFF; letter-spacing: 1px; text-transform: uppercase;}
+    
+    .person-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;}
+    .person-type { font-size: 13px; font-weight: 500; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;}
+    .person-amount { font-size: 22px; font-weight: 800; color: #D4AF37;}
+    .person-sub { font-size: 11px; color: #64748B; margin-top: 4px; font-weight: 300;}
+
+    .total-box { display: flex; justify-content: space-between; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: #FFFFFF; padding: 25px; border-radius: 16px; margin-top: 25px; margin-bottom: 30px; align-items: center;}
+    .total-label { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
+    .total-amount { font-size: 28px; font-weight: 800; color: #D4AF37;}
+
+    .close-btn { width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; color: #FFFFFF; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 2px;}
+    .close-btn:active { background: rgba(255,255,255,0.1);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">EquaBill</div>
+        <div class="sub-title">Smart Split &amp; Tip Master</div>
+    </div>
+
+    <!--Calculator Section-->
+    <div class="input-card">
+        <div class="section-title">1. Billing Information</div>
+        <div class="input-row">
+            <div class="input-label">Subtotal <span class="input-sub">Before tax &amp; tip</span></div>
+            <input class="custom-input" id="inp-bill" placeholder="$ 0.00" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Tax Amount</div>
+            <input class="custom-input" id="inp-tax" placeholder="$ 0.00" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Tip Percentage</div>
+            <input class="custom-input" id="inp-tip" type="number" value="18" />
+        </div>
+    </div>
+
+    <div class="input-card">
+        <div class="section-title">2. Split Configuration</div>
+        <div class="input-row">
+            <div class="input-label">Total People</div>
+            <input class="custom-input" id="inp-ppl" type="number" value="2" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Drinkers (Alcohol) <span class="input-sub">Separate alcohol cost</span></div>
+            <input class="custom-input" id="inp-drinkers" type="number" value="0" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Total Drink Cost</div>
+            <input class="custom-input" id="inp-drinks-cost" placeholder="$ 0.00" type="number" />
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Calculate Split</button>
+
+    <!--Embedded Guide Sections-->
+    <div class="guide-card">
+        <div class="guide-title">✨ What is EquaBill?</div>
+        <div class="guide-text">Ever had a great meal ruined by the awkward math at the end? When someone orders drinks and others don't, splitting the bill evenly isn't fair. <strong>EquaBill</strong> is your ultimate smart split companion. It instantly calculates exact individual shares while distributing taxes and tips perfectly based on what each person actually consumed.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">📖 How to Use</div>
+        <div class="guide-text"><strong>1. Bill Details:</strong> Enter the pure food cost (Subtotal), Tax, and your desired Tip Percentage from your receipt.</div>
+        <div class="guide-text"><strong>2. Split Rules:</strong> Enter the total number of people. If anyone ordered alcohol, enter how many people drank and the total cost of those drinks.</div>
+        <div class="guide-text"><strong>3. Calculate:</strong> Tap the button to generate a fair, digital receipt for everyone.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">💡 Pro Tips</div>
+        <div class="guide-text">The 'Drinkers' feature isn't just for alcohol! If one person ordered an expensive steak or a lavish dessert while others had a light meal, simply input that premium item's price into the <strong>Total Drink Cost</strong> field. EquaBill will cleanly separate the luxury cost and apply the correct proportional tax and tip to that specific person.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">⚠️ Disclaimer</div>
+        <div class="guide-text">This app is provided as a convenient utility tool to simplify complex bill splitting. Depending on local state tax laws, restaurant rounding policies, or post-tax tipping rules, the final calculated amount may vary by 1 or 2 cents compared to the merchant's physical receipt. Please use these results as a helpful reference for your group.</div>
+    </div>
+</div>
+
+<!--Premium Loading Screen-->
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Processing Receipt</div>
+    <div class="loading-sub">Calculating exact shares &amp; taxes</div>
+</div>
+
+<!--Premium Result Screen-->
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="receipt-header">
+            <div class="receipt-title">Final Analysis</div>
+        </div>
+        <div id="result-list"></div>
+        <div class="total-box">
+            <div class="total-label">Grand Total</div>
+            <div class="total-amount" id="res-grand-total">$0.00</div>
+        </div>
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Calculate Another Bill</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Maximum Compatibility & Dual Safety */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 40;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.5 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 300);
+    }
+});
+
+function startCalculation() {
+    var bill = document.getElementById('inp-bill').value || 0;
+    var tax = document.getElementById('inp-tax').value || 0;
+    var tip = document.getElementById('inp-tip').value || 0;
+    var ppl = document.getElementById('inp-ppl').value || 1;
+    var drinkers = document.getElementById('inp-drinkers').value || 0;
+    var drinkCost = document.getElementById('inp-drinks-cost').value || 0;
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&b=" + bill + "&tx=" + tax + "&tp=" + tip + "&p=" + ppl + "&d=" + drinkers + "&dc=" + drinkCost;
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? parseFloat(match[1]) : 0;
+    };
+
+    var bill = getParam('b');
+    var tax = getParam('tx');
+    var tip = getParam('tp');
+    var ppl = getParam('p');
+    var drinkers = getParam('d');
+    var drinkCost = getParam('dc');
+
+    if (ppl < 1) ppl = 1;
+    if (drinkers > ppl) drinkers = ppl;
+    if (drinkCost > bill) drinkCost = bill;
+
+    var foodCost = bill - drinkCost;
+    var nonDrinkers = ppl - drinkers;
+    
+    var foodPerPerson = foodCost / ppl;
+    var drinkPerDrinker = drinkers > 0 ? (drinkCost / drinkers) : 0;
+
+    var tipAmount = bill * (tip / 100);
+    var grandTotal = bill + tax + tipAmount;
+    var ratio = bill > 0 ? (grandTotal / bill) : 1;
+
+    var costNonDrinker = foodPerPerson * ratio;
+    var costDrinker = (foodPerPerson + drinkPerDrinker) * ratio;
+
+    var listHtml = "";
+
+    if (nonDrinkers > 0) {
+        listHtml += '<div class="person-card">';
+        listHtml += '<div><div class="person-type">Food Only (' + nonDrinkers + 'x)</div><div class="person-sub">Includes proportional tax & tip</div></div>';
+        listHtml += '<div class="person-amount">$' + costNonDrinker.toFixed(2) + '</div>';
+        listHtml += '</div>';
+    }
+
+    if (drinkers > 0) {
+        listHtml += '<div class="person-card" style="border-left: 3px solid #D4AF37; background: rgba(212, 175, 55, 0.05);">';
+        listHtml += '<div><div class="person-type" style="color:#D4AF37;">Food + Drinks (' + drinkers + 'x)</div><div class="person-sub">Includes proportional tax & tip</div></div>';
+        listHtml += '<div class="person-amount">$' + costDrinker.toFixed(2) + '</div>';
+        listHtml += '</div>';
+    }
+
+    document.getElementById('result-list').innerHTML = listHtml;
+    document.getElementById('res-grand-total').innerText = "$" + grandTotal.toFixed(2);
+    
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+        
+        document.getElementById('inp-bill').value = '';
+        document.getElementById('inp-tax').value = '';
+        document.getElementById('inp-drinks-cost').value = '';
+    } catch(e) {}
+}
+//]]>
+</script>
