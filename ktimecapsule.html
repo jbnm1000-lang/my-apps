@@ -1,0 +1,333 @@
+<!--Google Blogger Only: K-Time Capsule (Premium Age Archive & External Search, Strict ES5)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #F2F4F6 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Noto Sans KR', 'Outfit', sans-serif;
+        color: #191F28; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 28px; font-weight: 800; color: #1A237E; letter-spacing: -0.5px; margin-bottom: 8px;}
+    .sub-title { font-size: 12px; color: #5C6BC0; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;}
+
+    .info-card { background: #FFFFFF; border-radius: 18px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(26, 35, 126, 0.05); border-left: 5px solid #3F51B5;}
+    .card-title { font-size: 15px; font-weight: 800; color: #283593; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .card-text { font-size: 13.5px; color: #4E5968; line-height: 1.7; font-weight: 500; margin-bottom: 12px; word-break: keep-all; text-align: left;}
+    .card-text strong { color: #1A237E; font-weight: 800;}
+    .card-text:last-child { margin-bottom: 0;}
+
+    .input-card { background: #FFFFFF; border-radius: 20px; padding: 30px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); margin-bottom: 30px;}
+    .input-label { font-size: 13px; font-weight: 800; color: #4E5968; margin-bottom: 10px; display: block;}
+    
+    .custom-select { width: 100%; padding: 18px; font-size: 18px; font-weight: 700; color: #191F28; background: #F2F4F6; border: 1px solid #E5E8EB; border-radius: 12px; margin-bottom: 25px; outline: none; -webkit-appearance: none; appearance: none; text-align: center; font-family: 'Outfit', 'Noto Sans KR', sans-serif;}
+    .custom-select:focus { border-color: #3F51B5; background: #E8EAF6;}
+
+    .submit-btn { width: 100%; padding: 20px; font-size: 18px; font-weight: 800; color: #FFFFFF; background: #3F51B5; border: none; border-radius: 14px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(63, 81, 181, 0.3); letter-spacing: 1px;}
+    .submit-btn:active { background: #283593; transform: scale(0.97);}
+
+    /* Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(25, 31, 40, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #FFFFFF; border-radius: 24px; padding: 35px 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center;}
+    
+    .res-year { font-size: 42px; font-weight: 800; color: #1A237E; font-family: 'Outfit', sans-serif; margin-bottom: 5px; text-shadow: 2px 2px 0px #E8EAF6;}
+    .res-subtitle { font-size: 15px; font-weight: 700; color: #5C6BC0; margin-bottom: 25px;}
+    
+    .age-badge { display: inline-block; padding: 10px 25px; background: #E8EAF6; color: #3F51B5; font-size: 20px; font-weight: 800; border-radius: 30px; margin-bottom: 12px; border: 2px solid #C5CAE9;}
+    .grade-text { font-size: 18px; font-weight: 800; color: #333D4B; margin-bottom: 25px;}
+
+    .history-card { background: #FAFAFA; border: 1px solid #E5E8EB; border-radius: 16px; padding: 25px 20px; margin-bottom: 25px;}
+    .history-label { font-size: 12px; font-weight: 800; color: #8B95A1; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;}
+    .history-text { font-size: 15.5px; color: #191F28; line-height: 1.6; font-weight: 600; word-break: keep-all;}
+
+    /* External Search Buttons */
+    .search-section-title { font-size: 13px; font-weight: 800; color: #8B95A1; margin-bottom: 12px; text-align: left;}
+    .search-btn-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;}
+    .s-btn { width: 100%; padding: 15px; border-radius: 12px; font-size: 14.5px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; text-align: left; display: flex; align-items: center; justify-content: center; gap: 8px;}
+    .s-btn:active { transform: scale(0.98);}
+    .btn-naver { background: #03C75A; color: #FFFFFF; }
+    .btn-google { background: #F8F9FA; color: #3C4043; border: 1px solid #DADCE0;}
+    .btn-wiki { background: #FFFFFF; color: #000000; border: 1px solid #BDBDBD;}
+
+    .close-btn { width: 100%; padding: 18px; background: #F2F4F6; border: none; border-radius: 14px; color: #4E5968; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s;}
+    .close-btn:active { background: #E5E8EB;}
+</style>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Time Capsule</div>
+        <div class="sub-title">내 나이 기록부 &amp; 이력서 계산기</div>
+    </div>
+
+    <!--App Information & Disclaimer-->
+    <div class="info-card">
+        <div class="card-title">📖 앱 이용 안내</div>
+        <div class="card-text">
+            <strong>이력서 작성</strong>이나 과거의 추억을 회상할 때, 특정 연도에 내가 몇 살이었고 몇 학년이었는지 정확하게 계산해 주는 스마트 아카이브입니다.
+        </div>
+        <div class="card-text">
+            <strong>✓ 이용 방법:</strong> 본인의 출생 연도를 선택하고, 궁금한 과거(또는 미래) 연도를 선택한 뒤 '시간 여행하기' 버튼을 누르세요.
+        </div>
+    </div>
+
+    <div class="info-card" style="background-color: #fafafa; border-left-color: rgb(158, 158, 158);">
+        <div class="card-title" style="color: #616161;">⚠️ 주의사항 (면책조항)</div>
+        <div class="card-text">
+            본 앱의 학력 계산은 한국의 <strong>정규 보편 학제 (초등학교 8세, 중학교 14세, 고등학교 17세 입학)</strong> 및 '만 나이 통일법' 이전의 <strong>'한국 나이(세는 나이)'</strong>를 기준으로 작성되었습니다. 
+        </div>
+        <div class="card-text">
+            조기 입학, 재수, 유급, 빠른 년생 등 개인의 특수한 상황에 따라 실제 졸업 연도와 다를 수 있으므로, 공문서 작성 시 최종 검토용으로만 활용하시기 바랍니다.
+        </div>
+    </div>
+
+    <!--Input Section-->
+    <div class="input-card">
+        <label class="input-label">당신의 출생 연도를 선택하세요</label>
+        <select class="custom-select" id="birth-year"></select>
+
+        <label class="input-label">기억하고 싶은 과거(또는 미래) 연도</label>
+        <select class="custom-select" id="target-year"></select>
+
+        <button class="submit-btn" onclick="triggerAdAndCalculate()" ontouchstart="">시간 여행하기 🚀</button>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-year" id="res-year-text">1997</div>
+        <div class="res-subtitle">그해, 당신의 기록</div>
+        
+        <div class="age-badge" id="res-age">9살</div>
+        <div class="grade-text" id="res-grade">초등학교 2학년</div>
+
+        <div class="history-card">
+            <div class="history-label">🇰🇷 당시 대한민국은?</div>
+            <div class="history-text" id="res-history">역사 데이터가 출력됩니다.</div>
+        </div>
+
+        <div class="search-section-title">🔍 당시 시대 배경 더 찾아보기</div>
+        <div class="search-btn-group">
+            <button class="s-btn btn-naver" onclick="openSearch('naver')" ontouchstart="">N 네이버에서 검색하기</button>
+            <button class="s-btn btn-google" onclick="openSearch('google')" ontouchstart="">G 구글에서 사건 찾아보기</button>
+            <button class="s-btn btn-wiki" onclick="openSearch('wiki')" ontouchstart="">W 위키백과 해당 연도 읽기</button>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">메인 화면으로 돌아가기</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation */
+
+// History Database (1970 ~ 2026 : 57 Years MAX Data)
+var historyDB = {
+    1970: "새마을운동이 시작되고, 경부고속도로 전 구간이 개통되며 한강의 기적이 본격화되던 해입니다.",
+    1971: "서울의 첫 지하철인 1호선 공사가 착공되었고, 남북 적십자 회담이 처음으로 열렸습니다.",
+    1972: "7.4 남북 공동 성명이 발표되었으며, 유신 헌법이 제정되어 제4공화국이 출범했습니다.",
+    1973: "동양 최대 규모의 소양강 댐이 준공되었고, 국민차 '포니'의 개발이 시작된 해입니다.",
+    1974: "서울 지하철 1호선(서울역~청량리)이 개통되었고, 국민 간식 '초코파이'가 처음 출시되었습니다.",
+    1975: "여의도 국회의사당이 준공되었으며, 영동대교 개통으로 강남 개발이 본격적으로 시작되었습니다.",
+    1976: "에버랜드의 전신인 '용인 자연농원'이 개장하여 전 국민의 최고 휴양지로 떠올랐습니다.",
+    1977: "대한민국 역사상 처음으로 수출 100억 달러를 달성하며 경제 성장의 상징적인 해가 되었습니다.",
+    1978: "한국 문화예술의 전당인 세종문화회관이 개관하였고, 자연보호 헌장이 선포되었습니다.",
+    1979: "10.26 사태로 박정희 대통령이 서거하고, 12.12 군사반란이 일어나며 격동의 시기를 겪었습니다.",
+    1980: "5.18 광주 민주화운동이 일어났으며, 대한민국에 본격적으로 컬러 TV 방송이 시작되었습니다.",
+    1981: "36년 만에 야간통행금지가 해제되었고, 88 서울 올림픽 유치가 극적으로 확정되었습니다.",
+    1982: "대한민국 프로야구가 화려하게 출범하였고, 중고등학생의 교복과 두발 자율화가 시행되었습니다.",
+    1983: "KBS '이산가족 찾기' 생방송이 전 국민을 울렸고, 국민 애니메이션 '아기공룡 둘리'가 탄생했습니다.",
+    1984: "과천 서울대공원이 개장하였고, 한국에 천주교 전래 200주년을 맞아 교황이 최초로 방한했습니다.",
+    1985: "당시 아시아 최고층 건물이었던 여의도 63빌딩이 완공되어 서울의 랜드마크가 되었습니다.",
+    1986: "제10회 서울 아시안게임이 성공적으로 개최되었고, 한강 종합 개발 사업이 마무리되었습니다.",
+    1987: "6월 민주항쟁을 통해 대통령 직선제를 이끌어냈고, 현재까지 이어지는 1987년 체제가 출범했습니다.",
+    1988: "제24회 서울 올림픽이 개최되며 전 세계에 한국을 알렸고, 맥도날드 한국 1호점이 압구정에 문을 열었습니다.",
+    1989: "해외여행이 전면 자유화되어 국민들의 해외 출국이 본격적으로 시작된 뜻깊은 해입니다.",
+    1990: "삐삐(무선호출기)가 대중화되기 시작했고, 10월 3일 동서독이 통일되며 냉전 시대의 종식을 알렸습니다.",
+    1991: "SBS가 개국하며 지상파 3사 시대가 열렸고, 남북한이 UN에 동시 가입했습니다.",
+    1992: "서태지와 아이들이 '난 알아요'로 데뷔하며 대한민국 대중음악계의 판도를 영원히 바꾸어 놓았습니다.",
+    1993: "대전 엑스포(EXPO)가 개최되어 1,400만 명이 다녀갔고, 이마트 1호점 창동점이 개점했습니다.",
+    1994: "성수대교 붕괴 사고라는 큰 비극이 있었으며, 역사상 가장 끔찍했던 폭염이 기록된 해입니다.",
+    1995: "쓰레기 종량제가 전국적으로 전면 실시되었고, 케이블 TV 본방송이 시작되었습니다.",
+    1996: "전설의 아이돌 H.O.T.가 데뷔하며 본격적인 아이돌 팬덤 문화의 시대가 개막했습니다.",
+    1997: "IMF 외환위기가 터지며 국가 부도 사태를 맞았고, 삐삐 가입자 수가 1,500만 명으로 최고조에 달했습니다.",
+    1998: "외환위기 극복을 위한 전 국민적인 '금 모으기 운동'이 열렸고, PC방과 스타크래프트가 전국을 휩쓸었습니다.",
+    1999: "밀레니엄 버그(Y2K) 공포가 전 세계를 덮쳤고, 국민 SNS '싸이월드'가 처음 오픈했습니다.",
+    2000: "역사적인 첫 남북정상회담이 평양에서 열렸고, 조성모의 '아시나요'가 메가 히트를 기록했습니다.",
+    2001: "아시아의 허브 인천국제공항이 개항하였고, 9.11 테러로 전 세계가 충격에 빠진 해입니다.",
+    2002: "한일 월드컵에서 대한민국이 4강 신화를 쓰며 온 국민이 '붉은 악마'가 되어 거리를 가득 채웠습니다.",
+    2003: "국민 드라마 '대장금'이 방영되어 최고 시청률 57%를 기록하며 한류 열풍의 시작을 알렸습니다.",
+    2004: "KTX 고속철도가 전면 개통되어 전국 반나절 생활권이 열렸고, 주 5일 근무제가 처음 시행되었습니다.",
+    2005: "서울 청계천 복원 공사가 완료되어 시민들에게 개방되었고, 100원과 500원짜리 신형 지폐가 발행되었습니다.",
+    2006: "봉준호 감독의 영화 '괴물'이 개봉 38일 만에 천만 관객을 돌파하며 한국 영화의 위상을 높였습니다.",
+    2007: "애플이 아이폰을 최초로 공개했으며, 한국에서는 원더걸스의 'Tell Me'가 국민적인 댄스 열풍을 일으켰습니다.",
+    2008: "베이징 올림픽에서 한국 야구 대표팀이 9전 전승으로 금메달을 땄고, 광우병 촛불집회가 광화문을 채웠습니다.",
+    2009: "소녀시대의 'Gee'가 신드롬을 일으켰고, 한국에 아이폰 3GS가 출시되며 스마트폰 대중화가 시작되었습니다.",
+    2010: "카카오톡이 처음 출시되어 국민 메신저로 자리 잡기 시작했고, G20 정상회의가 서울에서 개최되었습니다.",
+    2011: "평창 동계올림픽 유치가 극적으로 확정되었고, 나는 가수다 열풍과 팟캐스트 '나꼼수'가 큰 인기를 끌었습니다.",
+    2012: "싸이의 '강남스타일'이 유튜브를 뚫고 빌보드 2위에 오르며 전 세계적인 신드롬을 일으켰습니다.",
+    2013: "가왕 조용필의 'Bounce'가 세대를 초월한 히트를 쳤고, 드라마 '응답하라 1994'가 복고 열풍을 주도했습니다.",
+    2014: "세월호 참사라는 가슴 아픈 비극이 있었으며, 과자계의 혁명 '허니버터칩' 품귀 대란이 일어났습니다.",
+    2015: "메르스(MERS) 사태로 전 국민이 마스크를 쓰기 시작했고, '응답하라 1988'이 역대급 시청률을 기록했습니다.",
+    2016: "국정농단 사태로 광화문에 촛불집회가 열렸고, 증강현실 게임 '포켓몬 GO' 열풍이 속초를 강타했습니다.",
+    2017: "헌정 사상 최초로 대통령 파면이 인용되었고, 젊은 세대 사이에서 욜로(YOLO) 라이프스타일이 크게 유행했습니다.",
+    2018: "평창 동계올림픽이 성공적으로 개최되어 '영미~' 컬링 신드롬을 일으켰고, 주 52시간 근무제가 시행되었습니다.",
+    2019: "봉준호 감독의 영화 '기생충'이 한국 영화 최초로 칸 영화제 황금종려상을 수상하는 쾌거를 이루었습니다.",
+    2020: "코로나19(COVID-19) 팬데믹이 시작되어 전국적인 마스크 대란과 사회적 거리두기가 일상화되었습니다.",
+    2021: "넷플릭스 오리지널 '오징어 게임'이 전 세계 1위를 차지하며 K-콘텐츠의 위력을 확실하게 보여주었습니다.",
+    2022: "카타르 월드컵에서 극적인 16강 진출을 이루어냈고, 편의점 오픈런을 부른 '포켓몬빵 띠부씰' 대란이 있었습니다.",
+    2023: "한국식 '세는 나이'가 폐지되고 법적으로 '만 나이 통일법'이 전면 시행되며 온 국민이 어려졌습니다.",
+    2024: "파리 올림픽이 개최되었고, 전 국민의 사랑을 받았던 자이언트 판다 '푸바오'가 중국으로 반환되었습니다.",
+    2025: "대한민국이 전체 인구의 20% 이상이 65세 이상인 '초고령사회'로 진입하는 역사적인 분기점이 되는 해입니다.",
+    2026: "밀라노-코르티나담페초 동계올림픽이 개최되며, 한국의 AI 및 모바일 혁명이 새로운 국면을 맞이하는 해입니다."
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    var birthSelect = document.getElementById('birth-year');
+    var targetSelect = document.getElementById('target-year');
+    var currentYear = new Date().getFullYear();
+    
+    for (var y = 1950; y <= 2026; y++) {
+        var opt1 = document.createElement('option');
+        opt1.value = y;
+        opt1.innerHTML = y + "년 출생";
+        if (y === 1990) opt1.selected = true;
+        birthSelect.appendChild(opt1);
+        
+        var opt2 = document.createElement('option');
+        opt2.value = y;
+        opt2.innerHTML = y + "년의 기록 보기";
+        if (y === currentYear) opt2.selected = true;
+        targetSelect.appendChild(opt2);
+    }
+
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var byMatch = searchParams.match(/[?&]by=([^&]+)/);
+    var tyMatch = searchParams.match(/[?&]ty=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && byMatch && tyMatch) {
+        setTimeout(function() { 
+            calculateAndShow(parseInt(byMatch[1]), parseInt(tyMatch[1]));
+        }, 300);
+    }
+});
+
+function triggerAdAndCalculate() {
+    var bYear = document.getElementById('birth-year').value;
+    var tYear = document.getElementById('target-year').value;
+    
+    var now = new Date().getTime();
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
+        }
+    } catch(e) {}
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    
+    setTimeout(function() {
+        window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&by=" + bYear + "&ty=" + tYear);
+    }, 500);
+}
+
+function calculateAndShow(birthYear, targetYear) {
+    var age = targetYear - birthYear + 1;
+    var gradeText = "";
+
+    if (age < 1) {
+        age = "태어나기 전";
+        gradeText = "아직 세상에 없던 시기입니다 🌠";
+    } else if (age === 1) {
+        age = "1살";
+        gradeText = "태어난 해입니다 🍼";
+    } else if (age >= 2 && age <= 7) {
+        age = age + "살";
+        gradeText = "미취학 아동 (유치원/어린이집) 🧸";
+    } else if (age >= 8 && age <= 13) {
+        age = age + "살";
+        var elemGrade = age - 7;
+        gradeText = "초등학교 " + elemGrade + "학년 🎒";
+        if (elemGrade === 1) gradeText += " (입학 연도)";
+        if (elemGrade === 6) gradeText += " (졸업 연도)";
+    } else if (age >= 14 && age <= 16) {
+        age = age + "살";
+        var midGrade = age - 13;
+        gradeText = "중학교 " + midGrade + "학년 🏫";
+        if (midGrade === 1) gradeText += " (입학 연도)";
+        if (midGrade === 3) gradeText += " (졸업 연도)";
+    } else if (age >= 17 && age <= 19) {
+        age = age + "살";
+        var highGrade = age - 16;
+        gradeText = "고등학교 " + highGrade + "학년 🎓";
+        if (highGrade === 1) gradeText += " (입학 연도)";
+        if (highGrade === 3) gradeText += " (졸업 연도)";
+    } else {
+        age = age + "살";
+        gradeText = "성인 (대학교 또는 사회생활) 💼";
+    }
+
+    var historyInfo = historyDB[targetYear] || "이 시대에는 또 다른 특별한 이야기들이 있었습니다.";
+
+    document.getElementById('res-year-text').innerText = targetYear + "년";
+    document.getElementById('res-age').innerText = age;
+    document.getElementById('res-grade').innerText = gradeText;
+    document.getElementById('res-history').innerText = historyInfo;
+
+    // Save target year globally for external search
+    window.currentTargetYear = targetYear;
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function openSearch(engine) {
+    var year = window.currentTargetYear || new Date().getFullYear();
+    var url = "";
+    
+    if (engine === 'naver') {
+        url = "https://search.naver.com/search.naver?query=" + year + "년+대한민국";
+    } else if (engine === 'google') {
+        url = "https://www.google.com/search?q=" + year + "년+대한민국+주요+사건";
+    } else if (engine === 'wiki') {
+        url = "https://ko.wikipedia.org/wiki/" + year + "년_대한민국";
+    }
+
+    // App Inventor Intent 우회 신호 발송 (EcoBin의 지도 링크 로직과 100% 동일)
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("EXTURL:" + url);
+        } else {
+            // 웹 브라우저 테스트용
+            window.open(url, "_blank");
+        }
+    } catch(e) {}
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
