@@ -1,0 +1,317 @@
+<!--Google Blogger Only: RetroAge (Global Nostalgia Archive, Strict ES5)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Poppins:wght@400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #F4F6F6 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Poppins', sans-serif;
+        color: #263238; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 35px; }
+    .main-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 800; color: #004D40; letter-spacing: -0.5px; margin-bottom: 5px;}
+    .sub-title { font-size: 13px; color: #00796B; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+
+    .info-card { background: #FFFFFF; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0, 77, 64, 0.08); border-top: 4px solid #004D40;}
+    .card-title { font-size: 16px; font-weight: 800; color: #004D40; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;}
+    .card-text { font-size: 14px; color: #455A64; line-height: 1.6; font-weight: 400; margin-bottom: 10px; text-align: left;}
+    .card-text strong { color: #004D40; font-weight: 700;}
+    .card-text:last-child { margin-bottom: 0;}
+
+    .input-card { background: #FFFFFF; border-radius: 16px; padding: 30px 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); margin-bottom: 30px;}
+    .input-label { font-size: 12px; font-weight: 800; color: #546E7A; margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 1px;}
+    
+    .custom-select { width: 100%; padding: 18px; font-size: 18px; font-weight: 700; color: #263238; background: #ECEFF1; border: 2px solid transparent; border-radius: 10px; margin-bottom: 25px; outline: none; -webkit-appearance: none; appearance: none; text-align: center; font-family: 'Poppins', sans-serif; transition: 0.2s;}
+    .custom-select:focus { border-color: #004D40; background: #FFFFFF;}
+
+    .submit-btn { width: 100%; padding: 20px; font-size: 16px; font-weight: 800; color: #263238; background: #FFC107; border: none; border-radius: 10px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(255, 193, 7, 0.4); text-transform: uppercase; letter-spacing: 1px;}
+    .submit-btn:active { background: #FFA000; transform: scale(0.97);}
+
+    /* Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(38, 50, 56, 0.95); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box;}
+    .result-content { max-width: 540px; margin: 20px auto; background: #FFFFFF; border-radius: 20px; padding: 40px 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center;}
+    
+    .res-year { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 800; color: #004D40; margin-bottom: 5px;}
+    .res-subtitle { font-size: 14px; font-weight: 700; color: #00796B; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px;}
+    
+    .age-badge { display: inline-block; padding: 10px 25px; background: #E0F2F1; color: #004D40; font-size: 22px; font-weight: 800; border-radius: 8px; margin-bottom: 15px;}
+    .grade-text { font-size: 16px; font-weight: 700; color: #455A64; margin-bottom: 30px;}
+
+    .history-card { background: #FFF8E1; border: 1px solid #FFECB3; border-radius: 12px; padding: 25px 20px; margin-bottom: 30px;}
+    .history-label { font-size: 12px; font-weight: 800; color: #F57F17; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;}
+    .history-text { font-size: 16px; color: #3E2723; line-height: 1.6; font-weight: 600;}
+
+    /* External Search Buttons */
+    .search-section-title { font-size: 12px; font-weight: 800; color: #90A4AE; margin-bottom: 12px; text-align: left; text-transform: uppercase; letter-spacing: 1px;}
+    .search-btn-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;}
+    .s-btn { width: 100%; padding: 16px; border-radius: 8px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; text-align: left; display: flex; align-items: center; justify-content: center; gap: 10px;}
+    .s-btn:active { transform: scale(0.98);}
+    .btn-google { background: #F1F3F4; color: #202124; border: 1px solid #DADCE0;}
+    .btn-youtube { background: #FFEBEE; color: #D32F2F; border: 1px solid #FFCDD2;}
+    .btn-wiki { background: #FFFFFF; color: #000000; border: 1px solid #BDBDBD;}
+
+    .close-btn { width: 100%; padding: 18px; background: #ECEFF1; border: none; border-radius: 8px; color: #546E7A; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase;}
+    .close-btn:active { background: #CFD8DC;}
+</style>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">RetroAge</div>
+        <div class="sub-title">Nostalgia &amp; Time Capsule</div>
+    </div>
+
+    <!--App Information (Nostalgia Focused)-->
+    <div class="info-card">
+        <div class="card-title">🕰️ Take a Trip Down Memory Lane</div>
+        <div class="card-text">
+            Ever wonder exactly how old you were when <strong>The Matrix</strong> came out, or when the <strong>first iPhone</strong> was announced? 
+        </div>
+        <div class="card-text">
+            <strong>RetroAge</strong> calculates your exact age in any given year and reveals the most iconic pop culture and historical events of that time. Connect with your past and explore the eras you lived through.
+        </div>
+    </div>
+
+    <!--Input Section-->
+    <div class="input-card">
+        <label class="input-label">Select Your Birth Year</label>
+        <select class="custom-select" id="birth-year"></select>
+
+        <label class="input-label">Select a Year to Revisit</label>
+        <select class="custom-select" id="target-year"></select>
+
+        <button class="submit-btn" onclick="triggerAdAndCalculate()" ontouchstart="">Time Travel Now 🚀</button>
+    </div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-year" id="res-year-text">1997</div>
+        <div class="res-subtitle">The World In This Year</div>
+        
+        <div class="age-badge" id="res-age">You were 9</div>
+        <div class="grade-text" id="res-grade">Childhood Era</div>
+
+        <div class="history-card">
+            <div class="history-label">🌎 Global Flashback</div>
+            <div class="history-text" id="res-history">History data will appear here.</div>
+        </div>
+
+        <div class="search-section-title">Explore This Era</div>
+        <div class="search-btn-group">
+            <button class="s-btn btn-youtube" onclick="openSearch('youtube')" ontouchstart="">▶️ Watch Videos from this Year</button>
+            <button class="s-btn btn-google" onclick="openSearch('google')" ontouchstart="">🔍 Google the Major Events</button>
+            <button class="s-btn btn-wiki" onclick="openSearch('wiki')" ontouchstart="">📖 Read the Wikipedia Archive</button>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Return to Present</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation */
+
+// Global History Database (1970 ~ 2026 : 57 Years MAX Data)
+var historyDB = {
+    1970: "Apollo 13 safely returns to Earth after a near-fatal disaster, and The Beatles officially disband, ending an era.",
+    1971: "Walt Disney World opens in Florida, and the first microprocessor, the Intel 4004, is released.",
+    1972: "The Godfather is released in theaters, and HBO launches as the first pay-television network.",
+    1973: "Martin Cooper makes the first-ever mobile phone call, and the Sydney Opera House is officially opened.",
+    1974: "US President Richard Nixon resigns due to the Watergate scandal, and the Rubik's Cube is invented.",
+    1975: "Microsoft is founded by Bill Gates and Paul Allen, and Jaws becomes the first summer blockbuster.",
+    1976: "Apple Computer is founded by Steve Jobs and Steve Wozniak in a garage. The movie Rocky hits theaters.",
+    1977: "Star Wars is released and becomes a global cultural phenomenon. The Atari 2600 gaming console launches.",
+    1978: "Space Invaders is released, kicking off the golden age of arcade video games.",
+    1979: "Sony introduces the Walkman, forever changing how people listen to music on the go.",
+    1980: "Pac-Man is released in Japan, and CNN launches as the world's first 24-hour news channel.",
+    1981: "MTV launches with the music video 'Video Killed the Radio Star', and IBM releases its first Personal Computer.",
+    1982: "Michael Jackson releases 'Thriller', which becomes the best-selling album of all time. E.T. hits theaters.",
+    1983: "The Internet is officially born with the transition to TCP/IP. Mario Bros. is released by Nintendo.",
+    1984: "Apple introduces the Macintosh computer with its famous '1984' Super Bowl commercial. Tetris is created.",
+    1985: "Super Mario Bros. and the NES revive the video game industry. Back to the Future dominates the box office.",
+    1986: "The Space Shuttle Challenger disaster occurs, and the Chernobyl nuclear plant explodes in the USSR.",
+    1987: "The Simpsons make their first television appearance as a series of animated shorts.",
+    1988: "The first transatlantic fiber-optic cable is laid, drastically improving global communications.",
+    1989: "The Berlin Wall falls, signaling the end of the Cold War era. The Game Boy is released by Nintendo.",
+    1990: "The World Wide Web is invented by Tim Berners-Lee, laying the foundation for the modern internet.",
+    1991: "The Soviet Union dissolves. Nirvana releases 'Smells Like Teen Spirit', defining the grunge era.",
+    1992: "The first SMS text message is sent, reading 'Merry Christmas'. Cartoon Network is launched.",
+    1993: "Jurassic Park uses groundbreaking CGI to break box office records. The EU is officially established.",
+    1994: "Amazon is founded by Jeff Bezos in his garage. The Lion King and Forrest Gump are released.",
+    1995: "Microsoft launches Windows 95, and Pixar releases Toy Story, the first fully computer-animated feature film.",
+    1996: "The Nintendo 64 is released. Dolly the sheep becomes the first mammal cloned from an adult cell.",
+    1997: "Harry Potter and the Philosopher's Stone is published, and James Cameron's Titanic hits theaters.",
+    1998: "Google is founded by Larry Page and Sergey Brin. The iMac G3 is introduced, saving Apple.",
+    1999: "The Matrix redefines action cinema, while the world prepares for the feared Y2K computer bug.",
+    2000: "The PlayStation 2 is launched, eventually becoming the best-selling video game console in history.",
+    2001: "The September 11 attacks fundamentally change the world. Wikipedia is launched as a free encyclopedia.",
+    2002: "The Euro currency is officially introduced in 12 European countries.",
+    2003: "The Human Genome Project is completed. Apple launches the iTunes Store.",
+    2004: "Facebook is founded by Mark Zuckerberg. The Motorola Razr V3 becomes a cultural icon.",
+    2005: "YouTube is launched, with its first video 'Me at the zoo' uploaded in April.",
+    2006: "Twitter launches with a 140-character limit. Pluto is demoted to a 'dwarf planet'.",
+    2007: "Steve Jobs unveils the first iPhone, revolutionizing the smartphone industry forever.",
+    2008: "Marvel's MCU begins with Iron Man. The global financial crisis causes a severe worldwide recession.",
+    2009: "Bitcoin is created by the pseudonymous Satoshi Nakamoto, launching the cryptocurrency era.",
+    2010: "Instagram is launched, and Apple releases the first iPad.",
+    2011: "Snapchat is released. The final Harry Potter movie premieres, ending a decade-long cinematic journey.",
+    2012: "NASA's Curiosity rover successfully lands on Mars. The 'Gangnam Style' music video breaks YouTube.",
+    2013: "Disney's Frozen becomes a global sensation, and the PlayStation 4 and Xbox One are released.",
+    2014: "The ALS Ice Bucket Challenge goes viral globally, raising over $200 million for research.",
+    2015: "The Paris Agreement on climate change is adopted by nearly every nation.",
+    2016: "Pokémon GO is released, becoming a massive global cultural phenomenon overnight.",
+    2017: "The Nintendo Switch is released, becoming one of the fastest-selling consoles in history.",
+    2018: "Avengers: Infinity War hits theaters, breaking numerous box office records.",
+    2019: "TikTok reaches 1 billion downloads, dominating global pop culture and music trends.",
+    2020: "The COVID-19 pandemic causes unprecedented global lockdowns and shifts the world to remote work.",
+    2021: "The James Webb Space Telescope is launched to observe the earliest galaxies in the universe.",
+    2022: "OpenAI releases ChatGPT to the public, sparking a massive global revolution in Artificial Intelligence.",
+    2023: "The 'Barbenheimer' phenomenon dominates the global box office. AI integration rapidly accelerates.",
+    2024: "The Paris Summer Olympics bring the world together for major international sporting events.",
+    2025: "Artificial Intelligence becomes deeply integrated into everyday operating systems and mobile devices.",
+    2026: "The Milan-Cortina Winter Olympics take place in Italy, showcasing the next generation of winter sports."
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    var birthSelect = document.getElementById('birth-year');
+    var targetSelect = document.getElementById('target-year');
+    var currentYear = new Date().getFullYear();
+    
+    for (var y = 1950; y <= 2026; y++) {
+        var opt1 = document.createElement('option');
+        opt1.value = y;
+        opt1.innerHTML = "Born in " + y;
+        if (y === 1990) opt1.selected = true;
+        birthSelect.appendChild(opt1);
+        
+        var opt2 = document.createElement('option');
+        opt2.value = y;
+        opt2.innerHTML = "Revisit " + y;
+        if (y === currentYear) opt2.selected = true;
+        targetSelect.appendChild(opt2);
+    }
+
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    var byMatch = searchParams.match(/[?&]by=([^&]+)/);
+    var tyMatch = searchParams.match(/[?&]ty=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott' && byMatch && tyMatch) {
+        setTimeout(function() { 
+            calculateAndShow(parseInt(byMatch[1]), parseInt(tyMatch[1]));
+        }, 300);
+    }
+});
+
+function triggerAdAndCalculate() {
+    var bYear = document.getElementById('birth-year').value;
+    var tYear = document.getElementById('target-year').value;
+    
+    var now = new Date().getTime();
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + now);
+        }
+    } catch(e) {}
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    
+    setTimeout(function() {
+        window.location.replace(baseUrl + "?" + mParam + "action=spin_ott&by=" + bYear + "&ty=" + tYear);
+    }, 500);
+}
+
+function calculateAndShow(birthYear, targetYear) {
+    var age = targetYear - birthYear;
+    var ageText = "";
+    var gradeText = "";
+
+    if (age < 0) {
+        ageText = "Not Born Yet";
+        gradeText = "Before your time 🌌";
+    } else if (age === 0) {
+        ageText = "Newborn";
+        gradeText = "The year you arrived 🍼";
+    } else {
+        ageText = "You were " + age;
+        
+        if (age >= 1 && age <= 4) {
+            gradeText = "Toddler Era 🧸";
+        } else if (age >= 5 && age <= 12) {
+            gradeText = "Childhood Era 🎒";
+        } else if (age >= 13 && age <= 19) {
+            gradeText = "Teenage Era 🎧";
+        } else if (age >= 20 && age <= 29) {
+            gradeText = "In your 20s 🎓";
+        } else if (age >= 30 && age <= 39) {
+            gradeText = "In your 30s 💼";
+        } else if (age >= 40 && age <= 49) {
+            gradeText = "In your 40s ☕";
+        } else if (age >= 50 && age <= 59) {
+            gradeText = "In your 50s 🍷";
+        } else {
+            gradeText = "Golden Era 🌟";
+        }
+    }
+
+    var historyInfo = historyDB[targetYear] || "This year holds many other untold stories.";
+
+    document.getElementById('res-year-text').innerText = targetYear;
+    document.getElementById('res-age').innerText = ageText;
+    document.getElementById('res-grade').innerText = gradeText;
+    document.getElementById('res-history').innerText = historyInfo;
+
+    window.currentTargetYear = targetYear;
+
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function openSearch(engine) {
+    var year = window.currentTargetYear || new Date().getFullYear();
+    var url = "";
+    
+    if (engine === 'youtube') {
+        url = "https://www.youtube.com/results?search_query=nostalgia+commercials+pop+culture+" + year;
+    } else if (engine === 'google') {
+        url = "https://www.google.com/search?q=major+global+events+in+" + year;
+    } else if (engine === 'wiki') {
+        url = "https://en.wikipedia.org/wiki/" + year;
+    }
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("EXTURL:" + url);
+        } else {
+            window.open(url, "_blank");
+        }
+    } catch(e) {}
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
