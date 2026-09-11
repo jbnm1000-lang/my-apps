@@ -1,0 +1,402 @@
+<!--Google Blogger Only: OptiPrice MAX Premium (Strict ES5, Dual-Safety AdMob Trigger, Discount Trap Detector)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0F172A !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif;
+        color: #F8FAFC; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particle-canvas {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 34px; font-weight: 800; color: #10B981; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(16, 185, 129, 0.3);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
+
+    .product-card { 
+        background: rgba(30, 41, 59, 0.7); 
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    
+    .card-header { font-size: 15px; font-weight: 800; color: #10B981; text-transform: uppercase; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(16, 185, 129, 0.2); padding-bottom: 12px; letter-spacing: 1px;}
+
+    .input-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;}
+    .input-row:last-child { margin-bottom: 0;}
+    
+    .input-label { font-size: 14px; font-weight: 600; color: #E2E8F0; display: flex; flex-direction: column;}
+    .input-sub { font-size: 11px; font-weight: 400; color: #64748B; margin-top: 4px;}
+    
+    .custom-input { width: 45%; padding: 14px; font-size: 16px; font-weight: 700; color: #FFFFFF; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; outline: none; text-align: right; font-family: 'Inter', sans-serif; transition: 0.3s; box-sizing: border-box;}
+    .custom-input:focus { border-color: #10B981; background: rgba(16, 185, 129, 0.05); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);}
+    .custom-input::placeholder { color: #475569; font-weight: 400; }
+    
+    .custom-select { width: 45%; padding: 14px; font-size: 15px; font-weight: 600; color: #FFFFFF; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; outline: none; text-align: center; -webkit-appearance: none; appearance: none; box-sizing: border-box;}
+    .custom-select:focus { border-color: #10B981;}
+
+    .discount-row { background: rgba(16, 185, 129, 0.05); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px dashed rgba(16, 185, 129, 0.3);}
+
+    .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #FFFFFF; background: linear-gradient(135deg, #059669 0%, #10B981 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);}
+
+    /* Premium Guide Sections */
+    .guide-card { background: rgba(30, 41, 59, 0.5); border-left: 4px solid #10B981; border-radius: 0 12px 12px 0; padding: 25px; margin-bottom: 20px;}
+    .guide-title { font-size: 15px; font-weight: 800; color: #10B981; margin-bottom: 15px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .guide-text { font-size: 13px; color: #CBD5E1; line-height: 1.7; font-weight: 400; margin-bottom: 12px;}
+    .guide-text:last-child { margin-bottom: 0;}
+    .guide-text strong { color: #FFFFFF; font-weight: 700;}
+
+    /* Loading Overlay */
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(5px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #10B981; border-radius: 50%; width: 55px; height: 55px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #10B981; letter-spacing: 2px; text-transform: uppercase;}
+    .loading-sub { font-size: 13px; color: #94A3B8; margin-top: 10px;}
+
+    /* Result Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 24px; padding: 35px 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center;}
+    
+    .winner-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: #10B981; font-size: 14px; font-weight: 800; padding: 10px 20px; border-radius: 20px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;}
+    .winner-title { font-size: 26px; font-weight: 800; color: #FFFFFF; margin-bottom: 30px;}
+    
+    .compare-box { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.8); border-radius: 16px; padding: 22px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);}
+    .compare-name { font-size: 14px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;}
+    .compare-price { font-size: 17px; font-weight: 800; color: #94A3B8;}
+    .highlight-price { color: #10B981; font-size: 22px;}
+
+    .savings-text { font-size: 15px; font-weight: 700; color: #FCD34D; margin-top: 25px; margin-bottom: 35px; background: rgba(252, 211, 77, 0.1); border: 1px solid rgba(252, 211, 77, 0.2); padding: 18px; border-radius: 16px;}
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; color: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;}
+    .close-btn:active { background: rgba(255,255,255,0.1);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">OptiPrice</div>
+        <div class="sub-title">Ultimate Unit Value Analyzer</div>
+    </div>
+
+    <!--Product A-->
+    <div class="product-card">
+        <div class="card-header">Option A (Standard)</div>
+        <div class="input-row">
+            <div class="input-label">Sticker Price ($)</div>
+            <input class="custom-input" id="price-a" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Size / Net Weight</div>
+            <input class="custom-input" id="size-a" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Unit Type</div>
+            <select class="custom-select" id="unit-a">
+                <option value="oz">Ounces (oz)</option>
+                <option value="lb">Pounds (lb)</option>
+                <option value="g">Grams (g)</option>
+                <option value="kg">Kilograms (kg)</option>
+                <option value="floz">Fluid Oz (fl oz)</option>
+                <option value="ml">Milliliters (ml)</option>
+                <option value="ea">Count (Each)</option>
+            </select>
+        </div>
+        <div class="input-row discount-row">
+            <div class="input-label">Discount Applied 
+                <span class="input-sub">Coupons or sales</span>
+            </div>
+            <input class="custom-input" id="disc-a" style="width: 35%;" type="number" />
+        </div>
+    </div>
+
+    <!--Product B-->
+    <div class="product-card">
+        <div class="card-header">Option B (Bulk / Sale)</div>
+        <div class="input-row">
+            <div class="input-label">Sticker Price ($)</div>
+            <input class="custom-input" id="price-b" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Size / Net Weight</div>
+            <input class="custom-input" id="size-b" type="number" />
+        </div>
+        <div class="input-row">
+            <div class="input-label">Unit Type</div>
+            <select class="custom-select" id="unit-b">
+                <option value="oz">Ounces (oz)</option>
+                <option value="lb">Pounds (lb)</option>
+                <option value="g">Grams (g)</option>
+                <option value="kg">Kilograms (kg)</option>
+                <option value="floz">Fluid Oz (fl oz)</option>
+                <option value="ml">Milliliters (ml)</option>
+                <option value="ea">Count (Each)</option>
+            </select>
+        </div>
+        <div class="input-row discount-row">
+            <div class="input-label">Discount Applied 
+                <span class="input-sub">Coupons or sales</span>
+            </div>
+            <input class="custom-input" id="disc-b" style="width: 35%;" type="number" />
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startComparison()" ontouchstart="">Analyze True Value</button>
+
+    <!--Embedded Guides & Tips-->
+    <div class="guide-card">
+        <div class="guide-title">🛒 Avoid The "Bulk Trap"</div>
+        <div class="guide-text">Supermarkets often trick shoppers into buying "Family Size" or "Bulk" packages by assuming bigger is always cheaper. In reality, the smaller package is frequently the better deal. <strong>OptiPrice</strong> cuts through the marketing illusions to reveal the true cost per basic unit.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">💡 How to Use &amp; Pro Tips</div>
+        <div class="guide-text"><strong>1. Enter Details:</strong> Input the price and size printed on the front of the packages.</div>
+        <div class="guide-text"><strong>2. Compare Anything:</strong> Do not worry about matching units. You can confidently compare a 16 oz box against a 1.5 lb bag. OptiPrice handles all complex unit math behind the scenes.</div>
+        <div class="guide-text"><strong>3. Use the Discount Detector:</strong> Is the item on sale for "20% off"? Enter that in the Discount field. OptiPrice will automatically reduce the final price before calculating the true unit value, showing you if the sale is actually worth it.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">⚠️ Disclaimer</div>
+        <div class="guide-text">OptiPrice provides calculated value estimates based on the information provided to assist your shopping decisions. Retailers may change final pricing or apply special club discounts at the register. Always verify the final checkout amount on your store receipt.</div>
+    </div>
+</div>
+
+<!--Loading Screen-->
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Analyzing Value</div>
+    <div class="loading-sub">Decoding supermarket pricing</div>
+</div>
+
+<!--Result Screen-->
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="winner-badge" id="res-badge">Best Deal Found</div>
+        <div class="winner-title" id="res-winner">Option A Wins!</div>
+        
+        <div class="compare-box" id="box-a">
+            <div class="compare-name">Option A</div>
+            <div class="compare-price" id="res-price-a">$0.00 / unit</div>
+        </div>
+        
+        <div class="compare-box" id="box-b">
+            <div class="compare-name">Option B</div>
+            <div class="compare-price" id="res-price-b">$0.00 / unit</div>
+        </div>
+
+        <div class="savings-text" id="res-savings">You save 0% by choosing this!</div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Analyze Another Item</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Maximum Compatibility */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.4 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(16, 185, 129, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 300);
+    }
+});
+
+function startComparison() {
+    var pA = document.getElementById('price-a').value || 0;
+    var sA = document.getElementById('size-a').value || 1;
+    var uA = document.getElementById('unit-a').value;
+    var dA = document.getElementById('disc-a').value || 0;
+    
+    var pB = document.getElementById('price-b').value || 0;
+    var sB = document.getElementById('size-b').value || 1;
+    var uB = document.getElementById('unit-b').value;
+    var dB = document.getElementById('disc-b').value || 0;
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&pa=" + pA + "&sa=" + sA + "&ua=" + uA + "&da=" + dA + "&pb=" + pB + "&sb=" + sB + "&ub=" + uB + "&db=" + dB;
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? match[1] : "";
+    };
+
+    var pa = parseFloat(getParam('pa')) || 0;
+    var sa = parseFloat(getParam('sa')) || 1;
+    var ua = getParam('ua') || 'ea';
+    var da = parseFloat(getParam('da')) || 0;
+    
+    var pb = parseFloat(getParam('pb')) || 0;
+    var sb = parseFloat(getParam('sb')) || 1;
+    var ub = getParam('ub') || 'ea';
+    var db = parseFloat(getParam('db')) || 0;
+
+    // Apply Discount
+    var finalPriceA = pa - (pa * (da / 100));
+    var finalPriceB = pb - (pb * (db / 100));
+
+    // Unit Conversion Rates to a Base Unit for fair comparison (Grams / Milliliters / Count)
+    var rates = {
+        'oz': 28.3495, 'lb': 453.592, 'g': 1, 'kg': 1000,
+        'floz': 29.5735, 'ml': 1, 'ea': 1
+    };
+
+    var baseUnitA = rates[ua] || 1;
+    var baseUnitB = rates[ub] || 1;
+
+    var costPerBaseA = finalPriceA / (sa * baseUnitA);
+    var costPerBaseB = finalPriceB / (sb * baseUnitB);
+
+    // Re-scale for display logic (Show price per selected unit)
+    var displayResA = costPerBaseA * (rates[ua] || 1);
+    var displayResB = costPerBaseB * (rates[ub] || 1);
+
+    document.getElementById('box-a').style.borderColor = "rgba(255,255,255,0.05)";
+    document.getElementById('box-b').style.borderColor = "rgba(255,255,255,0.05)";
+    document.getElementById('res-price-a').className = "compare-price";
+    document.getElementById('res-price-b').className = "compare-price";
+
+    var winnerText = "";
+    var savings = 0;
+
+    if (costPerBaseA < costPerBaseB) {
+        winnerText = "Option A Wins!";
+        document.getElementById('box-a').style.borderColor = "#10B981";
+        document.getElementById('res-price-a').className = "compare-price highlight-price";
+        savings = ((costPerBaseB - costPerBaseA) / costPerBaseB) * 100;
+    } else if (costPerBaseB < costPerBaseA) {
+        winnerText = "Option B Wins!";
+        document.getElementById('box-b').style.borderColor = "#10B981";
+        document.getElementById('res-price-b').className = "compare-price highlight-price";
+        savings = ((costPerBaseA - costPerBaseB) / costPerBaseA) * 100;
+    } else {
+        winnerText = "It's an Exact Tie!";
+        document.getElementById('res-badge').innerText = "Equal Value";
+    }
+
+    document.getElementById('res-winner').innerText = winnerText;
+    document.getElementById('res-price-a').innerText = "$" + displayResA.toFixed(4) + " / " + ua;
+    document.getElementById('res-price-b').innerText = "$" + displayResB.toFixed(4) + " / " + ub;
+
+    if (savings > 0) {
+        document.getElementById('res-savings').innerText = "You save " + savings.toFixed(1) + "% by choosing this option!";
+        document.getElementById('res-savings').style.display = "block";
+    } else {
+        document.getElementById('res-savings').style.display = "none";
+    }
+
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+        
+        document.getElementById('price-a').value = '';
+        document.getElementById('size-a').value = '';
+        document.getElementById('disc-a').value = '';
+        document.getElementById('price-b').value = '';
+        document.getElementById('size-b').value = '';
+        document.getElementById('disc-b').value = '';
+    } catch(e) {}
+}
+//]]>
+</script>
