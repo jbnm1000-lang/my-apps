@@ -1,0 +1,358 @@
+<!--Google Blogger Only: K-Stay Deadline Calculator MAX (Strict ES5, Dual-Safety AdMob Trigger, External Links)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0A1128 !important; 
+        user-select: none; -webkit-user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif;
+        color: #F8FAFC; 
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+    }
+
+    #particle-canvas {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+    }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 40px 20px 80px 20px; box-sizing: border-box; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #F59E0B; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
+
+    .input-card { 
+        background: rgba(30, 41, 59, 0.8); 
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    
+    .card-header { font-size: 15px; font-weight: 800; color: #F59E0B; text-transform: uppercase; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 12px; letter-spacing: 1px;}
+
+    .input-row { display: flex; flex-direction: column; margin-bottom: 20px;}
+    .input-row:last-child { margin-bottom: 0;}
+    
+    .input-label { font-size: 14px; font-weight: 600; color: #E2E8F0; margin-bottom: 8px;}
+    .input-sub { font-size: 11px; font-weight: 400; color: #64748B; margin-top: 4px;}
+    
+    .custom-input { width: 100%; padding: 16px; font-size: 16px; font-weight: 700; color: #FFFFFF; background: rgba(10, 17, 40, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s; box-sizing: border-box;}
+    .custom-input:focus { border-color: #F59E0B; background: rgba(245, 158, 11, 0.05); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);}
+    
+    .preset-container { display: flex; gap: 10px; margin-top: 10px;}
+    .preset-btn { flex: 1; padding: 10px; font-size: 13px; font-weight: 700; color: #94A3B8; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: center;}
+    .preset-btn:active { background: rgba(245, 158, 11, 0.2); color: #F59E0B; border-color: #F59E0B;}
+
+    .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #0A1128; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(245, 158, 11, 0.2);}
+
+    /* Premium Guide Sections */
+    .guide-card { background: rgba(30, 41, 59, 0.5); border-left: 4px solid #F59E0B; border-radius: 0 12px 12px 0; padding: 25px; margin-bottom: 20px;}
+    .guide-title { font-size: 15px; font-weight: 800; color: #F59E0B; margin-bottom: 15px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .guide-text { font-size: 13px; color: #CBD5E1; line-height: 1.7; font-weight: 400; margin-bottom: 12px;}
+    .guide-text:last-child { margin-bottom: 0;}
+    .guide-text strong { color: #FFFFFF; font-weight: 700;}
+
+    /* Loading Overlay */
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 17, 40, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(5px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #F59E0B; border-radius: 50%; width: 55px; height: 55px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #F59E0B; letter-spacing: 2px; text-transform: uppercase;}
+    .loading-sub { font-size: 13px; color: #94A3B8; margin-top: 10px;}
+
+    /* Result Modal */
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; overflow-y: auto; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 24px; padding: 35px 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center;}
+    
+    .winner-badge { display: inline-block; background: rgba(245, 158, 11, 0.15); color: #F59E0B; font-size: 14px; font-weight: 800; padding: 10px 20px; border-radius: 20px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;}
+    .winner-title { font-size: 24px; font-weight: 800; color: #FFFFFF; margin-bottom: 10px;}
+    .deadline-date { font-size: 34px; font-weight: 800; color: #F59E0B; margin-bottom: 30px; letter-spacing: -1px;}
+    
+    .compare-box { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 17, 40, 0.8); border-radius: 16px; padding: 22px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);}
+    .compare-name { font-size: 14px; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 1px;}
+    .compare-value { font-size: 17px; font-weight: 800; color: #94A3B8;}
+
+    .alert-text { font-size: 15px; font-weight: 700; color: #EF4444; margin-top: 25px; margin-bottom: 25px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 18px; border-radius: 16px;}
+    .safe-text { font-size: 15px; font-weight: 700; color: #10B981; margin-top: 25px; margin-bottom: 25px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 18px; border-radius: 16px;}
+
+    /* External Action Links */
+    .action-links { display: flex; gap: 10px; margin-bottom: 25px; }
+    .action-btn { flex: 1; padding: 15px 10px; font-size: 13px; font-weight: 700; color: #E2E8F0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.2s; }
+    .action-btn:active { background: rgba(245, 158, 11, 0.2); border-color: #F59E0B; color: #F59E0B; }
+    .action-icon { font-size: 22px; margin-bottom: 6px; }
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; color: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;}
+    .close-btn:active { background: rgba(255,255,255,0.1);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Stay Vault</div>
+        <div class="sub-title">Korea Visa Deadline Calculator</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header">Visa &amp; Entry Details</div>
+        
+        <div class="input-row">
+            <div class="input-label">Date of Entry to Korea</div>
+            <input class="custom-input" id="entry-date" type="date" />
+        </div>
+
+        <div class="input-row">
+            <div class="input-label">Allowed Duration of Stay (Days)
+                <span class="input-sub">Check your Visa or K-ETA approval (e.g., 90)</span>
+            </div>
+            <input class="custom-input" id="duration" placeholder="Enter days (e.g., 90)" type="number" />
+            <div class="preset-container">
+                <div class="preset-btn" onclick="setPreset(30)" ontouchstart="">30 Days</div>
+                <div class="preset-btn" onclick="setPreset(90)" ontouchstart="">90 Days</div>
+                <div class="preset-btn" onclick="setPreset(180)" ontouchstart="">180 Days</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Calculate Deadline</button>
+
+    <div class="guide-card">
+        <div class="guide-title">🛂 Avoid Overstay Penalties</div>
+        <div class="guide-text">Overstaying your visa in South Korea, even by a single day, can result in heavy fines, deportation, or a ban on future re-entry. <strong>K-Stay Vault</strong> calculates your exact legal departure deadline so you can book your return flight with peace of mind.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">💡 How Korean Immigration Counts</div>
+        <div class="guide-text">According to the Korea Immigration Service, the day you pass through immigration and enter the country counts as <strong>Day 1</strong> of your allowed stay. Our algorithm automatically factors this in to ensure you get the mathematically correct departure date.</div>
+    </div>
+
+    <div class="guide-card">
+        <div class="guide-title">⚠️ Disclaimer</div>
+        <div class="guide-text">This tool provides an estimated deadline for reference only. Visa rules may change depending on your nationality and agreements. Always verify your official expiration date with the Korea Immigration Service (Hi Korea) or your local embassy.</div>
+    </div>
+</div>
+
+<!--Loading Screen-->
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Analyzing Dates</div>
+    <div class="loading-sub">Connecting immigration logic</div>
+</div>
+
+<!--Result Screen-->
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="winner-badge">Must Leave On or Before</div>
+        <div class="deadline-date" id="res-deadline">YYYY-MM-DD</div>
+        
+        <div class="compare-box">
+            <div class="compare-name">Entry Date</div>
+            <div class="compare-value" id="res-entry">YYYY-MM-DD</div>
+        </div>
+        
+        <div class="compare-box">
+            <div class="compare-name">Allowed Stay</div>
+            <div class="compare-value" id="res-dur">0 Days</div>
+        </div>
+
+        <div class="safe-text" id="res-status">Status: Checking...</div>
+
+        <!--External Action Links Added-->
+        <div class="action-links">
+            <a class="action-btn" href="https://www.hikorea.go.kr/" target="_blank">
+                <span class="action-icon">🏛️</span>
+                Official Hi Korea
+            </a>
+            <a class="action-btn" href="https://www.skyscanner.com/" target="_blank">
+                <span class="action-icon">✈️</span>
+                Book Flight
+            </a>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Calculate Another Trip</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Maximum Compatibility */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 20;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.3 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(245, 158, 11, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+function setPreset(days) {
+    document.getElementById('duration').value = days;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    // Set default date to today
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    document.getElementById('entry-date').value = yyyy + '-' + mm + '-' + dd;
+
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 300);
+    }
+});
+
+function startCalculation() {
+    var eDate = document.getElementById('entry-date').value;
+    var dur = document.getElementById('duration').value;
+    
+    if (!eDate || !dur) {
+        alert("Please enter both Entry Date and Duration of Stay.");
+        return;
+    }
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&ed=" + eDate + "&dur=" + dur;
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? match[1] : "";
+    };
+
+    var ed = getParam('ed');
+    var dur = parseInt(getParam('dur'), 10);
+    
+    if (!ed || isNaN(dur)) return;
+
+    // Date Calculation (Entry day counts as Day 1)
+    var entryParts = ed.split('-');
+    var entryDate = new Date(entryParts[0], entryParts[1] - 1, entryParts[2]);
+    
+    var deadlineDate = new Date(entryDate.getTime());
+    deadlineDate.setDate(deadlineDate.getDate() + dur - 1);
+
+    var dYear = deadlineDate.getFullYear();
+    var dMonth = String(deadlineDate.getMonth() + 1).padStart(2, '0');
+    var dDay = String(deadlineDate.getDate()).padStart(2, '0');
+    var formattedDeadline = dYear + '-' + dMonth + '-' + dDay;
+
+    // Calculate days remaining from today
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    var diffTime = deadlineDate.getTime() - today.getTime();
+    var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    var statusEl = document.getElementById('res-status');
+    
+    if (diffDays < 0) {
+        statusEl.className = 'alert-text';
+        statusEl.innerText = "WARNING: You have overstayed your visa by " + Math.abs(diffDays) + " days!";
+    } else if (diffDays === 0) {
+        statusEl.className = 'alert-text';
+        statusEl.innerText = "URGENT: Your visa expires TODAY. You must leave.";
+    } else if (diffDays <= 7) {
+        statusEl.className = 'alert-text';
+        statusEl.innerText = "ACTION NEEDED: Only " + diffDays + " days remaining.";
+    } else {
+        statusEl.className = 'safe-text';
+        statusEl.innerText = "Safe Status: You have " + diffDays + " days remaining.";
+    }
+
+    document.getElementById('res-deadline').innerText = formattedDeadline;
+    document.getElementById('res-entry').innerText = ed;
+    document.getElementById('res-dur').innerText = dur + " Days";
+
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
