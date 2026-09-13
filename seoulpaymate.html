@@ -1,0 +1,332 @@
+<!--Google Blogger Only: Seoul Pay-Mate V2 (Strict ES5, Error-Free Text, Mobile Optimized UI)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #022C22 !important; 
+        user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif; color: #F8FAFC; margin: 0; padding: 0; overflow-x: hidden;
+        word-break: keep-all; overflow-wrap: break-word;
+    }
+
+    * { box-sizing: border-box; }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 35px 20px 80px 20px; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #FDE047; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(253, 224, 71, 0.2);}
+    .sub-title { font-size: 13px; color: #A7F3D0; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
+
+    .input-card { 
+        background: rgba(6, 78, 59, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(167, 243, 208, 0.15); border-radius: 24px; padding: 25px; margin-bottom: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+    }
+    
+    .card-header { font-size: 16px; font-weight: 800; color: #FDE047; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; border-bottom: 1px solid rgba(167, 243, 208, 0.15); padding-bottom: 12px; letter-spacing: 1px;}
+    .card-header-icon { font-size: 20px; margin-right: 10px;}
+
+    .input-row { display: flex; flex-direction: column; margin-bottom: 20px;}
+    .input-row:last-child { margin-bottom: 0;}
+    
+    .input-label { font-size: 14px; font-weight: 600; color: #D1FAE5; margin-bottom: 10px;}
+    .custom-input { width: 100%; padding: 18px; font-size: 17px; font-weight: 700; color: #FFFFFF; background: rgba(2, 44, 34, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s;}
+    .custom-input:focus { border-color: #FDE047; background: rgba(253, 224, 71, 0.05); box-shadow: 0 0 15px rgba(253, 224, 71, 0.15);}
+    
+    .preset-container { display: flex; gap: 10px; margin-top: 12px;}
+    .preset-btn { flex: 1; padding: 12px; font-size: 13px; font-weight: 700; color: #A7F3D0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; text-align: center; transition: 0.2s;}
+    .preset-btn:active { background: rgba(253, 224, 71, 0.2); color: #FDE047; border-color: #FDE047;}
+
+    .submit-btn { width: 100%; padding: 22px; font-size: 17px; font-weight: 800; color: #022C22; background: linear-gradient(135deg, #FEF08A 0%, #FACC15 100%); border: none; border-radius: 18px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(250, 204, 21, 0.25); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(250, 204, 21, 0.15);}
+
+    .info-card { background: rgba(2, 44, 34, 0.5); border-left: 4px solid #A7F3D0; border-radius: 0 16px 16px 0; padding: 25px; margin-bottom: 20px;}
+    .info-title { font-size: 15px; font-weight: 800; color: #A7F3D0; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 14px; color: #D1FAE5; line-height: 1.6; font-weight: 400; margin-bottom: 15px; text-align: left;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FDE047; font-weight: 700;}
+
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 44, 34, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(8px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FDE047; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #FDE047; letter-spacing: 2px; text-transform: uppercase;}
+    .loading-sub { font-size: 13px; color: #A7F3D0; margin-top: 10px; font-weight: 400;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; overflow-y: auto; padding: 20px; backdrop-filter: blur(12px);}
+    .result-content { max-width: 540px; margin: 20px auto; background: #064E3B; border: 1px solid rgba(167, 243, 208, 0.3); border-radius: 28px; padding: 35px 25px; box-shadow: 0 25px 70px rgba(0,0,0,0.8); text-align: center;}
+    
+    .res-section-title { font-size: 13px; font-weight: 800; color: #A7F3D0; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; margin-top: 30px;}
+    .res-section-title:first-child { margin-top: 0; color: #FDE047; }
+    
+    .highlight-amount { font-size: 38px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px; letter-spacing: -1px;}
+    .highlight-sub { font-size: 14px; color: #D1FAE5; margin-bottom: 25px; line-height: 1.5;}
+
+    .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;}
+    .value-item { background: rgba(2, 44, 34, 0.6); border: 1px solid rgba(255,255,255,0.05); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+    .value-icon { font-size: 26px; margin-bottom: 10px;}
+    .value-qty { font-size: 20px; font-weight: 800; color: #FDE047;}
+    .value-name { font-size: 12px; font-weight: 600; color: #A7F3D0; text-transform: uppercase; margin-top: 6px; text-align: center; line-height: 1.4;}
+
+    .action-links { display: flex; gap: 12px; margin-bottom: 30px; }
+    .action-btn { flex: 1; padding: 15px; font-size: 13px; font-weight: 700; color: #FFFFFF; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;}
+    .action-btn:active { background: rgba(253, 224, 71, 0.15); border-color: #FDE047; color: #FDE047; }
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;}
+    .close-btn:active { background: rgba(255,255,255,0.15);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Seoul Pay-Mate</div>
+        <div class="sub-title">Premium Travel Financial Guide</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">🚇</span> T-Money Transit Budget</div>
+        
+        <div class="input-row">
+            <div class="input-label">How many days are you staying?</div>
+            <input class="custom-input" id="t-days" type="number" />
+        </div>
+
+        <div class="input-row">
+            <div class="input-label">Expected Rides per Day (Subway/Bus)</div>
+            <input class="custom-input" id="t-rides" type="number" />
+            <div class="preset-container">
+                <div class="preset-btn" onclick="setPreset('t-rides', 2)" ontouchstart="">Light (2)</div>
+                <div class="preset-btn" onclick="setPreset('t-rides', 4)" ontouchstart="">Normal (4)</div>
+                <div class="preset-btn" onclick="setPreset('t-rides', 6)" ontouchstart="">Heavy (6)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">💎</span> KRW Value Analyzer</div>
+        <div class="input-row">
+            <div class="input-label">Enter a price in Korean Won (KRW)</div>
+            <input class="custom-input" id="k-price" type="number" />
+            <div class="preset-container">
+                <div class="preset-btn" onclick="setPreset('k-price', 15000)" ontouchstart="">15,000</div>
+                <div class="preset-btn" onclick="setPreset('k-price', 50000)" ontouchstart="">50,000</div>
+                <div class="preset-btn" onclick="setPreset('k-price', 100000)" ontouchstart="">100,000</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Analyze My Financial Plan</button>
+
+    <div class="info-card">
+        <div class="info-title">📱 How to Use This Tool</div>
+        <div class="info-text">Welcome to Seoul Pay-Mate. To calculate your ideal transit card budget, simply input the length of your stay and how often you plan to use public transport daily. If you want to understand what a specific price tag really means in Korea, enter the amount in the KRW Value Analyzer. Our system will immediately process the data and provide a clear financial breakdown.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Smart Travel Tips</div>
+        <div class="info-text"><strong>1. The T-Money Advantage:</strong> Purchasing a T-Money card is essential. Not only does it save you the hassle of buying single-journey tickets, but it also provides slight discounts on fares and allows free transfers between buses and subways within 30 minutes.</div>
+        <div class="info-text"><strong>2. Refund Policy:</strong> You can easily refund the remaining balance of your T-Money card (up to 20,000 KRW) at any convenience store for a small processing fee. However, the initial cost of the blank card (usually 3,000 to 5,000 KRW) is non-refundable.</div>
+        <div class="info-text"><strong>3. Tipping Culture:</strong> Remember that South Korea has a strict no-tipping culture. The price you see on the menu is the final price you pay. Enjoy your meals without worrying about extra service charges!</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">⚖️ Disclaimer &amp; Notice</div>
+        <div class="info-text">The financial estimates provided by Seoul Pay-Mate are designed for general planning purposes only. Transportation fares are calculated based on the standard adult base fare for Seoul metropolitan subways and buses. Actual costs may vary depending on travel distance, premium transport options, and regional differences. Always refer to the official transit authorities for the most precise rates. We do not collect or store any of your personal input data.</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Processing Data</div>
+    <div class="loading-sub">Synchronizing financial logic...</div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        
+        <div class="res-section-title">Recommended T-Money Charge</div>
+        <div class="highlight-amount" id="res-tmoney">0 KRW</div>
+        <div class="highlight-sub">Includes standard 3,000 KRW blank card purchase cost. We recommend charging this amount at the airport convenience store.</div>
+
+        <div class="res-section-title" id="val-title" style="display: none;">Purchasing Power in Korea</div>
+        <div class="value-grid" id="val-grid" style="display: none;">
+            <div class="value-item">
+                <div class="value-icon">☕</div>
+                <div class="value-qty" id="res-coffee">0</div>
+                <div class="value-name">Premium Coffees</div>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">🚇</div>
+                <div class="value-qty" id="res-subway">0</div>
+                <div class="value-name">Subway Rides</div>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">🍗</div>
+                <div class="value-qty" id="res-chicken">0</div>
+                <div class="value-name">Fried Chicken Sets</div>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">🥩</div>
+                <div class="value-qty" id="res-bbq">0</div>
+                <div class="value-name">K-BBQ Portions</div>
+            </div>
+        </div>
+
+        <div class="action-links">
+            <a class="action-btn" href="https://english.visitkorea.or.kr/" target="_blank">🗺️ Travel Guide</a>
+            <a class="action-btn" href="https://smrt.co.kr/program/cyberStation/main2.jsp?lang=e" target="_blank">🚇 Subway Map</a>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Plan Another Budget</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            alpha: Math.random() * 0.3 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(253, 224, 71, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+function setPreset(id, val) {
+    document.getElementById(id).value = val;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 300);
+    }
+});
+
+function startCalculation() {
+    var d = document.getElementById('t-days').value || 0;
+    var r = document.getElementById('t-rides').value || 0;
+    var p = document.getElementById('k-price').value || 0;
+    
+    if (d == 0 && r == 0 && p == 0) {
+        alert("Please enter at least one value to proceed with the analysis.");
+        return;
+    }
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var searchString = window.location.search;
+    var mParam = searchString.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&d=" + d + "&r=" + r + "&p=" + p;
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? match[1] : "0";
+    };
+
+    var days = parseInt(getParam('d'), 10);
+    var rides = parseInt(getParam('r'), 10);
+    var price = parseInt(getParam('p'), 10);
+
+    var tmoneyTotal = (days * rides * 1400) + (days > 0 ? 3000 : 0);
+    
+    // 안전한 화폐 표기법 적용 (KRW)
+    document.getElementById('res-tmoney').innerText = tmoneyTotal.toLocaleString() + " KRW";
+
+    if (price > 0) {
+        document.getElementById('val-title').style.display = 'block';
+        document.getElementById('val-grid').style.display = 'grid';
+        
+        document.getElementById('res-coffee').innerText = (price / 5000).toFixed(1); 
+        document.getElementById('res-subway').innerText = Math.floor(price / 1400);  
+        document.getElementById('res-chicken').innerText = (price / 22000).toFixed(1); 
+        document.getElementById('res-bbq').innerText = (price / 18000).toFixed(1); 
+    }
+
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
