@@ -1,0 +1,399 @@
+<!--Google Blogger Only: Korea Customs Check MAX V2 (Strict ES5, English Typography Fixed, Dual-Safety AdMob)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0F172A !important; 
+        user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif; color: #F8FAFC; margin: 0; padding: 0; overflow-x: hidden;
+        word-break: normal; overflow-wrap: break-word; line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 35px 20px 80px 20px; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 30px; font-weight: 800; color: #FBBF24; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 20px rgba(251, 191, 36, 0.2);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;}
+
+    .input-card { 
+        background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(251, 191, 36, 0.15); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+    
+    .card-header { font-size: 15px; font-weight: 800; color: #FBBF24; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(251, 191, 36, 0.15); padding-bottom: 12px; letter-spacing: 1px;}
+    .card-header-icon { font-size: 20px; margin-right: 10px;}
+
+    .input-row { display: flex; flex-direction: column; margin-bottom: 18px;}
+    .input-row:last-child { margin-bottom: 0;}
+    .row-group { display: flex; gap: 12px; }
+    .row-group .input-row { flex: 1; }
+    
+    .input-label { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 8px;}
+    .custom-input { width: 100%; padding: 16px; font-size: 15px; font-weight: 700; color: #FFFFFF; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s;}
+    .custom-input:focus { border-color: #FBBF24; background: rgba(251, 191, 36, 0.05); box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);}
+    
+    .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #0F172A; background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.25); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(245, 158, 11, 0.15);}
+
+    .info-card { background: rgba(15, 23, 42, 0.5); border-left: 4px solid #FBBF24; border-radius: 0 16px 16px 0; padding: 25px; margin-bottom: 20px;}
+    .info-title { font-size: 15px; font-weight: 800; color: #FDE68A; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 14px; color: #CBD5E1; margin-bottom: 15px; text-align: left;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FFFFFF; font-weight: 700;}
+
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(10px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FBBF24; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #FBBF24; letter-spacing: 2px; text-transform: uppercase;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; overflow-y: auto; padding: 20px; backdrop-filter: blur(12px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 28px; padding: 35px 25px; box-shadow: 0 25px 70px rgba(0,0,0,0.8); text-align: center;}
+    
+    .status-badge { display: inline-block; padding: 12px 24px; border-radius: 14px; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px;}
+    .status-safe { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);}
+    .status-warn { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);}
+
+    .res-item { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.05); border-radius: 18px; padding: 20px; margin-bottom: 15px; display: flex; flex-direction: column; text-align: left;}
+    .res-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
+    .res-title { font-size: 15px; font-weight: 800; color: #F8FAFC; text-transform: uppercase;}
+    .res-result { font-size: 14px; font-weight: 700;}
+    .text-green { color: #10B981; }
+    .text-red { color: #EF4444; }
+    .res-desc { font-size: 13px; color: #94A3B8;}
+
+    .action-links { display: flex; gap: 12px; margin-top: 30px; margin-bottom: 30px; }
+    .action-btn { flex: 1; padding: 16px; font-size: 14px; font-weight: 700; color: #FFFFFF; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;}
+    .action-btn:active { background: rgba(251, 191, 36, 0.15); border-color: #FBBF24; color: #FBBF24; }
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;}
+    .close-btn:active { background: rgba(255,255,255,0.15);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">Korea Customs Check</div>
+        <div class="sub-title">Premium Traveler Declaration Guide</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">🛍️</span> General Shopping Goods</div>
+        <div class="input-row">
+            <div class="input-label">Total Purchased Value (USD)</div>
+            <input class="custom-input" id="inp-general" type="number" />
+        </div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">🍾</span> Alcohol &amp; Liquor</div>
+        <div class="row-group">
+            <div class="input-row">
+                <div class="input-label">Bottles</div>
+                <input class="custom-input" id="inp-alc-bot" type="number" />
+            </div>
+            <div class="input-row">
+                <div class="input-label">Total Liters</div>
+                <input class="custom-input" id="inp-alc-vol" type="number" />
+            </div>
+            <div class="input-row">
+                <div class="input-label">Value (USD)</div>
+                <input class="custom-input" id="inp-alc-usd" type="number" />
+            </div>
+        </div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">✨</span> Perfume &amp; Tobacco</div>
+        <div class="row-group">
+            <div class="input-row">
+                <div class="input-label">Perfume (ml)</div>
+                <input class="custom-input" id="inp-perfume" type="number" />
+            </div>
+            <div class="input-row">
+                <div class="input-label">Cigarettes (Sticks)</div>
+                <input class="custom-input" id="inp-cig" type="number" />
+            </div>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Analyze Declaration Status</button>
+
+    <div class="info-card">
+        <div class="info-title">📱 How to Use This Guide</div>
+        <div class="info-text">Welcome to Korea Customs Check. To ensure a smooth and stress-free entry into South Korea, simply enter the details of the items you have purchased abroad or at duty-free shops. Our system will analyze your shopping list against the standard reference limits to help you understand if you need to prepare a customs declaration form upon arrival.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Smart Travel Allowances</div>
+        <div class="info-text"><strong>General Goods:</strong> Travelers are generally allowed up to USD 800 in total purchases without declaring.</div>
+        <div class="info-text"><strong>Alcoholic Beverages:</strong> The allowance is up to 2 bottles, provided the total volume is under 2 Liters AND the total value is under USD 400.</div>
+        <div class="info-text"><strong>Premium Perfume:</strong> You may bring up to 100ml in total.</div>
+        <div class="info-text"><strong>Tobacco Products:</strong> The standard limit is 200 sticks, which is typically equivalent to one carton of cigarettes.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">⚖️ Legal Notice &amp; Disclaimer</div>
+        <div class="info-text">This application serves as a general reference tool to assist with your travel preparations. Customs regulations and reference limits are subject to change and may vary depending on the traveler's age, item category, and specific purchase conditions. The results provided here do not guarantee duty-free entry. For the most accurate and up-to-date information, always refer directly to the official guidelines provided by the Korea Customs Service.</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Analyzing Items</div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        
+        <div class="status-badge status-safe" id="res-main-badge">Analyzing...</div>
+
+        <div class="res-item">
+            <div class="res-header">
+                <div class="res-title">General Goods</div>
+                <div class="res-result text-green" id="res-gen-status">OK</div>
+            </div>
+            <div class="res-desc" id="res-gen-desc">-</div>
+        </div>
+
+        <div class="res-item">
+            <div class="res-header">
+                <div class="res-title">Alcohol</div>
+                <div class="res-result text-green" id="res-alc-status">OK</div>
+            </div>
+            <div class="res-desc" id="res-alc-desc">-</div>
+        </div>
+
+        <div class="res-item">
+            <div class="res-header">
+                <div class="res-title">Perfume</div>
+                <div class="res-result text-green" id="res-per-status">OK</div>
+            </div>
+            <div class="res-desc" id="res-per-desc">-</div>
+        </div>
+
+        <div class="res-item">
+            <div class="res-header">
+                <div class="res-title">Cigarettes</div>
+                <div class="res-result text-green" id="res-cig-status">OK</div>
+            </div>
+            <div class="res-desc" id="res-cig-desc">-</div>
+        </div>
+
+        <div class="action-links">
+            <a class="action-btn" href="https://www.customs.go.kr/english/main.do" target="_blank">🏛️ Official Customs Site</a>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Check Another List</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Dual-Safety Logic & Error-Free Handling */
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1.5,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.3 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(251, 191, 36, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 400);
+    }
+});
+
+function startCalculation() {
+    var gen = document.getElementById('inp-general').value || 0;
+    var aBot = document.getElementById('inp-alc-bot').value || 0;
+    var aVol = document.getElementById('inp-alc-vol').value || 0;
+    var aUsd = document.getElementById('inp-alc-usd').value || 0;
+    var per = document.getElementById('inp-perfume').value || 0;
+    var cig = document.getElementById('inp-cig').value || 0;
+    
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&g=" + gen + "&ab=" + aBot + "&av=" + aVol + "&au=" + aUsd + "&p=" + per + "&c=" + cig;
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? parseFloat(match[1]) : 0;
+    };
+
+    var gen = getParam('g');
+    var aBot = getParam('ab');
+    var aVol = getParam('av');
+    var aUsd = getParam('au');
+    var per = getParam('p');
+    var cig = getParam('c');
+
+    var needsDeclaration = false;
+
+    var elGenStatus = document.getElementById('res-gen-status');
+    var elGenDesc = document.getElementById('res-gen-desc');
+    if (gen > 800) {
+        elGenStatus.innerText = "MAY REQUIRE DECLARATION";
+        elGenStatus.className = "res-result text-red";
+        elGenDesc.innerText = "Entered USD " + gen + ". This exceeds the USD 800 general reference limit by USD " + (gen - 800) + ".";
+        needsDeclaration = true;
+    } else {
+        elGenStatus.innerText = "WITHIN REFERENCE LIMIT";
+        elGenStatus.className = "res-result text-green";
+        elGenDesc.innerText = "Entered USD " + gen + ". Remaining reference allowance: USD " + (800 - gen) + ".";
+    }
+
+    var elAlcStatus = document.getElementById('res-alc-status');
+    var elAlcDesc = document.getElementById('res-alc-desc');
+    if (aBot > 2 || aVol > 2 || aUsd > 400) {
+        elAlcStatus.innerText = "MAY REQUIRE DECLARATION";
+        elAlcStatus.className = "res-result text-red";
+        elAlcDesc.innerText = "Your entry exceeds the reference allowance. The limit is 2 bottles, maximum 2 Liters, and maximum USD 400 in total.";
+        needsDeclaration = true;
+    } else if (aBot == 0 && aVol == 0 && aUsd == 0) {
+        elAlcStatus.innerText = "NO ITEMS ENTERED";
+        elAlcStatus.className = "res-result text-green";
+        elAlcDesc.innerText = "You have not entered any alcohol items.";
+    } else {
+        elAlcStatus.innerText = "WITHIN REFERENCE LIMIT";
+        elAlcStatus.className = "res-result text-green";
+        elAlcDesc.innerText = "Your entered alcohol items are within the reference limits.";
+    }
+
+    var elPerStatus = document.getElementById('res-per-status');
+    var elPerDesc = document.getElementById('res-per-desc');
+    if (per > 100) {
+        elPerStatus.innerText = "MAY REQUIRE DECLARATION";
+        elPerStatus.className = "res-result text-red";
+        elPerDesc.innerText = "Entered " + per + "ml. This exceeds the 100ml reference limit.";
+        needsDeclaration = true;
+    } else if (per == 0) {
+        elPerStatus.innerText = "NO ITEMS ENTERED";
+        elPerStatus.className = "res-result text-green";
+        elPerDesc.innerText = "You have not entered any perfume items.";
+    } else {
+        elPerStatus.innerText = "WITHIN REFERENCE LIMIT";
+        elPerStatus.className = "res-result text-green";
+        elPerDesc.innerText = "Entered " + per + "ml. Remaining reference allowance: " + (100 - per) + "ml.";
+    }
+
+    var elCigStatus = document.getElementById('res-cig-status');
+    var elCigDesc = document.getElementById('res-cig-desc');
+    if (cig > 200) {
+        elCigStatus.innerText = "MAY REQUIRE DECLARATION";
+        elCigStatus.className = "res-result text-red";
+        elCigDesc.innerText = "Entered " + cig + " sticks. This exceeds the 200 sticks reference limit.";
+        needsDeclaration = true;
+    } else if (cig == 0) {
+        elCigStatus.innerText = "NO ITEMS ENTERED";
+        elCigStatus.className = "res-result text-green";
+        elCigDesc.innerText = "You have not entered any tobacco items.";
+    } else {
+        elCigStatus.innerText = "WITHIN REFERENCE LIMIT";
+        elCigStatus.className = "res-result text-green";
+        elCigDesc.innerText = "Entered " + cig + " sticks. This is within the reference limit.";
+    }
+
+    var elMainBadge = document.getElementById('res-main-badge');
+    if (needsDeclaration) {
+        elMainBadge.innerText = "DECLARATION LIKELY REQUIRED";
+        elMainBadge.className = "status-badge status-warn";
+    } else {
+        elMainBadge.innerText = "LIKELY WITHIN LIMITS";
+        elMainBadge.className = "status-badge status-safe";
+    }
+
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
