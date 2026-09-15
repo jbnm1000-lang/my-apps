@@ -1,0 +1,357 @@
+<!--Google Blogger Only: K-Glow Date Decoder MAX PRO (ES5, Rose Gold Theme, Idle DB, Dual-Safety)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0F172A !important; 
+        user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif; color: #F8FAFC; margin: 0; padding: 0; overflow-x: hidden;
+        word-break: normal; overflow-wrap: break-word; line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 35px 20px 80px 20px; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #FDA4AF; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(253, 164, 175, 0.3);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;}
+
+    .input-card { 
+        background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(253, 164, 175, 0.2); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+    
+    .card-header { font-size: 14px; font-weight: 800; color: #FDA4AF; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(253, 164, 175, 0.2); padding-bottom: 12px; letter-spacing: 1px;}
+    .card-header-icon { font-size: 18px; margin-right: 10px;}
+
+    .input-label { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 10px; display: block;}
+    
+    .term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
+    .term-btn { padding: 14px; font-size: 14px; font-weight: 700; color: #FDA4AF; background: rgba(253, 164, 175, 0.08); border: 2px solid rgba(253, 164, 175, 0.2); border-radius: 12px; cursor: pointer; transition: 0.2s; text-align: center; letter-spacing: 0.5px;}
+    .term-btn.active { background: #FDA4AF; color: #0F172A; border-color: #FDA4AF; box-shadow: 0 0 15px rgba(253, 164, 175, 0.3);}
+    
+    .pao-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px;}
+    .pao-btn { padding: 12px 5px; font-size: 13px; font-weight: 700; color: #E2E8F0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: 0.2s; text-align: center;}
+    .pao-btn.active { background: #E2E8F0; color: #0F172A; border-color: #E2E8F0;}
+
+    .custom-input { width: 100%; padding: 18px; font-size: 16px; font-weight: 700; color: #FFFFFF; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s; text-align: center; letter-spacing: 1px;}
+    .custom-input:focus { border-color: #FDA4AF; background: rgba(253, 164, 175, 0.05); box-shadow: 0 0 15px rgba(253, 164, 175, 0.15);}
+    
+    .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #0F172A; background: linear-gradient(135deg, #FECDD3 0%, #FDA4AF 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(253, 164, 175, 0.25); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px; display: flex; align-items: center; justify-content: center; gap: 8px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(253, 164, 175, 0.15);}
+
+    .info-card { background: rgba(15, 23, 42, 0.5); border-left: 4px solid #FDA4AF; border-radius: 0 16px 16px 0; padding: 25px; margin-bottom: 20px;}
+    .info-title { font-size: 14px; font-weight: 800; color: #FECDD3; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 14px; color: #CBD5E1; margin-bottom: 18px; text-align: left; line-height: 1.8;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FFFFFF; font-weight: 700;}
+
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(10px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FDA4AF; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #FDA4AF; letter-spacing: 2px; text-transform: uppercase;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; overflow-y: auto; padding: 20px; backdrop-filter: blur(12px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(253, 164, 175, 0.3); border-radius: 28px; padding: 35px 25px; box-shadow: 0 25px 70px rgba(0,0,0,0.8); text-align: center;}
+    
+    .res-icon { font-size: 48px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(253, 164, 175, 0.4);}
+    .res-main-name { font-size: 26px; font-weight: 800; color: #FFFFFF; letter-spacing: -1px; margin-bottom: 10px;}
+    .res-date { font-size: 18px; font-weight: 700; color: #FDA4AF; margin-bottom: 25px; letter-spacing: 1px;}
+    
+    .res-desc-box { background: rgba(253, 164, 175, 0.1); border: 1px solid rgba(253, 164, 175, 0.3); border-radius: 16px; padding: 20px; margin-bottom: 25px;}
+    .res-desc-text { font-size: 15px; font-weight: 600; color: #F8FAFC; line-height: 1.7; text-align: left;}
+
+    .pao-box { background: rgba(15, 23, 42, 0.6); border: 1px dashed rgba(255,255,255,0.2); border-radius: 16px; padding: 20px; margin-bottom: 20px; text-align: left;}
+    .pao-title { font-size: 13px; font-weight: 800; color: #FECDD3; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+    .pao-text { font-size: 14px; color: #94A3B8; line-height: 1.6;}
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;}
+    .close-btn:active { background: rgba(255,255,255,0.15);}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Glow Date Decoder</div>
+        <div class="sub-title">Premium Korean Cosmetics Guide</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">🔎</span> Step 1. Select Printed Label</div>
+        <div class="input-label">Please carefully check the Korean characters printed next to the date on the bottom or edge of the product.</div>
+        
+        <div class="term-grid">
+            <div class="term-btn" id="btn-term-1" onclick="selectTerm('제조')" ontouchstart="">제조 (MFG)</div>
+            <div class="term-btn" id="btn-term-2" onclick="selectTerm('까지')" ontouchstart="">까지 (Until)</div>
+            <div class="term-btn" id="btn-term-3" onclick="selectTerm('사용기한')" ontouchstart="">사용기한 (EXP)</div>
+            <div class="term-btn" id="btn-term-4" onclick="selectTerm('유통기한')" ontouchstart="">유통기한 (Shelf Life)</div>
+            <div class="term-btn" id="btn-term-5" onclick="selectTerm('MFG')" ontouchstart="">MFG (English)</div>
+            <div class="term-btn" id="btn-term-6" onclick="selectTerm('EXP')" ontouchstart="">EXP / BBE (English)</div>
+        </div>
+        
+        <input id="selected-term" type="hidden" value="" />
+
+        <div class="card-header" style="margin-top: 30px;"><span class="card-header-icon">🧴</span> Step 2. Select PAO Symbol (Optional)</div>
+        <div class="input-label">Do you see a small 'Open Jar' icon on the back?</div>
+        
+        <div class="pao-grid">
+            <div class="pao-btn active" id="btn-pao-none" onclick="selectPao('None')" ontouchstart="">None</div>
+            <div class="pao-btn" id="btn-pao-6m" onclick="selectPao('6M')" ontouchstart="">6M</div>
+            <div class="pao-btn" id="btn-pao-12m" onclick="selectPao('12M')" ontouchstart="">12M</div>
+            <div class="pao-btn" id="btn-pao-24m" onclick="selectPao('24M')" ontouchstart="">24M</div>
+        </div>
+        
+        <input id="selected-pao" type="hidden" value="None" />
+
+        <div class="card-header" style="margin-top: 30px;"><span class="card-header-icon">📅</span> Step 3. Enter The Date</div>
+        <div class="input-label">Type the exact date printed on the product (YYYY.MM.DD).</div>
+        <input autocomplete="off" class="custom-input" id="inp-date" type="text" />
+    </div>
+
+    <!--화장대 보관함 저장 버튼 (전면광고 트리거)-->
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">
+        <span>🎀</span> Decode &amp; Save to My Vanity
+    </button>
+
+    <div class="info-card">
+        <div class="info-title">📖 How to Use This App</div>
+        <div class="info-text">Navigating Korean skincare labels can be quite confusing because many brands prefer to print the <strong>Manufacturing Date (제조)</strong> rather than the Expiration Date. This often leads to perfectly safe products being misunderstood.</div>
+        <div class="info-text">Simply select the term that matches your label, optionally add the PAO (Period After Opening) symbol, and enter the date. We will securely save this to your virtual vanity and provide a clear translation of its status.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Helpful Tip on PAO</div>
+        <div class="info-text">The small Open Jar symbol indicates how many months the product remains safe to use <strong>AFTER</strong> it has been opened. For example, "12M" means you should finish the product within 12 months of opening it, regardless of the printed manufacturing date.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">⚖️ General Reference &amp; Precautions</div>
+        <div class="info-text">This application provides a translation of standard cosmetic labeling terminology. The actual usability of a product is highly dependent on the manufacturer's specific formulation, ingredients, and your storage conditions (such as avoiding direct sunlight and humidity).</div>
+        <div class="info-text">This information is intended as a helpful guide, not a definitive safety guarantee. Always check the official brand guidelines, and discontinue use immediately if you notice any unusual changes in color, texture, or scent.</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Saving to Vanity...</div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="res-icon">✨</div>
+        <div class="res-main-name">Successfully Decoded!</div>
+        <div class="res-date" id="res-date-display">Date: 2026.05.10</div>
+
+        <div class="res-desc-box">
+            <div class="res-desc-text" id="res-translation"></div>
+        </div>
+
+        <div class="pao-box" id="pao-result-box" style="display: none;">
+            <div class="pao-title">🧴 Period After Opening (PAO)</div>
+            <div class="pao-text" id="res-pao-text"></div>
+        </div>
+        
+        <div class="pao-box" style="background: rgba(15, 23, 42, 0.4); border-color: rgba(255, 255, 255, 0.05);">
+            <div class="pao-text" style="color: #64748b; font-size: 12px;">Please remember that this is a general translation guide. Always ensure your products are stored properly and check for any signs of spoilage before application.</div>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Scan Another Product</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - K-Glow Date Decoder (Idle DB & Dual-Safety Ad Logic) */
+
+var termDB = {
+    "제조": "<strong>[ Manufacturing Date ]</strong><br><br>The date you entered indicates when this product was originally manufactured, not when it expires. Generally, unopened Korean cosmetics are formulated to remain stable for about 30 to 36 months from this date.",
+    "까지": "<strong>[ Expiration Date (Until) ]</strong><br><br>The date provided is the final expiration date. It is highly recommended to completely finish using the product by this specific date.",
+    "사용기한": "<strong>[ Use-By Date (EXP) ]</strong><br><br>This indicates the product's expiration date. For the best quality and safety, the product should be used before this date is reached.",
+    "유통기한": "<strong>[ Shelf Life (Distribution) ]</strong><br><br>This represents the period during which the product can be safely distributed and sold. It serves as a strong guideline for expiration.",
+    "MFG": "<strong>[ Manufacturing Date (English) ]</strong><br><br>This is the production date. Unopened skincare is generally safe for up to 3 years from this date, depending on the brand's specifications.",
+    "EXP": "<strong>[ Expiration Date (English) ]</strong><br><br>This is the expiration date or 'Best Before End'. It is advised not to use the product after this date has passed."
+};
+
+var paoDB = {
+    "6M": "The label indicates <strong>6M</strong>. You should discard this product 6 months after the day you first open the seal.",
+    "12M": "The label indicates <strong>12M</strong>. You have 12 months to safely use this product from the moment it is opened.",
+    "24M": "The label indicates <strong>24M</strong>. This product is designed to remain stable for 24 months after opening."
+};
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 20;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1.5,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            alpha: Math.random() * 0.3 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(253, 164, 175, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 400);
+    }
+});
+
+function selectTerm(term) {
+    document.getElementById('selected-term').value = term;
+    
+    var btns = document.getElementsByClassName('term-btn');
+    for(var i = 0; i < btns.length; i++) {
+        btns[i].className = 'term-btn';
+    }
+    
+    if(term === '제조') document.getElementById('btn-term-1').className = 'term-btn active';
+    if(term === '까지') document.getElementById('btn-term-2').className = 'term-btn active';
+    if(term === '사용기한') document.getElementById('btn-term-3').className = 'term-btn active';
+    if(term === '유통기한') document.getElementById('btn-term-4').className = 'term-btn active';
+    if(term === 'MFG') document.getElementById('btn-term-5').className = 'term-btn active';
+    if(term === 'EXP') document.getElementById('btn-term-6').className = 'term-btn active';
+}
+
+function selectPao(val) {
+    document.getElementById('selected-pao').value = val;
+    
+    var btns = document.getElementsByClassName('pao-btn');
+    for(var i = 0; i < btns.length; i++) {
+        btns[i].className = 'pao-btn';
+    }
+    
+    if(val === 'None') document.getElementById('btn-pao-none').className = 'pao-btn active';
+    if(val === '6M') document.getElementById('btn-pao-6m').className = 'pao-btn active';
+    if(val === '12M') document.getElementById('btn-pao-12m').className = 'pao-btn active';
+    if(val === '24M') document.getElementById('btn-pao-24m').className = 'pao-btn active';
+}
+
+function startCalculation() {
+    var term = document.getElementById('selected-term').value;
+    var pao = document.getElementById('selected-pao').value;
+    var dateVal = document.getElementById('inp-date').value;
+    
+    if (!term) {
+        alert("Please smoothly select the correct label type from Step 1 before proceeding.");
+        return;
+    }
+    
+    if (!dateVal || dateVal.trim() === "") {
+        alert("Please enter the printed date in Step 3 to ensure an accurate translation.");
+        return;
+    }
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&term=" + encodeURIComponent(term) + "&pao=" + encodeURIComponent(pao) + "&date=" + encodeURIComponent(dateVal.trim());
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    var term = getParam('term');
+    var pao = getParam('pao');
+    var dateVal = getParam('date');
+    
+    if (term && termDB[term]) {
+        document.getElementById('res-date-display').innerText = "Printed Date: " + dateVal;
+        document.getElementById('res-translation').innerHTML = termDB[term];
+        
+        if (pao && pao !== 'None' && paoDB[pao]) {
+            document.getElementById('res-pao-text').innerHTML = paoDB[pao];
+            document.getElementById('pao-result-box').style.display = 'block';
+        } else {
+            document.getElementById('pao-result-box').style.display = 'none';
+        }
+        
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('result-modal').style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
