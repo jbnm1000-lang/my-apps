@@ -1,4 +1,4 @@
-<!--Google Blogger Only: OmniCell Battery Decoder MAX PRO (Expanded DB, ES5, Dual-Safety)-->
+<!--Google Blogger Only: OmniCell Battery Decoder MAX PRO (1:1 Measure Tool, ES5, Dual-Safety)-->
 <meta charset="UTF-8"></meta>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
 <style>
@@ -44,8 +44,11 @@
     .custom-input:focus { border-color: #22D3EE; background: rgba(34, 211, 238, 0.05); box-shadow: 0 0 15px rgba(34, 211, 238, 0.15);}
     
     .quick-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;}
-    .tag-btn { padding: 10px 14px; font-size: 12px; font-weight: 700; color: #67E8F9; background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px;}
+    .tag-btn { padding: 10px 14px; font-size: 12px; font-weight: 700; color: #67E8F9; background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; justify-content: center;}
     .tag-btn:active { background: #22D3EE; color: #0F172A;}
+
+    .measure-btn { width: 100%; padding: 16px; font-size: 14px; font-weight: 800; color: #22D3EE; background: rgba(34, 211, 238, 0.1); border: 2px dashed #22D3EE; border-radius: 14px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;}
+    .measure-btn:active { background: #22D3EE; color: #0F172A;}
 
     .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #0F172A; background: linear-gradient(135deg, #67E8F9 0%, #06B6D4 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.25); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
     .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(6, 182, 212, 0.15);}
@@ -81,6 +84,8 @@
     .close-btn:active { background: rgba(255,255,255,0.15);}
     
     .error-msg { font-size: 16px; font-weight: 700; color: #EF4444; margin-top: 20px; margin-bottom: 30px;}
+
+    .circle-measure { border: 2px dashed #22D3EE; border-radius: 50%; margin: 0 auto 10px auto; background: rgba(34,211,238,0.1); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 15px rgba(34, 211, 238, 0.2);}
 </style>
 
 <canvas id="particle-canvas"></canvas>
@@ -91,12 +96,19 @@
         <div class="sub-title">Premium Universal Battery Guide</div>
     </div>
 
+    <!-- 1:1 Screen Measure Tool Card -->
+    <div class="input-card" style="border-color: #67E8F9; background: rgba(15, 23, 42, 0.7);">
+        <div class="card-header" style="color: #67E8F9;"><span class="card-header-icon">📏</span> Missing Battery Code?</div>
+        <div class="input-label" style="text-align: center; margin-bottom: 15px;">If the text is faded or unreadable, place your battery directly on your screen to match its size!</div>
+        <button class="measure-btn" onclick="openMeasureTool()" ontouchstart="">🔍 Open 1:1 Screen Matcher</button>
+    </div>
+
     <div class="input-card">
         <div class="card-header"><span class="card-header-icon">🔋</span> Enter Battery Code</div>
         <div class="input-row">
-            <div class="input-label">Type the exact code printed on your battery (e.g., LR44, SR626SW, 18650)</div>
+            <div class="input-label">Type the exact code printed on your battery (e.g., LR44, SR626SW)</div>
             <div class="search-wrapper">
-                <input autocomplete="off" class="custom-input" id="inp-query" type="text" />
+                <input autocomplete="off" class="custom-input" id="inp-query" type="text" placeholder="Search code..." />
             </div>
         </div>
         
@@ -116,18 +128,45 @@
     <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Decode Battery Specs</button>
 
     <div class="info-card">
-        <div class="info-title">📱 How to Use This Guide</div>
-        <div class="info-text">Welcome to the OmniCell Battery Decoder. We understand how frustrating it can be to stand in a store aisle, staring at a dead battery with tiny, unreadable codes. To use this tool, simply type the code printed on your battery into the search bar above, or select one of the common device categories. Our system will instantly cross-reference our expansive database to find the exact global standard size you need to purchase.</div>
+        <div class="info-title">⚡ Lightning-Fast Search</div>
+        <div class="info-text">Welcome to the OmniCell Battery Decoder. We understand the frustration of standing in a store staring at confusing battery codes. Simply type the code into our system, and our expansive built-in database will instantly cross-reference the exact global standard size you need.</div>
     </div>
 
     <div class="info-card">
         <div class="info-title">💡 Smart Shopping Tip</div>
-        <div class="info-text">Did you know that battery manufacturers often use their own unique codes for the exact same battery? For instance, a small watch battery might be labeled as <strong>AG13</strong>, <strong>357</strong>, <strong>A76</strong>, or <strong>LR44</strong> depending on the brand. Do not worry if the store does not have your specific code. Our decoder automatically connects all these aliases so you can confidently buy the correct alternative without any confusion.</div>
+        <div class="info-text">Battery manufacturers often use unique codes for the exact same battery. A small watch battery might be labeled as <strong>AG13</strong>, <strong>357</strong>, <strong>A76</strong>, or <strong>LR44</strong>. Our decoder links all these aliases automatically so you can buy the correct alternative without hesitation.</div>
     </div>
+</div>
 
-    <div class="info-card">
-        <div class="info-title">⚖️ Legal Notice &amp; Disclaimer</div>
-        <div class="info-text">This application is designed to provide helpful, general guidance for replacing common household batteries. While we strive to maintain an accurate and comprehensive database of international battery standards, manufacturer specifications and device requirements can occasionally change. We kindly recommend double-checking your device's user manual if you are unsure. Please note that this tool serves as a reference guide, and we are not responsible for any issues arising from incorrect battery usage.</div>
+<!-- 1:1 Measure Tool Modal -->
+<div class="result-modal" id="measure-modal">
+    <div class="result-content" style="padding: 25px 20px;">
+        <div class="battery-icon">📏</div>
+        <div class="res-main-name" style="font-size:24px; margin-bottom:15px;">1:1 Size Matcher</div>
+        <div class="info-text" style="text-align:center; margin-bottom:30px;">Gently place your coin battery over the circles below. Select the one that matches perfectly!</div>
+
+        <div style="display:flex; justify-content:space-around; align-items:flex-end; margin-bottom:40px;">
+            <!-- 20mm (CR2032/CR2025) -->
+            <div style="text-align:center; width:33%;">
+                <div class="circle-measure" style="width: 20mm; height: 20mm;"></div>
+                <div style="font-size:12px; color:#fff; font-weight:bold;">20mm</div>
+                <button class="tag-btn" style="margin-top:15px; width:100%;" onclick="selectFromMeasure('CR2032')">CR Series</button>
+            </div>
+            <!-- 11.6mm (LR44/LR43) -->
+            <div style="text-align:center; width:33%;">
+                <div class="circle-measure" style="width: 11.6mm; height: 11.6mm;"></div>
+                <div style="font-size:12px; color:#fff; font-weight:bold;">11.6mm</div>
+                <button class="tag-btn" style="margin-top:15px; width:100%;" onclick="selectFromMeasure('LR44')">LR44 / 357</button>
+            </div>
+            <!-- 7.9mm (LR41) -->
+            <div style="text-align:center; width:33%;">
+                <div class="circle-measure" style="width: 7.9mm; height: 7.9mm;"></div>
+                <div style="font-size:12px; color:#fff; font-weight:bold;">7.9mm</div>
+                <button class="tag-btn" style="margin-top:15px; width:100%;" onclick="selectFromMeasure('LR41')">LR41 / 392</button>
+            </div>
+        </div>
+        
+        <button class="close-btn" onclick="closeMeasureTool()" ontouchstart="">Back to Search</button>
     </div>
 </div>
 
@@ -185,7 +224,7 @@
 
 <script type="text/javascript">
 //<![CDATA[
-/* Strict ES5 Implementation - Premium Idle Battery Decoder with Massive Database */
+/* Strict ES5 Implementation - Premium Battery Decoder with Dual-Safety & 1:1 Measure Tool */
 
 var batteryDB = {
     // 1. Standard Cylindrical
@@ -200,14 +239,14 @@ var batteryDB = {
     "A23": { name: "A23", icon: "🔋", shape: "Short Thin Cylinder", volts: "12.0V", iec: "8LR932", ansi: "1811A", rech: "No", alias: "23A, V23GA, MN21, LRV08", devices: "Garage Door Remotes, Wireless Doorbells" },
     "A27": { name: "A27", icon: "🔋", shape: "Very Thin Short Cylinder", volts: "12.0V", iec: "8LR732", ansi: "N/A", rech: "No", alias: "27A, MN27, G27A", devices: "Car Alarms, Small RF Remotes" },
     
-    // 3. Lithium High Power (Rechargeable & Non-Rechargeable)
+    // 3. Lithium High Power
     "18650": { name: "18650", icon: "🔋", shape: "Thick Lithium Cylinder", volts: "3.7V", iec: "ICR18650", ansi: "N/A", rech: "Yes (Lithium-ion)", alias: "168A", devices: "Vapes, High-Power Flashlights, Laptop Battery Packs" },
     "14500": { name: "14500", icon: "🔋", shape: "AA-Sized Lithium", volts: "3.7V", iec: "ICR14500", ansi: "N/A", rech: "Yes", alias: "N/A", devices: "Tactical Flashlights, DIY Electronics" },
     "21700": { name: "21700", icon: "🔋", shape: "Very Thick Lithium", volts: "3.7V", iec: "ICR21700", ansi: "N/A", rech: "Yes", alias: "N/A", devices: "EVs, E-Bikes, Premium Flashlights" },
     "CR123A": { name: "CR123A", icon: "🔋", shape: "Short Thick Cylinder", volts: "3.0V", iec: "CR17345", ansi: "5018LC", rech: "No (Lithium)", alias: "123, DL123A, VL123A, EL123AP", devices: "Tactical Flashlights, Security Cameras, Sensors" },
     "CR2": { name: "CR2", icon: "🔋", shape: "Mini Thick Cylinder", volts: "3.0V", iec: "CR15270", ansi: "5046LC", rech: "No", alias: "DLCR2, KCR2", devices: "Compact Cameras, Rangefinders" },
     
-    // 4. Lithium Coin Cells (3.0V)
+    // 4. Lithium Coin Cells
     "CR2032": { name: "CR2032", icon: "🪙", shape: "Flat Coin (20mm x 3.2mm)", volts: "3.0V", iec: "CR2032", ansi: "5004LC", rech: "No (Lithium)", alias: "DL2032, ECR2032, BR2032, SB-T15", devices: "Car Smart Keys, PC Motherboards, Weight Scales" },
     "CR2025": { name: "CR2025", icon: "🪙", shape: "Flat Coin (20mm x 2.5mm)", volts: "3.0V", iec: "CR2025", ansi: "5003LC", rech: "No (Lithium)", alias: "DL2025, ECR2025, BR2025", devices: "Car Keys, Ultra-thin Remotes, Heart Rate Monitors" },
     "CR2016": { name: "CR2016", icon: "🪙", shape: "Thin Coin (20mm x 1.6mm)", volts: "3.0V", iec: "CR2016", ansi: "5000LC", rech: "No (Lithium)", alias: "DL2016, ECR2016, BR2016", devices: "Digital Watches, Small Keyfobs" },
@@ -217,7 +256,7 @@ var batteryDB = {
     "CR1620": { name: "CR1620", icon: "🪙", shape: "Small Thin Coin (16mm x 2.0mm)", volts: "3.0V", iec: "CR1620", ansi: "5009LC", rech: "No", alias: "DL1620, ECR1620", devices: "Car Key Fobs, Calculators" },
     "CR1220": { name: "CR1220", icon: "🪙", shape: "Mini Coin (12.5mm x 2.0mm)", volts: "3.0V", iec: "CR1220", ansi: "5012LC", rech: "No", alias: "DL1220, ECR1220", devices: "Thermometers, Keyless Entry" },
     
-    // 5. Alkaline & Silver Oxide Button Cells (1.5V / 1.55V)
+    // 5. Alkaline & Silver Oxide Button Cells
     "LR44": { name: "LR44", icon: "🪙", shape: "Small Button (11.6mm x 5.4mm)", volts: "1.5V", iec: "LR1154", ansi: "1166A", rech: "No", alias: "AG13, 357, A76, SR44, PX76A, L1154", devices: "Laser Pointers, Digital Thermometers, Small Toys" },
     "LR41": { name: "LR41", icon: "🪙", shape: "Mini Button (7.9mm x 3.6mm)", volts: "1.5V", iec: "LR736", ansi: "392A", rech: "No", alias: "AG3, 392, 384, 192, SR41, L736", devices: "Clinical Thermometers, Small Laser Pointers" },
     "LR43": { name: "LR43", icon: "🪙", shape: "Medium Button (11.6mm x 4.2mm)", volts: "1.5V", iec: "LR1142", ansi: "1131A", rech: "No", alias: "AG12, 386, 301, D386, L1142", devices: "Calculators, Hearing Aids" },
@@ -226,7 +265,6 @@ var batteryDB = {
     "SR621SW": { name: "SR621SW", icon: "🪙", shape: "Mini Watch Battery (6.8mm x 2.1mm)", volts: "1.55V", iec: "SR60", ansi: "1175SO", rech: "No (Silver Oxide)", alias: "364, AG1, SG1, LR621", devices: "Small Women's Analog Watches" }
 };
 
-// Massive Map mapping Aliases to Primary Keys
 var aliasMap = {
     "LR6":"AA", "15A":"AA", "MN1500":"AA", "MIGNON":"AA", "AM3":"AA", "UM3":"AA", "815":"AA",
     "LR03":"AAA", "24A":"AAA", "MN2400":"AAA", "MICRO":"AAA", "AM4":"AAA", "UM4":"AAA", "824":"AAA",
@@ -317,6 +355,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 400);
     }
 });
+
+function openMeasureTool() {
+    document.getElementById('measure-modal').style.display = 'block';
+}
+
+function closeMeasureTool() {
+    document.getElementById('measure-modal').style.display = 'none';
+}
+
+function selectFromMeasure(val) {
+    closeMeasureTool();
+    setQuickTag(val);
+}
 
 function setQuickTag(val) {
     document.getElementById('inp-query').value = val;
