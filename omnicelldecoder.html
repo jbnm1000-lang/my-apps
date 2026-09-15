@@ -1,0 +1,406 @@
+<!--Google Blogger Only: OmniCell Battery Decoder MAX PRO (Expanded DB, ES5, Dual-Safety)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0F172A !important; 
+        user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+        font-family: 'Inter', sans-serif; color: #F8FAFC; margin: 0; padding: 0; overflow-x: hidden;
+        word-break: normal; overflow-wrap: break-word; line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    #app-container {
+        position: relative; z-index: 1; width: 100%; max-width: 540px; min-height: 100vh; margin: 0 auto; 
+        padding: 35px 20px 80px 20px; 
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #22D3EE; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(34, 211, 238, 0.3);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;}
+
+    .input-card { 
+        background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+    
+    .card-header { font-size: 14px; font-weight: 800; color: #22D3EE; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(34, 211, 238, 0.2); padding-bottom: 12px; letter-spacing: 1px;}
+    .card-header-icon { font-size: 18px; margin-right: 10px;}
+
+    .input-row { display: flex; flex-direction: column; margin-bottom: 15px;}
+    .input-label { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 8px;}
+    
+    .search-wrapper { position: relative; display: flex; }
+    .custom-input { width: 100%; padding: 18px; font-size: 16px; font-weight: 700; color: #FFFFFF; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; outline: none; font-family: 'Inter', sans-serif; transition: 0.3s; text-transform: uppercase;}
+    .custom-input:focus { border-color: #22D3EE; background: rgba(34, 211, 238, 0.05); box-shadow: 0 0 15px rgba(34, 211, 238, 0.15);}
+    
+    .quick-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px;}
+    .tag-btn { padding: 10px 14px; font-size: 12px; font-weight: 700; color: #67E8F9; background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px;}
+    .tag-btn:active { background: #22D3EE; color: #0F172A;}
+
+    .submit-btn { width: 100%; padding: 22px; font-size: 16px; font-weight: 800; color: #0F172A; background: linear-gradient(135deg, #67E8F9 0%, #06B6D4 100%); border: none; border-radius: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.25); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; margin-bottom: 35px;}
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(6, 182, 212, 0.15);}
+
+    .info-card { background: rgba(15, 23, 42, 0.5); border-left: 4px solid #22D3EE; border-radius: 0 16px 16px 0; padding: 25px; margin-bottom: 20px;}
+    .info-title { font-size: 14px; font-weight: 800; color: #67E8F9; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 14px; color: #CBD5E1; margin-bottom: 18px; text-align: left; line-height: 1.8;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FFFFFF; font-weight: 700;}
+
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(10px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #22D3EE; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #22D3EE; letter-spacing: 2px; text-transform: uppercase;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; overflow-y: auto; padding: 20px; backdrop-filter: blur(12px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 28px; padding: 35px 25px; box-shadow: 0 25px 70px rgba(0,0,0,0.8); text-align: center;}
+    
+    .battery-icon { font-size: 48px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(34, 211, 238, 0.4);}
+    .res-main-name { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -1px; margin-bottom: 5px;}
+    .res-shape { font-size: 14px; font-weight: 600; color: #67E8F9; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;}
+
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px;}
+    .res-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 18px; text-align: center;}
+    .res-box-title { font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
+    .res-box-val { font-size: 16px; font-weight: 800; color: #F8FAFC;}
+
+    .res-alias-box { background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px;}
+    .res-alias-title { font-size: 12px; font-weight: 800; color: #22D3EE; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;}
+    .res-alias-val { font-size: 15px; font-weight: 600; color: #FFFFFF; line-height: 1.6;}
+
+    .close-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; margin-top: 15px;}
+    .close-btn:active { background: rgba(255,255,255,0.15);}
+    
+    .error-msg { font-size: 16px; font-weight: 700; color: #EF4444; margin-top: 20px; margin-bottom: 30px;}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">OmniCell Decoder</div>
+        <div class="sub-title">Premium Universal Battery Guide</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">🔋</span> Enter Battery Code</div>
+        <div class="input-row">
+            <div class="input-label">Type the exact code printed on your battery (e.g., LR44, SR626SW, 18650)</div>
+            <div class="search-wrapper">
+                <input autocomplete="off" class="custom-input" id="inp-query" type="text" />
+            </div>
+        </div>
+        
+        <div class="input-label" style="color: #94a3b8; margin-top: 20px;">OR SELECT BY DEVICE TYPE:</div>
+        <div class="quick-tags">
+            <div class="tag-btn" onclick="setQuickTag('CR2032')" ontouchstart="">🚗 Car Smart Key</div>
+            <div class="tag-btn" onclick="setQuickTag('AAA')" ontouchstart="">📺 TV Remote</div>
+            <div class="tag-btn" onclick="setQuickTag('SR626SW')" ontouchstart="">⌚ Analog Watch</div>
+            <div class="tag-btn" onclick="setQuickTag('LR44')" ontouchstart="">🧸 Small Toy</div>
+            <div class="tag-btn" onclick="setQuickTag('CR2025')" ontouchstart="">⚖️ Weight Scale</div>
+            <div class="tag-btn" onclick="setQuickTag('18650')" ontouchstart="">🔦 High-Power Flashlight</div>
+            <div class="tag-btn" onclick="setQuickTag('A23')" ontouchstart="">🔔 Doorbell</div>
+            <div class="tag-btn" onclick="setQuickTag('9V')" ontouchstart="">🚨 Smoke Alarm</div>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="startCalculation()" ontouchstart="">Decode Battery Specs</button>
+
+    <div class="info-card">
+        <div class="info-title">📱 How to Use This Guide</div>
+        <div class="info-text">Welcome to the OmniCell Battery Decoder. We understand how frustrating it can be to stand in a store aisle, staring at a dead battery with tiny, unreadable codes. To use this tool, simply type the code printed on your battery into the search bar above, or select one of the common device categories. Our system will instantly cross-reference our expansive database to find the exact global standard size you need to purchase.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Smart Shopping Tip</div>
+        <div class="info-text">Did you know that battery manufacturers often use their own unique codes for the exact same battery? For instance, a small watch battery might be labeled as <strong>AG13</strong>, <strong>357</strong>, <strong>A76</strong>, or <strong>LR44</strong> depending on the brand. Do not worry if the store does not have your specific code. Our decoder automatically connects all these aliases so you can confidently buy the correct alternative without any confusion.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">⚖️ Legal Notice &amp; Disclaimer</div>
+        <div class="info-text">This application is designed to provide helpful, general guidance for replacing common household batteries. While we strive to maintain an accurate and comprehensive database of international battery standards, manufacturer specifications and device requirements can occasionally change. We kindly recommend double-checking your device's user manual if you are unsure. Please note that this tool serves as a reference guide, and we are not responsible for any issues arising from incorrect battery usage.</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Decoding Specs</div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content" id="res-found" style="display: none;">
+        <div class="battery-icon" id="res-icon">🔋</div>
+        <div class="res-main-name" id="res-name">AA</div>
+        <div class="res-shape" id="res-shape">Cylinder Shape</div>
+
+        <div class="res-grid">
+            <div class="res-box">
+                <div class="res-box-title">Voltage</div>
+                <div class="res-box-val" id="res-volts">1.5V</div>
+            </div>
+            <div class="res-box">
+                <div class="res-box-title">IEC Standard</div>
+                <div class="res-box-val" id="res-iec">LR6</div>
+            </div>
+            <div class="res-box">
+                <div class="res-box-title">ANSI (USA)</div>
+                <div class="res-box-val" id="res-ansi">15A</div>
+            </div>
+            <div class="res-box">
+                <div class="res-box-title">Rechargeable</div>
+                <div class="res-box-val" id="res-rech">No (Alkaline)</div>
+            </div>
+        </div>
+
+        <div class="res-alias-box">
+            <div class="res-alias-title">Other Common Names (Aliases)</div>
+            <div class="res-alias-val" id="res-alias">LR6, 15A, Mignon, MN1500</div>
+        </div>
+        
+        <div class="res-alias-box" style="background: rgba(15, 23, 42, 0.6); border-color: rgba(255, 255, 255, 0.1);">
+            <div class="res-alias-title">Commonly Used In</div>
+            <div class="res-alias-val" id="res-devices" style="color: #94a3b8;">Wall Clocks, TV Remotes, Toys</div>
+        </div>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Decode Another Battery</button>
+    </div>
+    
+    <div class="result-content" id="res-error" style="display: none;">
+        <div class="battery-icon">❓</div>
+        <div class="res-main-name">Code Not Found</div>
+        <div class="error-msg">We couldn't find an exact match for this battery code.</div>
+        <div class="info-text" style="color: #cbd5e1; margin-bottom: 30px; text-align: center;">Please double-check the characters printed on the battery. If it is a standard household device, it likely uses AA, AAA, or a common Coin cell.</div>
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Try Again</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Premium Idle Battery Decoder with Massive Database */
+
+var batteryDB = {
+    // 1. Standard Cylindrical
+    "AA": { name: "AA", icon: "🔋", shape: "Standard Cylinder", volts: "1.5V", iec: "LR6", ansi: "15A", rech: "No (Alkaline)", alias: "MN1500, Mignon, AM3, UM3, 815", devices: "TV Remotes, Wall Clocks, Flashlights, Xbox Controllers" },
+    "AAA": { name: "AAA", icon: "🔋", shape: "Thin Cylinder", volts: "1.5V", iec: "LR03", ansi: "24A", rech: "No (Alkaline)", alias: "MN2400, Micro, AM4, UM4, 824", devices: "AC Remotes, Small Toys, Wireless Mice" },
+    "AAAA": { name: "AAAA", icon: "🔋", shape: "Mini Cylinder", volts: "1.5V", iec: "LR8D425", ansi: "25A", rech: "No", alias: "MN2500, E96, 425", devices: "Stylus Pens, Laser Pointers, Medical Devices" },
+    "C": { name: "C", icon: "🔋", shape: "Medium Thick Cylinder", volts: "1.5V", iec: "LR14", ansi: "14A", rech: "No", alias: "MN1400, Baby, AM2, 814", devices: "Medium Flashlights, Radios, Musical Toys" },
+    "D": { name: "D", icon: "🔋", shape: "Large Thick Cylinder", volts: "1.5V", iec: "LR20", ansi: "13A", rech: "No", alias: "MN1300, Mono, AM1, 813", devices: "Large Flashlights, Megaphones, Boomboxes" },
+    
+    // 2. Rectangular & Specialty Cylindrical
+    "9V": { name: "9V", icon: "🪫", shape: "Rectangular Block", volts: "9.0V", iec: "6LR61", ansi: "1604A", rech: "No", alias: "PP3, MN1604, E-Block, 6AM6", devices: "Smoke Alarms, Microphones, Walkie-Talkies, Multimeters" },
+    "A23": { name: "A23", icon: "🔋", shape: "Short Thin Cylinder", volts: "12.0V", iec: "8LR932", ansi: "1811A", rech: "No", alias: "23A, V23GA, MN21, LRV08", devices: "Garage Door Remotes, Wireless Doorbells" },
+    "A27": { name: "A27", icon: "🔋", shape: "Very Thin Short Cylinder", volts: "12.0V", iec: "8LR732", ansi: "N/A", rech: "No", alias: "27A, MN27, G27A", devices: "Car Alarms, Small RF Remotes" },
+    
+    // 3. Lithium High Power (Rechargeable & Non-Rechargeable)
+    "18650": { name: "18650", icon: "🔋", shape: "Thick Lithium Cylinder", volts: "3.7V", iec: "ICR18650", ansi: "N/A", rech: "Yes (Lithium-ion)", alias: "168A", devices: "Vapes, High-Power Flashlights, Laptop Battery Packs" },
+    "14500": { name: "14500", icon: "🔋", shape: "AA-Sized Lithium", volts: "3.7V", iec: "ICR14500", ansi: "N/A", rech: "Yes", alias: "N/A", devices: "Tactical Flashlights, DIY Electronics" },
+    "21700": { name: "21700", icon: "🔋", shape: "Very Thick Lithium", volts: "3.7V", iec: "ICR21700", ansi: "N/A", rech: "Yes", alias: "N/A", devices: "EVs, E-Bikes, Premium Flashlights" },
+    "CR123A": { name: "CR123A", icon: "🔋", shape: "Short Thick Cylinder", volts: "3.0V", iec: "CR17345", ansi: "5018LC", rech: "No (Lithium)", alias: "123, DL123A, VL123A, EL123AP", devices: "Tactical Flashlights, Security Cameras, Sensors" },
+    "CR2": { name: "CR2", icon: "🔋", shape: "Mini Thick Cylinder", volts: "3.0V", iec: "CR15270", ansi: "5046LC", rech: "No", alias: "DLCR2, KCR2", devices: "Compact Cameras, Rangefinders" },
+    
+    // 4. Lithium Coin Cells (3.0V)
+    "CR2032": { name: "CR2032", icon: "🪙", shape: "Flat Coin (20mm x 3.2mm)", volts: "3.0V", iec: "CR2032", ansi: "5004LC", rech: "No (Lithium)", alias: "DL2032, ECR2032, BR2032, SB-T15", devices: "Car Smart Keys, PC Motherboards, Weight Scales" },
+    "CR2025": { name: "CR2025", icon: "🪙", shape: "Flat Coin (20mm x 2.5mm)", volts: "3.0V", iec: "CR2025", ansi: "5003LC", rech: "No (Lithium)", alias: "DL2025, ECR2025, BR2025", devices: "Car Keys, Ultra-thin Remotes, Heart Rate Monitors" },
+    "CR2016": { name: "CR2016", icon: "🪙", shape: "Thin Coin (20mm x 1.6mm)", volts: "3.0V", iec: "CR2016", ansi: "5000LC", rech: "No (Lithium)", alias: "DL2016, ECR2016, BR2016", devices: "Digital Watches, Small Keyfobs" },
+    "CR2450": { name: "CR2450", icon: "🪙", shape: "Thick Large Coin (24.5mm x 5.0mm)", volts: "3.0V", iec: "CR2450", ansi: "5029LC", rech: "No (Lithium)", alias: "DL2450, ECR2450", devices: "Smart Home Sensors, Premium Watches" },
+    "CR2430": { name: "CR2430", icon: "🪙", shape: "Large Thin Coin (24.5mm x 3.0mm)", volts: "3.0V", iec: "CR2430", ansi: "5011LC", rech: "No", alias: "DL2430, ECR2430", devices: "Medical Devices, Garage Remotes" },
+    "CR1632": { name: "CR1632", icon: "🪙", shape: "Small Coin (16mm x 3.2mm)", volts: "3.0V", iec: "CR1632", ansi: "N/A", rech: "No", alias: "DL1632, ECR1632", devices: "Car Fobs, Heart Rate Monitors" },
+    "CR1620": { name: "CR1620", icon: "🪙", shape: "Small Thin Coin (16mm x 2.0mm)", volts: "3.0V", iec: "CR1620", ansi: "5009LC", rech: "No", alias: "DL1620, ECR1620", devices: "Car Key Fobs, Calculators" },
+    "CR1220": { name: "CR1220", icon: "🪙", shape: "Mini Coin (12.5mm x 2.0mm)", volts: "3.0V", iec: "CR1220", ansi: "5012LC", rech: "No", alias: "DL1220, ECR1220", devices: "Thermometers, Keyless Entry" },
+    
+    // 5. Alkaline & Silver Oxide Button Cells (1.5V / 1.55V)
+    "LR44": { name: "LR44", icon: "🪙", shape: "Small Button (11.6mm x 5.4mm)", volts: "1.5V", iec: "LR1154", ansi: "1166A", rech: "No", alias: "AG13, 357, A76, SR44, PX76A, L1154", devices: "Laser Pointers, Digital Thermometers, Small Toys" },
+    "LR41": { name: "LR41", icon: "🪙", shape: "Mini Button (7.9mm x 3.6mm)", volts: "1.5V", iec: "LR736", ansi: "392A", rech: "No", alias: "AG3, 392, 384, 192, SR41, L736", devices: "Clinical Thermometers, Small Laser Pointers" },
+    "LR43": { name: "LR43", icon: "🪙", shape: "Medium Button (11.6mm x 4.2mm)", volts: "1.5V", iec: "LR1142", ansi: "1131A", rech: "No", alias: "AG12, 386, 301, D386, L1142", devices: "Calculators, Hearing Aids" },
+    "LR1130": { name: "LR1130", icon: "🪙", shape: "Medium Thin Button (11.6mm x 3.1mm)", volts: "1.5V", iec: "LR54", ansi: "1138SO", rech: "No", alias: "AG10, 389, 390, SR1130, L1131", devices: "Calculators, Small Clocks, Books with Sound" },
+    "SR626SW": { name: "SR626SW", icon: "🪙", shape: "Watch Battery (6.8mm x 2.6mm)", volts: "1.55V", iec: "SR66", ansi: "1176SO", rech: "No (Silver Oxide)", alias: "377, AG4, SG4, LR626", devices: "Analog Wrist Watches" },
+    "SR621SW": { name: "SR621SW", icon: "🪙", shape: "Mini Watch Battery (6.8mm x 2.1mm)", volts: "1.55V", iec: "SR60", ansi: "1175SO", rech: "No (Silver Oxide)", alias: "364, AG1, SG1, LR621", devices: "Small Women's Analog Watches" }
+};
+
+// Massive Map mapping Aliases to Primary Keys
+var aliasMap = {
+    "LR6":"AA", "15A":"AA", "MN1500":"AA", "MIGNON":"AA", "AM3":"AA", "UM3":"AA", "815":"AA",
+    "LR03":"AAA", "24A":"AAA", "MN2400":"AAA", "MICRO":"AAA", "AM4":"AAA", "UM4":"AAA", "824":"AAA",
+    "LR8D425":"AAAA", "25A":"AAAA", "MN2500":"AAAA", "E96":"AAAA", "425":"AAAA",
+    "LR14":"C", "14A":"C", "MN1400":"C", "BABY":"C", "AM2":"C", "814":"C",
+    "LR20":"D", "13A":"D", "MN1300":"D", "MONO":"D", "AM1":"D", "813":"D",
+    "6LR61":"9V", "1604A":"9V", "PP3":"9V", "MN1604":"9V", "E-BLOCK":"9V", "6AM6":"9V",
+    "ICR18650":"18650", "168A":"18650",
+    "ICR14500":"14500", "ICR21700":"21700",
+    "8LR932":"A23", "1811A":"A23", "23A":"A23", "V23GA":"A23", "MN21":"A23", "LRV08":"A23",
+    "8LR732":"A27", "27A":"A27", "MN27":"A27", "G27A":"A27",
+    "CR17345":"CR123A", "5018LC":"CR123A", "123":"CR123A", "DL123A":"CR123A", "VL123A":"CR123A", "EL123AP":"CR123A",
+    "CR15270":"CR2", "5046LC":"CR2", "DLCR2":"CR2", "KCR2":"CR2",
+    "DL2032":"CR2032", "ECR2032":"CR2032", "BR2032":"CR2032", "SB-T15":"CR2032",
+    "DL2025":"CR2025", "ECR2025":"CR2025", "BR2025":"CR2025",
+    "DL2016":"CR2016", "ECR2016":"CR2016", "BR2016":"CR2016",
+    "DL2450":"CR2450", "ECR2450":"CR2450",
+    "DL2430":"CR2430", "ECR2430":"CR2430", "5011LC":"CR2430",
+    "DL1632":"CR1632", "ECR1632":"CR1632",
+    "DL1620":"CR1620", "ECR1620":"CR1620", "5009LC":"CR1620",
+    "DL1220":"CR1220", "ECR1220":"CR1220", "5012LC":"CR1220",
+    "AG13":"LR44", "357":"LR44", "A76":"LR44", "SR44":"LR44", "LR1154":"LR44", "1166A":"LR44", "PX76A":"LR44", "L1154":"LR44",
+    "AG3":"LR41", "392":"LR41", "384":"LR41", "SR41":"LR41", "LR736":"LR41", "392A":"LR41", "192":"LR41", "L736":"LR41",
+    "AG12":"LR43", "386":"LR43", "301":"LR43", "LR1142":"LR43", "1131A":"LR43", "D386":"LR43", "L1142":"LR43",
+    "AG10":"LR1130", "389":"LR1130", "390":"LR1130", "SR1130":"LR1130", "LR54":"LR1130", "1138SO":"LR1130", "L1131":"LR1130",
+    "377":"SR626SW", "AG4":"SR626SW", "SG4":"SR626SW", "LR626":"SR626SW", "SR66":"SR626SW", "1176SO":"SR626SW",
+    "364":"SR621SW", "AG1":"SR621SW", "SG1":"SR621SW", "LR621":"SR621SW", "SR60":"SR621SW", "1175SO":"SR621SW"
+};
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.4 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(34, 211, 238, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]action=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'spin_ott') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 400);
+    }
+});
+
+function setQuickTag(val) {
+    document.getElementById('inp-query').value = val;
+    startCalculation();
+}
+
+function startCalculation() {
+    var q = document.getElementById('inp-query').value;
+    if (!q) {
+        q = "";
+    }
+    q = q.replace(/^\s+|\s+$/g, '').toUpperCase();
+    
+    if (q === "") {
+        alert("Please enter a battery code first.");
+        return;
+    }
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "action=spin_ott&q=" + encodeURIComponent(q);
+    
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    var query = getParam('q');
+    var finalKey = "";
+    
+    if (batteryDB[query]) {
+        finalKey = query;
+    } else if (aliasMap[query]) {
+        finalKey = aliasMap[query];
+    }
+
+    if (finalKey !== "") {
+        var data = batteryDB[finalKey];
+        document.getElementById('res-icon').innerText = data.icon;
+        document.getElementById('res-name').innerText = data.name;
+        document.getElementById('res-shape').innerText = data.shape;
+        document.getElementById('res-volts').innerText = data.volts;
+        document.getElementById('res-iec').innerText = data.iec;
+        document.getElementById('res-ansi').innerText = data.ansi;
+        document.getElementById('res-rech').innerText = data.rech;
+        document.getElementById('res-alias').innerText = data.alias;
+        document.getElementById('res-devices').innerText = data.devices;
+        
+        document.getElementById('res-found').style.display = 'block';
+        document.getElementById('res-error').style.display = 'none';
+    } else {
+        document.getElementById('res-found').style.display = 'none';
+        document.getElementById('res-error').style.display = 'block';
+    }
+
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
