@@ -1,0 +1,410 @@
+<!--Google Blogger Only: K-Signature MAX PRO (ES5, Origin Badge, External Link, Dual-Safety)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+    .return_link, .sidebar-back, .navigation, .Header, #Header1, #header, .header-outer, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .post-title, .date-header, .date-outer, .breadcrumbs, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .search-action, .search-container, .top-bar-container, .top-bar, .share-action, .share-button, .search-button, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { 
+        display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important;
+    } 
+
+    html, body { 
+        background-color: #0B1120 !important; 
+        color: #F8FAFC; 
+        font-family: 'Inter', sans-serif; 
+        margin: 0; 
+        padding: 0; 
+        overflow-x: hidden;
+        user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+        line-height: 1.6;
+    }
+
+    * { box-sizing: border-box; }
+
+    #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    #app-container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 540px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 35px 20px 80px 20px;
+    }
+
+    .header-section { text-align: center; margin-bottom: 30px; }
+    .main-title { font-size: 32px; font-weight: 800; color: #D4AF37; letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);}
+    .sub-title { font-size: 13px; color: #94A3B8; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;}
+
+    .input-card {
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    .card-header { font-size: 14px; font-weight: 800; color: #D4AF37; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 12px; letter-spacing: 1px;}
+    .card-header-icon { font-size: 18px; margin-right: 10px;}
+    .input-label { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 10px; display: block;}
+
+    .custom-select {
+        width: 100%;
+        padding: 18px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #FFFFFF;
+        background-color: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 14px;
+        outline: none;
+        font-family: 'Inter', sans-serif;
+        transition: 0.3s;
+        margin-bottom: 25px;
+        -webkit-appearance: none; 
+        appearance: none;
+        letter-spacing: 1px;
+    }
+    .custom-select:focus { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
+    .custom-select option { background-color: #0F172A; color: #FFFFFF; font-weight: 600; }
+
+    .submit-btn {
+        width: 100%;
+        padding: 22px;
+        font-size: 16px;
+        font-weight: 800;
+        color: #000000;
+        background: linear-gradient(135deg, #FDE047 0%, #D4AF37 100%);
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 10px;
+        margin-bottom: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .submit-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);}
+
+    .info-card { background: rgba(15, 23, 42, 0.5); border-left: 4px solid #D4AF37; border-radius: 0 16px 16px 0; padding: 25px; margin-bottom: 20px;}
+    .info-title { font-size: 14px; font-weight: 800; color: #FDE047; margin-bottom: 15px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 14px; color: #CBD5E1; margin-bottom: 20px; text-align: left; line-height: 1.8; word-break: keep-all;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FFFFFF; font-weight: 700;}
+
+    .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 17, 32, 0.95); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(10px);}
+    .spinner { border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #D4AF37; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 25px;}
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .loading-text { font-size: 16px; font-weight: 800; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase;}
+
+    .result-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; overflow-y: auto; padding: 20px; backdrop-filter: blur(12px);}
+    .result-content { max-width: 540px; margin: 30px auto; background: #1E293B; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 28px; padding: 35px 25px; box-shadow: 0 25px 70px rgba(0,0,0,0.8); text-align: center;}
+    
+    .stamp-wrapper { width: 120px; height: 120px; margin: 0 auto 20px auto; border: 5px solid #DC2626; border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(220, 38, 38, 0.25); position: relative; background-color: transparent;}
+    .stamp-wrapper::after { content: ''; position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px; border: 2px solid #DC2626; border-radius: 10px; }
+    .stamp-text { color: #DC2626; font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 42px; font-weight: 900; writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 5px;}
+    
+    .kor-name { font-size: 34px; font-weight: 800; color: #D4AF37; margin-bottom: 2px; letter-spacing: 2px;}
+    .eng-name { font-size: 15px; color: #94A3B8; margin-bottom: 15px; letter-spacing: 1px;}
+    
+    /* 한자 및 순우리말 뱃지 스타일 */
+    .origin-badge { display: inline-block; padding: 6px 14px; background: rgba(212, 175, 55, 0.15); border: 1px solid #D4AF37; border-radius: 20px; font-size: 13px; font-weight: 700; color: #FDE047; margin-bottom: 8px; letter-spacing: 0.5px;}
+    .hanja-text { font-size: 20px; color: #E2E8F0; margin-bottom: 25px; font-family: "Malgun Gothic", serif; letter-spacing: 4px;}
+
+    .res-desc-box { background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 22px; margin-bottom: 25px;}
+    .res-desc-text { font-size: 15px; font-weight: 600; color: #F8FAFC; line-height: 1.8; text-align: left; word-break: keep-all;}
+
+    /* 외부 링크 버튼 (새 탭) */
+    .btn-external { display: flex; align-items: center; justify-content: center; width: 100%; padding: 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 16px; color: #FFFFFF; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; margin-bottom: 12px; transition: 0.2s; letter-spacing: 0.5px;}
+    .btn-external:active { background: rgba(255, 255, 255, 0.15);}
+    .btn-external span { margin-right: 8px; font-size: 18px;}
+
+    .close-btn { width: 100%; padding: 18px; background: transparent; border: none; color: #94A3B8; font-size: 14px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; text-decoration: underline;}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="app-container">
+    <div class="header-section">
+        <div class="main-title">K-Signature</div>
+        <div class="sub-title">Discover your authentic Korean identity</div>
+    </div>
+
+    <div class="input-card">
+        <div class="card-header"><span class="card-header-icon">👤</span> Step 1. Select Identity</div>
+        <div class="input-label">Please choose the gender identity for your name.</div>
+        <select class="custom-select" id="gender-select">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+        </select>
+
+        <div class="card-header" style="margin-top: 15px;"><span class="card-header-icon">✨</span> Step 2. Desired Vibe</div>
+        <div class="input-label">What feeling or meaning should your name convey?</div>
+        <select class="custom-select" id="vibe-select">
+            <option value="elegance">Elegance &amp; Beauty</option>
+            <option value="strength">Strength &amp; Courage</option>
+            <option value="wisdom">Wisdom &amp; Intellect</option>
+            <option value="nature">Calmness &amp; Nature</option>
+        </select>
+    </div>
+
+    <button class="submit-btn" onclick="startGeneration()" ontouchstart="">
+        <span>✍️</span> Craft My Signature
+    </button>
+
+    <div class="info-card">
+        <div class="info-title">📖 How to Use K-Signature</div>
+        <div class="info-text">Welcome! K-Signature is a premium tool designed to help you discover a beautiful, deeply meaningful Korean name that perfectly matches your personal energy. </div>
+        <div class="info-text"><strong>Step 1:</strong> Simply select your preferred identity from the first dropdown menu.<br><br><strong>Step 2:</strong> Choose the unique vibe or hidden meaning you want your new name to carry.<br><br><strong>Step 3:</strong> Tap the gold button to instantly generate your authentic name and a beautifully crafted traditional red stamp (Doojang).</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Pro Tips for Your New Name</div>
+        <div class="info-text">1. <strong>Social Media Ready:</strong> Take a screenshot of your beautiful red stamp and use it as a unique profile picture on Instagram or TikTok.</div>
+        <div class="info-text">2. <strong>Making Friends:</strong> Introduce yourself with your new Korean name at language exchange meetups or when making Korean friends. It is a fantastic icebreaker!</div>
+        <div class="info-text">3. <strong>Perfect Souvenirs:</strong> If you travel to Seoul, you can show your generated name to a local craftsman and have a real wooden stamp carved just for you.</div>
+        <div class="info-text">4. <strong>Infinite Variations:</strong> Feel free to try different vibes to see the wide variety of beautiful names the Korean language has to offer.</div>
+    </div>
+
+    <div class="info-card" style="border-color: #64748B;">
+        <div class="info-title" style="color: #94A3B8;">⚖️ Precautions &amp; Disclaimer</div>
+        <div class="info-text">This application generates names based on traditional Korean naming conventions and meanings to provide a delightful cultural experience.</div>
+        <div class="info-text">Please note that the names and stamp images provided here are strictly for entertainment and cultural appreciation. They <strong>do not hold any legal validity</strong> and cannot be used for official identification, banking, or government documentation. Enjoy the experience safely and creatively!</div>
+    </div>
+</div>
+
+<div class="loading-overlay" id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-text">Crafting Your Identity...</div>
+</div>
+
+<div class="result-modal" id="result-modal">
+    <div class="result-content">
+        <div class="stamp-wrapper">
+            <div class="stamp-text" id="stamp-display">이름</div>
+        </div>
+        <div class="kor-name" id="kor-display">이름</div>
+        <div class="eng-name" id="eng-display">Name</div>
+        
+        <!-- 한자어 / 순우리말 분석 결과 뱃지 추가 -->
+        <div class="origin-badge" id="origin-display">Sino-Korean (Hanja)</div>
+        <div class="hanja-text" id="hanja-display">漢字</div>
+
+        <div class="res-desc-box">
+            <div class="res-desc-text" id="meaning-display">Meaning goes here.</div>
+        </div>
+
+        <!-- 외부 백과사전/구글 검색 연동 버튼 추가 (무한 확장 킥포인트) -->
+        <a href="#" target="_blank" class="btn-external" id="btn-search-more">
+            <span>🔍</span> Explore Deeper on Google
+        </a>
+
+        <button class="close-btn" onclick="closeModal()" ontouchstart="">Close & Try Another</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - K-Signature MAX PRO (Added Hanja & External Links) */
+
+var nameDB = {
+    "female_elegance": [
+        { kor: "지안", eng: "Ji-an", type: "Sino-Korean (Hanja)", hanja: "智安", meaning: "Comfortable and beautifully graceful. It represents a life of peace, intelligence, and elegance." },
+        { kor: "수아", eng: "Su-a", type: "Sino-Korean (Hanja)", hanja: "秀雅", meaning: "Outstandingly beautiful and elegant. A name fit for someone with refined and excellent taste." },
+        { kor: "서아", eng: "Seo-a", type: "Sino-Korean (Hanja)", hanja: "瑞雅", meaning: "Auspicious and beautifully elegant. It brings good fortune and grace wherever she goes." },
+        { kor: "시아", eng: "Si-a", type: "Sino-Korean (Hanja)", hanja: "詩雅", meaning: "Poetic and elegantly beautiful. Someone who lives a beautiful life like a poem." }
+    ],
+    "female_strength": [
+        { kor: "윤아", eng: "Yoon-a", type: "Sino-Korean (Hanja)", hanja: "潤娥", meaning: "Shining and elegantly strong. A person who overcomes any obstacle with grace." },
+        { kor: "유진", eng: "Yu-jin", type: "Sino-Korean (Hanja)", hanja: "裕珍", meaning: "Abundant and incredibly valuable. A strong, precious, and highly resilient presence." },
+        { kor: "가람", eng: "Ga-ram", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Meaning 'River' in ancient Korean. Strong, fluid, and everlasting like a flowing river." },
+        { kor: "보람", eng: "Bo-ram", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Meaning 'Fruitful' or 'Rewarding'. A person who brings great worth and strong results." }
+    ],
+    "female_wisdom": [
+        { kor: "서연", eng: "Seo-yeon", type: "Sino-Korean (Hanja)", hanja: "瑞娟", meaning: "Auspicious and beautiful. Someone with deep intellect and insight into the world." },
+        { kor: "지윤", eng: "Ji-yoon", type: "Sino-Korean (Hanja)", hanja: "智允", meaning: "Great wisdom and success. A person destined to make wise and true choices." },
+        { kor: "수민", eng: "Su-min", type: "Sino-Korean (Hanja)", hanja: "秀玟", meaning: "Outstandingly clever and bright like a gem. Quick-witted and highly intelligent." },
+        { kor: "지원", eng: "Ji-won", type: "Sino-Korean (Hanja)", hanja: "智元", meaning: "The origin of wisdom. A perfect balance of brain and charming personality." }
+    ],
+    "female_nature": [
+        { kor: "하은", eng: "Ha-eun", type: "Sino-Korean (Hanja)", hanja: "夏恩", meaning: "Grand as summer, full of grace. Warm, welcoming, and giving like the sun." },
+        { kor: "바다", eng: "Ba-da", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Literally meaning 'Ocean'. Vast, deep, and embracing like the beautiful sea." },
+        { kor: "이슬", eng: "I-seul", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Literally meaning 'Morning Dew'. Pure, clear, and untouched by the world." },
+        { kor: "여름", eng: "Yeo-reum", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Literally meaning 'Summer'. Vibrant, passionate, and lively like the summer season." }
+    ],
+    "male_elegance": [
+        { kor: "은우", eng: "Eun-woo", type: "Sino-Korean (Hanja)", hanja: "恩宇", meaning: "Graceful and deeply divine. A gentle, soft-spoken, and infinitely broad aura." },
+        { kor: "선호", eng: "Seon-ho", type: "Sino-Korean (Hanja)", hanja: "善皓", meaning: "Goodness and a bright sky. A person with a broad, pure, and elegant heart." },
+        { kor: "도현", eng: "Do-hyun", type: "Sino-Korean (Hanja)", hanja: "道賢", meaning: "Virtuous and elegantly shining. Someone who leads with grace, wisdom, and honor." },
+        { kor: "로운", eng: "Ro-un", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Derived from 'Sleek and Wise'. A beautiful native name with a very soft pronunciation." }
+    ],
+    "male_strength": [
+        { kor: "건우", eng: "Geon-woo", type: "Sino-Korean (Hanja)", hanja: "建宇", meaning: "Building a strong universe. Built with great physical and mental fortitude." },
+        { kor: "준호", eng: "Jun-ho", type: "Sino-Korean (Hanja)", hanja: "俊昊", meaning: "Highly talented and vast like the summer sky. A born leader with immense inner strength." },
+        { kor: "태준", eng: "Tae-jun", type: "Sino-Korean (Hanja)", hanja: "泰俊", meaning: "Great, grand, and highly talented. A name representing massive potential and power." },
+        { kor: "진우", eng: "Jin-woo", type: "Sino-Korean (Hanja)", hanja: "鎭宇", meaning: "True, genuine, and divinely strong. Unwavering in the face of harsh challenges." }
+    ],
+    "male_wisdom": [
+        { kor: "지훈", eng: "Ji-hoon", type: "Sino-Korean (Hanja)", hanja: "智勳", meaning: "Wisdom and great merit. Someone whose high intelligence brings great achievements." },
+        { kor: "민준", eng: "Min-jun", type: "Sino-Korean (Hanja)", hanja: "敏俊", meaning: "Clever, quick, and highly talented. A classic, beloved name for a smart individual." },
+        { kor: "현우", eng: "Hyun-woo", type: "Sino-Korean (Hanja)", hanja: "賢宇", meaning: "Wise, shining, and divine. A person whose intellect illuminates the dark world." },
+        { kor: "승현", eng: "Seung-hyun", type: "Sino-Korean (Hanja)", hanja: "承炫", meaning: "Succeeding with great light. Destined to rise to the top intelligently and brightly." }
+    ],
+    "male_nature": [
+        { kor: "도윤", eng: "Do-yoon", type: "Sino-Korean (Hanja)", hanja: "道尹", meaning: "A great and righteous path. Steadfast and natural like a deep, ancient forest." },
+        { kor: "해성", eng: "Hae-sung", type: "Sino-Korean (Hanja)", hanja: "海星", meaning: "Shining brightly like a star over the sea. A vast and beautiful natural imagery." },
+        { kor: "산", eng: "San", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Literally meaning 'Mountain'. Strong, steady, and grand like a deeply rooted mountain." },
+        { kor: "우주", eng: "Woo-ju", type: "Native Korean (순우리말)", hanja: "Pure Korean Word", meaning: "Literally meaning 'Universe'. Vast, mysterious, and limitless with infinite possibilities." }
+    ]
+};
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.4 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, ' + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    initParticles();
+    
+    var searchParams = window.location.search;
+    var actionMatch = searchParams.match(/[?&]rs=([^&]+)/);
+    
+    if (actionMatch && actionMatch[1] === 'show') {
+        setTimeout(function() { 
+            parseURLAndShowResults();
+        }, 400);
+    }
+});
+
+function startGeneration() {
+    var g = document.getElementById('gender-select').value;
+    var v = document.getElementById('vibe-select').value;
+
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "rs=show&g=" + encodeURIComponent(g) + "&v=" + encodeURIComponent(v);
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function parseURLAndShowResults() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    var g = getParam('g');
+    var v = getParam('v');
+    var key = g + "_" + v;
+    var nameList = nameDB[key];
+    
+    if (!nameList || nameList.length === 0) {
+        nameList = nameDB["female_elegance"];
+    }
+    
+    var randIdx = Math.floor(Math.random() * nameList.length);
+    var result = nameList[randIdx];
+    
+    // 기본 정보 매칭
+    document.getElementById('stamp-display').innerText = result.kor;
+    document.getElementById('kor-display').innerText = result.kor;
+    document.getElementById('eng-display').innerText = result.eng;
+    
+    // 추가된 킥포인트 1: 뿌리 분석 및 한자 표기
+    document.getElementById('origin-display').innerText = result.type;
+    document.getElementById('hanja-display').innerText = result.hanja;
+    
+    document.getElementById('meaning-display').innerHTML = "<strong>[ Deep Cultural Meaning ]</strong><br><br>" + result.meaning;
+    
+    // 추가된 킥포인트 2: 구글 외부 연동 링크 생성 (이름 검색)
+    var googleSearchUrl = "https://www.google.com/search?q=Korean+name+" + encodeURIComponent(result.kor) + "+meaning";
+    document.getElementById('btn-search-more').href = googleSearchUrl;
+    
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('result-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.history.replaceState({}, document.title, baseUrl + mParam);
+    } catch(e) {}
+}
+//]]>
+</script>
