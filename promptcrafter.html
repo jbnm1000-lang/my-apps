@@ -1,0 +1,508 @@
+<!--Google Blogger Only: PromptCrafter MAX PRO (ES5, Massive DB, Particles, Dual-Safety Ad Logic)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet"></link>
+
+<style>
+    /* 구글 블로그 기본 테마 숨김 */
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar, .return_link, .sidebar-back, .navigation, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important; }
+
+    /* 전체 배경 설정 */
+    html, body { 
+        padding: 0 !important; 
+        margin: 0 !important; 
+        border: none !important; 
+        background-color: #0B1120 !important; 
+        background-image: none !important; 
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(30, 41, 59, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --accent-primary: #10b981; 
+        --accent-secondary: #6366f1; 
+        --accent-glow: #f59e0b; 
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+    }
+
+    /* 파티클 캔버스 */
+    #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .app-wrapper {
+        position: relative;
+        z-index: 1;
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        width: 100%;
+        user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 35px 25px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        box-sizing: border-box;
+        margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        background: linear-gradient(90deg, #10b981, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 30px;
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 35px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+
+    /* 입력 폼 스타일 */
+    .form-group { margin-bottom: 25px; position: relative; }
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 10px; color: #cbd5e1; padding-left: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
+    
+    select, input[type="text"], textarea {
+        width: 100%; padding: 18px; background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px;
+        color: var(--text-main); font-size: 15px; box-sizing: border-box;
+        outline: none; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
+        appearance: none; -webkit-appearance: none;
+        line-height: 1.5;
+    }
+    
+    select:focus, input[type="text"]:focus, textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 15px rgba(16, 185, 129, 0.25); background: rgba(15, 23, 42, 1); }
+    select option { background-color: #0F172A; color: #FFFFFF; font-weight: 500; }
+    textarea { resize: none; height: 100px; }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white; padding: 22px; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer;
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); transition: 0.2s; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .btn-generate:active { transform: scale(0.97); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4); }
+
+    /* 하단 안내 카드 스타일 */
+    .info-card { 
+        background: rgba(30, 41, 59, 0.5); 
+        border-left: 4px solid var(--accent-primary); 
+        border-radius: 0 16px 16px 0; 
+        padding: 25px; 
+        margin-bottom: 25px;
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+    }
+    .info-card.warning { border-left-color: var(--accent-glow); }
+    .info-title { font-size: 15px; font-weight: 800; color: var(--accent-primary); margin-bottom: 15px; display: flex; align-items: center; letter-spacing: 1px; text-transform: uppercase;}
+    .info-card.warning .info-title { color: var(--accent-glow); }
+    .info-text { font-size: 14px; color: #e2e8f0; margin-bottom: 18px; text-align: left; line-height: 1.8; word-break: keep-all; font-weight: 400;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: #FFFFFF; font-weight: 700;}
+
+    /* 결과창 화면 */
+    #resultContainer { display: none; animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    .output-box {
+        background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 16px;
+        padding: 25px; font-size: 14px; line-height: 1.9; color: #f8fafc; white-space: pre-wrap; word-break: break-all; margin-top: 20px; user-select: auto; -webkit-user-select: auto;
+    }
+
+    .btn-copy {
+        width: 100%; background: linear-gradient(90deg, #3b82f6, #4f46e5);
+        color: white; padding: 20px; border: none; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer;
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); transition: 0.2s; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .btn-copy:active { transform: scale(0.97); }
+
+    .btn-reset {
+        width: 100%; background: transparent; color: #94a3b8; padding: 18px; border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .btn-reset:active { background: rgba(255, 255, 255, 0.1); }
+
+    #toast {
+        visibility: hidden; min-width: 280px; background-color: #3b82f6; color: #fff; text-align: center;
+        border-radius: 50px; padding: 18px 24px; position: fixed; z-index: 1000; left: 50%; bottom: 40px;
+        transform: translateX(-50%); font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #toast.show { visibility: visible; animation: fadein 0.4s, fadeout 0.4s 2.6s; }
+    
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 40px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 40px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <!-- 메인 프롬프트 생성기 박스 -->
+    <div class="premium-box">
+        <h2 class="main-title">PromptCrafter</h2>
+        <div class="subtitle">Advanced AI Engineering Framework</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>1. Select Primary Domain</label>
+                <select id="category" onchange="syncSubCategories()">
+                    <option value="c1">💼 SEO Marketing &amp; Content Strategy</option>
+                    <option value="c2">🎥 YouTube &amp; Video Production</option>
+                    <option value="c3">💰 Financial Planning &amp; Wealth Management</option>
+                    <option value="c4">🎮 Game Design &amp; Player Psychology</option>
+                    <option value="c5">💻 Software Engineering &amp; IT Architecture</option>
+                    <option value="c6">🧬 Health, Fitness &amp; Clinical Nutrition</option>
+                    <option value="c7">📈 Corporate Strategy &amp; Executive Leadership</option>
+                    <option value="c8">🎓 Academic Research &amp; Scientific Writing</option>
+                    <option value="c9">🎨 Creative Arts &amp; Generative AI Design</option>
+                    <option value="c10">🧠 Psychological Counseling &amp; Mind Care</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>2. Select Specific Task Optimization</label>
+                <select id="subCategory"></select>
+            </div>
+
+            <div class="form-group">
+                <label>3. Input Core Keyword (Required)</label>
+                <input id="customKeyword" placeholder="e.g., Artificial Intelligence, Muscle Growth, Stock Market" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label>4. Add Custom Constraints (Optional)</label>
+                <textarea id="customContext" placeholder="e.g., Explain this using a highly analytical approach, limit the response to exactly 500 words, include recent statistics."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>5. Tone of Voice</label>
+                <select id="tone">
+                    <option value="t1">Highly Professional &amp; Authoritative</option>
+                    <option value="t2">Warm, Friendly &amp; Empathetic</option>
+                    <option value="t3">Strictly Analytical &amp; Objective</option>
+                    <option value="t4">Unconventionally Creative &amp; Inspiring</option>
+                    <option value="t5">Witty, Engaging &amp; Humorous</option>
+                    <option value="t6">Ultra-Concise &amp; Fluff-Free</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>6. Target Audience</label>
+                <select id="audience">
+                    <option value="a1">General Public (No Prior Knowledge)</option>
+                    <option value="a2">Industry Experts &amp; Professionals</option>
+                    <option value="a3">Absolute Beginners &amp; Students</option>
+                    <option value="a4">Executive Board Members</option>
+                    <option value="a5">Children &amp; Teenagers</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>7. Output Format Architecture</label>
+                <select id="format">
+                    <option value="f1">Logical Paragraphs (Best for reading flow)</option>
+                    <option value="f2">Data Table (Best for visual comparison)</option>
+                    <option value="f3">Bullet Points (Cleanly arranged core insights)</option>
+                    <option value="f4">Step-by-Step Actionable Guide</option>
+                    <option value="f5">Source Code / Ready-to-Compile Script</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>8. Output Language</label>
+                <select id="language">
+                    <option value="l1">English (Highest AI Logic Capability)</option>
+                    <option value="l2">Korean (한국어)</option>
+                    <option value="l3">Spanish (Español)</option>
+                    <option value="l4">Japanese (日本語)</option>
+                </select>
+            </div>
+
+            <button class="btn-generate" onclick="executeEngineBuild()" ontouchstart="">Craft Master Prompt</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--accent-primary); font-family: 'Poppins', sans-serif; font-size: 20px; margin-top: 0px; text-align: center; font-weight: 800;">💎 PROMPT DEPLOYED</h3>
+            <div class="output-box" id="promptConsole"></div>
+            <p style="color: var(--text-muted); font-size: 13px; font-weight: 600; margin-top: 20px; text-align: center;">Click the button below to copy the code and paste it into ChatGPT, Claude, or Gemini.</p>
+            
+            <button class="btn-copy" id="copyConsoleBtn" onclick="processClipboardCopy()" ontouchstart="">📋 Copy Framework</button>
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">← Craft Another Prompt</button>
+        </div>
+    </div>
+
+    <!-- 앱 설명 및 이용 방법 -->
+    <div class="info-card">
+        <div class="info-title">📖 How to Use PromptCrafter</div>
+        <div class="info-text">Welcome to PromptCrafter, the ultimate tool designed to help you extract the maximum potential from Artificial Intelligence. Writing a good prompt can be difficult, but this application does all the complex engineering for you.</div>
+        <div class="info-text"><strong>Step 1:</strong> Select your field of interest and the specific task you want the AI to perform from the dropdown menus.</div>
+        <div class="info-text"><strong>Step 2:</strong> Type in your core keyword. This is the main subject you want the AI to focus on. You can also add any specific rules in the optional box.</div>
+        <div class="info-text"><strong>Step 3:</strong> Choose the tone, audience, format, and language to shape exactly how the final output will look.</div>
+        <div class="info-text"><strong>Step 4:</strong> Tap the green button to generate a highly sophisticated Master Prompt. Copy it and paste it directly into your favorite AI tool!</div>
+    </div>
+
+    <!-- 꿀팁 -->
+    <div class="info-card">
+        <div class="info-title">💡 Pro Tips for Best Results</div>
+        <div class="info-text">1. <strong>Use English for Logic:</strong> Even if you want the final result in your native language, generating the prompt logic in English often yields much smarter and more accurate results from Large Language Models.</div>
+        <div class="info-text">2. <strong>Be Specific:</strong> In the 'Constraints' box, do not hesitate to be demanding. Tell the AI exactly how many words to write or what specific details to avoid. The more specific you are, the better the output.</div>
+        <div class="info-text">3. <strong>Experiment:</strong> Try changing the 'Tone of Voice' or 'Target Audience' for the same topic. You will be amazed at how differently the AI approaches the subject.</div>
+    </div>
+
+    <!-- 주의사항 및 면책 조항 -->
+    <div class="info-card warning">
+        <div class="info-title">⚖️ Precautions &amp; Disclaimer</div>
+        <div class="info-text">This application generates highly optimized prompt architectures to enhance the readability and logic of AI models. However, Artificial Intelligence can sometimes produce inaccurate information or "hallucinations."</div>
+        <div class="info-text">Please note that PromptCrafter is a structural tool. We do not guarantee the factual correctness of the answers provided by third-party AI platforms. <strong>You, as the final user, must carefully review and verify all generated content</strong> before using it for professional, academic, or financial purposes.</div>
+    </div>
+</div>
+
+<div id="toast">Copied successfully! Paste it into your AI tool.</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - PromptCrafter MAX PRO */
+
+// 파티클 효과 (테크 감성 에메랄드/블루)
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 35;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.5 + 0.1,
+            color: Math.random() > 0.5 ? 'rgba(16, 185, 129, ' : 'rgba(59, 130, 246, '
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + p.alpha + ')';
+            ctx.fill();
+
+            p.x += p.vx;
+            p.y -= Math.abs(p.vy); 
+
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(draw);
+        } else {
+            setTimeout(draw, 1000 / 60);
+        }
+    }
+    draw();
+}
+
+// MAX 데이터베이스 (방대한 지시어 조합)
+var engineData = {
+    c1: { role: "Chief SEO Marketing Director with 20 years of Google Algorithm expertise", subs: { s1: "Develop an SEO-optimized article architecture guaranteed to index on Google's first page.", s2: "Design a powerful psychological introduction hook to minimize bounce rate.", s3: "Construct a Google-friendly semantic markup and hierarchical header structure (H2, H3, H4).", s4: "Extract 15 click-inducing, psychology-based informative headlines.", s5: "Establish a comprehensive long-tail and blue-ocean niche keyword distribution strategy.", s6: "Draft an AdSense-optimized informational post that maximizes internal hyperlink value.", s7: "Create a complete content roadmap for 30 days to drastically boost domain authority.", s8: "Write a high-converting affiliate marketing service review template.", s9: "Analyze competitors' weaknesses and draft a highly differentiated in-depth content strategy.", s10: "Formulate a localized SEO strategy for penetrating specific geographic markets." } },
+    c2: { role: "Elite YouTube Content Director with over 500 million cumulative views", subs: { s1: "Write a mobile-optimized short-form viral script to prevent viewer drop-off in the first 3 seconds.", s2: "Build a 15-minute long-form documentary script designed for maximum audience retention.", s3: "Provide a highly detailed graphic design concept for a high-CTR YouTube thumbnail.", s4: "Generate a strategic tag set and detailed video description favored by YouTube's NLP algorithm.", s5: "Create a storytelling intro script that naturally induces subscriptions without sounding desperate.", s6: "Design a chain-reaction outro script that forces viewers to click the next recommended video.", s7: "Write a sophisticated, highly logical video script tailored for an educational or news channel.", s8: "Draft a witty, fast-paced script integrating current global internet memes and trends.", s9: "Plan an organically connected 5-part video series outline to build immense channel loyalty.", s10: "Create a live-stream interaction script designed to trigger explosive community chat engagements." } },
+    c3: { role: "Senior Consultant in Personal Finance and Wealth Management", subs: { s1: "Create a comprehensive strategy for maximizing hidden discount benefits and cashback rewards.", s2: "Analyze and match uncollected government subsidies or tax returns based on specific income types.", s3: "Design a precise monthly budget process to permanently reduce fixed living expenses by 30%.", s4: "Provide a financial diet solution for eliminating telecom overcharges and useless subscriptions.", s5: "Develop an optimal savings portfolio and account-splitting strategy for young professionals.", s6: "Draft a practical guide to cutting travel and accommodation costs in half using booking algorithms.", s7: "Explain the technical process for reverse-calculating and cashing out dormant credit card points.", s8: "Create a comprehensive checklist for preventing fraud in second-hand market transactions.", s9: "Provide a customized consumption optimization report for maximizing year-end tax deductions.", s10: "Design a long-term compound interest investment roadmap for early retirement (FIRE movement)." } },
+    c4: { role: "Lead Game Designer and Player Psychology Analyst", subs: { s1: "Draft a high-efficiency Free-to-Play (F2P) progression and resource management guide.", s2: "Provide a detailed tier list and meta analysis based on the latest patch notes and character data.", s3: "Write a systematic code of conduct and organizational structure for a massive gaming guild.", s4: "Design an early-game resource distribution strategy that limits new player waste to absolutely zero.", s5: "Explain the optimal skill rotation and gear setup protocol for maximum DPS in end-game raids.", s6: "Predict in-game economy shifts and inflation by reverse-analyzing the developer's recent updates.", s7: "Create a microtransaction efficiency comparison table to maximize low-spender marginal utility.", s8: "Develop a perfect team synergy composition and crisis timeline strategy for hardcore boss fights.", s9: "Draft a high-profit item trading baseline manual based on current auction house price trends.", s10: "Write a high-quality, immersive game lore interpretation post to engage the community." } },
+    c5: { role: "Chief Technology Officer (CTO) and Senior Enterprise Architect", subs: { s1: "Provide a multi-stack trace debugging and runtime error reverse-tracking solution.", s2: "Design a high-level architecture for an automated web crawling and data aggregation system.", s3: "Explain asynchronous data communication logic and state management for front-end frameworks.", s4: "Create a high-efficiency code refactoring model to reorganize legacy code into Clean Code standards.", s5: "Draft a detailed architectural spec sheet that allows non-technical executives to understand the system.", s6: "Outline a web security protocol to proactively block vulnerabilities like SQL injection and XSS.", s7: "Write a highly optimized script to automate the cleansing, parsing, and loading of massive raw datasets.", s8: "Provide a robust API communication code pattern that handles token renewal and authentication gracefully.", s9: "Design a synchronization solution between low-code platforms and secure external databases.", s10: "Create a 100-day intensive self-study roadmap to elevate a complete beginner to a junior software engineer." } },
+    c6: { role: "Clinical Nutritionist and Advanced Fitness Coach", subs: { s1: "Design a customized 4-week macronutrient diet plan to accelerate body fat reduction.", s2: "Provide a progressive overload routine manual categorized by muscle group for weight training beginners.", s3: "Draft a 10-minute daily corrective stretching routine to prevent chronic musculoskeletal disorders.", s4: "Create a highly efficient, safety-guaranteed cardiovascular protocol for individuals with joint issues.", s5: "Explain the optimal supplement intake timing and dosage guide to maximize muscle hypertrophy.", s6: "Design a nighttime sleep hygiene environment setup solution to eradicate insomnia and improve recovery.", s7: "Provide a psychological mind-setup solution to completely cut off stress-induced late-night binge eating.", s8: "Draft a scientific meal sequencing guide to proactively suppress postprandial blood sugar spikes.", s9: "Create a high-intensity home training bodyweight routine that generates zero inter-floor noise.", s10: "Explain a nervous system recovery and strategic deload guide to break through severe exercise plateaus." } },
+    c7: { role: "Senior Partner Director of Corporate Strategy at a Global Enterprise", subs: { s1: "Draft a highly logical business proposal framework designed to accelerate executive decision-making.", s2: "Write a diplomatic multinational corporate email that clearly resolves stakeholder conflicts.", s3: "Create a summary template that extracts core actionable insights from a 2-hour intense debate.", s4: "Provide a crisis management apology manual to minimize external backlash and defend brand trust.", s5: "Outline a market positioning and competitive analysis strategy for entering a new global market.", s6: "Design a data insight briefing sheet for executives that maximizes performance analysis readability.", s7: "Write a high-quality job description mapping core KPIs to attract top-tier industry talent.", s8: "Develop an onboarding guideline system that prevents new hire turnover and unlocks immediate productivity.", s9: "Draft a constructive, objective feedback interview scenario that induces significant team member growth.", s10: "Create a storytelling-based presentation speech script that drastically improves investment attraction rates." } },
+    c8: { role: "Chief Reviewer of the Academic Planning Committee at a Top University", subs: { s1: "Design a report introduction and structural outline guaranteed to achieve top academic grades.", s2: "Write a university presentation script that proactively defends against sharp questions from professors.", s3: "Provide a core value summary and potential exam question design extracted from vast academic texts.", s4: "Draft a compelling statement of purpose and research plan that deeply moves the scholarship committee.", s5: "Explain the methodology for establishing a robust research hypothesis and literature review for a dissertation.", s6: "Provide a framework for accurately translating complex academic terminology without losing contextual nuance.", s7: "Design an architecture for an English cover letter tailored for highly competitive graduate school admissions.", s8: "Create a time management matrix and learning roadmap for achieving short-term high scores in proficiency exams.", s9: "Outline an applied concentration control timetable that significantly elevates cramming efficiency.", s10: "Write an ultra-polite, formal email template for requesting a grade re-evaluation from a strict professor." } },
+    c9: { role: "Master Prompt Engineer for Generative AI and Creative Arts", subs: { s1: "Generate an 8K photorealistic rendering prompt with intricate lighting and camera lens specifications.", s2: "Draft a unique dimension-travel lore and multi-dimensional character relationship synopsis.", s3: "Provide 15 highly original, genre-specific literary writing prompts to shatter writer's block.", s4: "Write an original, emotionally captivating script for a short indie film or theater play.", s5: "Create highly sophisticated, poetic copywriting phrases that completely eliminate cliché elements.", s6: "Provide a framework for adapting mundane daily episodes into trendy, fast-paced webtoon scripts.", s7: "Design a protocol for deriving sophisticated brand naming and slogan assets that represent core identity.", s8: "Generate geometric design system image directives for creating modern, minimalist logos and emblems.", s9: "Draft a text architecture script that branches into complex multi-ending scenarios based on user choices.", s10: "Provide literary descriptive expressions that vividly visualize the auditory mood of a specific environment." } },
+    c10: { role: "Certified Clinical Psychologist and Mental Health Counselor", subs: { s1: "Provide a cognitive behavioral therapy (CBT) framework to identify and reframe negative thought patterns.", s2: "Draft a deep psychological analysis of recurring anxiety and provide immediate grounding techniques.", s3: "Design a guided meditation script focused on releasing deep-seated trauma and achieving inner peace.", s4: "Explain the psychological mechanisms behind procrastination and provide a strict action-oriented cure.", s5: "Create a communication framework for resolving severe interpersonal conflicts and establishing healthy boundaries.", s6: "Provide a detailed interpretation of complex dream symbols using Jungian psychoanalytic concepts.", s7: "Draft a daily journaling prompt set designed to dramatically boost self-esteem and self-awareness.", s8: "Explain the psychology of imposter syndrome and provide a step-by-step mental recovery roadmap.", s9: "Design a mindfulness protocol for highly sensitive persons (HSPs) to manage emotional exhaustion.", s10: "Provide a philosophical Stoic approach to accepting circumstances beyond one's control and finding calm." } }
+};
+
+var tones = { t1: "Highly Professional, authoritative, and expertly articulated.", t2: "Warm, empathetic, polite, and highly approachable.", t3: "Strictly analytical, completely objective, and entirely data-driven.", t4: "Unconventionally creative, highly original, and deeply inspiring.", t5: "Witty, engaging, humorous, and designed to prevent boredom.", t6: "Ultra-concise, completely stripped of fluff, and strictly summarized." };
+var auds = { a1: "The general public with absolutely zero prior knowledge.", a2: "Top-tier industry experts who instantly decode advanced jargon.", a3: "Absolute beginners and students looking to grasp the foundations.", a4: "Executive board members and decision-makers.", a5: "Children, teenagers, or individuals requiring easily digestible terms." };
+var fmts = { f1: "Logical paragraphs highly optimized for seamless reading flow.", f2: "A multi-dimensional Data Table for intuitive comparison.", f3: "Numbered lists and Bullet points cleanly arranging core insights.", f4: "A sequential, step-by-step actionable guide meant to be followed in order.", f5: "Complete source code or script ready to be copied and implemented." };
+var langs = { l1: "English", l2: "Korean (한국어)", l3: "Spanish (Español)", l4: "Japanese (日本語)" };
+
+function syncSubCategories() {
+    var catSelect = document.getElementById("category").value;
+    var subSelect = document.getElementById("subCategory");
+    subSelect.innerHTML = ""; 
+    var subs = engineData[catSelect].subs;
+    for (var key in subs) {
+        if (subs.hasOwnProperty(key)) {
+            var option = document.createElement("option");
+            option.value = key; 
+            option.text = subs[key]; 
+            subSelect.add(option);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    syncSubCategories(); 
+    processUrlParameters(); 
+});
+
+function activateToastAlert(message) {
+    var toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.className = "show";
+    setTimeout(function() { 
+        toast.className = toast.className.replace("show", ""); 
+    }, 3000);
+}
+
+function executeEngineBuild() {
+    var c = document.getElementById("category").value;
+    var s = document.getElementById("subCategory").value;
+    var kwInput = document.getElementById("customKeyword").value;
+    var ctxInput = document.getElementById("customContext").value;
+    
+    // ES5 string trim
+    var kwTrimmed = kwInput.replace(/^\s+|\s+$/g, '');
+    var ctxTrimmed = ctxInput.replace(/^\s+|\s+$/g, '');
+
+    var kw = encodeURIComponent(kwTrimmed);
+    var ctx = encodeURIComponent(ctxTrimmed);
+    var t = document.getElementById("tone").value;
+    var a = document.getElementById("audience").value;
+    var f = document.getElementById("format").value;
+    var l = document.getElementById("language").value;
+
+    if(kwTrimmed === "") {
+        activateToastAlert("Please enter the Core Keyword (Step 3)!");
+        document.getElementById("customKeyword").focus();
+        return;
+    }
+
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var query = "launch=true&c=" + c + "&s=" + s + "&kw=" + kw + "&ctx=" + ctx + "&t=" + t + "&a=" + a + "&f=" + f + "&l=" + l;
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    // 1. 앱인벤터 내부 통신 (WebViewString)
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(e) {}
+
+    // 2. 이중 우회 로직 (0.5초 강제 새로고침 URL 파라미터 전달)
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        document.getElementById("resultContainer").style.display = "block";
+
+        var c = getParam("c");
+        var s = getParam("s");
+        var kw = getParam("kw");
+        var ctx = getParam("ctx");
+        var t = getParam("t");
+        var a = getParam("a");
+        var f = getParam("f");
+        var l = getParam("l");
+
+        var promptText = "[Role Assignment]\n";
+        promptText += "You are a \"" + engineData[c].role + "\". Embody this knowledge completely and approach the problem strictly from this expert perspective.\n\n";
+        
+        promptText += "[Context & Core Subject]\n";
+        promptText += "- Target Audience: " + auds[a] + "\n";
+        promptText += "- Analysis Target: " + engineData[c].subs[s] + "\n";
+        promptText += "- Core Keyword: " + kw + "\n\n";
+        
+        if(ctx !== "") {
+            promptText += "[Special Constraints]\n";
+            promptText += "Apply the following user constraints strictly and without exception:\n\"" + ctx + "\"\n\n";
+        }
+        
+        promptText += "[Structural Requirements]\n";
+        promptText += "1. The tone of voice MUST be: \"" + tones[t] + "\".\n";
+        promptText += "2. Ensure the response is highly detailed, providing practical guidelines, empirical data, and concrete examples where applicable.\n";
+        promptText += "3. The output format MUST be implemented strictly as: \"" + fmts[f] + "\".\n\n";
+        
+        promptText += "[Output Language]\n";
+        promptText += "The final output MUST be written entirely in \"" + langs[l] + "\".";
+
+        document.getElementById("promptConsole").innerText = promptText;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(e) {}
+    }
+}
+
+function processClipboardCopy() {
+    var consoleText = document.getElementById("promptConsole").innerText;
+    var el = document.createElement("textarea"); 
+    el.value = consoleText;
+    document.body.appendChild(el); 
+    el.select(); 
+    document.execCommand("copy"); 
+    document.body.removeChild(el);
+
+    activateToastAlert("Copied successfully! Paste it into your AI tool.");
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(e) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
