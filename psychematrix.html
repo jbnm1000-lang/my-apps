@@ -1,0 +1,492 @@
+<!--Google Blogger Only: Psyche Matrix MAX PRO V2 (ES5, 16 Archetypes DB, Rose Gold Particles, Dual-Safety Ad Logic)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar, .return_link, .sidebar-back, .navigation, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important; }
+
+    html, body { 
+        padding: 0 !important; 
+        margin: 0 !important; 
+        border: none !important; 
+        background: linear-gradient(135deg, #0B1120 0%, #171E30 100%) !important; 
+        background-attachment: fixed !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(15, 23, 42, 0.7);
+        --glass-border: rgba(253, 164, 175, 0.25);
+        --accent-rose: #FDA4AF; 
+        --accent-pink: #F43F5E;
+        --text-main: #F8FAFC;
+        --text-muted: #94A3B8;
+    }
+
+    #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .app-wrapper {
+        position: relative;
+        z-index: 1;
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 35px 20px 80px 20px;
+        box-sizing: border-box;
+        width: 100%;
+        user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 40px 25px;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+        margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Playfair Display', serif;
+        text-align: center;
+        color: var(--accent-rose);
+        font-size: 36px;
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px rgba(253, 164, 175, 0.3);
+    }
+
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 40px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; }
+
+    .form-group { margin-bottom: 28px; position: relative; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #e2e8f0; padding-left: 4px; line-height: 1.4; }
+    
+    select {
+        width: 100%; padding: 18px; background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(253, 164, 175, 0.3); border-radius: 12px;
+        color: var(--accent-rose); font-size: 14px; box-sizing: border-box;
+        outline: none; transition: all 0.3s ease; font-family: 'Inter', sans-serif;
+        appearance: none; -webkit-appearance: none; font-weight: 400;
+        line-height: 1.5; white-space: normal;
+    }
+    
+    select:focus { border-color: var(--accent-pink); box-shadow: 0 0 20px rgba(244, 63, 94, 0.3); background: rgba(15, 23, 42, 1); }
+    select option { background-color: #0B1120; color: #F8FAFC; font-weight: 400; }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(135deg, #F43F5E 0%, #BE123C 100%);
+        color: #FFFFFF; padding: 22px; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer;
+        box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4); transition: 0.2s; margin-top: 15px; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Inter', sans-serif;
+    }
+    .btn-generate:active { transform: scale(0.97); box-shadow: 0 5px 15px rgba(244, 63, 94, 0.5); }
+
+    .info-card { 
+        background: rgba(30, 41, 59, 0.5); 
+        border: 1px solid rgba(253, 164, 175, 0.15);
+        border-radius: 16px; 
+        padding: 30px; 
+        margin-bottom: 25px;
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+    }
+    .info-title { font-size: 17px; font-weight: 700; color: var(--accent-rose); margin-bottom: 20px; font-family: 'Playfair Display', serif; letter-spacing: 1px; text-transform: uppercase; text-align: center;}
+    .info-text { font-size: 14px; color: #cbd5e1; margin-bottom: 18px; text-align: left; line-height: 1.9; word-break: keep-all; font-weight: 300;}
+    .info-text:last-child { margin-bottom: 0;}
+    .info-text strong { color: var(--accent-rose); font-weight: 600;}
+
+    #resultContainer { display: none; animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    .output-box {
+        background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 16px;
+        padding: 35px 25px; font-size: 15px; line-height: 2.0; color: #f8fafc; white-space: pre-wrap; word-break: keep-all; margin-top: 25px; text-align: left;
+    }
+
+    .card-name { font-family: 'Playfair Display', serif; color: var(--accent-rose); font-size: 28px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
+    .section-title { font-weight: 600; color: var(--accent-rose); font-size: 15px; text-transform: uppercase; letter-spacing: 1px; margin-top: 25px; margin-bottom: 10px; display: block; border-bottom: 1px solid rgba(253, 164, 175, 0.2); padding-bottom: 8px;}
+    .desc-text { color: #e2e8f0; font-size: 15px; line-height: 1.9; }
+
+    .btn-reset {
+        width: 100%; background: transparent; color: var(--text-muted); padding: 20px; border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 30px; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .btn-reset:active { background: rgba(255, 255, 255, 0.1); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">Psyche Matrix</h2>
+        <div class="subtitle">Advanced Personality Archetype Analysis</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>1. After a long, stressful week, what is your ideal way to recover?</label>
+                <select id="q1">
+                    <option value="I">A. Complete solitude, engaging in quiet hobbies or deep rest.</option>
+                    <option value="E">B. Surrounding myself with close friends or attending lively events.</option>
+                    <option value="I">C. Escaping into a rich internal world of books, movies, or thoughts.</option>
+                    <option value="E">D. Organizing a group activity to experience something entirely new.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>2. When processing new and complex information, where does your focus naturally shift?</label>
+                <select id="q2">
+                    <option value="S">A. Concrete facts, visible details, and practical applications.</option>
+                    <option value="N">B. Hidden meanings, underlying patterns, and future possibilities.</option>
+                    <option value="S">C. Past experiences and proven methods that have worked before.</option>
+                    <option value="N">D. Theoretical concepts and bold, innovative ideas.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>3. You must make a highly difficult choice affecting many people. What is your primary standard?</label>
+                <select id="q3">
+                    <option value="T">A. Objective truth, fairness, and maximizing efficiency.</option>
+                    <option value="F">B. Emotional impact, preserving harmony, and personal values.</option>
+                    <option value="T">C. Strategic logic, even if it is temporarily unpopular.</option>
+                    <option value="F">D. Deep empathy, ensuring no individual feels left behind.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>4. How do you approach your long-term goals and daily responsibilities?</label>
+                <select id="q4">
+                    <option value="J">A. Detailed planning, strict schedules, and seeking closure.</option>
+                    <option value="P">B. Maintaining flexibility, exploring options, and adapting to change.</option>
+                    <option value="J">C. Establishing clear rules and systematic routines to prevent chaos.</option>
+                    <option value="P">D. Relying on sudden bursts of inspiration and spontaneous action.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>5. During an unexpected crisis, what is your immediate natural reaction?</label>
+                <select id="q5">
+                    <option value="T">A. Detaching emotionally to secure control and find a rational solution.</option>
+                    <option value="F">B. Ensuring everyone involved is safe, calm, and emotionally supported.</option>
+                    <option value="J">C. Quickly establishing an action plan to restore order immediately.</option>
+                    <option value="P">D. Improvising swiftly, taking the situation as it unfolds.</option>
+                </select>
+            </div>
+
+            <button class="btn-generate" onclick="executeMatrix()" ontouchstart="">Reveal My Archetype</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--text-muted); font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; margin-top: 0px; text-align: center;">YOUR IN-DEPTH PROFILE</h3>
+            <div class="output-box" id="matrixConsole"></div>
+            <p style="color: var(--accent-rose); font-size: 14px; font-weight: 600; margin-top: 30px; text-align: center;">Share this deep analysis with those who truly know you.</p>
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">Recalibrate Assessment</button>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">🧠 Welcome to Psyche Matrix</div>
+        <div class="info-text">Psyche Matrix is an advanced analytical tool designed to uncover the hidden architecture of your behavior, motivations, and intrinsic nature. By moving beyond surface-level traits, this assessment identifies the core psychological archetype that governs your responses to the world.</div>
+        <div class="info-text"><strong>How it functions:</strong> The questionnaire utilizes a multi-layered matrix. Your responses across five distinct dimensions—energy recovery, information processing, standard of choice, structural preference, and crisis management—are synthesized to generate one of sixteen profound psychological profiles.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">💡 Guidance for Optimal Results</div>
+        <div class="info-text">1. <strong>Select your natural state:</strong> Do not choose the answer that reflects who you wish to be, or what society expects of you. Select the response that describes your immediate, unfiltered instinct.</div>
+        <div class="info-text">2. <strong>Embrace the nuances:</strong> Human psychology is complex. If you feel torn between two answers, reflect on your behavior during times of absolute comfort or extreme stress. These extremes often reveal your true baseline.</div>
+        <div class="info-text">3. <strong>Continuous evolution:</strong> Archetypes provide a blueprint, not a rigid constraint. Use this profile to understand your natural inclinations and to consciously develop your hidden potential.</div>
+    </div>
+
+    <div class="info-card">
+        <div class="info-title">⚖️ Comprehensive Disclaimer</div>
+        <div class="info-text">This application has been structured for profound self-reflection, personal insight, and intellectual exploration. It draws inspiration from established typological theories but operates independently as a reflective matrix.</div>
+        <div class="info-text">Please be fully aware that this assessment does not provide, nor is it intended to replace, professional clinical evaluation, psychiatric diagnosis, or formal psychological counseling. If you are navigating serious mental health concerns, it is highly recommended that you consult a certified psychological professional.</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Psyche Matrix MAX PRO V2 */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 45;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            alpha: Math.random() * 0.6 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(253, 164, 175, ' + p.alpha + ')';
+            ctx.fill();
+            p.x += p.vx; p.y -= Math.abs(p.vy); 
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        else setTimeout(draw, 1000 / 60);
+    }
+    draw();
+}
+
+// 16가지 성향 MAX 심층 데이터베이스
+var archetypeDB = {
+    "ISTJ": {
+        name: "The Inspector (Systematizer)",
+        desc: "You possess a formidable sense of duty and a profound respect for structure. You view the world through a lens of objective facts, relying on proven methods to maintain stability and order in a chaotic environment.",
+        strength: "Exceptional reliability, meticulous attention to detail, and the ability to execute complex plans flawlessly.",
+        weakness: "May struggle with sudden changes or unconventional ideas, often appearing overly rigid to those who value spontaneity.",
+        ideal: "A highly organized environment where expectations are clear, logic prevails, and dedication is rewarded."
+    },
+    "ISFJ": {
+        name: "The Protector (Guardian)",
+        desc: "You are the quiet anchor for those around you, offering unwavering support and deep empathy. You have a unique ability to remember specific details about people, making them feel profoundly understood and valued.",
+        strength: "Remarkable dedication, warm practical compassion, and an intrinsic motivation to preserve harmony.",
+        weakness: "Prone to severe burnout due to taking on the burdens of others while neglecting your own fundamental needs.",
+        ideal: "A stable, collaborative setting where genuine care is exchanged and traditions are respected."
+    },
+    "INFJ": {
+        name: "The Counselor (Mystic)",
+        desc: "Guided by a complex internal vision, you possess an innate understanding of human nature. You strive to uncover the deeper meaning behind surface interactions, continually seeking authentic, transformative connections.",
+        strength: "Profound psychological insight, unwavering idealism, and the capability to inspire deep systemic change.",
+        weakness: "Can become overly perfectionistic or withdraw completely when reality fails to meet your high moral standards.",
+        ideal: "A purpose-driven space that allows for quiet reflection, deep creativity, and meaningful impact."
+    },
+    "INTJ": {
+        name: "The Mastermind (Architect)",
+        desc: "You operate with a relentless intellectual independence. Your mind is a strategic matrix, constantly analyzing patterns and formulating long-term visions. You demand competence from yourself and others.",
+        strength: "Unmatched strategic foresight, sharp logical analysis, and the willpower to actualize complex visions.",
+        weakness: "May inadvertently dismiss the emotional complexities of others, appearing arrogant or overly critical.",
+        ideal: "An autonomous, intellectually rigorous environment free from bureaucratic inefficiency and micromanagement."
+    },
+    "ISTP": {
+        name: "The Craftsman (Operator)",
+        desc: "You navigate life with a calm, rational detachment, stepping in to solve problems with remarkable pragmatic skill. You are an observer who prefers action over theory, mastering the mechanics of your environment.",
+        strength: "Exceptional crisis management, adaptability, and an effortless mastery of tools and logical systems.",
+        weakness: "Often perceived as emotionally distant or unreadable. You may abandon projects once the initial challenge is solved.",
+        ideal: "A flexible, hands-on environment that offers immediate challenges and respects your need for physical autonomy."
+    },
+    "ISFP": {
+        name: "The Composer (Aesthete)",
+        desc: "You experience the world with an intense, quiet sensitivity. Driven by deep internal values rather than external logic, you seek to create beauty, harmony, and authentic experiences in the present moment.",
+        strength: "Profound aesthetic awareness, gentle empathy, and an unparalleled ability to stay true to yourself.",
+        weakness: "Highly sensitive to criticism and prone to avoiding necessary conflict, which can lead to suppressed resentment.",
+        ideal: "A supportive, creative atmosphere where strict rules are minimized and individual expression is celebrated."
+    },
+    "INFP": {
+        name: "The Healer (Idealist)",
+        desc: "Your internal world is a rich tapestry of values, poetry, and profound emotional depth. You are driven by an unyielding desire to find harmony and meaning, often seeing the hidden potential in people.",
+        strength: "Boundless imagination, deep moral integrity, and a unique capacity to understand complex human emotions.",
+        weakness: "Can easily become overwhelmed by the harshness of the external world, leading to isolation or impractical idealism.",
+        ideal: "A compassionate, deeply meaningful environment where you can champion a cause you truly believe in."
+    },
+    "INTP": {
+        name: "The Architect (Logician)",
+        desc: "You are driven by an insatiable intellectual curiosity. You seek to understand the underlying principles of the universe, constantly deconstructing concepts to identify inconsistencies and discover objective truths.",
+        strength: "Brilliant abstract thinking, total objectivity, and the ability to innovate beyond conventional paradigms.",
+        weakness: "May struggle to translate complex thoughts into practical reality, often ignoring social conventions or emotional nuances.",
+        ideal: "A low-pressure, intellectually stimulating domain where theoretical exploration is valued above rigid deadlines."
+    },
+    "ESTP": {
+        name: "The Dynamo (Promoter)",
+        desc: "You are a force of pure, pragmatic energy. Living fiercely in the present, you excel at reading the room and taking calculated risks. You prefer to leap into action and figure out the details as you go.",
+        strength: "Bold decisiveness, immense physical or social presence, and the ability to turn crisis into opportunity.",
+        weakness: "Can be impulsive and easily bored, occasionally disregarding long-term consequences or the feelings of others.",
+        ideal: "A fast-paced, dynamic arena that demands quick reflexes, high energy, and tangible results."
+    },
+    "ESFP": {
+        name: "The Performer (Entertainer)",
+        desc: "You possess a vibrant, magnetic energy that naturally draws people toward you. You approach life as an ongoing celebration, highly attuned to the sensory experiences and the emotional atmosphere around you.",
+        strength: "Outstanding interpersonal charm, infectious optimism, and the ability to uplift any group instantly.",
+        weakness: "May actively avoid serious planning or difficult emotional conversations, preferring to escape into distraction.",
+        ideal: "A highly social, aesthetically pleasing environment where collaboration and spontaneous joy are encouraged."
+    },
+    "ENFP": {
+        name: "The Champion (Campaigner)",
+        desc: "You are an enthusiastic explorer of ideas and human connections. You see the world as a web of endless possibilities, fueled by a deep-seated desire to inspire others and experience everything life has to offer.",
+        strength: "Limitless creativity, highly persuasive communication, and a genuine passion for understanding diverse perspectives.",
+        weakness: "Struggles with follow-through and routine. You may become scattered if forced to focus on tedious, practical details.",
+        ideal: "An innovative, flexible workspace filled with diverse individuals and continuous opportunities for brainstorming."
+    },
+    "ENTP": {
+        name: "The Visionary (Debater)",
+        desc: "You are an intellectual provocateur. You thrive on challenging the status quo, utilizing your quick wit and expansive logic to dismantle weak arguments and construct brilliant, unconventional solutions.",
+        strength: "Exceptional verbal agility, fearless innovation, and the ability to connect seemingly unrelated concepts.",
+        weakness: "Can be overly argumentative or insensitive. You often enjoy starting the fire but dislike cleaning up the ashes.",
+        ideal: "A challenging, intellectual battleground that rewards bold ideas and lacks strict hierarchical authority."
+    },
+    "ESTJ": {
+        name: "The Supervisor (Executive)",
+        desc: "You are the bedrock of civic and professional organizations. You value tradition, clear rules, and measurable results. You have a natural talent for managing resources and ensuring that objectives are met efficiently.",
+        strength: "Unwavering dedication, decisive leadership, and the capability to organize chaotic environments into functional systems.",
+        weakness: "May become overly rigid or dictatorial, sometimes dismissing the emotional nuances of the people involved.",
+        ideal: "A structured, goal-oriented institution where competence is clear and authority is respected."
+    },
+    "ESFJ": {
+        name: "The Provider (Consul)",
+        desc: "You are highly attuned to the social dynamics around you. You feel a deep responsibility to ensure the welfare of your community, actively organizing events and maintaining harmony among your peers.",
+        strength: "Exceptional organizational skills, profound loyalty, and an unparalleled ability to make others feel included and valued.",
+        weakness: "Highly dependent on external validation. You may suppress your own truth to avoid disrupting social harmony.",
+        ideal: "A collaborative, community-focused setting where mutual respect is the foundation of all interactions."
+    },
+    "ENFJ": {
+        name: "The Mentor (Protagonist)",
+        desc: "You are a charismatic and inspiring force. Driven by a vision of human potential, you naturally take on leadership roles to guide, mentor, and elevate the people around you toward a noble collective goal.",
+        strength: "Supreme emotional intelligence, articulate communication, and a genuine, transformative influence on others.",
+        weakness: "Can become overly invested in the problems of others, leading to severe emotional exhaustion and boundary issues.",
+        ideal: "A mission-driven organization focused on education, growth, or social change, where collaboration is paramount."
+    },
+    "ENTJ": {
+        name: "The Commander (Field Marshal)",
+        desc: "You are a natural-born strategist and leader. You view the world as a chessboard, constantly identifying inefficiencies and mobilizing people and resources to achieve grand, overarching objectives.",
+        strength: "Fearless ambition, strategic brilliance, and the sheer willpower to overcome any obstacle in your path.",
+        weakness: "Can be ruthlessly demanding and impatient with incompetence, often disregarding the emotional toll on your team.",
+        ideal: "A high-stakes, competitive environment where vision, efficiency, and decisive action are the ultimate metrics of success."
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    processUrlParameters(); 
+});
+
+function getMajority(val1, val2, val3, optionA, optionB) {
+    var countA = 0;
+    if(val1 === optionA) countA++;
+    if(val2 === optionA) countA++;
+    if(val3 === optionA) countA++;
+    return (countA >= 2) ? optionA : optionB;
+}
+
+function executeMatrix() {
+    var q1 = document.getElementById("q1").value;
+    var q2 = document.getElementById("q2").value;
+    var q3 = document.getElementById("q3").value;
+    var q4 = document.getElementById("q4").value;
+    var q5 = document.getElementById("q5").value;
+    
+    var query = "launch=true&q1=" + q1 + "&q2=" + q2 + "&q3=" + q3 + "&q4=" + q4 + "&q5=" + q5;
+    
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(err) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        document.getElementById("resultContainer").style.display = "block";
+
+        var q1 = getParam("q1"); // I or E
+        var q2 = getParam("q2"); // S or N
+        var q3 = getParam("q3"); // T or F
+        var q4 = getParam("q4"); // J or P
+        var q5 = getParam("q5"); // Tiebreaker (T/F or J/P influence)
+
+        // Generate archetype key
+        var type = "";
+        type += q1;
+        type += q2;
+        
+        // Use q5 as an advanced tie-breaker logic to ensure depth
+        var tf = getMajority(q3, q3, q5 === "T" || q5 === "F" ? q5 : q3, "T", "F");
+        type += tf;
+        
+        var jp = getMajority(q4, q4, q5 === "J" || q5 === "P" ? q5 : q4, "J", "P");
+        type += jp;
+
+        var result = archetypeDB[type] || archetypeDB["INTJ"]; // fallback to INTJ if error
+
+        var outputHtml = "<div class='card-name'>" + result.name + "</div>";
+        outputHtml += "<div class='desc-text'>" + result.desc + "</div>";
+        
+        outputHtml += "<span class='section-title'>Core Strengths</span>";
+        outputHtml += "<div class='desc-text'>" + result.strength + "</div>";
+        
+        outputHtml += "<span class='section-title'>Hidden Weaknesses</span>";
+        outputHtml += "<div class='desc-text'>" + result.weakness + "</div>";
+        
+        outputHtml += "<span class='section-title'>Ideal Environment</span>";
+        outputHtml += "<div class='desc-text'>" + result.ideal + "</div>";
+
+        document.getElementById("matrixConsole").innerHTML = outputHtml;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(err) {}
+    }
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(err) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
