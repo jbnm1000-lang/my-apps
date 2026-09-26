@@ -1,0 +1,411 @@
+<!--Google Blogger Only: Destiny Numerology MAX PRO (ES5, Massive DB, Black & Gold, Dual-Safety Ad Logic)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .fauxcolumn-left-outer, .fauxcolumn-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .bg-photo-overlay, .PopularPosts, #PopularPosts1, .popular-posts, .feed-links, .blog-feeds, .related-posts, .BlogArchive, .Label, .FeaturedPost, #FeaturedPost1, aside, .Profile, #Profile1, .PageList, #PageList1, .widget.Profile, .drawer, .drawer-container, .nav-sidebar, .report_abuse, .centered-top-container, .sticky-top-container, .search-action, .search-container, .back-button, .back-action, .top-bar-container, .top-bar, .return_link, .sidebar-back, .navigation, .mobile-header, #mobile-header, .b-mobile-header, .mobile-top-bar, .mobile-nav, .mobile-share-button, .mobile-back-button, .blog-title, .titlewrapper, .descriptionwrapper, .b-share, .b-search, #navbar-iframe, .b-header, .header-drawer, body header { display: none !important; visibility: hidden !important; height: 0 !important; position: absolute !important; margin: 0 !important; padding: 0 !important; }
+
+    html, body { 
+        padding: 0 !important; 
+        margin: 0 !important; 
+        border: none !important; 
+        background: linear-gradient(135deg, #050505 0%, #1A1813 100%) !important; 
+        background-attachment: fixed !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(20, 20, 20, 0.85);
+        --glass-border: rgba(212, 175, 55, 0.3);
+        --accent-gold: #D4AF37; 
+        --accent-light: #F1C40F;
+        --text-main: #F8FAFC;
+        --text-muted: #A0A0A0;
+    }
+
+    #particle-canvas {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+    }
+
+    .app-wrapper {
+        position: relative; z-index: 1; color: var(--text-main); font-family: 'Lato', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 35px 20px 80px 20px; box-sizing: border-box; width: 100%; user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px 25px; width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05); box-sizing: border-box; margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Cinzel', serif; text-align: center; color: var(--accent-gold); font-size: 34px; margin-top: 0; margin-bottom: 8px; font-weight: 700; letter-spacing: 3px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 40px; font-weight: 400; text-transform: uppercase; letter-spacing: 2.5px; }
+
+    .form-group { margin-bottom: 25px; position: relative; }
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 10px; color: #E0E0E0; padding-left: 4px; letter-spacing: 1.5px; text-transform: uppercase;}
+    
+    input[type="text"], select {
+        width: 100%; padding: 18px; background: rgba(10, 10, 10, 0.9); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; color: var(--accent-light); font-size: 16px; box-sizing: border-box; outline: none; transition: all 0.3s ease; font-family: 'Lato', sans-serif; text-align: center; font-weight: 400; letter-spacing: 1px; appearance: none; -webkit-appearance: none;
+    }
+    
+    select { background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 12px auto; }
+    
+    input[type="text"]:focus, select:focus { border-color: var(--accent-light); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); background: rgba(0, 0, 0, 1); }
+
+    .date-row { display: flex; gap: 10px; }
+    .date-row select { padding: 15px 10px; font-size: 15px; }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(135deg, #D4AF37 0%, #AA8222 100%); color: #000000; padding: 22px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); transition: 0.2s; margin-top: 15px; text-transform: uppercase; letter-spacing: 2px; font-family: 'Lato', sans-serif;
+    }
+    .btn-generate:active { transform: scale(0.97); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); }
+
+    .info-card { background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px; padding: 35px 30px; margin-bottom: 25px; width: 100%; max-width: 600px; box-sizing: border-box; }
+    .info-title { font-size: 18px; font-weight: 700; color: var(--accent-gold); margin-bottom: 20px; font-family: 'Cinzel', serif; letter-spacing: 1px; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 15px;}
+    .info-subtitle { font-size: 15px; font-weight: 700; color: #E0E0E0; margin-top: 25px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase;}
+    .info-text { font-size: 15px; color: #B0B0B0; margin-bottom: 15px; text-align: left; line-height: 1.8; word-break: keep-all; font-weight: 300;}
+
+    #resultContainer { display: none; animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; }
+    
+    .output-box { background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 35px 25px; font-size: 15px; line-height: 1.9; color: #E0E0E0; white-space: pre-wrap; word-break: keep-all; margin-top: 25px; text-align: left; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+
+    .num-title { font-family: 'Cinzel', serif; color: var(--accent-light); font-size: 28px; font-weight: 700; margin-bottom: 15px; text-align: center; letter-spacing: 1px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);}
+    .section-title { font-weight: 700; color: var(--accent-gold); font-size: 15px; text-transform: uppercase; letter-spacing: 2px; margin-top: 35px; margin-bottom: 12px; display: block; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 8px;}
+    .desc-text { color: #CCCCCC; font-size: 16px; line-height: 1.8; font-weight: 300; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent-gold);}
+
+    .link-btn { display: block; text-align: center; background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 15px; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 30px; letter-spacing: 1px; transition: 0.3s; }
+    .link-btn:hover { background: rgba(212, 175, 55, 0.2); }
+
+    .btn-reset { width: 100%; background: transparent; color: var(--text-muted); padding: 18px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 30px; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+    .btn-reset:active { background: rgba(255, 255, 255, 0.1); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">Destiny Numerology</h2>
+        <div class="subtitle">Discover Your True Path</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>Your Full Birth Name</label>
+                <input autocomplete="off" autocorrect="off" id="userName" spellcheck="false" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <div class="date-row">
+                    <select id="userMonth">
+                        <option disabled="" selected="" value="">Month</option>
+                        <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option>
+                        <option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option>
+                        <option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option>
+                        <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+                    </select>
+                    <select id="userDay">
+                        <option disabled="" selected="" value="">Day</option>
+                        <script type="text/javascript">
+                            for(var d=1; d<=31; d++) document.write("<option value='"+d+"'>"+d+"</option>");
+                        </script>
+                    </select>
+                    <select id="userYear">
+                        <option disabled="" selected="" value="">Year</option>
+                        <script type="text/javascript">
+                            var y = new Date().getFullYear();
+                            for(var i=y; i>=1920; i--) document.write("<option value='"+i+"'>"+i+"</option>");
+                        </script>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-generate" onclick="executeNumerology()" ontouchstart="">Reveal My Destiny</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--text-muted); font-family: Lato, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 3px; margin-top: 0px; text-align: center; text-transform: uppercase;">Your Deep Numerology Report</h3>
+            <div class="output-box" id="matrixConsole"></div>
+            
+            <a class="link-btn" href="https://en.wikipedia.org/wiki/Numerology" target="_blank">Explore Official Numerology History</a>
+            
+            <p style="color: var(--accent-gold); font-size: 13px; font-weight: 600; margin-top: 25px; text-align: center;">Share this profound insight with your loved ones.</p>
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">Check Another Destiny</button>
+        </div>
+    </div>
+
+    <!--추가된 상세 안내 카드-->
+    <div class="info-card" id="guideSection">
+        <div class="info-title">✨ Complete Guide &amp; Tips</div>
+        
+        <div class="info-subtitle">How to Use</div>
+        <div class="info-text">Numerology calculates your unique energetic signature. Enter your exact date of birth and the full name given to you at birth. The advanced matrix will instantly analyze your core numbers and present a highly detailed life report.</div>
+        
+        <div class="info-subtitle">Pro Tips for Accuracy</div>
+        <div class="info-text">1. Always use your original birth name. Even if you are married or use a nickname, your birth name holds the true original blueprint of your destiny.</div>
+        <div class="info-text">2. Feel free to check the numbers of your partner, friends, or family members to understand their hidden motivations and natural talents.</div>
+        
+        <div class="info-subtitle">Important Precautions</div>
+        <div class="info-text">This premium analysis provides deep philosophical and psychological perspectives meant for self-reflection and personal growth. It is an inspiring tool for self-discovery, not a substitute for professional medical, legal, or financial advice. We do not store any of your data; all calculations are safely processed within your device.</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 Implementation - Destiny Numerology MAX PRO */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 60;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.2 + 0.3,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            alpha: Math.random() * 0.7 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, ' + p.alpha + ')';
+            ctx.fill();
+            p.x += p.vx; p.y -= Math.abs(p.vy); 
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        else setTimeout(draw, 1000 / 60);
+    }
+    draw();
+}
+
+var lifePathDB = {
+    "1": {
+        title: "Life Path 1: The Independent Pioneer",
+        nature: "You are a natural-born leader. Fiercely independent and highly driven, you forge your own path rather than following the crowd. Your willpower is your greatest asset, allowing you to overcome almost any obstacle. You thrive on innovation and self-reliance.",
+        wealth: "Your financial success comes from your own original ideas and entrepreneurial spirit. You are best suited for positions where you are in charge. Avoid relying too heavily on partnerships; your true wealth is generated when you take the initiative.",
+        career: "Entrepreneur, Director, Innovator, Freelancer, or any leadership role where autonomy is highly respected."
+    },
+    "2": {
+        title: "Life Path 2: The Peacemaker",
+        nature: "You possess a deeply sensitive, intuitive, and diplomatic nature. You are the glue that holds groups together, always seeking harmony and balance. You have an uncanny ability to understand others' feelings and can easily see all sides of a situation.",
+        wealth: "Your financial stability is often tied to your ability to cooperate and form strong alliances. Wealth flows to you through partnerships, supportive roles, and environments where teamwork is valued. Patience is your key to financial growth.",
+        career: "Diplomat, Counselor, Designer, Musician, or any collaborative profession requiring tact and empathy."
+    },
+    "3": {
+        title: "Life Path 3: The Creative Communicator",
+        nature: "You are charismatic, vibrant, and incredibly creative. Expression is vital to your soul, whether through writing, speaking, art, or performance. You bring joy and optimism to those around you, and your enthusiasm for life is truly infectious.",
+        wealth: "Your communication skills and creative talents are your most lucrative assets. You attract money when you engage enthusiastically with the public and express your unique vision. Avoid scattering your energy; focus on one creative avenue to maximize success.",
+        career: "Writer, Actor, Public Speaker, Marketer, Artist, or any career involving self-expression."
+    },
+    "4": {
+        title: "Life Path 4: The Dedicated Builder",
+        nature: "You are the epitome of stability, hard work, and practicality. You are grounded, highly organized, and believe in building a solid foundation for the future. People rely on you because you always keep your promises and handle responsibilities with grace.",
+        wealth: "Financial success comes to you through slow, steady, and disciplined effort. You are an excellent manager of resources. Real estate, long-term investments, and structured savings will build substantial wealth over time.",
+        career: "Manager, Architect, Accountant, Engineer, or any field requiring logic and careful planning."
+    },
+    "5": {
+        title: "Life Path 5: The Freedom Seeker",
+        nature: "You are highly adaptable, adventurous, and crave freedom above all else. Routine bores you; you need constant change, travel, and new experiences to feel alive. You are a catalyst for change and possess an incredibly dynamic energy.",
+        wealth: "Your wealth is closely linked to your adaptability and willingness to take calculated risks. You can make money in unconventional ways. Roles involving travel, sales, or public interaction bring the best financial rewards. Beware of impulsive spending.",
+        career: "Travel Writer, Consultant, Sales Professional, Freelancer, or any dynamic, non-routine environment."
+    },
+    "6": {
+        title: "Life Path 6: The Nurturing Teacher",
+        nature: "You are incredibly responsible, loving, and deeply focused on family and community. You naturally take on the role of caretaker, providing comfort and guidance to those in need. Creating a harmonious and beautiful environment is essential for your well-being.",
+        wealth: "Your financial flow is often connected to services provided to others. Professions related to healing, teaching, and counseling will not only bring you emotional fulfillment but also steady, reliable income. People gladly pay for your trustworthy guidance.",
+        career: "Educator, Healthcare Provider, Counselor, Interior Designer, or community leader."
+    },
+    "7": {
+        title: "Life Path 7: The Spiritual Seeker",
+        nature: "You possess a brilliant, analytical mind paired with deep spiritual intuition. You are a truth-seeker, constantly looking beneath the surface of reality. You require significant alone time to process your thoughts and recharge your energy.",
+        wealth: "Your path to wealth lies in your specialized knowledge and expertise. Research, analysis, and deep intellectual pursuits will reward you financially. You are not driven primarily by money, but your deep insights naturally attract resources when needed.",
+        career: "Researcher, Analyst, Philosopher, Scientist, Investigator, or strategic planner."
+    },
+    "8": {
+        title: "Life Path 8: The Executive Powerhouse",
+        nature: "You are highly ambitious, goal-oriented, and possess strong executive abilities. You have a natural understanding of the material world, business, and power dynamics. You are meant to achieve significant success and influence in your lifetime.",
+        wealth: "Financial abundance is highly probable on your path, provided you maintain ethical standards. You excel at managing large-scale projects and organizing people. Wealth is generated through investments, corporate leadership, and scaling businesses.",
+        career: "CEO, Financial Advisor, Real Estate Developer, Business Owner, or Executive Director."
+    },
+    "9": {
+        title: "Life Path 9: The Humanitarian",
+        nature: "You are deeply compassionate, generous, and driven by a desire to make the world a better place. You possess a broad perspective and are often concerned with global issues rather than petty details. You are a natural philanthropist at heart.",
+        wealth: "Your wealth comes when you focus on serving the greater good rather than chasing money directly. Fields involving charity, global outreach, or large-scale creative projects will bring unexpected financial rewards. Letting go of material attachment ironically brings you more.",
+        career: "Philanthropist, International Relations, Artist, Social Worker, or environmental advocate."
+    },
+    "11": {
+        title: "Master Path 11: The Intuitive Illuminator",
+        nature: "As a Master Number, you carry a high vibrational energy. You are highly intuitive, inspiring, and possess profound spiritual insight. You are a bridge between the conscious and unconscious realms, meant to illuminate the truth for others.",
+        wealth: "Your financial success is closely tied to your ability to trust your profound intuition. When you follow your gut feelings and engage in inspiring, uplifting work, money flows naturally. Avoid highly stressful, purely materialistic environments.",
+        career: "Spiritual Teacher, Counselor, Inspirational Speaker, Artist, or intuitive guide."
+    },
+    "22": {
+        title: "Master Path 22: The Master Builder",
+        nature: "You hold the most powerful number in numerology. You have the unique ability to turn grand, visionary dreams into concrete reality. You combine the spiritual insight of the 11 with the practical, grounded nature of the 4.",
+        wealth: "Your potential for wealth is massive. You are capable of building empires, large institutions, or international businesses that leave a lasting legacy. Large-scale organization and steadfast dedication are your keys to monumental success.",
+        career: "International Business Leader, Master Architect, Diplomat, or visionary entrepreneur."
+    },
+    "33": {
+        title: "Master Path 33: The Master Teacher",
+        nature: "You possess the energy of pure, unconditional love and guidance. You are highly compassionate and dedicated to raising the consciousness of those around you. You are considered the 'Master Teacher', offering wisdom and healing.",
+        wealth: "Your financial stability comes directly from your selfless service. When you focus entirely on healing and guiding others without expecting return, resources are miraculously provided for you. Your true wealth is the impact you have on human lives.",
+        career: "Healer, Spiritual Leader, Advanced Educator, or director of a charitable foundation."
+    }
+};
+
+var expressionDB = {
+    "1": "Your outward persona is confident and pioneering. People see you as a self-starter and a natural leader who is not afraid to take risks. You express yourself best through independent action.",
+    "2": "You project an aura of calm, diplomacy, and warmth. People naturally feel comfortable around you and seek your advice. You express yourself best through collaboration and active listening.",
+    "3": "Your expression is highly verbal, artistic, and entertaining. You light up a room with your wit and charm. You communicate your thoughts best through creative mediums and social interaction.",
+    "4": "You come across as highly reliable, grounded, and methodical. Others see you as the rock they can lean on. You express yourself best through structured planning and hard, dedicated work.",
+    "5": "You project dynamic energy, curiosity, and a love for adventure. People are drawn to your exciting and unpredictable nature. You express yourself best through travel, adapting to change, and exploring new ideas.",
+    "6": "Your persona is warm, nurturing, and highly responsible. You radiate a sense of protection and care. You express yourself best by providing comfort, healing, and beautiful environments for your loved ones.",
+    "7": "You possess an aura of mystery, intelligence, and depth. People respect your wisdom and analytical skills. You express yourself best through writing, quiet observation, and intellectual pursuits.",
+    "8": "You project authority, competence, and success. Others see you as a powerful force capable of handling major responsibilities. You express yourself best by managing resources and leading large projects.",
+    "9": "Your persona is compassionate, tolerant, and globally minded. You radiate a sense of universal love and understanding. You express yourself best through acts of charity, art, and advocating for others.",
+    "11": "You express an almost magical, ethereal energy. People are drawn to your visionary ideas and profound insights. You communicate best when sharing spiritual truths or inspiring others to reach higher levels of awareness.",
+    "22": "You project incredible competence combined with grand vision. Others recognize your ability to accomplish massive goals. You express yourself best by designing systems that benefit society on a large scale.",
+    "33": "You radiate unconditional love and profound wisdom. People naturally look up to you as a spiritual parent or guide. You express yourself best through selfless service and deep, emotional healing."
+};
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    processUrlParameters(); 
+});
+
+function calculateCoreNumber(numStr) {
+    var sum = 0;
+    for (var i = 0; i < numStr.length; i++) {
+        if (!isNaN(parseInt(numStr[i]))) {
+            sum += parseInt(numStr[i]);
+        }
+    }
+    if (sum === 11 || sum === 22 || sum === 33) return sum;
+    if (sum > 9) return calculateCoreNumber(sum.toString());
+    return sum;
+}
+
+function executeNumerology() {
+    var name = document.getElementById("userName").value.trim();
+    var m = document.getElementById("userMonth").value;
+    var d = document.getElementById("userDay").value;
+    var y = document.getElementById("userYear").value;
+    
+    if (name === "" || m === "" || d === "" || y === "") {
+        alert("Please enter your full name and complete date of birth.");
+        return;
+    }
+
+    var cleanDob = m + d + y;
+    var lifePathNum = calculateCoreNumber(cleanDob);
+
+    var cleanName = name.toUpperCase().replace(/[^A-Z]/g, '');
+    var nameSum = 0;
+    var letterValues = { A:1,J:1,S:1, B:2,K:2,T:2, C:3,L:3,U:3, D:4,M:4,V:4, E:5,N:5,W:5, F:6,O:6,X:6, G:7,P:7,Y:7, H:8,Q:8,Z:8, I:9,R:9 };
+    for (var j = 0; j < cleanName.length; j++) {
+        if (letterValues[cleanName[j]]) {
+            nameSum += letterValues[cleanName[j]];
+        }
+    }
+    var expressionNum = calculateCoreNumber(nameSum.toString());
+    if(expressionNum === 0) expressionNum = 1; 
+
+    var query = "launch=true&lp=" + lifePathNum + "&ex=" + expressionNum;
+    
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    // 1. 앱인벤터 통신 (전면광고 호출)
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(err) {}
+
+    // 2. 이중 우회 강제 새로고침
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        
+        var guideSection = document.getElementById("guideSection");
+        if(guideSection) guideSection.style.display = "none";
+        
+        document.getElementById("resultContainer").style.display = "block";
+
+        var lp = getParam("lp");
+        var ex = getParam("ex");
+
+        var lpData = lifePathDB[lp] || lifePathDB["1"];
+        var exData = expressionDB[ex] || expressionDB["1"];
+
+        var outputHtml = "<div class='num-title'>" + lpData.title + "</div>";
+        
+        outputHtml += "<span class='section-title'>Core Nature & Path</span>";
+        outputHtml += "<div class='desc-text'>" + lpData.nature + "</div>";
+        
+        outputHtml += "<span class='section-title'>Wealth & Financial Flow</span>";
+        outputHtml += "<div class='desc-text'>" + lpData.wealth + "</div>";
+        
+        outputHtml += "<span class='section-title'>Ideal Career Directions</span>";
+        outputHtml += "<div class='desc-text'>" + lpData.career + "</div>";
+
+        outputHtml += "<span class='section-title'>Expression Number " + ex + " (Persona)</span>";
+        outputHtml += "<div class='desc-text'>" + exData + "</div>";
+
+        document.getElementById("matrixConsole").innerHTML = outputHtml;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(err) {}
+    }
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(err) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
