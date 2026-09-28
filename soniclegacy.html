@@ -1,0 +1,399 @@
+<!--Google Blogger Only: Sonic Legacy MAX PRO (ES5, Massive DB, Neon Dark, Dual-Safety Ad Logic)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet"></link>
+
+<style>
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .PopularPosts, .feed-links, .BlogArchive, .Label, aside, .Profile, .PageList, .nav-sidebar, body header { display: none !important; visibility: hidden !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
+
+    html, body { 
+        padding: 0 !important; margin: 0 !important; border: none !important; 
+        background: linear-gradient(135deg, #0a0a12 0%, #151025 100%) !important; 
+        background-attachment: fixed !important;
+        width: 100% !important; max-width: 100% !important; min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(25, 20, 40, 0.7);
+        --glass-border: rgba(138, 43, 226, 0.4);
+        --accent-neon: #8A2BE2; 
+        --accent-glow: #00FFFF; 
+        --text-main: #FFFFFF;
+        --text-muted: #A0A0B5;
+    }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    .app-wrapper {
+        position: relative; z-index: 1; color: var(--text-main); font-family: 'Montserrat', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 35px 20px 80px 20px; box-sizing: border-box; width: 100%; user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 45px 25px; width: 100%; max-width: 600px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.1); box-sizing: border-box; margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Montserrat', sans-serif; text-align: center; color: #FFFFFF; font-size: 32px; margin-top: 0; margin-bottom: 5px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+    }
+
+    .subtitle { text-align: center; color: var(--accent-glow); font-size: 13px; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+
+    .form-group { margin-bottom: 30px; position: relative; }
+    label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 12px; color: var(--text-muted); padding-left: 5px; letter-spacing: 2px; text-transform: uppercase; text-align: center;}
+    
+    select {
+        width: 100%; padding: 18px; background: rgba(10, 10, 20, 0.9); border: 1px solid var(--glass-border); border-radius: 12px; color: #FFF; font-size: 16px; box-sizing: border-box; outline: none; transition: all 0.3s ease; font-family: 'Montserrat', sans-serif; font-weight: 700; text-align: center; text-align-last: center; appearance: none; -webkit-appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%238A2BE2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 20px top 50%; background-size: 12px auto;
+    }
+    
+    select:focus { border-color: var(--accent-glow); box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(90deg, #8A2BE2 0%, #4B0082 100%); color: #FFFFFF; padding: 22px; border: none; border-radius: 12px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4); transition: 0.2s; margin-top: 15px; text-transform: uppercase; letter-spacing: 2px; font-family: 'Montserrat', sans-serif;
+    }
+    .btn-generate:active { transform: scale(0.97); }
+
+    #resultContainer { display: none; animation: fadeIn 0.8s ease; width: 100%; }
+    
+    .record-card { background: rgba(10, 10, 15, 0.8); border: 1px solid var(--glass-border); border-radius: 15px; padding: 35px 25px; margin-top: 15px; text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); position: relative; overflow: hidden;}
+    
+    .record-circle { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #333; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #222 30%, #000 70%); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+    .record-inner { width: 30px; height: 30px; border-radius: 50%; background: var(--accent-neon); border: 2px solid #000; }
+
+    .song-title { font-family: 'Playfair Display', serif; color: #FFFFFF; font-size: 28px; font-weight: 700; margin-bottom: 5px; line-height: 1.2; font-style: italic;}
+    .song-artist { color: var(--accent-glow); font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+    
+    .tag-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+    .tag { background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #FFF; border: 1px solid rgba(255,255,255,0.2);}
+
+    .song-desc { color: #CCCCCC; font-size: 14px; line-height: 1.8; font-weight: 300; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 25px;}
+
+    .action-buttons { display: flex; flex-direction: column; gap: 12px; }
+    .youtube-btn { display: block; text-align: center; background: #FF0000; color: #FFFFFF; padding: 16px; border: none; border-radius: 10px; text-decoration: none; font-weight: 900; letter-spacing: 1.5px; transition: 0.3s; font-size: 13px; text-transform: uppercase;}
+    .youtube-btn:active { background: #CC0000; }
+    .google-btn { display: block; text-align: center; background: #FFFFFF; color: #000000; padding: 16px; border: none; border-radius: 10px; text-decoration: none; font-weight: 900; letter-spacing: 1.5px; transition: 0.3s; font-size: 13px; text-transform: uppercase;}
+    .google-btn:active { background: #E0E0E0; }
+
+    .btn-reset { width: 100%; background: transparent; color: var(--text-muted); padding: 18px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: 0.2s; text-transform: uppercase; letter-spacing: 2px; }
+    
+    .info-card { background: rgba(15, 15, 20, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 35px 30px; margin-bottom: 25px; width: 100%; max-width: 600px; box-sizing: border-box; }
+    .info-title { font-size: 18px; font-weight: 900; color: var(--accent-glow); margin-bottom: 25px; letter-spacing: 1.5px; text-align: center; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;}
+    .info-subtitle { font-size: 14px; font-weight: 700; color: #FFF; margin-top: 20px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+    .info-text { font-size: 14px; color: #A0A0B5; margin-bottom: 15px; text-align: left; line-height: 1.8; font-weight: 300; word-break: keep-all;}
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">Sonic Legacy</h2>
+        <div class="subtitle">Global Masterpiece Engine</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>Select Musical Era</label>
+                <select id="eraSelect">
+                    <option value="ALL">Surprise Me (All Eras)</option>
+                    <option value="60s">1960s - The Golden Age</option>
+                    <option value="70s">1970s - Rock & Disco</option>
+                    <option value="80s">1980s - Pop & Synth</option>
+                    <option value="90s">1990s - Grunge & R&B</option>
+                    <option value="00s">2000s - Y2K Classics</option>
+                    <option value="10s">2010s - Modern Anthems</option>
+                    <option value="20s">2020s - Today's Hits</option>
+                </select>
+            </div>
+
+            <button class="btn-generate" onclick="executeEngine()" ontouchstart="">Discover Masterpiece</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--text-muted); font-size: 12px; margin-top: 0px; text-align: center; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Curated For You</h3>
+            
+            <div class="record-card">
+                <div class="record-circle"><div class="record-inner"></div></div>
+                <div class="song-title" id="rTitle">Title</div>
+                <div class="song-artist" id="rArtist">Artist</div>
+                
+                <div class="tag-container">
+                    <div class="tag" id="rYear">Year</div>
+                    <div class="tag" id="rGenre">Genre</div>
+                </div>
+                
+                <div class="song-desc" id="rDesc">Description</div>
+                
+                <div class="action-buttons">
+                    <a href="#" id="rLinkYT" class="youtube-btn" target="_blank" rel="noopener noreferrer">Search on YouTube ▶</a>
+                    <a href="#" id="rLinkGL" class="google-btn" target="_blank" rel="noopener noreferrer">Search on Google 🔍</a>
+                </div>
+            </div>
+
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">Discover Another Track</button>
+        </div>
+    </div>
+
+    <div class="info-card" id="guideSection">
+        <div class="info-title">App Guide & Pro Tips</div>
+        
+        <div class="info-subtitle">How It Works</div>
+        <div class="info-text">Welcome to your ultimate musical time machine. Sonic Legacy is engineered to break you out of your repetitive listening habits. Simply select your preferred decade from the dropdown menu, and our advanced curation algorithm will instantly dive into our massive database to retrieve a legendary masterpiece.</div>
+        
+        <div class="info-subtitle">Maximize Your Experience</div>
+        <div class="info-text"><strong>1. The 'Surprise Me' Feature:</strong> Don't limit yourself to the eras you already know. The most thrilling discoveries often happen when you select 'Surprise Me (All Eras)'. You might stumble upon a 1960s soul track or a 1980s synth-pop anthem that perfectly matches your current mood.</div>
+        <div class="info-text"><strong>2. Build Your Own Library:</strong> When you discover a track that gives you goosebumps, use the provided YouTube or Google search buttons immediately. Add these hidden gems to your personal Spotify or Apple Music playlists to build a truly unique music library.</div>
+        
+        <div class="info-subtitle">Legal & Copyright Disclaimer</div>
+        <div class="info-text">We deeply respect the intellectual property of all artists, producers, and record labels. <strong>Sonic Legacy strictly operates as a metadata curation and discovery engine. We do not host, store, stream, or distribute any copyrighted audio or video files within this application.</strong> All search buttons act as simple external web shortcuts that redirect you to public platforms like YouTube and Google. We encourage you to support the original artists by streaming their music through official channels.</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+/* Strict ES5 - Sonic Legacy MAX PRO (Massive DB Expanded) */
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 40;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            alpha: Math.random() * 0.5 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(138, 43, 226, ' + p.alpha + ')';
+            ctx.fill();
+            p.x += p.vx; p.y -= Math.abs(p.vy); 
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        else setTimeout(draw, 1000 / 60);
+    }
+    draw();
+}
+
+/* 방대한 MAX 데이터베이스 (약 100곡) */
+var musicDB = [
+    // 60s
+    { id: 1, era: "60s", title: "Hey Jude", artist: "The Beatles", year: "1968", genre: "Pop Rock", desc: "An uplifting, legendary anthem that transcends generations." },
+    { id: 2, era: "60s", title: "Respect", artist: "Aretha Franklin", year: "1967", genre: "R&B", desc: "The ultimate empowerment anthem. A monumental cultural landmark." },
+    { id: 3, era: "60s", title: "Good Vibrations", artist: "The Beach Boys", year: "1966", genre: "Pop", desc: "A pocket symphony featuring innovative studio techniques." },
+    { id: 4, era: "60s", title: "Like a Rolling Stone", artist: "Bob Dylan", year: "1965", genre: "Folk Rock", desc: "Revolutionary songwriting that challenged popular music." },
+    { id: 5, era: "60s", title: "My Girl", artist: "The Temptations", year: "1964", genre: "Soul", desc: "A flawless Motown classic with an iconic bassline." },
+    { id: 6, era: "60s", title: "I Want to Hold Your Hand", artist: "The Beatles", year: "1963", genre: "Rock", desc: "The song that ignited the British Invasion." },
+    { id: 7, era: "60s", title: "Paint It, Black", artist: "The Rolling Stones", year: "1966", genre: "Rock", desc: "A dark, driving rock masterpiece." },
+    { id: 8, era: "60s", title: "Stand By Me", artist: "Ben E. King", year: "1961", genre: "R&B", desc: "A timeless declaration of love and solidarity." },
+    { id: 9, era: "60s", title: "Light My Fire", artist: "The Doors", year: "1967", genre: "Psychedelic", desc: "A hypnotic journey of organ solos and poetic vocals." },
+    { id: 10, era: "60s", title: "Ring of Fire", artist: "Johnny Cash", year: "1963", genre: "Country", desc: "A country classic with unforgettable mariachi horns." },
+
+    // 70s
+    { id: 11, era: "70s", title: "Bohemian Rhapsody", artist: "Queen", year: "1975", genre: "Rock", desc: "A magnificent six-minute operatic rock suite." },
+    { id: 12, era: "70s", title: "Hotel California", artist: "Eagles", year: "1976", genre: "Rock", desc: "A surreal narrative featuring a legendary guitar solo." },
+    { id: 13, era: "70s", title: "Superstition", artist: "Stevie Wonder", year: "1972", genre: "Funk", desc: "Driven by one of the most famous clavinet riffs in history." },
+    { id: 14, era: "70s", title: "Dancing Queen", artist: "ABBA", year: "1976", genre: "Disco", desc: "The ultimate feel-good pop and disco crossover." },
+    { id: 15, era: "70s", title: "Stairway to Heaven", artist: "Led Zeppelin", year: "1971", genre: "Rock", desc: "An epic journey from a gentle acoustic intro to hard rock." },
+    { id: 16, era: "70s", title: "Imagine", artist: "John Lennon", year: "1971", genre: "Pop", desc: "A beautiful, peaceful anthem for a united world." },
+    { id: 17, era: "70s", title: "Stayin' Alive", artist: "Bee Gees", year: "1977", genre: "Disco", desc: "The defining track of the disco era and Saturday Night Fever." },
+    { id: 18, era: "70s", title: "Go Your Own Way", artist: "Fleetwood Mac", year: "1977", genre: "Rock", desc: "A brilliant, emotionally charged rock breakup anthem." },
+    { id: 19, era: "70s", title: "Let's Get It On", artist: "Marvin Gaye", year: "1973", genre: "Soul", desc: "The definitive romantic soul track of the decade." },
+    { id: 20, era: "70s", title: "Heart of Glass", artist: "Blondie", year: "1979", genre: "New Wave", desc: "A pristine fusion of punk attitude and disco beats." },
+
+    // 80s
+    { id: 21, era: "80s", title: "Billie Jean", artist: "Michael Jackson", year: "1983", genre: "Pop", desc: "Shattered records and cemented the King of Pop's global dominance." },
+    { id: 22, era: "80s", title: "Take On Me", artist: "a-ha", year: "1985", genre: "Synth-Pop", desc: "Known for its incredible vocal range and iconic music video." },
+    { id: 23, era: "80s", title: "Sweet Child O' Mine", artist: "Guns N' Roses", year: "1987", genre: "Rock", desc: "Blends raw rock energy with deep emotional resonance." },
+    { id: 24, era: "80s", title: "Like a Prayer", artist: "Madonna", year: "1989", genre: "Pop", desc: "A brilliant pop masterpiece blending rock and a gospel choir." },
+    { id: 25, era: "80s", title: "Every Breath You Take", artist: "The Police", year: "1983", genre: "Rock", desc: "A hauntingly beautiful track driven by a precise guitar figure." },
+    { id: 26, era: "80s", title: "Livin' on a Prayer", artist: "Bon Jovi", year: "1986", genre: "Rock", desc: "The ultimate stadium rock anthem of the 80s." },
+    { id: 27, era: "80s", title: "Purple Rain", artist: "Prince", year: "1984", genre: "R&B/Rock", desc: "An emotional, soaring guitar ballad from a true musical genius." },
+    { id: 28, era: "80s", title: "Under Pressure", artist: "Queen & David Bowie", year: "1981", genre: "Rock", desc: "A legendary collaboration with an unforgettable bassline." },
+    { id: 29, era: "80s", title: "I Wanna Dance with Somebody", artist: "Whitney Houston", year: "1987", genre: "Pop", desc: "A pure blast of vocal power and joyful dance energy." },
+    { id: 30, era: "80s", title: "Beat It", artist: "Michael Jackson", year: "1982", genre: "Pop Rock", desc: "A flawless crossover hit featuring Eddie Van Halen." },
+    { id: 31, era: "80s", title: "Careless Whisper", artist: "George Michael", year: "1984", genre: "Pop", desc: "Featuring the most famous saxophone riff in music history." },
+    { id: 32, era: "80s", title: "Africa", artist: "Toto", year: "1982", genre: "Soft Rock", desc: "A meticulously produced, timeless soft rock masterpiece." },
+    { id: 33, era: "80s", title: "Wake Me Up Before You Go-Go", artist: "Wham!", year: "1984", genre: "Pop", desc: "Bright, energetic, and perfectly crafted pop music." },
+
+    // 90s
+    { id: 34, era: "90s", title: "Smells Like Teen Spirit", artist: "Nirvana", year: "1991", genre: "Grunge", desc: "The explosive anthem that defined Generation X." },
+    { id: 35, era: "90s", title: "Wannabe", artist: "Spice Girls", year: "1996", genre: "Pop", desc: "An unstoppable burst of 'Girl Power' energy." },
+    { id: 36, era: "90s", title: "Wonderwall", artist: "Oasis", year: "1995", genre: "Britpop", desc: "A beautifully simple, incredibly catchy acoustic rock anthem." },
+    { id: 37, era: "90s", title: "No Scrubs", artist: "TLC", year: "1999", genre: "R&B", desc: "A sleek, futuristic R&B masterpiece with a powerful message." },
+    { id: 38, era: "90s", title: "Losing My Religion", artist: "R.E.M.", year: "1991", genre: "Rock", desc: "Brought alternative rock to the global mainstream." },
+    { id: 39, era: "90s", title: "Baby One More Time", artist: "Britney Spears", year: "1998", genre: "Pop", desc: "The debut that revolutionized teen pop music forever." },
+    { id: 40, era: "90s", title: "Waterfalls", artist: "TLC", year: "1995", genre: "R&B", desc: "A smooth, socially conscious hit that dominated the decade." },
+    { id: 41, era: "90s", title: "Creep", artist: "Radiohead", year: "1992", genre: "Alt Rock", desc: "An emotional, raw anthem of alienation." },
+    { id: 42, era: "90s", title: "Vogue", artist: "Madonna", year: "1990", genre: "Dance", desc: "Brought underground house music to the top of the charts." },
+    { id: 43, era: "90s", title: "I Will Always Love You", artist: "Whitney Houston", year: "1992", genre: "Soul", desc: "A staggering vocal performance that became a massive phenomenon." },
+    { id: 44, era: "90s", title: "California Love", artist: "2Pac", year: "1995", genre: "Hip-Hop", desc: "The ultimate West Coast rap anthem of the 90s." },
+    { id: 45, era: "90s", title: "Don't Speak", artist: "No Doubt", year: "1996", genre: "Rock", desc: "A deeply personal breakup song that became a global smash." },
+
+    // 00s
+    { id: 46, era: "00s", title: "Crazy in Love", artist: "Beyoncé", year: "2003", genre: "R&B", desc: "A triumphant, horn-driven explosion of energy." },
+    { id: 47, era: "00s", title: "Yellow", artist: "Coldplay", year: "2000", genre: "Rock", desc: "A lush, emotional guitar anthem full of hope." },
+    { id: 48, era: "00s", title: "Lose Yourself", artist: "Eminem", year: "2002", genre: "Hip-Hop", desc: "An intensely motivational rap anthem about seizing the moment." },
+    { id: 49, era: "00s", title: "Mr. Brightside", artist: "The Killers", year: "2003", genre: "Rock", desc: "A frantic, jealous, and incredibly catchy indie rock anthem." },
+    { id: 50, era: "00s", title: "Toxic", artist: "Britney Spears", year: "2003", genre: "Pop", desc: "A brilliantly produced, high-energy pop masterpiece." },
+    { id: 51, era: "00s", title: "Hey Ya!", artist: "Outkast", year: "2003", genre: "Hip-Hop", desc: "A joyful, genre-defying explosion of pure musical fun." },
+    { id: 52, era: "00s", title: "Umbrella", artist: "Rihanna", year: "2007", genre: "Pop", desc: "The sleek, modern pop track that defined the late 00s." },
+    { id: 53, era: "00s", title: "Seven Nation Army", artist: "The White Stripes", year: "2003", genre: "Rock", desc: "Features one of the most recognizable guitar riffs ever." },
+    { id: 54, era: "00s", title: "Single Ladies", artist: "Beyoncé", year: "2008", genre: "R&B", desc: "A massive cultural phenomenon with an iconic dance routine." },
+    { id: 55, era: "00s", title: "Viva La Vida", artist: "Coldplay", year: "2008", genre: "Pop Rock", desc: "A sweeping, orchestral pop rock masterpiece." },
+    { id: 56, era: "00s", title: "Poker Face", artist: "Lady Gaga", year: "2008", genre: "Pop", desc: "An infectious synth-pop track that took over the world." },
+    { id: 57, era: "00s", title: "Empire State of Mind", artist: "Jay-Z ft. Alicia Keys", year: "2009", genre: "Hip-Hop", desc: "The modern musical love letter to New York City." },
+
+    // 10s
+    { id: 58, era: "10s", title: "Rolling in the Deep", artist: "Adele", year: "2010", genre: "Pop", desc: "A powerhouse vocal performance wrapped in a dark beat." },
+    { id: 59, era: "10s", title: "Uptown Funk", artist: "Mark Ronson ft. Bruno Mars", year: "2014", genre: "Funk", desc: "A flawless modern recreation of classic 80s funk." },
+    { id: 60, era: "10s", title: "Shape of You", artist: "Ed Sheeran", year: "2017", genre: "Pop", desc: "A minimalist, rhythm-driven global phenomenon." },
+    { id: 61, era: "10s", title: "Bad Guy", artist: "Billie Eilish", year: "2019", genre: "Pop", desc: "A whispery, bass-heavy track that redefined mainstream pop." },
+    { id: 62, era: "10s", title: "Blank Space", artist: "Taylor Swift", year: "2014", genre: "Pop", desc: "A razor-sharp, flawlessly written pop masterpiece." },
+    { id: 63, era: "10s", title: "Thinking Out Loud", artist: "Ed Sheeran", year: "2014", genre: "Pop", desc: "A beautiful, romantic ballad that became a wedding standard." },
+    { id: 64, era: "10s", title: "Despacito", artist: "Luis Fonsi ft. Daddy Yankee", year: "2017", genre: "Latin Pop", desc: "The infectious reggaeton track that broke global streaming records." },
+    { id: 65, era: "10s", title: "Old Town Road", artist: "Lil Nas X", year: "2019", genre: "Country Rap", desc: "A viral sensation that perfectly blended country and hip-hop." },
+    { id: 66, era: "10s", title: "Someone Like You", artist: "Adele", year: "2011", genre: "Pop", desc: "A deeply emotional piano ballad of heartbreak and closure." },
+    { id: 67, era: "10s", title: "Happy", artist: "Pharrell Williams", year: "2013", genre: "Pop", desc: "An infectiously joyful track that took over the world." },
+    { id: 68, era: "10s", title: "God's Plan", artist: "Drake", year: "2018", genre: "Hip-Hop", desc: "A massive, uplifting hip-hop hit that dominated the charts." },
+    { id: 69, era: "10s", title: "Royals", artist: "Lorde", year: "2013", genre: "Indie Pop", desc: "A minimalist, anti-materialistic anthem that changed pop music." },
+    
+    // 20s
+    { id: 70, era: "20s", title: "Blinding Lights", artist: "The Weeknd", year: "2020", genre: "Synthwave", desc: "An electrifying, neon-soaked 80s revival track." },
+    { id: 71, era: "20s", title: "Levitating", artist: "Dua Lipa", year: "2020", genre: "Pop", desc: "A perfectly crafted, galaxy-themed disco-pop banger." },
+    { id: 72, era: "20s", title: "As It Was", artist: "Harry Styles", year: "2022", genre: "Pop", desc: "A melancholic yet upbeat, wildly successful synth track." },
+    { id: 73, era: "20s", title: "Anti-Hero", artist: "Taylor Swift", year: "2022", genre: "Pop", desc: "A raw, highly relatable exploration of self-doubt." },
+    { id: 74, era: "20s", title: "Flowers", artist: "Miley Cyrus", year: "2023", genre: "Pop", desc: "A breezy, confident anthem of self-love and independence." },
+    { id: 75, era: "20s", title: "Kill Bill", artist: "SZA", year: "2023", genre: "R&B", desc: "A smooth, darkly comedic R&B track of revenge and heartbreak." },
+    { id: 76, era: "20s", title: "Good 4 U", artist: "Olivia Rodrigo", year: "2021", genre: "Pop Punk", desc: "A high-energy, angst-filled pop-punk revival anthem." },
+    { id: 77, era: "20s", title: "Peaches", artist: "Justin Bieber", year: "2021", genre: "R&B", desc: "A smooth, laid-back summer groove." },
+    { id: 78, era: "20s", title: "Cruel Summer", artist: "Taylor Swift", year: "2023", genre: "Pop", desc: "An energetic, fan-favorite synth-pop track that finally got its moment." },
+    { id: 79, era: "20s", title: "Watermelon Sugar", artist: "Harry Styles", year: "2020", genre: "Pop", desc: "A bright, feel-good summer track full of pure joy." },
+    { id: 80, era: "20s", title: "Vampire", artist: "Olivia Rodrigo", year: "2023", genre: "Pop", desc: "A theatrical, piano-driven pop rock masterpiece." },
+    { id: 81, era: "20s", title: "Paint The Town Red", artist: "Doja Cat", year: "2023", genre: "Hip-Hop", desc: "A catchy, rebellious, and effortlessly cool rap track." },
+    { id: 82, era: "20s", title: "Stay", artist: "The Kid LAROI & Justin Bieber", year: "2021", genre: "Pop", desc: "A fast-paced, incredibly catchy synth-pop collaboration." }
+];
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    processUrlParameters(); 
+});
+
+function executeEngine() {
+    var selectedEra = document.getElementById("eraSelect").value;
+    
+    var filteredList = [];
+    if (selectedEra === "ALL") {
+        filteredList = musicDB;
+    } else {
+        for (var i = 0; i < musicDB.length; i++) {
+            if (musicDB[i].era === selectedEra) {
+                filteredList.push(musicDB[i]);
+            }
+        }
+    }
+    
+    if(filteredList.length === 0) filteredList = musicDB;
+
+    var randomIndex = Math.floor(Math.random() * filteredList.length);
+    var selectedSong = filteredList[randomIndex];
+
+    var query = "launch=true&sid=" + selectedSong.id;
+    
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(err) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        var guideSection = document.getElementById("guideSection");
+        if(guideSection) guideSection.style.display = "none";
+        
+        document.getElementById("resultContainer").style.display = "block";
+
+        var sid = parseInt(getParam("sid"));
+        var foundSong = null;
+        
+        for (var i = 0; i < musicDB.length; i++) {
+            if (musicDB[i].id === sid) {
+                foundSong = musicDB[i];
+                break;
+            }
+        }
+        
+        if (!foundSong) foundSong = musicDB[0];
+
+        document.getElementById("rTitle").innerText = foundSong.title;
+        document.getElementById("rArtist").innerText = foundSong.artist;
+        document.getElementById("rYear").innerText = foundSong.year;
+        document.getElementById("rGenre").innerText = foundSong.genre;
+        document.getElementById("rDesc").innerText = foundSong.desc;
+
+        var searchStr = foundSong.artist + " " + foundSong.title;
+        var formattedQuery = encodeURIComponent(searchStr).replace(/%20/g, '+');
+        
+        var ytLink = "https://www.youtube.com/results?search_query=" + formattedQuery;
+        var glLink = "https://www.google.com/search?q=" + formattedQuery;
+        
+        document.getElementById("rLinkYT").href = ytLink;
+        document.getElementById("rLinkGL").href = glLink;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(err) {}
+    }
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(err) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
