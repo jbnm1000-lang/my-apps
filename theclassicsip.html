@@ -1,0 +1,389 @@
+<!--Google Blogger Only: The Classic Sip (Premium UI, ES5, MAX 50 Evergreen DB, Dual-Safety Logic, Guide Section)-->
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
+
+<style>
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .PopularPosts, .feed-links, .BlogArchive, .Label, aside, .Profile, .PageList, .nav-sidebar, body header { display: none !important; visibility: hidden !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
+
+    html, body { 
+        padding: 0 !important; margin: 0 !important; border: none !important; 
+        background: linear-gradient(135deg, #050505 0%, #111111 100%) !important; 
+        background-attachment: fixed !important;
+        width: 100% !important; max-width: 100% !important; min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(18, 18, 18, 0.95);
+        --glass-border: rgba(212, 175, 55, 0.4);
+        --accent-gold: #D4AF37; 
+        --accent-danger: #E57373;
+        --text-main: #FFFFFF;
+        --text-muted: #9E9E9E;
+        --font-safe: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    .app-wrapper {
+        position: relative; z-index: 1; color: var(--text-main); font-family: var(--font-safe); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 80px 20px; box-sizing: border-box; width: 100%; user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 50px 30px; width: 100%; max-width: 600px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.1); box-sizing: border-box; margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Playfair Display', serif; text-align: center; color: var(--accent-gold); font-size: 32px; margin-top: 0; margin-bottom: 8px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 50px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; }
+
+    .form-group { margin-bottom: 40px; position: relative; z-index: 10; }
+    label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 16px; color: var(--accent-gold); text-align: center; letter-spacing: 2px; text-transform: uppercase;}
+    
+    .custom-select-wrapper { position: relative; width: 100%; font-family: var(--font-safe); }
+    .custom-select-trigger {
+        width: 100%; padding: 22px; background: #000; border: 1px solid var(--glass-border); border-radius: 8px; color: #FFF; font-size: 15px; font-weight: 700; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.3s ease;
+    }
+    .custom-select-trigger:active { border-color: var(--accent-gold); background: #111; }
+    
+    .custom-options {
+        display: none; position: absolute; top: 110%; left: 0; width: 100%; background: #0A0A0C; border: 1px solid var(--accent-gold); border-radius: 8px; z-index: 99; list-style: none; padding: 0; margin: 0; max-height: 250px; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+    }
+    .custom-options li {
+        padding: 20px; color: #CCC; font-size: 14px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; text-align: center; letter-spacing: 1px;
+    }
+    .custom-options li:hover, .custom-options li:active { background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(135deg, #D4AF37 0%, #AA8529 100%); color: #000; padding: 22px; border: none; border-radius: 8px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); transition: 0.2s; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .btn-generate:active { transform: scale(0.98); }
+
+    #resultContainer { display: none; animation: fadeIn 0.8s ease; width: 100%; }
+    
+    .record-card { background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 40px 25px; margin-top: 15px; text-align: center; }
+    
+    .cocktail-title { font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .cocktail-base { color: #FFF; font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-bottom: 30px; text-transform: uppercase; opacity: 0.8; }
+    
+    .recipe-section { background: #111; padding: 30px 20px; border-radius: 8px; text-align: left; margin-bottom: 30px; border-left: 2px solid var(--accent-gold); }
+    .recipe-label { color: var(--accent-gold); font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+    .recipe-text { color: #DDD; font-size: 15px; line-height: 1.8; margin-bottom: 25px; }
+    .recipe-text:last-child { margin-bottom: 0; }
+
+    .action-buttons { display: flex; flex-direction: column; gap: 12px; }
+    .youtube-btn, .google-btn { display: block; text-align: center; padding: 20px; border-radius: 8px; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 14px; }
+    .youtube-btn { background: #1A1A1A; color: #FFF; border: 1px solid #333; }
+    .google-btn { background: #FFF; color: #000; border: none; }
+
+    .btn-reset { width: 100%; background: transparent; color: var(--text-muted); padding: 20px; border: 1px solid #333; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 20px; letter-spacing: 1px; }
+
+    .info-card { background: rgba(18, 18, 18, 0.95); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 40px 30px; margin-bottom: 25px; width: 100%; max-width: 600px; box-sizing: border-box; }
+    .info-title { font-size: 18px; font-weight: 900; color: var(--accent-gold); margin-bottom: 25px; letter-spacing: 1.5px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 18px;}
+    .info-subtitle { font-size: 15px; font-weight: 700; color: #FFF; margin-top: 25px; margin-bottom: 14px; letter-spacing: 0.5px; }
+    .info-text { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; text-align: left; line-height: 1.8; font-weight: 400; word-break: keep-all;}
+
+    .warning-section { background: rgba(229, 115, 115, 0.05); border: 1px solid rgba(229, 115, 115, 0.3); padding: 25px; border-radius: 10px; margin-top: 30px; }
+    .warning-title { font-size: 14px; font-weight: 800; color: var(--accent-danger); margin-bottom: 12px; letter-spacing: 1px; }
+    .warning-text { font-size: 13px; color: #D0D0D0; line-height: 1.8; font-weight: 400; word-break: keep-all; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">The Classic Sip</h2>
+        <div class="subtitle">Timeless Mixology Archive</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>Select Base Spirit</label>
+                <div class="custom-select-wrapper" id="customSelect">
+                    <div class="custom-select-trigger" onclick="toggleDropdown()">
+                        <span id="selectedText">Discover Any (Surprise Me)</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <ul class="custom-options" id="optionsList">
+                        <li data-value="ALL" onclick="selectOption(this)">Discover Any (Surprise Me)</li>
+                        <li data-value="Gin" onclick="selectOption(this)">Gin - Botanical & Crisp</li>
+                        <li data-value="Vodka" onclick="selectOption(this)">Vodka - Clean & Smooth</li>
+                        <li data-value="Rum" onclick="selectOption(this)">Rum - Tropical & Rich</li>
+                        <li data-value="Whiskey" onclick="selectOption(this)">Whiskey - Deep & Complex</li>
+                        <li data-value="Tequila" onclick="selectOption(this)">Tequila - Earthy & Bold</li>
+                    </ul>
+                </div>
+                <input type="hidden" id="baseSelect" value="ALL">
+            </div>
+
+            <button class="btn-generate" onclick="executeEngine()" ontouchstart="">Unlock Recipe</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--accent-gold); font-size: 11px; font-weight: 700; letter-spacing: 3px; margin-bottom: 20px; text-align: center; text-transform: uppercase;">Curated For You</h3>
+            
+            <div class="record-card">
+                <div class="cocktail-title" id="rTitle">Cocktail Name</div>
+                <div class="cocktail-base" id="rBase">Base Spirit</div>
+                
+                <div class="recipe-section">
+                    <span class="recipe-label">Ingredients & Measure</span>
+                    <div class="recipe-text" id="rIngred">Ingredients here</div>
+                    
+                    <span class="recipe-label">Method & Profile</span>
+                    <div class="recipe-text" id="rMethod">Method here</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a class="youtube-btn" href="#" id="rLinkYT" rel="noopener noreferrer" target="_blank">Watch Tutorial on YouTube 🎬</a>
+                    <a class="google-btn" href="#" id="rLinkGL" rel="noopener noreferrer" target="_blank">Search Detailed History 🔍</a>
+                </div>
+            </div>
+
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">Explore Another Recipe</button>
+        </div>
+    </div>
+
+    <!-- 가이드 및 면책 조항 섹션 -->
+    <div class="info-card" id="guideSection">
+        <div class="info-title">Archive Guide & Policy</div>
+        
+        <div class="info-subtitle">Welcome to The Classic Sip</div>
+        <div class="info-text">Step into the world of premium bartending. This application is a curated archive of the world's most iconic and timeless cocktail recipes. Select your preferred base spirit, and our algorithm will unveil a classic recipe for your next home-tending session.</div>
+        
+        <div class="info-subtitle">Pro Tip for Home Bartenders</div>
+        <div class="info-text">If you are feeling adventurous, leave the selection on 'Discover Any' to let fate decide your evening drink. Use the external links provided with each recipe to watch professional mixologists craft the drink in real-time.</div>
+        
+        <div class="warning-section">
+            <div class="warning-title">Disclaimer & Safe Usage</div>
+            <div class="warning-text">This application is strictly for informational and educational purposes. We provide metadata and historical recipes of globally recognized cocktails. We do not sell, promote, or distribute alcohol. Please ensure you are of legal drinking age in your country before consuming alcohol. Always drink responsibly and never drink and drive. All external links direct to public search engines (YouTube/Google) for your convenience.</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function toggleDropdown() {
+    var list = document.getElementById('optionsList');
+    list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+}
+
+function selectOption(elem) {
+    document.getElementById('baseSelect').value = elem.getAttribute('data-value');
+    document.getElementById('selectedText').innerText = elem.innerText || elem.textContent;
+    document.getElementById('optionsList').style.display = 'none';
+}
+
+document.addEventListener('click', function(e) {
+    var wrapper = document.getElementById('customSelect');
+    var list = document.getElementById('optionsList');
+    if (wrapper && list && !wrapper.contains(e.target)) {
+        list.style.display = 'none';
+    }
+});
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 25;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            alpha: Math.random() * 0.5 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, ' + p.alpha + ')';
+            ctx.fill();
+            p.x += p.vx; p.y -= Math.abs(p.vy) + 0.1; 
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        else setTimeout(draw, 1000 / 60);
+    }
+    draw();
+}
+
+/* 50 MAX 풀 데이터베이스 꽉 채움 */
+var mixologyDB = [
+    // Gin Base (10개)
+    { id: 1, base: "Gin", title: "Dry Martini", ingred: "2 1/2 oz Gin\n1/2 oz Dry Vermouth\n1 Dash Orange Bitters\nGarnish: Lemon Twist or Olive", method: "Stir all ingredients with ice until very cold. Strain into a chilled martini glass. The undisputed king of cocktails." },
+    { id: 2, base: "Gin", title: "Negroni", ingred: "1 oz Gin\n1 oz Campari\n1 oz Sweet Vermouth\nGarnish: Orange Peel", method: "Build all ingredients in a rocks glass filled with ice. Stir gently. A perfect balance of bitter, sweet, and botanical." },
+    { id: 3, base: "Gin", title: "Gimlet", ingred: "2 oz Gin\n3/4 oz Fresh Lime Juice\n3/4 oz Simple Syrup\nGarnish: Lime Wheel", method: "Shake all ingredients with ice and strain into a chilled coupe. A crisp, refreshing classic that never goes out of style." },
+    { id: 4, base: "Gin", title: "Aviation", ingred: "2 oz Gin\n1/2 oz Maraschino Liqueur\n1/2 oz Fresh Lemon Juice\n1/4 oz Crème de Violette", method: "Shake all ingredients with ice and strain into a cocktail glass. Famous for its beautiful pale purple hue and floral notes." },
+    { id: 5, base: "Gin", title: "French 75", ingred: "1 oz Gin\n1/2 oz Lemon Juice\n1/2 oz Simple Syrup\n3 oz Champagne", method: "Shake gin, lemon, and syrup with ice. Strain into a flute and top with Champagne. Elegant and surprisingly powerful." },
+    { id: 6, base: "Gin", title: "Tom Collins", ingred: "2 oz Gin\n1 oz Lemon Juice\n1/2 oz Simple Syrup\nClub Soda to top", method: "Shake gin, lemon, and syrup. Strain into an ice-filled Collins glass and top with soda. The ultimate summer refresher." },
+    { id: 7, base: "Gin", title: "Vesper", ingred: "3 oz Gin\n1 oz Vodka\n1/2 oz Lillet Blanc", method: "Shake vigorously over ice until well chilled. Strain into a martini glass. Famous as James Bond's original creation." },
+    { id: 8, base: "Gin", title: "Bramble", ingred: "2 oz Gin\n1 oz Lemon Juice\n1/2 oz Simple Syrup\n1/2 oz Crème de Mûre", method: "Shake gin, lemon, and syrup. Strain over crushed ice. Drizzle blackberry liqueur over the top. A modern British classic." },
+    { id: 9, base: "Gin", title: "Singapore Sling", ingred: "1 1/2 oz Gin\n1/2 oz Cherry Heering\n1/4 oz Cointreau\n1/4 oz DOM Bénédictine\n4 oz Pineapple Juice\n1/2 oz Lime Juice\n1 dash Angostura Bitters", method: "Shake all ingredients with ice. Strain into a highball glass filled with fresh ice. Tropical, complex, and deeply historical." },
+    { id: 10, base: "Gin", title: "Corpse Reviver No. 2", ingred: "3/4 oz Gin\n3/4 oz Lemon Juice\n3/4 oz Cointreau\n3/4 oz Lillet Blanc\n1 Dash Absinthe", method: "Shake all ingredients with ice. Strain into a chilled coupe glass. A classic 'hair of the dog' morning cocktail." },
+
+    // Vodka Base (10개)
+    { id: 11, base: "Vodka", title: "Moscow Mule", ingred: "2 oz Vodka\n1/2 oz Lime Juice\n4-6 oz Ginger Beer\nGarnish: Lime Wedge & Mint", method: "Build in a copper mug filled with ice. Squeeze lime and top with ginger beer. Crisp, spicy, and perfectly chilled." },
+    { id: 12, base: "Vodka", title: "Cosmopolitan", ingred: "1 1/2 oz Vodka Citron\n1 oz Cointreau\n1/2 oz Fresh Lime Juice\n1 Dash Cranberry Juice", method: "Shake all ingredients with ice and strain into a chilled martini glass. A modern classic iconized by pop culture." },
+    { id: 13, base: "Vodka", title: "Espresso Martini", ingred: "2 oz Vodka\n1 oz Coffee Liqueur\n1 oz Fresh Espresso (hot)\n1/4 oz Simple Syrup", method: "Shake vigorously with ice to create a rich froth. Strain into a chilled coupe. Garnish with 3 coffee beans." },
+    { id: 14, base: "Vodka", title: "Bloody Mary", ingred: "2 oz Vodka\n4 oz Tomato Juice\n1/2 oz Lemon Juice\nWorcestershire, Tabasco, Salt, Pepper", method: "Roll ingredients back and forth between two shakers to mix without making it frothy. The ultimate savory brunch cocktail." },
+    { id: 15, base: "Vodka", title: "White Russian", ingred: "2 oz Vodka\n1 oz Coffee Liqueur\n1 oz Heavy Cream", method: "Build vodka and coffee liqueur over ice in a rocks glass. Gently float the heavy cream on top. Rich and decadent." },
+    { id: 16, base: "Vodka", title: "Lemon Drop", ingred: "2 oz Vodka Citron\n1/2 oz Triple Sec\n1 oz Lemon Juice\n1/2 oz Simple Syrup", method: "Shake well with ice. Strain into a sugar-rimmed martini glass. Sweet, sour, and perfectly balanced." },
+    { id: 17, base: "Vodka", title: "Black Russian", ingred: "2 oz Vodka\n1 oz Coffee Liqueur", method: "Build over ice in a rocks glass and stir gently. The simpler, darker predecessor to the White Russian." },
+    { id: 18, base: "Vodka", title: "Sea Breeze", ingred: "1 1/2 oz Vodka\n3 oz Cranberry Juice\n1 1/2 oz Grapefruit Juice", method: "Build over ice in a highball glass. Stir gently and garnish with a lime wheel. Tart and deeply refreshing." },
+    { id: 19, base: "Vodka", title: "Kamikaze", ingred: "1 1/2 oz Vodka\n1 oz Triple Sec\n1 oz Fresh Lime Juice", method: "Shake all ingredients with ice and strain into a chilled cocktail glass or serve as a shot. Sharp, citrusy, and direct." },
+    { id: 20, base: "Vodka", title: "Vodka Martini", ingred: "2 1/2 oz Vodka\n1/2 oz Dry Vermouth\nGarnish: Lemon Twist or Olive", method: "Stir or shake with ice according to preference. Strain into a chilled martini glass. A clean, crisp alternative to the gin classic." },
+
+    // Rum Base (10개)
+    { id: 21, base: "Rum", title: "Mojito", ingred: "2 oz White Rum\n1 oz Lime Juice\n3/4 oz Simple Syrup\n6-8 Mint Leaves\nClub Soda", method: "Lightly muddle mint with syrup. Add rum, lime, and ice. Top with soda and stir gently. A Cuban classic." },
+    { id: 22, base: "Rum", title: "Daiquiri", ingred: "2 oz Light Rum\n1 oz Fresh Lime Juice\n3/4 oz Simple Syrup", method: "Shake all ingredients with ice and strain into a chilled coupe. The pure essence of rum, lime, and sugar." },
+    { id: 23, base: "Rum", title: "Piña Colada", ingred: "2 oz Light Rum\n1 1/2 oz Cream of Coconut\n1 1/2 oz Pineapple Juice\n1/2 oz Fresh Lime Juice", method: "Shake vigorously with ice (or blend) and strain into a hurricane glass. A tropical vacation in a glass." },
+    { id: 24, base: "Rum", title: "Mai Tai", ingred: "1 1/2 oz White Rum\n1/2 oz Dark Rum (float)\n3/4 oz Orange Curaçao\n3/4 oz Lime Juice\n1/2 oz Orgeat", method: "Shake all except dark rum with ice. Strain over fresh crushed ice. Float dark rum on top. The Tiki masterpiece." },
+    { id: 25, base: "Rum", title: "Dark 'n' Stormy", ingred: "2 oz Dark Rum (Gosling's)\n3-4 oz Ginger Beer\n1/2 oz Lime Juice", method: "Build ginger beer and lime over ice in a highball glass. Float the dark rum on top to create the 'storm'." },
+    { id: 26, base: "Rum", title: "Cuba Libre", ingred: "2 oz Light Rum\n4 oz Cola\n1/2 oz Fresh Lime Juice", method: "Build over ice in a highball glass. Squeeze lime in and drop the shell. Much more than just a rum and coke." },
+    { id: 27, base: "Rum", title: "Zombie", ingred: "1 oz Light Rum\n1 oz Dark Rum\n1 oz Overproof Rum\nLime, Pineapple, Grenadine, Absinthe", method: "Shake all ingredients with ice. Strain over crushed ice. A notoriously strong and complex Tiki classic." },
+    { id: 28, base: "Rum", title: "Hemingway Daiquiri", ingred: "2 oz Light Rum\n3/4 oz Grapefruit Juice\n1/2 oz Lime Juice\n1/2 oz Maraschino Liqueur", method: "Shake all ingredients with ice and strain into a chilled coupe. Created for the famous author in Havana." },
+    { id: 29, base: "Rum", title: "Hurricane", ingred: "2 oz Light Rum\n2 oz Dark Rum\n2 oz Passion Fruit Juice\n1 oz Orange Juice\n1/2 oz Fresh Lime Juice\n1 tbsp Grenadine", method: "Shake all ingredients well with ice. Strain into a large Hurricane glass filled with fresh ice. A New Orleans party staple." },
+    { id: 30, base: "Rum", title: "Jungle Bird", ingred: "1 1/2 oz Dark Rum\n3/4 oz Campari\n1 1/2 oz Pineapple Juice\n1/2 oz Lime Juice\n1/2 oz Simple Syrup", method: "Shake all ingredients with ice. Strain into a rocks glass over fresh ice. A brilliant intersection of Tiki and bitter flavors." },
+
+    // Whiskey Base (10개)
+    { id: 31, base: "Whiskey", title: "Old Fashioned", ingred: "2 oz Bourbon or Rye\n1 Sugar Cube (or 1/4 oz simple)\n2 Dashes Angostura Bitters\nGarnish: Orange Peel", method: "Muddle sugar and bitters. Add whiskey and ice. Stir until properly chilled and diluted. The original definition of a cocktail." },
+    { id: 32, base: "Whiskey", title: "Manhattan", ingred: "2 oz Rye Whiskey\n1 oz Sweet Vermouth\n2 Dashes Angostura Bitters\nGarnish: Brandied Cherry", method: "Stir all ingredients with ice. Strain into a chilled coupe glass. Sophisticated, aromatic, and timeless." },
+    { id: 33, base: "Whiskey", title: "Whiskey Sour", ingred: "2 oz Bourbon\n3/4 oz Lemon Juice\n1/2 oz Simple Syrup\n1 Egg White (optional)", method: "Dry shake all ingredients without ice first, then add ice and shake again. Strain into a rocks glass. Silky and balanced." },
+    { id: 34, base: "Whiskey", title: "Boulevardier", ingred: "1 1/2 oz Bourbon or Rye\n1 oz Campari\n1 oz Sweet Vermouth", method: "Stir all ingredients with ice. Strain over a large ice block in a rocks glass. The whiskey drinker's Negroni." },
+    { id: 35, base: "Whiskey", title: "Mint Julep", ingred: "2 1/2 oz Bourbon\n1/2 oz Simple Syrup\n8-10 Mint Leaves\nCrushed Ice", method: "Lightly muddle mint and syrup. Add bourbon and pack with crushed ice. Stir until glass frosts. The pride of the Kentucky Derby." },
+    { id: 36, base: "Whiskey", title: "Sazerac", ingred: "2 oz Rye Whiskey\n1/2 oz Simple Syrup\n3 Dashes Peychaud's Bitters\nAbsinthe Rinse", method: "Rinse a chilled glass with Absinthe. Stir other ingredients with ice, then strain into the rinsed glass. A New Orleans legend." },
+    { id: 37, base: "Whiskey", title: "Irish Coffee", ingred: "1 1/2 oz Irish Whiskey\n4 oz Hot Coffee\n1/2 oz Brown Sugar Syrup\nLightly whipped cream", method: "Build hot coffee, whiskey, and sugar in a warm mug. Float the softly whipped cream on top. Do not stir." },
+    { id: 38, base: "Whiskey", title: "Rob Roy", ingred: "2 oz Scotch Whisky\n1 oz Sweet Vermouth\n2 Dashes Angostura Bitters", method: "Stir all ingredients with ice and strain into a chilled coupe. Essentially a Manhattan made with Scotch." },
+    { id: 39, base: "Whiskey", title: "Vieux Carré", ingred: "3/4 oz Rye Whiskey\n3/4 oz Cognac\n3/4 oz Sweet Vermouth\n1 Barspoon Bénédictine\n2 Dashes Peychaud's Bitters", method: "Stir all ingredients with ice. Strain into a rocks glass over fresh ice. Complex, smooth, and deeply historic." },
+    { id: 40, base: "Whiskey", title: "Penicillin", ingred: "2 oz Blended Scotch\n3/4 oz Lemon Juice\n3/4 oz Honey-Ginger Syrup\n1/4 oz Islay Single Malt (float)", method: "Shake blended scotch, lemon, and syrup with ice. Strain over fresh ice. Gently float the smoky Islay scotch on top." },
+
+    // Tequila Base (10개)
+    { id: 41, base: "Tequila", title: "Margarita", ingred: "2 oz Blanco Tequila\n1 oz Fresh Lime Juice\n1/2 oz Agave Nectar or Cointreau\nGarnish: Salt Rim", method: "Shake all ingredients with ice. Strain into a rocks glass over fresh ice. The world's most popular tequila drink." },
+    { id: 42, base: "Tequila", title: "Paloma", ingred: "2 oz Blanco Tequila\n1/2 oz Lime Juice\n4 oz Grapefruit Soda\nGarnish: Salt Rim", method: "Build over ice in a highball glass. Stir gently. Far more popular in Mexico than the Margarita." },
+    { id: 43, base: "Tequila", title: "Tequila Sunrise", ingred: "2 oz Blanco Tequila\n4 oz Fresh Orange Juice\n1/2 oz Grenadine", method: "Build tequila and orange juice over ice. Slowly pour grenadine down the side to create the sunrise effect. Do not stir." },
+    { id: 44, base: "Tequila", title: "El Diablo", ingred: "1 1/2 oz Reposado Tequila\n1/2 oz Crème de Cassis\n1/2 oz Lime Juice\nGinger Beer to top", method: "Shake tequila, cassis, and lime. Strain into an ice-filled Collins glass. Top with ginger Beer. Spicy and vibrant." },
+    { id: 45, base: "Tequila", title: "Tommy's Margarita", ingred: "2 oz 100% Agave Tequila\n1 oz Fresh Lime Juice\n1/2 oz Agave Nectar", method: "Shake all ingredients with ice and strain over fresh ice. A modern classic that removes the orange liqueur." },
+    { id: 46, base: "Tequila", title: "Batanga", ingred: "2 oz Blanco Tequila\n1/2 oz Lime Juice\nCola to top\nSalt rim", method: "Build over ice in a salt-rimmed glass. Stir with the same knife used to cut the lime. A rustic Mexican favorite." },
+    { id: 47, base: "Tequila", title: "Añejo Highball", ingred: "1 1/2 oz Añejo Tequila\n1/2 oz Orange Curaçao\n1/2 oz Lime Juice\n2 Dashes Angostura Bitters\nGinger Beer to top", method: "Build in an ice-filled highball glass. Stir gently to combine. A sophisticated, spiced cooler." },
+    { id: 48, base: "Tequila", title: "Oaxaca Old Fashioned", ingred: "1 1/2 oz Reposado Tequila\n1/2 oz Mezcal\n1 Barspoon Agave Nectar\n2 Dashes Angostura Bitters", method: "Stir all ingredients with ice. Strain into a rocks glass over a large ice cube. Flamed orange peel garnish is essential." },
+    { id: 49, base: "Tequila", title: "Matador", ingred: "2 oz Blanco Tequila\n3 oz Pineapple Juice\n1/2 oz Fresh Lime Juice", method: "Shake all ingredients vigorously with ice. Strain into a chilled cocktail glass or over ice. Sweet, sour, and dangerously smooth." },
+    { id: 50, base: "Tequila", title: "Mexican Firing Squad", ingred: "2 oz Blanco Tequila\n3/4 oz Lime Juice\n3/4 oz Grenadine\n4 Dashes Angostura Bitters", method: "Shake all ingredients with ice. Strain into a rocks glass over fresh ice. A beautiful, tart, and deeply flavorful classic." }
+];
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    processUrlParameters(); 
+});
+
+function executeEngine() {
+    var selectedBase = document.getElementById("baseSelect").value;
+    var filteredList = [];
+    
+    if (selectedBase === "ALL") {
+        filteredList = mixologyDB;
+    } else {
+        for (var i = 0; i < mixologyDB.length; i++) {
+            if (mixologyDB[i].base === selectedBase) {
+                filteredList.push(mixologyDB[i]);
+            }
+        }
+    }
+    
+    if(filteredList.length === 0) filteredList = mixologyDB;
+
+    var randomIndex = Math.floor(Math.random() * filteredList.length);
+    var selectedItem = filteredList[randomIndex];
+
+    var query = "launch=true&sid=" + selectedItem.id;
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(err) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        
+        var guideSection = document.getElementById("guideSection");
+        if(guideSection) guideSection.style.display = "none";
+        
+        document.getElementById("resultContainer").style.display = "block";
+
+        var sid = parseInt(getParam("sid"));
+        var foundItem = mixologyDB[0];
+        
+        for (var i = 0; i < mixologyDB.length; i++) {
+            if (mixologyDB[i].id === sid) {
+                foundItem = mixologyDB[i];
+                break;
+            }
+        }
+
+        document.getElementById("rTitle").innerText = foundItem.title;
+        document.getElementById("rBase").innerText = "Base Spirit: " + foundItem.base;
+        document.getElementById("rIngred").innerText = foundItem.ingred;
+        document.getElementById("rMethod").innerText = foundItem.method;
+
+        var searchStr = "how to make " + foundItem.title + " cocktail";
+        var formattedQuery = encodeURIComponent(searchStr).replace(/%20/g, '+');
+        
+        document.getElementById("rLinkYT").href = "https://www.youtube.com/results?search_query=" + formattedQuery;
+        document.getElementById("rLinkGL").href = "https://www.google.com/search?q=" + formattedQuery;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(err) {}
+    }
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(err) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
