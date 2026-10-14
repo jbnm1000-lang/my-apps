@@ -1,0 +1,387 @@
+<!--Google Blogger Only: Knot & Tie Vault (Premium UI, ES5, MAX 50 Evergreen DB, Dual-Safety Logic, Guide Section)-->
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"></meta>
+<link href="https://fonts.googleapis.com" rel="preconnect"></link>
+<link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"></link>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&amp;display=swap" rel="stylesheet"></link>
+
+<style>
+    /* 블로그 기본 요소 숨김 */
+    .sidebar, #sidebar, .sidebar-wrapper, .column-left-outer, .column-right-outer, .header-outer, #header, .footer-outer, #footer, .comments, #comments, .post-footer, .blog-pager, .date-header, .post-title, .breadcrumbs, .widget-area, .PopularPosts, .feed-links, .BlogArchive, .Label, aside, .Profile, .PageList, .nav-sidebar, body header { display: none !important; visibility: hidden !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
+
+    html, body { 
+        padding: 0 !important; margin: 0 !important; border: none !important; 
+        background: linear-gradient(135deg, #090A0B 0%, #17181A 100%) !important; 
+        background-attachment: fixed !important;
+        width: 100% !important; max-width: 100% !important; min-height: 100vh !important;
+    }
+
+    :root {
+        --glass-bg: rgba(20, 22, 24, 0.95);
+        --glass-border: rgba(196, 139, 71, 0.4); /* Saddle Bronze */
+        --accent-gold: #C48B47; 
+        --accent-danger: #E57373;
+        --text-main: #F0F0F0;
+        --text-muted: #9AA0A6;
+        --font-safe: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    .app-wrapper {
+        position: relative; z-index: 1; color: var(--text-main); font-family: var(--font-safe); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 80px 20px; box-sizing: border-box; width: 100%; user-select: none; -webkit-user-select: none;
+    }
+
+    .premium-box {
+        background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 50px 30px; width: 100%; max-width: 600px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(255, 255, 255, 0.05); box-sizing: border-box; margin-bottom: 30px;
+    }
+
+    h2.main-title {
+        font-family: 'Playfair Display', serif; text-align: center; color: var(--accent-gold); font-size: 32px; margin-top: 0; margin-bottom: 8px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 15px rgba(196, 139, 71, 0.2);
+    }
+
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 11px; margin-bottom: 50px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; }
+
+    .form-group { margin-bottom: 40px; position: relative; z-index: 10; }
+    label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 16px; color: var(--accent-gold); text-align: center; letter-spacing: 2px; text-transform: uppercase;}
+    
+    .custom-select-wrapper { position: relative; width: 100%; font-family: var(--font-safe); }
+    .custom-select-trigger {
+        width: 100%; padding: 22px; background: #0D0E10; border: 1px solid var(--glass-border); border-radius: 8px; color: #FFF; font-size: 15px; font-weight: 700; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.3s ease;
+    }
+    .custom-select-trigger:active { border-color: var(--accent-gold); background: #15171A; }
+    
+    .custom-options {
+        display: none; position: absolute; top: 110%; left: 0; width: 100%; background: #0F1113; border: 1px solid var(--accent-gold); border-radius: 8px; z-index: 99; list-style: none; padding: 0; margin: 0; max-height: 250px; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+    }
+    .custom-options li {
+        padding: 20px; color: #CCC; font-size: 14px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; text-align: center; letter-spacing: 1px;
+    }
+    .custom-options li:hover, .custom-options li:active { background: rgba(196, 139, 71, 0.1); color: var(--accent-gold); }
+
+    .btn-generate {
+        width: 100%; background: linear-gradient(135deg, #C48B47 0%, #A06F35 100%); color: #000; padding: 22px; border: none; border-radius: 8px; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 20px rgba(196, 139, 71, 0.2); transition: 0.2s; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .btn-generate:active { transform: scale(0.98); }
+
+    #resultContainer { display: none; animation: fadeIn 0.8s ease; width: 100%; }
+    
+    .record-card { background: #0A0C0E; border: 1px solid rgba(196, 139, 71, 0.2); border-radius: 12px; padding: 40px 25px; margin-top: 15px; text-align: center; }
+    
+    .cocktail-title { font-family: 'Playfair Display', serif; color: var(--accent-gold); font-size: 30px; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+    .cocktail-base { color: #FFF; font-size: 12px; font-weight: 700; letter-spacing: 2px; margin-bottom: 30px; text-transform: uppercase; opacity: 0.8; }
+    
+    .recipe-section { background: #121417; padding: 30px 20px; border-radius: 8px; text-align: left; margin-bottom: 30px; border-left: 3px solid var(--accent-gold); }
+    .recipe-label { color: var(--accent-gold); font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+    .recipe-text { color: #DDD; font-size: 14px; line-height: 1.8; margin-bottom: 25px; white-space: pre-wrap; }
+    .recipe-text:last-child { margin-bottom: 0; }
+
+    .action-buttons { display: flex; flex-direction: column; gap: 12px; }
+    .youtube-btn, .google-btn { display: block; text-align: center; padding: 20px; border-radius: 8px; text-decoration: none; font-weight: 700; letter-spacing: 1px; font-size: 14px; }
+    .youtube-btn { background: #1F2124; color: #FFF; border: 1px solid #333; }
+    .google-btn { background: #E0E0E0; color: #000; border: none; }
+
+    .btn-reset { width: 100%; background: transparent; color: var(--text-muted); padding: 20px; border: 1px solid #333; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 20px; letter-spacing: 1px; text-transform: uppercase; }
+
+    .info-card { background: rgba(20, 22, 24, 0.95); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 40px 30px; margin-bottom: 25px; width: 100%; max-width: 600px; box-sizing: border-box; }
+    .info-title { font-size: 17px; font-weight: 900; color: var(--accent-gold); margin-bottom: 25px; letter-spacing: 1.5px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 18px; text-transform: uppercase;}
+    .info-subtitle { font-size: 14px; font-weight: 700; color: #FFF; margin-top: 25px; margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .info-text { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: left; line-height: 1.8; font-weight: 400; word-break: keep-all;}
+
+    .warning-section { background: rgba(229, 115, 115, 0.05); border: 1px solid rgba(229, 115, 115, 0.2); padding: 25px; border-radius: 10px; margin-top: 30px; }
+    .warning-title { font-size: 13px; font-weight: 800; color: var(--accent-danger); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;}
+    .warning-text { font-size: 13px; color: #D0D0D0; line-height: 1.8; font-weight: 400; word-break: keep-all; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="app-wrapper">
+    <div class="premium-box">
+        <h2 class="main-title">Knot &amp; Tie Vault</h2>
+        <div class="subtitle">Essential Survival Guide</div>
+
+        <div id="formContainer">
+            <div class="form-group">
+                <label>Select Category</label>
+                <div class="custom-select-wrapper" id="customSelect">
+                    <div class="custom-select-trigger" onclick="toggleDropdown()">
+                        <span id="selectedText">Discover Any (Surprise Me)</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <ul class="custom-options" id="optionsList">
+                        <li data-value="ALL" onclick="selectOption(this)">Discover Any (Surprise Me)</li>
+                        <li data-value="Neckties" onclick="selectOption(this)">Neckties - Formal &amp; Daily</li>
+                        <li data-value="Fishing" onclick="selectOption(this)">Fishing - Hooks &amp; Lines</li>
+                        <li data-value="Camping" onclick="selectOption(this)">Camping - Tents &amp; Survival</li>
+                        <li data-value="Everyday" onclick="selectOption(this)">Everyday - Utility &amp; Sailing</li>
+                    </ul>
+                </div>
+                <input id="baseSelect" type="hidden" value="ALL" />
+            </div>
+
+            <button class="btn-generate" onclick="executeEngine()" ontouchstart="">Unlock Knot Guide</button>
+        </div>
+
+        <div id="resultContainer">
+            <h3 style="color: var(--accent-gold); font-size: 11px; font-weight: 700; letter-spacing: 3px; margin-bottom: 20px; text-align: center; text-transform: uppercase;">Curated For You</h3>
+            
+            <div class="record-card">
+                <div class="cocktail-title" id="rTitle">Knot Name</div>
+                <div class="cocktail-base" id="rBase">Category</div>
+                
+                <div class="recipe-section">
+                    <span class="recipe-label">Step-by-Step Guide</span>
+                    <div class="recipe-text" id="rIngred">Steps here</div>
+                    
+                    <span class="recipe-label">Best Use Case</span>
+                    <div class="recipe-text" id="rMethod">Method here</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a class="youtube-btn" href="#" id="rLinkYT" rel="noopener noreferrer" target="_blank">Watch Tutorial on YouTube 🎬</a>
+                    <a class="google-btn" href="#" id="rLinkGL" rel="noopener noreferrer" target="_blank">Search Detailed Info 🔍</a>
+                </div>
+            </div>
+
+            <button class="btn-reset" onclick="rebootSystem()" ontouchstart="">Explore Another Knot</button>
+        </div>
+    </div>
+
+    <!--가이드 및 면책 조항 섹션-->
+    <div class="info-card" id="guideSection">
+        <div class="info-title">Archive Guide &amp; Policy</div>
+        
+        <div class="info-subtitle">Welcome to Knot &amp; Tie Vault</div>
+        <div class="info-text">Whether you are preparing for a crucial job interview, securing a tent in the wilderness, or rigging a fishing line, knowing the right knot can save the day. This is a premium digital archive of 50+ essential knots.</div>
+        
+        <div class="info-subtitle">Pro Tip for Survival</div>
+        <div class="info-text">Text instructions are great, but visuals are better. Always use the YouTube button provided at the bottom of each guide to watch a professional step-by-step demonstration before attempting critical knots.</div>
+        
+        <div class="warning-section">
+            <div class="warning-title">Disclaimer &amp; Safe Usage</div>
+            <div class="warning-text">This application provides informational guides on knot tying. While we strive for accuracy, users must exercise extreme caution when using knots for climbing, heavy lifting, or life-critical situations. We are not responsible for any accidents or damages resulting from the use of this information. Practice safely.</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function toggleDropdown() {
+    var list = document.getElementById('optionsList');
+    list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+}
+
+function selectOption(elem) {
+    document.getElementById('baseSelect').value = elem.getAttribute('data-value');
+    document.getElementById('selectedText').innerText = elem.innerText || elem.textContent;
+    document.getElementById('optionsList').style.display = 'none';
+}
+
+document.addEventListener('click', function(e) {
+    var wrapper = document.getElementById('customSelect');
+    var list = document.getElementById('optionsList');
+    if (wrapper && list && !wrapper.contains(e.target)) {
+        list.style.display = 'none';
+    }
+});
+
+function initParticles() {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 20;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            alpha: Math.random() * 0.4 + 0.1
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(196, 139, 71, ' + p.alpha + ')'; // Bronze particles
+            ctx.fill();
+            p.x += p.vx; p.y -= Math.abs(p.vy) + 0.05; 
+            if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+            if (p.y < 0) p.y = canvas.height;
+        }
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        else setTimeout(draw, 1000 / 60);
+    }
+    draw();
+}
+
+/* 50 MAX 풀 데이터베이스 (매듭법) */
+var mixologyDB = [
+    // Neckties (12개)
+    { id: 1, base: "Neckties", title: "Four-in-Hand Knot", ingred: "1. Cross the wide end over the narrow end.\n2. Wrap it behind the narrow end.\n3. Bring it across the front again.\n4. Pull it up through the neck loop.\n5. Slip it down through the front loop and tighten.", method: "The most classic and simple necktie knot. Best for narrow collars and casual or everyday business wear. It creates an asymmetrical, stylish finish." },
+    { id: 2, base: "Neckties", title: "Full Windsor Knot", ingred: "1. Cross wide end over narrow.\n2. Bring it up through the neck loop from underneath.\n3. Pull down and wrap behind the narrow end.\n4. Pull up and through the loop again.\n5. Cross over the front, pull up through the neck loop, and down through the front knot.", method: "A thick, wide, and triangular knot. Ideal for wide spread collars and highly formal events like weddings or executive interviews." },
+    { id: 3, base: "Neckties", title: "Half Windsor Knot", ingred: "1. Cross wide over narrow.\n2. Wrap behind and pull up through the neck loop.\n3. Cross over the front.\n4. Pull up through the neck loop from underneath.\n5. Slide down through the front loop and tighten.", method: "A medium-sized, symmetrical knot. Highly versatile, making it perfect for standard collars and everyday office environments." },
+    { id: 4, base: "Neckties", title: "Pratt Knot", ingred: "1. Start with the tie INSIDE OUT. Cross wide under narrow.\n2. Bring wide end up and over the neck loop.\n3. Pull it down to tighten.\n4. Cross over the front to the left.\n5. Pull up through the neck loop and down through the knot.", method: "Also known as the Shelby knot. Symmetrical and medium-sized. Great for dress shirts with a medium spread collar." },
+    { id: 5, base: "Neckties", title: "Bow Tie", ingred: "1. Adjust so one end is longer.\n2. Cross long end over short and pull up through the loop.\n3. Fold the short end horizontally to form a bow shape.\n4. Drop the long end over the center.\n5. Pinch the bow, push the long end through the loop behind the bow, and adjust.", method: "The ultimate formal statement. Essential for tuxedos, black-tie events, and classic academic aesthetics." },
+    { id: 6, base: "Neckties", title: "Trinity Knot", ingred: "1. Cross the narrow end over the wide end.\n2. Pull up through the neck loop and wrap behind.\n3. Cross over the front and wrap around the neck loop again.\n4. Thread the narrow end through the newly formed loop.\n5. Hide the excess behind the collar.", method: "A complex, three-way symmetrical knot. Perfect for making a bold fashion statement at parties or creative events." },
+    { id: 7, base: "Neckties", title: "Eldredge Knot", ingred: "1. Cross narrow end over wide.\n2. Wrap and weave the narrow end around the wide end and neck loop multiple times.\n3. Carefully layer the wraps to create a braid-like effect.\n4. Tuck the final piece behind the collar.", method: "Highly complex and eye-catching. Creates a beautiful, braided effect. Wear with a solid color tie to show off the details." },
+    { id: 8, base: "Neckties", title: "Kelvin Knot", ingred: "1. Start inside out. Cross wide under narrow.\n2. Cross over the front, then behind.\n3. Cross over the front again.\n4. Pull up through the neck loop.\n5. Thread down through the front loop.", method: "Similar to the Four-in-Hand but slightly fuller and more symmetrical. A great alternative for everyday office wear." },
+    { id: 9, base: "Neckties", title: "Balthus Knot", ingred: "1. Start inside out. Cross wide under narrow.\n2. Wrap the wide end around the neck loop three separate times.\n3. Cross over the front.\n4. Pull up through the neck loop and down through the front knot.", method: "One of the largest necktie knots available. Requires a long tie and a very wide collar. Extremely bold and formal." },
+    { id: 10, base: "Neckties", title: "Victoria Knot", ingred: "1. Cross wide over narrow.\n2. Wrap it behind, then across the front.\n3. Wrap it behind and across the front a second time.\n4. Pull up through the neck loop and down through the front.", method: "A thicker version of the Four-in-Hand. The double wrap adds bulk, making it great for thin ties or casual wear." },
+    { id: 11, base: "Neckties", title: "Christensen Knot", ingred: "1. Cross wide over narrow.\n2. Form a standard knot base.\n3. Pinch the base and wrap the wide end over it twice before threading it through.", method: "Also known as the Cross knot. Features a distinctive crossed pattern in the center. Ideal for solid-colored ties." },
+    { id: 12, base: "Neckties", title: "Cafe Knot", ingred: "1. Start with the narrow end crossing over the wide end.\n2. Weave the narrow end intricately to form a layered shape.\n3. Slide the knot up using the wide end.", method: "A highly stylish, complex knot popularized by cafe culture. Perfect for casual suits and making a fashionable impression." },
+
+    // Fishing (13개)
+    { id: 13, base: "Fishing", title: "Improved Clinch Knot", ingred: "1. Thread line through the hook eye.\n2. Wrap the tag end around the standing line 5-7 times.\n3. Thread the tag end through the small loop near the eye.\n4. Bring it back through the large loop you just created. Moisten and pull tight.", method: "The most popular and reliable knot for tying a fishing line to a lure, hook, or swivel. Fast and very strong." },
+    { id: 14, base: "Fishing", title: "Palomar Knot", ingred: "1. Double the line and pass it through the hook eye.\n2. Tie a loose overhand knot with the doubled line.\n3. Pass the loop over the hook/lure.\n4. Moisten the line and pull both ends tight.", method: "Regarded as one of the strongest fishing knots. Extremely simple and perfect for braided lines." },
+    { id: 15, base: "Fishing", title: "Blood Knot", ingred: "1. Overlap the two lines to be joined.\n2. Wrap one tag end around the other line 5 times and bring it back to the center.\n3. Repeat with the other tag end, going the opposite direction.\n4. Pass both ends through the center loop in opposite directions and pull tight.", method: "The best knot for joining two fishing lines of similar diameter. Highly used in fly fishing." },
+    { id: 16, base: "Fishing", title: "Snell Knot", ingred: "1. Pass line through the hook eye toward the barb.\n2. Form a small loop along the hook shank.\n3. Wrap the tag end around the shank and the line 6-8 times inside the loop.\n4. Pull the standing line to tighten the coils against the eye.", method: "Provides a straight-line pull to the hook, resulting in better hook-up ratios. Essential for live bait fishing." },
+    { id: 17, base: "Fishing", title: "Arbor Knot", ingred: "1. Pass line around the reel arbor.\n2. Tie an overhand knot around the standing line with the tag end.\n3. Tie a second overhand knot in the tag end itself to act as a stopper.\n4. Pull tight to slide it down to the reel.", method: "The absolute standard for attaching backing or main line to the spool of a fishing reel." },
+    { id: 18, base: "Fishing", title: "Albright Knot", ingred: "1. Make a loop in the heavier line.\n2. Pass the lighter line through the loop.\n3. Wrap the lighter line tightly around the loop 10 times.\n4. Pass the lighter tag end back through the loop and pull tight.", method: "Excellent for joining two lines of unequal diameters, such as tying braid to a fluorocarbon leader." },
+    { id: 19, base: "Fishing", title: "Uni Knot", ingred: "1. Pass line through the eye and overlap it with the standing line.\n2. Form a loop with the tag end.\n3. Make 5-6 wraps inside the loop around both lines.\n4. Moisten and pull the tag end tight, then slide the knot to the eye.", method: "A highly versatile knot that can be used for tying hooks, connecting lines (Double Uni), or tying to a spool." },
+    { id: 20, base: "Fishing", title: "Surgeon's Knot", ingred: "1. Overlap the leader and main line by several inches.\n2. Form a simple loop with both lines.\n3. Pass the entire leader and tag end of the main line through the loop twice.\n4. Moisten and pull all four ends tight.", method: "A quick, easy, and very strong knot for joining two lines. Can be tied in the dark or with cold hands." },
+    { id: 21, base: "Fishing", title: "FG Knot", ingred: "1. Keep main braided line under tension.\n2. Weave the fluorocarbon leader over and under the braid in a figure-eight pattern about 20 times.\n3. Lock it in with half hitches.\n4. Pull extremely tight until the braid bites into the leader.", method: "The slimmest and strongest knot for connecting braid to a leader. Passes smoothly through rod guides." },
+    { id: 22, base: "Fishing", title: "Non-Slip Loop Knot", ingred: "1. Tie a loose overhand knot in the line.\n2. Pass the tag end through the lure eye and back through the overhand knot.\n3. Wrap the tag end around the standing line 4-5 times.\n4. Pass it back through the overhand knot, moisten, and tighten.", method: "Creates a fixed loop that allows artificial lures (like crankbaits) to swim freely and naturally in the water." },
+    { id: 23, base: "Fishing", title: "Davy Knot", ingred: "1. Pass line through the fly eye.\n2. Form a loose overhand knot ahead of the hook.\n3. Bring the tag end back through the loop.\n4. Pull the tag end and standing line simultaneously to tighten.", method: "A favorite among fly fishermen. Extremely small, very fast to tie, and wastes very little tippet material." },
+    { id: 24, base: "Fishing", title: "Rapala Knot", ingred: "1. Tie an overhand knot, leaving a long tag end. Pass it through the lure eye.\n2. Pass tag back through the overhand knot.\n3. Wrap it 3 times around the standing line.\n4. Pass it through the overhand knot again, then through the new loop. Tighten.", method: "Specifically designed to give swimming lures a natural, uninhibited action in the water." },
+    { id: 25, base: "Fishing", title: "Dropper Loop", ingred: "1. Form a loop in the middle of the line.\n2. Twist one side of the loop around the other 5-6 times.\n3. Push the center of the twisted loop through the middle opening.\n4. Pull both standing ends to close the twists tightly.", method: "Used to create a loop standing out from the main line. Perfect for attaching extra hooks or sinkers." },
+
+    // Camping (13개)
+    { id: 26, base: "Camping", title: "Bowline Knot", ingred: "1. Form a small loop (the rabbit hole).\n2. Pass the tag end (the rabbit) up through the loop.\n3. Wrap it behind the standing line (the tree).\n4. Pass it back down through the loop. Pull tight.", method: "The 'King of Knots'. Creates a secure loop at the end of a rope that will not shrink or slip under load. Essential for rescue." },
+    { id: 27, base: "Camping", title: "Figure Eight Knot", ingred: "1. Form a loop in the rope.\n2. Pass the tag end behind the standing line.\n3. Thread the tag end down through the first loop to form an '8'.\n4. Pull tight.", method: "A classic stopper knot. Prevents the end of a rope from slipping through a pulley or a hole." },
+    { id: 28, base: "Camping", title: "Clove Hitch", ingred: "1. Wrap the rope around a pole or tree.\n2. Cross it over itself and wrap around the pole again.\n3. Tuck the tag end under the last wrap.\n4. Pull both ends to tighten.", method: "A quick binding knot used to secure a rope to a spar or post. Great for starting lashings or securing a tent line temporarily." },
+    { id: 29, base: "Camping", title: "Taut-Line Hitch", ingred: "1. Wrap the rope around a peg and bring it back parallel to the standing line.\n2. Wrap the tag end inside the loop twice.\n3. Make one wrap outside the loop.\n4. Pull tight to finish.", method: "An adjustable loop knot. Slides easily when tension is removed, but grips tightly under load. Perfect for tent guy lines." },
+    { id: 30, base: "Camping", title: "Square Knot", ingred: "1. Take two ropes (Right over Left, Left over Right).\n2. Cross the right end over the left and tuck it under.\n3. Cross the new left end over the right and tuck it under.\n4. Pull all four ends to tighten.", method: "Also known as a Reef Knot. Used to secure non-critical items or bundle firewood. Do not use for joining ropes bearing heavy loads." },
+    { id: 31, base: "Camping", title: "Sheet Bend", ingred: "1. Make a bight (U-shape) in the thicker rope.\n2. Pass the thinner rope up through the bight.\n3. Wrap it around the back of both sides of the bight.\n4. Tuck the thinner rope under itself across the front.", method: "The absolute best knot for securely joining two ropes of different thicknesses or materials." },
+    { id: 32, base: "Camping", title: "Timber Hitch", ingred: "1. Wrap the rope around a log.\n2. Wrap the tag end around the standing line.\n3. Twist the tag end back around itself 3-4 times inside the loop.\n4. Pull the standing line to tighten against the log.", method: "Used to tow or lift heavy logs and timber. The heavier the load, the tighter it grips." },
+    { id: 33, base: "Camping", title: "Prusik Knot", ingred: "1. Take a small loop of cord.\n2. Wrap it around a thicker main rope 3 times inside its own loop.\n3. Dress the knot so the wraps are neat and parallel.\n4. Pull the tail to lock it.", method: "A friction hitch used in climbing and rescue. Slides freely when pushed, but grips the main rope instantly when weight is applied." },
+    { id: 34, base: "Camping", title: "Alpine Butterfly", ingred: "1. Wrap the rope around your hand three times.\n2. Take the middle wrap and pull it over the outer wrap.\n3. Tuck it under both wraps and pull through to form a loop.\n4. Tighten securely.", method: "Creates a secure, load-bearing loop in the middle of a rope without having access to the ends. Great for attaching carabiners." },
+    { id: 35, base: "Camping", title: "Water Knot", ingred: "1. Tie a loose overhand knot in one end of a strap/webbing.\n2. Take the other end and trace the exact path of the first knot in reverse.\n3. Pull all ends extremely tight.", method: "The standard knot used by climbers and campers for joining two pieces of flat webbing or tying a sling." },
+    { id: 36, base: "Camping", title: "Double Fisherman's", ingred: "1. Overlap two rope ends.\n2. Tie a double overhand knot around the first rope with the second rope.\n3. Tie a double overhand around the second rope with the first.\n4. Pull the standing lines so the knots slide together.", method: "Extremely strong knot used to join two ropes of equal thickness permanently. Very difficult to untie once loaded." },
+    { id: 37, base: "Camping", title: "Zeppelin Bend", ingred: "1. Form a 'b' shape with one rope and a 'q' shape with the other.\n2. Overlay the loops.\n3. Pass one tag end up through the center and the other down through the center.\n4. Pull tight.", method: "A highly secure, jam-resistant knot for joining two ropes. Easier to untie after heavy loading than a Fisherman's knot." },
+    { id: 38, base: "Camping", title: "Figure Eight on a Bight", ingred: "1. Fold the rope to create a bight (a U-shape).\n2. Treat the doubled rope as a single strand.\n3. Tie a standard figure eight knot with the doubled line.\n4. Pull tight to form a secure loop.", method: "The standard knot for climbers to attach a rope to their climbing harness. Indestructible and easy to verify visually." },
+
+    // Everyday (12개)
+    { id: 39, base: "Everyday", title: "Trucker's Hitch", ingred: "1. Tie a loop (like an Alpine Butterfly) high up on the standing line.\n2. Pass the tag end around the anchor point (like a car rack).\n3. Thread the tag end up through the loop.\n4. Pull down hard to create mechanical advantage, and tie off with half hitches.", method: "Provides a 3:1 mechanical advantage for tying down heavy loads on trucks, roof racks, or securing large tarps." },
+    { id: 40, base: "Everyday", title: "Cleat Hitch", ingred: "1. Wrap the line completely around the base of the cleat.\n2. Cross the line over the top in a figure-eight pattern.\n3. On the final cross, twist the line to form a half hitch.\n4. Pull tight over the horn of the cleat.", method: "The standard maritime knot for securing a boat to a dock cleat. Holds securely but can be untied instantly." },
+    { id: 41, base: "Everyday", title: "Constrictor Knot", ingred: "1. Wrap rope over the object.\n2. Cross it over itself and wrap around again.\n3. Pass the tag end under the first crossing point, going between the object and the rope.\n4. Pull both ends hard.", method: "One of the tightest binding knots. Acts like a rubber band or zip tie. Often used to temporarily clamp hoses or seal bags." },
+    { id: 42, base: "Everyday", title: "Rolling Hitch", ingred: "1. Wrap the rope around a pole or another taut rope.\n2. Make a second wrap crossing over the first.\n3. Make a third wrap above the others.\n4. Tuck the end under the last wrap and tighten.", method: "A friction hitch used to pull along the length of an object. Great for relieving tension on a stuck line." },
+    { id: 43, base: "Everyday", title: "Anchor Bend", ingred: "1. Pass the rope through the anchor ring twice.\n2. Pass the tag end behind the standing line.\n3. Tuck the tag end through the two loops you just made around the ring.\n4. Tie off with a half hitch.", method: "Despite the name, it is a hitch, not a bend. The absolute best and most secure knot for attaching a rope to an anchor or ring." },
+    { id: 44, base: "Everyday", title: "Mooring Hitch", ingred: "1. Pass rope around a post.\n2. Form a loop in the tag end and pass it behind the standing line.\n3. Form a bight in the standing line and pass it through the loop.\n4. Pull the tag end to tighten.", method: "A quick-release knot used to tie a boat to a mooring post. A sharp pull on the tag end releases the knot instantly." },
+    { id: 45, base: "Everyday", title: "Buntline Hitch", ingred: "1. Pass rope through a ring.\n2. Wrap the tag end around the standing line.\n3. Tie a clove hitch on the standing line, working towards the ring.\n4. Pull tight.", method: "A highly secure, jamming knot used to attach a rope to an object. Historically used to secure the bottom of square sails." },
+    { id: 46, base: "Everyday", title: "Sheepshank", ingred: "1. Fold the rope to create three parallel sections.\n2. Throw a half hitch over one end of the folded section.\n3. Throw another half hitch over the other end.\n4. Pull the standing ends tight.", method: "Used temporarily to shorten a rope or bypass a damaged section of rope. Must be kept under tension to hold." },
+    { id: 47, base: "Everyday", title: "Highwayman's Hitch", ingred: "1. Form a bight behind a pole.\n2. Form a second bight in the standing line and pass it through the first.\n3. Form a third bight in the tag end and pass it through the second.\n4. Pull the standing line to tighten.", method: "A quick-release knot historically used by robbers to quickly untie their horses. Releases instantly with a tug on the tag end." },
+    { id: 48, base: "Everyday", title: "Miller's Knot", ingred: "1. Wrap the cord around the neck of a sack.\n2. Cross the ends and wrap around a second time.\n3. Tuck the tag end under the first crossing point.\n4. Pull both ends hard.", method: "Also known as a Bag Knot. The traditional and most effective knot used by millers and farmers to tie off flour or grain sacks tightly." },
+    { id: 49, base: "Everyday", title: "Surgeon's Loop", ingred: "1. Fold the end of the line to form a doubled section.\n2. Tie an overhand knot with the doubled section.\n3. Pass the loop through the overhand knot a second time.\n4. Pull tight.", method: "Creates a very secure, fixed loop at the end of a line. Frequently used in fishing and everyday utility tasks." },
+    { id: 50, base: "Everyday", title: "Carrick Bend", ingred: "1. Form a loop with the first heavy rope.\n2. Lay the second rope across the loop.\n3. Weave the second rope under and over the first rope in an alternating pattern.\n4. Pull tight slowly.", method: "The most beautiful and secure knot for joining two very heavy, stiff ropes or cables. Does not jam under heavy loads." }
+];
+
+document.addEventListener('DOMContentLoaded', function() { 
+    initParticles();
+    processUrlParameters(); 
+});
+
+function executeEngine() {
+    var selectedBase = document.getElementById("baseSelect").value;
+    var filteredList = [];
+    
+    if (selectedBase === "ALL") {
+        filteredList = mixologyDB;
+    } else {
+        for (var i = 0; i < mixologyDB.length; i++) {
+            if (mixologyDB[i].base === selectedBase) {
+                filteredList.push(mixologyDB[i]);
+            }
+        }
+    }
+    
+    if(filteredList.length === 0) filteredList = mixologyDB;
+
+    var randomIndex = Math.floor(Math.random() * filteredList.length);
+    var selectedItem = filteredList[randomIndex];
+
+    var query = "launch=true&sid=" + selectedItem.id;
+    var baseUrl = window.location.href.split('?')[0].split('#')[0];
+    var mParam = window.location.search.indexOf("m=1") !== -1 ? "m=1&" : "";
+    var targetUrl = baseUrl + "?" + mParam + query;
+
+    try {
+        if (window.AppInventor && typeof window.AppInventor.setWebViewString === 'function') {
+            window.AppInventor.setWebViewString("action=spin_ott&time=" + new Date().getTime());
+        }
+    } catch(err) {}
+
+    setTimeout(function() {
+        window.location.replace(targetUrl);
+    }, 500);
+}
+
+function processUrlParameters() {
+    var searchParams = window.location.search;
+    var getParam = function(name) {
+        var match = searchParams.match(new RegExp("[?&]" + name + "=([^&]+)"));
+        return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    if (getParam("launch") === "true") {
+        document.getElementById("formContainer").style.display = "none";
+        
+        var guideSection = document.getElementById("guideSection");
+        if(guideSection) guideSection.style.display = "none";
+        
+        document.getElementById("resultContainer").style.display = "block";
+
+        var sid = parseInt(getParam("sid"));
+        var foundItem = mixologyDB[0];
+        
+        for (var i = 0; i < mixologyDB.length; i++) {
+            if (mixologyDB[i].id === sid) {
+                foundItem = mixologyDB[i];
+                break;
+            }
+        }
+
+        document.getElementById("rTitle").innerText = foundItem.title;
+        document.getElementById("rBase").innerText = "Category: " + foundItem.base;
+        document.getElementById("rIngred").innerText = foundItem.ingred;
+        document.getElementById("rMethod").innerText = foundItem.method;
+
+        var searchStr = "how to tie " + foundItem.title;
+        var formattedQuery = encodeURIComponent(searchStr).replace(/%20/g, '+');
+        
+        document.getElementById("rLinkYT").href = "https://www.youtube.com/results?search_query=" + formattedQuery;
+        document.getElementById("rLinkGL").href = "https://www.google.com/search?q=" + formattedQuery;
+        
+        try {
+            var box = document.querySelector('.premium-box');
+            if(box) window.scrollTo({top: box.offsetTop - 10, behavior: 'smooth'});
+        } catch(err) {}
+    }
+}
+
+function rebootSystem() { 
+    try {
+        var baseUrl = window.location.href.split('?')[0].split('#')[0];
+        var mParam = window.location.search.indexOf("m=1") !== -1 ? "?m=1" : "";
+        window.location.replace(baseUrl + mParam);
+    } catch(err) {
+        window.location.href = window.location.pathname; 
+    }
+}
+//]]>
+</script>
